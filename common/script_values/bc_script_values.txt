@@ -4,9 +4,16 @@
 # outnumbered by half again" the multiplied figure has to come from a script
 # value. Used by bc_scripted_triggers.txt.
 #
-# UNVERIFIED IN GAME. The plain < / > comparison of side_strength is proven
-# (probe 5); reading it into a script value and multiplying is not. If the two
-# events that use it never fire, check error.log for these keys first.
+# VERIFIED IN GAME 2026-08-12: bc_flank_collapses and bc_van_breaks_through both
+# fired, so reading side_strength into a script value and multiplying works.
+#
+# This is exactly the shape vanilla uses - 00_combat_values.txt defines
+# `vastly_outnumbered_combat_side_threshold = { value = side_strength multiply = 5 }`.
+# Not reusable here: 5x is a rout, 1.5x is a battle going badly, which is the
+# whole point of these two events.
+#
+# side_strength is scaled down by a factor of 1000 by the engine, so these are
+# ratios of an already-scaled number. Fine, because both sides are scaled alike.
 
 bc_outnumbered_threshold_value = {
 	value = scope:combat_side.side_strength

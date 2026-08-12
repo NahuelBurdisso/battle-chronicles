@@ -62,9 +62,6 @@ calls and one 0003 pop-up.
 
 ## Not yet verified in game
 
-- Whether vanilla's own `scope:combat_side.enemy_side.vastly_outnumbered_combat_side_threshold`
-  should replace `bc_outnumbered_threshold_value`. It exists and does the same
-  job; the hand-rolled value is proven, so this is a simplification, not a fix.
 - The weights. `base = 60` across seven commander events is a guess aimed at
   15-20% of commander rolls. `bc_frequency` exists so this is retunable without
   a script edit.
