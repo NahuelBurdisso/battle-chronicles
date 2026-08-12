@@ -29,6 +29,7 @@ construction — confirm with `python tools/ck3.py conflicts`.
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place |
 | `common/game_rules/bc_game_rules.txt` | frequency and swing |
 | `common/on_action/bc_on_actions.txt` | combat-end hook, `events = { }` only |
+| `common/character_memory_types/bc_memories.txt` | the shieldbrother memory |
 | `events/bc_events.txt` | the three pop-ups and the hidden cleanup |
 
 ## Rules this mod lives by
@@ -42,6 +43,12 @@ construction — confirm with `python tools/ck3.py conflicts`.
 - **Modifier names are prose.** The combat advantage breakdown prints them
   verbatim next to `Commander Martial Skill`.
 - **Nothing is replaced.** Every file is new and additive.
+- **State first, presentation second.** No gameplay effect ever sits inside a
+  `send_interface_toast`. A toast only reaches the player playing the scoped
+  character, so anything nested in one is unreliable for the AI — and almost
+  every commander and every knight in the world is AI.
+- **A toast is addressed, not broadcast.** Knight chronicles are raised on the
+  side commander, because nobody is playing a courtier knight.
 
 ## First live run (2026-08-12)
 
@@ -56,15 +63,35 @@ calls and one 0003 pop-up.
 - **Two bugs found and fixed:** the opinion modifiers needed a *positive*
   `monthly_change` (a decay rate, not a signed drift), and `add_gold = -100` is
   rejected outright — now `remove_short_term_gold = 100`.
-- **Never fired:** both knight events. Gates are narrow (prowess >= 12 or <= 6,
-  *and* the side losing, at base 40 against `commander_none` at 1000).
-  `bc_shieldbrother_forged` fires from the same file, so the hook is fine.
+- **Never fired:** both knight events. Diagnosed and fixed — see below.
+
+## Changes made after that run
+
+- **Knight events were unreachable, for three compounding reasons.** The pool
+  they compete in is `knight_none` at `base = 2000`, twice the commander pool's,
+  so `base = 40` was ~2% of a roll before any gate applied. On top of that,
+  `prowess <= 6` describes almost no knight — knights are *selected* for prowess.
+  Now `base = 150`, `prowess >= 10` for the breach, and `craven OR prowess <= 8`
+  for the disgrace, which is the better story regardless.
+- **Every gameplay effect moved out of its toast.** They only reliably run for a
+  character a player is playing, so as written the momentum system risked being
+  player-only. `bc_lines_bogged_down` proved it: it hit the enemy commander from
+  outside a toast and its own commander from inside one.
+- **Knight toasts now address the side commander.** Raised on the knight, they
+  reached nobody.
+- **Weights retuned** against the observed distribution: `horse_killed` 60 → 40
+  (no situational gate, was behaving like a second `none`), `lines_bogged_down`
+  60 → 100 (terrain gate is narrow enough on its own), `van_breaks_through`'s
+  martial bonus 40 → 25.
+- **Shieldbrothers now leave a memory**, `bc_shieldbrother_memory`, forty years,
+  one for each man naming the other. Opinion decays; this does not.
 
 ## Not yet verified in game
 
-- The weights. `base = 60` across seven commander events is a guess aimed at
-  15-20% of commander rolls. `bc_frequency` exists so this is retunable without
-  a script edit.
-- `bc_shieldbrother_forged` grants opinion only. The design also calls for a
-  character memory, which needs a `common/character_memory_types/` entry and has
-  not been probed.
+- Whether a `send_interface_toast` body runs at all for an AI character.
+  `bc_knight_holds_the_breach` carries a `debug_log` inside its toast for exactly
+  this: if `probe 'BC:'` returns fewer "toast body ran" than "fired
+  bc_knight_holds_the_breach", the answer is no. Nothing depends on the outcome
+  any more — this is to settle the rule, not to fix a bug.
+- The memory: that it renders, and that `[shieldbrother.GetFullName]` resolves.
+- The retuned weights.

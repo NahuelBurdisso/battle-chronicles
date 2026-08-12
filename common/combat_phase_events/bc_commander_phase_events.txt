@@ -7,14 +7,28 @@
 #   - a phase event rolls every COMBAT_EVENT_DAYS = 5 while a battle runs
 #   - `type = commander` roots on the commander, so `is_ai = no` means the PLAYER
 #     is personally leading that army - it is not a "player is watching" test
-#   - the competition is vanilla `commander_none` at base = 1000 plus AGOT's own
-#     casualty events, so base = 60 across seven events targets roughly 15-20% of
-#     commander rolls
+#   - the chance is a weight against every OTHER VALID event, per the engine's own
+#     `_combat_phase_events.info`. The pool is vanilla `commander_none` at
+#     base = 1000 plus AGOT's casualty events
 #   - bc_chronicle_ready_trigger, not the weights, is what stops these firing
 #     back to back; see bc_scripted_effects.txt
 #
-# The weights below are guesses and are meant to be retuned against real play.
-# That is exactly why bc_frequency exists.
+# STATE FIRST, PRESENTATION SECOND. Every momentum change used to live inside the
+# `send_interface_toast` block. That is not safe: a toast is documented as
+# "sends a message to the player playing the character in the scope and then
+# executes any effects inside", and most commanders in the world are AI, with no
+# player playing them. Left as it was, the entire momentum system risked applying
+# to the player's battles and to nobody else's - and bc_lines_bogged_down proved
+# the asymmetry, because it penalised the enemy commander from outside a toast
+# while penalising its own commander from inside one. Vanilla keeps state changes
+# in the effect block and messages purely presentational; so do we now.
+#
+# WEIGHTS, retuned after the first live session (59 commander fires):
+#   banner_falls 10, rally 5, horse_killed 15, flank 7, van 16, ground 5, bogged 1
+# horse_killed has the weakest situational gate of the seven and was firing like
+# a default, so its base drops to 40. bogged_down's terrain gate is narrow enough
+# that it needs a higher base to appear at all. bc_frequency exists so the rest
+# stays retunable without a script edit.
 
 # ---------------------------------------------------------------------------
 # The banner falls. The signature setback: the army loses its focal point.
@@ -23,10 +37,9 @@ bc_banner_falls = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
-		bc_side_is_losing_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
+		bc_side_is_losing_trigger = yes
 	}
 
 	chance = {
@@ -52,14 +65,14 @@ bc_banner_falls = {
 			trigger_event = bc_chronicles.0001
 		}
 		else = {
+			bc_faltering_major_effect = yes
+			add_stress = 10
+
 			send_interface_toast = {
 				type = event_toast_effect_bad
 				title = bc_banner_falls_toast
 				desc = bc_banner_falls_toast_desc
 				left_icon = scope:bc_commander
-
-				bc_faltering_major_effect = yes
-				add_stress = 10
 			}
 		}
 	}
@@ -72,7 +85,6 @@ bc_rally_the_line = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
 		bc_is_faltering_trigger = yes
 	}
@@ -105,13 +117,13 @@ bc_rally_the_line = {
 			trigger_event = bc_chronicles.0002
 		}
 		else = {
+			bc_rally_effect = yes
+
 			send_interface_toast = {
 				type = event_toast_effect_good
 				title = bc_rally_the_line_toast
 				desc = bc_rally_the_line_toast_desc
 				left_icon = scope:bc_commander
-
-				bc_rally_effect = yes
 			}
 		}
 	}
@@ -125,14 +137,15 @@ bc_horse_killed_under_him = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
-		prowess >= 8
 		NOT = { bc_is_faltering_trigger = yes }
+		prowess >= 8
 	}
 
+	# Lowest base of the seven: this is the only one with no situational gate at
+	# all, so at base = 60 it behaved like a second `none` event.
 	chance = {
-		base = 60
+		base = 40
 		modifier = {
 			factor = 0.5
 			has_game_rule = bc_frequency_low
@@ -153,14 +166,14 @@ bc_horse_killed_under_him = {
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_horse_killed_under_him"
 
+		bc_faltering_minor_effect = yes
+		add_prestige = 50
+
 		send_interface_toast = {
 			type = event_toast_effect_neutral
 			title = bc_horse_killed_toast
 			desc = bc_horse_killed_toast_desc
 			left_icon = scope:bc_commander
-
-			bc_faltering_minor_effect = yes
-			add_prestige = 50
 		}
 	}
 }
@@ -172,7 +185,6 @@ bc_flank_collapses = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
 		bc_side_is_outnumbered_trigger = yes
 	}
@@ -194,13 +206,13 @@ bc_flank_collapses = {
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_flank_collapses"
 
+		bc_faltering_major_effect = yes
+
 		send_interface_toast = {
 			type = event_toast_effect_bad
 			title = bc_flank_collapses_toast
 			desc = bc_flank_collapses_toast_desc
 			left_icon = scope:bc_commander
-
-			bc_faltering_major_effect = yes
 		}
 	}
 }
@@ -212,10 +224,9 @@ bc_van_breaks_through = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
-		bc_side_is_outnumbering_trigger = yes
 		martial >= 10
+		bc_side_is_outnumbering_trigger = yes
 	}
 
 	chance = {
@@ -229,7 +240,7 @@ bc_van_breaks_through = {
 			has_game_rule = bc_frequency_high
 		}
 		modifier = {
-			add = 40
+			add = 25
 			martial >= 16
 		}
 	}
@@ -245,13 +256,13 @@ bc_van_breaks_through = {
 			trigger_event = bc_chronicles.0003
 		}
 		else = {
+			bc_momentum_major_effect = yes
+
 			send_interface_toast = {
 				type = event_toast_effect_good
 				title = bc_van_breaks_through_toast
 				desc = bc_van_breaks_through_toast_desc
 				left_icon = scope:bc_commander
-
-				bc_momentum_major_effect = yes
 			}
 		}
 	}
@@ -265,10 +276,9 @@ bc_ground_favours_us = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
-		bc_terrain_favours_us_trigger = yes
 		NOT = { bc_has_momentum_trigger = yes }
+		bc_terrain_favours_us_trigger = yes
 	}
 
 	chance = {
@@ -293,13 +303,13 @@ bc_ground_favours_us = {
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_ground_favours_us"
 
+		bc_momentum_minor_effect = yes
+
 		send_interface_toast = {
 			type = event_toast_effect_good
 			title = bc_ground_favours_us_toast
 			desc = bc_ground_favours_us_toast_desc
 			left_icon = scope:bc_commander
-
-			bc_momentum_minor_effect = yes
 		}
 	}
 }
@@ -313,14 +323,15 @@ bc_lines_bogged_down = {
 	type = commander
 
 	is_valid = {
-		exists = root
 		bc_chronicle_ready_trigger = yes
-		bc_terrain_bogs_us_down_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
+		bc_terrain_bogs_us_down_trigger = yes
 	}
 
+	# Fired once in a whole session. The terrain gate is narrow enough on its own
+	# that it does not also need a low weight.
 	chance = {
-		base = 60
+		base = 100
 		modifier = {
 			factor = 0.5
 			has_game_rule = bc_frequency_low
@@ -336,19 +347,13 @@ bc_lines_bogged_down = {
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_lines_bogged_down"
 
+		bc_faltering_minor_effect = yes
+
 		send_interface_toast = {
 			type = event_toast_effect_neutral
 			title = bc_lines_bogged_down_toast
 			desc = bc_lines_bogged_down_toast_desc
 			left_icon = scope:bc_commander
-
-			bc_faltering_minor_effect = yes
-		}
-
-		# The enemy commander is stuck in the same mud. `?=` because a side can
-		# be leaderless.
-		scope:combat_side.enemy_side.side_commander ?= {
-			bc_faltering_minor_effect = yes
 		}
 	}
 }

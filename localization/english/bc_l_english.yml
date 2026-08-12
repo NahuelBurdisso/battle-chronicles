@@ -75,6 +75,18 @@
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
  bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it."
 
+# --- memories ---------------------------------------------------------------
+#
+# Three perspectives, per the vanilla standard in _character_memories.info: no
+# perspective / first / second / third, all past tense, all lower-case, because
+# the UI prints them inside a sentence it builds around them. `shieldbrother` is
+# the participant tag declared in bc_memories.txt; `owner` is always available.
+
+ bc_shieldbrother_memory:0 "stood shieldbrother in a battle"
+ bc_shieldbrother_memory_desc:0 "I came through the press back to back with [shieldbrother.GetFullName], and neither of us went down"
+ bc_shieldbrother_memory_desc_second_perspective:0 "you came through the press back to back with [shieldbrother.GetFullName], and neither of you went down"
+ bc_shieldbrother_memory_desc_third_perspective:0 "[owner.GetName] came through the press back to back with [shieldbrother.GetFullName], and neither of them went down"
+
 # --- pop-up events ----------------------------------------------------------
 
  bc_chronicles.0001.t:0 "The Banner Falls"

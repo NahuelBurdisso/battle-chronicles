@@ -1,0 +1,45 @@
+﻿# Battle Chronicles - character memories.
+#
+# The design always called for shieldbrothers to remember each other rather than
+# just carry an opinion modifier that decays away. Opinion fades; a memory is the
+# thing a character can still be asked about in twenty years.
+#
+# Shape copied verbatim from vanilla `became_blood_brother` in mpo_memories.txt -
+# `description = { random_valid = { desc = KEY } }`, one perspective each, a
+# `participants = { }` tag list, and a duration. The tag `shieldbrother` is what
+# the loc keys read back with `[shieldbrother.GetFullName]`, and it is also the
+# name that must be used at the `create_character_memory` call site.
+#
+# `icon` must name a file that already exists in the vanilla memory icon set -
+# `battle.dds` is used by vanilla's own `witnessed_death_battle_good`.
+
+bc_shieldbrother_memory = {
+	categories = { positive war relationships friend }
+	icon = "battle.dds"
+
+	description = {
+		random_valid = {
+			desc = bc_shieldbrother_memory_desc
+		}
+	}
+
+	second_perspective_description = {
+		random_valid = {
+			desc = bc_shieldbrother_memory_desc_second_perspective
+		}
+	}
+
+	third_perspective_description = {
+		random_valid = {
+			desc = bc_shieldbrother_memory_desc_third_perspective
+		}
+	}
+
+	participants = { shieldbrother }
+
+	# Deliberately long. The opinion modifier decays in a few years; this is what
+	# is left after it has.
+	duration = {
+		years = 40
+	}
+}
