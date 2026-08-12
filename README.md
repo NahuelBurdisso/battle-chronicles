@@ -43,12 +43,28 @@ construction — confirm with `python tools/ck3.py conflicts`.
   verbatim next to `Commander Martial Skill`.
 - **Nothing is replaced.** Every file is new and additive.
 
+## First live run (2026-08-12)
+
+8 of 10 events fired. `probe 'BC:'` counts: van_breaks_through 16,
+horse_killed 15, banner_falls 10, flank_collapses 7, ground_favours_us 5,
+rally_the_line 5, shieldbrother_forged 3, lines_bogged_down 1, plus 40 cleanup
+calls and one 0003 pop-up.
+
+- **Resolved:** `bc_script_values.txt` works. Reading `side_strength` into a
+  script value and multiplying is valid — `bc_flank_collapses` and
+  `bc_van_breaks_through` both fired.
+- **Two bugs found and fixed:** the opinion modifiers needed a *positive*
+  `monthly_change` (a decay rate, not a signed drift), and `add_gold = -100` is
+  rejected outright — now `remove_short_term_gold = 100`.
+- **Never fired:** both knight events. Gates are narrow (prowess >= 12 or <= 6,
+  *and* the side losing, at base 40 against `commander_none` at 1000).
+  `bc_shieldbrother_forged` fires from the same file, so the hook is fine.
+
 ## Not yet verified in game
 
-- `bc_script_values.txt` — the outnumbered/outnumbering ratio. Plain
-  `side_strength` comparison is proven; reading it into a script value and
-  multiplying is not. If `bc_flank_collapses` and `bc_van_breaks_through` never
-  fire, check `error.log` for these keys first.
+- Whether vanilla's own `scope:combat_side.enemy_side.vastly_outnumbered_combat_side_threshold`
+  should replace `bc_outnumbered_threshold_value`. It exists and does the same
+  job; the hand-rolled value is proven, so this is a simplification, not a fix.
 - The weights. `base = 60` across seven commander events is a guess aimed at
   15-20% of commander rolls. `bc_frequency` exists so this is retunable without
   a script edit.

@@ -44,6 +44,7 @@ bc_banner_falls = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_banner_falls"
 
 		if = {
 			limit = { bc_can_interrupt_player_trigger = yes }
@@ -96,6 +97,7 @@ bc_rally_the_line = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_rally_the_line"
 
 		if = {
 			limit = { bc_can_interrupt_player_trigger = yes }
@@ -149,6 +151,7 @@ bc_horse_killed_under_him = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_horse_killed_under_him"
 
 		send_interface_toast = {
 			type = event_toast_effect_neutral
@@ -189,6 +192,7 @@ bc_flank_collapses = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_flank_collapses"
 
 		send_interface_toast = {
 			type = event_toast_effect_bad
@@ -233,6 +237,7 @@ bc_van_breaks_through = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_van_breaks_through"
 
 		if = {
 			limit = { bc_can_interrupt_player_trigger = yes }
@@ -286,6 +291,7 @@ bc_ground_favours_us = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_ground_favours_us"
 
 		send_interface_toast = {
 			type = event_toast_effect_good
@@ -328,6 +334,7 @@ bc_lines_bogged_down = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_lines_bogged_down"
 
 		send_interface_toast = {
 			type = event_toast_effect_neutral

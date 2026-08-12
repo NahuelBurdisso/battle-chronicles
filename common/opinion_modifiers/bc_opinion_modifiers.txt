@@ -5,9 +5,16 @@
 # just a casualty count. Proven working from a knight phase event (probe 11).
 #
 # All decaying - a battle should fade, slowly.
+#
+# `monthly_change` is a decay RATE, not a signed drift, so it must be POSITIVE
+# even for a negative opinion. A negative value is rejected with
+#   Decaying modifier 'x' should have a duration or monthly_change!
+# and the modifier is dropped. The sign of the opinion comes from the `opinion =`
+# passed at the add_opinion call site. Verified in game 2026-08-12; every vanilla
+# decaying modifier in 00_activity_system_opinons.txt uses `monthly_change = 0.1`.
 
 bc_valiant_in_battle_opinion = {
-	monthly_change = -0.1
+	monthly_change = 0.1
 	decaying = yes
 	stacking = yes
 }
@@ -20,7 +27,7 @@ bc_craven_in_battle_opinion = {
 
 # Slowest decay of the three. This is the one meant to outlive the war.
 bc_shieldbrother_opinion = {
-	monthly_change = -0.05
+	monthly_change = 0.05
 	decaying = yes
 	stacking = yes
 }

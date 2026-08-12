@@ -45,6 +45,7 @@ bc_knight_holds_the_breach = {
 	effect = {
 		save_scope_as = bc_knight
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_holds_the_breach"
 
 		send_interface_toast = {
 			type = event_toast_effect_good
@@ -103,6 +104,7 @@ bc_knight_shames_himself = {
 	effect = {
 		save_scope_as = bc_knight
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_shames_himself"
 
 		send_interface_toast = {
 			type = event_toast_effect_bad
@@ -164,6 +166,7 @@ bc_shieldbrother_forged = {
 	effect = {
 		save_scope_as = bc_knight
 		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_shieldbrother_forged"
 
 		scope:combat_side = {
 			random_side_knight = {
