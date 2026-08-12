@@ -1,0 +1,95 @@
+﻿l_english:
+
+# Battle Chronicles.
+#
+# MUST stay UTF-8 WITH BOM. Without it CK3 drops the entire file and every key
+# renders as its raw name. Entry syntax is exact: one leading space, KEY:0 "text".
+#
+# The momentum modifier names below are NOT internal labels. The combat advantage
+# breakdown prints them verbatim, in a list next to "Commander Martial Skill" and
+# "Leading Own Soldiers". Verified in game. Write them as causes a maester would
+# record, never as mechanics.
+
+ bc_momentum_minor:0 "The Line Steadies"
+ bc_momentum_major:0 "The Line Surges Forward"
+ bc_momentum_decisive:0 "The Field Is Ours"
+ bc_faltering_minor:0 "The Line Wavers"
+ bc_faltering_major:0 "The Banner Wavers"
+ bc_faltering_decisive:0 "The Line Is Breaking"
+
+ bc_valiant_in_battle_opinion:0 "Stood Fast in Battle"
+ bc_craven_in_battle_opinion:0 "Shamed Himself in Battle"
+ bc_shieldbrother_opinion:0 "Shieldbrother"
+
+# --- game rules -------------------------------------------------------------
+
+ rule_bc_frequency:0 "Battle Chronicles: Frequency"
+ rule_bc_frequency_desc:0 "How often a battle produces a notable moment. Battles roll for events every five days."
+ setting_bc_frequency_low:0 "Rare"
+ setting_bc_frequency_low_desc:0 "Half as often. Chronicles stay reserved for long, hard battles."
+ setting_bc_frequency_default:0 "Default"
+ setting_bc_frequency_default_desc:0 "A notable moment roughly once a month of fighting."
+ setting_bc_frequency_high:0 "Frequent"
+ setting_bc_frequency_high_desc:0 "Twice as often. Battles become a running account."
+
+ rule_bc_swing:0 "Battle Chronicles: Swing"
+ rule_bc_swing_desc:0 "How far a single moment can tip a battle. Affects the advantage granted or lost by every chronicle."
+ setting_bc_swing_subtle:0 "Subtle"
+ setting_bc_swing_subtle_desc:0 "Moments colour a battle without deciding it."
+ setting_bc_swing_default:0 "Default"
+ setting_bc_swing_default_desc:0 "A decisive moment is worth about as much as a capable commander."
+ setting_bc_swing_dramatic:0 "Dramatic"
+ setting_bc_swing_dramatic_desc:0 "A battle can turn on one moment. Cuts both ways."
+
+# --- commander chronicles ---------------------------------------------------
+
+ bc_banner_falls_toast:0 "The Banner Falls"
+ bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it."
+
+ bc_rally_the_line_toast:0 "The Line Is Rallied"
+ bc_rally_the_line_toast_desc:0 "A shouted order carries where it should not have, and the ranks close again."
+
+ bc_horse_killed_toast:0 "Unhorsed"
+ bc_horse_killed_toast_desc:0 "The horse goes down screaming. He comes up out of the mud on foot, and is seen to come up."
+
+ bc_flank_collapses_toast:0 "The Flank Collapses"
+ bc_flank_collapses_toast_desc:0 "The outnumbered wing bends, and then it does not stop bending."
+
+ bc_van_breaks_through_toast:0 "The Van Breaks Through"
+ bc_van_breaks_through_toast_desc:0 "The leading ranks find the seam, and open it."
+
+ bc_ground_favours_us_toast:0 "The Ground Favours Us"
+ bc_ground_favours_us_toast_desc:0 "The slope, the trees, the narrow way in. They have to come to us across all of it."
+
+ bc_lines_bogged_down_toast:0 "The Lines Bog Down"
+ bc_lines_bogged_down_toast_desc:0 "Neither host can move. The battle becomes a matter of who tires of the mud last."
+
+# --- knight chronicles ------------------------------------------------------
+
+ bc_knight_holds_the_breach_toast:0 "He Holds the Breach"
+ bc_knight_holds_the_breach_toast_desc:0 "One man in the gap where the line failed, and the line has time to be made again behind him."
+
+ bc_knight_shames_himself_toast:0 "He Breaks and Runs"
+ bc_knight_shames_himself_toast_desc:0 "He throws down the shield and goes back through his own ranks. Every man he passes remembers it."
+
+ bc_shieldbrother_forged_toast:0 "Shieldbrothers"
+ bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it."
+
+# --- pop-up events ----------------------------------------------------------
+
+ bc_chronicles.0001.t:0 "The Banner Falls"
+ bc_chronicles.0001.desc:0 "The standard goes down.\n\nIt is not a sound so much as an absence. The men who were dressing on it turn, and find nothing to dress on, and the turn spreads outward faster than any order could.\n\nThe standard-bearer is somewhere under the feet of the melee. The staff is still visible, canted, being trodden lower."
+ bc_chronicles.0001.a:0 "Then I will carry it myself."
+ bc_chronicles.0001.b:0 "Sound the withdrawal. Reform behind the line."
+ bc_chronicles.0001.c:0 "No man steps back from where it fell."
+
+ bc_chronicles.0002.t:0 "Rally the Line"
+ bc_chronicles.0002.desc:0 "The line has not broken. It is doing something worse, and slower: it is thinking about breaking.\n\nMen at the back are looking over their shoulders and measuring the distance. Nothing has been decided yet. It will be decided in the next few moments, by whoever speaks into them."
+ bc_chronicles.0002.a:0 "Ride the length of the line where they can see me."
+ bc_chronicles.0002.b:0 "Promise them the spoils, and pay it out now."
+ bc_chronicles.0002.c:0 "Say nothing. Let them steady themselves."
+
+ bc_chronicles.0003.t:0 "The Van Breaks Through"
+ bc_chronicles.0003.desc:0 "The leading ranks have found the seam and put a wedge in it, and the wedge is going deeper than anyone intended.\n\nIt can be driven all the way. It can also be driven so far that it comes out the far side alone, with the enemy closed up behind it."
+ bc_chronicles.0003.a:0 "Press it. Everything behind the wedge."
+ bc_chronicles.0003.b:0 "Hold them. Keep the line whole."

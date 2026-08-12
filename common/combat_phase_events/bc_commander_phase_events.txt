@@ -1,0 +1,347 @@
+﻿# Battle Chronicles - commander phase events.
+#
+# New additive file. CK3 reads every file in common/combat_phase_events/ and
+# merges the keys, so nothing here replaces vanilla, AGOT or Battlefield Duel+.
+#
+# Firing model, all verified in game:
+#   - a phase event rolls every COMBAT_EVENT_DAYS = 5 while a battle runs
+#   - `type = commander` roots on the commander, so `is_ai = no` means the PLAYER
+#     is personally leading that army - it is not a "player is watching" test
+#   - the competition is vanilla `commander_none` at base = 1000 plus AGOT's own
+#     casualty events, so base = 60 across seven events targets roughly 15-20% of
+#     commander rolls
+#   - bc_chronicle_ready_trigger, not the weights, is what stops these firing
+#     back to back; see bc_scripted_effects.txt
+#
+# The weights below are guesses and are meant to be retuned against real play.
+# That is exactly why bc_frequency exists.
+
+# ---------------------------------------------------------------------------
+# The banner falls. The signature setback: the army loses its focal point.
+# ---------------------------------------------------------------------------
+bc_banner_falls = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_losing_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		if = {
+			limit = { bc_can_interrupt_player_trigger = yes }
+			bc_start_popup_cooldown_effect = yes
+			trigger_event = bc_chronicles.0001
+		}
+		else = {
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_banner_falls_toast
+				desc = bc_banner_falls_toast_desc
+				left_icon = scope:bc_commander
+
+				bc_faltering_major_effect = yes
+				add_stress = 10
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Rally the line. The only way back out of a setback, so it gates on having one.
+# ---------------------------------------------------------------------------
+bc_rally_the_line = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_is_faltering_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A capable commander is likelier to find the moment.
+		modifier = {
+			add = 40
+			martial >= 12
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		if = {
+			limit = { bc_can_interrupt_player_trigger = yes }
+			bc_start_popup_cooldown_effect = yes
+			trigger_event = bc_chronicles.0002
+		}
+		else = {
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_rally_the_line_toast
+				desc = bc_rally_the_line_toast_desc
+				left_icon = scope:bc_commander
+
+				bc_rally_effect = yes
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A horse killed under him. Non-lethal by design decision - no death, no maiming
+# anywhere in this mod. The commander is shaken, and is admired for standing up.
+# ---------------------------------------------------------------------------
+bc_horse_killed_under_him = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		prowess >= 8
+		NOT = { bc_is_faltering_trigger = yes }
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Fighting commanders are the ones who get unhorsed.
+		modifier = {
+			add = 30
+			prowess >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_horse_killed_toast
+			desc = bc_horse_killed_toast_desc
+			left_icon = scope:bc_commander
+
+			bc_faltering_minor_effect = yes
+			add_prestige = 50
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A flank collapses. Needs a real numbers disadvantage, not just "behind".
+# ---------------------------------------------------------------------------
+bc_flank_collapses = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_outnumbered_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_flank_collapses_toast
+			desc = bc_flank_collapses_toast_desc
+			left_icon = scope:bc_commander
+
+			bc_faltering_major_effect = yes
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The van breaks through. The mirror of the flank collapsing.
+# ---------------------------------------------------------------------------
+bc_van_breaks_through = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_outnumbering_trigger = yes
+		martial >= 10
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			martial >= 16
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		if = {
+			limit = { bc_can_interrupt_player_trigger = yes }
+			bc_start_popup_cooldown_effect = yes
+			trigger_event = bc_chronicles.0003
+		}
+		else = {
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_van_breaks_through_toast
+				desc = bc_van_breaks_through_toast_desc
+				left_icon = scope:bc_commander
+
+				bc_momentum_major_effect = yes
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The ground favours us. Plain vanilla terrain keys only, so this never
+# hard-depends on Seasons of Ice and Fire.
+# ---------------------------------------------------------------------------
+bc_ground_favours_us = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_terrain_favours_us_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Reading ground is a martial skill.
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_ground_favours_us_toast
+			desc = bc_ground_favours_us_toast_desc
+			left_icon = scope:bc_commander
+
+			bc_momentum_minor_effect = yes
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The lines bog down. The only symmetrical event: both commanders suffer, which
+# is what makes bad ground read as bad ground rather than as a penalty aimed at
+# the player.
+# ---------------------------------------------------------------------------
+bc_lines_bogged_down = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		bc_chronicle_ready_trigger = yes
+		bc_terrain_bogs_us_down_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_lines_bogged_down_toast
+			desc = bc_lines_bogged_down_toast_desc
+			left_icon = scope:bc_commander
+
+			bc_faltering_minor_effect = yes
+		}
+
+		# The enemy commander is stuck in the same mud. `?=` because a side can
+		# be leaderless.
+		scope:combat_side.enemy_side.side_commander ?= {
+			bc_faltering_minor_effect = yes
+		}
+	}
+}

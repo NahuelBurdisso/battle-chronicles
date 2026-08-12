@@ -1,0 +1,141 @@
+﻿# Battle Chronicles - shared effects.
+#
+# Every event reaches for momentum through the four wrappers below, never through
+# add_character_modifier directly. Tuning the whole mod is then two numbers and
+# one ladder in this file.
+#
+# NOTE: `$PARAM$` substitution inside a quoted string EATS THE SPACE IN FRONT OF
+# IT ("applied $MODIFIER$" prints "appliedbc_momentum_major"). Harmless in a log,
+# never build a display string on it.
+
+# The leaf. Everything funnels here so duration lives in exactly one place.
+bc_add_momentum_effect = {
+	add_character_modifier = {
+		modifier = $MODIFIER$
+		days = 20
+	}
+}
+
+# --- the swing ladder -------------------------------------------------------
+# `bc_swing` shifts which rung an event reaches for instead of scaling numbers.
+# subtle steps down, dramatic steps up, and the ladder is defined once in
+# bc_momentum_modifiers.txt. An event asking for "minor" under `dramatic` gets
+# major; an event asking for "major" under `subtle` gets minor.
+
+bc_momentum_minor_effect = {
+	if = {
+		limit = { has_game_rule = bc_swing_dramatic }
+		bc_add_momentum_effect = { MODIFIER = bc_momentum_major }
+	}
+	else = {
+		bc_add_momentum_effect = { MODIFIER = bc_momentum_minor }
+	}
+}
+
+bc_momentum_major_effect = {
+	if = {
+		limit = { has_game_rule = bc_swing_subtle }
+		bc_add_momentum_effect = { MODIFIER = bc_momentum_minor }
+	}
+	else_if = {
+		limit = { has_game_rule = bc_swing_dramatic }
+		bc_add_momentum_effect = { MODIFIER = bc_momentum_decisive }
+	}
+	else = {
+		bc_add_momentum_effect = { MODIFIER = bc_momentum_major }
+	}
+}
+
+bc_faltering_minor_effect = {
+	if = {
+		limit = { has_game_rule = bc_swing_dramatic }
+		bc_add_momentum_effect = { MODIFIER = bc_faltering_major }
+	}
+	else = {
+		bc_add_momentum_effect = { MODIFIER = bc_faltering_minor }
+	}
+}
+
+bc_faltering_major_effect = {
+	if = {
+		limit = { has_game_rule = bc_swing_subtle }
+		bc_add_momentum_effect = { MODIFIER = bc_faltering_minor }
+	}
+	else_if = {
+		limit = { has_game_rule = bc_swing_dramatic }
+		bc_add_momentum_effect = { MODIFIER = bc_faltering_decisive }
+	}
+	else = {
+		bc_add_momentum_effect = { MODIFIER = bc_faltering_major }
+	}
+}
+
+# --- rallying ---------------------------------------------------------------
+# Clearing a setback is worth more than adding a bonus, so the rally events
+# strip whatever tier is on and then grant a small push.
+
+bc_clear_faltering_effect = {
+	if = {
+		limit = { has_character_modifier = bc_faltering_minor }
+		remove_character_modifier = bc_faltering_minor
+	}
+	if = {
+		limit = { has_character_modifier = bc_faltering_major }
+		remove_character_modifier = bc_faltering_major
+	}
+	if = {
+		limit = { has_character_modifier = bc_faltering_decisive }
+		remove_character_modifier = bc_faltering_decisive
+	}
+}
+
+bc_rally_effect = {
+	bc_clear_faltering_effect = yes
+	bc_momentum_minor_effect = yes
+}
+
+# --- cleanup ----------------------------------------------------------------
+# Called from the hidden combat-end event. Without this, momentum earned in one
+# battle bleeds into the next 20 days of the war.
+
+bc_cleanup_effect = {
+	bc_clear_faltering_effect = yes
+	if = {
+		limit = { has_character_modifier = bc_momentum_minor }
+		remove_character_modifier = bc_momentum_minor
+	}
+	if = {
+		limit = { has_character_modifier = bc_momentum_major }
+		remove_character_modifier = bc_momentum_major
+	}
+	if = {
+		limit = { has_character_modifier = bc_momentum_decisive }
+		remove_character_modifier = bc_momentum_decisive
+	}
+}
+
+# --- pacing -----------------------------------------------------------------
+# Every commander chronicle sets this, and every commander chronicle refuses to
+# fire while it is set. One shared flag is what actually enforces the design
+# budget of "a notable moment roughly every 25-30 days of battle" — phase events
+# roll every 5 days (COMBAT_EVENT_DAYS), so without it seven events at base 60
+# would fire in a constant stream.
+
+bc_mark_chronicle_effect = {
+	add_character_flag = {
+		flag = bc_chronicle_recent
+		days = 15
+	}
+}
+
+# --- pop-up throttle --------------------------------------------------------
+# One prompt per 60 days per commander. A long siege would otherwise produce a
+# stream of them. This is a FLAG on purpose: modifiers are wiped at combat end,
+# so a modifier-based cooldown would reset with every battle.
+
+bc_start_popup_cooldown_effect = {
+	add_character_flag = {
+		flag = bc_popup_cooldown
+		days = 60
+	}
+}

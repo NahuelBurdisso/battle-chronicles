@@ -1,0 +1,45 @@
+﻿# Battle Chronicles - momentum modifiers.
+#
+# These are the whole mechanic. A phase event that goes well or badly puts one of
+# these on the commander, and `advantage` feeds straight into the combat roll.
+# Verified in game 2026-08-12: a character `advantage` modifier moves the battle
+# breakdown, and the breakdown lists each modifier by its LOCALIZED NAME next to
+# `Commander Martial Skill`. So these names are player-facing prose, not keys —
+# they must read as a battlefield cause, never as a game mechanic.
+#
+# Durations are set by the caller (bc_scripted_effects.txt), deliberately shorter
+# than a long battle so momentum decays instead of locking in.
+#
+# Three tiers per direction. The `bc_swing` game rule shifts which tier an event
+# reaches for rather than multiplying numbers, so there is exactly one ladder to
+# tune. See bc_scripted_effects.txt.
+
+bc_momentum_minor = {
+	icon = martial_positive
+	advantage = 3
+}
+
+bc_momentum_major = {
+	icon = martial_positive
+	advantage = 6
+}
+
+bc_momentum_decisive = {
+	icon = martial_positive
+	advantage = 10
+}
+
+bc_faltering_minor = {
+	icon = martial_negative
+	advantage = -3
+}
+
+bc_faltering_major = {
+	icon = martial_negative
+	advantage = -6
+}
+
+bc_faltering_decisive = {
+	icon = martial_negative
+	advantage = -10
+}

@@ -1,0 +1,87 @@
+﻿# Battle Chronicles - shared situation tests.
+#
+# Every gate lives here rather than inline in the events, so "what counts as
+# losing" is one decision instead of seven.
+#
+# All of these assume they are evaluated from a combat phase event, where
+# `scope:combat_side` exists. They are not safe anywhere else.
+
+# --- how the battle is going -----------------------------------------------
+# Proven in game (probe 5).
+
+bc_side_is_losing_trigger = {
+	scope:combat_side.side_strength < scope:combat_side.enemy_side.side_strength
+}
+
+bc_side_is_winning_trigger = {
+	scope:combat_side.side_strength > scope:combat_side.enemy_side.side_strength
+}
+
+# Half again as many. See the warning in bc_script_values.txt.
+bc_side_is_outnumbered_trigger = {
+	scope:combat_side.enemy_side.side_strength > bc_outnumbered_threshold_value
+}
+
+bc_side_is_outnumbering_trigger = {
+	scope:combat_side.side_strength > bc_outnumbering_threshold_value
+}
+
+# --- ground -----------------------------------------------------------------
+# scope:combat_side.combat.location is a province scope, so `terrain = x` works
+# there directly. Proven in game (probe 4). Plain vanilla terrain keys only, so
+# the mod never hard-depends on Seasons of Ice and Fire.
+
+bc_terrain_favours_us_trigger = {
+	scope:combat_side.combat.location = {
+		OR = {
+			terrain = hills
+			terrain = mountains
+			terrain = forest
+		}
+	}
+}
+
+bc_terrain_bogs_us_down_trigger = {
+	scope:combat_side.combat.location = {
+		OR = {
+			terrain = wetlands
+			terrain = jungle
+			terrain = mountains
+		}
+	}
+}
+
+# --- momentum state ---------------------------------------------------------
+# Used both to gate rallies and to stop a commander stacking the same setback
+# every five days.
+
+bc_has_momentum_trigger = {
+	OR = {
+		has_character_modifier = bc_momentum_minor
+		has_character_modifier = bc_momentum_major
+		has_character_modifier = bc_momentum_decisive
+	}
+}
+
+bc_is_faltering_trigger = {
+	OR = {
+		has_character_modifier = bc_faltering_minor
+		has_character_modifier = bc_faltering_major
+		has_character_modifier = bc_faltering_decisive
+	}
+}
+
+# --- pacing -----------------------------------------------------------------
+
+bc_chronicle_ready_trigger = {
+	NOT = { has_character_flag = bc_chronicle_recent }
+}
+
+# --- pop-up gate ------------------------------------------------------------
+# A flag, NOT a modifier. Momentum modifiers are stripped at combat end, so a
+# modifier-based lockout silently resets every battle. Verified the hard way.
+
+bc_can_interrupt_player_trigger = {
+	is_ai = no
+	NOT = { has_character_flag = bc_popup_cooldown }
+}

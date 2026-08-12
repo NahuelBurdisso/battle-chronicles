@@ -1,0 +1,27 @@
+﻿# Battle Chronicles - combat end cleanup.
+#
+# DO NOT put an `effect = { }` block in here.
+#
+# on_action `events = { }`, `random_events = { }` and `on_actions = { }` are
+# additive lists and merge across files. `effect = { }` DOES NOT. The engine keeps
+# exactly one and logs
+#   [E][jomini_onaction.cpp:161]: There is more than one 'effect' defined using most recent: file: ...
+# and "most recent" is decided by file read order inside common/on_action, which
+# is ALPHABETICAL - not playset load order. A mod loading dead last still loses to
+# `combat_on_actions.txt` if its own filename sorts earlier. This exact bug ate a
+# whole probe run on 2026-08-12.
+#
+# So: hook via `events = { }` and put the logic in a hidden combat_side event.
+# That is what vanilla itself does (on_combat_end_winner -> combat_event.0001).
+
+on_combat_end_winner = {
+	events = {
+		bc_chronicles.0090
+	}
+}
+
+on_combat_end_loser = {
+	events = {
+		bc_chronicles.0090
+	}
+}

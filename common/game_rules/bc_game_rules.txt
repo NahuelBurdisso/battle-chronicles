@@ -1,0 +1,35 @@
+﻿# Battle Chronicles - tuning rules.
+#
+# The starting weights in the phase events are guesses. These rules exist so the
+# player (and the author) can retune without a script edit and without a restart
+# of the whole modding loop.
+#
+# Read in script with `has_game_rule = <option>`, exactly as vanilla's
+# commander_none reads `has_game_rule = easy_difficulty`. Verified in game.
+#
+# WARNING: a modded game rule is baked into every save made with it. Disabling
+# this mod afterwards makes that save fail to load with
+#   Failed to read key reference: bc_frequency_default ... in file: "save games/x.ck3"
+# That is expected, not a bug.
+#
+# No option sets blocks_achievements.
+
+bc_frequency = {
+	categories = { flavor }
+
+	default = bc_frequency_default
+
+	bc_frequency_low = {}
+	bc_frequency_default = {}
+	bc_frequency_high = {}
+}
+
+bc_swing = {
+	categories = { flavor }
+
+	default = bc_swing_default
+
+	bc_swing_subtle = {}
+	bc_swing_default = {}
+	bc_swing_dramatic = {}
+}

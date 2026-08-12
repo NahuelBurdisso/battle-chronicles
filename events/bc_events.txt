@@ -1,0 +1,143 @@
+﻿namespace = bc_chronicles
+
+# Battle Chronicles - the player-facing moments.
+#
+# Only three of the ten chronicles ever become a pop-up, and only when the player
+# is personally leading the side and is not inside the 60-day pop-up cooldown.
+# Everything else is a toast, because that is what vanilla and AGOT do and the mod
+# should read as native.
+#
+# Nothing in here touches combat scopes. A triggered event runs on the character,
+# and momentum is a character modifier, so the outcomes work without carrying
+# scope:combat_side across the trigger_event boundary.
+#
+# The commander phase event applies NO momentum before firing these - the option
+# is the outcome. Every option therefore has to leave the commander somewhere.
+
+# ---------------------------------------------------------------------------
+# The banner falls.
+# ---------------------------------------------------------------------------
+bc_chronicles.0001 = {
+	type = character_event
+	title = bc_chronicles.0001.t
+	desc = bc_chronicles.0001.desc
+	theme = martial
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	option = {
+		name = bc_chronicles.0001.a
+		trigger = { prowess >= 8 }
+
+		bc_momentum_minor_effect = yes
+		add_prestige = 100
+		add_stress = 15
+	}
+
+	option = {
+		name = bc_chronicles.0001.b
+
+		bc_faltering_minor_effect = yes
+	}
+
+	option = {
+		name = bc_chronicles.0001.c
+
+		bc_faltering_major_effect = yes
+		add_prestige = 50
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Rally the line. Only reachable while faltering, so every option is a way out
+# of a hole - they differ in what the way out costs.
+# ---------------------------------------------------------------------------
+bc_chronicles.0002 = {
+	type = character_event
+	title = bc_chronicles.0002.t
+	desc = bc_chronicles.0002.desc
+	theme = martial
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	option = {
+		name = bc_chronicles.0002.a
+		trigger = { prowess >= 10 }
+
+		bc_rally_effect = yes
+		add_stress = 10
+	}
+
+	option = {
+		name = bc_chronicles.0002.b
+		trigger = { gold >= 100 }
+
+		add_gold = -100
+		bc_rally_effect = yes
+	}
+
+	option = {
+		name = bc_chronicles.0002.c
+
+		bc_clear_faltering_effect = yes
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The van breaks through.
+# ---------------------------------------------------------------------------
+bc_chronicles.0003 = {
+	type = character_event
+	title = bc_chronicles.0003.t
+	desc = bc_chronicles.0003.desc
+	theme = martial
+
+	left_portrait = {
+		character = root
+		animation = war_attacker
+	}
+
+	option = {
+		name = bc_chronicles.0003.a
+
+		bc_momentum_major_effect = yes
+		add_stress = 10
+	}
+
+	option = {
+		name = bc_chronicles.0003.b
+
+		bc_momentum_minor_effect = yes
+		add_prestige = 50
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Cleanup. Reached from on_combat_end_winner / _loser via their `events = { }`
+# list - see bc_on_actions.txt for why an `effect = { }` there is discarded.
+# Shape copied from vanilla combat_event.0001: hidden, scoped to the combat side,
+# no `type =`.
+#
+# Momentum must not survive the battle that earned it. Flags are deliberately NOT
+# cleared here: they are the cooldowns, and they are supposed to outlive the
+# battle.
+# ---------------------------------------------------------------------------
+bc_chronicles.0090 = {
+	hidden = yes
+	scope = combat_side
+
+	immediate = {
+		side_commander ?= {
+			bc_cleanup_effect = yes
+		}
+		every_side_knight = {
+			bc_cleanup_effect = yes
+		}
+	}
+}

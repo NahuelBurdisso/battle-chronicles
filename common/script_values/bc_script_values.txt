@@ -1,0 +1,19 @@
+﻿# Battle Chronicles - thresholds.
+#
+# A trigger can only compare one side_strength against the other. To ask "are we
+# outnumbered by half again" the multiplied figure has to come from a script
+# value. Used by bc_scripted_triggers.txt.
+#
+# UNVERIFIED IN GAME. The plain < / > comparison of side_strength is proven
+# (probe 5); reading it into a script value and multiplying is not. If the two
+# events that use it never fire, check error.log for these keys first.
+
+bc_outnumbered_threshold_value = {
+	value = scope:combat_side.side_strength
+	multiply = 1.5
+}
+
+bc_outnumbering_threshold_value = {
+	value = scope:combat_side.enemy_side.side_strength
+	multiply = 1.5
+}

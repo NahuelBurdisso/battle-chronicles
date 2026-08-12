@@ -1,0 +1,206 @@
+﻿# Battle Chronicles - knight phase events.
+#
+# `type = knight` has NO is_ai gate. Unlike `type = commander` it fires for every
+# knight on every side of every combat in the world - the probe run saw 41 fires
+# from a single battle. Two consequences:
+#   - gate hard in is_valid, and never do expensive work before the gate
+#   - bc_chronicle_ready_trigger / bc_mark_chronicle_effect are per-CHARACTER, so
+#     a knight's 15-day cooldown is independent of his commander's
+#
+# Knights push momentum onto the SIDE COMMANDER, not onto themselves. Only the
+# commander's advantage modifiers were proven to reach the combat roll; a knight's
+# own advantage is unverified, and a knight is the story rather than the mechanic.
+# `?=` on side_commander because a side can be leaderless.
+
+# ---------------------------------------------------------------------------
+# A knight holds the breach. The side is losing and one man buys it time.
+# ---------------------------------------------------------------------------
+bc_knight_holds_the_breach = {
+	type = knight
+
+	is_valid = {
+		exists = root
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_losing_trigger = yes
+		prowess >= 12
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 18
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_knight_holds_the_breach_toast
+			desc = bc_knight_holds_the_breach_toast_desc
+			left_icon = scope:bc_knight
+
+			add_prestige = 100
+		}
+
+		scope:combat_side.side_commander ?= {
+			bc_momentum_minor_effect = yes
+		}
+
+		if = {
+			limit = { exists = liege }
+			add_opinion = {
+				target = liege
+				modifier = bc_valiant_in_battle_opinion
+				opinion = 15
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A knight shames himself. Non-lethal: he lives, and everyone saw it.
+# ---------------------------------------------------------------------------
+bc_knight_shames_himself = {
+	type = knight
+
+	is_valid = {
+		exists = root
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_losing_trigger = yes
+		prowess <= 6
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_knight_shames_himself_toast
+			desc = bc_knight_shames_himself_toast_desc
+			left_icon = scope:bc_knight
+
+			add_stress = 15
+		}
+
+		scope:combat_side.side_commander ?= {
+			bc_faltering_minor_effect = yes
+		}
+
+		# The grudge runs from the liege toward the knight, so it is the liege's
+		# opinion of him that drops.
+		if = {
+			limit = { exists = liege }
+			reverse_add_opinion = {
+				target = liege
+				modifier = bc_craven_in_battle_opinion
+				opinion = -20
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Shieldbrothers. The seed of the wider idea - two knights who came through the
+# same press together. Free to hook here because we are already iterating
+# knights, and every_side_knight / random_side_knight are proven (probe 14).
+# ---------------------------------------------------------------------------
+bc_shieldbrother_forged = {
+	type = knight
+
+	is_valid = {
+		exists = root
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		scope:combat_side = {
+			any_side_knight = {
+				count >= 2
+			}
+		}
+	}
+
+	chance = {
+		base = 25
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+
+		scope:combat_side = {
+			random_side_knight = {
+				limit = {
+					NOT = { this = scope:bc_knight }
+					is_alive = yes
+					bc_chronicle_ready_trigger = yes
+				}
+				save_scope_as = bc_shieldbrother
+			}
+		}
+
+		if = {
+			limit = { exists = scope:bc_shieldbrother }
+
+			scope:bc_shieldbrother = {
+				bc_mark_chronicle_effect = yes
+			}
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_shieldbrother_forged_toast
+				desc = bc_shieldbrother_forged_toast_desc
+				left_icon = scope:bc_knight
+				right_icon = scope:bc_shieldbrother
+			}
+
+			add_opinion = {
+				target = scope:bc_shieldbrother
+				modifier = bc_shieldbrother_opinion
+				opinion = 25
+			}
+			reverse_add_opinion = {
+				target = scope:bc_shieldbrother
+				modifier = bc_shieldbrother_opinion
+				opinion = 25
+			}
+		}
+	}
+}
