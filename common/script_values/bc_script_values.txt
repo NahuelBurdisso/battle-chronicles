@@ -14,6 +14,13 @@
 #
 # side_strength is scaled down by a factor of 1000 by the engine, so these are
 # ratios of an already-scaled number. Fine, because both sides are scaled alike.
+#
+# SCOPE WARNING: the two values below are written against `scope:combat_side`
+# because they are read from phase events, where that scope exists. The
+# aftermath values further down are written against `root`, because they are
+# read from a combat_side-scoped event where the side IS root and
+# `scope:combat_side` does not exist. Do not copy one style into the other's
+# call site.
 
 bc_outnumbered_threshold_value = {
 	value = scope:combat_side.side_strength
@@ -23,4 +30,64 @@ bc_outnumbered_threshold_value = {
 bc_outnumbering_threshold_value = {
 	value = scope:combat_side.enemy_side.side_strength
 	multiply = 1.5
+}
+
+# --- aftermath: how lopsided were the hosts ---------------------------------
+#
+# Read from bc_chronicles.0091 / .0092, where the combat side is ROOT. The
+# `root.` prefix is not decoration. Both call sites put a scope path on the
+# left - `enemy_side.side_max_army_size >= bc_our_host_gap_value` - and if the
+# engine resolves an unprefixed script value on the right in the LEFT operand's
+# scope, this would evaluate as `enemy >= enemy * 1.5`: permanently false, on
+# both sides, while still passing the winner-versus-loser symmetry check that
+# exists to catch exactly this. That resolution rule is unverified. Anchoring
+# means it never has to be known.
+#
+# multiply MUST stay strictly greater than 1. At exactly 1 the row degenerates
+# to "the hosts were not identical", which is true in nearly every battle and
+# donates a free calc_true_if point to both sides.
+#
+# side_max_army_size, not side_army_size or troops_ratio: at combat END a
+# current-strength ratio measures the outcome, not the odds. Grand Remembrance
+# corroborates the reading by computing casualties as
+# `side_max_army_size - side_army_size` (zz_gr_memory_tracking.txt:74).
+
+bc_our_host_gap_value = {
+	value = root.side_max_army_size
+	multiply = 1.5
+}
+
+bc_their_host_gap_value = {
+	value = root.enemy_side.side_max_army_size
+	multiply = 1.5
+}
+
+# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -------------------------
+# Bracket the live 1.5 so the marker ladder in .0091 / .0092 can report where
+# the odds actually sit. Nothing but the debug_log ladders reads these.
+#
+# These are the reason the events also carry a PER-SIDE host size ladder: if
+# every battle reports "odds even", these four cannot distinguish "the hosts
+# really were matched" from "side_max_army_size does not work on the left of a
+# comparison and all three rungs are silently false". The per-side ladder tests
+# that construct against plain constants and is the control.
+
+bc_cal_our_host_gap_2x = {
+	value = root.side_max_army_size
+	multiply = 2.0
+}
+
+bc_cal_their_host_gap_2x = {
+	value = root.enemy_side.side_max_army_size
+	multiply = 2.0
+}
+
+bc_cal_our_host_gap_12x = {
+	value = root.side_max_army_size
+	multiply = 1.2
+}
+
+bc_cal_their_host_gap_12x = {
+	value = root.enemy_side.side_max_army_size
+	multiply = 1.2
 }
