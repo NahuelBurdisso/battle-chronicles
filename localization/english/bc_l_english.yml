@@ -84,6 +84,11 @@
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
  bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it."
 
+# --- aftermath --------------------------------------------------------------
+
+ bc_aftermath_nickname_toast:0 "A Name Won on the Field"
+ bc_aftermath_nickname_toast_desc:0 "He has won another great field, and enough of them now that men who were not there have started calling him something. It has stuck."
+
 # --- memories ---------------------------------------------------------------
 #
 # Three perspectives, per the vanilla standard in _character_memories.info: no
