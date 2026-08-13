@@ -164,16 +164,30 @@ Re-derive by restoring the ladders from git history, not by guessing.
   `lose notable` 5. Only the per-side host ladder differs, which is correct.
 - **Resolved:** zero mod-attributable lines in `error.log`.
 
+## Confirmation run, 2026-08-13 (Generous, 5 combat ends)
+
+A second, short run on `bc_aftermath_generous` to settle the two things the
+calibration run could not.
+
+- **Resolved: two knights on the same side both get a memory of the same
+  battle.** Checked by eye in the memories window on two different knights after
+  a player-fought battle; both name the same province. This was the one thing in
+  the design no log could answer, and it is the load-bearing proof that
+  `bc_battle_memory_effect` is iterator-safe — the `random_memory` +
+  `NOT = { has_variable = battle_location }` idiom does not let the second
+  knight's `set_variable` land on the first knight's memory.
+- **Resolved: `bc_aftermath_generous` executes.** 3 of 5 battles graded notable
+  against a Default rate that is now well under the 13% the calibration run
+  measured on looser thresholds.
+- **Symmetry held again:** win notable 3 == lose notable 3, win not-notable 2 ==
+  lose not-notable 2. All 5 battles, both sides, same verdict.
+- Zero mod-attributable lines in `error.log`.
+
 ## Not yet verified in game
 
-- **Two knights on the same side both getting a memory of the same battle.** No
-  log can answer this — it needs eyes on the memories window (the round button in
-  the character window, tooltip "See the Memories of this character"). The
-  calibration save produced only 5 notable wins and none was guaranteed to be the
-  player's.
-- **`bc_aftermath_generous`.** The run was played on `default`, and game rules
-  are baked into a save at creation, so the generous branch has never executed.
-  Its effect is arithmetic and small — one free `calc_true_if` point — but it is
-  untested.
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
   resolves.
+- The nickname award. It needs one commander to bank three notable wins with
+  `martial >= 14` and no nickname yet, which no run so far has been long enough
+  to produce. `"BC: nickname awarded"` is a permanent marker, so `probe 'BC:'`
+  will report it the first time it happens.
