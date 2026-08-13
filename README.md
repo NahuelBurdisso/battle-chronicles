@@ -15,8 +15,9 @@ README for the 13-probe result table.
 - Enable:   `python tools/ck3.py playset add battle_chronicles`
 - Read results: `python tools/ck3.py probe 'bc_'`
 
-Load after AGOT and after Battlefield Duel+. Zero file collisions by
-construction — confirm with `python tools/ck3.py conflicts`.
+Load after AGOT. Zero file collisions by construction — confirm with
+`python tools/ck3.py index -q && python tools/ck3.py conflicts` (`conflicts`
+reads the index, so a stale index can only ever report a pass).
 
 ## What is where
 
@@ -26,11 +27,12 @@ construction — confirm with `python tools/ck3.py conflicts`.
 | `common/combat_phase_events/bc_knight_phase_events.txt` | 3 knight moments |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
-| `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place |
-| `common/game_rules/bc_game_rules.txt` | frequency and swing |
-| `common/on_action/bc_on_actions.txt` | combat-end hook, `events = { }` only |
-| `common/character_memory_types/bc_memories.txt` | the shieldbrother memory |
-| `events/bc_events.txt` | the three pop-ups and the hidden cleanup |
+| `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
+| `common/script_values/bc_script_values.txt` | the four ratio thresholds |
+| `common/game_rules/bc_game_rules.txt` | frequency, swing, aftermath |
+| `common/on_action/bc_on_actions.txt` | combat-end hooks, `events = { }` only |
+| `common/character_memory_types/bc_memories.txt` | shieldbrother + the two battle memories |
+| `events/bc_events.txt` | three pop-ups, cleanup, and the two aftermath graders |
 
 ## Rules this mod lives by
 
@@ -107,12 +109,71 @@ calls and one 0003 pop-up.
   spending the knight's 15-day lockout and logging a fire. Nothing happens now
   until the partner exists.
 
+## The aftermath system
+
+At combat end, `bc_chronicles.0091` (winner) and `.0092` (loser) grade the
+battle. If it was notable, every surviving knight on the side gets a 40-year
+memory of the province — `bc_battle_memory_won` or `bc_battle_memory_lost`. On
+the winning side the commander also banks a notable win in
+`var:bc_notable_battles`, and at three wins with `martial >= 14` and no nickname
+yet, he is named on the field from a list of 27 AGOT nicknames.
+
+Two events rather than one because `bc_chronicles.0090` fires from both hooks and
+nothing in its body can tell which called it. `is_combat_side_pursuing` is
+documented as "is this side the winner", but every script use of it in vanilla
+and AGOT is *during* combat; its value at combat end is unproven. Two events
+makes the outcome structural instead of inferred.
+
+The grade must be **symmetric** — both sides must reach the same verdict, or one
+side's knights remember a battle the other side's do not. Every row is either
+combat-scoped (symmetric for free) or written as an explicit `OR` across
+`enemy_side`.
+
+Game rule `bc_aftermath`: `off` / `default` / `generous`. Generous donates a free
+`calc_true_if` point, so one real row is enough. All three of the mod's game
+rules default to their middle option.
+
+## Calibration run, 2026-08-13 (39 combat ends, both sides logged)
+
+The grade's thresholds were seeded from vanilla's own numbers and then measured
+with temporary ladder markers. Vanilla's numbers turned out to be the wrong
+*shape*, not merely the wrong size — **three of the five rows never fired once**:
+
+| row | ladder | verdict |
+|---|---|---|
+| size | <5k 26 / 5-10k 8 / 10-20k 5 / 20k+ **0** | 20k and 30k were dead. Now 10k / 20k. |
+| blood | <25 3 / 25-50 29 / 50-75 7 / 75+ **0** | 75 was dead. Now 50 (top 18%). |
+| odds | even 9 / 1.2x 9 / 1.5x 11 / 2x 10 | 1.5x fired on **54%** and was carrying the whole trigger. Now 2x (top 26%). |
+| warscore | <10 30 / 10-25 3 / 25-50 2 / 50+ 4 | 25 already sat at the top 15%. Kept. |
+
+The three ratio rows are scale-free and will hold as hosts grow. Size is the only
+absolute, which is why both rungs are set above the sample rather than fitted to
+it — 20k is reserved for late-campaign hosts and is meant to age into relevance.
+Re-derive by restoring the ladders from git history, not by guessing.
+
+- **Resolved:** `side_max_army_size` works on the LEFT of a comparison. It had
+  zero script precedent anywhere in vanilla, AGOT or the playset. A control
+  ladder against plain constants left its `else` branch, and the odds ladder
+  spread across all four buckets instead of collapsing to one.
+- **Resolved:** a `send_interface_toast` body **does** run for an AI character —
+  `fired bc_knight_holds_the_breach` 14 == `toast body ran` 14.
+- **Resolved:** all 11 phase events now fire, including
+  `bc_knight_shames_himself` (11×), which never fired before the retune.
+- **Resolved:** symmetry holds empirically. Every ladder matches rung-for-rung
+  between `.0091` and `.0092` across all 39 battles, and `win notable` 5 ==
+  `lose notable` 5. Only the per-side host ladder differs, which is correct.
+- **Resolved:** zero mod-attributable lines in `error.log`.
+
 ## Not yet verified in game
 
-- Whether a `send_interface_toast` body runs at all for an AI character.
-  `bc_knight_holds_the_breach` carries a `debug_log` inside its toast for exactly
-  this: if `probe 'BC:'` returns fewer "toast body ran" than "fired
-  bc_knight_holds_the_breach", the answer is no. Nothing depends on the outcome
-  any more — this is to settle the rule, not to fix a bug.
-- The memory: that it renders, and that `[shieldbrother.GetFullName]` resolves.
-- The retuned weights.
+- **Two knights on the same side both getting a memory of the same battle.** No
+  log can answer this — it needs eyes on the memories window (the round button in
+  the character window, tooltip "See the Memories of this character"). The
+  calibration save produced only 5 notable wins and none was guaranteed to be the
+  player's.
+- **`bc_aftermath_generous`.** The run was played on `default`, and game rules
+  are baked into a save at creation, so the generous branch has never executed.
+  Its effect is arithmetic and small — one free `calc_true_if` point — but it is
+  untested.
+- The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
+  resolves.

@@ -38,14 +38,21 @@ bc_outnumbering_threshold_value = {
 # `root.` prefix is not decoration. Both call sites put a scope path on the
 # left - `enemy_side.side_max_army_size >= bc_our_host_gap_value` - and if the
 # engine resolves an unprefixed script value on the right in the LEFT operand's
-# scope, this would evaluate as `enemy >= enemy * 1.5`: permanently false, on
+# scope, this would evaluate as `enemy >= enemy * 2`: permanently false, on
 # both sides, while still passing the winner-versus-loser symmetry check that
 # exists to catch exactly this. That resolution rule is unverified. Anchoring
 # means it never has to be known.
 #
+# VERIFIED IN GAME 2026-08-13: side_max_army_size works on the LEFT of a
+# comparison, which had no script precedent anywhere in vanilla, AGOT or the
+# playset. A control ladder against plain constants left its else branch, and
+# the odds ladder spread across all four buckets over 39 battles rather than
+# collapsing to one.
+#
 # multiply MUST stay strictly greater than 1. At exactly 1 the row degenerates
 # to "the hosts were not identical", which is true in nearly every battle and
-# donates a free calc_true_if point to both sides.
+# donates a free calc_true_if point to both sides. It was 1.5 until the
+# calibration run showed that fired on 54% of battles; 2.0 is the top quarter.
 #
 # side_max_army_size, not side_army_size or troops_ratio: at combat END a
 # current-strength ratio measures the outcome, not the odds. Grand Remembrance
@@ -54,40 +61,10 @@ bc_outnumbering_threshold_value = {
 
 bc_our_host_gap_value = {
 	value = root.side_max_army_size
-	multiply = 1.5
+	multiply = 2.0
 }
 
 bc_their_host_gap_value = {
 	value = root.enemy_side.side_max_army_size
-	multiply = 1.5
-}
-
-# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -------------------------
-# Bracket the live 1.5 so the marker ladder in .0091 / .0092 can report where
-# the odds actually sit. Nothing but the debug_log ladders reads these.
-#
-# These are the reason the events also carry a PER-SIDE host size ladder: if
-# every battle reports "odds even", these four cannot distinguish "the hosts
-# really were matched" from "side_max_army_size does not work on the left of a
-# comparison and all three rungs are silently false". The per-side ladder tests
-# that construct against plain constants and is the control.
-
-bc_cal_our_host_gap_2x = {
-	value = root.side_max_army_size
 	multiply = 2.0
-}
-
-bc_cal_their_host_gap_2x = {
-	value = root.enemy_side.side_max_army_size
-	multiply = 2.0
-}
-
-bc_cal_our_host_gap_12x = {
-	value = root.side_max_army_size
-	multiply = 1.2
-}
-
-bc_cal_their_host_gap_12x = {
-	value = root.enemy_side.side_max_army_size
-	multiply = 1.2
 }

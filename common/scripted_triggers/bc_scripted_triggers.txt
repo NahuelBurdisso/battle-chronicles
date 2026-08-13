@@ -120,20 +120,41 @@ bc_can_interrupt_player_trigger = {
 # symmetric because it asks "was either host much larger", not "were we
 # outnumbered". The game rule is the same on both sides.
 #
-# PLACEHOLDER NUMBERS. Every threshold here is vanilla's, used as a starting
-# guess. Westerosi hosts are larger than CK3's and these are expected to be too
-# low. They are reset from the calibration run, which also replaces this
-# comment.
+# CALIBRATED 2026-08-13 against 39 combat ends, both sides logged separately.
+# Vanilla's numbers turned out to be the wrong shape entirely, not merely the
+# wrong size: THREE of the five rows never fired once in 39 battles. What the
+# ladders showed, and what each number is now:
+#
+#   size   under 5k 26 / 5-10k 8 / 10-20k 5 / 20k+ NONE
+#          Vanilla's 20k and 30k were dead rows. 10k/20k instead. 10k is the
+#          top 13% of this sample; 20k fires on nothing yet and is deliberately
+#          reserved for late-campaign hosts, which are much larger than the
+#          early-game armies this run measured. Do not lower it to fit a
+#          bookmark start - it is the one row meant to age into relevance.
+#   blood  under 25 3 / 25-50 29 / 50-75 7 / 75+ NONE
+#          75 was a dead row. 50 is the top 18%.
+#   odds   even 9 / 1.2x 9 / 1.5x 11 / 2x 10
+#          1.5x fired on 21 of 39 - FIFTY-FOUR PERCENT. It was carrying the
+#          whole trigger and calling half of all battles remarkable. 2x is the
+#          top 26%.
+#   score  under 10 30 / 10-25 3 / 25-50 2 / 50+ 4
+#          25 already sat right at the top 15%. The only threshold kept.
+#
+# The three ratio rows - blood, odds, warscore - are scale free and will hold
+# as hosts grow. Size is the only absolute, which is why its two rungs are set
+# high rather than fitted to this sample.
+#
+# Re-derive by restoring the ladders from git history, not by guessing.
 
 bc_battle_is_notable_trigger = {
 	calc_true_if = {
 		amount >= 2
 
+		combat = { num_total_troops >= 10000 }
 		combat = { num_total_troops >= 20000 }
-		combat = { num_total_troops >= 30000 }
 		OR = {
-			percent_enemies_killed >= 75
-			enemy_side.percent_enemies_killed >= 75
+			percent_enemies_killed >= 50
+			enemy_side.percent_enemies_killed >= 50
 		}
 		OR = {
 			enemy_side.side_max_army_size >= bc_our_host_gap_value
