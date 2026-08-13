@@ -41,6 +41,15 @@
  setting_bc_swing_dramatic:0 "Dramatic"
  setting_bc_swing_dramatic_desc:0 "A battle can turn on one moment. Cuts both ways."
 
+ rule_bc_aftermath:0 "Battle Chronicles: Aftermath"
+ rule_bc_aftermath_desc:0 "Whether a battle worth remembering leaves a mark on the men who fought it. Knights carry a memory of the field; a commander who wins several may be named for them."
+ setting_bc_aftermath_off:0 "Off"
+ setting_bc_aftermath_off_desc:0 "Battles leave nothing behind. The mod behaves as it did before this was added, and AGOT's own nickname system is left entirely alone."
+ setting_bc_aftermath_default:0 "Default"
+ setting_bc_aftermath_default_desc:0 "A battle must stand out in at least two ways — its size, its cost, the odds against, or how completely it was decided. Most fields do not."
+ setting_bc_aftermath_generous:0 "Generous"
+ setting_bc_aftermath_generous_desc:0 "One reason is enough. Notable fields and the names won on them become common."
+
 # --- commander chronicles ---------------------------------------------------
 
  bc_banner_falls_toast:0 "The Banner Falls"
@@ -86,6 +95,21 @@
  bc_shieldbrother_memory_desc:0 "I came through the press back to back with [shieldbrother.GetFullName], and neither of us went down"
  bc_shieldbrother_memory_desc_second_perspective:0 "you came through the press back to back with [shieldbrother.GetFullName], and neither of you went down"
  bc_shieldbrother_memory_desc_third_perspective:0 "[owner.GetName] came through the press back to back with [shieldbrother.GetFullName], and neither of them went down"
+
+# The title reads back the province with GetNameNoTooltip and the description
+# with GetName. Vanilla's own battle-memory titles do the same: a title is
+# already inside a memory-list entry, and GetName there nests a tooltip in a
+# tooltip. `battle_location` is set on the memory by bc_battle_memory_effect.
+
+ bc_battle_memory_won:0 "won a battle at [ROOT.Var('battle_location').GetProvince.GetNameNoTooltip]"
+ bc_battle_memory_won_desc:0 "I stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and we were the ones still standing on it"
+ bc_battle_memory_won_desc_second_perspective:0 "you stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and you were the ones still standing on it"
+ bc_battle_memory_won_desc_third_perspective:0 "[owner.GetName] stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and was among those still standing on it"
+
+ bc_battle_memory_lost:0 "lost a battle at [ROOT.Var('battle_location').GetProvince.GetNameNoTooltip]"
+ bc_battle_memory_lost_desc:0 "I stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
+ bc_battle_memory_lost_desc_second_perspective:0 "you stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
+ bc_battle_memory_lost_desc_third_perspective:0 "[owner.GetName] stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
 
 # --- pop-up events ----------------------------------------------------------
 

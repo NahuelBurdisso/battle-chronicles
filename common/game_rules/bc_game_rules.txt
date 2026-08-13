@@ -33,3 +33,13 @@ bc_swing = {
 	bc_swing_default = {}
 	bc_swing_dramatic = {}
 }
+
+bc_aftermath = {
+	categories = { flavor }
+
+	default = bc_aftermath_default
+
+	bc_aftermath_off = {}
+	bc_aftermath_default = {}
+	bc_aftermath_generous = {}
+}

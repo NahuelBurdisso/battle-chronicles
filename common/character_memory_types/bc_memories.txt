@@ -43,3 +43,73 @@ bc_shieldbrother_memory = {
 		years = 40
 	}
 }
+
+# --- the battle memory ------------------------------------------------------
+#
+# One field, remembered by every knight who stood on it. Two types rather than
+# one so the polarity token in `categories` is right and the localization does
+# not have to branch on the outcome.
+#
+# NO `participants` block on purpose. This memory is about a place, not a
+# person - vanilla's `became_incapable_due_to_battle_concussion` is the
+# precedent for a participant-free type carrying `battle_location`.
+#
+# `duration` is forty years and MUST NOT be `memory_default_duration`. The
+# default is `value = 5` plus bonuses that only rulers, duchy-tier holders and
+# the player's own circle collect, so a landless AI knight - precisely the man
+# this feature exists for - would score 5 and forget the field inside five
+# years. Same decision, same reason, as bc_shieldbrother_memory above.
+
+bc_battle_memory_won = {
+	categories = { positive martial war battle }
+	icon = "battle.dds"
+
+	description = {
+		random_valid = {
+			desc = bc_battle_memory_won_desc
+		}
+	}
+
+	second_perspective_description = {
+		random_valid = {
+			desc = bc_battle_memory_won_desc_second_perspective
+		}
+	}
+
+	third_perspective_description = {
+		random_valid = {
+			desc = bc_battle_memory_won_desc_third_perspective
+		}
+	}
+
+	duration = {
+		years = 40
+	}
+}
+
+bc_battle_memory_lost = {
+	categories = { negative martial war battle }
+	icon = "battle.dds"
+
+	description = {
+		random_valid = {
+			desc = bc_battle_memory_lost_desc
+		}
+	}
+
+	second_perspective_description = {
+		random_valid = {
+			desc = bc_battle_memory_lost_desc_second_perspective
+		}
+	}
+
+	third_perspective_description = {
+		random_valid = {
+			desc = bc_battle_memory_lost_desc_third_perspective
+		}
+	}
+
+	duration = {
+		years = 40
+	}
+}
