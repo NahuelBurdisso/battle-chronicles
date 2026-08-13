@@ -371,3 +371,253 @@ bc_chronicles.0092 = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# Aftermath, winning side. Reached from on_combat_end_winner.
+#
+# Everything .0092 does, plus the two things that only make sense for a winner:
+# the cumulative notable-win counter, and the name won on the field.
+#
+# The counter is incremented BEFORE the nickname check, so <N> counts the
+# battle just fought.
+# ---------------------------------------------------------------------------
+bc_chronicles.0091 = {
+	hidden = yes
+	scope = combat_side
+
+	trigger = {
+		NOT = { has_game_rule = bc_aftermath_off }
+	}
+
+	immediate = {
+		# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -----------------
+		# Identical ladders to .0092, tagged "win". They MUST stay identical:
+		# comparing `probe 'BC: win notable'` against `probe 'BC: lose notable'`
+		# is the only test that catches an asymmetric bar, and it only works if
+		# both sides measure the same thing.
+		if = {
+			limit = { combat = { num_total_troops >= 40000 } }
+			debug_log = "BC: win size 40k+"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 30000 } }
+			debug_log = "BC: win size 30k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 20000 } }
+			debug_log = "BC: win size 20k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 10000 } }
+			debug_log = "BC: win size 10k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 5000 } }
+			debug_log = "BC: win size 5k"
+		}
+		else = {
+			debug_log = "BC: win size under 5k"
+		}
+
+		if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 75
+					enemy_side.percent_enemies_killed >= 75
+				}
+			}
+			debug_log = "BC: win blood 75"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 50
+					enemy_side.percent_enemies_killed >= 50
+				}
+			}
+			debug_log = "BC: win blood 50"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 25
+					enemy_side.percent_enemies_killed >= 25
+				}
+			}
+			debug_log = "BC: win blood 25"
+		}
+		else = {
+			debug_log = "BC: win blood under 25"
+		}
+
+		if = {
+			limit = { combat = { warscore_value >= 50 } }
+			debug_log = "BC: win warscore 50"
+		}
+		else_if = {
+			limit = { combat = { warscore_value >= 25 } }
+			debug_log = "BC: win warscore 25"
+		}
+		else_if = {
+			limit = { combat = { warscore_value >= 10 } }
+			debug_log = "BC: win warscore 10"
+		}
+		else = {
+			debug_log = "BC: win warscore under 10"
+		}
+
+		if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_cal_our_host_gap_2x
+					side_max_army_size >= bc_cal_their_host_gap_2x
+				}
+			}
+			debug_log = "BC: win odds 2x"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_our_host_gap_value
+					side_max_army_size >= bc_their_host_gap_value
+				}
+			}
+			debug_log = "BC: win odds 1.5x"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_cal_our_host_gap_12x
+					side_max_army_size >= bc_cal_their_host_gap_12x
+				}
+			}
+			debug_log = "BC: win odds 1.2x"
+		}
+		else = {
+			debug_log = "BC: win odds even"
+		}
+
+		# The control for the odds ladder - see .0092 for why it exists.
+		if = {
+			limit = { side_max_army_size >= 20000 }
+			debug_log = "BC: win host 20k+"
+		}
+		else_if = {
+			limit = { side_max_army_size >= 10000 }
+			debug_log = "BC: win host 10k"
+		}
+		else_if = {
+			limit = { side_max_army_size >= 5000 }
+			debug_log = "BC: win host 5k"
+		}
+		else = {
+			debug_log = "BC: win host under 5k"
+		}
+		# --- end calibration ------------------------------------------------
+
+		if = {
+			limit = { bc_battle_is_notable_trigger = yes }
+			debug_log = "BC: win notable"
+
+			combat.location ?= {
+				save_scope_as = bc_battle_province
+			}
+
+			if = {
+				limit = { exists = scope:bc_battle_province }
+				every_side_knight = {
+					limit = {
+						is_alive = yes
+						# See .0092 for why this is trigger_if.
+						trigger_if = {
+							limit = { exists = root.side_commander }
+							NOT = { this = root.side_commander }
+						}
+					}
+					bc_battle_memory_effect = { TYPE = bc_battle_memory_won }
+				}
+			}
+
+			# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -------------
+			# Accounts for the notable wins that never reach the commander
+			# branch at all. Without this, `nickname awarded` plus the four
+			# other `nickname blocked` counts can fall short of `win notable`
+			# with no explanation.
+			if = {
+				limit = { NOT = { exists = side_commander } }
+				debug_log = "BC: nickname blocked no commander"
+			}
+			# --- end calibration --------------------------------------------
+
+			side_commander ?= {
+				if = {
+					limit = { is_alive = yes }
+					# NOTE, deviation from the spec: the spec puts is_alive in
+					# the nickname limit only, which would let a commander who
+					# died winning still take the tally. It is hoisted here
+					# instead because the tally exists solely to gate the
+					# nickname and a dead man will never command again, so the
+					# difference is unobservable - and one gate is clearer than
+					# two.
+					bc_notable_battle_counter_effect = yes
+
+					# `exists` is belt and braces. What actually makes the
+					# var: read below safe is bc_notable_battle_counter_effect
+					# immediately above, which always writes the variable
+					# before anything reads it. Do not rely on evaluation
+					# order to make it safe - CK3 guarantees no order of
+					# evaluation among siblings, in a limit or anywhere else.
+					if = {
+						limit = {
+							has_any_nickname = no
+							exists = var:bc_notable_battles
+							var:bc_notable_battles >= 3
+							# martial, not prowess. This names a man for
+							# commanding, and it is the same threshold the mod
+							# already uses for its high-martial phase-event
+							# bonus. Deliberately NOT AGOT's heroic gate of
+							# prowess >= 25 plus bold AI: a man can be the
+							# finest field commander in Westeros and a
+							# mediocre swordsman, and that is who this is for.
+							martial >= 14
+						}
+						# The toast inside the effect needs a character for
+						# left_icon, and a scripted effect does not rebind
+						# ROOT - ROOT is still the combat side. Save him here.
+						save_scope_as = bc_named_commander
+						bc_aftermath_nickname_effect = yes
+					}
+					# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -----
+					# If `probe 'BC: nickname awarded'` comes back zero, these
+					# say which gate ate it rather than leaving it unexplained.
+					else_if = {
+						limit = { has_any_nickname = yes }
+						debug_log = "BC: nickname blocked already named"
+					}
+					else_if = {
+						# No `exists` guard needed and none wanted:
+						# bc_notable_battle_counter_effect ran unconditionally
+						# before this whole chain and guarantees the variable.
+						# An `OR = { NOT = { exists } ... }` here would be the
+						# unsafe read the comment above warns about, since CK3
+						# does not guarantee OR short-circuits.
+						limit = { var:bc_notable_battles < 3 }
+						debug_log = "BC: nickname blocked count"
+					}
+					else = {
+						debug_log = "BC: nickname blocked martial"
+					}
+					# --- end calibration ------------------------------------
+				}
+				# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN ---------
+				else = {
+					debug_log = "BC: nickname blocked dead commander"
+				}
+				# --- end calibration ----------------------------------------
+			}
+		}
+		else = {
+			debug_log = "BC: win not notable"
+		}
+	}
+}
