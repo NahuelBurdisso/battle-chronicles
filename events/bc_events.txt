@@ -157,3 +157,217 @@ bc_chronicles.0090 = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# Aftermath, losing side. Reached from on_combat_end_loser.
+#
+# Same shape as bc_chronicles.0090 and as vanilla's own combat-side graders:
+# hidden, scope = combat_side, NO `type =`.
+#
+# TWO events rather than one because bc_chronicles.0090 fires from both hooks
+# and nothing in its body can tell which one invoked it. is_combat_side_pursuing
+# is documented as "is this side the winner", but every script use of it in
+# vanilla and AGOT is DURING combat, inside is_army_in_combat = yes; its value
+# at combat end is unproven. Two events makes the outcome structural instead of
+# inferred, and costs nothing.
+#
+# The grade runs in `immediate`, not in the event trigger, even though the cited
+# precedent historical_artifacts.0100 puts its calc_true_if in the trigger. The
+# calibration markers below have to fire on EVERY combat end, including the ones
+# that fail the bar, or they measure only the battles that already passed. The
+# only thing in the trigger is the off switch.
+#
+# This event does NOT touch bc_notable_battles. The counter is wins only - see
+# bc_notable_battle_counter_effect. The two events are not mirror images.
+# ---------------------------------------------------------------------------
+bc_chronicles.0092 = {
+	hidden = yes
+	scope = combat_side
+
+	trigger = {
+		NOT = { has_game_rule = bc_aftermath_off }
+	}
+
+	immediate = {
+		# --- CALIBRATION ONLY - DELETE AFTER THE TUNING RUN -----------------
+		# Every marker is tagged "lose" because .0091 fires on the same battle
+		# and untagged markers would double-count the distribution - and worse,
+		# would make the winner-versus-loser comparison impossible. That
+		# comparison is the one test that catches an asymmetric bar.
+		#
+		# Buckets rather than interpolated numbers because `ck3.py probe`
+		# tallies repeated markers, and a unique string per battle cannot be
+		# counted.
+		if = {
+			limit = { combat = { num_total_troops >= 40000 } }
+			debug_log = "BC: lose size 40k+"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 30000 } }
+			debug_log = "BC: lose size 30k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 20000 } }
+			debug_log = "BC: lose size 20k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 10000 } }
+			debug_log = "BC: lose size 10k"
+		}
+		else_if = {
+			limit = { combat = { num_total_troops >= 5000 } }
+			debug_log = "BC: lose size 5k"
+		}
+		else = {
+			debug_log = "BC: lose size under 5k"
+		}
+
+		if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 75
+					enemy_side.percent_enemies_killed >= 75
+				}
+			}
+			debug_log = "BC: lose blood 75"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 50
+					enemy_side.percent_enemies_killed >= 50
+				}
+			}
+			debug_log = "BC: lose blood 50"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					percent_enemies_killed >= 25
+					enemy_side.percent_enemies_killed >= 25
+				}
+			}
+			debug_log = "BC: lose blood 25"
+		}
+		else = {
+			debug_log = "BC: lose blood under 25"
+		}
+
+		if = {
+			limit = { combat = { warscore_value >= 50 } }
+			debug_log = "BC: lose warscore 50"
+		}
+		else_if = {
+			limit = { combat = { warscore_value >= 25 } }
+			debug_log = "BC: lose warscore 25"
+		}
+		else_if = {
+			limit = { combat = { warscore_value >= 10 } }
+			debug_log = "BC: lose warscore 10"
+		}
+		else = {
+			debug_log = "BC: lose warscore under 10"
+		}
+
+		if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_cal_our_host_gap_2x
+					side_max_army_size >= bc_cal_their_host_gap_2x
+				}
+			}
+			debug_log = "BC: lose odds 2x"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_our_host_gap_value
+					side_max_army_size >= bc_their_host_gap_value
+				}
+			}
+			debug_log = "BC: lose odds 1.5x"
+		}
+		else_if = {
+			limit = {
+				OR = {
+					enemy_side.side_max_army_size >= bc_cal_our_host_gap_12x
+					side_max_army_size >= bc_cal_their_host_gap_12x
+				}
+			}
+			debug_log = "BC: lose odds 1.2x"
+		}
+		else = {
+			debug_log = "BC: lose odds even"
+		}
+
+		# The CONTROL for the odds ladder above. Every rung up there puts
+		# side_max_army_size on the left of a comparison, which has no script
+		# precedent anywhere in vanilla, AGOT or the playset. If that construct
+		# does not work, all three rungs are silently false and the ladder
+		# reports "even" on every battle - indistinguishable from a world of
+		# evenly matched hosts. This ladder uses the same construct against
+		# plain constants: if it ever leaves the else, the construct works.
+		if = {
+			limit = { side_max_army_size >= 20000 }
+			debug_log = "BC: lose host 20k+"
+		}
+		else_if = {
+			limit = { side_max_army_size >= 10000 }
+			debug_log = "BC: lose host 10k"
+		}
+		else_if = {
+			limit = { side_max_army_size >= 5000 }
+			debug_log = "BC: lose host 5k"
+		}
+		else = {
+			debug_log = "BC: lose host under 5k"
+		}
+		# --- end calibration ------------------------------------------------
+
+		if = {
+			limit = { bc_battle_is_notable_trigger = yes }
+			debug_log = "BC: lose notable"
+
+			combat.location ?= {
+				save_scope_as = bc_battle_province
+			}
+
+			# The province check is an enclosing if, not part of the limit -
+			# it is a property of the battle, and re-asking it once per knight
+			# is noise.
+			if = {
+				limit = { exists = scope:bc_battle_province }
+				every_side_knight = {
+					limit = {
+						# Knights die in the combat that just ended. Vanilla
+						# guards its own post-battle knight handling the same
+						# way (AGOT combat_events.txt:854, :1028; the
+						# vanilla equivalents are :813 and :877).
+						is_alive = yes
+						# We never give a commander a battle memory - vanilla
+						# already gives the loser's commander one, every time,
+						# with no random gate. Nothing in the API says whether
+						# every_side_knight includes him; this costs nothing if
+						# it does not.
+						#
+						# NOTE, deviation from the spec: the spec writes this
+						# as a bare `NOT = { this = root.side_commander }`.
+						# trigger_if, not a bare NOT: a side can be leaderless,
+						# which is why side_commander and combat.location are
+						# reached with ?= everywhere else in this event. A bare
+						# comparison against a missing scope is an error-log
+						# line for every knight of every leaderless battle.
+						trigger_if = {
+							limit = { exists = root.side_commander }
+							NOT = { this = root.side_commander }
+						}
+					}
+					bc_battle_memory_effect = { TYPE = bc_battle_memory_lost }
+				}
+			}
+		}
+		else = {
+			debug_log = "BC: lose not notable"
+		}
+	}
+}
