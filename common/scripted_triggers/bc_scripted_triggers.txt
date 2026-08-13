@@ -4,7 +4,10 @@
 # losing" is one decision instead of seven.
 #
 # All of these assume they are evaluated from a combat phase event, where
-# `scope:combat_side` exists. They are not safe anywhere else.
+# `scope:combat_side` exists. They are not safe anywhere else - EXCEPT
+# bc_battle_is_notable_trigger at the bottom of the file, which takes the
+# combat side as ROOT and is called from the combat-end events, where
+# `scope:combat_side` does not exist. Check which one you are writing.
 
 # --- how the battle is going -----------------------------------------------
 # Proven in game (probe 5).
@@ -90,4 +93,53 @@ bc_chronicle_ready_trigger = {
 bc_can_interrupt_player_trigger = {
 	is_ai = no
 	NOT = { has_character_flag = bc_popup_cooldown }
+}
+
+# --- was this battle worth remembering --------------------------------------
+#
+# ROOT is the combat side. This is the one trigger in the file that does not
+# use scope:combat_side - see the header.
+#
+# calc_true_if is the engine's own points system and is what vanilla uses for
+# this exact question, twice: combat_event.3000 for the map point-of-interest
+# and historical_artifacts.0100 for naming an artifact after a battle. Both
+# count direct children, so DO NOT wrap any of these rows in a nested scripted
+# trigger - a nested trigger counts as one row no matter how many tests it
+# holds.
+#
+# Five substantive rows plus the game rule. The two size rows nest, so the bar
+# actually reads "huge, or big plus one other thing". Deliberate: thirty
+# thousand men on a field is notable whatever else happened. It also means the
+# blood, odds and warscore rows never decide the largest battles, so read their
+# calibration ladders against the sub-huge population.
+#
+# The bar must be SYMMETRIC - both sides must reach the same verdict, or one
+# side's knights get a memory of a battle the other side's knights do not.
+# num_total_troops and warscore_value are combat-scoped and symmetric for free.
+# Blood is made symmetric by the explicit OR across enemy_side. The odds row is
+# symmetric because it asks "was either host much larger", not "were we
+# outnumbered". The game rule is the same on both sides.
+#
+# PLACEHOLDER NUMBERS. Every threshold here is vanilla's, used as a starting
+# guess. Westerosi hosts are larger than CK3's and these are expected to be too
+# low. They are reset from the calibration run, which also replaces this
+# comment.
+
+bc_battle_is_notable_trigger = {
+	calc_true_if = {
+		amount >= 2
+
+		combat = { num_total_troops >= 20000 }
+		combat = { num_total_troops >= 30000 }
+		OR = {
+			percent_enemies_killed >= 75
+			enemy_side.percent_enemies_killed >= 75
+		}
+		OR = {
+			enemy_side.side_max_army_size >= bc_our_host_gap_value
+			side_max_army_size >= bc_their_host_gap_value
+		}
+		combat = { warscore_value >= 25 }
+		has_game_rule = bc_aftermath_generous
+	}
 }
