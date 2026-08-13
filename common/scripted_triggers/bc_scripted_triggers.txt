@@ -31,11 +31,17 @@ bc_side_is_outnumbering_trigger = {
 # there directly. Proven in game (probe 4). Plain vanilla terrain keys only, so
 # the mod never hard-depends on Seasons of Ice and Fire.
 
+# `mountains` used to appear in BOTH lists, so in the mountains the ground
+# simultaneously favoured you and bogged you down and the two events fought over
+# the same roll. It belongs to the bogging list: hills and forest already carry
+# "good defensive ground", while wetlands and jungle on their own are close to
+# nonexistent in Westeros - the Neck and nothing else - so without mountains the
+# bogged-down event would never be seen at all.
+
 bc_terrain_favours_us_trigger = {
 	scope:combat_side.combat.location = {
 		OR = {
 			terrain = hills
-			terrain = mountains
 			terrain = forest
 		}
 	}

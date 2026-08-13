@@ -86,6 +86,27 @@ calls and one 0003 pop-up.
 - **Shieldbrothers now leave a memory**, `bc_shieldbrother_memory`, forty years,
   one for each man naming the other. Opinion decays; this does not.
 
+## Review pass, 2026-08-12 (four bugs, all found by reading)
+
+- **The knight's opinion ran backwards.** `bc_knight_holds_the_breach` used
+  `add_opinion = { target = liege }`, which raises *the knight's* opinion of his
+  lord. "Stood Fast in Battle" is the lord's view of the knight. Now
+  `reverse_add_opinion`, matching the grudge in `bc_knight_shames_himself`.
+- **Two events skipped the tier gate.** `bc_flank_collapses` had no
+  `NOT = { bc_is_faltering_trigger }` and `bc_van_breaks_through` had no
+  `NOT = { bc_has_momentum_trigger }`. Tiers are separate modifier keys, so a
+  commander could carry minor and major at once and sit at ±9 — off the end of
+  the ladder everything else is tuned against.
+- **`mountains` was in both terrain lists**, so mountain ground both favoured
+  you and bogged you down, and the two events competed for the same roll. It is
+  now only in the bogging list; hills and forest already carry "good defensive
+  ground", and wetlands and jungle alone are close to nonexistent in Westeros.
+- **Shieldbrother burned its cooldown on a no-op.** `is_valid` can only ask
+  whether the side has two knights, not whether a second one is off cooldown, so
+  the event could win a roll and find nobody to pair with — after already
+  spending the knight's 15-day lockout and logging a fire. Nothing happens now
+  until the partner exists.
+
 ## Not yet verified in game
 
 - Whether a `send_interface_toast` body runs at all for an AI character.

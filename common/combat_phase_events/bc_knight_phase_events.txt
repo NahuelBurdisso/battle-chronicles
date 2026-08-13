@@ -77,9 +77,14 @@ bc_knight_holds_the_breach = {
 
 		add_prestige = 100
 
+		# reverse_add_opinion, not add_opinion. `add_opinion = { target = liege }`
+		# changes ROOT's opinion of the liege - it would have made the knight
+		# think better of his lord for his own courage. The admiration runs the
+		# other way, which is what "Stood Fast in Battle" says, and it is the
+		# same direction bc_knight_shames_himself uses for the grudge.
 		if = {
 			limit = { exists = liege }
-			add_opinion = {
+			reverse_add_opinion = {
 				target = liege
 				modifier = bc_valiant_in_battle_opinion
 				opinion = 15
@@ -205,10 +210,14 @@ bc_shieldbrother_forged = {
 		}
 	}
 
+	# NOTHING happens before the partner is found. `is_valid` can only ask
+	# whether the side has two knights, not whether a second one is off
+	# cooldown, so this event can win a roll and still have nobody to pair
+	# with. Marking the chronicle up front cost the knight a 15-day lockout for
+	# an event that did not happen, and logged a fire that produced no story.
+	# A wasted roll is free; a wasted lockout is not.
 	effect = {
 		save_scope_as = bc_knight
-		bc_mark_chronicle_effect = yes
-		debug_log = "BC: fired bc_shieldbrother_forged"
 
 		scope:combat_side = {
 			random_side_knight = {
@@ -223,6 +232,9 @@ bc_shieldbrother_forged = {
 
 		if = {
 			limit = { exists = scope:bc_shieldbrother }
+
+			bc_mark_chronicle_effect = yes
+			debug_log = "BC: fired bc_shieldbrother_forged"
 
 			scope:bc_shieldbrother = {
 				bc_mark_chronicle_effect = yes
