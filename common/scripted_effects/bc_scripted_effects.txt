@@ -272,7 +272,34 @@ bc_aftermath_nickname_effect = {
 
 	debug_log = "BC: nickname awarded"
 
-	# Field order matches every other toast in the mod.
+	# The toast is ADDRESSED, not broadcast - the mod's own rule, and the
+	# nickname was breaking it. Raised on the commander alone it reached nobody
+	# in the overwhelmingly common case: the man being named is a courtier
+	# captain leading his lord's army, so he is AI, and a send_interface_toast
+	# body only runs for a character a player is playing. The name was being
+	# awarded in silence.
+	#
+	# Same shape the knight chronicles already use, for the same reason - they
+	# raise on the side commander because nobody is playing a courtier knight.
+	# Here the courtier IS the subject, so it goes one step up to his liege.
+	#
+	# left_icon stays scope:bc_named_commander in both branches: it must name
+	# the man who won it, not whoever is being told.
+	if = {
+		limit = { is_ai = no }
+		bc_aftermath_nickname_toast_effect = yes
+	}
+	else_if = {
+		limit = { exists = liege }
+		liege = {
+			bc_aftermath_nickname_toast_effect = yes
+		}
+	}
+}
+
+# The toast itself, so the two call sites above cannot drift apart. Field order
+# matches every other toast in the mod.
+bc_aftermath_nickname_toast_effect = {
 	send_interface_toast = {
 		type = event_toast_effect_good
 		title = bc_aftermath_nickname_toast
