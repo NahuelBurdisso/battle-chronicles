@@ -56,6 +56,7 @@ bc_banner_falls = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_banner_falls"
 
@@ -67,6 +68,7 @@ bc_banner_falls = {
 		else = {
 			bc_faltering_major_effect = yes
 			add_stress = 10
+			bc_record_moment_effect = { TIER = major KIND = wild SWING = down }
 
 			send_interface_toast = {
 				type = event_toast_effect_bad
@@ -108,6 +110,7 @@ bc_rally_the_line = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_rally_the_line"
 
@@ -118,6 +121,7 @@ bc_rally_the_line = {
 		}
 		else = {
 			bc_rally_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
 			send_interface_toast = {
 				type = event_toast_effect_good
@@ -163,11 +167,13 @@ bc_horse_killed_under_him = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_horse_killed_under_him"
 
 		bc_faltering_minor_effect = yes
 		add_prestige = 50
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
 		send_interface_toast = {
 			type = event_toast_effect_neutral
@@ -208,10 +214,12 @@ bc_flank_collapses = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_flank_collapses"
 
 		bc_faltering_major_effect = yes
+		bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
 
 		send_interface_toast = {
 			type = event_toast_effect_bad
@@ -255,6 +263,7 @@ bc_van_breaks_through = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_van_breaks_through"
 
@@ -265,6 +274,7 @@ bc_van_breaks_through = {
 		}
 		else = {
 			bc_momentum_major_effect = yes
+			bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
 
 			send_interface_toast = {
 				type = event_toast_effect_good
@@ -308,10 +318,12 @@ bc_ground_favours_us = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_ground_favours_us"
 
 		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
 		send_interface_toast = {
 			type = event_toast_effect_good
@@ -352,10 +364,12 @@ bc_lines_bogged_down = {
 
 	effect = {
 		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_lines_bogged_down"
 
 		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
 		send_interface_toast = {
 			type = event_toast_effect_neutral
