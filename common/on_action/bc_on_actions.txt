@@ -25,3 +25,12 @@ on_combat_end_loser = {
 		bc_chronicles.0092
 	}
 }
+
+# Root = Combat here, NOT a combat side — see event_scopes.log and the DIAG event
+# this currently carries. `events = { }` for the same reason as the two hooks
+# above: an `effect = { }` in an on_action does not merge across files.
+on_combat_start = {
+	events = {
+		bc_chronicles.0900
+	}
+}
