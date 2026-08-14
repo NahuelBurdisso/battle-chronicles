@@ -16,14 +16,12 @@
 
 on_combat_end_winner = {
 	events = {
-		bc_chronicles.0090
 		bc_chronicles.0091
 	}
 }
 
 on_combat_end_loser = {
 	events = {
-		bc_chronicles.0090
 		bc_chronicles.0092
 	}
 }

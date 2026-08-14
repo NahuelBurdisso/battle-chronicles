@@ -32,14 +32,16 @@ reads the index, so a stale index can only ever report a pass).
 | `common/game_rules/bc_game_rules.txt` | frequency, swing, aftermath |
 | `common/on_action/bc_on_actions.txt` | combat-end hooks, `events = { }` only |
 | `common/character_memory_types/bc_memories.txt` | shieldbrother + the two battle memories |
-| `events/bc_events.txt` | three pop-ups, cleanup, and the two aftermath graders |
+| `events/bc_events.txt` | the three player-facing pop-ups, and nothing else |
+| `events/bc_aftermath_events.txt` | the two hidden combat-end graders |
 
 ## Rules this mod lives by
 
 - **Non-lethal.** No `death`, no maiming, anywhere. A setback is an advantage
   penalty and some stress.
-- **Momentum never outlives its battle.** `bc_chronicles.0090` strips it at
-  combat end.
+- **Momentum never outlives its battle.** The combat-end graders
+  `bc_chronicles.0091` and `.0092` strip it, before anything reads the scratch
+  variables it was earned alongside.
 - **Cooldowns are flags, never modifiers.** Modifiers are wiped at combat end, so
   a modifier-based lockout silently resets every battle.
 - **Modifier names are prose.** The combat advantage breakdown prints them
@@ -118,11 +120,12 @@ the winning side the commander also banks a notable win in
 `var:bc_notable_battles`, and at three wins with `martial >= 14` and no nickname
 yet, he is named on the field from a list of 27 AGOT nicknames.
 
-Two events rather than one because `bc_chronicles.0090` fires from both hooks and
-nothing in its body can tell which called it. `is_combat_side_pursuing` is
-documented as "is this side the winner", but every script use of it in vanilla
-and AGOT is *during* combat; its value at combat end is unproven. Two events
-makes the outcome structural instead of inferred.
+One event per hook, not one shared event, because nothing in a combat-end event's
+body can tell which hook invoked it. `is_combat_side_pursuing` is documented as
+"is this side the winner", but every script use of it in vanilla and AGOT is
+*during* combat; its value at combat end is unproven. A hook apiece makes the
+outcome structural instead of inferred, and it is also what lets cleanup, grading
+and scratch clearing run in a written, provable order within each one.
 
 The grade must be **symmetric** — both sides must reach the same verdict, or one
 side's knights remember a battle the other side's do not. Every row is either

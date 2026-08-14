@@ -1,0 +1,211 @@
+﻿namespace = bc_chronicles
+
+# Battle Chronicles - the combat-end graders.
+#
+# Reached from on_combat_end_winner / _loser via their `events = { }` list - see
+# bc_on_actions.txt for why an `effect = { }` there is discarded. Shape copied
+# from vanilla combat_event.0001: hidden, scoped to the combat side, no `type =`.
+#
+# TWO events, one per hook. Not one: nothing in an event body can tell which of
+# on_combat_end_winner / on_combat_end_loser invoked it. is_combat_side_pursuing
+# is documented as "is this side the winner", but every use of it in vanilla and
+# AGOT is DURING combat inside is_army_in_combat = yes, and its value at combat
+# end is unproven. Two events makes the outcome structural instead of inferred.
+#
+# NEITHER CARRIES A `trigger`. The old cleanup event these two replace had none
+# either, deliberately: it was the only caller of bc_cleanup_effect, and putting
+# momentum stripping behind the aftermath off switch would leave `advantage +-10`
+# modifiers bleeding twenty days into the next battle for any player who touched
+# that setting. The game rule therefore lives on an INNER `if` around the grading
+# branch only.
+#
+# The grade runs in `immediate`, not in an event trigger, even though the cited
+# precedent historical_artifacts.0100 puts its calc_true_if in the trigger. The
+# grading markers have to fire on EVERY combat end, including the ones that fail
+# the bar, or they measure only the battles that already passed.
+#
+# Momentum must not survive the battle that earned it. Flags are deliberately NOT
+# cleared here: they are the cooldowns, and they are supposed to outlive the
+# battle.
+#
+# BODY ORDER IS LOAD-BEARING and is part of the design:
+#   1. cleanup, OUTSIDE the gate
+#   2. grading, INSIDE the gate
+#   3. scratch clearing, OUTSIDE the gate, and LAST
+# Step 3 must follow step 2 because grading reads scratch. Writing the two-column
+# split the natural way — all ungated work together — is exactly wrong.
+#
+# Scratch clearing arrives in task 12. Until then step 3 is absent, which is
+# correct: there is no scratch yet.
+
+# ---------------------------------------------------------------------------
+# Winning side.
+#
+# Everything the losing grader does, plus the two things that only make sense
+# for a winner: the cumulative notable-win counter, and the name won on the
+# field. The two events are NOT mirror images.
+#
+# The counter is incremented BEFORE the nickname check, so <N> counts the
+# battle just fought.
+# ---------------------------------------------------------------------------
+bc_chronicles.0091 = {
+	hidden = yes
+	scope = combat_side
+
+	immediate = {
+		debug_log = "BC: combat end cleanup"
+		side_commander ?= {
+			bc_cleanup_effect = yes
+		}
+		every_side_knight = {
+			bc_cleanup_effect = yes
+		}
+
+		if = {
+			limit = { NOT = { has_game_rule = bc_aftermath_off } }
+
+			if = {
+				limit = { bc_battle_is_notable_trigger = yes }
+				debug_log = "BC: win notable"
+
+				combat.location ?= {
+					save_scope_as = bc_battle_province
+				}
+
+				# The province check is an enclosing if, not part of the limit -
+				# it is a property of the battle, and re-asking it once per
+				# knight is noise.
+				if = {
+					limit = { exists = scope:bc_battle_province }
+					every_side_knight = {
+						limit = {
+							# Knights die in the combat that just ended. Vanilla
+							# guards its own post-battle knight handling the same
+							# way (AGOT combat_events.txt:854, :1028; the
+							# vanilla equivalents are :813 and :877).
+							is_alive = yes
+							# See bc_chronicles.0092 for why this is trigger_if.
+							trigger_if = {
+								limit = { exists = root.side_commander }
+								NOT = { this = root.side_commander }
+							}
+						}
+						bc_battle_memory_effect = { TYPE = bc_battle_memory_won }
+					}
+				}
+
+				side_commander ?= {
+					if = {
+						limit = { is_alive = yes }
+						# NOTE, deviation from the spec: the spec puts is_alive in
+						# the nickname limit only, which would let a commander who
+						# died winning still take the tally. It is hoisted here
+						# instead because the tally exists solely to gate the
+						# nickname and a dead man will never command again, so the
+						# difference is unobservable - and one gate is clearer than
+						# two.
+						bc_notable_battle_counter_effect = yes
+
+						# `exists` is belt and braces. What actually makes the
+						# var: read below safe is bc_notable_battle_counter_effect
+						# immediately above, which always writes the variable
+						# before anything reads it. Do not rely on evaluation
+						# order to make it safe - CK3 guarantees no order of
+						# evaluation among siblings, in a limit or anywhere else.
+						if = {
+							limit = {
+								has_any_nickname = no
+								exists = var:bc_notable_battles
+								var:bc_notable_battles >= 3
+								# martial, not prowess. This names a man for
+								# commanding, and it is the same threshold the mod
+								# already uses for its high-martial phase-event
+								# bonus. Deliberately NOT AGOT's heroic gate of
+								# prowess >= 25 plus bold AI: a man can be the
+								# finest field commander in Westeros and a
+								# mediocre swordsman, and that is who this is for.
+								martial >= 14
+							}
+							# The toast inside the effect needs a character for
+							# left_icon, and a scripted effect does not rebind
+							# ROOT - ROOT is still the combat side. Save him here.
+							save_scope_as = bc_named_commander
+							bc_aftermath_nickname_effect = yes
+						}
+					}
+				}
+			}
+			else = {
+				debug_log = "BC: win not notable"
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Losing side.
+#
+# Everything above except the two winner-only items: the cumulative notable-win
+# counter and the nickname. The two events are NOT mirror images — the counter is
+# wins only, deliberately.
+# ---------------------------------------------------------------------------
+bc_chronicles.0092 = {
+	hidden = yes
+	scope = combat_side
+
+	immediate = {
+		debug_log = "BC: combat end cleanup"
+		side_commander ?= {
+			bc_cleanup_effect = yes
+		}
+		every_side_knight = {
+			bc_cleanup_effect = yes
+		}
+
+		if = {
+			limit = { NOT = { has_game_rule = bc_aftermath_off } }
+
+			if = {
+				limit = { bc_battle_is_notable_trigger = yes }
+				debug_log = "BC: lose notable"
+
+				combat.location ?= {
+					save_scope_as = bc_battle_province
+				}
+
+				# The province check is an enclosing if, not part of the limit -
+				# it is a property of the battle, and re-asking it once per
+				# knight is noise.
+				if = {
+					limit = { exists = scope:bc_battle_province }
+					every_side_knight = {
+						limit = {
+							is_alive = yes
+							# We never give a commander a battle memory - vanilla
+							# already gives the loser's commander one, every time,
+							# with no random gate. Nothing in the API says whether
+							# every_side_knight includes him; this costs nothing if
+							# it does not.
+							#
+							# NOTE, deviation from the spec: the spec writes this
+							# as a bare `NOT = { this = root.side_commander }`.
+							# trigger_if, not a bare NOT: a side can be leaderless,
+							# which is why side_commander and combat.location are
+							# reached with ?= everywhere else in this event. A bare
+							# comparison against a missing scope is an error-log
+							# line for every knight of every leaderless battle.
+							trigger_if = {
+								limit = { exists = root.side_commander }
+								NOT = { this = root.side_commander }
+							}
+						}
+						bc_battle_memory_effect = { TYPE = bc_battle_memory_lost }
+					}
+				}
+			}
+			else = {
+				debug_log = "BC: lose not notable"
+			}
+		}
+	}
+}
