@@ -207,3 +207,34 @@ bc_write_style_effect = {
 		set_variable = { name = bc_battle_style value = flag:$KIND$ }
 	}
 }
+
+# --- scratch clearing -------------------------------------------------------
+#
+# remove_variable, NEVER set_variable value = 0. Three of the six cannot hold
+# zero — bc_battle_style is a flag, bc_battle_foe is a character,
+# bc_battle_wounded is a presence test — and absence-versus-zero is what the seam
+# and the pacing floor both test.
+#
+# bc_battle_wounded is listed although nothing writes it until plan 6. Clearing a
+# variable that does not exist is a no-op; forgetting to add it later is not.
+#
+# KNOWN LEAK, not closed here. A pop-up answered AFTER the battle has already
+# ended writes scratch that nothing will clear: bc_chronicles.0001/0002/0003 are
+# player events sitting in the queue, so if the combat resolves before the player
+# clicks, the option's bc_record_moment_effect runs after this effect has already
+# run, leaving bc_battle_moments, bc_battle_tier and bc_battle_style behind.
+# bc_battle_open_effect overwrites bc_battle_size and bc_battle_foe on the next
+# battle but does NOT touch those three, so the next battle starts with an
+# inflated moment count and a stale style. It affects only a human player who
+# leaves a pop-up unanswered through the end of a battle, and the obvious fix —
+# having bc_battle_open_effect clear all three — has to be weighed against the
+# pop-up legitimately arriving mid-battle, which is the normal case and must keep
+# working.
+bc_clear_scratch_effect = {
+	remove_variable = bc_battle_moments
+	remove_variable = bc_battle_tier
+	remove_variable = bc_battle_style
+	remove_variable = bc_battle_size
+	remove_variable = bc_battle_wounded
+	remove_variable = bc_battle_foe
+}

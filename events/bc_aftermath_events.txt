@@ -139,6 +139,18 @@ bc_chronicles.0091 = {
 				debug_log = "BC: win not notable"
 			}
 		}
+
+		# LAST, and OUTSIDE the gate above. Both properties are load-bearing.
+		# Inside the gate, a player who turned aftermath off would accumulate
+		# scratch forever. Before the grading branch, the grading would read
+		# variables that had just been removed - from plan 3 onward the branch
+		# reads bc_battle_style and bc_battle_foe - and would silently never
+		# fire while logging a missing-variable line on every combat end in the
+		# world. Grouping all the ungated work together is the natural way to
+		# write this and is exactly wrong.
+		side_commander ?= {
+			bc_clear_scratch_effect = yes
+		}
 	}
 }
 
@@ -206,6 +218,12 @@ bc_chronicles.0092 = {
 			else = {
 				debug_log = "BC: lose not notable"
 			}
+		}
+
+		# LAST, and OUTSIDE the gate above - see bc_chronicles.0091 for why both
+		# properties matter.
+		side_commander ?= {
+			bc_clear_scratch_effect = yes
 		}
 	}
 }
