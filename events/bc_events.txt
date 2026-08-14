@@ -150,12 +150,6 @@ bc_chronicles.0090 = {
 	immediate = {
 		debug_log = "BC: combat end cleanup"
 		side_commander ?= {
-			# DIAG, temporary. Nothing in the mod has ever proven that
-			# `side_commander` still resolves once combat is OVER. Every marker
-			# collected so far sits outside this block. This one fires on every
-			# combat end regardless of notability, so it answers the question in
-			# minutes rather than waiting on a rare grade.
-			debug_log = "BC: DIAG cleanup commander scope entered"
 			bc_cleanup_effect = yes
 		}
 		every_side_knight = {
@@ -285,13 +279,8 @@ bc_chronicles.0091 = {
 			}
 
 			side_commander ?= {
-				# DIAG, temporary.
-				debug_log = "BC: DIAG win commander scope entered"
-
 				if = {
 					limit = { is_alive = yes }
-					# DIAG, temporary.
-					debug_log = "BC: DIAG commander alive"
 					# NOTE, deviation from the spec: the spec puts is_alive in
 					# the nickname limit only, which would let a commander who
 					# died winning still take the tally. It is hoisted here
@@ -300,48 +289,6 @@ bc_chronicles.0091 = {
 					# difference is unobservable - and one gate is clearer than
 					# two.
 					bc_notable_battle_counter_effect = yes
-
-					# DIAG, temporary. Each gate arm reported separately, so the
-					# log names which one is failing instead of leaving the whole
-					# conjunction as one silent no.
-					#
-					# The counter ladder is wrapped in an `exists` guard: reading
-					# a missing variable is an error-log line, and if the effect
-					# above is the thing that is broken, the variable is exactly
-					# what will be missing.
-					if = {
-						limit = { exists = var:bc_notable_battles }
-						if = {
-							limit = { var:bc_notable_battles >= 3 }
-							debug_log = "BC: DIAG counter >= 3"
-						}
-						else_if = {
-							limit = { var:bc_notable_battles >= 2 }
-							debug_log = "BC: DIAG counter == 2"
-						}
-						else = {
-							debug_log = "BC: DIAG counter == 1"
-						}
-					}
-					else = {
-						debug_log = "BC: DIAG counter MISSING after increment"
-					}
-
-					if = {
-						limit = { has_any_nickname = no }
-						debug_log = "BC: DIAG no nickname yet"
-					}
-					else = {
-						debug_log = "BC: DIAG already has a nickname"
-					}
-
-					if = {
-						limit = { martial >= 14 }
-						debug_log = "BC: DIAG martial >= 14"
-					}
-					else = {
-						debug_log = "BC: DIAG martial below 14"
-					}
 
 					# `exists` is belt and braces. What actually makes the
 					# var: read below safe is bc_notable_battle_counter_effect

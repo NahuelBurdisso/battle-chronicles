@@ -99,13 +99,6 @@ bc_knight_holds_the_breach = {
 				title = bc_knight_holds_the_breach_toast
 				desc = bc_knight_holds_the_breach_toast_desc
 				left_icon = scope:bc_knight
-
-				# Probe, not gameplay. If this count comes back lower than the
-				# "fired" count above, it proves a toast body is skipped when no
-				# player is playing the scoped character - the exact reason every
-				# real effect was lifted out of these blocks. One event carries
-				# this marker; that is enough to answer it.
-				debug_log = "BC: toast body ran (knight breach)"
 			}
 		}
 	}
