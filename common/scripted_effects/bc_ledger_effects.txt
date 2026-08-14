@@ -97,3 +97,113 @@ bc_battle_open_effect = {
 		set_variable = { name = bc_battle_size value = 1 }
 	}
 }
+
+# --- the seam ---------------------------------------------------------------
+#
+# bc_record_moment_effect = { TIER = minor|major|decisive  KIND = <kind>  SWING = up|down }
+#
+# TIER as passed is the REQUESTED tier. The escalation ladder below is a CEILING
+# and can only lower it — a site asking for `minor` on the tenth moment still gets
+# `minor`. That is why exactly two call sites request `decisive`: a ceiling cannot
+# manufacture a tier nobody asks for.
+#
+# SWING exists because polarity is real in the shipped events and neither of the
+# other two parameters carries it. bc_horse_killed_under_him and
+# bc_van_breaks_through are both KIND `bloodied`, and one falters while the other
+# gains. The wound gate in plan 6 is written against SWING = down.
+#
+# NO COMBAT SCOPE IS TOUCHED HERE. Eight of the eighteen call sites are pop-up
+# options, and bc_events.txt records as an invariant that those character events
+# hold no combat scope at all. Everything combat-scoped lives in
+# bc_battle_open_effect instead.
+bc_record_moment_effect = {
+	if = {
+		limit = { NOT = { exists = var:bc_battle_moments } }
+		set_variable = { name = bc_battle_moments value = 1 }
+	}
+	else = {
+		change_variable = { name = bc_battle_moments add = 1 }
+	}
+
+	bc_record_effective_tier_effect = { TIER = $TIER$ KIND = $KIND$ }
+}
+
+# The ceiling, then the style write. Split out of the seam only because the
+# ceiling has to resolve BEFORE the style comparison can use it — the style is
+# keyed on EFFECTIVE tier, not requested.
+#
+# The ceiling is read AFTER bc_battle_moments is incremented, so the first moment
+# of a battle sees 1, not 0, and there is no zero case.
+#
+#   moments 1-2  ->  minor
+#   moments 3-4  ->  major
+#   moments 5+   ->  decisive
+#
+# THE COMPARISON IS `flag:$TIER$ = flag:decisive`, NOT `$TIER$ = decisive`. A bare
+# `$TIER$ = decisive` substitutes textually to `decisive = decisive`, and `decisive`
+# is not a script value, trigger or scope anywhere in vanilla, AGOT or the playset —
+# it is an unknown key, which is a silent no-op, not a validation failure. Wrapping
+# both sides in `flag:` is the shipped idiom for comparing a parameter against a
+# literal: vanilla 00_animal_effects.txt:1659 (`flag:$BONUS$ = flag:court_physician`)
+# and :1778-1793 (`flag:$METHOD$ = flag:gift` and two siblings), AGOT
+# 00_agot_character_data_effects.txt:1427-1463. Call sites are unaffected — they
+# still pass TIER = decisive.
+bc_record_effective_tier_effect = {
+	if = {
+		limit = {
+			flag:$TIER$ = flag:decisive
+			var:bc_battle_moments >= 5
+		}
+		bc_write_style_effect = { RANK = 3 KIND = $KIND$ }
+		debug_log = "BC: moment decisive"
+	}
+	else_if = {
+		limit = {
+			OR = {
+				flag:$TIER$ = flag:decisive
+				flag:$TIER$ = flag:major
+			}
+			var:bc_battle_moments >= 3
+		}
+		bc_write_style_effect = { RANK = 2 KIND = $KIND$ }
+		debug_log = "BC: moment major"
+	}
+	else = {
+		bc_write_style_effect = { RANK = 1 KIND = $KIND$ }
+		debug_log = "BC: moment minor"
+	}
+}
+
+# bc_battle_style holds the KIND of the HIGHEST-TIER moment of the battle, ties
+# broken by the LAST such moment. Not last-wins: a decisive stand on day five
+# should name the battle even if a minor scuffle followed it.
+#
+# `>=` rather than `>` is exactly what makes ties break to the last moment. Do not
+# "tidy" it to `>`.
+#
+# This needs a high-water mark, which is what bc_battle_tier is for. It cannot be
+# derived from bc_battle_moments, because a call site may request `minor` at any
+# rung of the ladder.
+#
+# THE ABSENCE CASE IS A SEPARATE BRANCH, NOT AN `OR` ROW. Writing it as
+# `OR = { NOT = { exists = var:bc_battle_tier }  var:bc_battle_tier <= $RANK$ }`
+# looks equivalent and is not: CK3 does not short-circuit, so on the first moment of
+# every battle — when the variable does not exist yet — the second row still
+# evaluates and logs a read of a missing variable, once per moment, forever. The
+# mod already states this rule in its own source, in the imperative — see the
+# comment above the nickname gate in `bc_chronicles.0091`: "Do not rely on
+# evaluation order to make it safe - CK3 guarantees no order of evaluation among
+# siblings, in a limit or anywhere else."
+# The nested shape below is the same one `bc_notable_battle_counter_effect` uses.
+bc_write_style_effect = {
+	if = {
+		limit = { NOT = { exists = var:bc_battle_tier } }
+		set_variable = { name = bc_battle_tier value = $RANK$ }
+		set_variable = { name = bc_battle_style value = flag:$KIND$ }
+	}
+	else_if = {
+		limit = { var:bc_battle_tier <= $RANK$ }
+		set_variable = { name = bc_battle_tier value = $RANK$ }
+		set_variable = { name = bc_battle_style value = flag:$KIND$ }
+	}
+}
