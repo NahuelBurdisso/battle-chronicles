@@ -48,9 +48,11 @@ reads the index, so a stale index can only ever report a pass).
   verbatim next to `Commander Martial Skill`.
 - **Nothing is replaced.** Every file is new and additive.
 - **State first, presentation second.** No gameplay effect ever sits inside a
-  `send_interface_toast`. A toast only reaches the player playing the scoped
-  character, so anything nested in one is unreliable for the AI — and almost
-  every commander and every knight in the world is AI.
+  `send_interface_toast` — effects go in the `effect` block, the toast stays
+  purely presentational. The *reason* originally given for this rule was wrong
+  and is corrected below: a toast body **does** run for an AI subject. The rule
+  stands anyway, because vanilla writes it this way and because a presentational
+  block is the wrong place to hide state a future reader has to find.
 - **A toast is addressed, not broadcast.** Knight chronicles are raised on the
   side commander, because nobody is playing a courtier knight.
 
@@ -77,10 +79,10 @@ calls and one 0003 pop-up.
   `prowess <= 6` describes almost no knight — knights are *selected* for prowess.
   Now `base = 150`, `prowess >= 10` for the breach, and `craven OR prowess <= 8`
   for the disgrace, which is the better story regardless.
-- **Every gameplay effect moved out of its toast.** They only reliably run for a
-  character a player is playing, so as written the momentum system risked being
-  player-only. `bc_lines_bogged_down` proved it: it hit the enemy commander from
-  outside a toast and its own commander from inside one.
+- **Every gameplay effect moved out of its toast.** The stated reason — that a
+  toast body only runs for a character a player is playing — was a *guess* from
+  the documentation wording, and the 2026-08-13 run disproved it (see below).
+  The move was still correct; the justification was not.
 - **Knight toasts now address the side commander.** Raised on the knight, they
   reached nobody.
 - **Weights retuned** against the observed distribution: `horse_killed` 60 → 40
@@ -212,6 +214,60 @@ change survives this run.
   zero `BC:` lines from a full battle. `deploy` writes the pointer `.mod` only; it
   does not enable the mod. Check `debug.log` for
   `Battle Chronicles|mod/battle_chronicles.mod|Enabled` before trusting any run.
+
+## DIAG run, 2026-08-14 (expansion plan 1, task 15)
+
+Five open questions were instrumented with pure `debug_log` markers and answered
+in one session. 137 combat ends per grader. The DIAG markers are temporary and
+come out in task 16; the answers are permanent and live here.
+
+- **Q1 — commander trait density.** n=267 side commanders: 0 traits 153, 1 trait
+  110, 2 traits 3, 3+ traits 1. `number_of_commander_traits < 3` passes 99.6% of
+  the time, so it is not a gate in practice. Keep it; it costs nothing and it
+  covers the one case in 267.
+- **Q2 — `scope = combat` events work; the combat links do not.**
+  `bc_chronicles.0900` fired **151** times, so a `scope = combat` event dispatched
+  from `on_combat_start` is valid even though nothing in vanilla or AGOT declares
+  one. But `combat_attacker.side_commander` and `combat_defender.side_commander`
+  each resolved **zero** times from inside it, and `?=` swallowed both failures in
+  silence. **Plan 5's eve pop-up must not be written against those two links.**
+- **Q3 — battle size.** Per side: 5k+ 46, 3k 42, 2k 31, 1k 14, under-1k 4. The
+  invented 2,000 boundary in `bc_battle_open_effect` splits the low band 73/18
+  instead of leaving one undivided lump. Keep it.
+- **Q4 — a toast body DOES run for an AI subject.** Split by subject: human 0,
+  AI 117, and the marker *inside* the toast ran 117 times. **B == H + A**, so
+  nesting is not what suppresses anything. This retires the mod's original stated
+  reason for keeping effects out of toasts — the practice stays, the explanation
+  was wrong. The earlier probe could not settle this because it did not split by
+  who was playing the subject.
+- **Q5 — terrain census.** rough 58, forest 32, winter 20, open 19, jungle 8,
+  **desert 0**, and `NONE MATCHED` **0** — the `agot_is_<x>_terrain` ladder is
+  exhaustive over everything that actually occurred. Desert's zero is recorded
+  rather than acted on; the arm stays.
+- **Other counts:** `win notable` 79 / `lose notable` 79 and `win not notable` 58
+  / `lose not notable` 58, perfectly symmetric as they must be. `BC: nickname
+  awarded` 5, this time under the real gate.
+
+### The run also exposed a defect that made the whole ledger dead
+
+`bc_record_moment_effect` declared `SWING` in its signature and read it nowhere.
+CK3 does not ignore an unused parameter — it **refuses to compile the effect**:
+
+```
+[E] Compiling source for bc_record_moment_effect failed for unknown arguments: SWING
+    bc_ledger_effects.txt line: 119
+```
+
+thirteen times at load, and **zero** `BC: moment` lines all session. All 18 call
+sites were silently dead. Nothing else broke: no toast, no event, no call site
+complained. The fix reads the parameter with a two-arm log rather than deleting
+it, so plan 6's wound gate keeps the `SWING = down` hook it is written against.
+
+Three follow-on lines were `Variable 'X' is used but is never set` for
+`bc_battle_style`, `bc_battle_tier` and `bc_battle_wounded` (twice each). The
+first two resolve once the seam compiles. The third is genuine and stays until
+plan 6 — and it corrects a claim the plan made in passing: `remove_variable` on a
+never-set variable **does** log.
 
 ## Not yet verified in game
 
