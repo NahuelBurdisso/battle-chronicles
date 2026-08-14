@@ -1,0 +1,99 @@
+﻿# Battle Chronicles - the ledger.
+#
+# ONE SEAM. Every moment in the mod — phase event or pop-up option — reports
+# itself through bc_record_moment_effect and nothing else writes moment state.
+# That is the only place the "state never lives inside a toast" rule has to be
+# enforced, the only place the variable leak surface has to be audited, and the
+# only place a future system has to hook.
+#
+# ALL WRITES LAND ON THE SIDE COMMANDER. The three `type = knight` events root on
+# the knight, so they call in from inside scope:combat_side.side_commander ?= .
+# NOTHING IN THIS MOD EVER WRITES A bc_ VARIABLE ONTO A KNIGHT. Per-character
+# state on every participant has to be cleared on both sides or it leaks forever,
+# and there are far more knights than commanders.
+#
+# THREE TIERS OF STATE:
+#   momentum  character modifier  20 days, wiped at combat end
+#   scratch   character variable  this battle only, cleared at combat end
+#   ledger    character variable  forever
+# Momentum must stay a modifier — it is what the engine reads for advantage.
+# Scratch and ledger must be variables — bc_cleanup_effect strips every modifier
+# at combat end, so anything modifier-shaped cannot persist by construction.
+#
+# CLEARING MEANS remove_variable, NEVER set_variable value = 0. Three scratch
+# variables cannot hold zero, and absence-versus-zero is load-bearing: it is how
+# the seam detects the first moment of a battle and which arm of the pacing floor
+# fires.
+
+# --- opening the battle -----------------------------------------------------
+#
+# Called at the TOP of every commander and knight phase event's `effect` block,
+# before bc_mark_chronicle_effect and before any trigger_event, where
+# scope:combat_side always exists.
+#
+# UNCONDITIONAL, NOT WRITE-IF-UNSET. An earlier design skipped when the variables
+# were already set. That was wrong for a reason outside this effect: scratch is
+# cleared at combat end on `side_commander`, so a commander REPLACED mid-combat is
+# never cleared — and under write-if-unset his stale values would freeze
+# PERMANENTLY, not for one battle. A stale bc_battle_size of 3 would let a
+# two-hundred-man skirmish maim people once family 3 ships.
+#
+# Overwriting is also MORE correct on the foe: capturing the current enemy
+# commander at every phase event tracks a mid-battle replacement on the other
+# side, which capture-once does not.
+#
+# CALL THIS AT MOST ONCE PER EVENT EXECUTION. The `?=` below leaves
+# scope:bc_open_foe untouched when it fails rather than clearing it, so a second
+# call in the same execution whose `?=` failed would find the FIRST call's scope
+# still standing, pass the `exists` test, and write the wrong foe. No call site in
+# plan 1 calls it twice — all ten call it once, at the top of an `effect` block —
+# but plan 4 adds code to this same effect, so the constraint is written down
+# rather than left to be rediscovered.
+bc_battle_open_effect = {
+	scope:combat_side.enemy_side.side_commander ?= {
+		save_scope_as = bc_open_foe
+	}
+	if = {
+		limit = { exists = scope:bc_open_foe }
+		set_variable = {
+			name = bc_battle_foe
+			value = scope:bc_open_foe
+		}
+	}
+	else = {
+		# Self-contained: without this, a leaderless enemy side leaves the
+		# PREVIOUS battle's foe in place. bc_clear_scratch_effect (task 12)
+		# happens to cover this today, but that is a different effect in a
+		# different task, and this one should not depend on it.
+		remove_variable = bc_battle_foe
+	}
+
+	# A BUCKET, 1/2/3 — never a raw troop count.
+	#
+	# num_total_troops is a TRIGGER ONLY: triggers.log:9537-9540 gives it
+	# comparison traits and scope `combat`, it appears in no value log, and all
+	# four of its uses in the playset are left-hand trigger comparisons. There is
+	# no way to read it into a set_variable value =. An earlier design wrote
+	# `value = scope:combat_side.combat.num_total_troops`, which would simply not
+	# have worked, and every size gate in the expansion rested on that one write.
+	#
+	# NOT side_strength, which IS readable and is therefore the trap:
+	# bc_script_values.txt:15-16 records that the engine scales it down by 1000, so
+	# reaching for it would make every battle read as "under 2,000".
+	#
+	# 10,000 is bc_battle_is_notable_trigger's own lower size row
+	# (bc_scripted_triggers.txt:153). 2,000 is INVENTED — the calibration run
+	# recorded `under 5k` as one undivided bucket and never subdivided it. DIAG Q3
+	# measures it.
+	if = {
+		limit = { scope:combat_side.combat = { num_total_troops >= 10000 } }
+		set_variable = { name = bc_battle_size value = 3 }
+	}
+	else_if = {
+		limit = { scope:combat_side.combat = { num_total_troops >= 2000 } }
+		set_variable = { name = bc_battle_size value = 2 }
+	}
+	else = {
+		set_variable = { name = bc_battle_size value = 1 }
+	}
+}
