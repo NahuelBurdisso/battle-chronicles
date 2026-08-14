@@ -95,23 +95,24 @@ bc_rally_effect = {
 }
 
 # --- cleanup ----------------------------------------------------------------
-# Called from the hidden combat-end event. Without this, momentum earned in one
+# Called from the combat-end graders. Without this, momentum earned in one
 # battle bleeds into the next 20 days of the war.
-
+#
+# FLAT, NOT GUARDED. remove_character_modifier on an absent modifier is a no-op
+# — vanilla's own vizierate_remove_extravagance_modifiers_effect
+# (00_diarchy_scripted_effects.txt:2318-2335) is an unguarded list of 16 of
+# which at most 4 are ever held. Guards here bought nothing and made the list a
+# place where a new modifier gets forgotten.
+#
+# EVERY modifier the mod can apply during a battle must appear here. That is the
+# one rule this effect exists to make easy to obey.
 bc_cleanup_effect = {
-	bc_clear_faltering_effect = yes
-	if = {
-		limit = { has_character_modifier = bc_momentum_minor }
-		remove_character_modifier = bc_momentum_minor
-	}
-	if = {
-		limit = { has_character_modifier = bc_momentum_major }
-		remove_character_modifier = bc_momentum_major
-	}
-	if = {
-		limit = { has_character_modifier = bc_momentum_decisive }
-		remove_character_modifier = bc_momentum_decisive
-	}
+	remove_character_modifier = bc_faltering_minor
+	remove_character_modifier = bc_faltering_major
+	remove_character_modifier = bc_faltering_decisive
+	remove_character_modifier = bc_momentum_minor
+	remove_character_modifier = bc_momentum_major
+	remove_character_modifier = bc_momentum_decisive
 }
 
 # --- pacing -----------------------------------------------------------------
