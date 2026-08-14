@@ -183,11 +183,38 @@ calibration run could not.
   lose not-notable 2. All 5 battles, both sides, same verdict.
 - Zero mod-attributable lines in `error.log`.
 
+## Forced-nickname run, 2026-08-14 (expansion plan 1, task 2)
+
+The nickname reward path had never executed, so plan 1 forced it before plan 1
+task 4 refactors it. The gate was temporarily reduced to `has_any_nickname = no`
+— dropping `exists = var:bc_notable_battles`, `var:bc_notable_battles >= 3` and
+`martial >= 14` — and restored afterwards with `git checkout --`. No source
+change survives this run.
+
+- **Resolved:** `bc_aftermath_nickname_effect` executes. `BC: nickname awarded`
+  appeared 3 times over 4 notable wins, and the toast rendered in game. The name
+  drawn was `nick_agot_greycloak`, so the `random_list` of 27 and AGOT's nickname
+  keys both resolve.
+- **The toast is addressed correctly.** It reached the player.
+- **The toast text is generic and that is a real gap.** All 27 nicknames share one
+  `bc_aftermath_nickname_toast_desc`, which never names the nickname it just gave
+  — the player sees "men have started calling him something" and has to open the
+  character to learn what. Noted for plan 6.
+- **Error sweep clean.** `probe "bc_"` returned 15 groups, all whitelisted: the
+  mod's own `BC:` markers, the launcher's `BC Spike|...|Disabled` line, and two
+  engine load lines (`NAMESPACE > 'bc_chronicles' is set to #4180000`,
+  `Loaded [6] events from 'events/bc_events.txt'`). Zero lines in `error.log`.
+- **A wasted run came first, and the cause is worth writing down.** The mod had
+  fallen out of `dlc_load.json` since 2026-08-12, so the first attempt produced
+  zero `BC:` lines from a full battle. `deploy` writes the pointer `.mod` only; it
+  does not enable the mod. Check `debug.log` for
+  `Battle Chronicles|mod/battle_chronicles.mod|Enabled` before trusting any run.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
   resolves.
-- The nickname award. It needs one commander to bank three notable wins with
-  `martial >= 14` and no nickname yet, which no run so far has been long enough
-  to produce. `"BC: nickname awarded"` is a permanent marker, so `probe 'BC:'`
-  will report it the first time it happens.
+- The nickname award **under its real gate**. The path itself is proven (see the
+  2026-08-14 run) but no commander has yet banked three notable wins with
+  `martial >= 14` and no nickname unaided. `"BC: nickname awarded"` is a permanent
+  marker, so `probe 'BC:'` will report it the first time it happens.
