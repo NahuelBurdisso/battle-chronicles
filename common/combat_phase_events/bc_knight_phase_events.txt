@@ -92,7 +92,9 @@ bc_knight_holds_the_breach = {
 		}
 
 		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
 			bc_momentum_minor_effect = yes
+			bc_record_moment_effect = { TIER = major KIND = entrenched SWING = up }
 
 			send_interface_toast = {
 				type = event_toast_effect_good
@@ -158,7 +160,9 @@ bc_knight_shames_himself = {
 		}
 
 		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
 			bc_faltering_minor_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
 			send_interface_toast = {
 				type = event_toast_effect_bad
@@ -212,6 +216,16 @@ bc_shieldbrother_forged = {
 	effect = {
 		save_scope_as = bc_knight
 
+		# The one exception to the rule stated just above, and it does not
+		# violate it in substance: opening the battle is not a lockout. It
+		# writes two variables that every other phase event overwrites anyway,
+		# so running it on a roll that finds no partner costs nothing. Do not
+		# "fix" this by moving it inside the if - the seam calls below need
+		# bc_battle_size, and no other event is guaranteed to have run first.
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+		}
+
 		scope:combat_side = {
 			random_side_knight = {
 				limit = {
@@ -263,6 +277,8 @@ bc_shieldbrother_forged = {
 			}
 
 			scope:combat_side.side_commander ?= {
+				bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
 				send_interface_toast = {
 					type = event_toast_effect_good
 					title = bc_shieldbrother_forged_toast
