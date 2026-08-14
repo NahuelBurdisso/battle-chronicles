@@ -214,6 +214,11 @@ change survives this run.
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
   resolves.
+- The 2026-08-14 localization fixes: that
+  `[bc_named_commander.GetNicknameNoTooltip]` resolves inside the award toast
+  (including in the liege branch, where the scope has moved), and that the 26
+  new `nick_agot_*_desc` keys render on hover in the character sheet with no
+  `Duplicate localization key` line in `error.log`.
 - The nickname award **under its real gate**. The path itself is proven (see the
   2026-08-14 run) but no commander has yet banked three notable wins with
   `martial >= 14` and no nickname unaided. `"BC: nickname awarded"` is a permanent
