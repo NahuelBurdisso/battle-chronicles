@@ -42,6 +42,7 @@ bc_chronicles.0001 = {
 		trigger = { prowess >= 8 }
 
 		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 		add_prestige = 100
 		add_stress = 15
 	}
@@ -50,12 +51,14 @@ bc_chronicles.0001 = {
 		name = bc_chronicles.0001.b
 
 		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 	}
 
 	option = {
 		name = bc_chronicles.0001.c
 
 		bc_faltering_major_effect = yes
+		bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
 		add_prestige = 50
 	}
 }
@@ -84,6 +87,7 @@ bc_chronicles.0002 = {
 		trigger = { prowess >= 10 }
 
 		bc_rally_effect = yes
+		bc_record_moment_effect = { TIER = major KIND = ordered SWING = up }
 		add_stress = 10
 	}
 
@@ -96,12 +100,14 @@ bc_chronicles.0002 = {
 		# and the option silently does nothing but rally for free. Verified in game.
 		remove_short_term_gold = 100
 		bc_rally_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 	}
 
 	option = {
 		name = bc_chronicles.0002.c
 
 		bc_clear_faltering_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 	}
 }
 
@@ -127,6 +133,7 @@ bc_chronicles.0003 = {
 		name = bc_chronicles.0003.a
 
 		bc_momentum_major_effect = yes
+		bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
 		add_stress = 10
 	}
 
@@ -134,6 +141,7 @@ bc_chronicles.0003 = {
 		name = bc_chronicles.0003.b
 
 		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 		add_prestige = 50
 	}
 }
