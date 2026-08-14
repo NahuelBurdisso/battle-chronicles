@@ -96,11 +96,27 @@ bc_knight_holds_the_breach = {
 			bc_momentum_minor_effect = yes
 			bc_record_moment_effect = { TIER = major KIND = entrenched SWING = up }
 
+			# DIAG Q4. TEMPORARY, deleted at the end of stage 1. The two subject
+			# markers are OUTSIDE the toast on purpose: they count how often the
+			# toast was REACHED, split by whether anyone is playing the subject.
+			# `body ran` counts how often the inside of it executed. Comparing
+			# the three numbers is the answer. The earlier probe at this same
+			# site lacked the split, which is the only reason it could not
+			# settle the question.
+			if = {
+				limit = { is_ai = no }
+				debug_log = "BC: DIAG Q4 subject HUMAN"
+			}
+			else = {
+				debug_log = "BC: DIAG Q4 subject AI"
+			}
+
 			send_interface_toast = {
 				type = event_toast_effect_good
 				title = bc_knight_holds_the_breach_toast
 				desc = bc_knight_holds_the_breach_toast_desc
 				left_icon = scope:bc_knight
+				debug_log = "BC: DIAG Q4 body ran"
 			}
 		}
 	}
