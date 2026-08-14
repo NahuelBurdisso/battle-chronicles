@@ -86,8 +86,19 @@
 
 # --- aftermath --------------------------------------------------------------
 
+# The desc NAMES the nickname. It used to end "calling him something", which left
+# the player to go and open the character sheet to find out what he had just been
+# called - the one fact the toast exists to deliver. The saved scope is safe to
+# read here: bc_aftermath_nickname_effect runs give_nickname BEFORE the toast, and
+# the scope is saved by the caller (bc_chronicles.0091) so it survives the step up
+# to the liege in the AI branch.
+#
+# GetNicknameNoTooltip, not GetNickname: the nickname is already inside a toast
+# body, and GetNickname would nest a tooltip in a tooltip. Vanilla uses exactly
+# this form for a saved scope in fp2_struggle.2051.desc.
+
  bc_aftermath_nickname_toast:0 "A Name Won on the Field"
- bc_aftermath_nickname_toast_desc:0 "He has won another great field, and enough of them now that men who were not there have started calling him something. It has stuck."
+ bc_aftermath_nickname_toast_desc:0 "He has won another great field, and enough of them now that men who were not there have started calling him '[bc_named_commander.GetNicknameNoTooltip]'. It has stuck."
 
 # --- memories ---------------------------------------------------------------
 #
@@ -134,3 +145,50 @@
  bc_chronicles.0003.desc:0 "The leading ranks have found the seam and put a wedge in it, and the wedge is going deeper than anyone intended.\n\nIt can be driven all the way. It can also be driven so far that it comes out the far side alone, with the enemy closed up behind it."
  bc_chronicles.0003.a:0 "Press it. Everything behind the wedge."
  bc_chronicles.0003.b:0 "Hold them. Keep the line whole."
+
+# --- nickname tooltips ------------------------------------------------------
+#
+# The ONE place this mod writes a key it did not invent. CK3 builds the nickname
+# tooltip in the character sheet from `<nickname>_desc`, so there is no bc_-
+# prefixed alternative: either the engine's key exists or the tooltip has nothing
+# to say. AGOT defines all 27 names but only ONE of these descriptions
+# (nick_agot_the_painter_desc), so 26 of the names this mod hands out hovered
+# blank. That is what these fill.
+#
+# ADDITIONS, NOT OVERRIDES. Verified against the whole AGOT localization tree
+# before writing: none of the 26 keys below is defined anywhere in it. A key that
+# is defined twice is a `Duplicate localization key` line in error.log and the
+# loser is silently discarded, so if AGOT ever ships its own, DELETE ours - do not
+# rely on load order to pick a winner.
+#
+# These render for ANY bearer, including canon characters who start the game with
+# the name. So each one is written as a byname a fighting man earns, never as
+# something that only makes sense for a commander this mod just promoted, and each
+# uses the vanilla gendered tokens rather than assuming a man.
+
+ nick_agot_the_warrior_desc:0 "Men who have stood in the line beside [CHARACTER.GetShortUINameNoTooltipNoFormat] say the Warrior himself was wearing [CharYourHerHis(CHARACTER)] face that day."
+ nick_agot_greysteel_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] has gone grey in the saddle, and the steel in [CharYourHerHis(CHARACTER)] hand has lost none of its edge."
+ nick_agot_fireball_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] falls on a battle the way fire falls on dry grass, and leaves about as much of it standing."
+ nick_agot_hardstone_desc:0 "The field threw everything it had at [CHARACTER.GetShortUINameNoTooltipNoFormat] and broke on [CharYouHerHim(CHARACTER)] like water on stone."
+ nick_agot_breakspear_desc:0 "Spears splinter on [CHARACTER.GetShortUINamePossessiveNoTooltipNoFormat] shield, and [CharYouSheHe(CHARACTER)] keeps coming."
+ nick_agot_oakenfist_desc:0 "[CHARACTER.GetShortUINamePossessiveNoTooltipNoFormat|U] fist closes on a battle like oak, and what it takes hold of does not get loose."
+ nick_agot_greatheart_desc:0 "There is no braver heart on any field [CHARACTER.GetShortUINameNoTooltipNoFormat] has ridden onto, and every man who followed [CharYouHerHim(CHARACTER)] there knows it."
+ nick_agot_ironheart_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] watched the line break and did not flinch. Men have called [CharYouHerHim(CHARACTER)] iron-hearted ever since, and not all of them meant it kindly."
+ nick_agot_the_neveryield_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] has been outnumbered, surrounded and ridden down, and has never once yielded."
+ nick_agot_greycloak_desc:0 "The cloak went onto the field clean and came off it grey with ash and dust, and [CHARACTER.GetShortUINameNoTooltipNoFormat] has worn it that way ever since."
+ nick_agot_longspear_desc:0 "Few men get close enough to [CHARACTER.GetShortUINameNoTooltipNoFormat] to find out what [CharYouSheHe(CHARACTER)] can do with a sword."
+ nick_agot_shieldbreaker_desc:0 "Shields come away from [CHARACTER.GetShortUINameNoTooltipNoFormat] in pieces, and the arms behind them rarely fare better."
+ nick_agot_shieldsmasher_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] does not go around a shield wall. [CharYouSheHe(CHARACTER)] goes through it."
+ nick_agot_thunderbolt_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] arrives on a battle the way thunder arrives on a summer afternoon: all at once, and far too late to do anything about."
+ nick_agot_the_steelskin_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] has been cut, thrown and trampled, and keeps standing back up. The smallfolk have decided [CharYouSheHe(CHARACTER)] must be skinned in steel."
+ nick_agot_the_woe_desc:0 "Whole houses count the day they met [CHARACTER.GetShortUINameNoTooltipNoFormat] in the field as the worst in their history."
+ nick_agot_the_morningstar_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] rides at the head of the charge, bright and early and impossible to mistake for anyone else."
+ nick_agot_oakenshield_desc:0 "Men form up behind [CHARACTER.GetShortUINameNoTooltipNoFormat] because whatever is in front of [CharYouHerHim(CHARACTER)] tends to stay in front of [CharYouHerHim(CHARACTER)]."
+ nick_agot_blacksword_desc:0 "[CHARACTER.GetShortUINamePossessiveNoTooltipNoFormat|U] blade comes off the field black to the hilt, and [CharYouSheHe(CHARACTER)] has never been in any hurry to clean it."
+ nick_agot_widowmaker_desc:0 "Count the widows made by the last three fields and you have counted [CHARACTER.GetShortUINamePossessiveNoTooltipNoFormat] work."
+ nick_agot_bloodborn_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] seems to have been born for a battlefield, and is never so alive as on one."
+ nick_agot_starfire_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] came down on them like something falling burning out of the night sky."
+ nick_agot_the_windrider_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] is always on the flank nobody was watching, and always sooner than anyone thought possible."
+ nick_agot_swiftspur_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] is first onto the field and last off it, and [CharYourHerHis(CHARACTER)] horses pay for both."
+ nick_agot_battleborn_desc:0 "[CHARACTER.GetShortUINameNoTooltipNoFormat|U] has fought so many fields that men have stopped asking where [CharYouSheHe(CHARACTER)] came from and started saying [CharYouSheHe(CHARACTER)] was born out of one."
+ nick_agot_swordbiter_desc:0 "[CHARACTER.GetShortUINamePossessiveNoTooltipNoFormat|U] blade has taken so many notches out of other men's steel that the armourers know [CharYouHerHim(CHARACTER)] by the work."
