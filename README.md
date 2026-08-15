@@ -30,7 +30,7 @@ reads the index, so a stale index can only ever report a pass).
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
 | `common/script_values/bc_script_values.txt` | the four ratio thresholds |
 | `common/game_rules/bc_game_rules.txt` | frequency, swing, aftermath |
-| `common/on_action/zz_bc_on_actions.txt` | combat-end hooks, `events = { }` only; the `zz_` sorts us after `combat_on_actions.txt` |
+| `common/on_action/zz_bc_on_actions.txt` | combat-end hooks, `events = { }` only. The `zz_` is a **failed** ordering experiment and is now arbitrary — see the file header |
 | `common/character_memory_types/bc_memories.txt` | shieldbrother + the two battle memories |
 | `events/bc_events.txt` | the three player-facing pop-ups, and nothing else |
 | `events/bc_aftermath_events.txt` | the two hidden combat-end graders |
@@ -580,15 +580,21 @@ different fixes.
   fired and no relation exists, the target form is wrong and must be re-derived.
 - The rivalry game rule rendering: **Battle Chronicles: Rivalry** with three
   readable options on the rules screen.
-- **Which step of the dead-knight block dies.** Three markers now split it. Read
-  them in this order: `BC: dk reached enemy side` absent means `enemy_side` does
-  not step on this hook; reached without `BC: dk found dead` means
-  `combat_event.1001` has not run yet and the alphabetical-order assumption is
-  wrong, so the fix is a different hook rather than another rename; found without
-  `BC: dead knights` means `enemy_side.side_commander` is null and the toast needs
-  a different addressee.
-- **The wound.** `"BC: wound"` has never fired, because no decisive moment has
-  occurred since it shipped. The decisive floor is now `>= 4` rather than `>= 5`,
-  which is the first change that makes the arm reachable in a typical battle.
-- **The decisive rate at the new floor.** `>= 4` is set to the measured mean and
-  is itself a guess about the shape of the distribution, not just its centre.
+- **Whether a `combat_side` survives a day.** The dead-knight read is now deferred
+  into `bc_chronicles.0093`. `BC: dk deferred` counting while
+  `BC: dk deferred fired` is absent means the side object was freed and the read
+  must be re-hung on the commander character. Both counting with
+  `BC: dk found dead` still 0 means a day is not enough, or knights are not dying.
+- **The wound, at last measurably.** `"BC: wound"` has never fired, and until
+  2026-08-15 that was starvation — it had one call site on an arm that resolved
+  once per run. It now also hangs off the major arm (~45/run).
+  `BC: wound gates passed` counting with `BC: wound` 0 means the
+  `var:bc_battle_size >= 3` read rejects; both 0 while `BC: moment major` counts
+  means the five-row outer limit does.
+- **That the SWING row rejects.** It was inert until the major arm started feeding
+  it wins. Roughly a third of what now reaches `bc_wound_effect` is `swing up`,
+  and nothing has yet proven the row turns those away.
+- **The decisive rate at the new floor.** `>= 4` scored 1 in 44 battles. The
+  binding constraint is call-site rarity, not the floor — only 10 of 233 moments
+  ever request `decisive` and 7 request it too early. Both numbers should be
+  re-measured together, never one alone.
