@@ -157,11 +157,19 @@ bc_can_interrupt_player_trigger = {
 # trigger - a nested trigger counts as one row no matter how many tests it
 # holds.
 #
-# Five substantive rows plus the game rule. The two size rows nest, so the bar
+# Six substantive rows plus the game rule. The two size rows nest, so the bar
 # actually reads "huge, or big plus one other thing". Deliberate: thirty
 # thousand men on a field is notable whatever else happened. It also means the
 # blood, odds and warscore rows never decide the largest battles, so read their
 # calibration ladders against the sub-huge population.
+#
+# THE SIXTH ROW - bc_was_wipe_trigger - WAS ADDED AFTER THE 2026-08-13
+# CALIBRATION AND IS NOT IN THAT SAMPLE. The 39 battles below were measured
+# before scope:wipe was read at all, so the ladders describe a five-row trigger.
+# A wipe is worth one point of the two, so the row cannot raise the pass rate on
+# its own; it can only promote a battle that already had one other row. Re-run
+# the calibration if that assumption is ever questioned - do not adjust the
+# thresholds to compensate for it.
 #
 # The bar must be SYMMETRIC - both sides must reach the same verdict, or one
 # side's knights get a memory of a battle the other side's knights do not.
@@ -211,6 +219,7 @@ bc_battle_is_notable_trigger = {
 			side_max_army_size >= bc_their_host_gap_value
 		}
 		combat = { warscore_value >= 25 }
+		bc_was_wipe_trigger = yes
 		has_game_rule = bc_aftermath_generous
 	}
 }
