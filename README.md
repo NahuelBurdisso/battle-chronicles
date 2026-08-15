@@ -415,7 +415,8 @@ before `combat_`.
 - `BC: moment decisive` at its shipped line **0**. `BC: wound` **0**.
 
 The single `BC: moment decisive` in the log is at `bc_ledger_effects.txt:258`,
-which is a **previous build** — the current one logs it at `:273`. So no decisive
+which is a **previous build** — the current one logs it from inside
+`bc_record_effective_tier_effect`, at a line that has moved since. So no decisive
 moment occurred at all during this run and the wound was never reached. This is
 not evidence against the wound; it is evidence that `decisive` needs
 `var:bc_battle_moments >= 5`, i.e. a long battle, and none happened. Plan 6's
@@ -524,9 +525,11 @@ absent means re-hang the read on the commander character instead of the side.
 
 ### The decisive floor was the wrong lever
 
-`BC: moment decisive` **1**, at `bc_ledger_effects.txt:285` — verified as the
-current build's line, so it is a genuine clear of the new `>= 4` floor rather
-than a stale hit. But the interesting number is upstream:
+`BC: moment decisive` **1**, and the logged line was checked against that run's
+build and matched the `debug_log` inside `bc_record_effective_tier_effect`, so it
+is a genuine clear of the new `>= 4` floor rather than a stale hit. The number
+that line had then is not recorded here on purpose: it would be a claim about a
+build this file can no longer point at. But the interesting number is upstream:
 
 `BC: fired bc_flank_collapses` **10**, and both `TIER = decisive` call sites pass
 identical arguments, so they share one arg-hash — which totals 10. So

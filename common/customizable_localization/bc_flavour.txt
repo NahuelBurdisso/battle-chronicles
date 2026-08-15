@@ -18,15 +18,20 @@
 #
 # CITATIONS INTO bc_ledger_effects.txt NAME A PARAGRAPH, NOT A LINE, AND THAT IS
 # A RULE RATHER THAN A STYLE. That file's comments are long and get edited often,
-# so every edit shifts every line below it. Four consecutive review rounds lost
-# their Critical finding to a citation that had been correct when written and was
-# silently wrong after an unrelated comment above it grew - the last one shifted
-# by three and was hand-corrected by one, which left four citations pointing at
-# an `exists` guard, a debug_log line, and two paragraph tails. A paragraph name
+# so every edit shifts every line below it. Several review rounds in a row spent
+# their headline finding on prose that had rotted, and round 8's was this exact
+# failure: a comment above grew by three lines, the citations below it were
+# hand-corrected by one, and four of them ended up naming an `exists` guard, a
+# debug_log line, a paragraph tail, and a paragraph opening. A paragraph name
 # like `THE ABSENT SIZE CASE IS REAL` or `A BUCKET, 1/2/3` cannot rot silently:
 # grep either finds it or the paragraph was renamed, which is a visible event.
-# Line numbers survive here only for files this mod edits rarely, and for
-# same-file references the rule is stricter still - name the key.
+# Note that one of those four wrong numbers landed on the `A BUCKET, 1/2/3`
+# heading itself - landing on a heading is not the same as naming one, and only
+# the name is checkable. `validate --strict` now flags a citation that lands on
+# a blank line or past the end of a file, but it cannot flag one that lands on
+# the wrong live line, which is the case round 8 lost its headline to. No file
+# here is edited rarely enough for a bare line number to be safe: for same-file
+# references name the key, and across files name the definition or paragraph.
 #
 # type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
 # variable-held character. Vanilla's Custom2 second argument is always a saved

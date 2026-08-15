@@ -198,7 +198,8 @@
 # THE THREE SAY NOTHING ABOUT THE MOMENT ITSELF, and that is deliberate twice
 # over. The clause is SHARED by all ten moments, so anything it says has to read
 # the same after a banner falling and after a stalemate - the same test
-# bc_bond_clause's header states at bc_flavour.txt:131-136. And a fragment that
+# bc_bond_clause's own header states, under `SHARED AND NOT PER-MOMENT`. And a
+# fragment that
 # points back at the moment ("such a thing", "it") is pointing past the bond
 # fragment that task 4 renders in between - and past the ground fragment as well
 # on bc_banner_falls_toast_desc, the only desc that has one - so its nearest
