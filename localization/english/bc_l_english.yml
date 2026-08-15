@@ -139,16 +139,33 @@
 # --- shared fragments: the scale --------------------------------------------
 #
 # ONE AXIS, GRADED: how much of the fight is not yet in the fighting. Huge, most
-# of the men; large, a good part of them; small, scarcely any. ONE FRAME FOR ALL
-# THREE - only the quantifier moves - so the grading is legible in a single
-# reading. Keep it monotone, and keep the smallest arm SHORT OF A UNIVERSAL: an
-# arm saying every man is in the fighting is falsified by the moment it is
-# appended to on bc_knight_shames_himself, whose literal is a man leaving the
-# fighting, and strained on bc_ground_favours_us, whose literal has the enemy
-# still crossing the ground. Neither knight event carries a size gate, so a small
-# battle is a routine host for that pairing. See the header on bc_scale_clause in
-# bc_flavour.txt, which records the two axes that are closed, why, and the
-# four-row test a replacement has to pass.
+# of the men; large, a good part of them; small, few. ALL THREE CARRY THE PHRASE
+# `not yet in the fighting` VERBATIM, so the grading is legible in one reading
+# and a reader comparing two arms is comparing quantifiers. The opening clause
+# and the word order still differ between them - the small arm fronts its subject
+# to avoid `scarcely any ... are not`, which needs two inversions to parse - so
+# this is a shared phrase, not a shared frame. Keep it monotone.
+#
+# KEEP THE SMALLEST ARM SHORT OF A UNIVERSAL. An arm saying every man is in the
+# fighting is falsified outright by the moment it is appended to on
+# bc_knight_shames_himself, whose literal is a man leaving the fighting; the
+# shipped ` the men not yet in the fighting are few` counts him among the few.
+# That event is `type = knight` and its is_valid carries no size gate
+# (bc_knight_phase_events.txt:124-132), so a small battle is a routine host for
+# the pairing.
+#
+# ONE STRAIN IS NOT FIXED AND IS RECORDED RATHER THAN HIDDEN. On
+# bc_ground_favours_us - a COMMANDER moment, bc_commander_phase_events.txt:328 -
+# the literal reads `They have to come to us across all of it.`, which puts the
+# enemy host short of contact. bc_battle_size counts BOTH sides, so if that
+# reading is taken strictly then something near half the combat is not yet in the
+# fighting, and `are few` is wrong for the same reason the universal was wrong,
+# only less so. Softening the quantifier bought a degree, not a fix. If task 4
+# shows this reading badly, the answer is a per-moment clause on that one toast,
+# not a fourth regrade of a clause all ten share.
+#
+# See the header on bc_scale_clause in bc_flavour.txt, which records the two axes
+# that are closed, why, and the four-row test a replacement has to pass.
 #
 # THE SUBJECT IS THE WHOLE FIGHT, NOT THE COMMANDER'S OWN MEN, AND THAT IS NOT A
 # STYLE CHOICE. bc_battle_size is set by comparing num_total_troops on the
@@ -157,10 +174,18 @@
 # measured. It would also collide with the moments' own gates: a toast carries
 # the commander's portrait, and bc_flank_collapses fires only when he is
 # outnumbered (bc_commander_phase_events.txt:221) while bc_van_breaks_through
-# fires only when he is outnumbering (:273). An earlier draft said whole
-# companies of his stood idle and were not yet called on, which on
-# bc_flank_collapses contradicts the literal it was appended to and reads as a
-# reproach: the verb has to be agentless as well as the subject shared.
+# fires only when he is outnumbering (:273). TWO drafts shipped and were pulled
+# for this, and they are different drafts - quoted rather than paraphrased,
+# because paraphrasing them is how they got merged into one in an earlier note:
+#   b3e7c32  " Whole companies will be kept out of the fighting and never put in
+#            at all."  - reads as the commander's own men, which on
+#            bc_flank_collapses contradicts a literal about a wing giving way for
+#            want of men.
+#   4163d3b  " Whole parts of a battle this size are standing idle, not yet
+#            called on."  - subject fixed, verb not: "called on" still implies
+#            someone who could have called and did not, and the toast carries his
+#            portrait.
+# The verb has to be agentless as well as the subject shared.
 #
 # THE THREE SAY NOTHING ABOUT THE MOMENT ITSELF, and that is deliberate twice
 # over. The clause is SHARED by all ten moments, so anything it says has to read
@@ -182,13 +207,26 @@
 # CITATION - validate does not, and there is no sweeper - so every citation here
 # rots silently, and a same-file one rots on any edit to this file, which is the
 # file most likely to be edited by whoever is reading this. Grep the key.
-#   "man"       ALL FIVE bc_frag_bond_* arms open "The man commanding here", and
-#               the bond fragment renders in the sentence IMMEDIATELY BEFORE this
-#               one on all ten toasts, so this is the only guaranteed collision
-#               in the list. Plural "the men" beside it is ordinary English;
-#               SINGULAR "a man" is not, and an earlier small arm read "there is
-#               not a man who is not in the fighting" directly after "The man
-#               commanding here".
+#   "the man"   ALL FIVE bc_frag_bond_* arms carry the substring "the man
+#               commanding here" - four of them open on it, bc_frag_bond_heathen
+#               carries it mid-sentence ("...at dawn, the man commanding here was
+#               not.") - and the bond fragment renders in the sentence
+#               IMMEDIATELY BEFORE this one on all ten toasts. THE ONLY
+#               GUARANTEED COLLISION IN THIS LIST. Plural "the men" beside it is
+#               ordinary English; SINGULAR "a man" is not, and an earlier small
+#               arm read " In a fight this small, there is not a man who is not
+#               in the fighting."
+#   "man"       singular, and NOT only in the bond arms:
+#               bc_knight_holds_the_breach_toast_desc ("One man in the gap") and
+#               bc_frag_banner_falls_rough ("the man who carried it"). On the
+#               breach toast an arm using singular "man" would make three
+#               consecutive sentences that each name one.
+#   "the men"   bc_banner_falls_toast_desc ("the men nearest it"), which is the
+#               one literal that already spends the plural every arm here uses.
+#   "all"       bc_ground_favours_us_toast_desc ("across all of it"),
+#               bc_frag_banner_falls_open ("they all see it go"). The huge arm
+#               ended " ...not yet in the fighting at all." until this was
+#               noticed.
 #   "field"     bc_frag_banner_falls_open, bc_frag_bond_nemesis, bc_frag_bond_kin
 #   "again"     bc_rally_the_line_toast_desc, bc_knight_holds_the_breach_toast_desc
 #   "behind"    bc_knight_holds_the_breach_toast_desc
@@ -204,27 +242,32 @@
 # eve on `var:bc_battle_size >= 3` (bc_eve_effects.txt:75) while the huge arm
 # fires on `= 3`, so an eve implies the huge arm - but that holds only at the
 # MOMENT THE EVE WAS OFFERED. The gate also carries
-# `NOT = { exists = var:bc_battle_moments }`, so it is tested once, at the first
-# moment; the size ladder is inside bc_battle_open_effect, which is unconditional
-# at the top of EVERY phase event (bc_ledger_effects.txt:35-44), so it re-derives
-# the band from a live num_total_troops comparison on every moment thereafter.
-# Whether that number can fall during a combat is NOT established anywhere in
-# this repo. If it can, a battle that opens above 10,000 shows its eve and then
-# renders the large arm later in the same fight.
+# `NOT = { exists = var:bc_battle_moments }`, which is evaluated on every phase
+# event but CAN ONLY PASS at the first; the size ladder sits in
+# bc_battle_open_effect, which runs upstream of every read in all ten events
+# (bc_ledger_effects.txt:35-44 for the overwrite semantics, :112-125 for the
+# ladder itself, and :59-63 for why "upstream of every read" is the right phrase
+# and "at the top of every event" is not - the three knight events call it nested
+# rather than at the top). So the band is re-derived from a live num_total_troops
+# comparison at every later moment. Whether that number can FALL during a combat
+# is NOT established anywhere in this repo. If it can, a battle that opens above
+# 10,000 shows its eve and then renders the large arm later in the same fight.
 #
 # NOR IS THE CONVERSE ANYWHERE NEAR TRUE, which is the more useful fact: the eve
 # needs a human commander and clears a 90-day cooldown, so the 2026-08-15
-# tiered-marker run recorded 131 size-3 moments and TWO eves in 44 battles
+# tiered-marker run recorded 131 size-3 moments and TWO eves over 44 combat ends
 # (README.md, that run's section). The huge arm is overwhelmingly seen by players
 # who never saw an eve. Words that are the eve's: "all day" (desc_intro,
 # desc_ground_winter), "across the field" (desc_nemesis, desc_stranger, desc_kin,
-# desc_countryman), "field" alone (desc_ground_open, desc_ground_jungle), and
-# "go in there ... gone from this battle" (desc_ground_jungle), which is why no
-# arm here says "gone in". Treat neither list as complete.
+# desc_countryman), "field" alone (desc_ground_open, desc_ground_jungle), "the
+# men" (desc_countryman, desc_ground_winter), "yet" (desc_intro, "nothing has
+# been settled yet"), and "go in there ... gone from this battle"
+# (desc_ground_jungle, with "goes in there" in desc_ground_forest), which is why
+# no arm here says "gone in". Treat neither list as complete.
 
- bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting at all."
+ bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting."
  bc_frag_scale_large:0 " In a fight this size, a good part of the men are not yet in the fighting."
- bc_frag_scale_small:0 " In a fight this small, scarcely any of the men are not yet in the fighting."
+ bc_frag_scale_small:0 " In a fight this small, the men not yet in the fighting are few."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
