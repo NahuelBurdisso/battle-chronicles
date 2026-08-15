@@ -281,3 +281,90 @@ bc_clear_scratch_effect = {
 	remove_variable = bc_battle_wounded
 	remove_variable = bc_battle_foe
 }
+
+# --- family 2: the character of the fight -----------------------------------
+#
+# The leaf, mirroring bc_add_momentum_effect in bc_scripted_effects.txt so that
+# duration lives in exactly one place per family. 20 days, the same as momentum:
+# both families are wiped at combat end by bc_cleanup_effect, so the duration
+# only matters for the pre-existing case of a pop-up answered after the battle
+# ended - see the KNOWN LEAK note on bc_clear_scratch_effect above.
+bc_add_verb_effect = {
+	add_character_modifier = {
+		modifier = $MODIFIER$
+		days = 20
+	}
+}
+
+# The (KIND, SWING) -> modifier table. THIS IS THE ONLY PLACE THE MAPPING LIVES.
+#
+#   bloodied    either  ->  bc_bloodied
+#   entrenched  either  ->  bc_shieldwall
+#   wild        either  ->  bc_spent_horse
+#   ordered     up      ->  bc_pursuit
+#   ordered     down    ->  nothing
+#   adapted     either  ->  nothing
+#   measured    either  ->  nothing
+#
+# NO `else` ARM. adapted and measured are the KINDs that describe how the
+# commander READ the battle rather than what the battle DID to the army, and
+# there is no army modifier that means "he judged it well". FIVE of the eighteen
+# call sites are adapted or measured - bc_ground_favours_us, bc_lines_bogged_down,
+# and the three pop-up options .0001b, .0002b and .0003b - and all five are
+# supposed to fall through.
+#
+# THE COMPARISON IS `flag:$KIND$ = flag:bloodied`, NOT `$KIND$ = bloodied`. A bare
+# `$KIND$ = bloodied` substitutes textually to `bloodied = bloodied`, an unknown
+# key, which is a SILENT NO-OP that validate passes cleanly - the whole ladder
+# would be dead and nothing would say so. Same rule and same reason as the tier
+# comparison in bc_record_effective_tier_effect; the precedents are cited there.
+#
+# ONLY THE `ordered` ROW TESTS SWING, AND THAT ASYMMETRY IS DELIBERATE. Do not
+# "fix" it in either direction - neither by adding a SWING test to the other three
+# rows nor by deleting it from this one.
+#
+# The eighteen call sites plan 1 ships use nine of the twelve (KIND, SWING)
+# pairs. The three that never occur are `entrenched`/`down`, `wild`/`up` and
+# `ordered`/`down`. So for bloodied, entrenched and wild a SWING test would be
+# either always-true or always-false today, buying nothing and inviting a
+# reader to trust a distinction the data does not support. `ordered` is the one
+# KIND where the design wants the pair, and `ordered`/`up` is reachable - three
+# call sites use it.
+#
+# SWING IS STILL A PARAMETER OF THE SEAM, NOT OF THIS TABLE. Plan 6's wound gate
+# reads it on every KIND, including the three this ladder ignores. Dropping it
+# from the seam because this table barely uses it would break that plan.
+#
+# ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
+# a gap in the call sites: bc_bloodied from 3 sites, bc_shieldwall from 3,
+# bc_spent_horse from 4, bc_pursuit from 3.
+#
+# THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution
+# inside a quoted string eats the space in front of it, and more importantly a
+# substituted marker would print the same text whether the ladder matched or fell
+# through - which is the exact failure these markers exist to catch.
+bc_apply_verb_effect = {
+	if = {
+		limit = { flag:$KIND$ = flag:bloodied }
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		debug_log = "BC: verb bloodied"
+	}
+	else_if = {
+		limit = { flag:$KIND$ = flag:entrenched }
+		bc_add_verb_effect = { MODIFIER = bc_shieldwall }
+		debug_log = "BC: verb shieldwall"
+	}
+	else_if = {
+		limit = { flag:$KIND$ = flag:wild }
+		bc_add_verb_effect = { MODIFIER = bc_spent_horse }
+		debug_log = "BC: verb spent horse"
+	}
+	else_if = {
+		limit = {
+			flag:$KIND$ = flag:ordered
+			flag:$SWING$ = flag:up
+		}
+		bc_add_verb_effect = { MODIFIER = bc_pursuit }
+		debug_log = "BC: verb pursuit"
+	}
+}
