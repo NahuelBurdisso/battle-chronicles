@@ -305,6 +305,21 @@ bc_record_effective_tier_effect = {
 		}
 		bc_write_style_effect = { RANK = 2 KIND = $KIND$ }
 		debug_log = "BC: moment major"
+
+		# THE MAJOR ARM WOUNDS TOO, AND IT IS THE ARM THAT DOES THE WORK.
+		# Measured 2026-08-15: the whole mod asks for `decisive` exactly ten
+		# times a run, all ten from bc_flank_collapses, and seven of those ten
+		# arrive while the ledger still holds 1-2 moments, so they demote to
+		# minor. Decisive resolved ONCE in 44 battles. Hanging the wound off
+		# that arm alone gave it a single opportunity in a 500k-line log, which
+		# is why "BC: wound" read zero for three runs while nothing was
+		# actually broken - the rung above it was starving it.
+		#
+		# Major resolved 45 times in the same run. Same arm shape, same $SWING$,
+		# and bc_wound_effect's own var:bc_battle_wounded guard still caps it at
+		# one wound per battle, so this widens the sample without widening the
+		# outcome.
+		bc_wound_effect = { SWING = $SWING$ }
 	}
 	else = {
 		bc_write_style_effect = { RANK = 1 KIND = $KIND$ }
@@ -350,9 +365,10 @@ bc_write_style_effect = {
 #
 # bc_wound_effect = { SWING = up|down }
 #
-# CALLED FROM THE DECISIVE ARM OF bc_record_effective_tier_effect, AND NOWHERE
-# ELSE. That placement IS gate 1a: the arm is the definition of "this moment
-# resolved to decisive", after the ceiling has been applied.
+# CALLED FROM THE DECISIVE AND MAJOR ARMS OF bc_record_effective_tier_effect, AND
+# NOWHERE ELSE. That placement IS gate 1a: an arm is the definition of "this moment
+# resolved to that tier", after the ceiling has been applied. It was decisive-only
+# until 2026-08-15; the major arm carries the comment explaining why it is not.
 #
 # DO NOT REWRITE THIS AGAINST var:bc_battle_tier. The spec says to and the spec is
 # wrong on that one word. bc_battle_tier is a HIGH-WATER MARK - bc_write_style_effect
@@ -371,10 +387,12 @@ bc_write_style_effect = {
 # passes - every wound would fire regardless of swing. Same failure as
 # `$TIER$ = decisive`; same shipped fix (vanilla 00_animal_effects.txt:1659).
 #
-# THE SWING ROW IS INERT TODAY AND STAYS. Both TIER = decisive call sites already
-# pass SWING = down, so this row rejects nothing as the mod stands. SWING exists in
-# the seam's signature BECAUSE of this gate - spec Section 1 says so - and the
-# first `decisive` + `up` site anyone adds would otherwise wound a man for winning.
+# THE SWING ROW STOPPED BEING INERT ON 2026-08-15. It was: both TIER = decisive
+# call sites pass SWING = down, so while this ran off the decisive arm alone the
+# row rejected nothing. The major arm feeds it every KIND the mod raises, and the
+# 2026-08-15 run logged 24 + 16 `BC: moment swing up` against 47 + 17 + 16 + 12 +
+# 10 down - so roughly a third of what now reaches here is a WIN. This row is the
+# only thing standing between that and wounding a man for winning.
 #
 # THE SIZE READ IS NESTED, THE OTHER FOUR ROWS ARE NOT. CK3 does not short-circuit
 # and guarantees no evaluation order among siblings, so a comparison in the outer
@@ -415,6 +433,12 @@ bc_wound_effect = {
 			NOT = { has_trait = wounded }
 			exists = var:bc_battle_size
 		}
+		# DIAGNOSTIC, AND IT COMES OUT ONCE THE RATIO IS KNOWN. Same rule the eve
+		# and the dead knights each cost a run to learn: one marker in the
+		# innermost block cannot say which gate rejected. This one splits the
+		# five-row outer limit from the size read, which are the two candidates
+		# with different fixes.
+		debug_log = "BC: wound gates passed"
 		if = {
 			limit = { var:bc_battle_size >= 3 }
 			change_trait_rank = {

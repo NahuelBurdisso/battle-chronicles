@@ -14,15 +14,21 @@
 # So: hook via `events = { }` and put the logic in a hidden combat_side event.
 # That is what vanilla itself does (on_combat_end_winner -> combat_event.0001).
 #
-# THE `zz_` PREFIX IS LOAD-BEARING. The same alphabetical read order that decides
-# an `effect` fight also decides the ORDER OF THE MERGED `events` LIST, and
-# bc_chronicles.0091 has to be dispatched AFTER combat_event.1001 - the event that
-# kills the losing side's knights - or its dead-knight toast finds a field on which
-# nobody has died yet. Under the old name `bc_on_actions.txt` it sorted before
-# `combat_on_actions.txt` and the toast logged ZERO over 112 grader runs.
+# THE `zz_` PREFIX IS NOT LOAD-BEARING, AND THE FAILED ATTEMPT TO MAKE IT SO IS THE
+# ONLY REASON IT IS STILL HERE. This file was renamed from `bc_on_actions.txt` on
+# the theory that the alphabetical read order above ALSO orders the merged `events`
+# list, so bc_chronicles.0091 would dispatch after combat_event.1001 - the event
+# that kills the losing side's knights - and the dead-knight toast would find a
+# field where someone had died.
 #
-# Renaming this file is therefore a behavioural change, not housekeeping. If it is
-# ever renamed back, `BC: dead knights` goes silent again.
+# MEASURED 2026-08-15 AND IT IS FALSE. `zz_` sorts last among on_action filenames
+# and .0091 still ran before 1001: `BC: dk reached enemy side` 33,
+# `BC: dk found dead` 0. Alphabetical order settles `effect` fights and nothing
+# else. NO PREFIX CAN WIN A DISPATCH RACE. Do not spend another run on one.
+#
+# The dead-knight read is deferred a day into bc_chronicles.0093 instead, which
+# sidesteps the ordering question entirely. This filename is now arbitrary and
+# renaming it is housekeeping, not a behavioural change.
 
 on_combat_end_winner = {
 	events = {

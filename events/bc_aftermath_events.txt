@@ -151,46 +151,39 @@ bc_chronicles.0091 = {
 				# THE TOAST GOES TO THE MAN WHO LOST THEM, i.e. the loser's
 				# commander, which is also who the loc string has always described.
 				#
-				# IT DEPENDS ON DISPATCH ORDER, WHICH IS WHY THE FILE IS NAMED
-				# zz_bc_on_actions.txt. combat_event.1001 has to have run before
-				# this, and both are `events = { }` entries on on_combat_end_winner
-				# merged across files in ALPHABETICAL filename order.
+				# IT IS DEFERRED A DAY, AND THE MEASUREMENT IS WHY.
 				#
-				# THREE MARKERS, ONE PER STEP, BECAUSE ONE WAS NOT ENOUGH - TWICE.
-				# This block has now returned zero on two separate runs (274 then
-				# 28 notable wins) with a single marker sitting inside the innermost
-				# `?=`, which is the same trap that hid the eve's failure for two
-				# runs before it. A zero from one marker cannot say WHICH step died,
-				# and the three candidates need different fixes:
+				# The three markers below were split one-per-step precisely so a
+				# zero would say WHICH step died, and on 2026-08-15 they answered:
+				# `BC: dk reached enemy side` 33, `BC: dk found dead` 0,
+				# `BC: dead knights` 0. That is the first row of the table this
+				# comment used to carry - reached, not found. enemy_side steps
+				# correctly and combat_event.1001 simply has not killed anyone yet
+				# when we look.
 				#
-				#   reached, not found  -> combat_event.1001 has not run yet. The
-				#                          alphabetical-order assumption is wrong and
-				#                          the fix is a different hook, not a rename.
-				#   reached and found   -> enemy_side.side_commander is null at this
-				#                          point. The `?=` is eating it, and the toast
-				#                          needs a different addressee.
-				#   nothing at all      -> enemy_side does not step from a combat side
-				#                          on this hook, which would contradict
-				#                          vanilla's own use at combat_events.txt:850.
+				# SO THE zz_ FILENAME PREMISE IS DISPROVEN AND A RENAME CANNOT FIX
+				# THIS. Alphabetical filename order decides which `effect` block
+				# wins when two files claim the same on_action, but it does NOT
+				# order the merged `events = { }` list - `zz_` put us last among
+				# filenames and we still ran before AGOT's 1001. Do not try
+				# another prefix.
 				#
-				# THESE ARE DIAGNOSTIC AND THEY COME OUT once the question is
-				# settled. `BC: dead knights` is the permanent one.
-				enemy_side = {
-					debug_log = "BC: dk reached enemy side"
-					if = {
-						limit = { any_side_knight = { is_alive = no } }
-						debug_log = "BC: dk found dead"
-						side_commander ?= {
-							save_scope_as = bc_bereaved_commander
-							debug_log = "BC: dead knights"
-							bc_addressed_toast_effect = {
-								TYPE = event_toast_effect_bad
-								TITLE = bc_dead_knights_toast
-								DESC = bc_dead_knights_toast_desc
-								SUBJECT = scope:bc_bereaved_commander
-							}
-						}
-					}
+				# Deferring by a day steps outside the dispatch entirely: whatever
+				# order on_combat_end_winner fans its events in, all of them have
+				# run by the next tick. bc_chronicles.0093 carries the read.
+				#
+				# THE SIDE SCOPE MAY NOT SURVIVE THE DAY, and that is the one thing
+				# this cannot settle statically. A combat side is a transient
+				# object; if the engine frees it when the combat closes, .0093
+				# never fires and `BC: dk deferred fired` stays absent while
+				# `BC: dk deferred` counts up. That pair is the whole diagnostic,
+				# and it distinguishes "too early" from "object is gone" - which
+				# need different fixes, the second one being to re-hang the read on
+				# the commander character instead of the side.
+				debug_log = "BC: dk deferred"
+				trigger_event = {
+					id = bc_chronicles.0093
+					days = 1
 				}
 
 				side_commander ?= {
@@ -359,6 +352,56 @@ bc_chronicles.0092 = {
 		# properties matter.
 		side_commander ?= {
 			bc_clear_scratch_effect = yes
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Dead knights, one day after the battle.
+#
+# RAISED ONLY FROM bc_chronicles.0091, INSIDE ITS NOTABILITY GATE. Root is the
+# WINNING side, exactly as it was there, so this still reads across at
+# enemy_side - the dead knights of any battle are the loser's, and vanilla does
+# its killing at AGOT combat_events.txt:849 inside `enemy_side = {
+# every_side_knight }`.
+#
+# THE DELAY IS THE ENTIRE POINT AND IT IS NOT A ROUNDING KNOB. .0091 and AGOT's
+# combat_event.1001 are both `events = { }` entries on on_combat_end_winner, and
+# the merged list is NOT ordered by filename - measured 2026-08-15, see the
+# comment at the call site. A day steps outside the dispatch instead of trying
+# to win it.
+#
+# NO GATE REPEATED HERE. .0091 already decided this battle was notable before it
+# raised us; re-testing would either duplicate that logic or quietly diverge from
+# it. The only thing this event decides is whether anyone actually died.
+#
+# THE TWO MARKERS ARE A PAIR, NOT DECORATION. "BC: dk deferred" is written by the
+# call site, "BC: dk deferred fired" by this event. A run where the first counts
+# and the second is absent means the combat side object did not survive the day,
+# and the fix is to re-hang this read on the commander character rather than the
+# side. They come out together once that is settled.
+# ---------------------------------------------------------------------------
+bc_chronicles.0093 = {
+	hidden = yes
+	scope = combat_side
+
+	immediate = {
+		debug_log = "BC: dk deferred fired"
+		enemy_side = {
+			if = {
+				limit = { any_side_knight = { is_alive = no } }
+				debug_log = "BC: dk found dead"
+				side_commander ?= {
+					save_scope_as = bc_bereaved_commander
+					debug_log = "BC: dead knights"
+					bc_addressed_toast_effect = {
+						TYPE = event_toast_effect_bad
+						TITLE = bc_dead_knights_toast
+						DESC = bc_dead_knights_toast_desc
+						SUBJECT = scope:bc_bereaved_commander
+					}
+				}
+			}
 		}
 	}
 }

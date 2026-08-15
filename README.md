@@ -484,6 +484,77 @@ Lowered to `>= 4`, so the ladder is now minor 1-2, major 3, decisive 4+. **The
 major band is one moment wide and that is the part most likely to need a second
 look.** Re-measure before moving either number again.
 
+## Tiered-marker run, 2026-08-15 (logs cleared, both fixes measured)
+
+Third clean-log run. 44 combat ends, 36 notable wins, 36 notable losses. Battle
+sizes 1/2/3 = 17/85/131. Moments: minor 187, major 45, decisive 1 = **233, or
+5.3 per battle** — up from 4.2, so the mean moves between runs and any floor set
+against it is soft.
+
+### The opening is closed
+
+`BC: eve offered` 2 → `BC: eve popup 0011` 2. Second clean run in a row with a
+1:1 ratio. Nothing outstanding.
+
+### The `zz_` filename premise is disproven
+
+```
+33  BC: dk reached enemy side
+ 0  BC: dk found dead
+ 0  BC: dead knights
+```
+
+Row one of the three-way table the block was carrying: **`enemy_side` steps
+correctly and `combat_event.1001` has not killed anyone yet when we look.** The
+per-step markers paid for themselves on their first run.
+
+**Alphabetical filename order does not order the merged `events = { }` list.** It
+decides which `effect` block wins when two files claim the same on_action, and
+that is all. `zz_bc_on_actions.txt` sorts last among filenames and still ran
+before AGOT's 1001. *No prefix can fix this — do not try another one.*
+
+The read is now deferred a day into `bc_chronicles.0093`, raised from `.0091`
+inside the same notability gate, which steps outside the dispatch entirely. The
+one thing that cannot be settled statically is whether the combat side object
+survives the day; `BC: dk deferred` (call site) paired with
+`BC: dk deferred fired` (event) answers it. First counting while the second is
+absent means re-hang the read on the commander character instead of the side.
+
+### The decisive floor was the wrong lever
+
+`BC: moment decisive` **1**, at `bc_ledger_effects.txt:285` — verified as the
+current build's line, so it is a genuine clear of the new `>= 4` floor rather
+than a stale hit. But the interesting number is upstream:
+
+`BC: fired bc_flank_collapses` **10**, and both `TIER = decisive` call sites pass
+identical arguments, so they share one arg-hash — which totals 10. So
+`bc_chronicles.0001.c` was chosen **zero** times and every decisive *request* in
+the run came from the flank-collapse phase event.
+
+| where those 10 landed | count | means |
+|---|---|---|
+| `:311` minor | 7 | ledger held 1-2 moments at call time |
+| `:307` major | 2 | ledger held exactly 3 |
+| `:285` decisive | 1 | ledger held 4+ |
+
+`5 → 4` was directionally right (this run scores 0 at `>= 5`), but the dominant
+constraint is not the floor: **only 10 of 233 moments ever ask for `decisive`,
+and 7 of those ask too early.** `bc_flank_collapses` fires near the start of a
+battle. Leave the floor at 4 and re-measure before touching it again.
+
+### The wound's zero was starvation, not a bug
+
+`bc_wound_effect` had exactly one call site — the last line of the decisive arm.
+Decisive resolved once, so **the wound had one opportunity in the entire run and
+missed it.** Adding markers to it would still have produced a one-sample log.
+
+It is now called from the **major arm as well**, which resolved 45 times on the
+same run. Its own `var:bc_battle_wounded` guard still caps it at one wound per
+battle, so this widens the sample without widening the outcome. A
+`BC: wound gates passed` marker now splits the five-row outer limit from the
+nested `var:bc_battle_size >= 3` read, which are the two candidates with
+different fixes.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
