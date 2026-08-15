@@ -106,3 +106,41 @@ bc_rivalry_set_relation_effect = {
 		}
 	}
 }
+
+# --- escalation -------------------------------------------------------------
+#
+# CALLED ON THE COMMANDER on a NOTABLE LOSS, with bc_battle_foe known to exist
+# and known ALIVE - the entry point proved both.
+#
+# NEVER OVERWRITE AN EXISTING bc_nemesis. One running grudge per commander; a
+# second rival dilutes the first into noise. That is what the `else` is for, and
+# it is why it logs rather than doing nothing quietly.
+#
+# THE CREATE BRANCH USES THE STEP VALUE, NOT 1. A first loss that is a wipe
+# writes 2 and takes a stranger straight to `rival`. Section 4 records that an
+# earlier draft hardcoded this branch to 1 and quietly made that sentence false.
+#
+# `var:bc_nemesis = var:bc_battle_foe` is safe in the else_if because the first
+# arm already tested `NOT = { exists = var:bc_nemesis }` and else_if arms ARE
+# ordered with respect to each other. It is only siblings WITHIN one trigger block
+# that have no guaranteed order.
+bc_rivalry_loss_effect = {
+	if = {
+		limit = { NOT = { exists = var:bc_nemesis } }
+		set_variable = { name = bc_nemesis value = var:bc_battle_foe }
+		set_variable = { name = bc_nemesis_losses value = bc_rivalry_step_value }
+		bc_rivalry_set_relation_effect = yes
+		bc_rivalry_toast_effect = yes
+		debug_log = "BC: nemesis new"
+	}
+	else_if = {
+		limit = { var:bc_nemesis = var:bc_battle_foe }
+		change_variable = { name = bc_nemesis_losses add = bc_rivalry_step_value }
+		bc_rivalry_set_relation_effect = yes
+		bc_rivalry_toast_effect = yes
+		debug_log = "BC: nemesis escalate"
+	}
+	else = {
+		debug_log = "BC: nemesis held"
+	}
+}
