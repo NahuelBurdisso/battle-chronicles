@@ -1,0 +1,23 @@
+* text=auto eol=lf
+
+# Paradox script and localization are LF + UTF-8. The loc additionally needs a
+# BOM, and so does every script .txt in this mod - `ck3.py validate` fails the
+# build without one. NOTHING HERE PRESERVES A BOM: `text` governs line endings
+# only, and a CRLF checkout would not strip a BOM either. The two are recorded
+# together because they are checked together and are easy to conflate.
+#
+# WHY THIS FILE EXISTS AT ALL. The box this mod is written on has
+# core.autocrlf=true, so without a declaration here every checkout writes CRLF
+# into files the parent tooling repo declares LF. It went unnoticed because git
+# cleans CRLF back to LF on the way in, which leaves `git status` clean over a
+# working tree that is mixed - and it was mixed: two files under common/ had
+# CRLF while the other twenty-three did not.
+*.txt text eol=lf
+*.yml text eol=lf
+*.gui text eol=lf
+*.mod text eol=lf
+*.md text eol=lf
+
+*.png binary
+*.dds binary
+*.tga binary
