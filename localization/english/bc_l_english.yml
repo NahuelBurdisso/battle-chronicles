@@ -212,10 +212,16 @@
 # clause: a toast literal, one bond fragment, and on bc_banner_falls_toast_desc
 # alone a ground fragment as well - that one can resolve to its empty arm, so
 # treat its words as possible rather than guaranteed.
-# KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE. NO TOOL IN THIS REPO CHECKS A
-# CITATION - validate does not, and there is no sweeper - so every citation here
-# rots silently, and a same-file one rots on any edit to this file, which is the
-# file most likely to be edited by whoever is reading this. Grep the key.
+# KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE, and the reason has narrowed
+# since this was written. `validate` now checks the POSITION of a citation: it
+# will say when one runs off the end of the file it names, or lands on a blank
+# line. No example is spelled out here, because a spelled-out example IS a
+# citation and the checker resolves it - the first draft of this paragraph
+# invented a line number to illustrate the error and duly earned the error.
+# What it still cannot say is that a citation landed on a real line which is the
+# WRONG line - and that is exactly what a citation into this file does on any
+# edit to this file, the file most likely to be edited by whoever is reading
+# this. A key name survives that. Grep the key.
 #   "the man"   ALL FIVE CONTENT ARMS of bc_bond_clause carry the substring
 #               "man commanding here" - four open on "The man commanding here",
 #               bc_frag_bond_heathen carries it mid-sentence ("...at dawn, the
