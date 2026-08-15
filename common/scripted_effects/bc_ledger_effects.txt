@@ -110,6 +110,46 @@ bc_battle_open_effect = {
 		set_variable = { name = bc_battle_size value = 1 }
 		debug_log = "BC: size 1"
 	}
+
+	# --- housekeeping: drop a dead nemesis ----------------------------------
+	#
+	# HOUSEKEEPING, NOT SAFETY. Every bc_nemesis read is already guarded by
+	# `exists` plus `is_alive = yes`, and a dead character is a real object in
+	# CK3, so is_alive on one is a clean `no` rather than an error.
+	#
+	# WHAT THIS ACTUALLY FIXES: bc_rivalry_loss_effect's first arm tests
+	# `NOT = { exists = var:bc_nemesis }`, so a commander holding a dead
+	# reference can never acquire a new nemesis. One dead foe would disable C
+	# for that commander permanently.
+	#
+	# HERE RATHER THAN AT THE READ SITES because both read sites are pure
+	# TRIGGER contexts - a phase event's is_valid and an event desc branch - and
+	# no effect runs in a trigger. This effect is the one place an effect is
+	# guaranteed to run on the commander during a battle.
+	#
+	# IT LAGS THE READ BY ONE PHASE EVENT, harmlessly: is_valid runs before the
+	# effect block, so the first roll of the first battle after the man dies
+	# still reads the dangling variable. The guard handles that read cleanly.
+	#
+	# NESTED, NOT SIBLING. `exists = var:bc_nemesis` beside a read of
+	# var:bc_nemesis would be a missing-variable read on every commander in the
+	# world who has no nemesis, on every phase event roll - which is most of
+	# them.
+	#
+	# Both variables go together. Leaving bc_nemesis_losses behind would let the
+	# next grudge inherit the dead man's counter and start at `rival`.
+	#
+	# THIS DOES NOT REMOVE THE RELATION. A relation with a dead man is CK3's own
+	# business. The variables are the mod's; the relation is not.
+	if = {
+		limit = { exists = var:bc_nemesis }
+		if = {
+			limit = { NOT = { var:bc_nemesis = { is_alive = yes } } }
+			remove_variable = bc_nemesis
+			remove_variable = bc_nemesis_losses
+			debug_log = "BC: nemesis wipe"
+		}
+	}
 }
 
 # --- the seam ---------------------------------------------------------------
