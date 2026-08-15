@@ -218,16 +218,24 @@ bc_chronicles.0011 = {
 	# option set it was offered with. That is the whole reason bc_eve_ground is a
 	# scope and not scratch.
 	#
-	# OPTION d IS DELIBERATELY NARROWER THAN THE GROUND DESC CHAIN. The chain
-	# names five bands; this gate names two. They answer different questions:
-	# the chain says what the ground IS, the option says whether the ground can
-	# be HELD. The test is the modifier's own header - "anchored himself to a
-	# hillside or a treeline" - which is an EDGE you stand on. Rough and forest
-	# both give you one. Jungle gained a desc arm without gaining this option
-	# because there is no edge to it: you go in, and its paragraph says what
-	# happens to men who do. Winter and desert fail differently again - they
-	# are attrition, and there is nothing there to hold. If a band is ever
-	# added here, the modifier is the argument, not the paragraph.
+	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN, AND THE LINE IS FEATURE
+	# VERSUS CONDITION. The chain names five bands; this gate names three. The
+	# test is the modifier's own header - "anchored himself to a hillside or a
+	# treeline" - so a band qualifies when it is a FEATURE on the map you can
+	# put your flank against. Rough is the hillside; forest and jungle are both
+	# the treeline (the jungle band is agot_is_jungle_terrain OR
+	# agot_is_cloudforest_terrain - see bc_ground_triggers.txt - so it is trees
+	# either way). Winter and desert are CONDITIONS, not features: cold and
+	# thirst are on both armies everywhere on the field, and there is nothing
+	# standing there to hold.
+	#
+	# DO NOT ARGUE THIS FROM THE PARAGRAPHS. Two earlier versions of this
+	# comment did - jungle was excluded because its text says men who go in
+	# are gone - and both died on the same rock: the forest text says a line
+	# that goes in stops being a line, which is the same sentence, and forest
+	# keeps the option. Jungle was left out by oversight when it gained a desc
+	# arm, not by design. If a band is ever added here, the modifier is the
+	# argument.
 	#
 	# DECISION TABLE for the two markers below. Their denominator is eves
 	# ANSWERED, which is neither the moment count nor `BC: eve offered`:
@@ -247,6 +255,7 @@ bc_chronicles.0011 = {
 					OR = {
 						bc_ground_is_rough_trigger = yes
 						bc_ground_is_forest_trigger = yes
+						bc_ground_is_jungle_trigger = yes
 					}
 				}
 			}
