@@ -144,3 +144,95 @@ bc_rivalry_loss_effect = {
 		debug_log = "BC: nemesis held"
 	}
 }
+
+# --- decrement --------------------------------------------------------------
+#
+# CALLED ON THE COMMANDER on a NOTABLE WIN, and ONLY when the entry point has
+# proved that bc_nemesis exists, is alive, and IS bc_battle_foe. Beating anyone
+# else does nothing.
+#
+# THE FLOOR GUARD IS `<= bc_rivalry_step_value`, NOT A CONSTANT. Both constants
+# fail, in opposite directions:
+#   `<= 2` over-fires - an ordinary win (N = 1) against a two-loss foe zeroes the
+#          counter and runs the whole removal ladder, erasing a `rival` after a
+#          single win when the counter says two are owed.
+#   `<= 1` under-fires - a wipe win (N = 2) against a one-loss foe produces -1,
+#          after which a literal `= 0` test never fires again and the rivalry slot
+#          jams permanently on a negative counter.
+# Only `<= N` is right in both directions, and it stays right for any future step
+# size. The clear condition below is written `<= 0` regardless, belt and braces,
+# so a negative counter arriving by any route still clears instead of jamming.
+#
+# NOT clamp_variable. It exists (effects.log:223-227) but has ZERO uses in
+# vanilla, and it takes `max` as well as `min`, so it would need an invented
+# ceiling. change_variable's `min` operation (:198-203) is likewise unexercised
+# here and its semantics - floor, versus "take the smaller of the two" - are not
+# stated in the dump. The explicit branch is longer and is the only one whose
+# behaviour is certain.
+#
+# THE RUNG LADDER IS NOT RE-RUN ON THE WAY DOWN. Relations escalate only, never
+# downgrade: a decrement that lands above 0 changes the counter and nothing else.
+# An ordinary win against a two-loss rival leaves him a rival with the counter at
+# 1; a second win takes it to 0 and removes the relation outright. So a rival
+# costs two wins to be rid of. Re-running the ladder would demote him to `grudge`
+# in between, which removes a relation the player never asked to remove.
+bc_rivalry_win_effect = {
+	if = {
+		limit = { var:bc_nemesis_losses <= bc_rivalry_step_value }
+		set_variable = { name = bc_nemesis_losses value = 0 }
+	}
+	else = {
+		change_variable = { name = bc_nemesis_losses subtract = bc_rivalry_step_value }
+	}
+
+	if = {
+		limit = { var:bc_nemesis_losses <= 0 }
+		bc_rivalry_clear_effect = yes
+	}
+	else = {
+		debug_log = "BC: nemesis decrement"
+	}
+}
+
+# --- the clear --------------------------------------------------------------
+#
+# CALLED ON THE COMMANDER with bc_nemesis known to exist and known alive.
+#
+# REMOVAL ORDER IS LOAD-BEARING: test nemesis FIRST and rival LAST. `nemesis`
+# carries `relation_aliases = { rival }` (00_scripted_relations.txt:81), so
+# has_relation_rival is TRUE FOR A NEMESIS. Testing rival first would fire
+# remove_relation_rival on a man whose actual relation is nemesis, leaving the
+# nemesis relation in place with its variables gone - unremovable, because the
+# counter that would find him again has just been deleted.
+#
+# EXACTLY ONE OF THE THREE IS EVER HELD, and the ENGINE guarantees it rather than
+# this mod: rival's `opposites` contains grudge (:56) and nemesis's contains both
+# rival and grudge (:72-73), so setting a higher rung removed the lower one.
+#
+# THE TWO remove_variable LINES COME LAST. With the saved scope they no longer
+# HAVE to - the ladder reads scope:bc_rivalry_foe, not the variable - but the
+# order is what the next reader will expect, and reverting to a var: target later
+# would make it load-bearing again without anyone noticing.
+#
+# NOTHING HERE IS GATED ON bc_rivalry_off. The off switch suppresses SETTING a
+# relation; if a player turns it off mid-campaign, relations already set must
+# still be removable when their counter reaches zero. has_relation_* on a man who
+# has none is a clean `no`, so running the ladder costs nothing.
+bc_rivalry_clear_effect = {
+	var:bc_nemesis = { save_scope_as = bc_rivalry_foe }
+	if = {
+		limit = { has_relation_nemesis = scope:bc_rivalry_foe }
+		remove_relation_nemesis = scope:bc_rivalry_foe
+	}
+	else_if = {
+		limit = { has_relation_rival = scope:bc_rivalry_foe }
+		remove_relation_rival = scope:bc_rivalry_foe
+	}
+	else_if = {
+		limit = { has_relation_grudge = scope:bc_rivalry_foe }
+		remove_relation_grudge = scope:bc_rivalry_foe
+	}
+	remove_variable = bc_nemesis
+	remove_variable = bc_nemesis_losses
+	debug_log = "BC: nemesis cleared"
+}
