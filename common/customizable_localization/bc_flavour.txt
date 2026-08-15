@@ -270,11 +270,16 @@ bc_bond_clause = {
 # bc_eve_effects.txt:75). That is correct while the writer emits exactly 3, 2
 # and 1 and nothing else, and the step 4 check is what keeps it correct. It is
 # recorded because a fourth band would break the two forms differently, and
-# NEITHER break is loud - validate passes both. `>=` arms would render the huge
-# arm for the new band, which looks like ordinary prose and is wrong; these
-# equality arms would render nothing at all, which looks like a battle whose size
-# was never written. The second failure is the one the `BC: size` markers can
-# still tell apart, per the paragraph above; the first is not visible anywhere.
+# NEITHER break is loud - validate passes both. A band added ABOVE the current
+# top would make `>=` arms render the huge arm for it, which looks like ordinary
+# prose and is wrong; these equality arms would render nothing at all, which
+# looks like a battle whose size was never written. (A band inserted BELOW, or a
+# renumbering that splits an existing range, mis-sorts the `>=` arms differently
+# again - the point is that the two forms fail differently, not that one failure
+# is fixed.) Only the equality failure can be told apart from an unwritten
+# variable, and only from the log: the `BC: size` markers name the band, so a
+# marker for a band with no string is diagnosable, while a wrong string under a
+# correct marker is diagnosable only by whoever already knows this mapping.
 #
 # THE BUCKETS ARE 10,000+ / 2,000+ / under, and they BELONG TO THE WRITER. The
 # derivation, the measured distribution and the standing instruction not to
@@ -297,14 +302,20 @@ bc_bond_clause = {
 # outnumbered (bc_commander_phase_events.txt:221) and bc_van_breaks_through only
 # when he is outnumbering (:273).
 #
-# THE VERB HAS TO BE AGENTLESS AS WELL AS THE SUBJECT SHARED. An earlier draft
-# said whole companies of his stood idle and were not yet called on. On
-# bc_flank_collapses that contradicts the literal it is appended to - a wing
-# giving way for want of men - and it reads as a reproach aimed at the man whose
-# portrait is on the toast. The three strings as shipped name no one who could
-# have acted and did not. Note that the collision is not adjacency: task 4
-# renders the ground and bond fragments between the literal and this clause, so
-# this is the fourth sentence of the desc, not the second, and it still collides.
+# THE VERB HAS TO BE AGENTLESS AS WELL AS THE SUBJECT SHARED. Two drafts failed
+# here. One said whole companies OF HIS would never be put in; the one that
+# actually shipped and was then replaced said whole parts of a battle this size
+# were standing idle, not yet called on. On bc_flank_collapses the first
+# contradicts the literal it is appended to - a wing giving way for want of men -
+# and both read as a reproach aimed at the man whose portrait is on the toast.
+# The three strings as shipped name no one who could have acted and did not.
+#
+# AND THE REPROACH DOES NOT NEED ADJACENCY TO LAND. On nine of the ten toasts
+# this clause is the THIRD sentence: the moment's own literal, then the bond
+# fragment, then this. Only bc_banner_falls_toast_desc has a ground fragment
+# as well, because Plan A's spike gave it one and task 4 adds none - see the ten
+# rewritten descs in Plan B task 4 step 1. One sentence of distance did not save
+# either failed draft, so do not assume more would.
 #
 # TWO OTHER AXES ARE CLOSED, AND BOTH WERE SHIPPED BEFORE THEY WERE CAUGHT.
 # Read this before proposing a fourth rewrite, because both look free until the
@@ -331,24 +342,35 @@ bc_bond_clause = {
 #   3. Contradicted by no moment's own `is_valid`. The commitment axis failed
 #      here in its first phrasing - see the paragraph above on both hosts. Grep
 #      the phase-event files for `bc_side_is_outnumber`, which is where that
-#      failure was found. Do NOT expect to find bc_battle_size there: no moment
-#      gates on it, which is exactly why row 2 has to be a separate grep of the
-#      whole mod.
+#      failure was found. Grepping them for bc_battle_size returns one hit and it
+#      is a comment (bc_knight_phase_events.txt:230); NO moment gates on the
+#      variable, which is exactly why row 2 has to be a separate grep of the
+#      whole mod rather than of these two files.
 #   4. Reads the same after ALL TEN toast literals, because this clause is
 #      shared.
 #
 # ROW 4 IS THE ONE AN AXIS ABOUT THE MOMENT CANNOT PASS. At least seven of the
-# ten are states or one-offs rather than repeatable events. Five are one-off or
-# standing FOR THE BATTLE: a standard falls once, ground favours you for the
-# whole battle, a stalemate is a condition, a flank that does not stop bending is
-# a condition too, and a man unhorsed onto his feet cannot be unhorsed again.
-# Two more are one-off PER MAN and not per battle - a knight breaks and runs, a
-# shieldbrother bond is forged, both `type = knight`
-# (bc_knight_phase_events.txt:118 and :191), and a second knight can do either in
-# the same fight. That weakens those two rows but does not save an axis about
-# repetition, because the toast is written about the one man it fired for and a
-# clause counting repetitions would be counting a different man's. These three
-# strings say nothing about the moment at all, which is how they pass.
+# ten READ as states or one-offs rather than as repeatable events: a standard
+# falls, ground favours you for the whole battle, a stalemate is a condition, a
+# flank that does not stop bending is a condition too, a man is unhorsed onto his
+# feet, a knight breaks and runs, a shieldbrother bond is forged.
+#
+# THAT IS A CLAIM ABOUT THE PROSE, NOT ABOUT THE EVENTS, and reading the
+# `is_valid` blocks will not confirm it. NOTHING enforces once-per-battle on any
+# of them: bc_banner_falls gates only on the chronicle cooldown, not faltering,
+# and losing (bc_commander_phase_events.txt:39-43), while bc_rally_the_line
+# requires faltering (:96-99) and clears it again through bc_rally_effect
+# (bc_scripted_effects.txt:92-95), so banner, rally, banner is a reachable
+# sequence inside one combat. The three knight moments are weaker
+# still - they are `type = knight` (bc_knight_phase_events.txt:50, :118, :191),
+# so a second knight can do the same thing in the same fight, and the toast is
+# written about the one man it fired for.
+#
+# The axis still fails, and it fails on the PROSE: a clause counting repetitions
+# would be counting something these ten sentences never establish, and on the
+# knight moments it would be counting a different man's moment than the one the
+# toast describes. These three strings say nothing about the moment at all,
+# which is how they pass.
 #
 # THE FALLBACK, LIKE bc_bond_clause'S, IS UNREACHABLE FROM THE TEN MOMENT TOASTS
 # AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it

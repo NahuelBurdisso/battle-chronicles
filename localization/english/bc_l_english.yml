@@ -139,9 +139,16 @@
 # --- shared fragments: the scale --------------------------------------------
 #
 # ONE AXIS, GRADED: how much of the fight is not yet in the fighting. Huge, most
-# of the men; large, a good part of them; small, not a man. Keep it monotone -
-# see the header on bc_scale_clause in bc_flavour.txt, which records the two
-# axes that are closed, why, and the four-row test a replacement has to pass.
+# of the men; large, a good part of them; small, scarcely any. ONE FRAME FOR ALL
+# THREE - only the quantifier moves - so the grading is legible in a single
+# reading. Keep it monotone, and keep the smallest arm SHORT OF A UNIVERSAL: an
+# arm saying every man is in the fighting is falsified by the moment it is
+# appended to on bc_knight_shames_himself, whose literal is a man leaving the
+# fighting, and strained on bc_ground_favours_us, whose literal has the enemy
+# still crossing the ground. Neither knight event carries a size gate, so a small
+# battle is a routine host for that pairing. See the header on bc_scale_clause in
+# bc_flavour.txt, which records the two axes that are closed, why, and the
+# four-row test a replacement has to pass.
 #
 # THE SUBJECT IS THE WHOLE FIGHT, NOT THE COMMANDER'S OWN MEN, AND THAT IS NOT A
 # STYLE CHOICE. bc_battle_size is set by comparing num_total_troops on the
@@ -159,20 +166,29 @@
 # over. The clause is SHARED by all ten moments, so anything it says has to read
 # the same after a banner falling and after a stalemate - the same test
 # bc_bond_clause's header states at bc_flavour.txt:131-136. And a fragment that
-# points back at the moment ("such a thing", "it") is pointing past the ground
-# and bond fragments that task 4 renders in between, so its nearest antecedent
-# at render time is the bond sentence, not the toast's own. These three name
-# their subject outright and carry no anaphor.
+# points back at the moment ("such a thing", "it") is pointing past the bond
+# fragment that task 4 renders in between - and past the ground fragment as well
+# on bc_banner_falls_toast_desc, the only desc that has one - so its nearest
+# antecedent at render time is the bond sentence, not the toast's own. These
+# three name their subject outright and carry no anaphor.
 #
 # WORDS ALREADY SPOKEN FOR IN THE RUN OF TEXT THIS CLAUSE JOINS. This is a
-# CURATED SHORTLIST, not a grep dump - grepping "field" alone returns thirty-six
+# CURATED SHORTLIST, not a grep dump - grepping "field" alone returns thirty-two
 # key lines across the file, most of them in text that never renders beside a
 # moment toast. What is listed is what task 4 can put in one desc with this
-# clause, which is a toast literal, one ground fragment and one bond fragment.
+# clause: a toast literal, one bond fragment, and on bc_banner_falls_toast_desc
+# alone a ground fragment as well.
 # KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE. NO TOOL IN THIS REPO CHECKS A
 # CITATION - validate does not, and there is no sweeper - so every citation here
 # rots silently, and a same-file one rots on any edit to this file, which is the
 # file most likely to be edited by whoever is reading this. Grep the key.
+#   "man"       ALL FIVE bc_frag_bond_* arms open "The man commanding here", and
+#               the bond fragment renders in the sentence IMMEDIATELY BEFORE this
+#               one on all ten toasts, so this is the only guaranteed collision
+#               in the list. Plural "the men" beside it is ordinary English;
+#               SINGULAR "a man" is not, and an earlier small arm read "there is
+#               not a man who is not in the fighting" directly after "The man
+#               commanding here".
 #   "field"     bc_frag_banner_falls_open, bc_frag_bond_nemesis, bc_frag_bond_kin
 #   "again"     bc_rally_the_line_toast_desc, bc_knight_holds_the_breach_toast_desc
 #   "behind"    bc_knight_holds_the_breach_toast_desc
@@ -180,15 +196,27 @@
 #   "no one"    bc_frag_banner_falls_forest
 #   "came"      bc_shieldbrother_forged_toast_desc
 #   "dawn"      bc_frag_bond_heathen
+#   "out of"    bc_horse_killed_toast_desc ("comes up out of the mud")
 #
 # THE EVE DESCS ARE A SEPARATE COLLISION SCOPE, because they render in their own
-# pop-up rather than in this run of text - but for the HUGE arm the two scopes
-# are CO-EXTENSIVE, not merely adjacent. bc_eve_offer_effect gates the eve on
-# `var:bc_battle_size >= 3` (bc_eve_effects.txt:75) and the huge arm fires on
-# `= 3`, so every battle that shows an eve is a battle whose every toast carries
-# the huge arm, and the large and small arms can never co-occur with an eve at
-# all. Check the huge arm against the eve descs word by word; the other two need
-# only a glance. Words that are theirs: "all day" (desc_intro,
+# pop-up rather than in this run of text. CHECK ALL THREE ARMS AGAINST THEM, not
+# just the huge one. The tempting shortcut is that bc_eve_offer_effect gates the
+# eve on `var:bc_battle_size >= 3` (bc_eve_effects.txt:75) while the huge arm
+# fires on `= 3`, so an eve implies the huge arm - but that holds only at the
+# MOMENT THE EVE WAS OFFERED. The gate also carries
+# `NOT = { exists = var:bc_battle_moments }`, so it is tested once, at the first
+# moment; the size ladder is inside bc_battle_open_effect, which is unconditional
+# at the top of EVERY phase event (bc_ledger_effects.txt:35-44), so it re-derives
+# the band from a live num_total_troops comparison on every moment thereafter.
+# Whether that number can fall during a combat is NOT established anywhere in
+# this repo. If it can, a battle that opens above 10,000 shows its eve and then
+# renders the large arm later in the same fight.
+#
+# NOR IS THE CONVERSE ANYWHERE NEAR TRUE, which is the more useful fact: the eve
+# needs a human commander and clears a 90-day cooldown, so the 2026-08-15
+# tiered-marker run recorded 131 size-3 moments and TWO eves in 44 battles
+# (README.md, that run's section). The huge arm is overwhelmingly seen by players
+# who never saw an eve. Words that are the eve's: "all day" (desc_intro,
 # desc_ground_winter), "across the field" (desc_nemesis, desc_stranger, desc_kin,
 # desc_countryman), "field" alone (desc_ground_open, desc_ground_jungle), and
 # "go in there ... gone from this battle" (desc_ground_jungle), which is why no
@@ -196,7 +224,7 @@
 
  bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting at all."
  bc_frag_scale_large:0 " In a fight this size, a good part of the men are not yet in the fighting."
- bc_frag_scale_small:0 " In a fight this small, there is not a man who is not in the fighting."
+ bc_frag_scale_small:0 " In a fight this small, scarcely any of the men are not yet in the fighting."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
