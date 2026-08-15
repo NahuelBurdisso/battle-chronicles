@@ -39,10 +39,20 @@
 # guarding against something that cannot happen.
 #
 # THE FOE COMES FROM var:bc_battle_foe, NOT scope:bc_open_foe. The variable is
-# maintained - bc_battle_open_effect's else arm removes it when the enemy side is
-# leaderless - while the saved scope is not, so scope:bc_open_foe can still hold
-# the commander of a PREVIOUS battle. Reading it would name the wrong man in the
-# nemesis line.
+# MAINTAINED - bc_battle_open_effect's else arm removes it when the enemy side
+# is leaderless - while the scope is written on one arm only and cleared on
+# neither. So on a leaderless side scope:bc_open_foe is either absent or stale,
+# and reading it would either read nothing or name the wrong man in the nemesis
+# line. The variable is the one with a defined value on every path.
+#
+# SCOPE LIFETIME IS UNVERIFIED HERE, and this comment does not depend on it.
+# Whether a saved scope survives past the event execution that wrote it is not
+# in the 1.19.0.6 script_docs dump and cannot be settled by reading files; the
+# usual reading is that `save_scope_as` writes into the CURRENT execution's
+# scope list and `trigger_event` copies that list into the raised event, which
+# would mean a scope cannot leak from one battle into the next at all. Every
+# scope read in this file is `exists`-guarded, so both readings are safe. Do
+# not spend a session closing a cross-battle leak until a run has shown one.
 #
 # bc_eve_foe IS SAVED INSIDE THE is_ai = no GATE. Kept from the original for the
 # same reason it was written: it costs nothing and it keeps the save off every AI
@@ -76,21 +86,23 @@ bc_eve_offer_effect = {
 		# freshness comes from writing it here, one line before the raise; the
 		# durability comes from it being a scope.
 		#
-		# THE HOLE, STATED: a scope IS durable across battles too. A player who
-		# leaves one eve unanswered and is offered another would render the
-		# second against the first's ground. The eve cooldown makes this rare
-		# rather than impossible. `BC: eve ground missing` counting while
-		# `BC: eve offered` counts more is what that looks like in the log.
-		# The same hole exists for scope:bc_eve_foe: when the current enemy
-		# side is leaderless the `if` above does not fire, and a previous
-		# battle's commander is left standing in the scope. That was always
-		# true, but bc_eve_foe now drives four desc arms — nemesis, kin,
-		# heathen, countryman — and the nemesis one is shared with option e,
-		# because bc_eve_facing_nemesis_trigger reads scope:bc_eve_foe and
-		# gates both. So a stale foe who happens to be the nemesis renders the
-		# nemesis paragraph AND unlocks option e, which grants bc_bloodied and
-		# 5 stress to a real character. That is the tooth this hole did not
-		# have before.
+		# THE HOLE, IF SCOPES OUTLIVE THEIR EXECUTION - see the SCOPE LIFETIME
+		# note at the top of this file, which says that is UNVERIFIED and quite
+		# possibly false. If they do: a player who leaves one eve unanswered
+		# and is offered another renders the second against the first's ground,
+		# and the same goes for scope:bc_eve_foe, whose `if` above does not
+		# fire on a leaderless enemy side. If they do not, both simply come up
+		# absent and the guarded fallbacks render, which is correct behaviour.
+		#
+		# WHY IT IS WORTH WATCHING EITHER WAY: bc_eve_foe drives four desc arms
+		# — nemesis, kin, heathen, countryman — and the nemesis one is shared
+		# with option e, because bc_eve_facing_nemesis_trigger reads
+		# scope:bc_eve_foe and gates both. A stale foe who happened to be the
+		# nemesis would render the nemesis paragraph AND unlock option e, which
+		# grants bc_bloodied and 5 stress to a real character. That is the only
+		# path in the eve where a wrong scope does something rather than
+		# showing something. In the log it looks like `BC: eve ground missing`
+		# counting while `BC: eve offered` counts more.
 		if = {
 			limit = { exists = scope:combat_side.combat.location }
 			scope:combat_side.combat.location = { save_scope_as = bc_eve_ground }

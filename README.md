@@ -609,7 +609,7 @@ different fixes.
   | markers | toast | verdict |
   |---|---|---|
   | a band | clause present, matches band | shape proven — Plan B may proceed |
-  | a band | no clause at all | either `Custom()` does not render in a toast desc, or `scope:bc_chronicle_subject` is not addressable from loc. Both kill the design as written; before abandoning it, retry once with `bc_commander`, which is saved on the same character fifteen lines above the toast (`bc_commander_phase_events.txt:65`; the toast is at `:80-85`). If that renders, the anchor is the problem and not the mechanism. |
+  | a band | no clause at all | **not a mechanism failure** — vanilla ships this exact shape. `court_poet_poetry_desc` (`localization/english/court_positions_2_l_english.yml:150`) is `"[court_poet_from_task.Custom('GeneratePoem_Outro_Rhyming')]"`, rendered by the `send_interface_toast` at `common/court_positions/tasks/00_court_poet_tasks.txt:94-98` against a scope saved at `:47` — a saved scope, a bare `Custom`, in a toast desc. Eleven other vanilla toasts do the same. So a blank clause means the **anchor** or the **variable**, not the mechanism: retry with `bc_commander`, saved on the same character fifteen lines above the toast (`bc_commander_phase_events.txt:65`; the toast is at `:80-85`). Do not abandon the design on this symptom. |
   | a band | clause present, wrong band | the arms read the variable off the wrong character — the anchor resolves but not to the commander who holds the scratch. |
   | `BC: ground missing` | no clause | not a spike failure — `combat.location` did not resolve at a phase event. Fix the read site in `bc_write_ground_effect` and run again. |
 - **The widened eve.** `bc_chronicles.0011` now assembles three paragraphs and

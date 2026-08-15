@@ -22,10 +22,11 @@
 # effect via scope:bc_battle_province, the moment writer via
 # scope:combat_side.combat.location, and two call sites in bc_eve_events.txt via
 # scope:bc_eve_ground (the ground desc chain and the option d trigger). The eve
-# callers read scope:bc_eve_ground, a saved scope that is durable across battles
-# — a player who leaves one eve unanswered may see the next rendered against the
-# previous battle's ground. That is a materially different risk profile from the
-# other two callers, which read combat.location fresh on every phase event.
+# callers read a SAVED SCOPE rather than combat.location fresh, so if a saved
+# scope outlives the execution that wrote it they can see a previous battle's
+# ground. Whether it does is unverified — see the SCOPE LIFETIME note in
+# bc_eve_effects.txt, which explains why it does not matter for correctness
+# (every read there is `exists`-guarded) and why it should not be chased.
 
 bc_ground_is_desert_trigger = {
 	OR = {

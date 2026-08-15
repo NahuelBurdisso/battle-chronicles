@@ -37,8 +37,16 @@
 # bc_reputation_effects.txt:238-244.
 #
 # MARKERS, and what each one means on its own:
-#   BC: ground <band>       classified. Six of these should sum to the moment
-#                           count, minus the two below.
+#   BC: ground <band>       classified. THE DENOMINATOR IS THE TEN
+#                           `BC: fired bc_*` MARKERS, NOT THE MOMENT COUNT.
+#                           These are written once per phase-event fire; a
+#                           moment is recorded once per seam call, and the two
+#                           differ in both directions - a phase event that
+#                           raises a pop-up writes a band and records no
+#                           moment, and the pop-up option records a moment
+#                           later with no band. Eight of the eighteen seam call
+#                           sites are pop-up options. The six bands plus the
+#                           two failures below should sum to the ten fired.
 #   BC: ground NONE MATCHED the province matched no band. Impossible while the
 #                           partition holds - tools/ck3.py validate enforces it -
 #                           so this means AGOT changed under us.
@@ -116,19 +124,23 @@ bc_write_ground_effect = {
 # MARKERS: SIX bond markers for five bond values, plus two creed markers.
 # `stranger` is written from two sites and marked differently at each - the
 # inner else logs `BC: bond stranger`, the outer else logs `BC: bond nofoe` and
-# NOT `BC: bond stranger`. The six are DISJOINT and the SIX sum to the moment
-# count. Do not read `nofoe` as a subset of `stranger`; it is the other half of
-# it, and treating it as a subset double-counts every leaderless enemy side.
+# NOT `BC: bond stranger`. The six are DISJOINT and the SIX sum to the ten
+# `BC: fired bc_*` markers - NOT to the moment count, for the reason given at
+# the ground markers above. Do not read `nofoe` as a subset of `stranger`; it is
+# the other half of it, and treating it as a subset double-counts every
+# leaderless enemy side.
 #
-# The two creed markers sum to the moment count MINUS `BC: bond nofoe`, because
+# The two creed markers sum to the ten fired MINUS `BC: bond nofoe`, because
 # a battle with no enemy commander has no creed to compare.
 #
 # DO NOT "RECONCILE" THIS LADDER WITH THE EVE. The desc chain in
 # bc_eve_events.txt carries the same five values in a different order —
 # nemesis, kin, heathen, countryman, stranger — with heathen deliberately above
 # countryman, because the eve picks a line nobody reads back. This ladder writes
-# a fact that other systems read back: bc_battle_bond drives the aftermath award
-# and the fragment vocabulary. Lifting `heathen` above `countryman` here would
+# a fact that other systems read back: today only `flag:nemesis` is consumed, by
+# the aftermath award at bc_aftermath_events.txt:260; the other four are written
+# and logged against the fragment work Plan B does. Lifting `heathen` above
+# `countryman` here would
 # silently change what `BC: bond countryman` and `BC: bond heathen` count and
 # shift the prose vocabulary for the remaining fragment work. The two orders
 # disagree and that is the intent. See bc_eve_events.txt for the reciprocal note.
