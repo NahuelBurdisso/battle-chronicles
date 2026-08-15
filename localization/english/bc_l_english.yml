@@ -138,27 +138,27 @@
 
 # --- shared fragments: the scale --------------------------------------------
 #
-# ONE AXIS, GRADED: how much of the battle is standing about not yet fighting.
-# Huge, most of the men are elsewhere on it; large, whole parts of it are idle;
-# small, everyone who came is in it. Keep it monotone - see the header on
-# bc_scale_clause in bc_flavour.txt, which records the two axes that are closed,
-# why, and the test a replacement has to pass.
+# ONE AXIS, GRADED: how much of the fight is not yet in the fighting. Huge, most
+# of the men; large, a good part of them; small, not a man. Keep it monotone -
+# see the header on bc_scale_clause in bc_flavour.txt, which records the two
+# axes that are closed, why, and the four-row test a replacement has to pass.
 #
-# THE SUBJECT IS THE WHOLE BATTLE, BOTH HOSTS, AND THAT IS NOT A STYLE CHOICE.
-# bc_battle_size is written from `scope:combat_side.combat.num_total_troops`
-# (bc_ledger_effects.txt:113), which counts BOTH SIDES, so a clause that read as
-# a claim about the commander's own men would be saying something the variable
-# never measured. It would also collide with the moments' own gates: a toast is
-# sent with the commander's icon, and bc_flank_collapses requires
-# bc_side_is_outnumbered_trigger (bc_commander_phase_events.txt:221) while
-# bc_van_breaks_through requires bc_side_is_outnumbering_trigger (:273) - so
-# "his companies stand idle" contradicts the first outright, on the mod's
-# highest-firing commander moment.
+# THE SUBJECT IS THE WHOLE FIGHT, NOT THE COMMANDER'S OWN MEN, AND THAT IS NOT A
+# STYLE CHOICE. bc_battle_size is set by comparing num_total_troops on the
+# COMBAT scope (bc_ledger_effects.txt:113), which counts both sides, so a clause
+# read as a claim about his men would report something the variable never
+# measured. It would also collide with the moments' own gates: a toast carries
+# the commander's portrait, and bc_flank_collapses fires only when he is
+# outnumbered (bc_commander_phase_events.txt:221) while bc_van_breaks_through
+# fires only when he is outnumbering (:273). An earlier draft said whole
+# companies of his stood idle and were not yet called on, which on
+# bc_flank_collapses contradicts the literal it was appended to and reads as a
+# reproach: the verb has to be agentless as well as the subject shared.
 #
 # THE THREE SAY NOTHING ABOUT THE MOMENT ITSELF, and that is deliberate twice
 # over. The clause is SHARED by all ten moments, so anything it says has to read
 # the same after a banner falling and after a stalemate - the same test
-# bc_bond_clause's header states at bc_flavour.txt:130-135. And a fragment that
+# bc_bond_clause's header states at bc_flavour.txt:131-136. And a fragment that
 # points back at the moment ("such a thing", "it") is pointing past the ground
 # and bond fragments that task 4 renders in between, so its nearest antecedent
 # at render time is the bond sentence, not the toast's own. These three name
@@ -169,27 +169,34 @@
 # key lines across the file, most of them in text that never renders beside a
 # moment toast. What is listed is what task 4 can put in one desc with this
 # clause, which is a toast literal, one ground fragment and one bond fragment.
-# KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE: a same-file line citation rots
-# the moment anything above it is edited, and the citation sweeper does not
-# check bare `key:N` forms, so it would rot silently. Grep the key.
+# KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE. NO TOOL IN THIS REPO CHECKS A
+# CITATION - validate does not, and there is no sweeper - so every citation here
+# rots silently, and a same-file one rots on any edit to this file, which is the
+# file most likely to be edited by whoever is reading this. Grep the key.
 #   "field"     bc_frag_banner_falls_open, bc_frag_bond_nemesis, bc_frag_bond_kin
 #   "again"     bc_rally_the_line_toast_desc, bc_knight_holds_the_breach_toast_desc
 #   "behind"    bc_knight_holds_the_breach_toast_desc
 #   "every man" bc_knight_shames_himself_toast_desc
 #   "no one"    bc_frag_banner_falls_forest
+#   "came"      bc_shieldbrother_forged_toast_desc
 #   "dawn"      bc_frag_bond_heathen
 #
-# THE EVE DESCS ARE A SEPARATE COLLISION SCOPE and are not on that list, because
-# they render in their own pop-up rather than in this run of text. They are
-# still protected: "all day" is bc_chronicles.0011.desc_intro's and
-# desc_ground_winter's, "across the field" belongs to desc_nemesis,
-# desc_stranger, desc_kin and desc_countryman, and desc_ground_open and
-# desc_ground_jungle use "field" on their own. Check both scopes before adding a
-# distinctive word here, and treat neither list as complete.
+# THE EVE DESCS ARE A SEPARATE COLLISION SCOPE, because they render in their own
+# pop-up rather than in this run of text - but for the HUGE arm the two scopes
+# are CO-EXTENSIVE, not merely adjacent. bc_eve_offer_effect gates the eve on
+# `var:bc_battle_size >= 3` (bc_eve_effects.txt:75) and the huge arm fires on
+# `= 3`, so every battle that shows an eve is a battle whose every toast carries
+# the huge arm, and the large and small arms can never co-occur with an eve at
+# all. Check the huge arm against the eve descs word by word; the other two need
+# only a glance. Words that are theirs: "all day" (desc_intro,
+# desc_ground_winter), "across the field" (desc_nemesis, desc_stranger, desc_kin,
+# desc_countryman), "field" alone (desc_ground_open, desc_ground_jungle), and
+# "go in there ... gone from this battle" (desc_ground_jungle), which is why no
+# arm here says "gone in". Treat neither list as complete.
 
- bc_frag_scale_huge:0 " Most of the men in a battle this big are somewhere else on it and have not gone in."
- bc_frag_scale_large:0 " Whole parts of a battle this size are standing idle, not yet called on."
- bc_frag_scale_small:0 " Everyone who came to a battle this small is already in it."
+ bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting at all."
+ bc_frag_scale_large:0 " In a fight this size, a good part of the men are not yet in the fighting."
+ bc_frag_scale_small:0 " In a fight this small, there is not a man who is not in the fighting."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
