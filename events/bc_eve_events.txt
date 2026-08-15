@@ -57,9 +57,9 @@ bc_chronicles.0011 = {
 	# pop-up renders when the player gets round to it, which can be after the
 	# combat ended and bc_clear_scratch_effect ran.
 	#
-	# THE FOE CHAIN CARRIES THE SAME FIVE VALUES AS THE BOND LADDER BUT IN A
-	# DIFFERENT ORDER - nemesis, kin, heathen, countryman, stranger, where the
-	# ladder in bc_write_bond_effect runs nemesis, kin, countryman, heathen,
+	# THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE. This chain
+	# runs nemesis, kin, heathen, countryman, stranger; the same five values, and
+	# the ladder in bc_write_bond_effect runs nemesis, kin, countryman, heathen,
 	# stranger. Heathen is lifted above countryman ON PURPOSE: a man of your own
 	# people who prays to something else is the more interesting sentence, and
 	# under the ladder's order he never gets one. The two orders disagree and

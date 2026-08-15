@@ -40,17 +40,41 @@
 # carries. The authoritative list lives in tools/ck3lib/validate.py, under
 # `WHAT THIS CHECKS IS POSITION, NOT MEANING` - and a paragraph name is cited on
 # one line or it is not cited at all, because a name broken across a line break
-# is invisible to the grep that is the whole point of naming it. Round 13 caught
-# three such names installed by the very commit that converted them, and round 14
-# caught two more that 631a6a9 left alone because it scoped its fix to the names
-# 20ce50d had touched. The rule is FILE-WIDE from the moment it is written down;
-# the acceptance test is grepping every name this file cites, not the new ones.
-# Where the target's own heading wraps, cite the unbroken prefix on its first
-# line - but check first, because the adjacent paragraph is often the better
-# citation AND unwrapped, which is what round 14 found here. What `validate`
-# cannot flag is a citation landing on the wrong LIVE line, which is the case
-# round 8 lost its headline to. Not `--strict`: that flag only adds the
-# missing-loc check, and the citation check runs on every validate.
+# is invisible to the grep that is the whole point of naming it. Rounds 13, 14
+# and 15 each found wrapped names, and each time the sweep that was supposed to
+# have caught them was file-wide in prose and partial in fact - 631a6a9 scoped
+# by which commit had touched the name, fb6f4f0 by what a name LOOKS like, and
+# its ALL-CAPS detector could not see `Family 3 is shipped but unmeasured`,
+# whose target is a markdown heading. So: the rule is FILE-WIDE the moment it is
+# written down, and the acceptance test must be CASING-BLIND.
+#
+# THE DETECTOR IS AN UNBALANCED BACKTICK, which is casing-blind, needs no list of
+# names, and is the literal signature of the defect rather than a proxy for it: a
+# wrapped span leaves an odd backtick count on both of the lines it straddles.
+# Skip fenced code blocks and check every commentable file. Two things about it
+# are worth knowing before running it. First, it is NOT a validate check, and
+# deliberately - the mod has legitimate multi-line quotations, of loc text and of
+# script, and those wrap on purpose, so a hard error would fire on a clean tree.
+# No count of them is given, for the reason a count of citations is not given
+# above. THE EXEMPTION IS A QUOTED RUN OF TEXT; A GREP TARGET IS NEVER
+# EXEMPT. Second, the earlier sweep that looked for a cited name and then went
+# looking for its definition was VACUOUS: a citation matches itself, so every
+# name resolved and the sweep reported clean on a tree that had wrapped names in
+# it. Exclude the citing line, or do not run that shape at all.
+#
+# AND THE RULE COVERS LOG MARKERS, NOT ONLY PARAGRAPH NAMES. That is what the
+# backtick detector turned up that no earlier sweep had: `BC: nickname awarded`,
+# `BC: terrain NONE MATCHED` and `rule off` were all wrapped in README.md. A
+# marker is a grep target twice over - once against this source, once against the
+# game's own log - and a wrapped one cannot even be pasted into a log search.
+#
+# Where the target's own heading wraps, prefer renaming the heading to fit one
+# line over citing a prefix, since a prefix is itself a rot risk; and check
+# whether the adjacent paragraph is the better citation before assuming the
+# wrapped one was meant. What `validate` cannot flag is a citation
+# landing on the wrong LIVE line, which is the case round 8 lost its headline to.
+# Not `--strict`: that flag only adds the missing-loc check, and the citation
+# check runs on every validate.
 #
 # THE RULE IS ABSOLUTE FOR bc_ledger_effects.txt AND ASPIRATIONAL EVERYWHERE
 # ELSE, and saying so is more honest than a rule this file breaks. Below there
@@ -71,8 +95,8 @@
 # For same-file references the rule is already absolute: name the key.
 #
 # ONE EXEMPTION, and it is not a loophole: a citation recording where a marker
-# WAS in a build that has since moved on. README.md's `Family 3 is shipped but
-# unmeasured` section does this - it quotes a log line against
+# WAS in a build that has since moved on. The README section headed
+# `Family 3 is shipped but unmeasured` does this - it quotes a log line against
 # `bc_ledger_effects.txt:258` and labels it a previous build. A paragraph name
 # cannot express a pointer into a superseded file, and the number is not a claim
 # about the current one. Anything that IS a claim about the current file follows
@@ -221,8 +245,10 @@ bc_banner_falls_ground = {
 # reciprocal pair are written down: bc_context_effects.txt carries the paragraph
 # `DO NOT "RECONCILE" THIS LADDER WITH THE EVE` and bc_eve_events.txt carries
 # `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE`, which is the
-# half making the same-battle claim; the paragraph above it documents the order
-# disagreement itself. This clause is the third carrier of those five values.
+# half making the same-battle claim. The order disagreement itself is documented
+# in that same file under
+# `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`.
+# This clause is the third carrier of those five values.
 # NOT the first whose ordering the player sees: the eve's chain has always picked
 # a paragraph by its own order. It WILL be the first to put the LADDER's ordering
 # in front of the player as prose, once it is wired. Until then the ladder

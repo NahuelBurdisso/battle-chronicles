@@ -249,8 +249,8 @@ come out in task 16; the answers are permanent and live here.
   exhaustive over everything that actually occurred. Desert's zero is recorded
   rather than acted on; the arm stays.
 - **Other counts:** `win notable` 79 / `lose notable` 79 and `win not notable` 58
-  / `lose not notable` 58, perfectly symmetric as they must be. `BC: nickname
-  awarded` 5, this time under the real gate.
+  / `lose not notable` 58, perfectly symmetric as they must be.
+  `BC: nickname awarded` 5, this time under the real gate.
 
 ### The run also exposed a defect that made the whole ledger dead
 
@@ -333,11 +333,11 @@ Two structural notes from plan 2 that belong with these counts:
 | style | 67 | 7 | **1** |
 | terrain | 69 | 8 | **8** |
 
-Terrain awarded across 3 distinct argument hashes. **No `BC: terrain NONE
-MATCHED`** — the terrain ladder is still exhaustive under the reputation caller,
-matching Q5. **No `BC: award blocked` of any kind**, which confirms Q1's estimate
-that the trait-count budget gate passes ~99.6% of the time and shows style and
-terrain never collided over the same battle.
+Terrain awarded across 3 distinct argument hashes.
+**No `BC: terrain NONE MATCHED`** — the terrain ladder is still exhaustive under
+the reputation caller, matching Q5. **No `BC: award blocked` of any kind**, which
+confirms Q1's estimate that the trait-count budget gate passes ~99.6% of the time
+and shows style and terrain never collided over the same battle.
 
 ### Plan 4 — the nemesis
 
@@ -350,9 +350,10 @@ terrain never collided over the same battle.
 - **`rung rival` (12) exceeding `escalate` (6) proves the wipe branch.** A first
   loss can only land on the rival rung if `bc_rivalry_step_value` returned 2, so
   `scope:wipe` resolves inside the script value — which had no precedent.
-- **The descent path is unverified.** `decrement`, `cleared`, `wipe` and `rule
-  off` were all absent, for the ordinary reason that nobody beat their nemesis in
-  one session. All four are permanent markers and will report themselves.
+- **The descent path is unverified.** `decrement`, `cleared`, `wipe` and
+  `rule off` were all absent, for the ordinary reason that nobody beat their
+  nemesis in one session. All four are permanent markers and will report
+  themselves.
 
 ### Bonus: plan 1's last open done-when closed
 
