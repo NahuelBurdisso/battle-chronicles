@@ -27,13 +27,18 @@ on_combat_end_loser = {
 }
 
 # Root = Combat here, NOT a combat side — see event_scopes.log, which is why
-# bc_chronicles.0900 declares `scope = combat`. Proven at runtime, 152 fires.
+# bc_chronicles.0010 declares `scope = combat`. Proven at runtime, 152 fires.
+# EMPTY in the loaded file - AGOT combat_on_actions.txt:3-4 is a bare
+# `on_combat_start = { }` - so this is an entirely unclaimed hook and
+# bc_chronicles.0010 is its only entry.
+#
 # Read bc_combat_start_events.txt before building on this hook: the event is
 # reachable, but combat_attacker / combat_defender are NOT resolvable from inside
-# it. `events = { }` for the same reason as the two hooks above: an `effect = { }`
+# it, which is why the eve reaches the two sides through every_combat_side.
+# `events = { }` for the same reason as the two hooks above: an `effect = { }`
 # in an on_action does not merge across files.
 on_combat_start = {
 	events = {
-		bc_chronicles.0900
+		bc_chronicles.0010
 	}
 }

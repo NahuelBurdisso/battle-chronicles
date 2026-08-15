@@ -226,7 +226,8 @@ come out in task 16; the answers are permanent and live here.
   the time, so it is not a gate in practice. Keep it; it costs nothing and it
   covers the one case in 267.
 - **Q2 — `scope = combat` events work; the combat links do not.**
-  `bc_chronicles.0900` fired **151** times, so a `scope = combat` event dispatched
+  `bc_chronicles.0900` — the probe event, since retired and replaced by the eve's
+  `bc_chronicles.0010` on the same hook — fired **151** times, so a `scope = combat` event dispatched
   from `on_combat_start` is valid even though nothing in vanilla or AGOT declares
   one. But `combat_attacker.side_commander` and `combat_defender.side_commander`
   each resolved **zero** times from inside it, and `?=` swallowed both failures in
