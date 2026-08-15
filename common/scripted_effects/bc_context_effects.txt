@@ -80,3 +80,93 @@ bc_write_ground_effect = {
 		debug_log = "BC: ground missing"
 	}
 }
+
+# --- the foe, and the creed -------------------------------------------------
+#
+# TWO INDEPENDENT QUESTIONS, TWO INDEPENDENT CHAINS, and that is the whole point
+# of the shape below.
+#
+# bc_battle_bond is an ORDERED, MUTUALLY EXCLUSIVE ladder: a man is a nemesis
+# first, kin second, a countryman third. An ordered ladder SWALLOWS every
+# question below the arm that matched - so a nemesis of another faith would
+# never reach a `heathen` arm, and the faith question would be answerable only
+# for foes who are nothing else. Faith therefore gets its OWN if/else beside the
+# ladder, not an arm inside it.
+#
+# THE LADDER HAS A TERMINAL ARM AND IT IS NOT DECORATION. A foe of a different
+# culture and the same faith - a Reachman against a Westerman, both of the Seven,
+# which is the largest match-up class on the AGOT map - matches nemesis no, kin
+# no, countryman no, heathen no. Without the `else` he would leave bc_battle_bond
+# unwritten and emit no marker at all, and the single most common case in the
+# game would be invisible in the logs.
+#
+# NESTED, NOT SIBLING, on every read. CK3 does not short-circuit and guarantees
+# no evaluation order among siblings, so `exists = var:bc_battle_foe` beside a
+# read of var:bc_battle_foe is a missing-variable read on every leaderless enemy
+# side. The outer `if` is the guard; everything inside it may read freely.
+#
+# MARKERS: SIX bond markers for five bond values, plus two creed markers.
+# `stranger` is written from two sites and marked differently at each - the
+# inner else logs `BC: bond stranger`, the outer else logs `BC: bond nofoe` and
+# NOT `BC: bond stranger`. The six are DISJOINT and the SIX sum to the moment
+# count. Do not read `nofoe` as a subset of `stranger`; it is the other half of
+# it, and treating it as a subset double-counts every leaderless enemy side.
+#
+# The two creed markers sum to the moment count MINUS `BC: bond nofoe`, because
+# a battle with no enemy commander has no creed to compare.
+bc_write_bond_effect = {
+	if = {
+		limit = { exists = var:bc_battle_foe }
+
+		# bc_facing_nemesis_trigger, NOT a hand-rolled comparison.
+		# bc_scripted_triggers.txt:244-255 already nests both reads behind their
+		# own `exists` in a trigger_if AND carries the `is_alive = yes` row. A
+		# hand-rolled `limit = { exists = var:bc_nemesis  var:bc_battle_foe =
+		# var:bc_nemesis }` would read var:bc_nemesis as a SIBLING of its own
+		# exists, which is the rule at the top of this file, and would drop the
+		# liveness row on top of it.
+		if = {
+			limit = { bc_facing_nemesis_trigger = yes }
+			set_variable = { name = bc_battle_bond value = flag:nemesis }
+			debug_log = "BC: bond nemesis"
+		}
+		else_if = {
+			limit = { var:bc_battle_foe = { is_close_family_of = scope:bc_chronicle_subject } }
+			set_variable = { name = bc_battle_bond value = flag:kin }
+			debug_log = "BC: bond kin"
+		}
+		else_if = {
+			limit = { var:bc_battle_foe = { culture = scope:bc_chronicle_subject.culture } }
+			set_variable = { name = bc_battle_bond value = flag:countryman }
+			debug_log = "BC: bond countryman"
+		}
+		else_if = {
+			limit = { NOT = { var:bc_battle_foe = { faith = scope:bc_chronicle_subject.faith } } }
+			set_variable = { name = bc_battle_bond value = flag:heathen }
+			debug_log = "BC: bond heathen"
+		}
+		else = {
+			set_variable = { name = bc_battle_bond value = flag:stranger }
+			debug_log = "BC: bond stranger"
+		}
+
+		# A SEPARATE CHAIN, deliberately. See the header.
+		if = {
+			limit = { NOT = { var:bc_battle_foe = { faith = scope:bc_chronicle_subject.faith } } }
+			set_variable = { name = bc_battle_creed value = flag:heathen }
+			debug_log = "BC: creed heathen"
+		}
+		else = {
+			set_variable = { name = bc_battle_creed value = flag:same }
+			debug_log = "BC: creed same"
+		}
+	}
+	else = {
+		# A leaderless enemy side. `stranger` rather than absent: the prose has a
+		# stranger arm and it is the right one to read here, and an absent flag
+		# would fall to a fallback that says nothing about the foe at all.
+		set_variable = { name = bc_battle_bond value = flag:stranger }
+		debug_log = "BC: bond nofoe"
+		remove_variable = bc_battle_creed
+	}
+}

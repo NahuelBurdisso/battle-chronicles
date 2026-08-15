@@ -241,6 +241,19 @@ bc_battle_is_notable_trigger = {
 # this battle's foe. Reading the combat scope directly instead would fix that at
 # the cost of an unverified scope path evaluated on every roll of every battle in
 # the world.
+#
+# SINCE bc_write_bond_effect, ONE CALLER IS NOT A WEIGHT BLOCK. That effect - in
+# bc_context_effects.txt, called from bc_battle_open_effect - asks this in the
+# `limit` of its first `if`. Still a trigger context, so the safety argument
+# above holds unchanged, but two things above are now local to the weight call
+# sites and not to this trigger:
+#   - "TRIGGER contexts only - weight multipliers and is_valid blocks" now also
+#     means the limit of an if in an effect.
+#   - "IT MISSES THE FIRST ROLL OF EVERY BATTLE" is true of weights and FALSE
+#     from bc_write_bond_effect, which runs after the foe block in the same
+#     effect and therefore sees bc_battle_foe on the very first moment.
+# The second one matters: do not "fix" the first-roll gap by moving the foe
+# write, because the bond ladder already depends on the write being upstream.
 bc_facing_nemesis_trigger = {
 	exists = var:bc_nemesis
 	exists = var:bc_battle_foe

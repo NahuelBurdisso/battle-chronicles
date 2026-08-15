@@ -129,6 +129,16 @@ bc_battle_open_effect = {
 	# what these write, and the size ladder writes what one of them reads.
 	bc_write_ground_effect = yes
 
+	# AFTER the foe block at the top of this effect - it reads var:bc_battle_foe,
+	# which that block writes or removes. AFTER the dead-nemesis housekeeping
+	# would be better still, but the housekeeping sits below and moving it is a
+	# larger change than this needs: bc_facing_nemesis_trigger carries its own
+	# `is_alive = yes` row, so a dangling reference fails to match and falls
+	# through to the next arm. The consequence is one phase event of a dead man's
+	# grudge reading as `countryman` or `stranger` rather than `nemesis`, which is
+	# the correct answer anyway.
+	bc_write_bond_effect = yes
+
 	# --- housekeeping: drop a dead nemesis ----------------------------------
 	#
 	# HOUSEKEEPING, NOT SAFETY. Every bc_nemesis read is already guarded by
@@ -530,6 +540,8 @@ bc_clear_scratch_effect = {
 	remove_variable = bc_battle_wounded
 	remove_variable = bc_battle_foe
 	remove_variable = bc_battle_ground
+	remove_variable = bc_battle_bond
+	remove_variable = bc_battle_creed
 }
 
 # --- family 2: the character of the fight -----------------------------------
