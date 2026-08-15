@@ -72,7 +72,7 @@ bc_style_streak_effect = {
 	}
 	else_if = {
 		limit = { var:bc_style_last = var:bc_battle_style }
-		change_variable = { name = bc_style_streak add = 1 }
+		change_variable = { name = bc_style_streak add = bc_style_step_value }
 		debug_log = "BC: style streak"
 	}
 	else = {

@@ -171,3 +171,30 @@ bc_rivalry_step_value = {
 		value = 1
 	}
 }
+
+# --- B's streak step ---------------------------------------------------------
+#
+# TWO ON A WIPE, ONE OTHERWISE, AND IT IS READ IN EXACTLY ONE PLACE - the MATCH
+# branch of bc_style_streak_effect. The two CREATE branches stay a literal 1.
+#
+# THE ASYMMETRY WITH C IS DELIBERATE AND IS THE WHOLE MECHANISM. C's counter uses
+# its step in the create branch too, because it is a tally of damage done to you
+# and the first blow's severity is exactly the thing being counted. A STREAK is a
+# claim about repetition, and nothing has repeated on the first battle. Because
+# the create branch stays 1, "two wipes fought the same way earn the trait" is
+# true: the first wipe is a mismatch, creates the streak at 1, the second matches
+# and adds 2, reaching the threshold of 3. Use the step in the create branch and
+# it becomes "one wipe plus one mismatch", which is a different feature.
+#
+# THE TERRAIN STREAK IS NOT AFFECTED AND MUST NOT BE. Its threshold is 2, so a
+# by-2 step would award a terrain trait from a single battle and reopen exactly
+# the budget problem plan 3's award-ordering rule exists to close.
+bc_style_step_value = {
+	if = {
+		limit = { bc_was_wipe_trigger = yes }
+		value = 2
+	}
+	else = {
+		value = 1
+	}
+}
