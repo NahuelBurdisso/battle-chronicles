@@ -159,7 +159,7 @@ bc_write_bond_effect = {
 		limit = { exists = var:bc_battle_foe }
 
 		# bc_facing_nemesis_trigger, NOT a hand-rolled comparison.
-		# bc_scripted_triggers.txt:245-255 already nests both reads behind their
+		# bc_scripted_triggers.txt:257-268 already nests both reads behind their
 		# own `exists` in a trigger_if AND carries the `is_alive = yes` row. A
 		# hand-rolled `limit = { exists = var:bc_nemesis  var:bc_battle_foe =
 		# var:bc_nemesis }` would read var:bc_nemesis as a SIBLING of its own

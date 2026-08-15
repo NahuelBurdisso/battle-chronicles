@@ -14,12 +14,17 @@
 # in order, so a trigger-less arm anywhere but last would swallow the ones below
 # it. Every definition here ends in one.
 #
-# HOW MUCH THAT FALLBACK IS WORTH VARIES BY DEFINITION, and each one says so in
-# its own header. It is load-bearing on the ground clauses, because
-# bc_write_ground_effect removes the variable first and has two exits that never
-# rewrite it. It is unreachable on bc_bond_clause, because bc_write_bond_effect
-# writes on every path. Do not generalise either case to the other; check the
-# writer.
+# HOW OFTEN THAT FALLBACK ACTUALLY RENDERS VARIES BY DEFINITION AND BY CALL SITE,
+# and each definition says so in its own header. On the ground clauses it is
+# load-bearing from anywhere, because bc_write_ground_effect removes the variable
+# first and has two exits that never rewrite it. On bc_bond_clause it never
+# renders from the ten moment toasts, because bc_write_bond_effect writes on
+# every path and runs upstream of all ten - but it would render routinely from a
+# pop-up option's toast, which runs after bc_clear_scratch_effect.
+#
+# SO CHECK THE WRITER **AND** THE CALL SITE. Checking only the writer gives the
+# wrong answer for the pop-up case, and no fallback here may be deleted on the
+# strength of a claim that names only one of the two.
 #
 # NESTED, NOT SIBLING, on the variable read. The bare `exists` row and the
 # trigger_if are safe as siblings - only the READ has to be nested, which is
@@ -116,8 +121,11 @@ bc_banner_falls_ground = {
 # different-faith foe will read `countryman` in the toasts and `heathen` in the
 # eve, in the same battle. That is the documented intent - see the reciprocal
 # notes at bc_context_effects.txt:136-149 and bc_eve_events.txt:60-73 - and this
-# is the third carrier of those five values and the first whose ordering will
-# reach the player as prose. Do not "reconcile" the two.
+# is the third carrier of those five values. NOT the first whose ordering the
+# player sees: the eve's chain has always picked a paragraph by its own order.
+# It is the first to put the LADDER's ordering in front of the player as prose -
+# until now the ladder reached the player only as piety and prestige, through the
+# aftermath award. Do not "reconcile" the two.
 #
 # THIS CLAUSE READS THE BOND AND NOT THE CREED. bc_write_bond_effect also writes
 # an orthogonal var:bc_battle_creed, which exists precisely because the ladder
@@ -125,32 +133,27 @@ bc_banner_falls_ground = {
 # the faith fact is unsayable here. That is not an oversight: the creed gets its
 # own clause class or it does not get said. Do not fold it into these five.
 #
-# THE FALLBACK IS AN EMPTY STRING, AND IT IS UNREACHABLE FROM THE TEN MOMENT
-# TOASTS. Both halves matter, and so does that scope - it is a claim about ten
-# call sites, not about the variable.
+# THE FALLBACK NEVER RENDERS FROM THE TEN MOMENT TOASTS - and that is a claim
+# about those ten call sites, not about the variable. bc_write_bond_effect writes
+# bc_battle_bond on every one of its six paths - five ladder arms and the
+# leaderless `else` - with no leading remove_variable, and bc_ledger_effects.txt:141
+# calls it unconditionally from bc_battle_open_effect. All ten toasts run
+# downstream of that call: seven commander sites in the same effect block, and
+# three knight sites behind the same `scope:combat_side.side_commander ?=` link,
+# which for bc_shieldbrother_forged is a SECOND block on that link rather than
+# the same one (bc_knight_phase_events.txt:231 and :285). Either way a failed
+# `?=` skips the open call and the toast together.
 #
-# UNREACHABLE FROM THOSE TEN because bc_write_bond_effect writes bc_battle_bond
-# on every one of its six paths - five ladder arms and the leaderless `else` -
-# with no leading remove_variable, and bc_ledger_effects.txt:141 calls it
-# unconditionally from bc_battle_open_effect, which all ten toast sites run
-# downstream of in the same effect block. The three knight sites are inside the
-# same `side_commander ?=` guard as their open call, so a failed `?=` skips both
-# rather than reaching a toast with no write.
+# DO NOT SHORTEN THAT TO "UNREACHABLE" AND DELETE THE ARM. A bond clause on a
+# POP-UP OPTION's toast would reach it routinely and correctly:
+# bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
+# `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen seam
+# call sites are pop-up options that run whenever the player gets round to them -
+# bc_ledger_effects.txt:432-434 records exactly this hazard for bc_battle_size.
 #
-# THE ONE THING THAT WOULD BREAK THAT is a bond clause added to a POP-UP OPTION's
-# toast. bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
-# `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen
-# seam call sites are pop-up options that run whenever the player gets round to
-# them - bc_ledger_effects.txt:432-434 records exactly this hazard for
-# bc_battle_size. Such a site would reach the fallback routinely and correctly.
-# So: do not read "unreachable" as "delete it", and do not extend the claim past
-# the ten. Contrast the ground clause, whose fallback is reachable even from the
-# ten, because bc_write_ground_effect removes first and has two exits that never
-# rewrite.
-#
-# EMPTY because a path that left the variable unwritten could not name a foe, and
-# every sentence in this class presumes one. Silence is the only honest output,
-# and house style requires the arm to exist regardless.
+# THE STRING IS EMPTY because a path that left the variable unwritten could not
+# name a foe, and every sentence in this class presumes one. Silence is the only
+# honest output.
 bc_bond_clause = {
 	type = character
 

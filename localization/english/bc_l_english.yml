@@ -124,9 +124,9 @@
 
 # --- shared fragments: the bond ---------------------------------------------
 
- bc_frag_bond_nemesis:0 " The man commanding here knows whose banner that is across the field, and has known since it went up."
+ bc_frag_bond_nemesis:0 " The man commanding here knew whose colours those were across the field before either host moved."
  bc_frag_bond_kin:0 " The man commanding here shares blood with whoever is giving the orders across the field."
- bc_frag_bond_countryman:0 " Both sides are shouting in the same tongue."
+ bc_frag_bond_countryman:0 " The men on both sides curse in the same words."
  bc_frag_bond_heathen:0 " Whatever the other side was praying to at dawn, the man commanding here was not."
  bc_frag_bond_stranger:0 " Nobody across the field is anybody to the man commanding here."
  bc_frag_bond_any:0 ""

@@ -238,7 +238,7 @@ bc_chronicles.0011 = {
 	# partition of the 23 AGOT terrain helpers, not as a tactical one, so band
 	# membership is mixed. bc_ground_triggers.txt:31-39 puts
 	# agot_is_desert_mountains_terrain and agot_is_canyon_terrain in DESERT,
-	# which this gate refuses, while :50-60 puts agot_is_mountains_terrain in
+	# which this gate refuses, while :51-61 puts agot_is_mountains_terrain in
 	# ROUGH, which it allows - and the same file puts wetlands and bog in ROUGH
 	# too. So the gate is band-accurate and terrain-approximate. Two ways to
 	# close that gap were considered and both lose. Splitting a band would
