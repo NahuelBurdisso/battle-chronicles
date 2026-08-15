@@ -80,7 +80,7 @@
  bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it.[bc_chronicle_subject.Custom('bc_banner_falls_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # SPIKE. One fragment set, on one moment, to prove the shape renders before the
-# rest of the fragment keys are written. That run has not happened; the bond and
+# rest of the fragment keys were. That run has not happened; the bond and
 # scale fragments below were written anyway, under the AMENDMENT in
 # docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, because a
 # fragment APPENDED to a desc that keeps its literal sentence fails to "no
@@ -231,14 +231,13 @@
 #               bc_frag_bond_* is the empty fallback bc_frag_bond_any, which
 #               cannot render from these ten toasts. The bond fragment renders in
 #               the sentence immediately before this one on all ten toasts.
-#               THE ONLY GUARANTEED COLLISION IN THIS LIST. A name is cited on
-#               one line or it is not cited at all, so this one is not wrapped -
-#               the 84-column comment rule forced the wrap that used to split it,
-#               and the fix is to re-flow, not to widen.
-#               Plural "the men" beside it is
-#               ordinary English; SINGULAR "a man" is not, and an earlier small
-#               arm read " In a fight this small, there is not a man who is not
-#               in the fighting."
+#               THE ONLY GUARANTEED COLLISION IN THIS LIST. Plural "the men"
+#               beside it is ordinary English; SINGULAR "a man" is not, and an
+#               earlier small arm read " In a fight this small, there is not a
+#               man who is not in the fighting." (The name above sits on one
+#               unbroken line because a name is cited on one line or it is not
+#               cited at all. The 84-column comment rule forced the wrap that
+#               used to split it, so the fix is to re-flow, not to widen.)
 #   "man"       singular, and NOT only in the bond arms:
 #               bc_knight_holds_the_breach_toast_desc ("One man in the gap") and
 #               bc_frag_banner_falls_rough ("the man who carried it"). On the
