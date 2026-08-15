@@ -1,0 +1,76 @@
+﻿# Battle Chronicles - the six ground bands.
+#
+# EXTRACTED, NOT INVENTED. These six bodies were the six `limit` blocks of
+# bc_terrain_bucket_effect, which had already been verified exhaustive over all
+# 23 AGOT terrain helpers - 5 + 5 + 7 + 2 + 2 + 2 = 23, every helper exactly
+# once. The reputation streak and the moment prose therefore speak one
+# vocabulary by construction rather than by anyone remembering to keep two
+# ladders in step.
+#
+# NEVER `terrain = X` UNDER AGOT. AGOT defines road variants as DISTINCT terrain
+# types - `majorroad_hills` is not `hills` - plus nine AGOT-only bases vanilla
+# has no key for. ~26% of the map is INVISIBLE to a bare `terrain =` check and
+# it fails silently. See bc_reputation_effects.txt:246-254.
+#
+# THIS FILE HOLDS THESE SIX TRIGGERS AND NOTHING ELSE. tools/ck3lib/validate.py
+# checks the partition by counting every `agot_is_*_terrain` mention in this
+# file and comparing the multiset against the 23 base helpers. Adding an
+# unrelated trigger here that happens to mention a terrain will break that
+# check, correctly and confusingly.
+#
+# SCOPE: PROVINCE. Every caller enters a province scope first - the bucket
+# effect via scope:bc_battle_province, the moment writer via
+# scope:combat_side.combat.location.
+
+bc_ground_is_desert_trigger = {
+	OR = {
+		agot_is_drylands_terrain = yes
+		agot_is_desert_terrain = yes
+		agot_is_desert_mountains_terrain = yes
+		agot_is_oasis_terrain = yes
+		agot_is_canyon_terrain = yes
+	}
+}
+
+bc_ground_is_open_trigger = {
+	OR = {
+		agot_is_farmlands_terrain = yes
+		agot_is_plains_terrain = yes
+		agot_is_steppe_terrain = yes
+		agot_is_floodplains_terrain = yes
+		agot_is_urban_terrain = yes
+	}
+}
+
+bc_ground_is_rough_trigger = {
+	OR = {
+		agot_is_hills_terrain = yes
+		agot_is_mountains_terrain = yes
+		agot_is_wetlands_terrain = yes
+		agot_is_the_bog_terrain = yes
+		agot_is_taiga_bog_terrain = yes
+		agot_is_terraced_hills_terrain = yes
+		agot_is_highlands_terrain = yes
+	}
+}
+
+bc_ground_is_forest_trigger = {
+	OR = {
+		agot_is_forest_terrain = yes
+		agot_is_taiga_terrain = yes
+	}
+}
+
+bc_ground_is_jungle_trigger = {
+	OR = {
+		agot_is_jungle_terrain = yes
+		agot_is_cloudforest_terrain = yes
+	}
+}
+
+bc_ground_is_winter_trigger = {
+	OR = {
+		agot_is_frozen_flats_terrain = yes
+		agot_is_glacier_terrain = yes
+	}
+}

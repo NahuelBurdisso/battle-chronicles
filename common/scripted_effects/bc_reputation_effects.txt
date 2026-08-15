@@ -253,9 +253,10 @@ bc_style_award_toast_effect = {
 # bare `terrain =` check, and it fails silently - the province simply matches
 # nothing and falls to the `else`.
 #
-# THE LADDER IS EXHAUSTIVE OVER ALL 23 HELPERS - verified against AGOT's
-# 00_agot_terrain_type_triggers.txt, 5 + 5 + 7 + 2 + 2 + 2 = 23, every helper
-# once. So the `else` is unreachable in principle, which is exactly why it logs.
+# THE LADDER IS EXHAUSTIVE OVER ALL 23 HELPERS - 5 + 5 + 7 + 2 + 2 + 2 = 23,
+# every helper once. The six bands now live in bc_ground_triggers.txt and
+# tools/ck3.py validate enforces the count. So the `else` is unreachable in
+# principle, which is exactly why it logs.
 # An unhandled terrain would otherwise write nothing and reset nothing, and the
 # streak would quietly stall. The caller therefore does NOT assume this effect
 # wrote anything; it guards the streak call on `exists = var:bc_terrain_this`.
@@ -268,68 +269,27 @@ bc_terrain_bucket_effect = {
 	save_scope_as = bc_terrain_subject
 	scope:bc_battle_province = {
 		if = {
-			limit = {
-				OR = {
-					agot_is_drylands_terrain = yes
-					agot_is_desert_terrain = yes
-					agot_is_desert_mountains_terrain = yes
-					agot_is_oasis_terrain = yes
-					agot_is_canyon_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_desert_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:desert } }
 		}
 		else_if = {
-			limit = {
-				OR = {
-					agot_is_farmlands_terrain = yes
-					agot_is_plains_terrain = yes
-					agot_is_steppe_terrain = yes
-					agot_is_floodplains_terrain = yes
-					agot_is_urban_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_open_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:open } }
 		}
 		else_if = {
-			limit = {
-				OR = {
-					agot_is_hills_terrain = yes
-					agot_is_mountains_terrain = yes
-					agot_is_wetlands_terrain = yes
-					agot_is_the_bog_terrain = yes
-					agot_is_taiga_bog_terrain = yes
-					agot_is_terraced_hills_terrain = yes
-					agot_is_highlands_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_rough_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:rough } }
 		}
 		else_if = {
-			limit = {
-				OR = {
-					agot_is_forest_terrain = yes
-					agot_is_taiga_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_forest_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:forest } }
 		}
 		else_if = {
-			limit = {
-				OR = {
-					agot_is_jungle_terrain = yes
-					agot_is_cloudforest_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_jungle_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:jungle } }
 		}
 		else_if = {
-			limit = {
-				OR = {
-					agot_is_frozen_flats_terrain = yes
-					agot_is_glacier_terrain = yes
-				}
-			}
+			limit = { bc_ground_is_winter_trigger = yes }
 			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:winter } }
 		}
 		else = {
