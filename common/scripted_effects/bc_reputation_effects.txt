@@ -218,3 +218,215 @@ bc_style_award_toast_effect = {
 		SUBJECT = scope:bc_award_subject
 	}
 }
+
+# --- terrain: resolve the bucket -------------------------------------------
+#
+# CALLED ON THE COMMANDER, but reads scope:bc_battle_province, which the grader
+# saved. Saved scopes are visible down the scope chain within one event execution
+# - the memory writes already rely on this from inside every_side_knight.
+#
+# THE CALLER GUARDS ON `exists = scope:bc_battle_province`. combat.location is
+# reached with `?=` and may not resolve; the graders already wrap their memory
+# writes in the same guard for the same reason.
+#
+# save_scope_as = bc_terrain_subject IS NOT OPTIONAL. Inside
+# `scope:bc_battle_province = { }` the scope is a PROVINCE, and the variable has
+# to land on the COMMANDER. `root` will not do it: the graders are
+# `scope = combat_side`, this effect is called from inside `side_commander ?= { }`,
+# and NEITHER a scripted effect NOR `side_commander ?=` rebinds ROOT - so `root`
+# here is the COMBAT SIDE. The variable would land on the side, and every read of
+# it from the commander would miss. Same lesson as bc_reward_effects.txt:108.
+#
+# NEVER `terrain = X` UNDER AGOT. ALWAYS `agot_is_X_terrain = yes`.
+# AGOT's common/terrain_types/01_agot_terrains.txt defines road variants as
+# DISTINCT terrain types - `majorroad_hills` is not `hills` - plus AGOT-only bases
+# (`frozen_flats`, `glacier`, `highlands`, `the_bog`, `taiga_bog`, `cloudforest`,
+# `terraced_hills`, `canyon`, `urban`) that vanilla has no key for at all. In
+# common/province_terrain/00_province_terrain.txt, of 7007 provinces 1036 sit on a
+# road variant and ~756 on an AGOT-only base: ~26% of the map is INVISIBLE to a
+# bare `terrain =` check, and it fails silently - the province simply matches
+# nothing and falls to the `else`.
+#
+# THE LADDER IS EXHAUSTIVE OVER ALL 23 HELPERS - verified against AGOT's
+# 00_agot_terrain_type_triggers.txt, 5 + 5 + 7 + 2 + 2 + 2 = 23, every helper
+# once. So the `else` is unreachable in principle, which is exactly why it logs.
+# An unhandled terrain would otherwise write nothing and reset nothing, and the
+# streak would quietly stall. The caller therefore does NOT assume this effect
+# wrote anything; it guards the streak call on `exists = var:bc_terrain_this`.
+#
+# SIX buckets, not five. Winter IS reachable: AGOT has 184 `frozen_flats` and 81
+# `glacier` provinces, and `winter_soldier` exists at AGOT 00_traits.txt:17133
+# alongside the other five - `flag = commander_trait_flag`,
+# `category = winter_commander`, no `opposites` (span-checked 17133-17212).
+bc_terrain_bucket_effect = {
+	save_scope_as = bc_terrain_subject
+	scope:bc_battle_province = {
+		if = {
+			limit = {
+				OR = {
+					agot_is_drylands_terrain = yes
+					agot_is_desert_terrain = yes
+					agot_is_desert_mountains_terrain = yes
+					agot_is_oasis_terrain = yes
+					agot_is_canyon_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:desert } }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					agot_is_farmlands_terrain = yes
+					agot_is_plains_terrain = yes
+					agot_is_steppe_terrain = yes
+					agot_is_floodplains_terrain = yes
+					agot_is_urban_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:open } }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					agot_is_hills_terrain = yes
+					agot_is_mountains_terrain = yes
+					agot_is_wetlands_terrain = yes
+					agot_is_the_bog_terrain = yes
+					agot_is_taiga_bog_terrain = yes
+					agot_is_terraced_hills_terrain = yes
+					agot_is_highlands_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:rough } }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					agot_is_forest_terrain = yes
+					agot_is_taiga_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:forest } }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					agot_is_jungle_terrain = yes
+					agot_is_cloudforest_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:jungle } }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					agot_is_frozen_flats_terrain = yes
+					agot_is_glacier_terrain = yes
+				}
+			}
+			scope:bc_terrain_subject = { set_variable = { name = bc_terrain_this value = flag:winter } }
+		}
+		else = {
+			debug_log = "BC: terrain NONE MATCHED"
+		}
+	}
+}
+
+# Same three-branch shape as bc_style_streak_effect, same reason: the first-ever
+# battle must not read a missing bc_terrain_last. Threshold 2, not 3 - fighting
+# the same ground twice is a weaker claim than fighting the same WAY three times,
+# and terrain is not chosen. A commander goes where the war goes.
+bc_terrain_streak_effect = {
+	if = {
+		limit = { NOT = { exists = var:bc_terrain_last } }
+		set_variable = { name = bc_terrain_last value = var:bc_terrain_this }
+		set_variable = { name = bc_terrain_streak value = 1 }
+		debug_log = "BC: terrain reset"
+	}
+	else_if = {
+		limit = { var:bc_terrain_last = var:bc_terrain_this }
+		change_variable = { name = bc_terrain_streak add = 1 }
+		debug_log = "BC: terrain streak"
+	}
+	else = {
+		set_variable = { name = bc_terrain_last value = var:bc_terrain_this }
+		set_variable = { name = bc_terrain_streak value = 1 }
+		debug_log = "BC: terrain reset"
+	}
+}
+
+# Six buckets, six traits. Called only when the streak has reached 2 and the
+# budget gate passed. Reads bc_terrain_this, NOT the province - the bucket was
+# already resolved once and resolving it twice is how the two answers drift apart,
+# and re-reading it would also mean writing the bare-`terrain =` bug twice.
+#
+# NO remove_trait ARM. None of the six terrain traits has an `opposites` block,
+# verified across the whole of AGOT's 00_traits.txt. Adding one symmetrically with
+# the style ladder would be dead code implying a rule that does not exist.
+bc_terrain_award_effect = {
+	if = {
+		limit = {
+			var:bc_terrain_this = flag:desert
+			NOT = { has_trait = desert_warrior }
+		}
+		add_trait = desert_warrior
+		bc_terrain_award_toast_effect = { TRAIT = desert_warrior }
+	}
+	else_if = {
+		limit = {
+			var:bc_terrain_this = flag:open
+			NOT = { has_trait = open_terrain_expert }
+		}
+		add_trait = open_terrain_expert
+		bc_terrain_award_toast_effect = { TRAIT = open_terrain_expert }
+	}
+	else_if = {
+		limit = {
+			var:bc_terrain_this = flag:rough
+			NOT = { has_trait = rough_terrain_expert }
+		}
+		add_trait = rough_terrain_expert
+		bc_terrain_award_toast_effect = { TRAIT = rough_terrain_expert }
+	}
+	else_if = {
+		limit = {
+			var:bc_terrain_this = flag:forest
+			NOT = { has_trait = forest_fighter }
+		}
+		add_trait = forest_fighter
+		bc_terrain_award_toast_effect = { TRAIT = forest_fighter }
+	}
+	else_if = {
+		limit = {
+			var:bc_terrain_this = flag:jungle
+			NOT = { has_trait = jungle_stalker }
+		}
+		add_trait = jungle_stalker
+		bc_terrain_award_toast_effect = { TRAIT = jungle_stalker }
+	}
+	else_if = {
+		limit = {
+			var:bc_terrain_this = flag:winter
+			NOT = { has_trait = winter_soldier }
+		}
+		add_trait = winter_soldier
+		bc_terrain_award_toast_effect = { TRAIT = winter_soldier }
+	}
+	else = {
+		debug_log = "BC: award blocked has trait"
+	}
+}
+
+# Mirrors bc_style_award_toast_effect exactly, including the bc_award_taken write
+# and the reason for it.
+bc_terrain_award_toast_effect = {
+	save_scope_as = bc_award_subject
+	set_variable = { name = bc_award_taken value = 1 }
+	debug_log = "BC: terrain award"
+	bc_addressed_toast_effect = {
+		TYPE = event_toast_effect_good
+		TITLE = bc_terrain_award_toast
+		DESC = bc_terrain_award_$TRAIT$_desc
+		SUBJECT = scope:bc_award_subject
+	}
+}
