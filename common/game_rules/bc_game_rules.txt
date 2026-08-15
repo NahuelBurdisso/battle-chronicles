@@ -75,3 +75,20 @@ bc_rivalry = {
 	bc_rivalry_rival = {}
 	bc_rivalry_nemesis = {}
 }
+
+# TWO OPTIONS, NOT THREE. The other rules above are low/default/high ladders
+# because each scales a frequency. This one is a switch: a wound either can
+# happen or it cannot. A "frequent wounds" rung would need a second set of gate
+# values and there is nothing to tune them against until family 3's firing rate
+# has been measured at least once.
+#
+# DEFAULTS ON, like bc_aftermath. The feature is the point of the plan that adds
+# it; a rule defaulting off is a feature nobody sees.
+bc_wounds = {
+	categories = { flavor }
+
+	default = bc_wounds_default
+
+	bc_wounds_off = {}
+	bc_wounds_default = {}
+}

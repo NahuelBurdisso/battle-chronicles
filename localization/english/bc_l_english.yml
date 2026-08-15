@@ -237,6 +237,13 @@
  setting_bc_rivalry_nemesis:0 "Nemesis"
  setting_bc_rivalry_nemesis_desc:0 "The full ladder. Three losses to one man makes him a nemesis — which in A Game of Thrones is a man you may find yourself planning to kill."
 
+ rule_bc_wounds:0 "Battle Chronicles: Wounds"
+ rule_bc_wounds_desc:0 "Whether a commander can be hurt in the fighting. He is never killed, and never worse than wounded — but a wounded man cannot lead an army until he mends."
+ setting_bc_wounds_off:0 "Off"
+ setting_bc_wounds_off_desc:0 "Commanders come off every field whole. Battles still turn on their decisions; nothing is ever taken out of them."
+ setting_bc_wounds_default:0 "Default"
+ setting_bc_wounds_default_desc:0 "A commander on the wrong side of a decisive moment, in a large battle that has already been going a while, may be carried off it. At most once per battle, and never more than once at a time."
+
 # --- rivalry ----------------------------------------------------------------
 
  bc_reason_battle_grudge:0 "beat him on the field"
