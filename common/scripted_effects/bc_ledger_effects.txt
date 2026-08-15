@@ -90,16 +90,25 @@ bc_battle_open_effect = {
 	# which is the whole point of having it. Do not re-guess it; re-derive it by
 	# restoring the ladder from git history, the same rule the README states for
 	# the aftermath thresholds.
+	#
+	# THE THREE MARKERS ARE PERMANENT AND THEY REPLACE DIAG Q3. Q3 measured the
+	# WORLD; these measure what the MOD CHOSE, and the whole risk in spec Section 6
+	# is that those two disagree. Without them there is no way at runtime to tell a
+	# size-1 battle from a size-3 one, and every claim in plans 2-6 about big
+	# battles behaving differently becomes unmeasurable.
 	if = {
 		limit = { scope:combat_side.combat = { num_total_troops >= 10000 } }
 		set_variable = { name = bc_battle_size value = 3 }
+		debug_log = "BC: size 3"
 	}
 	else_if = {
 		limit = { scope:combat_side.combat = { num_total_troops >= 2000 } }
 		set_variable = { name = bc_battle_size value = 2 }
+		debug_log = "BC: size 2"
 	}
 	else = {
 		set_variable = { name = bc_battle_size value = 1 }
+		debug_log = "BC: size 1"
 	}
 }
 
