@@ -236,3 +236,13 @@
  setting_bc_rivalry_rival_desc:0 "A first loss is a grudge; a second makes him a rival. It stops there however many times he beats you."
  setting_bc_rivalry_nemesis:0 "Nemesis"
  setting_bc_rivalry_nemesis_desc:0 "The full ladder. Three losses to one man makes him a nemesis — which in A Game of Thrones is a man you may find yourself planning to kill."
+
+# --- rivalry ----------------------------------------------------------------
+
+ bc_reason_battle_grudge:0 "beat him on the field"
+ bc_reason_battle_rival:0 "has beaten him twice on the field"
+ bc_reason_battle_nemesis:0 "has broken him three times on the field"
+ bc_rivalry_toast:0 "The Man Across the Field"
+ bc_rivalry_grudge_desc:0 "[bc_rivalry_foe.GetName] took the field from [bc_rivalry_subject.GetName] today. That is all it is so far — a name, and a face to put to it."
+ bc_rivalry_rival_desc:0 "Twice now. [bc_rivalry_subject.GetName] has lost to [bc_rivalry_foe.GetName] twice, and the second time it stopped being bad luck."
+ bc_rivalry_nemesis_desc:0 "Three fields, three defeats, one man. [bc_rivalry_subject.GetName] has stopped thinking about the war and started thinking about [bc_rivalry_foe.GetName]."

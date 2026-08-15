@@ -236,3 +236,120 @@ bc_rivalry_clear_effect = {
 	remove_variable = bc_nemesis_losses
 	debug_log = "BC: nemesis cleared"
 }
+
+# --- the entry point --------------------------------------------------------
+#
+# bc_rivalry_effect = { OUTCOME = win|lose }
+#
+# CALLED ON THE COMMANDER, from inside
+# `side_commander ?= { if = { limit = { is_alive = yes } } }` in both graders,
+# INSIDE the notability gate and INSIDE the aftermath game-rule gate, and BEFORE
+# bc_clear_scratch_effect - which removes bc_battle_foe.
+#
+# `flag:$OUTCOME$ = flag:lose`, NOT `$OUTCOME$ = lose`. A bare `$OUTCOME$ = lose`
+# substitutes to `lose = lose`, an unknown key, a SILENT NO-OP that validate
+# passes.
+#
+# EVERY GUARD IS NESTED, NOT SIBLING. CK3 does not short-circuit and guarantees no
+# evaluation order among siblings, so `exists = var:X` beside a read of var:X does
+# not protect the read. `exists` itself is safe on a missing variable; it is the
+# READ that has to be nested.
+#
+# THE ALIVE CHECK IS NOT OPTIONAL. Characters die constantly and set_relation_* on
+# a dead man is a permanent error-log line. CK3 keeps dead characters as real
+# objects, so `is_alive` on one is a clean `no` rather than an error - which is
+# exactly what makes this guard sufficient and the dead-foe wipe merely
+# housekeeping.
+#
+# THE WIN PATH IS AN else_if AND ITS INNER TEST IS NESTED, NOT FOLDED IN. Folding
+# `var:bc_nemesis = var:bc_battle_foe` into the else_if limit beside
+# `exists = var:bc_nemesis` would be a missing-variable read on every win by a
+# commander who has no running grudge - which is nearly every win in the game.
+# There is deliberately NO else on the inner if: winning against a man who is not
+# your nemesis is the overwhelmingly common case and logging it would flood
+# debug.log.
+bc_rivalry_effect = {
+	if = {
+		limit = { exists = var:bc_battle_foe }
+		if = {
+			limit = { var:bc_battle_foe = { is_alive = yes } }
+			if = {
+				limit = { flag:$OUTCOME$ = flag:lose }
+				bc_rivalry_loss_effect = yes
+			}
+			else_if = {
+				limit = { exists = var:bc_nemesis }
+				if = {
+					limit = { var:bc_nemesis = var:bc_battle_foe }
+					bc_rivalry_win_effect = yes
+				}
+			}
+		}
+	}
+}
+
+# --- the toast --------------------------------------------------------------
+#
+# ROUTED, NOT BROADCAST. bc_addressed_toast_effect (bc_reward_effects.txt) raises
+# on the subject if he is human and on his liege if he is not, because nearly
+# every commander in the world is AI.
+#
+# CALLED FROM BOTH ESCALATION BRANCHES, AFTER bc_rivalry_set_relation_effect, so
+# that the rung it describes is the rung that was actually set - including when
+# the cap clamped it. Calling it before would describe a rung the player did not
+# get.
+#
+# IT MIRRORS THE LADDER'S THRESHOLDS AND ITS CAP, arm for arm. If the two ever
+# disagree the toast lies, so they are written adjacent and the cap test is
+# duplicated deliberately rather than factored out - factoring it into a trigger
+# would put the two a file apart, which is the pair most likely to drift.
+#
+# ALL THREE ARMS PASS event_toast_effect_bad. This is the mod's first bad-news
+# routed toast; plan 1 made TYPE a required parameter of
+# bc_addressed_toast_effect precisely so this one is not a green tick. An omitted
+# TYPE is not an error in CK3 - the literal `type = $TYPE$` reaches the toast and
+# validate passes it.
+#
+# UNDER bc_rivalry_off THERE IS NO TOAST AT ALL. The counter moved but nothing
+# happened to the man, and announcing "he is your rival now" when he is not would
+# be the one place the off switch leaked. The empty `if` body with the work in the
+# `else` is deliberate: the inverted form reads the same and is one negation
+# further from the rule name.
+bc_rivalry_toast_effect = {
+	if = {
+		limit = { has_game_rule = bc_rivalry_off }
+	}
+	else = {
+		save_scope_as = bc_rivalry_subject
+		var:bc_nemesis = { save_scope_as = bc_rivalry_foe }
+		if = {
+			limit = {
+				var:bc_nemesis_losses >= 3
+				has_game_rule = bc_rivalry_nemesis
+			}
+			bc_addressed_toast_effect = {
+				TYPE = event_toast_effect_bad
+				TITLE = bc_rivalry_toast
+				DESC = bc_rivalry_nemesis_desc
+				SUBJECT = scope:bc_rivalry_subject
+			}
+		}
+		else_if = {
+			limit = { var:bc_nemesis_losses >= 2 }
+			bc_addressed_toast_effect = {
+				TYPE = event_toast_effect_bad
+				TITLE = bc_rivalry_toast
+				DESC = bc_rivalry_rival_desc
+				SUBJECT = scope:bc_rivalry_subject
+			}
+		}
+		else = {
+			bc_addressed_toast_effect = {
+				TYPE = event_toast_effect_bad
+				TITLE = bc_rivalry_toast
+				DESC = bc_rivalry_grudge_desc
+				SUBJECT = scope:bc_rivalry_subject
+			}
+		}
+	}
+}
