@@ -114,6 +114,12 @@ bc_chronicles.0091 = {
 						# nickname share one precedence ordering and award at most
 						# one thing per battle.
 						bc_reputation_effect = { OUTCOME = win }
+
+						# Plan 4. AFTER B - the two share no variable, so the order
+						# between them is free, but a fixed one is one less thing to
+						# reason about later. It must stay BEFORE
+						# bc_clear_scratch_effect, which removes bc_battle_foe.
+						bc_rivalry_effect = { OUTCOME = win }
 					}
 				}
 			}
@@ -208,6 +214,11 @@ bc_chronicles.0092 = {
 					if = {
 						limit = { is_alive = yes }
 						bc_reputation_effect = { OUTCOME = lose }
+
+						# Plan 4. `OUTCOME = lose` is the arm that CREATES or
+						# ESCALATES a grudge; the winner's `win` arm only ever
+						# decrements one that already names him.
+						bc_rivalry_effect = { OUTCOME = lose }
 					}
 				}
 			}
