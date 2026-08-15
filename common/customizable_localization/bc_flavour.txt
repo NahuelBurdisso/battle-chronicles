@@ -6,9 +6,11 @@
 # bc_ledger_effects.txt - where it could be logged. Nothing here decides
 # anything; it selects a sentence for a decision already recorded. So a fragment
 # that renders wrong is two different bugs, and the marker in the log tells them
-# apart: if the marker names the band you expected, the arm order here is wrong,
-# and if it does not, the effect classified wrong and this file rendered
-# faithfully.
+# apart: if the marker names the band you expected, the fault is in this file -
+# arm order, comparison value, comparison form, or loc key - and if it does not,
+# the effect classified wrong and this file rendered faithfully. Do not narrow
+# the first half to arm order: the scale header below documents a fault of the
+# comparison FORM that leaves the marker correct and the arm order correct.
 #
 # MOST OF THOSE COMPARISONS ARE AGAINST A FLAG. bc_scale_clause is the exception
 # and compares a NUMBER, because bc_battle_size is written as one. Its own header
@@ -269,19 +271,39 @@ bc_bond_clause = {
 # only names the three values the ladder writes; changing a boundary is an edit
 # there, not here.
 #
-# THE THREE STRINGS GRADE ALONG ONE AXIS: how often a fight this size throws up
-# a moment like the one the toast just described. Huge, again and again; large,
-# once or twice more; small, not twice. Keep any rewrite monotone along that
-# axis - two arms that make the same claim stop the clause carrying scale at
-# all, which is the only thing it is for.
+# THE THREE STRINGS GRADE ALONG ONE AXIS: how many men are standing in the
+# battle without being used. Huge, whole companies never go in; large, a company
+# or two is still waiting; small, there is nobody left to send. Keep any rewrite
+# monotone along that axis - two arms that make the same claim stop the clause
+# carrying scale at all, which is the only thing it is for.
 #
-# THAT AXIS IS NOT THE FIRST ONE, AND THE FIRST ONE IS NOT AVAILABLE. The first
-# draft graded on who hears about the moment. bc_frag_banner_falls_open answers
-# that same question outright - "there is nothing else on that field to look at,
-# and so they all see it go" - and in the run of text task 4 builds it renders
-# ahead of this clause, so on open ground every arm either restated it or
-# contradicted it. Rewording the arms cannot get round that; only staying off
-# the question can. Any rewrite that grades on visibility hits the wall again.
+# TWO OTHER AXES ARE CLOSED, AND BOTH WERE SHIPPED BEFORE THEY WERE CAUGHT.
+# Read this before proposing a third rewrite, because both look free until the
+# thing that owns them is named.
+#
+#   VISIBILITY - who hears about the moment - is owned by the ground fragments.
+#   bc_frag_banner_falls_open reads ` There is nothing else on that field to
+#   look at, and so they all see it go.`, and in the run of text task 4 builds
+#   it renders AHEAD of this clause, so on open ground every scale arm either
+#   restated it or contradicted it outright.
+#
+#   RECURRENCE - how often a fight this size throws up such a moment - is owned
+#   by bc_chronicle_flag_days_value (bc_script_values.txt:110-128), which grades
+#   off THIS VERY VARIABLE: size 3 gives a 10-day chronicle cooldown, size 2
+#   twenty, size 1 forty. Prose putting two more moments in one afternoon does
+#   not merely duplicate that value, it contradicts it by an order of magnitude,
+#   and the player falsifies it by watching the screen.
+#
+# THE TEST FOR A REPLACEMENT AXIS IS THREE ROWS, NOT ONE. It must be settled by
+# no other fragment class (visibility failed here), by no mechanic keyed on
+# bc_battle_size (recurrence failed here - grep the mod for `bc_battle_size`
+# before believing an axis is free), and it must read the same after ALL TEN
+# toast literals, because this clause is shared. That last row is the one an
+# axis about the moment cannot pass: four of the ten are states or one-offs -
+# a standard falls once, ground favours you for the whole battle, a stalemate is
+# a condition, and a knight breaks and runs once - so anything counting
+# repetitions of the moment is incoherent against them. These three strings say
+# nothing about the moment at all, which is how they pass it.
 #
 # THE FALLBACK, LIKE bc_bond_clause'S, IS UNREACHABLE FROM THE TEN MOMENT TOASTS
 # AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it

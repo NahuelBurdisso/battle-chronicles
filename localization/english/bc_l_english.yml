@@ -138,30 +138,34 @@
 
 # --- shared fragments: the scale --------------------------------------------
 #
-# ONE AXIS, GRADED: how often a fight this size throws up a moment like the one
-# the toast just described. Huge, again and again; large, once or twice more;
-# small, not twice. Keep it monotone - see the header on bc_scale_clause in
-# bc_flavour.txt.
+# ONE AXIS, GRADED: how many men are standing in the battle without being used.
+# Huge, whole companies never go in; large, a company or two is still waiting;
+# small, there is nobody left to send. Keep it monotone - see the header on
+# bc_scale_clause in bc_flavour.txt, which also records the two axes that are
+# closed and why.
 #
-# THE AXIS IS DELIBERATELY NOT VISIBILITY, and this is not a style preference.
-# The first draft graded on who hears about the moment, which is a question
-# bc_frag_banner_falls_open:94 has already answered by the time the scale
-# fragment renders - "there is nothing else on that field to look at, and so
-# they all see it go" - so on open ground every arm either restated it or
-# contradicted it outright. Rewording the arms cannot fix that; only staying off
-# the question can.
+# THE THREE SAY NOTHING ABOUT THE MOMENT ITSELF, and that is deliberate twice
+# over. The clause is SHARED by all ten moments, so anything it says has to read
+# the same after a banner falling and after a stalemate - the same test
+# bc_bond_clause's header states at bc_flavour.txt:129-134. And a fragment that
+# points back at the moment ("such a thing", "it") is pointing past the ground
+# and bond fragments that task 4 renders in between, so its nearest antecedent
+# at render time is the bond sentence, not the toast's own. These three name
+# their subject outright and carry no anaphor.
 #
-# NONE OF THE THREE MAY SAY "field". Three fragments already use it -
-# bc_frag_banner_falls_open:94, bc_frag_bond_nemesis:132 and
-# bc_frag_bond_kin:133 - and task 4 appends ground, then bond, then scale to a
-# toast's literal sentence. The two bond arms are mutually exclusive, so at most
-# two of the three land in one run of text, and a "field" here would be the
-# third. The check is not specific to "field" or to this section - grep the
-# whole file for any distinctive word before using it here.
+# WORDS THAT ARE ALREADY TAKEN, checked by grepping this whole file and not by
+# reading the section: "field" (bc_frag_banner_falls_open:94,
+# bc_frag_bond_nemesis:132, bc_frag_bond_kin:133), "again"
+# (bc_rally_the_line_toast_desc:102, bc_knight_holds_the_breach_toast_desc:122),
+# "behind" (:122 again), "every man" (bc_knight_shames_himself_toast_desc:125),
+# "dawn" (bc_frag_bond_heathen:135), "all day" (bc_chronicles.0011.desc_intro).
+# Task 4 appends ground, then bond, then scale to a toast's literal sentence, so
+# any of those can land in one run of text with this clause. Grep before adding
+# a distinctive word here; the list above is what the grep found, not a limit.
 
- bc_frag_scale_huge:0 " In a fight this size such a thing will happen again before dark, and again after that."
- bc_frag_scale_large:0 " In a fight this size such a thing will happen once or twice more before dark."
- bc_frag_scale_small:0 " In a fight this small such a thing will not happen twice."
+ bc_frag_scale_huge:0 " Whole companies will be kept out of the fighting and never put in at all."
+ bc_frag_scale_large:0 " A company or two will be kept out of the fighting and called on later."
+ bc_frag_scale_small:0 " Nobody is being kept out of the fighting. There is no one left to send."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
