@@ -24,7 +24,7 @@
 # writes on every path and runs upstream of all ten - but it would render from a
 # pop-up option's toast whose option is ANSWERED after the combat ended, because
 # that is the case in which bc_clear_scratch_effect has already run
-# (bc_ledger_effects.txt:523-524). Note the verb: what :525-527 calls the normal
+# (bc_ledger_effects.txt:516-520). Note the verb: what :525-527 calls the normal
 # case is the pop-up ARRIVING mid-battle, and a pop-up answered when it arrives
 # still finds the variable there. No pop-up option toast exists yet.
 #
@@ -40,12 +40,13 @@
 # --- SPIKE. The only WIRED fragment set. -------------------------------------
 #
 # It was written to prove the shape renders before the other 103 fragment keys
-# were, and that run has not happened. bc_bond_clause below it was still written, under the
-# AMENDMENT in docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md,
-# which split the gate: a clause that is APPENDED to a desc keeping its literal
-# sentence fails to "no improvement", so it needs no run, while a clause that
-# REPLACES the literal fails to an empty toast and still does. This spike is the
-# only fragment set any call site names today.
+# were, and that run has not happened. bc_bond_clause below it was written
+# anyway, under the AMENDMENT in
+# docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, which split the
+# gate: a clause APPENDED to a desc that keeps its literal sentence fails to "no
+# improvement", so it needs no run, while a clause that REPLACES the literal
+# fails to an empty toast and still does. This spike is the only fragment set any
+# call site names today.
 bc_banner_falls_ground = {
 	type = character
 
