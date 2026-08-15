@@ -218,8 +218,9 @@ bc_chronicles.0011 = {
 	# option set it was offered with. That is the whole reason bc_eve_ground is a
 	# scope and not scratch.
 	#
-	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN: five bands render, three
-	# qualify. The modifier is what the gate answers to - bc_ground_held is
+	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN: the chain names five
+	# bands, three qualify. The modifier is what the gate answers to -
+	# bc_ground_held's header comment at bc_battle_modifiers.txt:60-62 is
 	# "anchored himself to a hillside or a treeline", ground you stand on -
 	# and rough, forest and jungle are the three bands whose paragraph is
 	# about a thing standing between the two armies. Winter and desert read as
@@ -232,17 +233,27 @@ bc_chronicles.0011 = {
 	# agot_is_desert_mountains_terrain and agot_is_canyon_terrain in DESERT,
 	# which this gate refuses, while :50-60 puts agot_is_mountains_terrain in
 	# ROUGH, which it allows - and the same file puts wetlands and bog in ROUGH
-	# too. So the gate is band-accurate and terrain-approximate. Splitting the
-	# bands to fix that would desynchronise them from the reputation streak,
-	# which is the whole reason they were extracted rather than invented; the
-	# approximation is cheaper than that.
+	# too. So the gate is band-accurate and terrain-approximate. Two ways to
+	# close that gap were considered and both lose. Splitting a band would
+	# change the flag bc_terrain_bucket_effect writes, desynchronising the
+	# reputation streak from the moment prose - the one thing extracting these
+	# triggers was meant to prevent. A bespoke bc_ground_is_holdable_trigger in
+	# some other file would leave the six alone, but it is a SECOND terrain
+	# ladder outside the partition check in validate.py, which only reads
+	# bc_ground_triggers.txt, so it would have to be kept in step with AGOT by
+	# hand and nothing would catch it drifting. The approximation is cheaper
+	# than either.
 	#
 	# DO NOT ARGUE THIS FROM THE PARAGRAPHS. Two earlier versions of this
 	# comment did - jungle was excluded because its text says men who go in
 	# are gone - and both died on the same rock: the forest text says a line
 	# that goes in stops being a line, which is the same sentence, and forest
-	# keeps the option. Jungle was left out by oversight when it gained a desc
-	# arm, not by design. AND DO NOT ARGUE IT AS A PROPERTY OF THE TERRAIN
+	# keeps the option. On the record: jungle was never considered here - the
+	# plan that wrote this gate called jungle too rare to name at all, so it
+	# had no desc arm either, and the arm was added later without revisiting
+	# the gate. The two comments that afterwards called the omission
+	# deliberate were reading intent into a gap. AND DO NOT ARGUE IT AS A
+	# PROPERTY OF THE TERRAIN
 	# either - a third version claimed there was nothing to hold in a desert
 	# and agot_is_canyon_terrain falsified it. What is true is the sentence
 	# above: three bands qualify, and the bands are prose.

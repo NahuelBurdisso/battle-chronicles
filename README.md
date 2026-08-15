@@ -284,9 +284,10 @@ moments recorded.
 known plan-6 debt, since retired — `bc_wound_effect` writes the variable, and the
 error sweep under "Confirmation run, 2026-08-15" below found no `bc_` group at
 all. Every `debug.log` group is either a mod marker or one of the two engine
-load lines plan 1 carved out. **Zero missing-variable reads** for anything plans 2, 3 or 4 introduced —
-which is the real result, because all three plans read variables that may not
-exist and rely on nested guards rather than short-circuiting.
+load lines plan 1 carved out. **Zero missing-variable reads** for anything plans
+2, 3 or 4 introduced — which is the real result, because all three read
+variables that may not exist and rely on nested guards rather than
+short-circuiting.
 
 ### Plan 2 — the ledger
 
