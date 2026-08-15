@@ -26,9 +26,8 @@
 # and, if present, the _desc.
 #
 # ALL FOUR TAGS CONFIRMED IN THE API DUMP, ../../docs/api/1.19.0.6/modifiers.log,
-# each `Use areas: character`. Nothing in this workspace validates a modifier
-# tag - a misspelled one is a silent no-op - so that check is the only one there
-# is.
+# each `Use areas: character`. Nothing in this workspace validates a modifier tag
+# - a misspelled one is a silent no-op - so that check is the only one there is.
 #
 # EVERY ONE OF THESE MUST APPEAR IN bc_cleanup_effect. That is the one rule.
 
