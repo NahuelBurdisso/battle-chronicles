@@ -50,6 +50,18 @@
 # but plan 4 adds code to this same effect, so the constraint is written down
 # rather than left to be rediscovered.
 bc_battle_open_effect = {
+	# THE ANCHOR. Every context writer below reaches into a province or reads a
+	# foe, and both rebind the scope. This is the only handle on the commander
+	# that survives those hops. It carries no meaning of its own - it is an
+	# address, not a fact - so it is exempt from the "no saved scope carries
+	# meaning" rule in the spec, and a stale one is harmless because it is
+	# rewritten in every phase event, before anything reads it. NOT literally at
+	# the top of every effect block: the seven commander events call this effect
+	# at the top, but the three knight events call it nested inside their
+	# `scope:combat_side.side_commander ?=` block (bc_knight_phase_events.txt:101,
+	# :169, :232). Upstream of every read is what matters, not the line number.
+	save_scope_as = bc_chronicle_subject
+
 	scope:combat_side.enemy_side.side_commander ?= {
 		save_scope_as = bc_open_foe
 	}
@@ -110,6 +122,12 @@ bc_battle_open_effect = {
 		set_variable = { name = bc_battle_size value = 1 }
 		debug_log = "BC: size 1"
 	}
+
+	# --- context: what this battle is ---------------------------------------
+	#
+	# AFTER the size ladder and BEFORE the eve raise at the bottom. The eve reads
+	# what these write, and the size ladder writes what one of them reads.
+	bc_write_ground_effect = yes
 
 	# --- housekeeping: drop a dead nemesis ----------------------------------
 	#
@@ -511,6 +529,7 @@ bc_clear_scratch_effect = {
 	remove_variable = bc_battle_size
 	remove_variable = bc_battle_wounded
 	remove_variable = bc_battle_foe
+	remove_variable = bc_battle_ground
 }
 
 # --- family 2: the character of the fight -----------------------------------

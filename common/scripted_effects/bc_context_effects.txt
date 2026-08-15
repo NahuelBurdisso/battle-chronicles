@@ -1,0 +1,82 @@
+﻿# Battle Chronicles - what a moment knows about its battle.
+#
+# CLASSIFICATION HAPPENS HERE, NEVER IN A LOCALIZATION ARM. A loc arm cannot be
+# instrumented: it renders or it does not, and a mis-scoped read renders as
+# nothing, which reads exactly like an arm that legitimately did not match.
+# Script can log. So script decides which situation obtains and writes a flag,
+# and the prose only ever compares flags.
+#
+# EVERYTHING HERE IS SCRATCH, on the SIDE COMMANDER, cleared by
+# bc_clear_scratch_effect at combat end. Nothing here is a saved scope carrying
+# meaning: a saved scope is not cleared when a combat ends, so a stale one would
+# make the NEXT battle read the LAST battle's ground. Scratch that is missing
+# resolves to a fallback arm, which is the correct failure.
+#
+# CALLED FROM bc_battle_open_effect, on the commander, at the top of every phase
+# event. See bc_ledger_effects.txt:28-51 for why that call is unconditional.
+
+# --- the ground -------------------------------------------------------------
+#
+# THE REMOVE COMES FIRST so that a failure cannot leave the previous phase
+# event's band standing. Every path below either writes a band or logs why it
+# did not, and an unwritten variable is a fallback arm rather than a lie.
+#
+# scope:bc_chronicle_subject IS NOT OPTIONAL. Inside
+# scope:combat_side.combat.location the scope is a PROVINCE and the variable has
+# to land on the COMMANDER. `root` will not do it - a phase event roots on the
+# commander for `type = commander` but on the KNIGHT for `type = knight`, and no
+# bc_ variable is ever written onto a knight. Same lesson as
+# bc_reputation_effects.txt:238-244.
+#
+# MARKERS, and what each one means on its own:
+#   BC: ground <band>       classified. Six of these should sum to the moment
+#                           count, minus the two below.
+#   BC: ground NONE MATCHED the province matched no band. Impossible while the
+#                           partition holds - tools/ck3.py validate enforces it -
+#                           so this means AGOT changed under us.
+#   BC: ground missing      combat.location did not resolve. A different fix
+#                           entirely: the read site, not the bands.
+bc_write_ground_effect = {
+	remove_variable = bc_battle_ground
+	if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			if = {
+				limit = { bc_ground_is_desert_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:desert } }
+				debug_log = "BC: ground desert"
+			}
+			else_if = {
+				limit = { bc_ground_is_open_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:open } }
+				debug_log = "BC: ground open"
+			}
+			else_if = {
+				limit = { bc_ground_is_rough_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:rough } }
+				debug_log = "BC: ground rough"
+			}
+			else_if = {
+				limit = { bc_ground_is_forest_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:forest } }
+				debug_log = "BC: ground forest"
+			}
+			else_if = {
+				limit = { bc_ground_is_jungle_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:jungle } }
+				debug_log = "BC: ground jungle"
+			}
+			else_if = {
+				limit = { bc_ground_is_winter_trigger = yes }
+				scope:bc_chronicle_subject = { set_variable = { name = bc_battle_ground value = flag:winter } }
+				debug_log = "BC: ground winter"
+			}
+			else = {
+				debug_log = "BC: ground NONE MATCHED"
+			}
+		}
+	}
+	else = {
+		debug_log = "BC: ground missing"
+	}
+}
