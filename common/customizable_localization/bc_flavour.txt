@@ -239,8 +239,10 @@
 # fails to an empty toast and still does. THREE fragment sets are named by a call
 # site today: this one, from bc_banner_falls_toast_desc alone, and the two shared
 # clauses, from all ten. The nine remaining per-moment ground sets are Plan B
-# tasks 6-14, none of which is written; each of those REPLACES its literal, so
-# each still waits on the run.
+# tasks 6-14 and none is written. Each of those tasks ALSO writes a core set,
+# and it is the CORE set that REPLACES the moment's literal rather than being
+# appended to it - so every one of them still waits on the run, and so does
+# task 5, which writes a core set for this moment and no ground set.
 bc_banner_falls_ground = {
 	type = character
 
