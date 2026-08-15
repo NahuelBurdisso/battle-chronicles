@@ -106,32 +106,14 @@ bc_chronicles.0091 = {
 						# two.
 						bc_notable_battle_counter_effect = yes
 
-						# `exists` is belt and braces. What actually makes the
-						# var: read below safe is bc_notable_battle_counter_effect
-						# immediately above, which always writes the variable
-						# before anything reads it. Do not rely on evaluation
-						# order to make it safe - CK3 guarantees no order of
-						# evaluation among siblings, in a limit or anywhere else.
-						if = {
-							limit = {
-								has_any_nickname = no
-								exists = var:bc_notable_battles
-								var:bc_notable_battles >= 3
-								# martial, not prowess. This names a man for
-								# commanding, and it is the same threshold the mod
-								# already uses for its high-martial phase-event
-								# bonus. Deliberately NOT AGOT's heroic gate of
-								# prowess >= 25 plus bold AI: a man can be the
-								# finest field commander in Westeros and a
-								# mediocre swordsman, and that is who this is for.
-								martial >= 14
-							}
-							# The toast inside the effect needs a character for
-							# left_icon, and a scripted effect does not rebind
-							# ROOT - ROOT is still the combat side. Save him here.
-							save_scope_as = bc_named_commander
-							bc_aftermath_nickname_effect = yes
-						}
+						# The counter stays ABOVE the chain and stays here: the
+						# chain's nickname arm reads `var:bc_notable_battles >= 3`,
+						# so the counter must have already incremented for this
+						# battle. The nickname gate itself moved INTO the chain
+						# (bc_reputation_effects.txt) so that style, terrain and
+						# nickname share one precedence ordering and award at most
+						# one thing per battle.
+						bc_reputation_effect = { OUTCOME = win }
 					}
 				}
 			}
@@ -212,6 +194,20 @@ bc_chronicles.0092 = {
 							}
 						}
 						bc_battle_memory_effect = { TYPE = bc_battle_memory_lost }
+					}
+				}
+
+				# Plan 3. `OUTCOME = lose` closes the nickname arm of the chain
+				# and nothing else - style and terrain grade EITHER outcome,
+				# because a man who loses three battles the same way has still
+				# shown you who he is.
+				#
+				# NO bc_notable_battle_counter_effect HERE. That counter is wins
+				# only, and this event's header says so.
+				side_commander ?= {
+					if = {
+						limit = { is_alive = yes }
+						bc_reputation_effect = { OUTCOME = lose }
 					}
 				}
 			}
