@@ -149,12 +149,13 @@ bc_write_ground_effect = {
 # here would silently change what `BC: bond countryman` and `BC: bond heathen`
 # count AND swap which sentence a same-culture different-faith foe gets in the
 # toasts. The two orders disagree and that is the intent, which the eve states
-# from its own side under
-# `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. The
-# paragraph below that one,
-# `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE`,
-# is the half that predicts the toasts, and bc_flavour.txt's bc_bond_clause
-# header is the third note in the same ring.
+# from its own side under the paragraph named
+# `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. Directly
+# below that one, the paragraph named
+# `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE` is the half
+# that predicts the toasts. bc_flavour.txt's bc_bond_clause header is the third
+# FILE in the ring, and the ring is four PARAGRAPHS: this one, those two, and
+# that header. Do not read the ordinal as a paragraph count.
 #
 # NOTE ON SCOPE: bc_battle_bond and bc_battle_creed are written on the caller's
 # current scope, not explicitly through scope:bc_chronicle_subject. This is safe

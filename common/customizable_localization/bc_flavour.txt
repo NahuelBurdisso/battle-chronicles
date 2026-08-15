@@ -40,39 +40,79 @@
 # carries. The authoritative list lives in tools/ck3lib/validate.py, under
 # `WHAT THIS CHECKS IS POSITION, NOT MEANING` - and a paragraph name is cited on
 # one line or it is not cited at all, because a name broken across a line break
-# is invisible to the grep that is the whole point of naming it. Rounds 13, 14
-# and 15 each found wrapped names, and each time the sweep that was supposed to
-# have caught them was file-wide in prose and partial in fact - 631a6a9 scoped
-# by which commit had touched the name, fb6f4f0 by what a name LOOKS like, and
-# its ALL-CAPS detector could not see `Family 3 is shipped but unmeasured`,
-# whose target is a markdown heading. So: the rule is FILE-WIDE the moment it is
-# written down, and the acceptance test must be CASING-BLIND.
+# is invisible to the grep that is the whole point of naming it. 631a6a9 wrote
+# that rule, after 20ce50d had wrapped three of the four names it installed.
+# Rounds 14 and 15 then each found wrapped names that the PREVIOUS round's sweep
+# was supposed to have caught, and each time the sweep was file-wide in prose and
+# partial in fact - 631a6a9 scoped by which commit had touched the name, fb6f4f0
+# by what a name LOOKS like, and its ALL-CAPS detector could not see
+# `Family 3 is shipped but unmeasured`, whose target is a markdown heading. So:
+# the rule is REPO-WIDE the moment it is written down, and the acceptance test
+# must be CASING-BLIND. REPO-WIDE IS NOT A FLOURISH. The sweep that accepted
+# 137f93a ran over the mod directory only, while the prose beside it said
+# `every commentable file`; the docs tree it never entered was carrying wrapped
+# log markers the whole time - `BC: eve ground missing` in the live depth spec,
+# `BC: combat end cleanup`, `BC: floor admitted` and `BC: style award` in the
+# closed expansion plans, and the engine's own `Duplicate localization key` in
+# the handoff. The same defect as every round before it, one directory wider.
 #
 # THE DETECTOR IS AN UNBALANCED BACKTICK, which is casing-blind, needs no list of
-# names, and is the literal signature of the defect rather than a proxy for it: a
-# wrapped span leaves an odd backtick count on both of the lines it straddles.
-# Skip fenced code blocks and check every commentable file. Two things about it
-# are worth knowing before running it. First, it is NOT a validate check, and
-# deliberately - the mod has legitimate multi-line quotations, of loc text and of
-# script, and those wrap on purpose, so a hard error would fire on a clean tree.
-# No count of them is given, for the reason a count of citations is not given
-# above. THE EXEMPTION IS A QUOTED RUN OF TEXT; A GREP TARGET IS NEVER
-# EXEMPT. Second, the earlier sweep that looked for a cited name and then went
-# looking for its definition was VACUOUS: a citation matches itself, so every
-# name resolved and the sweep reported clean on a tree that had wrapped names in
-# it. Exclude the citing line, or do not run that shape at all.
+# names, and is the literal signature of the defect rather than a proxy for it. A
+# wrapped span leaves an odd backtick count on the line where the break starts
+# and on the line where it ends; a line lying wholly INSIDE a span carries no
+# backtick at all and is not flagged, so a span broken twice is caught at its two
+# ends and not in its middle, and two independent unbalanced spans on one line
+# sum to even and hide each other. Neither has occurred; both would need a
+# different detector. Skip fenced code blocks, prune `.git` and `__pycache__`,
+# and check every commentable file in both repos.
+#
+# IT IS A SCRIPT NOW, tools/sweep_backticks.py in the tooling repo, because the
+# hand-rolled version was retyped from memory every round and was wrong in a new
+# way each time. Its own header carries the limits above and two the ad-hoc
+# versions did not have. A fence opened inside a blockquote reads as prose
+# unless the `>` prefix is allowed for, which put fenced lines of the reputation
+# plan into a report as findings. And an escaped backtick has to be stripped
+# before counting: one inside an otherwise balanced line flips it to odd, which
+# is noise, but one inside a genuinely unbalanced line flips it to EVEN, which
+# is a miss. The script spells its own backticks as escapes for the same reason
+# - a detector that names its own source on every run teaches the reader to
+# skim the report.
+#
+# Two things about it are worth knowing before running it. First, it is NOT a
+# validate check, and deliberately - the mod has legitimate multi-line
+# quotations, of loc text and of script, and those wrap on purpose, so a hard
+# error would fire on a clean tree. No count of them is given, for the reason a
+# count of citations is not given above. THE EXEMPTION IS A QUOTED RUN OF TEXT; A
+# GREP TARGET IS NEVER EXEMPT. The line between them is what the span is FOR: a
+# marker, an engine message or a paragraph name exists to be pasted into a
+# search, and wrapping it destroys the only thing it does; a run of script, a
+# command line, a path or borrowed prose is read in place, and wrapping it costs
+# nothing. What survives the sweep on a clean tree is all of the second kind.
+# Second, a sweep that looks for a cited name and then goes looking for its
+# definition is VACUOUS unless it excludes the citing
+# line: a citation matches itself, so every name resolves and the sweep reports
+# clean on a tree that has wrapped names in it. That shape was tried in the round
+# 137f93a closed and did exactly this, which is why it is written down as a
+# property of the shape rather than as a thing some past commit did.
 #
 # AND THE RULE COVERS LOG MARKERS, NOT ONLY PARAGRAPH NAMES. That is what the
-# backtick detector turned up that no earlier sweep had: `BC: nickname awarded`,
-# `BC: terrain NONE MATCHED` and `rule off` were all wrapped in README.md. A
-# marker is a grep target twice over - once against this source, once against the
-# game's own log - and a wrapped one cannot even be pasted into a log search.
+# backtick detector turned up that no earlier sweep had: `BC: nickname awarded`
+# and `BC: terrain NONE MATCHED` were both wrapped in README.md. A marker is a
+# grep target twice over - once against this source, once against the game's own
+# log - and a wrapped one cannot even be pasted into a log search. The same sweep
+# unwrapped `rule off` alongside them, and that one is NOT a marker: it is a
+# suffix, under the `BC: nemesis` shorthand README.md uses through that section,
+# as `decrement`, `cleared` and `wipe` are beside it. Unwrapping a suffix does
+# not make it pasteable. The shorthand is the residual hazard there and this
+# detector cannot see it.
 #
 # Where the target's own heading wraps, prefer renaming the heading to fit one
-# line over citing a prefix, since a prefix is itself a rot risk; and check
-# whether the adjacent paragraph is the better citation before assuming the
-# wrapped one was meant. What `validate` cannot flag is a citation
-# landing on the wrong LIVE line, which is the case round 8 lost its headline to.
+# line over citing a prefix, since a prefix is itself a rot risk - which is what
+# 137f93a did to the eve's order-disagreement heading. And check whether the
+# adjacent paragraph is the better citation before assuming the wrapped one was
+# meant, which is the mistake fb6f4f0 made and 137f93a undid. What `validate`
+# cannot flag is a citation landing on the wrong LIVE line, which is the case
+# round 8 lost its headline to.
 # Not `--strict`: that flag only adds the missing-loc check, and the citation
 # check runs on every validate.
 #
@@ -246,9 +286,10 @@ bc_banner_falls_ground = {
 # `DO NOT "RECONCILE" THIS LADDER WITH THE EVE` and bc_eve_events.txt carries
 # `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE`, which is the
 # half making the same-battle claim. The order disagreement itself is documented
-# in that same file under
-# `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`.
-# This clause is the third carrier of those five values.
+# in that same file, directly above that half, under the paragraph named
+# `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. This clause
+# is the third CARRIER of those five values - a different triple from the third
+# FILE in the reciprocal ring, which is this header.
 # NOT the first whose ordering the player sees: the eve's chain has always picked
 # a paragraph by its own order. It WILL be the first to put the LADDER's ordering
 # in front of the player as prose, once it is wired. Until then the ladder
