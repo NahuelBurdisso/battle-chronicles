@@ -10,7 +10,7 @@
 #   - the chance is a weight against every OTHER VALID event, per the engine's own
 #     `_combat_phase_events.info`. The pool is vanilla `commander_none` at
 #     base = 1000 plus AGOT's casualty events
-#   - bc_chronicle_ready_trigger, not the weights, is what stops these firing
+#   - bc_chronicle_ready_commander_trigger, not the weights, is what stops these firing
 #     back to back; see bc_scripted_effects.txt
 #
 # STATE FIRST, PRESENTATION SECOND. Every momentum change used to live inside the
@@ -37,7 +37,7 @@ bc_banner_falls = {
 	type = commander
 
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
 		bc_side_is_losing_trigger = yes
 	}
@@ -57,7 +57,7 @@ bc_banner_falls = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_banner_falls"
 
 		if = {
@@ -87,7 +87,7 @@ bc_rally_the_line = {
 	type = commander
 
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		bc_is_faltering_trigger = yes
 	}
 
@@ -111,7 +111,7 @@ bc_rally_the_line = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_rally_the_line"
 
 		if = {
@@ -141,7 +141,7 @@ bc_horse_killed_under_him = {
 	type = commander
 
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
 		prowess >= 8
 	}
@@ -168,7 +168,7 @@ bc_horse_killed_under_him = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_horse_killed_under_him"
 
 		bc_faltering_minor_effect = yes
@@ -195,7 +195,7 @@ bc_flank_collapses = {
 	# could land a -6 on top of a live -3 and put the commander at -9, off the
 	# end of the ladder the whole mod is tuned against.
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
 		bc_side_is_outnumbered_trigger = yes
 	}
@@ -215,7 +215,7 @@ bc_flank_collapses = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_flank_collapses"
 
 		bc_faltering_major_effect = yes
@@ -239,7 +239,7 @@ bc_van_breaks_through = {
 	# Same tier gate as bc_ground_favours_us, for the same reason in the other
 	# direction: stacking bc_momentum_major on a live bc_momentum_minor is +9.
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_has_momentum_trigger = yes }
 		martial >= 10
 		bc_side_is_outnumbering_trigger = yes
@@ -264,7 +264,7 @@ bc_van_breaks_through = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_van_breaks_through"
 
 		if = {
@@ -294,7 +294,7 @@ bc_ground_favours_us = {
 	type = commander
 
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_has_momentum_trigger = yes }
 		bc_terrain_favours_us_trigger = yes
 	}
@@ -319,7 +319,7 @@ bc_ground_favours_us = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_ground_favours_us"
 
 		bc_momentum_minor_effect = yes
@@ -343,7 +343,7 @@ bc_lines_bogged_down = {
 	type = commander
 
 	is_valid = {
-		bc_chronicle_ready_trigger = yes
+		bc_chronicle_ready_commander_trigger = yes
 		NOT = { bc_is_faltering_trigger = yes }
 		bc_terrain_bogs_us_down_trigger = yes
 	}
@@ -365,7 +365,7 @@ bc_lines_bogged_down = {
 	effect = {
 		save_scope_as = bc_commander
 		bc_battle_open_effect = yes
-		bc_mark_chronicle_effect = yes
+		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_lines_bogged_down"
 
 		bc_faltering_minor_effect = yes
