@@ -1,0 +1,108 @@
+﻿# Battle Chronicles - the man across the field.
+#
+# ONE RUNNING GRUDGE PER COMMANDER, held in two LEDGER variables:
+#
+#   bc_nemesis         character   who he is carrying it against
+#   bc_nemesis_losses  integer     how many losses are owed
+#
+# bc_clear_scratch_effect must NEVER learn about either. They are the feature.
+# bc_battle_foe, which C reads, IS scratch and is cleared at combat end - which is
+# why C must run before bc_clear_scratch_effect in both graders.
+#
+# EVERYTHING HERE IS CALLED ON THE COMMANDER, from inside `side_commander ?= { }`
+# in the graders, inside their `is_alive = yes` gate.
+#
+# EVERY RELATION EFFECT TARGETS scope:bc_rivalry_foe, NEVER var:bc_nemesis.
+# Measured across all of vanilla common/ + events/ and all of AGOT:
+# `has_relation_X = var:Y` is shipped (bp1_yearly_james.txt:1160-1161,
+# 00_agot_mega_wars_script_values.txt:1424,1430) but `set_relation_X = var:Y` and
+# `remove_relation_X = var:Y` have ZERO shipped uses - every call targets a saved
+# scope, root, or a $PARAM$. The design document says no scope save is needed;
+# that is unsupported and this file overrides it. validate has no knowledge of
+# effect target forms, so a target the engine declines would be a SILENT NO-OP
+# that every static check in this plan would pass.
+#
+# ALL THREE RELATIONS ALREADY EXIST IN VANILLA, at
+# 00_scripted_relations.txt:43 (grudge), :54 (rival), :70 (nemesis). AGOT ships
+# 00_agot_scripted_relations.txt ALONGSIDE rather than overriding, so these are
+# vanilla definitions and they load unchanged. This file defines no relations.
+
+# --- the rung ladder --------------------------------------------------------
+#
+# CALLED ON THE COMMANDER, with bc_nemesis and bc_nemesis_losses BOTH known to
+# exist and bc_nemesis known to be ALIVE. Both callers write the counter
+# immediately before calling, and the entry point proved the foe alive.
+#
+# THRESHOLDS, NOT EXACT VALUES, in DESCENDING order. Section 5's wipe rule
+# increments by 2, so the counter SKIPS values and an exact-match table would
+# leave 4 with no row. Descending order means the first arm that matches wins and
+# there is no unreachable value above the top rung.
+#
+# THE CAP CLAMPS, IT DOES NOT SKIP. has_game_rule = bc_rivalry_nemesis sits in the
+# TOP arm's limit only. Under bc_rivalry_rival a counter of 5 fails the top arm,
+# falls to `>= 2`, and sets rival - which is the whole point. Putting the rule
+# test in an outer gate instead would make a five-loss foe set NOTHING.
+#
+# NO EXPLICIT TEARDOWN ON THE WAY UP. rival's `opposites` list contains grudge
+# (00_scripted_relations.txt:56) and nemesis's contains both rival and grudge
+# (:72-73), so the ENGINE removes the lower rung when a higher one is set.
+# Escalation is purely set_relation_*.
+#
+# THE TOP TWO RUNGS ARE MUTUAL, THE BOTTOM ONE IS NOT. rival carries
+# `corresponding = rival` (:64) and nemesis `corresponding = nemesis` (:82);
+# grudge carries neither. So a first loss puts a one-directional -60 on the loser
+# only, while a second makes the WINNER a rival of the loser too, at -60 both
+# ways, and a third makes it -120 both ways. That is intended - the man who keeps
+# beating you notices you back - but it means C reaches into the opinion of a
+# character it never ran on, which is the real reason bc_rivalry defaults to
+# `rival` rather than `nemesis`.
+#
+# IT ALSO MAKES THE CLEAR SYMMETRIC. remove_relation_rival/_nemesis take the
+# corresponding side with them, so a commander who beats his rival back to zero
+# is not left as the target of a relation he can no longer see.
+#
+# `var:bc_nemesis_losses >= 3` and `has_game_rule = bc_rivalry_nemesis` are
+# SIBLINGS and that is safe because the counter is proven to exist by the CALLER -
+# not because of evaluation order. CK3 does not short-circuit and guarantees no
+# order among siblings; the safety comes from the invariant above. Call this from
+# a site that has not just written bc_nemesis_losses and it breaks silently.
+#
+# set_relation_X = { target = ... reason = ... } is the shipped form -
+# effects.log:9770 (grudge), :9810 (nemesis), :9860 (rival), all character scope.
+# The reason keys are free-form loc keys; vanilla names them things like
+# `nemesis_danelaw_rejection`.
+bc_rivalry_set_relation_effect = {
+	if = {
+		limit = { has_game_rule = bc_rivalry_off }
+		debug_log = "BC: nemesis rule off"
+	}
+	else = {
+		var:bc_nemesis = { save_scope_as = bc_rivalry_foe }
+		if = {
+			limit = {
+				var:bc_nemesis_losses >= 3
+				has_game_rule = bc_rivalry_nemesis
+			}
+			set_relation_nemesis = {
+				target = scope:bc_rivalry_foe
+				reason = bc_reason_battle_nemesis
+			}
+			debug_log = "BC: nemesis rung nemesis"
+		}
+		else_if = {
+			limit = { var:bc_nemesis_losses >= 2 }
+			set_relation_rival = {
+				target = scope:bc_rivalry_foe
+				reason = bc_reason_battle_rival
+			}
+			debug_log = "BC: nemesis rung rival"
+		}
+		else = {
+			set_relation_grudge = {
+				target = scope:bc_rivalry_foe
+				reason = bc_reason_battle_grudge
+			}
+			debug_log = "BC: nemesis rung grudge"
+		}
+	}
+}
