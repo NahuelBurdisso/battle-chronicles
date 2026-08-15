@@ -1,0 +1,49 @@
+﻿# Battle Chronicles - the eve.
+#
+# THE ONLY EFFECT IN THIS MOD CALLED FROM A `scope = combat` CONTEXT. Everything
+# else runs on a character, a combat side, or inside a phase event. Nothing in
+# vanilla or AGOT declares `scope = combat` - `scope = combat_side` is universal,
+# 30 declarations across both - so this whole path exists because DIAG Q2 measured
+# that it works, not because anything shipped proves it.
+#
+# CALLED ON THE COMMANDER. The caller has already stepped into side_commander with
+# `?=` from inside every_combat_side, so a leaderless side never reaches this.
+#
+# FOE IS A SCOPE, PASSED AS A PARAMETER, AND MAY NOT EXIST. The other side can be
+# leaderless, in which case the chain resolves to nothing. `exists = $FOE$` is safe
+# on a missing target; the SAVE below is the read that has to be guarded.
+#
+# bc_eve_foe IS SAVED INSIDE THE is_ai = no GATE, WHICH IS WHAT MAKES IT SAFE
+# UNDER AN ITERATION. every_combat_side runs this twice, once per side, and a
+# second pass would otherwise overwrite the scope the first pass's pop-up has not
+# rendered yet. At most one of the two commanders can be human, so at most one
+# pass ever reaches the save.
+#
+# THE COOLDOWN IS TAKEN BEFORE THE EVENT IS RAISED, not in the event. An event
+# raised on a character is not guaranteed to have been answered - or even opened -
+# by the time anything else runs, and the throttle is about how often the mod
+# INTERRUPTS, not about how often the player replies.
+#
+# is_ai = no IS NOT POLISH. on_combat_start fires for EVERY combat in the world.
+# Without this row the hook raises a character_event on every AI commander of
+# every qualifying battle on the map. The mod's existing pop-ups are gated the
+# same way for the same reason.
+#
+# NOT bc_can_interrupt_player_trigger. That trigger tests bc_popup_cooldown, which
+# is the mid-battle budget the eve must not spend. The two rows are written out
+# here so that the two throttles cannot be accidentally merged later.
+bc_eve_offer_effect = {
+	if = {
+		limit = {
+			is_ai = no
+			NOT = { has_character_flag = bc_eve_cooldown }
+		}
+		if = {
+			limit = { exists = $FOE$ }
+			$FOE$ = { save_scope_as = bc_eve_foe }
+		}
+		bc_start_eve_cooldown_effect = yes
+		debug_log = "BC: eve offered"
+		trigger_event = bc_chronicles.0011
+	}
+}
