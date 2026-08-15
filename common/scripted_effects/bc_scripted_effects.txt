@@ -187,3 +187,25 @@ bc_start_popup_cooldown_effect = {
 		days = 60
 	}
 }
+
+# --- the eve's own throttle -------------------------------------------------
+# 90 days, and a SEPARATE FLAG from bc_popup_cooldown on purpose.
+#
+# Sharing the 60-day pop-up cooldown would starve the mid-battle chronicles: the
+# eve fires FIRST, every time, before a single phase event has rolled, so it would
+# consume the budget before the battle began and the player would never see a
+# moment from inside a fight again.
+#
+# Longer than 60 because the eve is rarer by construction - it needs a 5000-man
+# battle - and because two eves in a season reads as a tic rather than as an
+# occasion.
+#
+# A FLAG, not a modifier, for the reason bc_start_popup_cooldown_effect records:
+# modifiers are wiped at combat end, so a modifier-based lockout silently resets
+# every battle.
+bc_start_eve_cooldown_effect = {
+	add_character_flag = {
+		flag = bc_eve_cooldown
+		days = 90
+	}
+}

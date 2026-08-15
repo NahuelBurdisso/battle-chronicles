@@ -286,3 +286,40 @@ bc_was_wipe_trigger = {
 		scope:wipe = yes
 	}
 }
+
+# --- is the man across the field the one who has beaten me before -----------
+#
+# THE EVE'S read-back, and it is NOT bc_facing_nemesis_trigger. That one reads
+# var:bc_battle_foe, which bc_battle_open_effect writes in a PHASE EVENT's effect
+# - and at on_combat_start no phase event has rolled, so bc_battle_foe still holds
+# nothing or holds the LAST battle's foe. Using it here would be silently wrong on
+# every eve.
+#
+# THE EVE DOES NOT NEED IT. on_combat_start runs at combat scope, so the hidden
+# event iterates both sides and saves each side's man before offering.
+# scope:bc_eve_foe is therefore this battle's opposing commander, known exactly,
+# with no phase event involved. The eve is the one place in the mod that has the
+# real answer rather than a one-roll-stale one.
+#
+# CALLED ON THE COMMANDER, in a TRIGGER context - an event desc branch. It must be
+# safe for a commander who has no nemesis, which is nearly all of them, and safe
+# when the other side is leaderless and nothing saved the scope.
+#
+# THE TWO `exists` ROWS ARE SAFE AS SIBLINGS. `exists` on a missing variable or a
+# missing scope is safe; only a READ has to be nested, which is what the
+# trigger_if does.
+#
+# NO is_alive ROW, unlike bc_facing_nemesis_trigger. The eve's foe is commanding a
+# battle that is starting, so he is alive by construction; that trigger reads a
+# variable which can outlive its subject.
+bc_eve_facing_nemesis_trigger = {
+	exists = var:bc_nemesis
+	exists = scope:bc_eve_foe
+	trigger_if = {
+		limit = {
+			exists = var:bc_nemesis
+			exists = scope:bc_eve_foe
+		}
+		var:bc_nemesis = scope:bc_eve_foe
+	}
+}
