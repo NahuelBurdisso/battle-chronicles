@@ -226,12 +226,15 @@ come out in task 16; the answers are permanent and live here.
   the time, so it is not a gate in practice. Keep it; it costs nothing and it
   covers the one case in 267.
 - **Q2 — `scope = combat` events work; the combat links do not.**
-  `bc_chronicles.0900` — the probe event, since retired and replaced by the eve's
-  `bc_chronicles.0010` on the same hook — fired **151** times, so a `scope = combat` event dispatched
-  from `on_combat_start` is valid even though nothing in vanilla or AGOT declares
-  one. But `combat_attacker.side_commander` and `combat_defender.side_commander`
-  each resolved **zero** times from inside it, and `?=` swallowed both failures in
-  silence. **Plan 5's eve pop-up must not be written against those two links.**
+  `bc_chronicles.0900` — the probe event, since retired — fired **151** times, so a
+  `scope = combat` event dispatched from `on_combat_start` is valid even though
+  nothing in vanilla or AGOT declares one. But `combat_attacker.side_commander` and
+  `combat_defender.side_commander` each resolved **zero** times from inside it, and
+  `?=` swallowed both failures in silence.
+  **This conclusion was later superseded — see the 2026-08-14 run.** The two links
+  were probably never the problem: no commander is assigned to a combat side at
+  `on_combat_start` at all, so *every* route out of that hook finds nobody. The
+  hook is now unclaimed and the opening runs from inside the battle.
 - **Q3 — battle size.** Per side: 5k+ 46, 3k 42, 2k 31, 1k 14, under-1k 4. The
   invented 2,000 boundary in `bc_battle_open_effect` splits the low band 73/18
   instead of leaving one undivided lump. Keep it.

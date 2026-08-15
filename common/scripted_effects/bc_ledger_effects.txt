@@ -150,6 +150,21 @@ bc_battle_open_effect = {
 			debug_log = "BC: nemesis wipe"
 		}
 	}
+
+	# THE OPENING IS RAISED HERE, AND IT IS RAISED LAST ON PURPOSE. Everything it
+	# reads is written above: var:bc_battle_foe by the foe block at the top of this
+	# effect, var:bc_battle_size by the ladder in the middle. The dead-nemesis
+	# housekeeping directly above must also have run first, so that a battle
+	# against a man who died last year cannot name him.
+	#
+	# IT FIRES ITSELF ONLY ONCE PER BATTLE. bc_eve_offer_effect's own gate is
+	# `NOT = { exists = var:bc_battle_moments }`, and this effect runs on every
+	# moment - see that file's header for why that idiom means "first moment".
+	#
+	# IT USED TO RUN FROM on_combat_start AND COULD NOT WORK THERE. No commander is
+	# assigned to a combat side at that point, measured over 22 combats. This is
+	# the earliest place the mod can reach a side commander at all.
+	bc_eve_offer_effect = yes
 }
 
 # --- the seam ---------------------------------------------------------------

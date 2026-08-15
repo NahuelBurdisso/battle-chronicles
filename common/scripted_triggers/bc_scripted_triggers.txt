@@ -289,17 +289,17 @@ bc_was_wipe_trigger = {
 
 # --- is the man across the field the one who has beaten me before -----------
 #
-# THE EVE'S read-back, and it is NOT bc_facing_nemesis_trigger. That one reads
-# var:bc_battle_foe, which bc_battle_open_effect writes in a PHASE EVENT's effect
-# - and at on_combat_start no phase event has rolled, so bc_battle_foe still holds
-# nothing or holds the LAST battle's foe. Using it here would be silently wrong on
-# every eve.
+# THE OPENING'S read-back, and it is NOT bc_facing_nemesis_trigger. That one reads
+# var:bc_battle_foe live, which is right for an effect that runs inside a moment.
+# This one is read from an EVENT DESC, and a desc is rendered when the player gets
+# round to the pop-up - possibly after the battle has ended and
+# bc_clear_scratch_effect has removed the variable. A saved scope is not cleared,
+# so scope:bc_eve_foe still names the right man; var:bc_battle_foe might name
+# nobody at all.
 #
-# THE EVE DOES NOT NEED IT. on_combat_start runs at combat scope, so the hidden
-# event iterates both sides and saves each side's man before offering.
-# scope:bc_eve_foe is therefore this battle's opposing commander, known exactly,
-# with no phase event involved. The eve is the one place in the mod that has the
-# real answer rather than a one-roll-stale one.
+# THE SCOPE IS WRITTEN FROM THE VARIABLE, one line before the raise, in
+# bc_eve_offer_effect. So it is this battle's opposing commander, not a stale one -
+# the freshness comes from the variable, the durability from the scope.
 #
 # CALLED ON THE COMMANDER, in a TRIGGER context - an event desc branch. It must be
 # safe for a commander who has no nemesis, which is nearly all of them, and safe

@@ -259,15 +259,15 @@
  bc_dead_knights_toast:0 "They Did Not All Come Back"
  bc_dead_knights_toast_desc:0 "Some of the men who rode out under [bc_bereaved_commander.GetName]'s banner are still on that field. The heralds will have their names by morning."
 
-# --- the eve ----------------------------------------------------------------
+# --- the opening ------------------------------------------------------------
 
- bc_chronicles.0011.t:0 "First Light"
- bc_chronicles.0011.desc_intro:0 "The host is formed up before the sun is properly over the ridge. Whatever is decided now will have to be lived with all day."
+ bc_chronicles.0011.t:0 "The Lines Close"
+ bc_chronicles.0011.desc_intro:0 "The hosts are in reach of one another and nothing has been settled yet. Whatever is chosen now will have to be lived with all day."
  bc_chronicles.0011.desc_nemesis:0 "And across the field, under the other banner, is [bc_eve_foe.GetName]. [ROOT.Char.GetFirstName] has been here before, against this man, and it did not go well."
- bc_chronicles.0011.desc_stranger:0 "Across the field the other host is still dressing its lines. Nobody over there is anybody [ROOT.Char.GetFirstName] knows."
- bc_chronicles.0011.a:0 "Press them at first light."
+ bc_chronicles.0011.desc_stranger:0 "Across the field the other host comes on behind a banner nobody here can name. Nobody over there is anybody [ROOT.Char.GetFirstName] knows."
+ bc_chronicles.0011.a:0 "Press them before they are set."
  bc_chronicles.0011.b:0 "Hold the ground and let them come."
- bc_chronicles.0011.c:0 "Wait. See how they form up."
+ bc_chronicles.0011.c:0 "Wait. See how the first ranks fare."
 
 # --- the flesh --------------------------------------------------------------
 
