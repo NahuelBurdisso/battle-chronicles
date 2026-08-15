@@ -199,12 +199,11 @@
 # over. The clause is SHARED by all ten moments, so anything it says has to read
 # the same after a banner falling and after a stalemate - the same test
 # bc_bond_clause's own header states, under `SHARED AND NOT PER-MOMENT`. And a
-# fragment that
-# points back at the moment ("such a thing", "it") is pointing past the bond
-# fragment that task 4 renders in between - and past the ground fragment as well
-# on bc_banner_falls_toast_desc, the only desc that has one - so its nearest
-# antecedent at render time is the bond sentence, not the toast's own. These
-# three name their subject outright and carry no anaphor.
+# fragment that points back at the moment ("such a thing", "it") is pointing
+# past the bond fragment that task 4 renders in between - and past the ground
+# fragment as well on bc_banner_falls_toast_desc, the only desc that has one -
+# so its nearest antecedent at render time is the bond sentence, not the toast's
+# own. These three name their subject outright and carry no anaphor.
 #
 # WORDS ALREADY SPOKEN FOR IN THE RUN OF TEXT THIS CLAUSE JOINS. This is a
 # CURATED SHORTLIST, not a grep dump - grepping "field" alone returns thirty-two
