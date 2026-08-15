@@ -430,3 +430,142 @@ bc_terrain_award_toast_effect = {
 		SUBJECT = scope:bc_award_subject
 	}
 }
+
+# --- the chain --------------------------------------------------------------
+#
+# bc_reputation_effect = { OUTCOME = win|lose }
+#
+# CALLED ON THE COMMANDER, from inside `side_commander ?= { if = { limit = { is_alive = yes } } }`
+# in both graders, INSIDE the notability gate and INSIDE the aftermath game-rule
+# gate.
+#
+# TWO PHASES. Bookkeeping first and unconditionally; then at most one award.
+# Collapsing them would make the terrain streak depend on whether a style award
+# happened, which would put holes in a commander's terrain history.
+#
+# PHASE 2 IS THREE FLAT `if` BLOCKS, NOT AN else_if CHAIN. Precedence is carried
+# by bc_award_taken instead. else_if cannot be used because every arm's gate needs
+# its own NESTED exists guard - CK3 does not short-circuit and guarantees no
+# evaluation order among siblings, so `exists = var:X` beside `var:X >= 3` in one
+# limit does not protect the comparison - and nesting a guard is exactly what an
+# else_if arm cannot do without leaving the chain.
+#
+# bc_award_taken IS SET BY THE TOAST EFFECTS, not here, so it means "an award was
+# actually made" and not "an arm was entered". A style ladder that falls through
+# on has_trait leaves it unset and terrain still gets its turn.
+#
+# THE RESET FOLLOWS THE THRESHOLD, NOT THE AWARD. set_variable ... value = 0 sits
+# ABOVE the award attempt in both ladders, so it runs on all four block-doors:
+# the budget gate, the has_trait check, losing to an earlier arm, and an
+# unresolved bucket. If a streak survived any of them the commander would re-enter
+# the dead branch on every subsequent notable battle, forever.
+#
+# WHY EACH AWARD LADDER'S VARIABLE IS PROVEN TO EXIST BEFORE IT RUNS:
+#   style   - phase 2a's outer `exists = var:bc_style_streak`, combined with the
+#             fact that phase 1 writes bc_style_streak ONLY when bc_battle_style
+#             existed. The hole worth naming: bc_style_streak is LEDGER and
+#             survives between battles, so a notable battle with no moments could
+#             in principle enter 2a on a stale streak with no style to award from.
+#             It cannot fire - the streak only ever reaches 3 via a battle that
+#             had a style, and it is reset to 0 the moment it reaches 3 - and the
+#             ladder's `else` marker is what would report it if a later plan
+#             breaks that reasoning. Do not remove that marker.
+#   terrain - the explicit `exists = var:bc_terrain_this` row in phase 2b.
+#
+# THE OUTCOME IS A PARAMETER, and it has to be. Style and terrain grade EITHER
+# outcome - a man who loses three battles the same way has still shown you who he
+# is - but the nickname is a reward for winning. Without the parameter the
+# nickname block would be reachable on a defeat, because its gate is
+# `var:bc_notable_battles >= 3`, a CUMULATIVE tally that a man who has won three
+# battles before still satisfies on the day he loses one.
+#
+# `flag:$OUTCOME$ = flag:win`, NOT `$OUTCOME$ = win`. A bare `$OUTCOME$ = win`
+# substitutes to `win = win`, an unknown key, a SILENT NO-OP that validate passes.
+#
+# BOTH remove_variable CALLS ARE OUTSIDE EVERY BRANCH, deliberately. If
+# bc_terrain_this lived inside the terrain block, a battle that took the style
+# block would leave it on the commander and the NEXT battle's terrain streak would
+# compare against last battle's bucket. If bc_award_taken survived, every future
+# battle would award nothing. remove_variable on a missing variable is safe.
+# Neither belongs in bc_clear_scratch_effect: their lifetime is one effect call,
+# not one battle.
+bc_reputation_effect = {
+	# --- phase 1: bookkeeping, always ---
+	if = {
+		limit = { exists = var:bc_battle_style }
+		bc_style_streak_effect = yes
+	}
+	if = {
+		limit = { exists = scope:bc_battle_province }
+		bc_terrain_bucket_effect = yes
+		if = {
+			limit = { exists = var:bc_terrain_this }
+			bc_terrain_streak_effect = yes
+		}
+	}
+
+	# --- phase 2a: style ---
+	if = {
+		limit = { exists = var:bc_style_streak }
+		if = {
+			limit = { var:bc_style_streak >= 3 }
+			set_variable = { name = bc_style_streak value = 0 }
+			if = {
+				limit = { number_of_commander_traits < 3 }
+				bc_style_award_effect = yes
+			}
+			else = {
+				debug_log = "BC: award blocked budget"
+			}
+		}
+	}
+
+	# --- phase 2b: terrain, only if style awarded nothing ---
+	# The streak reset is INSIDE the threshold test but OUTSIDE the
+	# bc_award_taken test, deliberately: a terrain threshold reached on a
+	# battle that style already won still resets, or it would be re-reached
+	# and re-blocked on every notable battle from here on.
+	if = {
+		limit = { exists = var:bc_terrain_streak }
+		if = {
+			limit = { var:bc_terrain_streak >= 2 }
+			set_variable = { name = bc_terrain_streak value = 0 }
+			if = {
+				limit = {
+					NOT = { exists = var:bc_award_taken }
+					exists = var:bc_terrain_this
+					number_of_commander_traits < 3
+				}
+				bc_terrain_award_effect = yes
+			}
+			else = {
+				debug_log = "BC: award blocked terrain"
+			}
+		}
+	}
+
+	# --- phase 2c: the nickname, only if nothing above awarded ---
+	# `exists = var:bc_notable_battles` may sit as a sibling because `exists`
+	# on a missing variable is safe. The COMPARISON is what has to be nested,
+	# and it is. This gate used to be safe by position - the counter wrote the
+	# variable on the line above it - but the loser grader does not call the
+	# counter, so position no longer proves anything.
+	if = {
+		limit = {
+			NOT = { exists = var:bc_award_taken }
+			flag:$OUTCOME$ = flag:win
+			has_any_nickname = no
+			martial >= 14
+			exists = var:bc_notable_battles
+		}
+		if = {
+			limit = { var:bc_notable_battles >= 3 }
+			save_scope_as = bc_named_commander
+			bc_aftermath_nickname_effect = yes
+		}
+	}
+
+	# --- always: drop the scratch ---
+	remove_variable = bc_terrain_this
+	remove_variable = bc_award_taken
+}
