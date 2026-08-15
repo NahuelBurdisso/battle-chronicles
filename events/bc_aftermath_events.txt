@@ -53,6 +53,21 @@ bc_chronicles.0091 = {
 	scope = combat_side
 
 	immediate = {
+		# --- measurement only ------------------------------------------------
+		#
+		# OUTSIDE THE NOTABILITY GATE ON PURPOSE, unlike the dead-knight block
+		# below. This marker exists to answer two questions no static check can:
+		# how often a wipe actually happens, and whether both sides agree it did.
+		# Gating it on notability would only ever show wipes that were already
+		# going to be notable, which is the population the row cannot affect.
+		#
+		# NO STATE. This writes nothing and reads nothing but scope:wipe. It is
+		# the same kind of row as the calibration markers, and it stays.
+		if = {
+			limit = { bc_was_wipe_trigger = yes }
+			debug_log = "BC: wipe"
+		}
+
 		debug_log = "BC: combat end cleanup"
 		side_commander ?= {
 			bc_cleanup_effect = yes
@@ -91,6 +106,50 @@ bc_chronicles.0091 = {
 							}
 						}
 						bc_battle_memory_effect = { TYPE = bc_battle_memory_won }
+					}
+				}
+
+				# --- the knights who did not come back ----------------------
+				#
+				# A PRESENCE TEST, NOT AN ITERATION. One aggregate toast per
+				# battle per liege. CK3 cannot group an iteration by an arbitrary
+				# key, so there is no way to fan the dead out into one toast per
+				# distinct liege - and no need, because on a combat side the
+				# knights are the side commander's, so raising it once on him is
+				# already once per liege.
+				#
+				# THE SAVE_SCOPE_AS IS NOT OPTIONAL. bc_addressed_toast_effect
+				# writes left_icon = $SUBJECT$, a scripted effect does not rebind
+				# ROOT, and its liege arm has already changed scope by the time
+				# left_icon is evaluated - so SUBJECT must be a saved scope, never
+				# `this`.
+				#
+				# event_toast_effect_bad. This and the rivalry toast are the
+				# reason TYPE is a parameter of bc_addressed_toast_effect at all.
+				#
+				# OUTSIDE THE PROVINCE GATE, INSIDE THE NOTABILITY GATE. A battle
+				# whose location does not resolve still killed knights, so the
+				# province gate must not swallow this. The notability gate must
+				# not be escaped: without it every skirmish in the world raises a
+				# toast on somebody.
+				#
+				# NO is_alive GATE ON THE COMMANDER, unlike everything else in
+				# this event. A commander who fell with his knights is exactly the
+				# case worth telling, and bc_addressed_toast_effect routes a dead
+				# man's toast to his liege because a dead character is never
+				# human. Adding is_alive = yes here would silence the worst day
+				# the side had.
+				if = {
+					limit = { any_side_knight = { is_alive = no } }
+					side_commander ?= {
+						save_scope_as = bc_bereaved_commander
+						debug_log = "BC: dead knights"
+						bc_addressed_toast_effect = {
+							TYPE = event_toast_effect_bad
+							TITLE = bc_dead_knights_toast
+							DESC = bc_dead_knights_toast_desc
+							SUBJECT = scope:bc_bereaved_commander
+						}
 					}
 				}
 
@@ -154,6 +213,16 @@ bc_chronicles.0092 = {
 	scope = combat_side
 
 	immediate = {
+		# --- measurement only ------------------------------------------------
+		#
+		# Identical to the block in bc_chronicles.0091, deliberately. A marker on
+		# one side only would make every wipe look asymmetric and would falsify
+		# the one thing the runtime checkpoint is looking for.
+		if = {
+			limit = { bc_was_wipe_trigger = yes }
+			debug_log = "BC: wipe"
+		}
+
 		debug_log = "BC: combat end cleanup"
 		side_commander ?= {
 			bc_cleanup_effect = yes
@@ -200,6 +269,29 @@ bc_chronicles.0092 = {
 							}
 						}
 						bc_battle_memory_effect = { TYPE = bc_battle_memory_lost }
+					}
+				}
+
+				# --- the knights who did not come back ----------------------
+				#
+				# Identical to the block in bc_chronicles.0091, and it belongs in
+				# both: the WINNER also loses knights, and a winner told nothing
+				# about his dead is the same gap on the other side.
+				#
+				# See .0091 for why this is a presence test rather than a second
+				# iteration, why the scope must be saved, and why there is no
+				# is_alive gate on the commander.
+				if = {
+					limit = { any_side_knight = { is_alive = no } }
+					side_commander ?= {
+						save_scope_as = bc_bereaved_commander
+						debug_log = "BC: dead knights"
+						bc_addressed_toast_effect = {
+							TYPE = event_toast_effect_bad
+							TITLE = bc_dead_knights_toast
+							DESC = bc_dead_knights_toast_desc
+							SUBJECT = scope:bc_bereaved_commander
+						}
 					}
 				}
 

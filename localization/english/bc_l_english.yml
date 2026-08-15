@@ -246,3 +246,8 @@
  bc_rivalry_grudge_desc:0 "[bc_rivalry_foe.GetName] took the field from [bc_rivalry_subject.GetName] today. That is all it is so far — a name, and a face to put to it."
  bc_rivalry_rival_desc:0 "Twice now. [bc_rivalry_subject.GetName] has lost to [bc_rivalry_foe.GetName] twice, and the second time it stopped being bad luck."
  bc_rivalry_nemesis_desc:0 "Three fields, three defeats, one man. [bc_rivalry_subject.GetName] has stopped thinking about the war and started thinking about [bc_rivalry_foe.GetName]."
+
+# --- the dead ---------------------------------------------------------------
+
+ bc_dead_knights_toast:0 "They Did Not All Come Back"
+ bc_dead_knights_toast_desc:0 "Some of the men who rode out under [bc_bereaved_commander.GetName]'s banner are still on that field. The heralds will have their names by morning."
