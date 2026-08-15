@@ -17,6 +17,22 @@
  bc_faltering_major:0 "The Banner Wavers"
  bc_faltering_decisive:0 "The Line Is Breaking"
 
+# Family 2, the character of the fight. These are `army_*` / `knight_*` tags, so
+# they do NOT appear in the combat advantage breakdown the comment above is about
+# — they show in the army stat breakdown and the character's modifier list, both
+# of which render the name and the _desc. Nothing in the toolchain warns when one
+# of these is missing: `--strict`'s loc cross-check covers traits, decisions and
+# character interactions only, so an unlocalized modifier renders its raw key at
+# the player and validates clean forever.
+ bc_bloodied:0 "Blood for Ground"
+ bc_bloodied_desc:0 "They have paid for every step they have taken, and they mean to be paid back."
+ bc_shieldwall:0 "The Shields Are Locked"
+ bc_shieldwall_desc:0 "They have set their feet. Nothing is getting through, and nothing is getting done."
+ bc_spent_horse:0 "The Horses Are Blown"
+ bc_spent_horse_desc:0 "The knights went in hard and went in early. There is nothing left in the animals."
+ bc_pursuit:0 "Hard on Their Heels"
+ bc_pursuit_desc:0 "The enemy is giving ground, and there is no order left in the giving."
+
  bc_valiant_in_battle_opinion:0 "Stood Fast in Battle"
  bc_craven_in_battle_opinion:0 "Shamed Himself in Battle"
  bc_shieldbrother_opinion:0 "Shieldbrother"
