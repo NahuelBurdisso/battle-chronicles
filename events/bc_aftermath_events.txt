@@ -212,6 +212,95 @@ bc_chronicles.0091 = {
 						# reason about later. It must stay BEFORE
 						# bc_clear_scratch_effect, which removes bc_battle_foe.
 						bc_rivalry_effect = { OUTCOME = win }
+
+						# WINNER ONLY, .0091 ONLY. There is no symmetric loss
+						# term: the loser already pays in the grading, and paying
+						# twice for one battle turns a defeat by a heathen into a
+						# spiral. Asymmetry here is deliberate and is not an
+						# oversight to be tidied up later.
+						#
+						# TWO FLAGS, READ INDEPENDENTLY. bc_battle_creed picks the
+						# CURRENCY; bc_battle_bond = nemesis doubles whichever
+						# currency the creed chose.
+						#
+						# THE CURRENCY QUESTION GOES TO THE CREED AND NOT THE
+						# BOND. The bond is an ordered ladder, so a different-
+						# faith foe who shares your culture is filed under
+						# `countryman` and the bond flag alone cannot answer it.
+						# The creed is the orthogonal flag that exists for
+						# exactly this read.
+						#
+						# THE NEMESIS TERM GOES TO THE BOND, because `nemesis`
+						# is the top rung of that ladder and the creed knows
+						# nothing about grudges. Two questions, two flags, and
+						# they are not interchangeable in either direction.
+						#
+						# NESTED, NOT SIBLING, on both reads. The bond read sits
+						# inside its own `if = { limit = { exists = ... } }` and
+						# not beside the creed's - they are different variables
+						# and `bond` is written on paths where `creed` is not.
+						#
+						# BEFORE bc_clear_scratch_effect, which removes both.
+						# That call is at the bottom of this event and outside
+						# this gate; do not move either.
+						if = {
+							limit = { exists = var:bc_battle_creed }
+							if = {
+								limit = { var:bc_battle_creed = flag:heathen }
+								add_piety = 100
+								debug_log = "BC: award piety"
+							}
+							else = {
+								add_prestige = 50
+								debug_log = "BC: award prestige"
+							}
+							if = {
+								limit = { exists = var:bc_battle_bond }
+								if = {
+									limit = { var:bc_battle_bond = flag:nemesis }
+									if = {
+										limit = { var:bc_battle_creed = flag:heathen }
+										add_piety = 100
+									}
+									else = {
+										add_prestige = 50
+									}
+									debug_log = "BC: award nemesis"
+								}
+							}
+						}
+						else = {
+							# THE COMMON CASE IS NOT "NO ENEMY COMMANDER". It is
+							# a notable battle that produced NO BC MOMENT at all:
+							# bc_battle_creed is written by bc_battle_open_effect,
+							# which only runs from a phase event, and
+							# bc_battle_is_notable_trigger is independent of
+							# whether any moment fired. A leaderless enemy side is
+							# the OTHER cause and is much rarer.
+							#
+							# So a large count here is expected and is not a bug.
+							# The two causes are separable in the log: cross it
+							# against `BC: bond nofoe`, which counts only the
+							# leaderless case.
+							debug_log = "BC: award no creed"
+						}
+
+						# DECISION TABLE for the four award markers, so the next
+						# reader does not have to reconstruct it from the plan:
+						#
+						#   piety + prestige + no creed  = notable wins that
+						#       reached here, which is LESS than `BC: win notable`
+						#       (that one is logged outside both the
+						#       `side_commander ?=` and the `is_alive` gates).
+						#   nemesis                      = a SUBSET of piety or
+						#       prestige, never a fourth alternative to them.
+						#   no creed high, `bond nofoe` low = notable battles with
+						#       no moment. Expected.
+						#   no creed high, `bond nofoe` high = leaderless enemy
+						#       sides. A different question entirely.
+						#   piety 0 while `creed heathen` counts = the read is
+						#       landing on the wrong character, or this block ran
+						#       after bc_clear_scratch_effect.
 					}
 				}
 			}

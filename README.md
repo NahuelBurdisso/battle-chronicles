@@ -626,3 +626,11 @@ different fixes.
   run must show it appear when option d is taken and be **gone** by the next
   battle of the same war. If it is still there, `bc_cleanup_effect` did not run
   or did not reach the new line.
+- **The foe-relative award.** `probe 'BC: award'` reports which of the two
+  currencies paid. The three markers `piety` / `prestige` / `no creed` partition
+  the notable wins that reached the award; `nemesis` is a subset of the first
+  two. A run where `BC: award no creed` dominates means most notable wins carry
+  no BC moment — not that the award is broken. Separate the two causes by
+  crossing it against `BC: bond nofoe`, which counts only the leaderless-enemy
+  case. `BC: award piety` at zero while `BC: creed heathen` counts is the real
+  failure: the read is landing on the wrong character.
