@@ -163,6 +163,29 @@ bc_record_moment_effect = {
 	}
 
 	bc_record_effective_tier_effect = { TIER = $TIER$ KIND = $KIND$ }
+
+	# Family 2 needs a real battle. Size 1 is a skirmish and gets the tide only -
+	# spec Section 6, "verb families gate on size".
+	#
+	# NESTED, NOT TWO SIBLING ROWS IN ONE `limit`. CK3 does not short-circuit and
+	# guarantees no evaluation order among siblings, so
+	# `limit = { exists = var:bc_battle_size  var:bc_battle_size >= 2 }` would
+	# still evaluate the comparison when the variable is absent and log a read of
+	# a missing variable.
+	#
+	# THE ABSENT CASE IS REAL, NOT DEFENSIVE PADDING. Eight of the eighteen call
+	# sites are pop-up options, and a pop-up answered AFTER combat ended has had
+	# bc_battle_size removed by bc_clear_scratch_effect. Without this guard that
+	# option would log an error - and if the comparison somehow passed, it would
+	# apply a 20-day modifier that bc_cleanup_effect has already run past and will
+	# never remove.
+	if = {
+		limit = { exists = var:bc_battle_size }
+		if = {
+			limit = { var:bc_battle_size >= 2 }
+			bc_apply_verb_effect = { KIND = $KIND$ SWING = $SWING$ }
+		}
+	}
 }
 
 # The ceiling, then the style write. Split out of the seam only because the
