@@ -15,12 +15,15 @@
 # side_strength is scaled down by a factor of 1000 by the engine, so these are
 # ratios of an already-scaled number. Fine, because both sides are scaled alike.
 #
-# SCOPE WARNING: the two values below are written against `scope:combat_side`
-# because they are read from phase events, where that scope exists. The
-# aftermath values further down are written against `root`, because they are
-# read from a combat_side-scoped event where the side IS root and
-# `scope:combat_side` does not exist. Do not copy one style into the other's
-# call site.
+# SCOPE WARNING: THIS FILE NOW HOLDS THREE SCOPE CONVENTIONS. The two values
+# below are written against `scope:combat_side` because they are read from phase
+# events, where that scope exists. The aftermath values further down are written
+# against `root`, because they are read from a combat_side-scoped event where the
+# side IS root and `scope:combat_side` does not exist. The third is
+# bc_chronicle_flag_days_value at the bottom, which is neither: it is evaluated
+# inside bc_mark_chronicle_commander_effect, which runs ON THE COMMANDER, so it
+# reads `var:bc_battle_size` bare off `this` with no scope prefix at all.
+# Do not copy any one style into another's call site.
 
 bc_outnumbered_threshold_value = {
 	value = scope:combat_side.side_strength
@@ -67,4 +70,59 @@ bc_our_host_gap_value = {
 bc_their_host_gap_value = {
 	value = root.enemy_side.side_max_army_size
 	multiply = 2.0
+}
+
+# The chronicle cooldown, in days, scaled by battle size.
+#
+#   size 3 (10,000+)  ->  10 days   a moment every other phase roll
+#   size 2 (2,000+)   ->  20 days
+#   size 1 (skirmish) ->  40 days
+#
+# Phase events roll every 5 days (COMBAT_EVENT_DAYS), so the flag length IS the
+# pacing. The old flat 15 gave a two-month siege battle a constant stream and a
+# skirmish nothing at all.
+#
+# SCOPE: `this`, a character - the commander. NOT scope:combat_side, NOT root.
+# This is the third convention in this file; see the header.
+#
+# SHAPE: every branch is a bare `value = X`, there is NO base value outside the
+# ladder, and the ladder is an if nested inside an if. All three at once are
+# shipped in ONE vanilla value - recent_epidemics_outbreak_mult_value,
+# 06_ce1_epidemics_values.txt:1869-1917. Its outer arm even gates on a variable
+# existing (`has_variable = epidemic_cooldown_general`) exactly as this one does,
+# and its inner leaves are all bare `value = <ident>`.
+#
+# The one place this is SAFER than the vanilla original: that value has no outer
+# `else`, so a character matching neither outer arm falls through to nothing.
+# This one has the else below.
+#
+# THE `exists` GUARD IS THE OUTER BRANCH, NOT A SIBLING ROW, for the reason
+# stated at the seam's size gate: CK3 does not short-circuit, so a sibling
+# `exists` would not stop the comparison from evaluating and logging a read of a
+# missing variable.
+#
+# The 15 in the else arm is the old flat duration. It is unreachable if the call
+# ordering holds - bc_battle_open_effect writes bc_battle_size before
+# bc_mark_chronicle_commander_effect is reached in all seven commander events -
+# and it is there so that a future call site that breaks that ordering degrades
+# to the shipped behaviour instead of to zero days, which would mean no cooldown
+# at all.
+bc_chronicle_flag_days_value = {
+	if = {
+		limit = { exists = var:bc_battle_size }
+		if = {
+			limit = { var:bc_battle_size >= 3 }
+			value = 10
+		}
+		else_if = {
+			limit = { var:bc_battle_size >= 2 }
+			value = 20
+		}
+		else = {
+			value = 40
+		}
+	}
+	else = {
+		value = 15
+	}
 }
