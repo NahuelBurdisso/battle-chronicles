@@ -281,7 +281,8 @@ moments recorded.
 
 **Error sweep clean.** `error.log` holds exactly one distinct `bc_` group:
 `Variable 'bc_battle_wounded' is used but is never set`, twice, which is the
-known plan-6 debt documented at `bc_ledger_effects.txt:318-325`. Every `debug.log`
+known plan-6 debt, since retired — `bc_wound_effect` writes the variable and the
+2026-08-15 sweep below found no `bc_` group at all. Every `debug.log`
 group is either a mod marker or one of the two engine load lines plan 1 carved
 out. **Zero missing-variable reads** for anything plans 2, 3 or 4 introduced —
 which is the real result, because all three plans read variables that may not
@@ -617,7 +618,7 @@ different fixes.
   | markers | screen | verdict |
   |---|---|---|
   | `BC: ground <band>` (write-path marker, not the eve's own read) | a third paragraph naming that band | the write path and the eve's `scope:bc_eve_ground` read agreed — both work. A mismatch between the write-path band and the rendered paragraph is itself informative: the scope saved the province but a subsequent battle overwrote `BC: ground <band>` while the scope still points to the first one. |
-  | `BC: ground` for **any named band** — rough, forest, jungle, winter, desert | third paragraph reads "The field is what it is" | `scope:bc_eve_ground` is saved but the band triggers do not match through it — check the scope's type, not the triggers. This is a real failure: all five have named arms and none of them should reach the fallback. Desert is the one band the confirmation run never produced (0/137), so an absent `BC: ground desert` proves nothing either way. |
+  | `BC: ground` for **any named band** — rough, forest, jungle, winter, desert | third paragraph reads "The field is what it is" | `scope:bc_eve_ground` is saved but the band triggers do not match through it — check the scope's type, not the triggers. This is a real failure: all five have named arms and none of them should reach the fallback. Desert is the one band the DIAG run's Q5 terrain census never produced (0/137), so an absent `BC: ground desert` proves nothing either way. |
   | `BC: eve ground missing` | third paragraph reads "The field is what it is" | correct behaviour: the ground scope never saved, the fallback renders as designed. Not a trigger bug. The insert may be in the wrong branch of `bc_eve_offer_effect` if this counts while `BC: eve offered` counts equally. |
   | `BC: ground open` or unresolved province | third paragraph reads "The field is what it is" | correct: open is the only band that legitimately rides the fallback, and an unresolved province also reaches it. |
   | any | option d visible on open ground | the `trigger` is not gating; every option in the mod is then suspect |
