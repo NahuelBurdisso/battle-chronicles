@@ -147,29 +147,36 @@
 # this is a shared phrase, not a shared frame. Keep it monotone.
 #
 # KEEP THE SMALLEST ARM SHORT OF A UNIVERSAL. An arm saying every man is in the
-# fighting is falsified outright by the moment it is appended to on
-# bc_knight_shames_himself, whose literal is a man leaving the fighting; the
-# shipped ` the men not yet in the fighting are few` counts him among the few.
-# That event is `type = knight` and its is_valid carries no size gate
-# (bc_knight_phase_events.txt:124-132), so a small battle is a routine host for
-# the pairing.
+# fighting is falsified outright on bc_knight_shames_himself, whose literal is a
+# man leaving the fighting. The shipped arm survives that pairing by being SILENT
+# about him rather than by accommodating him: "not yet in the fighting" denotes
+# men who have not gone in, and he went in and came back out, so he is in neither
+# the few nor the many. That event is `type = knight` and its is_valid carries no
+# size gate (bc_knight_phase_events.txt:124-132), so a small battle is a routine
+# host for the pairing.
 #
-# ONE STRAIN IS NOT FIXED AND IS RECORDED RATHER THAN HIDDEN. On
-# bc_ground_favours_us - a COMMANDER moment, bc_commander_phase_events.txt:328 -
-# the literal reads `They have to come to us across all of it.`, which puts the
-# enemy host short of contact. bc_battle_size counts BOTH sides, so if that
-# reading is taken strictly then something near half the combat is not yet in the
-# fighting, and `are few` is wrong for the same reason the universal was wrong,
-# only less so. Softening the quantifier bought a degree, not a fix. If task 4
-# shows this reading badly, the answer is a per-moment clause on that one toast,
-# not a fourth regrade of a clause all ten share.
+# TWO STRAINS ARE NOT FIXED AND ARE RECORDED RATHER THAN HIDDEN. Both are between
+# the SMALL arm and a literal that implies men still out of the fighting; the huge
+# and large arms reinforce those same literals.
+#   bc_ground_favours_us - a COMMANDER moment, bc_commander_phase_events.txt:328 -
+#   reads `They have to come to us across all of it.`, which puts the enemy host
+#   short of contact. bc_battle_size counts BOTH sides, so read strictly, near
+#   half the combat is not yet in the fighting and `are few` is wrong for the
+#   same reason the universal was, only less so.
+#   bc_knight_holds_the_breach - bc_knight_phase_events.txt:50, no size gate in
+#   its is_valid at :56-61 - reads `the line has time to be made again behind
+#   him`, which needs men behind the line who are not yet in it. Milder, because
+#   a line being remade is a smaller body of men than a host still crossing.
+# Softening the quantifier bought a degree, not a fix. If task 4 shows either
+# badly, the answer is a per-moment clause on that one toast, not a fourth
+# regrade of a clause all ten share.
 #
 # See the header on bc_scale_clause in bc_flavour.txt, which records the two axes
 # that are closed, why, and the four-row test a replacement has to pass.
 #
 # THE SUBJECT IS THE WHOLE FIGHT, NOT THE COMMANDER'S OWN MEN, AND THAT IS NOT A
 # STYLE CHOICE. bc_battle_size is set by comparing num_total_troops on the
-# COMBAT scope (bc_ledger_effects.txt:113), which counts both sides, so a clause
+# COMBAT scope (bc_ledger_effects.txt:116), which counts both sides, so a clause
 # read as a claim about his men would report something the variable never
 # measured. It would also collide with the moments' own gates: a toast carries
 # the commander's portrait, and bc_flank_collapses fires only when he is
@@ -202,16 +209,19 @@
 # key lines across the file, most of them in text that never renders beside a
 # moment toast. What is listed is what task 4 can put in one desc with this
 # clause: a toast literal, one bond fragment, and on bc_banner_falls_toast_desc
-# alone a ground fragment as well.
+# alone a ground fragment as well - that one can resolve to its empty arm, so
+# treat its words as possible rather than guaranteed.
 # KEYS ARE NAMED WITHOUT LINE NUMBERS ON PURPOSE. NO TOOL IN THIS REPO CHECKS A
 # CITATION - validate does not, and there is no sweeper - so every citation here
 # rots silently, and a same-file one rots on any edit to this file, which is the
 # file most likely to be edited by whoever is reading this. Grep the key.
-#   "the man"   ALL FIVE bc_frag_bond_* arms carry the substring "the man
-#               commanding here" - four of them open on it, bc_frag_bond_heathen
-#               carries it mid-sentence ("...at dawn, the man commanding here was
-#               not.") - and the bond fragment renders in the sentence
-#               IMMEDIATELY BEFORE this one on all ten toasts. THE ONLY
+#   "the man"   ALL FIVE CONTENT ARMS of bc_bond_clause carry the substring
+#               "man commanding here" - four open on "The man commanding here",
+#               bc_frag_bond_heathen carries it mid-sentence ("...at dawn, the
+#               man commanding here was not."). The sixth key that matches
+#               bc_frag_bond_* is the empty fallback bc_frag_bond_any, which
+#               cannot render from these ten toasts. The bond fragment renders in
+#               the sentence IMMEDIATELY BEFORE this one on all ten toasts. THE ONLY
 #               GUARANTEED COLLISION IN THIS LIST. Plural "the men" beside it is
 #               ordinary English; SINGULAR "a man" is not, and an earlier small
 #               arm read " In a fight this small, there is not a man who is not
@@ -245,13 +255,15 @@
 # `NOT = { exists = var:bc_battle_moments }`, which is evaluated on every phase
 # event but CAN ONLY PASS at the first; the size ladder sits in
 # bc_battle_open_effect, which runs upstream of every read in all ten events
-# (bc_ledger_effects.txt:35-44 for the overwrite semantics, :112-125 for the
-# ladder itself, and :59-63 for why "upstream of every read" is the right phrase
-# and "at the top of every event" is not - the three knight events call it nested
-# rather than at the top). So the band is re-derived from a live num_total_troops
-# comparison at every later moment. Whether that number can FALL during a combat
-# is NOT established anywhere in this repo. If it can, a battle that opens above
-# 10,000 shows its eve and then renders the large arm later in the same fight.
+# (bc_ledger_effects.txt:35-44 for the overwrite semantics, :115-128 for the
+# ladder itself, and that file's THE ANCHOR comment on
+# `save_scope_as = bc_chronicle_subject` for why "upstream of every read" is the
+# right phrase and "at the top of every event" is not - the three knight events
+# call it nested rather than at the top). So the band is re-derived from a live
+# num_total_troops comparison at every later moment. Whether that number can FALL
+# during a combat is NOT established anywhere in this repo. If it can, a battle
+# that opens above 10,000 shows its eve and then renders the large arm later in
+# the same fight.
 #
 # NOR IS THE CONVERSE ANYWHERE NEAR TRUE, which is the more useful fact: the eve
 # needs a human commander and clears a 90-day cooldown, so the 2026-08-15

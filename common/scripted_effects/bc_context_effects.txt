@@ -21,7 +21,7 @@
 # resolves to a fallback arm, which is the correct failure.
 #
 # CALLED FROM bc_battle_open_effect, on the commander, at the top of every phase
-# event. See bc_ledger_effects.txt:29-52 for why that call is unconditional.
+# event. See bc_ledger_effects.txt:29-54 for why that call is unconditional.
 
 # --- the ground -------------------------------------------------------------
 #

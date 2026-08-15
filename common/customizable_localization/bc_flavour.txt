@@ -35,7 +35,7 @@
 # writes on every path and runs upstream of all ten - but it would render from a
 # pop-up option's toast whose option is ANSWERED after the combat ended, because
 # that is the case in which bc_clear_scratch_effect has already run
-# (bc_ledger_effects.txt:516-520). Note the verb: what :525-527 calls the normal
+# (bc_ledger_effects.txt:519-523). Note the verb: what :528-530 calls the normal
 # case is the pop-up ARRIVING mid-battle, and a pop-up answered when it arrives
 # still finds the variable there. No pop-up option toast exists yet.
 #
@@ -169,7 +169,7 @@ bc_banner_falls_ground = {
 # THE FALLBACK NEVER RENDERS FROM THE TEN MOMENT TOASTS - and that is a claim
 # about those ten call sites, not about the variable. bc_write_bond_effect writes
 # bc_battle_bond on every one of its six paths - five ladder arms and the
-# leaderless `else` - with no leading remove_variable, and bc_ledger_effects.txt:141
+# leaderless `else` - with no leading remove_variable, and bc_ledger_effects.txt:144
 # calls it unconditionally from bc_battle_open_effect. All ten toasts run
 # downstream of that call: seven commander sites in the same effect block, and
 # three knight sites behind the same `scope:combat_side.side_commander ?=` link,
@@ -179,12 +179,12 @@ bc_banner_falls_ground = {
 #
 # DO NOT SHORTEN THAT TO "UNREACHABLE" AND DELETE THE ARM. A bond clause on a
 # POP-UP OPTION's toast would reach it correctly whenever that option is answered
-# after the combat ended: bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
-# `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen seam
+# after the combat ended: bc_clear_scratch_effect (bc_ledger_effects.txt:531) does
+# `remove_variable = bc_battle_bond` at :539, and eight of the mod's eighteen seam
 # call sites are pop-up options, which the player may leave sitting in the queue.
-# bc_ledger_effects.txt:432-434 records exactly this hazard for bc_battle_size,
+# bc_ledger_effects.txt:435-437 records exactly this hazard for bc_battle_size,
 # and states the same condition in the same words: `Answered after the combat
-# ended`. Answered while the battle is still running - and :523-524 says the leak
+# ended`. Answered while the battle is still running - and :526-527 says the leak
 # reaches only a player who leaves a pop-up unanswered through the end of one -
 # the variable is still there. So the arm is not routine; it is the tail, and the
 # tail is real.
@@ -254,19 +254,19 @@ bc_bond_clause = {
 #
 # bc_battle_size IS A NUMBER, NOT A FLAG, and this is the ONLY class in this file
 # that compares one. The size ladder inside bc_battle_open_effect
-# (bc_ledger_effects.txt:112-125) writes it with `value = 3` / `2` / `1`. Every
+# (bc_ledger_effects.txt:115-128) writes it with `value = 3` / `2` / `1`. Every
 # other keyed class here compares `var:X = flag:y`. Writing `flag:huge` in an arm
 # below would be a SILENT no-match - validate passes it clean, and the clause
 # would simply never render. ON THE TOAST that is indistinguishable from a
 # battle whose size was never written: both show nothing. IN THE LOG it is not.
-# The ladder emits `BC: size 3` / `2` / `1` (bc_ledger_effects.txt:115, :120,
-# :124), so a size marker with no clause on the toast is this bug, and no size
+# The ladder emits `BC: size 3` / `2` / `1` (bc_ledger_effects.txt:118, :123,
+# :127), so a size marker with no clause on the toast is this bug, and no size
 # marker at all is the other one. Do not diagnose from the toast alone.
 # Plan B task 3 step 4 has a mechanical check that reads both this definition and
 # the writer and prints the two value lists; run it after touching either.
 #
 # THE ARMS COMPARE FOR EQUALITY, where every size gate elsewhere in the mod uses
-# `>=` (bc_script_values.txt:114 and :118, bc_ledger_effects.txt:269 and :472,
+# `>=` (bc_script_values.txt:114 and :118, bc_ledger_effects.txt:270 and :473,
 # bc_eve_effects.txt:75). That is correct while the writer emits exactly 3, 2
 # and 1 and nothing else, and the step 4 check is what keeps it correct. It is
 # recorded because a fourth band would break the two forms differently, and
@@ -278,26 +278,36 @@ bc_bond_clause = {
 # ladder rejects 0 exactly as the equality arms do, and both fall to the
 # trigger-less arm. It is a RENUMBERING that splits an existing range that sorts
 # the two forms differently again.) Only the equality failure can be told apart
-# from an unwritten
-# variable, and only from the log: the `BC: size` markers name the band, so a
-# marker for a band with no string is diagnosable, while a wrong string under a
-# correct marker is diagnosable only by whoever already knows this mapping.
+# from an unwritten variable, and only from the log: the `BC: size` markers name
+# the band, so a marker for a band with no string is diagnosable, while a wrong
+# string under a correct marker is diagnosable only by whoever already knows this
+# mapping.
 #
 # THE BUCKETS ARE 10,000+ / 2,000+ / under, and they BELONG TO THE WRITER. The
 # derivation, the measured distribution and the standing instruction not to
-# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:97-105. This file
+# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:98-106. This file
 # only names the three values the ladder writes; changing a boundary is an edit
 # there, not here.
 #
 # THE THREE STRINGS GRADE ALONG ONE AXIS: how much of the fight is not yet in
-# the fighting. Huge, most of the men; large, a good part of them; small, not a
-# man. Keep any rewrite monotone along that axis - two arms that make the same
+# the fighting. Keep any rewrite monotone along it - two arms that make the same
 # claim stop the clause carrying scale at all, which is the only thing it is for.
+#
+# THE ARM-BY-ARM GLOSS THAT USED TO SIT HERE IS DELETED ON PURPOSE. It named what
+# each of the three strings said, and the strings live in bc_l_english.yml, so it
+# went stale on every regrade and did: it still read `small, not a man` two
+# regrades after that string was pulled for being a universal, and it survived
+# two review rounds in that state while the twin summary in the loc file was
+# corrected both times. A duplicated summary of three strings in another file has
+# no reader who needs it. THE STRINGS AND THEIR REASONING LIVE IN ONE PLACE - the
+# `shared fragments: the scale` section header in bc_l_english.yml, which is also
+# where the smallest arm's must-not-be-a-universal rule is recorded. Read that
+# before rewriting an arm; read this before rewriting the AXIS.
 #
 # THE SUBJECT IS BOTH HOSTS, NOT THE COMMANDER'S OWN MEN. The size ladder sets
 # bc_battle_size by comparing num_total_troops on the COMBAT scope
-# (bc_ledger_effects.txt:113) - num_total_troops is a trigger, not a readable
-# value (bc_ledger_effects.txt:86-91), which is why the ladder compares rather
+# (bc_ledger_effects.txt:116) - num_total_troops is a trigger, not a readable
+# value (bc_ledger_effects.txt:87-92), which is why the ladder compares rather
 # than assigns - and the combat is both sides. A clause phrased as a claim about
 # his men would therefore report something the variable never measured, and would
 # collide with the moments' own gates: bc_flank_collapses fires only when he is
@@ -318,9 +328,13 @@ bc_bond_clause = {
 # strings as shipped name no one who could have acted and did not.
 #
 # AND THE REPROACH DOES NOT NEED ADJACENCY TO LAND. The bond fragment renders
-# BETWEEN the moment's literal and this clause on all ten toasts, and on
-# bc_banner_falls_toast_desc a ground fragment renders as well - it is the only
-# desc that has one, from Plan A's spike, and task 4 adds no others. See the ten
+# BETWEEN the moment's literal and this clause on all ten toasts, and it always
+# renders a SENTENCE there: bc_write_bond_effect writes on every path, so
+# bc_frag_bond_any is unreachable from the ten toasts. bc_banner_falls_toast_desc
+# additionally carries a ground CALL - the only desc that does, from Plan A's
+# spike, and task 4 adds no others - but that call can resolve to the empty arm,
+# because bc_write_ground_effect removes the variable first and has two exits
+# that never rewrite it. See the paragraph at the top of this file, and the ten
 # rewritten descs in Plan B task 4 step 1. DO NOT STATE A SENTENCE ORDINAL HERE:
 # five of the ten literals are two sentences, so "the third sentence" and "the
 # fourth sentence" have each been written into this file and each been wrong.
@@ -371,11 +385,10 @@ bc_bond_clause = {
 # requires faltering (:96-99) and clears it again through bc_rally_effect
 # (bc_scripted_effects.txt:92-95), so banner, rally, banner is a reachable
 # sequence inside one combat. The three knight moments are weaker
-# still - they are `type = knight` (bc_knight_phase_events.txt:50, :118, :191,
-# which are the DEFINITION lines; the `type` row is the line after each, and
-# citing the definition is this file's convention), so a second knight can do the
-# same thing in the same fight, and the toast is written about the one man it
-# fired for.
+# still - they are `type = knight` (defined at bc_knight_phase_events.txt:50,
+# :118 and :191; the `type` row is the line after each), so a second knight can
+# do the same thing in the same fight, and the toast is written about the one man
+# it fired for.
 #
 # The axis still fails, and it fails on the PROSE: a clause counting repetitions
 # would be counting something these ten sentences never establish, and on the
@@ -387,7 +400,7 @@ bc_bond_clause = {
 # AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it
 # writes on all three paths with no leading remove_variable, and it sits above
 # bc_write_bond_effect in the same effect - so every argument in bc_bond_clause's
-# header applies here unchanged. bc_ledger_effects.txt:432-434 makes the pop-up
+# header applies here unchanged. bc_ledger_effects.txt:435-437 makes the pop-up
 # case for THIS variable by name: `Answered after the combat ended, it runs after
 # bc_clear_scratch_effect and there is no bc_battle_size to read.`
 #

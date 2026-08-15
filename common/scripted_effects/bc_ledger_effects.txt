@@ -28,9 +28,11 @@
 
 # --- opening the battle -----------------------------------------------------
 #
-# Called at the TOP of every commander and knight phase event's `effect` block,
+# Called UPSTREAM OF EVERY READ in all ten commander and knight phase events -
 # before bc_mark_chronicle_effect and before any trigger_event, where
-# scope:combat_side always exists.
+# scope:combat_side always exists. Not literally at the top of every `effect`
+# block; see the THE ANCHOR comment on save_scope_as = bc_chronicle_subject below
+# for the three knight events, which call it nested.
 #
 # UNCONDITIONAL, NOT WRITE-IF-UNSET. An earlier design skipped when the variables
 # were already set. That was wrong for a reason outside this effect: scratch is
@@ -47,9 +49,10 @@
 # scope:bc_open_foe untouched when it fails rather than clearing it, so a second
 # call in the same execution whose `?=` failed would find the FIRST call's scope
 # still standing, pass the `exists` test, and write the wrong foe. No call site in
-# plan 1 calls it twice — all ten call it once, at the top of an `effect` block —
-# but plan 4 adds code to this same effect, so the constraint is written down
-# rather than left to be rediscovered.
+# plan 1 calls it twice — all ten call it exactly once per execution, seven at the
+# top of the `effect` block and three nested, per THE ANCHOR comment below — but
+# plan 4 adds code to this same effect, so the constraint is written down rather
+# than left to be rediscovered.
 bc_battle_open_effect = {
 	# THE ANCHOR. Every context writer below reaches into a province or reads a
 	# foe, and both rebind the scope. This is the only handle on the commander
