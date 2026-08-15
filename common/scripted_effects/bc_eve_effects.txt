@@ -68,6 +68,26 @@ bc_eve_offer_effect = {
 			limit = { exists = var:bc_battle_foe }
 			var:bc_battle_foe = { save_scope_as = bc_eve_foe }
 		}
+
+		# THE EVE READS SCOPES, NOT SCRATCH, and this is the reason. The pop-up
+		# is a player event sitting in a queue; its desc renders when the player
+		# gets round to it, which can be after the combat has ended and
+		# bc_clear_scratch_effect has run. A saved scope is not cleared. The
+		# freshness comes from writing it here, one line before the raise; the
+		# durability comes from it being a scope.
+		#
+		# THE HOLE, STATED: a scope IS durable across battles too. A player who
+		# leaves one eve unanswered and is offered another would render the
+		# second against the first's ground. The eve cooldown makes this rare
+		# rather than impossible. `BC: eve ground missing` counting while
+		# `BC: eve offered` counts more is what that looks like in the log.
+		if = {
+			limit = { exists = scope:combat_side.combat.location }
+			scope:combat_side.combat.location = { save_scope_as = bc_eve_ground }
+		}
+		else = {
+			debug_log = "BC: eve ground missing"
+		}
 		bc_start_eve_cooldown_effect = yes
 		debug_log = "BC: eve offered"
 		trigger_event = bc_chronicles.0011
