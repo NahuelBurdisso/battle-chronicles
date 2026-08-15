@@ -244,3 +244,36 @@ bc_facing_nemesis_trigger = {
 		var:bc_nemesis = { is_alive = yes }
 	}
 }
+
+# --- was this an annihilation ------------------------------------------------
+#
+# READS scope:wipe, WHICH THE ENGINE PASSES TO BOTH COMBAT-END HOOKS. AGOT
+# combat_on_actions.txt:13 documents it above on_combat_end_winner and :527 above
+# on_combat_end_loser, so both graders see the same value and any bar built on it
+# is SYMMETRIC for free - which bc_battle_is_notable_trigger's header requires.
+#
+# IT SURVIVES INTO AN EVENT RAISED FROM THE `events = { }` LIST. Proven by
+# vanilla: combat_event.1001 is raised from on_combat_end_winner's list
+# (AGOT combat_on_actions.txt:17) and reads `scope:wipe = yes` at AGOT
+# events/war_events/combat_events.txt:781 and :947. Nothing has to thread it.
+#
+# SCOPE-INDEPENDENT. A saved scope is readable from any scope in the event, so
+# this trigger is equally valid on the combat side (the notability row) and on
+# the commander inside side_commander ?= { } (bc_style_step_value).
+#
+# TRIGGER_IF, NOT THE SPEC'S `AND = { exists = scope:wipe  scope:wipe = yes }`.
+# The conjunction is right and the sibling shape is wrong. Shipped script uses
+# BOTH idioms - `exists` at combat_on_actions.txt:100, `= yes` at :758 - which
+# means it is unsettled whether the scope always exists carrying a boolean or
+# exists only when true. Under the second reading the spec's AND compares against
+# a missing scope on EVERY non-wipe combat end in the world, which is nearly all
+# of them, and CK3 does not short-circuit and guarantees no evaluation order among
+# siblings. `exists` is safe on a missing scope; the COMPARISON is what has to be
+# nested. Same rule, same reason, as every variable guard in plans 3 and 4.
+bc_was_wipe_trigger = {
+	exists = scope:wipe
+	trigger_if = {
+		limit = { exists = scope:wipe }
+		scope:wipe = yes
+	}
+}
