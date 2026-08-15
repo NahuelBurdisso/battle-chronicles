@@ -269,6 +269,90 @@ first two resolve once the seam compiles. The third is genuine and stays until
 plan 6 — and it corrects a claim the plan made in passing: `remove_variable` on a
 never-set variable **does** log.
 
+## Checkpoint run, 2026-08-14 (plans 2, 3 and 4 in one session)
+
+Three deferred runtime checkpoints — plan 2 task 12, plan 3 task 10, plan 4 task
+11 — run together on one debug session rather than three. 37 notable losses, 707
+moments recorded.
+
+**Error sweep clean.** `error.log` holds exactly one distinct `bc_` group:
+`Variable 'bc_battle_wounded' is used but is never set`, twice, which is the
+known plan-6 debt documented at `bc_ledger_effects.txt:318-325`. Every `debug.log`
+group is either a mod marker or one of the two engine load lines plan 1 carved
+out. **Zero missing-variable reads** for anything plans 2, 3 or 4 introduced —
+which is the real result, because all three plans read variables that may not
+exist and rely on nested guards rather than short-circuiting.
+
+### Plan 2 — the ledger
+
+- `BC: size` covered 3 of 4 bands (size 2 ×120, size 3 ×96, size 1 ×40).
+- `BC: verb` hit **all four** verbs: shieldwall 57, pursuit 42, bloodied 52,
+  spent horse 40. The verb table is exercised end to end.
+- `BC: chronicle mark commander` ×139.
+- **`BC: floor admitted` never fired.** Per plan 2 task 12 step 6 this is
+  *inconclusive, not a failure* — that row only applies when the mark marker is
+  absent, and it fired 139 times. Retry recipe: two battles back to back with the
+  same commander. **The floor is untested, not broken.** Every other empty probe
+  in plan 2 means a defect; this one does not, and it is the result a later
+  reader is most likely to misremember.
+
+Two structural notes from plan 2 that belong with these counts:
+
+- **The battle-size boundary is measured, not invented.** Q3's census (per side:
+  5k+ 46, 3k 42, 2k 31, 1k 14, under-1k 4) is what the 2,000 rung in
+  `bc_battle_open_effect` is set against — it splits the low band 73/18 rather
+  than leaving one lump. Plan 6's wound gate inherits it.
+- **All four verbs are reachable from the shipped call sites**, so a missing verb
+  after several varied battles is a defect to investigate, not a shrug. What is
+  unreachable is three `(KIND, SWING)` *pairs* out of twelve — `wild`/`up`,
+  `entrenched`/`down`, `ordered`/`down` — which is why only the `ordered` row of
+  the verb ladder tests `SWING` at all.
+- **`bc_mark_chronicle_effect` and `bc_chronicle_ready_trigger` are knight-only
+  now.** The commander pool got its own pair, so the two pacing budgets stopped
+  competing: a commander moment no longer spends a knight's slot.
+- **Known pre-existing hazard, not fixed and not worsened.** A pop-up option
+  answered *after* combat ends applies its momentum modifier with a fresh 20-day
+  duration, and `bc_cleanup_effect` has already run, so nothing strips it until
+  it expires. This predates plans 1 and 2 and affects `bc_chronicles.0001`–`.0003`;
+  the 60-day pop-up cooldown keeps the window narrow. The family-2 modifiers are
+  immune only as a side effect of the `exists = var:bc_battle_size` guard, which
+  is there for correctness of the read — **do not remove that guard on the
+  grounds that the variable is always written, because at that call site it is
+  not.**
+
+### Plan 3 — style and terrain reputation
+
+| | reset | streak | award |
+|---|---|---|---|
+| style | 67 | 7 | **1** |
+| terrain | 69 | 8 | **8** |
+
+Terrain awarded across 3 distinct argument hashes. **No `BC: terrain NONE
+MATCHED`** — the terrain ladder is still exhaustive under the reputation caller,
+matching Q5. **No `BC: award blocked` of any kind**, which confirms Q1's estimate
+that the trait-count budget gate passes ~99.6% of the time and shows style and
+terrain never collided over the same battle.
+
+### Plan 4 — the nemesis
+
+`BC: nemesis new` ×32, `escalate` ×6, `held` ×1, `rung grudge` ×26, `rung rival`
+×12.
+
+- **The accounting is exact.** At the first snapshot new 30 + escalate 6 + held 1
+  = 37 = exactly the 37 `BC: lose notable`. Nothing was swallowed by the entry
+  point's nested guards on `bc_battle_foe` existence and liveness.
+- **`rung rival` (12) exceeding `escalate` (6) proves the wipe branch.** A first
+  loss can only land on the rival rung if `bc_rivalry_step_value` returned 2, so
+  `scope:wipe` resolves inside the script value — which had no precedent.
+- **The descent path is unverified.** `decrement`, `cleared`, `wipe` and `rule
+  off` were all absent, for the ordinary reason that nobody beat their nemesis in
+  one session. All four are permanent markers and will report themselves.
+
+### Bonus: plan 1's last open done-when closed
+
+`BC: moment decisive` fired once. It had been 0 across 707 moments in the DIAG
+run, and it was the single unmet criterion left on plan 1.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
@@ -282,3 +366,15 @@ never-set variable **does** log.
   2026-08-14 run) but no commander has yet banked three notable wins with
   `martial >= 14` and no nickname unaided. `"BC: nickname awarded"` is a permanent
   marker, so `probe 'BC:'` will report it the first time it happens.
+- **The nemesis relation itself, on a character screen.** `BC: nemesis new` fired
+  32 times and `BC: nemesis rung grudge` 26, so `bc_rivalry_set_relation_effect`
+  runs and picks the right rung — but a marker only proves the effect was
+  *reached*, not that the relation *landed*. Plan 4 targets
+  `scope:bc_rivalry_foe`, saved from `var:bc_nemesis`, on the strength of an
+  argument about shipped syntax: `set_relation_X = var:Y` has **zero** uses in
+  vanilla or AGOT, while `has_relation_X = var:Y` ships. That argument is
+  untested. Open a commander who took a `BC: nemesis new` and look for a grudge
+  against the right man with the reason *"beat him on the field"*. If the marker
+  fired and no relation exists, the target form is wrong and must be re-derived.
+- The rivalry game rule rendering: **Battle Chronicles: Rivalry** with three
+  readable options on the rules screen.
