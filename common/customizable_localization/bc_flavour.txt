@@ -72,8 +72,8 @@
 #
 # IT IS A SCRIPT NOW, tools/sweep_backticks.py in the tooling repo, because the
 # hand-rolled version was retyped from memory every round and was wrong in a new
-# way each time. Its own header carries the limits above and two the ad-hoc
-# versions did not have. A fence opened inside a blockquote reads as prose
+# way each time. Its own header carries the limits above, and two FIXES the
+# ad-hoc versions did not have. A fence opened inside a blockquote reads as prose
 # unless the `>` prefix is allowed for, and WHAT THAT COSTS IS THE DELIMITER,
 # NOT THE BODY: a delimiter is three backticks, so an unrecognised one is odd
 # and reports itself, which is how the reputation plan's blockquoted fence
@@ -84,21 +84,28 @@
 # Stripping removes BOTH; it does not trade one for the other. The script
 # spells its own backticks as escapes for the same reason
 # - a detector that names its own source on every run teaches the reader to
-# skim the report. Its tests spell theirs the same way, through one shared
-# fixture constant, and for the same reason: written literally they put twelve
-# lines of the test file into the report.
+# skim the report. Its tests spell theirs the same way, through two shared
+# fixture constants, and for the same reason: written literally the fixtures
+# put a block of the test file into the report on every run.
 #
 # AND IT IS PINNED, which is the half that makes the rest of this paragraph
 # worth reading. tools/tests/test_sweep_backticks.py holds a test per claim
-# made above, including a pair that patches the blockquote allowance back out
-# and asserts the DELIMITERS report and not the body. Beside it,
-# tools/tests/mutate_sweep_backticks.py breaks the script one line at a time
-# and records which tests go red. Every mutant is killed and every test is
-# killed by at least one mutant, so none of them is the kind that passes
-# against a build with the checked behaviour deleted - the kind the citation
-# checker's own suite was found to contain, twice. Without that, a claim
-# written down here and a claim the script actually honours are
-# indistinguishable, which is the state every hand-rolled sweep was in.
+# made above - including the body half, which needed a fixture whose body IS
+# unbalanced, because with the blockquoted body the reputation plan actually
+# has the assertion cannot tell an exempt body from a body with nothing to
+# say. Beside it, tools/tests/mutate_sweep_backticks.py breaks the script one
+# line at a time and records which tests go red.
+#
+# BE PRECISE ABOUT WHAT THAT BUYS, because the first draft of this paragraph
+# was not. Every mutant is killed and no test is left unkilled, and NEITHER
+# FACT IS A STATEMENT ABOUT ANY SINGLE TEST. Both are properties of the pair
+# taken whole, and a test can hold them while pinning less than its name
+# claims - two here did, and round 18 found them by writing mutants the
+# harness did not have rather than by re-running it. THE MUTANT LIST IS THE
+# CLAIM, and it is only as good as its coverage of the file it points at. What
+# this rules out is the shape the citation checker's own suite was twice found
+# to have, a test that passes against a build with the checked behaviour
+# deleted. What it does not rule out is a behaviour nobody thought to break.
 #
 # Two things about it are worth knowing before running it. First, it is NOT a
 # validate check, and deliberately - the mod has legitimate multi-line
