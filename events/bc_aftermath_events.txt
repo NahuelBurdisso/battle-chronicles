@@ -3,7 +3,7 @@
 # Battle Chronicles - the combat-end graders.
 #
 # Reached from on_combat_end_winner / _loser via their `events = { }` list - see
-# bc_on_actions.txt for why an `effect = { }` there is discarded. Shape copied
+# zz_bc_on_actions.txt for why an `effect = { }` there is discarded. Shape copied
 # from vanilla combat_event.0001: hidden, scoped to the combat side, no `type =`.
 #
 # TWO events, one per hook. Not one: nothing in an event body can tell which of
@@ -139,16 +139,36 @@ bc_chronicles.0091 = {
 				# man's toast to his liege because a dead character is never
 				# human. Adding is_alive = yes here would silence the worst day
 				# the side had.
-				if = {
-					limit = { any_side_knight = { is_alive = no } }
-					side_commander ?= {
-						save_scope_as = bc_bereaved_commander
-						debug_log = "BC: dead knights"
-						bc_addressed_toast_effect = {
-							TYPE = event_toast_effect_bad
-							TITLE = bc_dead_knights_toast
-							DESC = bc_dead_knights_toast_desc
-							SUBJECT = scope:bc_bereaved_commander
+				#
+				# IT LOOKS ACROSS AT enemy_side, AND THAT IS THE WHOLE FIX.
+				# Root is the WINNING side, and vanilla does not kill the winner's
+				# knights at all - combat_event.1001 walks the winner at AGOT
+				# combat_events.txt:846 only to write battle history, and does its
+				# killing at :849 inside `enemy_side = { every_side_knight }`. The
+				# dead knights of any battle are the LOSER's. This block read its
+				# own side for two plans and logged zero over 112 grader runs.
+				#
+				# THE TOAST GOES TO THE MAN WHO LOST THEM, i.e. the loser's
+				# commander, which is also who the loc string has always described.
+				#
+				# IT DEPENDS ON DISPATCH ORDER, WHICH IS WHY THE FILE IS NAMED
+				# zz_bc_on_actions.txt. combat_event.1001 has to have run before
+				# this, and both are `events = { }` entries on on_combat_end_winner
+				# merged across files in ALPHABETICAL filename order. `BC: dead
+				# knights` is the marker that says the order held. If it is silent
+				# again, the assumption is what failed, not this block.
+				enemy_side = {
+					if = {
+						limit = { any_side_knight = { is_alive = no } }
+						side_commander ?= {
+							save_scope_as = bc_bereaved_commander
+							debug_log = "BC: dead knights"
+							bc_addressed_toast_effect = {
+								TYPE = event_toast_effect_bad
+								TITLE = bc_dead_knights_toast
+								DESC = bc_dead_knights_toast_desc
+								SUBJECT = scope:bc_bereaved_commander
+							}
 						}
 					}
 				}
@@ -272,28 +292,24 @@ bc_chronicles.0092 = {
 					}
 				}
 
-				# --- the knights who did not come back ----------------------
+				# --- NO DEAD-KNIGHT BLOCK HERE, AND IT IS NOT AN OVERSIGHT ---
 				#
-				# Identical to the block in bc_chronicles.0091, and it belongs in
-				# both: the WINNER also loses knights, and a winner told nothing
-				# about his dead is the same gap on the other side.
+				# This event used to carry a copy of .0091's dead-knight toast, on
+				# the reasoning that a loser told nothing about his dead is a gap.
+				# It never fired once. Neither did .0091's copy: zero across 112
+				# grader runs and 56 notable battles.
 				#
-				# See .0091 for why this is a presence test rather than a second
-				# iteration, why the scope must be saved, and why there is no
-				# is_alive gate on the commander.
-				if = {
-					limit = { any_side_knight = { is_alive = no } }
-					side_commander ?= {
-						save_scope_as = bc_bereaved_commander
-						debug_log = "BC: dead knights"
-						bc_addressed_toast_effect = {
-							TYPE = event_toast_effect_bad
-							TITLE = bc_dead_knights_toast
-							DESC = bc_dead_knights_toast_desc
-							SUBJECT = scope:bc_bereaved_commander
-						}
-					}
-				}
+				# VANILLA KILLS KNIGHTS ON ONE SIDE ONLY, AND NOT FROM HERE.
+				# combat_event.1001 (AGOT combat_events.txt:849) does its killing
+				# inside `enemy_side = { every_side_knight = { ... } }` and it is
+				# raised from on_combat_end_winner. So the dead knights of a battle
+				# are the LOSER's, and they are made dead on the WINNER's hook.
+				# This event runs on on_combat_end_loser and cannot be ordered
+				# after that; the winner's own knights are only walked at :846,
+				# which writes battle history and kills nobody.
+				#
+				# The toast therefore lives once, in .0091, reaching across to
+				# enemy_side. Do not restore a copy here.
 
 				# Plan 3. `OUTCOME = lose` closes the nickname arm of the chain
 				# and nothing else - style and terrain grade EITHER outcome,

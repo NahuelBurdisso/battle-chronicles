@@ -13,6 +13,16 @@
 #
 # So: hook via `events = { }` and put the logic in a hidden combat_side event.
 # That is what vanilla itself does (on_combat_end_winner -> combat_event.0001).
+#
+# THE `zz_` PREFIX IS LOAD-BEARING. The same alphabetical read order that decides
+# an `effect` fight also decides the ORDER OF THE MERGED `events` LIST, and
+# bc_chronicles.0091 has to be dispatched AFTER combat_event.1001 - the event that
+# kills the losing side's knights - or its dead-knight toast finds a field on which
+# nobody has died yet. Under the old name `bc_on_actions.txt` it sorted before
+# `combat_on_actions.txt` and the toast logged ZERO over 112 grader runs.
+#
+# Renaming this file is therefore a behavioural change, not housekeeping. If it is
+# ever renamed back, `BC: dead knights` goes silent again.
 
 on_combat_end_winner = {
 	events = {

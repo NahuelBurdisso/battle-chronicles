@@ -30,7 +30,7 @@ reads the index, so a stale index can only ever report a pass).
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
 | `common/script_values/bc_script_values.txt` | the four ratio thresholds |
 | `common/game_rules/bc_game_rules.txt` | frequency, swing, aftermath |
-| `common/on_action/bc_on_actions.txt` | combat-end hooks, `events = { }` only |
+| `common/on_action/zz_bc_on_actions.txt` | combat-end hooks, `events = { }` only; the `zz_` sorts us after `combat_on_actions.txt` |
 | `common/character_memory_types/bc_memories.txt` | shieldbrother + the two battle memories |
 | `events/bc_events.txt` | the three player-facing pop-ups, and nothing else |
 | `events/bc_aftermath_events.txt` | the two hidden combat-end graders |
