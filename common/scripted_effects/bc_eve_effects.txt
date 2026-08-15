@@ -84,9 +84,13 @@ bc_eve_offer_effect = {
 		# The same hole exists for scope:bc_eve_foe: when the current enemy
 		# side is leaderless the `if` above does not fire, and a previous
 		# battle's commander is left standing in the scope. That was always
-		# true, but bc_eve_foe now drives three desc arms and option e — which
-		# grants bc_bloodied and 5 stress to a real character — so a stale foe
-		# here has teeth that it did not before.
+		# true, but bc_eve_foe now drives four desc arms — nemesis, kin,
+		# heathen, countryman — and the nemesis one is shared with option e,
+		# because bc_eve_facing_nemesis_trigger reads scope:bc_eve_foe and
+		# gates both. So a stale foe who happens to be the nemesis renders the
+		# nemesis paragraph AND unlocks option e, which grants bc_bloodied and
+		# 5 stress to a real character. That is the tooth this hole did not
+		# have before.
 		if = {
 			limit = { exists = scope:combat_side.combat.location }
 			scope:combat_side.combat.location = { save_scope_as = bc_eve_ground }

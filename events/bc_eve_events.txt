@@ -218,6 +218,17 @@ bc_chronicles.0011 = {
 	# option set it was offered with. That is the whole reason bc_eve_ground is a
 	# scope and not scratch.
 	#
+	# OPTION d IS DELIBERATELY NARROWER THAN THE GROUND DESC CHAIN. The chain
+	# names five bands; this gate names two. They answer different questions:
+	# the chain says what the ground IS, the option says whether the ground can
+	# be HELD. bc_ground_held is +army_toughness / -army_pursuit, a line that
+	# does not break and does not chase - which is rough and forest. Jungle
+	# gained a desc arm without gaining this option on purpose: its paragraph
+	# says men who go in there are gone from the battle, which is dispersal,
+	# the opposite of a held line. Winter and desert are the same judgement.
+	# If a band is ever added here, the modifier is the argument, not the
+	# paragraph.
+	#
 	# DECISION TABLE for the two markers below. Their denominator is eves
 	# ANSWERED, which is neither the moment count nor `BC: eve offered`:
 	#   both 0 while `BC: eve offered` counts  the options are never reachable,

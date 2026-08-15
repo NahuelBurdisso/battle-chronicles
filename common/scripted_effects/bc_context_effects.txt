@@ -8,7 +8,7 @@
 #
 # ONE EXCEPTION: the eve (bc_eve_events.txt:bc_chronicles.0011). Its desc chain
 # and option triggers classify directly — is_close_family_of, faith, culture,
-# and four band triggers — because the eve renders after bc_clear_scratch_effect
+# and five band triggers — because the eve renders after bc_clear_scratch_effect
 # has run, so it must read durable saved scopes rather than scratch that no
 # longer exists. The rule still holds everywhere else. The consequence is that
 # the eve's chains are uninstrumented — there is no marker that says which
