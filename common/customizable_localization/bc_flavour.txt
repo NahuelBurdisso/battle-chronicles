@@ -112,7 +112,14 @@
 # element SINGLY as well as wholesale. What this rules out is the shape the
 # citation checker's own suite was twice found to have, a test that passes
 # against a build with the checked behaviour deleted. What it does not rule out
-# is a behaviour nobody thought to break.
+# is a behaviour nobody thought to break - AND ONE SOMEONE THOUGHT TO BREAK AND
+# THEN WROTE DOWN AS UNBREAKABLE. Round 20 recorded two deletions as
+# deliberately absent from the harness, on the ground that each survives
+# anyway. Round 21 found one of the two grounds false: NTFS collates uppercased
+# and case-insensitively, which is not the order Python's sort gives, so both of
+# the walk's sorts were observable all along and neither was observed. A list of
+# decisions is the last place anyone re-reads, which is what makes a false
+# premise parked in one durable.
 #
 # Two things about it are worth knowing before running it. First, it is NOT a
 # validate check, and deliberately - the mod has legitimate multi-line
