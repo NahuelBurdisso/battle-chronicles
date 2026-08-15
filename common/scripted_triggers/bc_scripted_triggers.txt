@@ -111,6 +111,31 @@ bc_chronicle_ready_trigger = {
 	NOT = { has_character_flag = bc_chronicle_recent }
 }
 
+# The COMMANDER variant. A separate trigger, NOT an edit of the one above.
+#
+# The shared one is still used by the knight events, and it must stay exactly as
+# it is for them: no bc_ variable is ever written onto a knight (spec Section 1),
+# so `NOT = { exists = var:bc_battle_moments }` is ALWAYS TRUE on a knight.
+# Rewriting the shared trigger in place would therefore disable the knight
+# cooldown entirely - every knight event would pass the OR on its second arm
+# forever.
+#
+# The second arm is the FLOOR: a commander who has recorded nothing yet gets one
+# moment immediately, no matter how long the size-scaled flag has left to run.
+# Without it a size-1 skirmish sets a 40-day flag on the first roll that misses,
+# and a short battle ends with no chronicle at all.
+#
+# It is an `exists` arm, not `var:bc_battle_moments = 0`. The variable is written
+# on the FIRST recorded moment, so before that it does not exist - and comparing
+# a missing variable is the read CK3 logs about. Once it exists it is at least 1
+# and this arm is false forever after, which is what makes it a one-shot floor.
+bc_chronicle_ready_commander_trigger = {
+	OR = {
+		NOT = { has_character_flag = bc_chronicle_recent }
+		NOT = { exists = var:bc_battle_moments }
+	}
+}
+
 # --- pop-up gate ------------------------------------------------------------
 # A flag, NOT a modifier. Momentum modifiers are stripped at combat end, so a
 # modifier-based lockout silently resets every battle. Verified the hard way.
