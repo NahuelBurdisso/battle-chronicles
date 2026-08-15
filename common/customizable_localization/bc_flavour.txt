@@ -84,28 +84,35 @@
 # Stripping removes BOTH; it does not trade one for the other. The script
 # spells its own backticks as escapes for the same reason
 # - a detector that names its own source on every run teaches the reader to
-# skim the report. Its tests spell theirs the same way, through two shared
-# fixture constants, and for the same reason: written literally the fixtures
-# put a block of the test file into the report on every run.
+# skim the report. Its tests spell theirs the same way, through named
+# constants, and for the same reason: written literally the fixtures put a
+# block of the test file into the report on every run. No number of constants
+# is given, for the reason no number of citations is given above.
 #
 # AND IT IS PINNED, which is the half that makes the rest of this paragraph
 # worth reading. tools/tests/test_sweep_backticks.py holds a test per claim
-# made above - including the body half, which needed a fixture whose body IS
-# unbalanced, because with the blockquoted body the reputation plan actually
-# has the assertion cannot tell an exempt body from a body with nothing to
-# say. Beside it, tools/tests/mutate_sweep_backticks.py breaks the script one
-# line at a time and records which tests go red.
+# made above - including the body half. That one needed a fixture whose body
+# is ITSELF unbalanced: the blockquoted fence the reputation plan actually
+# carries has no backtick anywhere in its body, so against that fixture alone
+# the assertion cannot tell an exempt body from a body with nothing to say.
+# Beside it, tools/tests/mutate_sweep_backticks.py breaks the script one line
+# at a time and records which tests go red.
 #
 # BE PRECISE ABOUT WHAT THAT BUYS, because the first draft of this paragraph
 # was not. Every mutant is killed and no test is left unkilled, and NEITHER
 # FACT IS A STATEMENT ABOUT ANY SINGLE TEST. Both are properties of the pair
 # taken whole, and a test can hold them while pinning less than its name
-# claims - two here did, and round 18 found them by writing mutants the
-# harness did not have rather than by re-running it. THE MUTANT LIST IS THE
-# CLAIM, and it is only as good as its coverage of the file it points at. What
-# this rules out is the shape the citation checker's own suite was twice found
-# to have, a test that passes against a build with the checked behaviour
-# deleted. What it does not rule out is a behaviour nobody thought to break.
+# claims. Round 18 found two such tests, and round 19 found another by the
+# same method: writing mutants the harness did not have rather than re-running
+# the ones it did. Its find is the sharpest illustration of the point - a test
+# named for the extension list drew both its fixtures AND its expectation from
+# that list, so deleting an extension deleted the fixture that would have
+# caught it. THE MUTANT LIST IS THE CLAIM, and it is only as good as its
+# coverage of the file it points at; for a collection, that means breaking each
+# element SINGLY as well as wholesale. What this rules out is the shape the
+# citation checker's own suite was twice found to have, a test that passes
+# against a build with the checked behaviour deleted. What it does not rule out
+# is a behaviour nobody thought to break.
 #
 # Two things about it are worth knowing before running it. First, it is NOT a
 # validate check, and deliberately - the mod has legitimate multi-line
