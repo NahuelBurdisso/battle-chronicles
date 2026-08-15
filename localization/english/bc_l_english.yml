@@ -79,8 +79,13 @@
  bc_banner_falls_toast:0 "The Banner Falls"
  bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it.[bc_chronicle_subject.Custom('bc_banner_falls_ground')]"
 
-# SPIKE. One fragment set, on one moment, to prove the shape renders before
-# ninety-nine more are written. Each BEGINS WITH A SPACE because it is appended
+# SPIKE. One fragment set, on one moment, to prove the shape renders before the
+# other 103 fragment keys are written. That run has not happened; the bond
+# fragments below were written anyway, under the AMENDMENT in
+# docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, because a
+# fragment APPENDED to a desc that keeps its literal sentence fails to "no
+# improvement" rather than to an empty toast. This set is still the only one a
+# call site names. Each BEGINS WITH A SPACE because it is appended
 # to a finished sentence - the anchor above deliberately has no space before the
 # tag, so that the empty fallback leaves no trailing space. Each is one clause:
 # the fragment adds a place to a thing that already happened, it does not
@@ -126,7 +131,7 @@
 
  bc_frag_bond_nemesis:0 " The man commanding here does not have to ask whose colours are across the field."
  bc_frag_bond_kin:0 " The man commanding here shares blood with whoever is giving the orders across the field."
- bc_frag_bond_countryman:0 " The man commanding here learned the same songs as the men he is killing."
+ bc_frag_bond_countryman:0 " The man commanding here and the one commanding against him were born to the same people."
  bc_frag_bond_heathen:0 " Whatever the other side was praying to at dawn, the man commanding here was not."
  bc_frag_bond_stranger:0 " The man commanding here has never had cause to learn a name on the other side."
  bc_frag_bond_any:0 ""

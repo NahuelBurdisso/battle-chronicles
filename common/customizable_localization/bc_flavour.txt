@@ -14,17 +14,19 @@
 # in order, so a trigger-less arm anywhere but last would swallow the ones below
 # it. Every definition here ends in one.
 #
-# HOW OFTEN THAT FALLBACK ACTUALLY RENDERS VARIES BY DEFINITION AND BY CALL SITE,
-# and each definition says so in its own header. On the ground clauses it is
-# load-bearing from anywhere, because bc_write_ground_effect removes the variable
-# first and has two exits that never rewrite it. On bc_bond_clause it never
-# renders from the ten moment toasts, because bc_write_bond_effect writes on
-# every path and runs upstream of all ten - but it would render from a pop-up
-# option's toast whose option is answered AFTER the combat ended, because that
-# is the case in which bc_clear_scratch_effect has already run
-# (bc_ledger_effects.txt:516-527). Answered mid-battle, which that same comment
-# calls the normal case, the variable is still there and the fallback does not
-# render. No pop-up option toast exists yet.
+# HOW OFTEN THAT FALLBACK ACTUALLY RENDERS VARIES BY DEFINITION AND BY CALL SITE.
+# The ground case is stated here rather than in bc_banner_falls_ground's header,
+# which is a spike marker and says nothing about its fallback; every definition
+# added from bc_bond_clause onward states its own. On the ground clauses the
+# fallback is load-bearing from anywhere, because bc_write_ground_effect removes
+# the variable first and has two exits that never rewrite it. On bc_bond_clause
+# it never renders from the ten moment toasts, because bc_write_bond_effect
+# writes on every path and runs upstream of all ten - but it would render from a
+# pop-up option's toast whose option is ANSWERED after the combat ended, because
+# that is the case in which bc_clear_scratch_effect has already run
+# (bc_ledger_effects.txt:523-524). Note the verb: what :525-527 calls the normal
+# case is the pop-up ARRIVING mid-battle, and a pop-up answered when it arrives
+# still finds the variable there. No pop-up option toast exists yet.
 #
 # SO CHECK THE WRITER **AND** THE CALL SITE. Checking only the writer gives the
 # wrong answer for the pop-up case, and no fallback here may be deleted on the
@@ -35,7 +37,15 @@
 # what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
 # so the bare `exists` beside it is the row that actually rejects.
 
-# --- SPIKE. The only fragment until a run proves this shape renders. ---------
+# --- SPIKE. The only WIRED fragment set. -------------------------------------
+#
+# It was written to prove the shape renders before the other 103 fragment keys
+# were, and that run has not happened. bc_bond_clause below it was still written, under the
+# AMENDMENT in docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md,
+# which split the gate: a clause that is APPENDED to a desc keeping its literal
+# sentence fails to "no improvement", so it needs no run, while a clause that
+# REPLACES the literal fails to an empty toast and still does. This spike is the
+# only fragment set any call site names today.
 bc_banner_falls_ground = {
 	type = character
 
@@ -121,8 +131,9 @@ bc_banner_falls_ground = {
 # class on the AGOT map - lands there. bc_context_effects.txt:204-208 routes a
 # LEADERLESS enemy side to the same value, but that arm justifies itself by
 # saying the prose has a stranger clause, so citing it alone argues in a circle.
-# It is also only the smaller half: that file warns at :129-131 not to read
-# `nofoe` as a subset of `stranger`.
+# It is also only one half of the value, and the smaller one - :129-131 warns
+# not to read `nofoe` as a subset of `stranger` but as the OTHER half of it, and
+# :112-117 above is the half that carries the largest match-up class.
 #
 # THE ORDER OF THOSE FIVE IS NOT THE ORDER THE EVE USES, deliberately. The eve's
 # desc chain runs nemesis, kin, heathen, countryman, stranger; the ladder in
@@ -133,9 +144,9 @@ bc_banner_falls_ground = {
 # notes at bc_context_effects.txt:136-149 and bc_eve_events.txt:60-73 - and this
 # is the third carrier of those five values. NOT the first whose ordering the
 # player sees: the eve's chain has always picked a paragraph by its own order.
-# It is the first to put the LADDER's ordering in front of the player as prose -
-# until now the ladder reached the player only as piety and prestige, through the
-# aftermath award. Do not "reconcile" the two.
+# It WILL be the first to put the LADDER's ordering in front of the player as
+# prose, once it is wired. Until then the ladder reaches the player only as piety
+# and prestige, through the aftermath award. Do not "reconcile" the two.
 #
 # THIS CLAUSE READS THE BOND AND NOT THE CREED. bc_write_bond_effect also writes
 # an orthogonal var:bc_battle_creed, which exists precisely because the ladder
@@ -160,9 +171,11 @@ bc_banner_falls_ground = {
 # `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen seam
 # call sites are pop-up options, which the player may leave sitting in the queue.
 # bc_ledger_effects.txt:432-434 records exactly this hazard for bc_battle_size,
-# and states the same condition: `Answered after the combat ended`. Answered
-# mid-battle - the normal case, per bc_ledger_effects.txt:516-527 - the variable
-# is still there. So the arm is not routine; it is the tail, and the tail is real.
+# and states the same condition in the same words: `Answered after the combat
+# ended`. Answered while the battle is still running - and :523-524 says the leak
+# reaches only a player who leaves a pop-up unanswered through the end of one -
+# the variable is still there. So the arm is not routine; it is the tail, and the
+# tail is real.
 #
 # THE STRING IS EMPTY because a path that left the variable unwritten could not
 # name a foe, and every sentence in this class presumes one. Silence is the only
