@@ -25,9 +25,10 @@
 # breakdown and in the character's modifier list. Both render the localized name
 # and, if present, the _desc.
 #
-# ALL FOUR TAGS CONFIRMED IN THE API DUMP, docs/api/1.19.0.6/modifiers.log, each
-# `Use areas: character`. Nothing in this workspace validates a modifier tag -
-# a misspelled one is a silent no-op - so that check is the only one there is.
+# ALL FOUR TAGS CONFIRMED IN THE API DUMP, ../../docs/api/1.19.0.6/modifiers.log,
+# each `Use areas: character`. Nothing in this workspace validates a modifier
+# tag - a misspelled one is a silent no-op - so that check is the only one there
+# is.
 #
 # EVERY ONE OF THESE MUST APPEAR IN bc_cleanup_effect. That is the one rule.
 
@@ -63,9 +64,9 @@ bc_pursuit = {
 #
 # BOTH TAGS ARE ALREADY IN USE IN THIS FILE - army_toughness_mult by
 # bc_shieldwall, army_pursuit_mult by bc_pursuit - so both are confirmed against
-# docs/api/1.19.0.6/modifiers.log by the same evidence the header cites. Nothing
-# in this workspace validates a modifier tag; reusing a proven one is the only
-# check available.
+# ../../docs/api/1.19.0.6/modifiers.log by the same evidence the header cites.
+# Nothing in this workspace validates a modifier tag; reusing a proven one is
+# the only check available.
 #
 # NOT a second bc_shieldwall. Shieldwall trades damage for toughness and is
 # something the line does. This trades PURSUIT for toughness and is something

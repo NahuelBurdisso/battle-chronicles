@@ -80,15 +80,16 @@
  bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it.[bc_chronicle_subject.Custom('bc_banner_falls_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # SPIKE. One fragment set, on one moment, to prove the shape renders before the
-# rest of the fragment keys were. That run has not happened; the bond and
+# rest of the fragment keys were written. That run has not happened; the bond and
 # scale fragments below were written anyway, under the AMENDMENT in
-# docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, because a
-# fragment APPENDED to a desc that keeps its literal sentence fails to "no
-# improvement" rather than to an empty toast. This set is still the only
-# PER-MOMENT one a call site names, and bc_banner_falls_toast_desc is still the
-# only desc carrying a ground call. Each BEGINS WITH A SPACE because it is appended
-# to a finished sentence - the anchor above deliberately has no space before the
-# tag, so that the empty fallback leaves no trailing space. Each is one clause:
+# ../../docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md - a path
+# from THIS repo's root, the plans being in the tooling repo two levels above
+# it - because a fragment APPENDED to a desc that keeps its literal sentence
+# fails to "no improvement" rather than to an empty toast. This set is still the
+# only PER-MOMENT one a call site names, and bc_banner_falls_toast_desc is still
+# the only desc carrying a ground call. Each BEGINS WITH A SPACE because it is
+# appended to a finished sentence - the anchor above deliberately has no space
+# before the tag, so the empty fallback leaves no trailing space. One clause each:
 # the fragment adds a place to a thing that already happened, it does not
 # restate the thing.
  bc_frag_banner_falls_desert:0 " The dust takes it before the sand does."
@@ -234,10 +235,12 @@
 #               THE ONLY GUARANTEED COLLISION IN THIS LIST. Plural "the men"
 #               beside it is ordinary English; SINGULAR "a man" is not, and an
 #               earlier small arm read " In a fight this small, there is not a
-#               man who is not in the fighting." (The name above sits on one
-#               unbroken line because a name is cited on one line or it is not
-#               cited at all. The 84-column comment rule forced the wrap that
-#               used to split it, so the fix is to re-flow, not to widen.)
+#               man who is not in the fighting." (The ALL-CAPS collision verdict
+#               in this entry is not requoted here, because requoting a grep
+#               target inside its own file makes the grep return two hits. It
+#               sits on one unbroken line because a name is cited on one line or
+#               it is not cited at all, and the 84-column rule forced the wrap
+#               that used to split it - so the fix was to re-flow, not widen.)
 #   "man"       singular, and NOT only in the bond arms:
 #               bc_knight_holds_the_breach_toast_desc ("One man in the gap") and
 #               bc_frag_banner_falls_rough ("the man who carried it"). On the

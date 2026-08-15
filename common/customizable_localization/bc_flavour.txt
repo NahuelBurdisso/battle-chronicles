@@ -233,13 +233,15 @@
 # It was written to prove the shape renders before the rest of the fragment keys
 # were, and that run has not happened. bc_bond_clause and bc_scale_clause below
 # it were written and then wired anyway, under the AMENDMENT in
-# docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, which split the
-# gate: a clause APPENDED to a desc that keeps its literal sentence fails to "no
-# improvement", so it needs no run, while a clause that REPLACES the literal
-# fails to an empty toast and still does. THREE fragment sets are named by a call
-# site today: this one, from bc_banner_falls_toast_desc alone, and the two shared
-# clauses, from all ten. The nine remaining per-moment ground sets are Plan B
-# tasks 6-14 and none is written. Each of those tasks ALSO writes a core set,
+# ../../docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md - a path
+# relative to THIS repo's root, because the plans live in the tooling repo two
+# levels above it. The AMENDMENT split the gate: a clause APPENDED to a desc
+# that keeps its literal sentence fails to "no improvement", so it needs no run,
+# while a clause that REPLACES the literal fails to an empty toast and still
+# does. THREE fragment sets are named by a call site today: this one, from
+# bc_banner_falls_toast_desc alone, and the two shared clauses, from all ten.
+# The nine remaining per-moment ground sets are Plan B tasks 6-14 and none is
+# written. Each of those tasks ALSO writes a core set,
 # and it is the CORE set that REPLACES the moment's literal rather than being
 # appended to it - so every one of them still waits on the run, and so does
 # task 5, which writes a core set for this moment and no ground set.

@@ -227,7 +227,7 @@ bc_chronicles.0011 = {
 	#
 	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN: the chain names five
 	# bands, three qualify. The modifier is what the gate answers to -
-	# bc_ground_held's header comment at bc_battle_modifiers.txt:60-62 is
+	# bc_ground_held's header comment at bc_battle_modifiers.txt:61-63 is
 	# "anchored himself to a hillside or a treeline", ground you stand on -
 	# and rough, forest and jungle are the three bands whose paragraph is
 	# about a thing standing between the two armies. Winter and desert read as
