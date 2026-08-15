@@ -3,8 +3,8 @@
 # Paradox script and localization are LF + UTF-8. Both also carry a BOM in this
 # mod, but only one of the two is checked: `has_bom` has a single call site, in
 # `_check_loc_file`, which is reached only for a .yml under localization/. The
-# BOM on every script .txt here is a convention NOTHING ENFORCES - `ck3.py
-# validate` passes a .txt that has lost one. NOTHING HERE PRESERVES A BOM
+# BOM on every script .txt here is a convention NOTHING ENFORCES: a .txt that
+# has lost one still passes `ck3.py validate`. NOTHING HERE PRESERVES A BOM
 # EITHER: `text` governs line endings only, and a CRLF checkout would not strip
 # a BOM. The two are recorded together because they are easy to conflate, not
 # because they are checked together.
@@ -14,8 +14,8 @@
 # into files the parent tooling repo declares LF. The parent's .gitattributes
 # does not reach this far: an attributes lookup stops at the top level of the
 # repository that contains the file, and this mod is its own repository. It went
-# unnoticed because git cleans CRLF back to LF on the way in, which leaves `git
-# status` clean over a working tree that is mixed - and it was mixed, in a
+# unnoticed because git cleans CRLF back to LF on the way in, so `git status`
+# reads clean over a working tree that is mixed - and it was mixed, in a
 # minority of the files under common/.
 *.txt text eol=lf
 *.yml text eol=lf
