@@ -82,9 +82,14 @@ bc_battle_open_effect = {
 	# reaching for it would make every battle read as "under 2,000".
 	#
 	# 10,000 is bc_battle_is_notable_trigger's own lower size row
-	# (bc_scripted_triggers.txt:153). 2,000 is INVENTED — the calibration run
-	# recorded `under 5k` as one undivided bucket and never subdivided it. DIAG Q3
-	# measures it.
+	# (bc_scripted_triggers.txt:153). 2,000 was INVENTED — the calibration run
+	# recorded `under 5k` as one undivided bucket and never subdivided it. It was
+	# then measured over 143 battles, counted per side against the world rather
+	# than against this variable: 5k+ 46, 3k 42, 2k 31, 1k 14, under-1k 4. The
+	# boundary STANDS — it splits the low band 73/18 instead of leaving one lump,
+	# which is the whole point of having it. Do not re-guess it; re-derive it by
+	# restoring the ladder from git history, the same rule the README states for
+	# the aftermath thresholds.
 	if = {
 		limit = { scope:combat_side.combat = { num_total_troops >= 10000 } }
 		set_variable = { name = bc_battle_size value = 3 }

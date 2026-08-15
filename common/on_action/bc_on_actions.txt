@@ -26,9 +26,12 @@ on_combat_end_loser = {
 	}
 }
 
-# Root = Combat here, NOT a combat side — see event_scopes.log and the DIAG event
-# this currently carries. `events = { }` for the same reason as the two hooks
-# above: an `effect = { }` in an on_action does not merge across files.
+# Root = Combat here, NOT a combat side — see event_scopes.log, which is why
+# bc_chronicles.0900 declares `scope = combat`. Proven at runtime, 152 fires.
+# Read bc_combat_start_events.txt before building on this hook: the event is
+# reachable, but combat_attacker / combat_defender are NOT resolvable from inside
+# it. `events = { }` for the same reason as the two hooks above: an `effect = { }`
+# in an on_action does not merge across files.
 on_combat_start = {
 	events = {
 		bc_chronicles.0900

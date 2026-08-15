@@ -166,11 +166,17 @@ bc_aftermath_nickname_effect = {
 # the world is AI, and a toast raised on a man nobody is playing reaches nobody —
 # so a toast ABOUT an AI subject is raised on somebody who might be human.
 #
-# Whether the toast BODY additionally fails to execute for an AI character is a
-# separate and currently OPEN question - README.md:158-159 says it executes,
-# README.md:48-51 says it does not. DIAG Q4 settles it. This effect is correct
-# either way; only the strength of the "keep state out of toasts" rule depends on
-# the answer.
+# Whether the toast BODY additionally executes for an AI character was an open
+# question - README.md said both things in two different places. It was measured
+# at combat end across 128 toasts whose subject was a non-player character, by
+# splitting the count on `is_ai` OUTSIDE the toast and comparing to a marker
+# inside it: human 0, AI 128, inside 128. THE BODY RUNS. README.md now records
+# that next to the claim it corrects.
+#
+# This effect is correct either way - addressing is about who SEES the toast, not
+# about whether its body executes, and those are independent. Only the strength of
+# the "keep state out of toasts" rule depended on the answer, and that rule now
+# rests on convention and legibility rather than on reliability.
 #
 # CALLED ON THE SUBJECT. Tests is_ai on THIS, raises on THIS or on `liege`.
 #

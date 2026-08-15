@@ -15,13 +15,19 @@
 #
 # TWO RULES LEARNED FROM THE FIRST LIVE RUN, both of which this file now follows:
 #
-# 1. STATE FIRST, PRESENTATION SECOND. `send_interface_toast` is documented as
-#    "sends a message to the player playing the character in the scope and then
-#    executes any effects inside". Effects nested in a toast are therefore not
-#    trustworthy for an AI character, and every knight here is an AI character.
-#    Vanilla never relies on it either - 00_knight_phase_events.txt applies
-#    add_prestige and friends in the effect block and keeps the message purely
-#    presentational. So do we.
+# 1. STATE FIRST, PRESENTATION SECOND. Effects go in the `effect` block; the
+#    toast stays purely presentational. Vanilla does the same -
+#    00_knight_phase_events.txt applies add_prestige and friends in the effect
+#    block and keeps the message presentational.
+#
+#    The reason ORIGINALLY given for this rule was wrong, and the correction is
+#    worth keeping so nobody reinstates it. `send_interface_toast` is documented
+#    as "sends a message to the player playing the character in the scope and
+#    then executes any effects inside", which reads as though a nested effect
+#    cannot run for an AI subject. Measured at this exact site on 2026-08-14 by
+#    splitting the count on `is_ai` outside the toast and comparing to a marker
+#    inside it: human 0, AI 128, inside 128. The body runs for AI exactly as it
+#    does for a human. Keep the rule, drop the justification.
 #
 # 2. THE TOAST GOES TO WHOEVER IS LEADING THE SIDE. A toast raised on `root`
 #    reaches "the player playing root", and nobody is playing a courtier knight,
@@ -96,27 +102,11 @@ bc_knight_holds_the_breach = {
 			bc_momentum_minor_effect = yes
 			bc_record_moment_effect = { TIER = major KIND = entrenched SWING = up }
 
-			# DIAG Q4. TEMPORARY, deleted at the end of stage 1. The two subject
-			# markers are OUTSIDE the toast on purpose: they count how often the
-			# toast was REACHED, split by whether anyone is playing the subject.
-			# `body ran` counts how often the inside of it executed. Comparing
-			# the three numbers is the answer. The earlier probe at this same
-			# site lacked the split, which is the only reason it could not
-			# settle the question.
-			if = {
-				limit = { is_ai = no }
-				debug_log = "BC: DIAG Q4 subject HUMAN"
-			}
-			else = {
-				debug_log = "BC: DIAG Q4 subject AI"
-			}
-
 			send_interface_toast = {
 				type = event_toast_effect_good
 				title = bc_knight_holds_the_breach_toast
 				desc = bc_knight_holds_the_breach_toast_desc
 				left_icon = scope:bc_knight
-				debug_log = "BC: DIAG Q4 body ran"
 			}
 		}
 	}

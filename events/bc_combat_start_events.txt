@@ -1,0 +1,39 @@
+﻿namespace = bc_chronicles
+
+# Battle Chronicles - the combat-start hook.
+#
+# This file exists so plan 5 has a proven place to put the eve pop-up dispatcher.
+# The body is one marker and nothing else. Do not add state here without reading
+# the two findings below first.
+#
+# WHY A `scope = combat` EVENT AT ALL. `on_combat_start` raises with Root = the
+# Combat, not a combat side, so an event hooked to it has to declare
+# `scope = combat`. NOTHING IN VANILLA OR AGOT DECLARES ONE - this was measured
+# rather than copied, because there was no precedent either way. It works: the
+# event fired 152 times over a session with 143 combat ends.
+#
+# WHAT DOES NOT WORK, AND IT IS THE TRAP THIS FILE EXISTS TO RECORD.
+# `combat_attacker` and `combat_defender` did NOT resolve from inside this event.
+# Both were probed as `combat_<side>.side_commander ?= { debug_log = ... }` across
+# those same 152 fires and BOTH LOGGED ZERO. The `?=` swallowed the failure in
+# silence - which is why this needed a marker to detect at all. A `?=` block that
+# never runs is indistinguishable from a `?=` block that had nothing to do.
+#
+# So an eve pop-up CANNOT reach the two sides through those links. It needs
+# another route to a character, and whichever route is chosen must be proven with
+# its own marker before anything is built on it. Do not assume a scope link
+# resolves just because the API dump lists it - the dump is authoritative about
+# existence and scope type, not about what resolves at a given call site.
+#
+# `events = { }` rather than `effect = { }` in the on_action, for the reason
+# bc_on_actions.txt gives: an `effect = { }` in an on_action does not merge across
+# files, and the winner is decided by alphabetical filename.
+
+bc_chronicles.0900 = {
+	hidden = yes
+	scope = combat
+
+	immediate = {
+		debug_log = "BC: combat start"
+	}
+}
