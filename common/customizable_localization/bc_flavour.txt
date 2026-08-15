@@ -20,18 +20,25 @@
 # A RULE RATHER THAN A STYLE. That file's comments are long and get edited often,
 # so every edit shifts every line below it. Rounds 7 and 8 both spent their
 # headline finding on prose that had ROTTED rather than on prose that was wrong
-# when written, and round 8's was this exact failure: two comments above grew by
-# three lines between them, four of the citations below were hand-corrected by
-# one instead of three, and those four ended up naming an `exists` guard, a
-# debug_log line, a paragraph tail, and a paragraph opening. Ten other citations
-# in the same commit were shifted correctly, which is why nobody noticed. A name
-# like `THE ABSENT SIZE CASE IS REAL` or `A BUCKET, 1/2/3` cannot rot silently:
-# grep either finds it or the paragraph was renamed, which is a visible event.
-# Note that one of those four wrong numbers landed on the `A BUCKET, 1/2/3`
-# heading itself - landing on a heading is not the same as naming one, and only
-# the name is checkable. `validate --strict` now flags a citation that lands on
-# a blank line or past the end of a file, but it cannot flag one that lands on
-# the wrong live line, which is the case round 8 lost its headline to.
+# when written, and round 8's was this exact failure. In 253e4f7 two comments
+# grew by three lines between them; most of the citations below were re-pointed
+# correctly and a handful were not, and the ones that were not landed on an
+# `exists` guard, a debug_log line, a paragraph tail, and the `A BUCKET, 1/2/3`
+# heading itself. Read the commit if the detail matters. No count appears here
+# on purpose: three rounds running, this paragraph asserted how many were wrong
+# and was itself wrong, because the answer depends on whether a bare `:472`
+# continuing a previous citation counts as one. That is the whole argument in
+# miniature - a number about line numbers is as brittle as the line numbers.
+#
+# A name like `THE ABSENT SIZE CASE IS REAL` or `A BUCKET, 1/2/3` cannot rot
+# silently: grep either finds it or the paragraph was renamed, which is a
+# visible event. Note that landing on a heading is not the same as naming one,
+# and only the name is checkable. `validate` now flags a citation that lands on
+# a blank line, a bare `#`, a `}` that is not the end of a range, or off the end
+# of a file, and one that names a `bc_` file this mod does not have - but it
+# cannot flag one that lands on the wrong live line, which is the case round 8
+# lost its headline to. Not `--strict`: that flag only adds the missing-loc
+# check, and the citation check runs on every validate.
 #
 # THE RULE IS ABSOLUTE FOR bc_ledger_effects.txt AND ASPIRATIONAL EVERYWHERE
 # ELSE, and saying so is more honest than a rule this file breaks. Below there
@@ -41,6 +48,14 @@
 # converted as the paragraphs around them are touched, not in a sweep, because
 # a sweep of citations is the exact edit that went wrong in round 8. For
 # same-file references the rule is already absolute: name the key.
+#
+# ONE EXEMPTION, and it is not a loophole: a citation recording where a marker
+# WAS in a build that has since moved on. README.md's `Family 3 is shipped but
+# unmeasured` section does this - it quotes a log line against
+# `bc_ledger_effects.txt:258` and labels it a previous build. A paragraph name
+# cannot express a pointer into a superseded file, and the number is not a claim
+# about the current one. Anything that IS a claim about the current file follows
+# the rule.
 #
 # type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
 # variable-held character. Vanilla's Custom2 second argument is always a saved
