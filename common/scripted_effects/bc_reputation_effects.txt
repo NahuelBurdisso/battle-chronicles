@@ -1,0 +1,83 @@
+﻿# Battle Chronicles - the commander's reputation.
+#
+# CK3 lets a commander get BETTER at commanding by fighting - vanilla's
+# commander_trait_leveling_leveling_effect runs on every_side_commander at both
+# combat ends. But every branch of it is gated `has_trait = X`: it levels traits
+# you already have and never grants one. The only granter is
+# give_random_commander_trait_effect, a flat random_list behind a lifestyle perk
+# whose terrain branches are gated on OWNING that terrain. So the game never lets
+# you become a KIND of commander by fighting. That is what this file does.
+#
+# EVERYTHING HERE IS CALLED ON THE COMMANDER, from inside `side_commander ?= { }`
+# in the graders, inside their `is_alive = yes` gate. The four variables below are
+# LEDGER, not scratch: never cleared, and bc_clear_scratch_effect must never learn
+# about them.
+#
+#   bc_style_last     flag:<kind>    the last notable battle's style
+#   bc_style_streak   integer        consecutive notable battles of that style
+#   bc_terrain_last   flag:<bucket>  THE BUCKET, never the terrain key
+#   bc_terrain_streak integer        consecutive notable battles in that bucket
+#
+# ALL TWELVE TRAITS ALREADY EXIST. AGOT overrides vanilla's 00_traits.txt
+# wholesale, so AGOT's definitions are what load; all twelve carry
+# `flag = commander_trait_flag` there. They do NOT all carry
+# `category = commander` - winter_soldier is `category = winter_commander`.
+# Nothing here branches on category. This file defines no traits.
+
+# --- the style streak -------------------------------------------------------
+#
+# Compare this battle's style against the last one. Match increments; mismatch
+# starts a new streak AT 1, because the battle just fought IS the first of it.
+#
+# THE WHOLE THING IS GUARDED ON `exists = var:bc_battle_style`. A notable battle
+# in which no moment ever fired has no style, and B must do nothing rather than
+# log a missing-variable read on every such combat end - which is most of them
+# early in a game.
+#
+# THE FIRST-EVER BATTLE AND A MISMATCH DO THE SAME THING - a commander with no
+# history is a commander starting a streak - so the obvious shape is to fold them
+# into one branch:
+#
+#   OR = { NOT = { exists = var:bc_style_last }
+#          NOT = { var:bc_style_last = var:bc_battle_style } }   # DO NOT WRITE THIS
+#
+# THAT IS THE ONE SHARP EDGE IN THIS EFFECT, AND IT IS WRONG. Both arms of an OR
+# are evaluated - CK3 does not short-circuit and guarantees no evaluation order
+# among siblings - so on the first battle the second arm reads a
+# `var:bc_style_last` that does not exist, and reading a missing variable logs an
+# error. Every commander in the world would produce one on his first notable
+# battle.
+#
+# The three-branch shape below is therefore NOT a stylistic choice. The exists
+# test is the OUTER branch, and the comparison happens only in an else_if that
+# cannot be reached unless the variable exists. else_if arms ARE ordered with
+# respect to each other; it is only siblings within one trigger block that are
+# not.
+#
+# THE FIRST AND THIRD BRANCHES ARE BYTE-IDENTICAL AND MUST NOT BE FACTORED
+# TOGETHER. The only difference is the guard, and there is no single guard
+# covering both that does not reintroduce a read of `var:bc_style_last` when it
+# does not exist. Same trade bc_write_style_effect makes in bc_ledger_effects.txt.
+#
+# `change_variable` is safe in the second branch ONLY, because reaching it proves
+# bc_style_last exists, and bc_style_streak is written by the same two branches
+# that write bc_style_last - they are set together in both, always. If you ever
+# write bc_style_last without bc_style_streak, this breaks silently.
+bc_style_streak_effect = {
+	if = {
+		limit = { NOT = { exists = var:bc_style_last } }
+		set_variable = { name = bc_style_last value = var:bc_battle_style }
+		set_variable = { name = bc_style_streak value = 1 }
+		debug_log = "BC: style reset"
+	}
+	else_if = {
+		limit = { var:bc_style_last = var:bc_battle_style }
+		change_variable = { name = bc_style_streak add = 1 }
+		debug_log = "BC: style streak"
+	}
+	else = {
+		set_variable = { name = bc_style_last value = var:bc_battle_style }
+		set_variable = { name = bc_style_streak value = 1 }
+		debug_log = "BC: style reset"
+	}
+}
