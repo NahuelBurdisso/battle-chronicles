@@ -19,8 +19,12 @@
 # load-bearing from anywhere, because bc_write_ground_effect removes the variable
 # first and has two exits that never rewrite it. On bc_bond_clause it never
 # renders from the ten moment toasts, because bc_write_bond_effect writes on
-# every path and runs upstream of all ten - but it would render routinely from a
-# pop-up option's toast, which runs after bc_clear_scratch_effect.
+# every path and runs upstream of all ten - but it would render from a pop-up
+# option's toast whose option is answered AFTER the combat ended, because that
+# is the case in which bc_clear_scratch_effect has already run
+# (bc_ledger_effects.txt:516-527). Answered mid-battle, which that same comment
+# calls the normal case, the variable is still there and the fallback does not
+# render. No pop-up option toast exists yet.
 #
 # SO CHECK THE WRITER **AND** THE CALL SITE. Checking only the writer gives the
 # wrong answer for the pop-up case, and no fallback here may be deleted on the
@@ -111,8 +115,14 @@ bc_banner_falls_ground = {
 #
 # FIVE VALUES, MATCHING bc_write_bond_effect'S LADDER EXACTLY: nemesis, kin,
 # countryman, heathen, stranger. `stranger` gets a real clause rather than
-# sharing the fallback because it is a real answer - bc_context_effects.txt:204-208
-# routes a LEADERLESS enemy side here on purpose, and its comment says why.
+# sharing the fallback because it is a real answer, and the reason is the LADDER'S
+# TERMINAL ARM, not the leaderless one: bc_context_effects.txt:112-117 records
+# that a foe of a different culture and the same faith - the largest match-up
+# class on the AGOT map - lands there. bc_context_effects.txt:204-208 routes a
+# LEADERLESS enemy side to the same value, but that arm justifies itself by
+# saying the prose has a stranger clause, so citing it alone argues in a circle.
+# It is also only the smaller half: that file warns at :129-131 not to read
+# `nofoe` as a subset of `stranger`.
 #
 # THE ORDER OF THOSE FIVE IS NOT THE ORDER THE EVE USES, deliberately. The eve's
 # desc chain runs nemesis, kin, heathen, countryman, stranger; the ladder in
@@ -145,11 +155,14 @@ bc_banner_falls_ground = {
 # `?=` skips the open call and the toast together.
 #
 # DO NOT SHORTEN THAT TO "UNREACHABLE" AND DELETE THE ARM. A bond clause on a
-# POP-UP OPTION's toast would reach it routinely and correctly:
-# bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
+# POP-UP OPTION's toast would reach it correctly whenever that option is answered
+# after the combat ended: bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
 # `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen seam
-# call sites are pop-up options that run whenever the player gets round to them -
-# bc_ledger_effects.txt:432-434 records exactly this hazard for bc_battle_size.
+# call sites are pop-up options, which the player may leave sitting in the queue.
+# bc_ledger_effects.txt:432-434 records exactly this hazard for bc_battle_size,
+# and states the same condition: `Answered after the combat ended`. Answered
+# mid-battle - the normal case, per bc_ledger_effects.txt:516-527 - the variable
+# is still there. So the arm is not routine; it is the tail, and the tail is real.
 #
 # THE STRING IS EMPTY because a path that left the variable unwritten could not
 # name a foe, and every sentence in this class presumes one. Silence is the only
