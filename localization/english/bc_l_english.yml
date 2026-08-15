@@ -136,6 +136,18 @@
  bc_frag_bond_stranger:0 " The man commanding here has never had cause to learn a name on the other side."
  bc_frag_bond_any:0 ""
 
+# --- shared fragments: the scale --------------------------------------------
+#
+# One axis, graded: who hears about the moment. Keep it monotone - see the header
+# on bc_scale_clause in bc_flavour.txt. None of the three may say "field": the
+# ground fragments above and the bond fragments beside them already use it, and
+# task 4 renders ground, then bond, then scale in one sentence.
+
+ bc_frag_scale_huge:0 " There are so many men in this that word of it will reach most of them as rumour, if at all."
+ bc_frag_scale_large:0 " Enough men are engaged that whole companies of them will never hear of this."
+ bc_frag_scale_small:0 " The fight is small enough that every man in it will know of this by nightfall."
+ bc_frag_scale_any:0 ""
+
 # --- aftermath --------------------------------------------------------------
 
 # The desc NAMES the nickname. It used to end "calling him something", which left

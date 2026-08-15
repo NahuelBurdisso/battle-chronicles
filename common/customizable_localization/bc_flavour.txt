@@ -1,9 +1,15 @@
 ﻿# Battle Chronicles - prose fragments.
 #
-# THE ARMS ONLY COMPARE FLAGS. Every classification decision was made in
-# bc_context_effects.txt, where it could be logged. Nothing here decides
-# anything; it selects a sentence for a decision already recorded. If a
-# fragment renders wrong, the marker in the log says which of the two it was.
+# THE ARMS ONLY COMPARE A RECORDED CLASSIFICATION. Every classification decision
+# was made in an effect - bc_context_effects.txt for the ground and the bond, the
+# size ladder in bc_ledger_effects.txt for the scale - where it could be logged.
+# Nothing here decides anything; it selects a sentence for a decision already
+# recorded. If a fragment renders wrong, the marker in the log says which of the
+# two it was.
+#
+# MOST OF THOSE COMPARISONS ARE AGAINST A FLAG. bc_scale_clause is the exception
+# and compares a NUMBER, because bc_battle_size is written as one. Its own header
+# says what that costs.
 #
 # type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
 # variable-held character. Vanilla's Custom2 second argument is always a saved
@@ -236,5 +242,76 @@ bc_bond_clause = {
 	}
 	text = {
 		localization_key = bc_frag_bond_any
+	}
+}
+
+# --- the scale, shared by all ten moments ------------------------------------
+#
+# bc_battle_size IS A NUMBER, NOT A FLAG, and this is the ONLY class in this file
+# that compares one. The size ladder inside bc_battle_open_effect
+# (bc_ledger_effects.txt:112-125) writes it with `value = 3` / `2` / `1`. Every
+# other keyed class here compares `var:X = flag:y`. Writing `flag:huge` in an arm
+# below would be a SILENT no-match - validate passes it clean, and the clause
+# would simply never render, which on a toast is indistinguishable from a battle
+# whose size never got written. There is no marker that would tell you apart.
+# Plan B task 3 step 4 has a mechanical check that reads both this definition and
+# the writer and prints the two value lists; run it after touching either.
+#
+# THE BUCKETS ARE 10,000+ / 2,000+ / under, and they BELONG TO THE WRITER. The
+# derivation, the measured distribution and the standing instruction not to
+# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:95-111. This file
+# only names the three values the ladder writes; changing a boundary is an edit
+# there, not here.
+#
+# THE THREE STRINGS GRADE ALONG ONE AXIS: who hears about the moment. Huge, most
+# of the host gets it as rumour or not at all; large, whole companies never hear;
+# small, every man knows by nightfall. Keep any rewrite monotone along that axis
+# - two arms that both say "few men know" stop the clause carrying scale at all,
+# which is the only thing it is for.
+#
+# THE FALLBACK, LIKE bc_bond_clause'S, IS UNREACHABLE FROM THE TEN MOMENT TOASTS
+# AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it
+# writes on all three paths with no leading remove_variable, and it sits above
+# bc_write_bond_effect in the same effect - so every argument in bc_bond_clause's
+# header applies here unchanged. bc_ledger_effects.txt:432-434 makes the pop-up
+# case for THIS variable by name: `Answered after the combat ended, it runs after
+# bc_clear_scratch_effect and there is no bc_battle_size to read.`
+#
+# NOTHING CALLS THIS YET. Wiring it into the ten toasts is Plan B task 4.
+bc_scale_clause = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_scale_huge
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 3
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_large
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 2
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_small
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 1
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_any
 	}
 }
