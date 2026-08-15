@@ -357,6 +357,74 @@ terrain never collided over the same battle.
 `BC: moment decisive` fired once. It had been 0 across 707 moments in the DIAG
 run, and it was the single unmet criterion left on plan 1.
 
+## Sweep run, 2026-08-14 (plan 5 task 11 and plan 6 task 6 in one session)
+
+Counts below are the whole `debug.log` — 5,623 `BC:` hits over 96 distinct
+markers, 169 combat ends per side, 137 notable wins and 137 notable losses. Three
+results, two of them failures, and both failures were diagnosable from the marker
+counts alone.
+
+### The eve never reached a single commander, and the ratio said why
+
+- `BC: eve fired` **68**, `BC: eve side` **136**, `BC: eve commander` **0**.
+
+136 is exactly twice 68, so the `scope = combat` event dispatched and
+`every_combat_side` visited both sides of every one of those 68 combats. Both
+links worked. `side_commander` then produced nobody, 136 times out of 136.
+
+That is not a broken scope link. The same `side_commander` reached a commander
+**385** times in the same log through `BC: chronicle mark commander`. The
+difference is *when*: **no commander is assigned to a combat side at
+`on_combat_start`.** This also retires the DIAG Q2 conclusion above —
+`combat_attacker` / `combat_defender` were very likely never the problem, there
+was simply nobody there to find.
+
+There is no other pre-battle hook in the on_action dump, so no routing fixes it.
+The opening moved **into** the battle: `bc_eve_offer_effect` is now called from
+the end of `bc_battle_open_effect`, which already runs on the side commander and
+already holds the foe and the size, and gates itself to the first moment with
+`NOT = { exists = var:bc_battle_moments }`. `on_combat_start` is left unclaimed
+with the measurement written into the on_action file.
+
+**The general lesson, which cost two runs: a `?=` block that never runs is
+indistinguishable from one that had nothing to do.** Only the marker inside it
+told the difference.
+
+### The dead-knight toast was watching the wrong side
+
+- `BC: dead knights` **0**, across 274 notable grader runs.
+
+Vanilla kills knights on **one** side and not from the hook we were on.
+`combat_event.1001` walks the winner at AGOT `combat_events.txt:846` only to write
+battle history; it does its killing at `:849`, inside
+`enemy_side = { every_side_knight = { ... } }`. So the dead knights of a battle
+are always the **loser's**, and they are made dead on the **winner's** hook — a
+place `bc_chronicles.0092` can never be ordered after.
+
+The toast now lives once, in `.0091`, reaching across to `enemy_side` and
+addressing the loser's commander. That requires our grader to dispatch after
+`combat_event.1001`, which is why the on_action file is now
+`zz_bc_on_actions.txt`: the merged `events` list is ordered by the same
+alphabetical filename read order that decides an `effect` fight, and `bc_` sorted
+before `combat_`.
+
+### Family 3 is shipped but unmeasured
+
+- `BC: moment decisive` at its shipped line **0**. `BC: wound` **0**.
+
+The single `BC: moment decisive` in the log is at `bc_ledger_effects.txt:258`,
+which is a **previous build** — the current one logs it at `:273`. So no decisive
+moment occurred at all during this run and the wound was never reached. This is
+not evidence against the wound; it is evidence that `decisive` needs
+`var:bc_battle_moments >= 5`, i.e. a long battle, and none happened. Plan 6's
+firing rate remains unknown.
+
+### Closed by this run
+
+- **`BC: floor admitted` fired 5 times.** It was 0 in the checkpoint run and
+  recorded there as *inconclusive, not a failure*. The cooldown floor is now
+  exercised.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
@@ -382,3 +450,14 @@ run, and it was the single unmet criterion left on plan 1.
   fired and no relation exists, the target form is wrong and must be re-derived.
 - The rivalry game rule rendering: **Battle Chronicles: Rivalry** with three
   readable options on the rules screen.
+- **The opening pop-up, from its new home.** `bc_eve_offer_effect` now runs from
+  `bc_battle_open_effect`, which is proven to run on the side commander — but the
+  route has never produced a pop-up. `"BC: eve offered"` says the gate passed and
+  `"BC: eve popup 0011"` says the event opened. If the first appears without the
+  second, the raise is the failure.
+- **The dead-knight toast, after the `zz_` rename.** The merged-`events` ordering
+  argument is reasoned from the `effect`-collision behaviour, not measured.
+  `"BC: dead knights"` is the marker that says the order held; silence means the
+  assumption is what failed.
+- **The wound.** `"BC: wound"` has never fired, because no decisive moment has
+  occurred since it shipped. Needs a battle of 5+ moments with a losing swing.
