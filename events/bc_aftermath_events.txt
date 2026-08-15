@@ -154,12 +154,32 @@ bc_chronicles.0091 = {
 				# IT DEPENDS ON DISPATCH ORDER, WHICH IS WHY THE FILE IS NAMED
 				# zz_bc_on_actions.txt. combat_event.1001 has to have run before
 				# this, and both are `events = { }` entries on on_combat_end_winner
-				# merged across files in ALPHABETICAL filename order. `BC: dead
-				# knights` is the marker that says the order held. If it is silent
-				# again, the assumption is what failed, not this block.
+				# merged across files in ALPHABETICAL filename order.
+				#
+				# THREE MARKERS, ONE PER STEP, BECAUSE ONE WAS NOT ENOUGH - TWICE.
+				# This block has now returned zero on two separate runs (274 then
+				# 28 notable wins) with a single marker sitting inside the innermost
+				# `?=`, which is the same trap that hid the eve's failure for two
+				# runs before it. A zero from one marker cannot say WHICH step died,
+				# and the three candidates need different fixes:
+				#
+				#   reached, not found  -> combat_event.1001 has not run yet. The
+				#                          alphabetical-order assumption is wrong and
+				#                          the fix is a different hook, not a rename.
+				#   reached and found   -> enemy_side.side_commander is null at this
+				#                          point. The `?=` is eating it, and the toast
+				#                          needs a different addressee.
+				#   nothing at all      -> enemy_side does not step from a combat side
+				#                          on this hook, which would contradict
+				#                          vanilla's own use at combat_events.txt:850.
+				#
+				# THESE ARE DIAGNOSTIC AND THEY COME OUT once the question is
+				# settled. `BC: dead knights` is the permanent one.
 				enemy_side = {
+					debug_log = "BC: dk reached enemy side"
 					if = {
 						limit = { any_side_knight = { is_alive = no } }
+						debug_log = "BC: dk found dead"
 						side_commander ?= {
 							save_scope_as = bc_bereaved_commander
 							debug_log = "BC: dead knights"

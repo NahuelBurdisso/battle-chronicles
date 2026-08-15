@@ -251,8 +251,20 @@ bc_record_moment_effect = {
 # of a battle sees 1, not 0, and there is no zero case.
 #
 #   moments 1-2  ->  minor
-#   moments 3-4  ->  major
-#   moments 5+   ->  decisive
+#   moments 3     ->  major
+#   moments 4+   ->  decisive
+#
+# THE DECISIVE RUNG WAS 5 AND IT WAS MEASURED TOO HIGH. Across two logged runs
+# (874 moments, ~80 combat ends) `decisive` fired exactly ONCE. The reason is that
+# battles average about 4.2 moments, so a floor of 5 sat ABOVE the mean and the
+# rung was not rare, it was very nearly unreachable - which also meant family 3's
+# wound, which hangs off this arm alone, could never be measured at all.
+#
+# 4 IS THE MEAN, NOT A GUESS. It puts the rung at roughly the length of a typical
+# battle, so a decisive moment needs a battle that ran a little long rather than
+# one twice the usual length. **Re-measure before moving it again** - the next run
+# is the first with any decisive data at all, and the major band is now a single
+# moment wide, which is the part most likely to need a second look.
 #
 # THE COMPARISON IS `flag:$TIER$ = flag:decisive`, NOT `$TIER$ = decisive`. A bare
 # `$TIER$ = decisive` substitutes textually to `decisive = decisive`, and `decisive`
@@ -267,7 +279,7 @@ bc_record_effective_tier_effect = {
 	if = {
 		limit = {
 			flag:$TIER$ = flag:decisive
-			var:bc_battle_moments >= 5
+			var:bc_battle_moments >= 4
 		}
 		bc_write_style_effect = { RANK = 3 KIND = $KIND$ }
 		debug_log = "BC: moment decisive"

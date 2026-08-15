@@ -425,6 +425,65 @@ firing rate remains unknown.
   recorded there as *inconclusive, not a failure*. The cooldown floor is now
   exercised.
 
+## Confirmation run, 2026-08-15 (logs cleared first)
+
+Both 2026-08-14 fixes retested on a clean log. 40 combat ends per side, 28
+notable wins, 28 notable losses, 167 moments. **Error sweep clean — no `bc_`
+group in `error.log` at all**, which also retires the `bc_battle_wounded` debt
+for good.
+
+### The opening works, end to end
+
+```
+1  bc_eve_effects.txt:72 (bc_eve_offer_effect):          BC: eve offered
+1  bc_eve_events.txt:70  (bc_chronicles.0011:immediate): BC: eve popup 0011
+```
+
+Gate passed, event raised, event opened — and **the pop-up named the enemy
+commander**, confirmed by eye. That closes the two things no static check could
+reach: `scope:bc_eve_foe` survives the `trigger_event`, and
+`bc_eve_facing_nemesis_trigger` picks the nemesis branch correctly. The move off
+`on_combat_start` is done.
+
+### The dead-knight toast failed again, and the single marker failed again
+
+`BC: dead knights` **0** over 28 notable wins, after the `enemy_side` rework and
+the `zz_` rename.
+
+**The block had one marker, inside the innermost `?=` — the same trap that hid
+the eve's failure for two runs.** A zero from it cannot say which of three
+different failures happened, and they need three different fixes. The block now
+carries a marker per step (`BC: dk reached enemy side`, `BC: dk found dead`,
+`BC: dead knights`); the next run names the failing step instead of returning
+another uninformative zero. The scope path itself is not in doubt — vanilla does
+`enemy_side = { every_side_knight = { ... } }` at `combat_events.txt:850`.
+
+**The lesson is now three runs old and should be treated as a rule: a marker
+inside a `?=` or a nested `if` only proves the innermost step. Mark every step
+whose failure would need a different fix.**
+
+### The decisive rung was measured too high, and has been lowered
+
+`BC: moment decisive` **0** again, so `BC: wound` was **0** for the
+uninformative reason a second time. But this run had a clean log and gave the
+number that explains it:
+
+| | |
+|---|---|
+| moments recorded | 167 |
+| combat ends | ~40 |
+| **moments per battle** | **~4.2** |
+| old decisive floor | `var:bc_battle_moments >= 5` |
+
+**The floor sat above the mean battle length.** Across both runs — 874 moments —
+`decisive` fired exactly once, ever. The rung was not rare, it was very nearly
+unreachable, and since family 3's wound hangs off that arm alone it could never
+be measured at all.
+
+Lowered to `>= 4`, so the ladder is now minor 1-2, major 3, decisive 4+. **The
+major band is one moment wide and that is the part most likely to need a second
+look.** Re-measure before moving either number again.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
@@ -450,14 +509,15 @@ firing rate remains unknown.
   fired and no relation exists, the target form is wrong and must be re-derived.
 - The rivalry game rule rendering: **Battle Chronicles: Rivalry** with three
   readable options on the rules screen.
-- **The opening pop-up, from its new home.** `bc_eve_offer_effect` now runs from
-  `bc_battle_open_effect`, which is proven to run on the side commander — but the
-  route has never produced a pop-up. `"BC: eve offered"` says the gate passed and
-  `"BC: eve popup 0011"` says the event opened. If the first appears without the
-  second, the raise is the failure.
-- **The dead-knight toast, after the `zz_` rename.** The merged-`events` ordering
-  argument is reasoned from the `effect`-collision behaviour, not measured.
-  `"BC: dead knights"` is the marker that says the order held; silence means the
-  assumption is what failed.
+- **Which step of the dead-knight block dies.** Three markers now split it. Read
+  them in this order: `BC: dk reached enemy side` absent means `enemy_side` does
+  not step on this hook; reached without `BC: dk found dead` means
+  `combat_event.1001` has not run yet and the alphabetical-order assumption is
+  wrong, so the fix is a different hook rather than another rename; found without
+  `BC: dead knights` means `enemy_side.side_commander` is null and the toast needs
+  a different addressee.
 - **The wound.** `"BC: wound"` has never fired, because no decisive moment has
-  occurred since it shipped. Needs a battle of 5+ moments with a losing swing.
+  occurred since it shipped. The decisive floor is now `>= 4` rather than `>= 5`,
+  which is the first change that makes the arm reachable in a typical battle.
+- **The decisive rate at the new floor.** `>= 4` is set to the measured mean and
+  is itself a guess about the shape of the distribution, not just its centre.
