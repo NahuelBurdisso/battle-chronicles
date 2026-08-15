@@ -119,6 +119,12 @@ bc_style_streak_effect = {
 # the case the marker exists to report. It also catches a bc_battle_style holding
 # a kind not in this table, which would mean the seam's KIND vocabulary and this
 # ladder have drifted apart.
+#
+# WHY `var:bc_battle_style` IS SAFE TO READ HERE with no exists guard of its own:
+# the only caller is phase 2a of bc_reputation_effect, which is nested inside
+# `exists = var:bc_style_streak`, and phase 1 writes bc_style_streak ONLY when
+# bc_battle_style existed, and nothing ever removes it. A later plan that moves
+# this call site breaks that invariant silently.
 bc_style_award_effect = {
 	if = {
 		limit = {
@@ -363,6 +369,12 @@ bc_terrain_streak_effect = {
 # NO remove_trait ARM. None of the six terrain traits has an `opposites` block,
 # verified across the whole of AGOT's 00_traits.txt. Adding one symmetrically with
 # the style ladder would be dead code implying a rule that does not exist.
+#
+# WHY `var:bc_terrain_this` IS SAFE TO READ HERE with no exists guard of its own:
+# the only caller is phase 2b of bc_reputation_effect, whose inner limit carries
+# an explicit `exists = var:bc_terrain_this` row. That row is not optional - the
+# bucket ladder's `else` arm writes nothing, so a terrain no helper covers would
+# otherwise reach this ladder with the variable absent.
 bc_terrain_award_effect = {
 	if = {
 		limit = {
