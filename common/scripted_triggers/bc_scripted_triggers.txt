@@ -214,3 +214,33 @@ bc_battle_is_notable_trigger = {
 		has_game_rule = bc_aftermath_generous
 	}
 }
+
+# Is the man across the field the man who has beaten me before?
+#
+# CALLED ON THE COMMANDER, in TRIGGER contexts only - weight multipliers and
+# is_valid blocks. It must therefore be safe to evaluate on every commander in
+# the world on every phase event roll, most of whom have no nemesis at all.
+#
+# THE TWO `exists` ROWS ARE SAFE AS SIBLINGS - `exists` on a missing variable is
+# safe, and only a READ of a missing variable logs an error. The trigger_if
+# repeats them and does the reading, which is the shipped pattern this mod
+# already uses in the graders' every_side_knight limit.
+#
+# IT MISSES THE FIRST ROLL OF EVERY BATTLE, deliberately. bc_battle_foe is
+# written in the EFFECT of a phase event and weights are evaluated BEFORE the
+# effect, so the first roll of a battle sees nothing and every roll after sees
+# this battle's foe. Reading the combat scope directly instead would fix that at
+# the cost of an unverified scope path evaluated on every roll of every battle in
+# the world.
+bc_facing_nemesis_trigger = {
+	exists = var:bc_nemesis
+	exists = var:bc_battle_foe
+	trigger_if = {
+		limit = {
+			exists = var:bc_nemesis
+			exists = var:bc_battle_foe
+		}
+		var:bc_nemesis = var:bc_battle_foe
+		var:bc_nemesis = { is_alive = yes }
+	}
+}

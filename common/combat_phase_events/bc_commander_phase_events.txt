@@ -52,6 +52,13 @@ bc_banner_falls = {
 			factor = 2
 			has_game_rule = bc_frequency_high
 		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
 	}
 
 	effect = {
@@ -105,6 +112,13 @@ bc_rally_the_line = {
 		modifier = {
 			add = 40
 			martial >= 12
+		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
 		}
 	}
 
@@ -163,6 +177,13 @@ bc_horse_killed_under_him = {
 			add = 30
 			prowess >= 14
 		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
 	}
 
 	effect = {
@@ -209,6 +230,13 @@ bc_flank_collapses = {
 		modifier = {
 			factor = 2
 			has_game_rule = bc_frequency_high
+		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
 		}
 	}
 
@@ -258,6 +286,13 @@ bc_van_breaks_through = {
 		modifier = {
 			add = 25
 			martial >= 16
+		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
 		}
 	}
 
@@ -314,6 +349,13 @@ bc_ground_favours_us = {
 			add = 30
 			martial >= 14
 		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
 	}
 
 	effect = {
@@ -359,6 +401,13 @@ bc_lines_bogged_down = {
 		modifier = {
 			factor = 2
 			has_game_rule = bc_frequency_high
+		}
+		# Plan 4: the read-back. A grudge match produces more moments than a
+		# battle against a stranger. Same factor on every commander event - a
+		# per-event tuning pass needs its own runtime measurement.
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
 		}
 	}
 
