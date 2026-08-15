@@ -65,6 +65,12 @@ bc_chronicles.0011 = {
 	# under the ladder's order he never gets one. The two orders disagree and
 	# that is the intent - the ladder writes a fact, this chain picks a line.
 	#
+	# THAT SPLIT IS NOW VISIBLE TO THE PLAYER IN ONE BATTLE. bc_bond_clause in
+	# bc_flavour.txt renders the LADDER's answer into every moment toast, so a
+	# same-culture different-faith foe reads `heathen` here on the eve and
+	# `countryman` in the toasts an hour later. Intended, and the third
+	# reciprocal note is in that clause's header.
+	#
 	# THE stranger ARM IS A TRUE FALLBACK AND HAS TO STAY REACHABLE ONLY BY
 	# STRANGERS. Its text says "a banner nobody here can name", which is a lie
 	# about a countryman. That is why the countryman arm is here and not dropped:
