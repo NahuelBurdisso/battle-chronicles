@@ -11,11 +11,17 @@
 # record, never as mechanics.
 
  bc_momentum_minor:0 "The Line Steadies"
+ bc_momentum_minor_desc:0 "The shouting has changed. They are listening again."
  bc_momentum_major:0 "The Line Surges Forward"
+ bc_momentum_major_desc:0 "The line is moving forward and it is moving together."
  bc_momentum_decisive:0 "The Field Is Ours"
+ bc_momentum_decisive_desc:0 "It is over. They have not all worked that out yet."
  bc_faltering_minor:0 "The Line Wavers"
+ bc_faltering_minor_desc:0 "Men are looking over their shoulders. Not many. Enough."
  bc_faltering_major:0 "The Banner Wavers"
+ bc_faltering_major_desc:0 "The banner is where the line should be, and the line is not there."
  bc_faltering_decisive:0 "The Line Is Breaking"
+ bc_faltering_decisive_desc:0 "It is not a battle any more. It is a crowd running in one direction."
 
 # Family 2, the character of the fight. These are `army_*` / `knight_*` tags, so
 # they do NOT appear in the combat advantage breakdown the comment above is about
