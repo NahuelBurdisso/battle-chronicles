@@ -53,8 +53,12 @@
 # `every commentable file`; the docs tree it never entered was carrying wrapped
 # log markers the whole time - `BC: eve ground missing` in the live depth spec,
 # `BC: combat end cleanup`, `BC: floor admitted` and `BC: style award` in the
-# closed expansion plans, and the engine's own `Duplicate localization key` in
-# the handoff. The same defect as every round before it, one directory wider.
+# closed expansion plans, the engine's own `Duplicate localization key` in the
+# handoff, and its
+# `Compiling source for bc_record_moment_effect failed for unknown arguments: SWING`
+# in the expansion design - which is the case the `engine message` half of the
+# exemption boundary below was written for. The same shape as 631a6a9's sweep
+# and fb6f4f0's, wide in prose and narrow in fact, one directory wider.
 #
 # THE DETECTOR IS AN UNBALANCED BACKTICK, which is casing-blind, needs no list of
 # names, and is the literal signature of the defect rather than a proxy for it. A
@@ -70,11 +74,15 @@
 # hand-rolled version was retyped from memory every round and was wrong in a new
 # way each time. Its own header carries the limits above and two the ad-hoc
 # versions did not have. A fence opened inside a blockquote reads as prose
-# unless the `>` prefix is allowed for, which put fenced lines of the reputation
-# plan into a report as findings. And an escaped backtick has to be stripped
-# before counting: one inside an otherwise balanced line flips it to odd, which
-# is noise, but one inside a genuinely unbalanced line flips it to EVEN, which
-# is a miss. The script spells its own backticks as escapes for the same reason
+# unless the `>` prefix is allowed for, and WHAT THAT COSTS IS THE DELIMITER,
+# NOT THE BODY: a delimiter is three backticks, so an unrecognised one is odd
+# and reports itself, which is how the reputation plan's blockquoted fence
+# turned up in a report. Its fenced body was scanned too and holds no backtick
+# at all. And an escaped backtick has to be stripped before counting: counted
+# raw, one inside an otherwise balanced line flips it to odd, which is noise,
+# and one inside a genuinely unbalanced line flips it to EVEN, which is a miss.
+# Stripping removes BOTH; it does not trade one for the other. The script
+# spells its own backticks as escapes for the same reason
 # - a detector that names its own source on every run teaches the reader to
 # skim the report.
 #
@@ -99,12 +107,22 @@
 # backtick detector turned up that no earlier sweep had: `BC: nickname awarded`
 # and `BC: terrain NONE MATCHED` were both wrapped in README.md. A marker is a
 # grep target twice over - once against this source, once against the game's own
-# log - and a wrapped one cannot even be pasted into a log search. The same sweep
-# unwrapped `rule off` alongside them, and that one is NOT a marker: it is a
-# suffix, under the `BC: nemesis` shorthand README.md uses through that section,
-# as `decrement`, `cleared` and `wipe` are beside it. Unwrapping a suffix does
-# not make it pasteable. The shorthand is the residual hazard there and this
-# detector cannot see it.
+# log - and a wrapped one cannot even be pasted into a log search.
+#
+# AND A SUFFIX OF A MARKER IS A GREP TARGET TOO. 8a0d33e claimed the opposite -
+# that the `rule off` this sweep unwrapped in README.md was `NOT a marker`, a
+# mere suffix under the `BC: nemesis` shorthand that section uses, and that
+# `Unwrapping a suffix does not make it pasteable`. Both halves are wrong.
+# `BC: nemesis rule off` is a live marker, written at
+# bc_rivalry_effects.txt:77, and the README sentence that carried the wrapped
+# text calls `decrement`, `cleared`, `wipe` and `rule off`
+# `All four are permanent markers` in as many words. A suffix is a CONTIGUOUS
+# SUBSTRING, so it pastes into a source grep and into a log grep and finds the
+# marker; wrapped, it pastes into neither. The shorthand is a readability
+# hazard and not a grep hazard, and this detector correctly does not care about
+# it. The same reasoning covers `win not notable`,
+# `fired bc_knight_holds_the_breach` and `subject AI`, all unwrapped in the
+# docs tree for the same reason and all correctly unwrapped.
 #
 # Where the target's own heading wraps, prefer renaming the heading to fit one
 # line over citing a prefix, since a prefix is itself a rot risk - which is what
@@ -288,8 +306,7 @@ bc_banner_falls_ground = {
 # half making the same-battle claim. The order disagreement itself is documented
 # in that same file, directly above that half, under the paragraph named
 # `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. This clause
-# is the third CARRIER of those five values - a different triple from the third
-# FILE in the reciprocal ring, which is this header.
+# is the last of the three carriers of those five values to be written, and
 # NOT the first whose ordering the player sees: the eve's chain has always picked
 # a paragraph by its own order. It WILL be the first to put the LADDER's ordering
 # in front of the player as prose, once it is wired. Until then the ladder

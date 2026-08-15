@@ -153,9 +153,11 @@ bc_write_ground_effect = {
 # `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. Directly
 # below that one, the paragraph named
 # `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE` is the half
-# that predicts the toasts. bc_flavour.txt's bc_bond_clause header is the third
-# FILE in the ring, and the ring is four PARAGRAPHS: this one, those two, and
-# that header. Do not read the ordinal as a paragraph count.
+# that predicts the toasts. bc_flavour.txt's bc_bond_clause header closes the
+# ring from the third file, and its half of it is the paragraph named
+# `THE ORDER OF THOSE FIVE IS NOT THE ORDER THE EVE USES`. Cite that and not
+# the header: a header is many paragraphs, so a citation to `the header` names
+# nothing a grep can land on.
 #
 # NOTE ON SCOPE: bc_battle_bond and bc_battle_creed are written on the caller's
 # current scope, not explicitly through scope:bc_chronicle_subject. This is safe
