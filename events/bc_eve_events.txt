@@ -65,11 +65,12 @@ bc_chronicles.0011 = {
 	# under the ladder's order he never gets one. The two orders disagree and
 	# that is the intent - the ladder writes a fact, this chain picks a line.
 	#
-	# THAT SPLIT IS NOW VISIBLE TO THE PLAYER IN ONE BATTLE. bc_bond_clause in
-	# bc_flavour.txt renders the LADDER's answer into every moment toast, so a
-	# same-culture different-faith foe reads `heathen` here on the eve and
-	# `countryman` in the toasts an hour later. Intended, and the third
-	# reciprocal note is in that clause's header.
+	# THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE, though it
+	# is not yet. bc_bond_clause in bc_flavour.txt has an arm for all five and
+	# renders the LADDER's answer; nothing calls it until it is wired into the
+	# ten moment toasts. Once it is, a same-culture different-faith foe reads
+	# `heathen` here on the eve and `countryman` in the toasts of the same
+	# battle. Intended, and the third reciprocal note is in that clause's header.
 	#
 	# THE stranger ARM IS A TRUE FALLBACK AND HAS TO STAY REACHABLE ONLY BY
 	# STRANGERS. Its text says "a banner nobody here can name", which is a lie
@@ -235,7 +236,7 @@ bc_chronicles.0011 = {
 	# THIS GATE IS COARSER THAN IT SOUNDS, AND THAT IS A KNOWN COST. The six
 	# bands were EXTRACTED from bc_terrain_bucket_effect as an exhaustive PROSE
 	# partition of the 23 AGOT terrain helpers, not as a tactical one, so band
-	# membership is mixed. bc_ground_triggers.txt:30-38 puts
+	# membership is mixed. bc_ground_triggers.txt:31-39 puts
 	# agot_is_desert_mountains_terrain and agot_is_canyon_terrain in DESERT,
 	# which this gate refuses, while :50-60 puts agot_is_mountains_terrain in
 	# ROUGH, which it allows - and the same file puts wetlands and bog in ROUGH

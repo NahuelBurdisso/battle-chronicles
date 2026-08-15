@@ -102,22 +102,22 @@ bc_banner_falls_ground = {
 # as after a flank collapsing; a clause about the ground does not - a standard
 # goes down IN the sand, a flank collapses AMONG the trees. The verb has to agree
 # with the ground and does not have to agree with the foe. That is the whole
-# reason this is one definition and the ground is ten.
+# reason this is one definition and the ground will be ten.
 #
 # FIVE VALUES, MATCHING bc_write_bond_effect'S LADDER EXACTLY: nemesis, kin,
 # countryman, heathen, stranger. `stranger` gets a real clause rather than
-# sharing the fallback because it is a real answer - bc_context_effects.txt:201-206
+# sharing the fallback because it is a real answer - bc_context_effects.txt:204-208
 # routes a LEADERLESS enemy side here on purpose, and its comment says why.
 #
 # THE ORDER OF THOSE FIVE IS NOT THE ORDER THE EVE USES, deliberately. The eve's
 # desc chain runs nemesis, kin, heathen, countryman, stranger; the ladder in
 # bc_write_bond_effect runs nemesis, kin, countryman, heathen, stranger. This
-# clause renders whatever the LADDER decided, so a same-culture different-faith
-# foe reads `countryman` in the toast and `heathen` in the eve, in the same
-# battle. That is the documented intent - see the reciprocal notes at
-# bc_context_effects.txt:136-146 and bc_eve_events.txt:60-66 - and this is now
-# the third carrier of those five values and the first whose ordering reaches the
-# player as prose. Do not "reconcile" the two.
+# clause renders whatever the LADDER decided, so once it is wired a same-culture
+# different-faith foe will read `countryman` in the toasts and `heathen` in the
+# eve, in the same battle. That is the documented intent - see the reciprocal
+# notes at bc_context_effects.txt:136-149 and bc_eve_events.txt:60-73 - and this
+# is the third carrier of those five values and the first whose ordering will
+# reach the player as prose. Do not "reconcile" the two.
 #
 # THIS CLAUSE READS THE BOND AND NOT THE CREED. bc_write_bond_effect also writes
 # an orthogonal var:bc_battle_creed, which exists precisely because the ladder
@@ -125,15 +125,32 @@ bc_banner_falls_ground = {
 # the faith fact is unsayable here. That is not an oversight: the creed gets its
 # own clause class or it does not get said. Do not fold it into these five.
 #
-# THE FALLBACK IS AN EMPTY STRING, AND IT IS UNREACHABLE TODAY. Both halves
-# matter. Unreachable because bc_write_bond_effect writes bc_battle_bond on every
-# one of its six paths - five ladder arms and the leaderless `else` - with no
-# leading remove_variable, and bc_ledger_effects.txt:141 calls it unconditionally
-# from bc_battle_open_effect, which every one of the ten toast sites runs
-# downstream of. Contrast the ground clause, whose fallback IS reachable. Empty
-# because if a future path ever does leave the variable unwritten, any sentence
-# about the foe would be presuming a foe that path could not name. Silence is the
-# only honest output, and house style requires the arm to exist regardless.
+# THE FALLBACK IS AN EMPTY STRING, AND IT IS UNREACHABLE FROM THE TEN MOMENT
+# TOASTS. Both halves matter, and so does that scope - it is a claim about ten
+# call sites, not about the variable.
+#
+# UNREACHABLE FROM THOSE TEN because bc_write_bond_effect writes bc_battle_bond
+# on every one of its six paths - five ladder arms and the leaderless `else` -
+# with no leading remove_variable, and bc_ledger_effects.txt:141 calls it
+# unconditionally from bc_battle_open_effect, which all ten toast sites run
+# downstream of in the same effect block. The three knight sites are inside the
+# same `side_commander ?=` guard as their open call, so a failed `?=` skips both
+# rather than reaching a toast with no write.
+#
+# THE ONE THING THAT WOULD BREAK THAT is a bond clause added to a POP-UP OPTION's
+# toast. bc_clear_scratch_effect (bc_ledger_effects.txt:528) does
+# `remove_variable = bc_battle_bond` at :536, and eight of the mod's eighteen
+# seam call sites are pop-up options that run whenever the player gets round to
+# them - bc_ledger_effects.txt:432-434 records exactly this hazard for
+# bc_battle_size. Such a site would reach the fallback routinely and correctly.
+# So: do not read "unreachable" as "delete it", and do not extend the claim past
+# the ten. Contrast the ground clause, whose fallback is reachable even from the
+# ten, because bc_write_ground_effect removes first and has two exits that never
+# rewrite.
+#
+# EMPTY because a path that left the variable unwritten could not name a foe, and
+# every sentence in this class presumes one. Silence is the only honest output,
+# and house style requires the arm to exist regardless.
 bc_bond_clause = {
 	type = character
 

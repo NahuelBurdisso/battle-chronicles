@@ -21,7 +21,7 @@
 # resolves to a fallback arm, which is the correct failure.
 #
 # CALLED FROM bc_battle_open_effect, on the commander, at the top of every phase
-# event. See bc_ledger_effects.txt:28-51 for why that call is unconditional.
+# event. See bc_ledger_effects.txt:29-52 for why that call is unconditional.
 
 # --- the ground -------------------------------------------------------------
 #
@@ -137,15 +137,16 @@ bc_write_ground_effect = {
 # bc_eve_events.txt carries the same five values in a different order —
 # nemesis, kin, heathen, countryman, stranger — with heathen deliberately above
 # countryman, because the eve picks a line nobody reads back. This ladder writes
-# a fact that other systems read back. Two read it now: the aftermath award at
-# bc_aftermath_events.txt:260 consumes `flag:nemesis`, and bc_bond_clause in
-# bc_flavour.txt renders ALL FIVE as prose in every moment toast. That second one
-# is what raises the cost of touching this order - it is no longer only a
-# question of what the markers count. Lifting `heathen` above `countryman` here
-# would silently change what `BC: bond countryman` and `BC: bond heathen` count
-# AND swap which sentence a same-culture different-faith foe gets in the toast.
-# The two orders disagree and that is the intent. Reciprocal notes at
-# bc_eve_events.txt:60-66 and bc_flavour.txt's bc_bond_clause header.
+# a fact that other systems read back. ONE reads it today: the aftermath award at
+# bc_aftermath_events.txt:260 consumes `flag:nemesis`. A SECOND is written and
+# waiting - bc_bond_clause in bc_flavour.txt has an arm for all five and will
+# render whichever this ladder picked, once it is wired into the ten moment
+# toasts. Nothing calls it yet. When that lands, touching this order stops being
+# only a question of what the markers count: lifting `heathen` above `countryman`
+# here would silently change what `BC: bond countryman` and `BC: bond heathen`
+# count AND swap which sentence a same-culture different-faith foe gets in the
+# toasts. The two orders disagree and that is the intent. Reciprocal notes at
+# bc_eve_events.txt:60-73 and bc_flavour.txt's bc_bond_clause header.
 #
 # NOTE ON SCOPE: bc_battle_bond and bc_battle_creed are written on the caller's
 # current scope, not explicitly through scope:bc_chronicle_subject. This is safe
@@ -158,7 +159,7 @@ bc_write_bond_effect = {
 		limit = { exists = var:bc_battle_foe }
 
 		# bc_facing_nemesis_trigger, NOT a hand-rolled comparison.
-		# bc_scripted_triggers.txt:244-255 already nests both reads behind their
+		# bc_scripted_triggers.txt:245-255 already nests both reads behind their
 		# own `exists` in a trigger_if AND carries the `is_alive = yes` row. A
 		# hand-rolled `limit = { exists = var:bc_nemesis  var:bc_battle_foe =
 		# var:bc_nemesis }` would read var:bc_nemesis as a SIBLING of its own
