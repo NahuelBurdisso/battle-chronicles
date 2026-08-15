@@ -228,16 +228,19 @@
 # what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
 # so the bare `exists` beside it is the row that actually rejects.
 
-# --- SPIKE. The only WIRED fragment set. -------------------------------------
+# --- SPIKE. The first set wired, and still the only PER-MOMENT one. ----------
 #
-# It was written to prove the shape renders before the other 103 fragment keys
+# It was written to prove the shape renders before the rest of the fragment keys
 # were, and that run has not happened. bc_bond_clause and bc_scale_clause below
-# it were written anyway, under the AMENDMENT in
+# it were written and then wired anyway, under the AMENDMENT in
 # docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, which split the
 # gate: a clause APPENDED to a desc that keeps its literal sentence fails to "no
 # improvement", so it needs no run, while a clause that REPLACES the literal
-# fails to an empty toast and still does. This spike is the only fragment set any
-# call site names today.
+# fails to an empty toast and still does. THREE fragment sets are named by a call
+# site today: this one, from bc_banner_falls_toast_desc alone, and the two shared
+# clauses, from all ten. The nine remaining per-moment ground sets are Plan B
+# tasks 6-14, none of which is written; each of those REPLACES its literal, so
+# each still waits on the run.
 bc_banner_falls_ground = {
 	type = character
 
@@ -332,21 +335,21 @@ bc_banner_falls_ground = {
 # THE ORDER OF THOSE FIVE IS NOT THE ORDER THE EVE USES, deliberately. The eve's
 # desc chain runs nemesis, kin, heathen, countryman, stranger; the ladder in
 # bc_write_bond_effect runs nemesis, kin, countryman, heathen, stranger. This
-# clause renders whatever the LADDER decided, so once it is wired a same-culture
-# different-faith foe will read `countryman` in the toasts and `heathen` in the
-# eve, in the same battle. That is the documented intent, and both halves of the
+# clause renders whatever the LADDER decided, so a same-culture different-faith
+# foe now reads `countryman` in the toasts and `heathen` in the eve, in the same
+# battle. That is the documented intent, and both halves of the
 # reciprocal pair are written down: bc_context_effects.txt carries the paragraph
 # `DO NOT "RECONCILE" THIS LADDER WITH THE EVE` and bc_eve_events.txt carries
-# `THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE`, which is the
+# `THAT SPLIT IS VISIBLE TO THE PLAYER INSIDE ONE BATTLE`, which is the
 # half making the same-battle claim. The order disagreement itself is documented
 # in that same file, directly above that half, under the paragraph named
 # `THE FOE CHAIN AND THE BOND LADDER DISAGREE ON ORDER, ON PURPOSE`. This clause
 # is the last of the three carriers of those five values to be written, and
 # NOT the first whose ordering the player sees: the eve's chain has always picked
-# a paragraph by its own order. It WILL be the first to put the LADDER's ordering
-# in front of the player as prose, once it is wired. Until then the ladder
-# reaches the player only as piety and prestige, through the aftermath award. Do
-# not "reconcile" the two.
+# a paragraph by its own order. It IS the first to put the LADDER's ordering in
+# front of the player as prose: Plan B task 4 wired it into all ten toasts.
+# Before that the ladder reached the player only as piety and prestige, through
+# the aftermath award. Do not "reconcile" the two.
 #
 # THIS CLAUSE READS THE BOND AND NOT THE CREED. bc_write_bond_effect also writes
 # an orthogonal var:bc_battle_creed, which exists precisely because the ladder
@@ -524,10 +527,10 @@ bc_bond_clause = {
 # renders a SENTENCE there: bc_write_bond_effect writes on every path, so
 # bc_frag_bond_any is unreachable from the ten toasts. bc_banner_falls_toast_desc
 # additionally carries a ground CALL - the only desc that does, from Plan A's
-# spike, and task 4 adds no others - but that call can resolve to the empty arm,
+# spike, and task 4 added no others - but that call can resolve to the empty arm,
 # because bc_write_ground_effect removes the variable first and has two exits
 # that never rewrite it. See the paragraph at the top of this file, and the ten
-# rewritten descs in Plan B task 4 step 1. DO NOT STATE A SENTENCE ORDINAL HERE:
+# toast descs in bc_l_english.yml. DO NOT STATE A SENTENCE ORDINAL HERE:
 # five of the ten literals are two sentences, so "the third sentence" and "the
 # fourth sentence" have each been written into this file and each been wrong.
 # What is checkable from one file, and what matters, is what renders in between.
@@ -538,9 +541,9 @@ bc_bond_clause = {
 #
 #   VISIBILITY - who hears about the moment - is owned by the ground fragments.
 #   bc_frag_banner_falls_open reads ` There is nothing else on that field to
-#   look at, and so they all see it go.`, and in the run of text task 4 builds
-#   it renders AHEAD of this clause, so on open ground every scale arm either
-#   restated it or contradicted it outright.
+#   look at, and so they all see it go.`, and in the run of text the ten descs
+#   build it renders AHEAD of this clause, so on open ground every scale arm
+#   either restated it or contradicted it outright.
 #
 #   RECURRENCE - how often a fight this size throws up such a moment - is owned
 #   by bc_chronicle_flag_days_value (bc_script_values.txt:110-128), which grades
@@ -597,7 +600,11 @@ bc_bond_clause = {
 # name: `Answered after the combat ended, it runs after bc_clear_scratch_effect
 # and there is no bc_battle_size to read.`
 #
-# NOTHING CALLS THIS YET. Wiring it into the ten toasts is Plan B task 4.
+# ALL TEN TOASTS CALL THIS, from Plan B task 4, and it renders LAST on every one
+# of them - after the moment's literal, after the ground call on the one desc
+# that carries it, and after the bond clause. Last because it is the widest: the
+# literal is one man's moment, the bond is one man's foe, and this is the whole
+# field. Nothing else calls it.
 bc_scale_clause = {
 	type = character
 

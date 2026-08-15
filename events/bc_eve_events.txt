@@ -65,12 +65,12 @@ bc_chronicles.0011 = {
 	# under the ladder's order he never gets one. The two orders disagree and
 	# that is the intent - the ladder writes a fact, this chain picks a line.
 	#
-	# THAT SPLIT WILL BECOME VISIBLE TO THE PLAYER INSIDE ONE BATTLE, though it
-	# is not yet. bc_bond_clause in bc_flavour.txt has an arm for all five and
-	# renders the LADDER's answer; nothing calls it until it is wired into the
-	# ten moment toasts. Once it is, a same-culture different-faith foe reads
-	# `heathen` here on the eve and `countryman` in the toasts of the same
-	# battle. Intended, and the third reciprocal note is in that clause's header.
+	# THAT SPLIT IS VISIBLE TO THE PLAYER INSIDE ONE BATTLE. bc_bond_clause in
+	# bc_flavour.txt has an arm for all five and renders the LADDER's answer,
+	# and all ten moment toast descs now call it, so a same-culture
+	# different-faith foe reads `heathen` here on the eve and `countryman` in
+	# the toasts of the same battle. Intended, and the third reciprocal note is
+	# in that clause's header.
 	#
 	# THE stranger ARM IS A TRUE FALLBACK AND HAS TO STAY REACHABLE ONLY BY
 	# STRANGERS. Its text says "a banner nobody here can name", which is a lie
