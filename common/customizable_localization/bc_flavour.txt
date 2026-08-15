@@ -1,11 +1,14 @@
 ﻿# Battle Chronicles - prose fragments.
 #
 # THE ARMS ONLY COMPARE A RECORDED CLASSIFICATION. Every classification decision
-# was made in an effect - bc_context_effects.txt for the ground and the bond, the
-# size ladder in bc_ledger_effects.txt for the scale - where it could be logged.
-# Nothing here decides anything; it selects a sentence for a decision already
-# recorded. If a fragment renders wrong, the marker in the log says which of the
-# two it was.
+# was made in an effect - bc_write_ground_effect and bc_write_bond_effect in
+# bc_context_effects.txt, the size ladder inside bc_battle_open_effect in
+# bc_ledger_effects.txt - where it could be logged. Nothing here decides
+# anything; it selects a sentence for a decision already recorded. So a fragment
+# that renders wrong is two different bugs, and the marker in the log tells them
+# apart: if the marker names the band you expected, the arm order here is wrong,
+# and if it does not, the effect classified wrong and this file rendered
+# faithfully.
 #
 # MOST OF THOSE COMPARISONS ARE AGAINST A FLAG. bc_scale_clause is the exception
 # and compares a NUMBER, because bc_battle_size is written as one. Its own header
@@ -46,8 +49,8 @@
 # --- SPIKE. The only WIRED fragment set. -------------------------------------
 #
 # It was written to prove the shape renders before the other 103 fragment keys
-# were, and that run has not happened. bc_bond_clause below it was written
-# anyway, under the AMENDMENT in
+# were, and that run has not happened. bc_bond_clause and bc_scale_clause below
+# it were written anyway, under the AMENDMENT in
 # docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, which split the
 # gate: a clause APPENDED to a desc that keeps its literal sentence fails to "no
 # improvement", so it needs no run, while a clause that REPLACES the literal
@@ -252,22 +255,33 @@ bc_bond_clause = {
 # (bc_ledger_effects.txt:112-125) writes it with `value = 3` / `2` / `1`. Every
 # other keyed class here compares `var:X = flag:y`. Writing `flag:huge` in an arm
 # below would be a SILENT no-match - validate passes it clean, and the clause
-# would simply never render, which on a toast is indistinguishable from a battle
-# whose size never got written. There is no marker that would tell you apart.
+# would simply never render. ON THE TOAST that is indistinguishable from a
+# battle whose size was never written: both show nothing. IN THE LOG it is not.
+# The ladder emits `BC: size 3` / `2` / `1` (bc_ledger_effects.txt:115, :120,
+# :124), so a size marker with no clause on the toast is this bug, and no size
+# marker at all is the other one. Do not diagnose from the toast alone.
 # Plan B task 3 step 4 has a mechanical check that reads both this definition and
 # the writer and prints the two value lists; run it after touching either.
 #
 # THE BUCKETS ARE 10,000+ / 2,000+ / under, and they BELONG TO THE WRITER. The
 # derivation, the measured distribution and the standing instruction not to
-# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:95-111. This file
+# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:97-105. This file
 # only names the three values the ladder writes; changing a boundary is an edit
 # there, not here.
 #
-# THE THREE STRINGS GRADE ALONG ONE AXIS: who hears about the moment. Huge, most
-# of the host gets it as rumour or not at all; large, whole companies never hear;
-# small, every man knows by nightfall. Keep any rewrite monotone along that axis
-# - two arms that both say "few men know" stop the clause carrying scale at all,
-# which is the only thing it is for.
+# THE THREE STRINGS GRADE ALONG ONE AXIS: how often a fight this size throws up
+# a moment like the one the toast just described. Huge, again and again; large,
+# once or twice more; small, not twice. Keep any rewrite monotone along that
+# axis - two arms that make the same claim stop the clause carrying scale at
+# all, which is the only thing it is for.
+#
+# THAT AXIS IS NOT THE FIRST ONE, AND THE FIRST ONE IS NOT AVAILABLE. The first
+# draft graded on who hears about the moment. bc_frag_banner_falls_open answers
+# that same question outright - "there is nothing else on that field to look at,
+# and so they all see it go" - and in the run of text task 4 builds it renders
+# ahead of this clause, so on open ground every arm either restated it or
+# contradicted it. Rewording the arms cannot get round that; only staying off
+# the question can. Any rewrite that grades on visibility hits the wall again.
 #
 # THE FALLBACK, LIKE bc_bond_clause'S, IS UNREACHABLE FROM THE TEN MOMENT TOASTS
 # AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it

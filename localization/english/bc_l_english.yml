@@ -80,8 +80,8 @@
  bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it.[bc_chronicle_subject.Custom('bc_banner_falls_ground')]"
 
 # SPIKE. One fragment set, on one moment, to prove the shape renders before the
-# other 103 fragment keys are written. That run has not happened; the bond
-# fragments below were written anyway, under the AMENDMENT in
+# other 103 fragment keys are written. That run has not happened; the bond and
+# scale fragments below were written anyway, under the AMENDMENT in
 # docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md, because a
 # fragment APPENDED to a desc that keeps its literal sentence fails to "no
 # improvement" rather than to an empty toast. This set is still the only one a
@@ -138,14 +138,30 @@
 
 # --- shared fragments: the scale --------------------------------------------
 #
-# One axis, graded: who hears about the moment. Keep it monotone - see the header
-# on bc_scale_clause in bc_flavour.txt. None of the three may say "field": the
-# ground fragments above and the bond fragments beside them already use it, and
-# task 4 renders ground, then bond, then scale in one sentence.
+# ONE AXIS, GRADED: how often a fight this size throws up a moment like the one
+# the toast just described. Huge, again and again; large, once or twice more;
+# small, not twice. Keep it monotone - see the header on bc_scale_clause in
+# bc_flavour.txt.
+#
+# THE AXIS IS DELIBERATELY NOT VISIBILITY, and this is not a style preference.
+# The first draft graded on who hears about the moment, which is a question
+# bc_frag_banner_falls_open:94 has already answered by the time the scale
+# fragment renders - "there is nothing else on that field to look at, and so
+# they all see it go" - so on open ground every arm either restated it or
+# contradicted it outright. Rewording the arms cannot fix that; only staying off
+# the question can.
+#
+# NONE OF THE THREE MAY SAY "field". Three fragments already use it -
+# bc_frag_banner_falls_open:94, bc_frag_bond_nemesis:132 and
+# bc_frag_bond_kin:133 - and task 4 appends ground, then bond, then scale to a
+# toast's literal sentence. The two bond arms are mutually exclusive, so at most
+# two of the three land in one run of text, and a "field" here would be the
+# third. The check is not specific to "field" or to this section - grep the
+# whole file for any distinctive word before using it here.
 
- bc_frag_scale_huge:0 " There are so many men in this that word of it will reach most of them as rumour, if at all."
- bc_frag_scale_large:0 " Enough men are engaged that whole companies of them will never hear of this."
- bc_frag_scale_small:0 " The fight is small enough that every man in it will know of this by nightfall."
+ bc_frag_scale_huge:0 " In a fight this size such a thing will happen again before dark, and again after that."
+ bc_frag_scale_large:0 " In a fight this size such a thing will happen once or twice more before dark."
+ bc_frag_scale_small:0 " In a fight this small such a thing will not happen twice."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
