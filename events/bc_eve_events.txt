@@ -218,24 +218,34 @@ bc_chronicles.0011 = {
 	# option set it was offered with. That is the whole reason bc_eve_ground is a
 	# scope and not scratch.
 	#
-	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN, AND THE LINE IS FEATURE
-	# VERSUS CONDITION. The chain names five bands; this gate names three. The
-	# test is the modifier's own header - "anchored himself to a hillside or a
-	# treeline" - so a band qualifies when it is a FEATURE on the map you can
-	# put your flank against. Rough is the hillside; forest and jungle are both
-	# the treeline (the jungle band is agot_is_jungle_terrain OR
-	# agot_is_cloudforest_terrain - see bc_ground_triggers.txt - so it is trees
-	# either way). Winter and desert are CONDITIONS, not features: cold and
-	# thirst are on both armies everywhere on the field, and there is nothing
-	# standing there to hold.
+	# OPTION d IS NARROWER THAN THE GROUND DESC CHAIN: five bands render, three
+	# qualify. The modifier is what the gate answers to - bc_ground_held is
+	# "anchored himself to a hillside or a treeline", ground you stand on -
+	# and rough, forest and jungle are the three bands whose paragraph is
+	# about a thing standing between the two armies. Winter and desert read as
+	# what the day is doing to everyone on it.
+	#
+	# THIS GATE IS COARSER THAN IT SOUNDS, AND THAT IS A KNOWN COST. The six
+	# bands were EXTRACTED from bc_terrain_bucket_effect as an exhaustive PROSE
+	# partition of the 23 AGOT terrain helpers, not as a tactical one, so band
+	# membership is mixed. bc_ground_triggers.txt:30-38 puts
+	# agot_is_desert_mountains_terrain and agot_is_canyon_terrain in DESERT,
+	# which this gate refuses, while :50-60 puts agot_is_mountains_terrain in
+	# ROUGH, which it allows - and the same file puts wetlands and bog in ROUGH
+	# too. So the gate is band-accurate and terrain-approximate. Splitting the
+	# bands to fix that would desynchronise them from the reputation streak,
+	# which is the whole reason they were extracted rather than invented; the
+	# approximation is cheaper than that.
 	#
 	# DO NOT ARGUE THIS FROM THE PARAGRAPHS. Two earlier versions of this
 	# comment did - jungle was excluded because its text says men who go in
 	# are gone - and both died on the same rock: the forest text says a line
 	# that goes in stops being a line, which is the same sentence, and forest
 	# keeps the option. Jungle was left out by oversight when it gained a desc
-	# arm, not by design. If a band is ever added here, the modifier is the
-	# argument.
+	# arm, not by design. AND DO NOT ARGUE IT AS A PROPERTY OF THE TERRAIN
+	# either - a third version claimed there was nothing to hold in a desert
+	# and agot_is_canyon_terrain falsified it. What is true is the sentence
+	# above: three bands qualify, and the bands are prose.
 	#
 	# DECISION TABLE for the two markers below. Their denominator is eves
 	# ANSWERED, which is neither the moment count nor `BC: eve offered`:
