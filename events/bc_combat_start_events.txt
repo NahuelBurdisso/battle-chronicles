@@ -90,3 +90,75 @@ bc_chronicles.0010 = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The eve, as the player sees it. A character_event on the commander.
+#
+# THE ONLY MOMENT IN THE MOD WHERE THE PLAYER COMMITS AHEAD OF KNOWING ANYTHING.
+# Every other choice answers something that has already happened.
+#
+# TWO OPTIONS APPLY A FAMILY-2 MODIFIER BY NAME, and these are the only call sites
+# in the mod that do. Everywhere else the (KIND, SWING) table inside
+# bc_record_moment_effect decides which modifier a moment implies. There is no
+# moment here - nothing has happened yet - so there is no seam call to route
+# through and the option names the posture directly. It still goes through
+# bc_add_verb_effect rather than add_character_modifier, so the 20-day duration
+# stays in one place per family.
+#
+# NO OPTION APPLIES MOMENTUM. The battle has not started. The eve is about shape,
+# not advantage, and momentum is the tide.
+#
+# THE THIRD OPTION IS NOT FREE. Declining to commit is a choice, and a commander
+# who never commits should not be indistinguishable from one who does.
+# ---------------------------------------------------------------------------
+bc_chronicles.0011 = {
+	type = character_event
+	title = bc_chronicles.0011.t
+	theme = martial
+
+	# first_valid, not a bare desc. The nemesis branch is the read-back plan 4
+	# promises and the eve is the cheapest place in the mod to deliver it - one
+	# desc branch, no new event, no new state.
+	desc = {
+		desc = bc_chronicles.0011.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = { bc_eve_facing_nemesis_trigger = yes }
+				desc = bc_chronicles.0011.desc_nemesis
+			}
+			desc = bc_chronicles.0011.desc_stranger
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	immediate = {
+		debug_log = "BC: eve popup 0011"
+	}
+
+	# NO `trigger` ON THIS EVENT. Both gates were taken in bc_eve_offer_effect
+	# before the raise - re-testing them here would let a commander who passed
+	# the gate lose the event to a race and take the 90-day cooldown for nothing.
+
+	option = {
+		name = bc_chronicles.0011.a
+
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		add_stress = 10
+	}
+
+	option = {
+		name = bc_chronicles.0011.b
+
+		bc_add_verb_effect = { MODIFIER = bc_shieldwall }
+	}
+
+	option = {
+		name = bc_chronicles.0011.c
+
+		add_prestige = -25
+	}
+}
