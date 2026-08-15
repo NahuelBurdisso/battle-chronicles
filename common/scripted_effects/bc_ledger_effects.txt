@@ -386,6 +386,30 @@ bc_wound_effect = {
 			}
 			set_variable = { name = bc_battle_wounded value = yes }
 			debug_log = "BC: wound"
+
+			# STATE FIRST, PRESENTATION SECOND. The trait, the variable and the
+			# marker are all written before the toast, per the rule
+			# bc_knight_phase_events.txt:18-24 records from the first live run:
+			# effects nested inside a send_interface_toast are not trustworthy for
+			# an AI character, and most commanders in the world are AI.
+			#
+			# THE save_scope_as IS NOT OPTIONAL. bc_addressed_toast_effect writes
+			# `left_icon = $SUBJECT$`, a scripted effect does not rebind ROOT, and
+			# its liege arm has already changed scope by the time left_icon is
+			# evaluated - so SUBJECT must be a SAVED SCOPE, never `this`.
+			#
+			# THIS TOAST IS THE WHOLE NOTIFICATION. wounded_1 carries
+			# `flag = no_message` (AGOT 00_traits.txt:6330), so the trait arrives
+			# with no vanilla message of any kind. Without this block a commander
+			# silently stops being able to lead armies and nothing on screen says
+			# why.
+			save_scope_as = bc_wounded_commander
+			bc_addressed_toast_effect = {
+				TYPE = event_toast_effect_bad
+				TITLE = bc_wounded_toast
+				DESC = bc_wounded_toast_desc
+				SUBJECT = scope:bc_wounded_commander
+			}
 		}
 	}
 }

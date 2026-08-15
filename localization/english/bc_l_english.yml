@@ -268,3 +268,8 @@
  bc_chronicles.0011.a:0 "Press them at first light."
  bc_chronicles.0011.b:0 "Hold the ground and let them come."
  bc_chronicles.0011.c:0 "Wait. See how they form up."
+
+# --- the flesh --------------------------------------------------------------
+
+ bc_wounded_toast:0 "Carried From the Field"
+ bc_wounded_toast_desc:0 "[bc_wounded_commander.GetName] was brought down in the thick of it and carried out. He will live. He will not sit a horse at the head of an army until he mends."
