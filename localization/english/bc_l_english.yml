@@ -75,7 +75,21 @@
 # --- commander chronicles ---------------------------------------------------
 
  bc_banner_falls_toast:0 "The Banner Falls"
- bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it."
+ bc_banner_falls_toast_desc:0 "The standard goes down in the press, and the men nearest it look for it and do not find it.[bc_chronicle_subject.Custom('bc_banner_falls_ground')]"
+
+# SPIKE. One fragment set, on one moment, to prove the shape renders before
+# ninety-nine more are written. Each BEGINS WITH A SPACE because it is appended
+# to a finished sentence - the anchor above deliberately has no space before the
+# tag, so that the empty fallback leaves no trailing space. Each is one clause:
+# the fragment adds a place to a thing that already happened, it does not
+# restate the thing.
+ bc_frag_banner_falls_desert:0 " The dust takes it before the sand does."
+ bc_frag_banner_falls_open:0 " There is nothing else on that field to look at, and so they all see it go."
+ bc_frag_banner_falls_rough:0 " It goes down the slope with the man who carried it."
+ bc_frag_banner_falls_forest:0 " The branches have it before the ground does, and it hangs there where no one can reach it."
+ bc_frag_banner_falls_jungle:0 " The green closes over it in a moment, as though it had never been raised."
+ bc_frag_banner_falls_winter:0 " It lies in the snow, and the snow begins at once to cover it."
+ bc_frag_banner_falls_any:0 ""
 
  bc_rally_the_line_toast:0 "The Line Is Rallied"
  bc_rally_the_line_toast_desc:0 "A shouted order carries where it should not have, and the ranks close again."

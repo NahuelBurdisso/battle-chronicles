@@ -598,3 +598,15 @@ different fixes.
   binding constraint is call-site rarity, not the floor — only 10 of 233 moments
   ever request `decisive` and 7 request it too early. Both numbers should be
   re-measured together, never one alone.
+- **The spike fragment.** `bc_banner_falls_ground`, invoked as
+  `[bc_chronicle_subject.Custom('bc_banner_falls_ground')]` from
+  `bc_banner_falls_toast_desc`. The next run must show a Banner Falls toast
+  whose sentence ends with a clause naming the ground, and `probe 'BC: ground'`
+  must report a band for the same battle. Read them together:
+
+  | markers | toast | verdict |
+  |---|---|---|
+  | a band | clause present, matches band | shape proven — Plan B may proceed |
+  | a band | no clause at all | either `Custom()` does not render in a toast desc, or `scope:bc_chronicle_subject` is not addressable from loc. Both kill the design as written; before abandoning it, retry once with `bc_commander`, which is saved on the same character fifteen lines above the toast (`bc_commander_phase_events.txt:65`; the toast is at `:80-85`). If that renders, the anchor is the problem and not the mechanism. |
+  | a band | clause present, wrong band | the arms read the variable off the wrong character — the anchor resolves but not to the commander who holds the scratch. |
+  | `BC: ground missing` | no clause | not a spike failure — `combat.location` did not resolve at a phase event. Fix the read site in `bc_write_ground_effect` and run again. |

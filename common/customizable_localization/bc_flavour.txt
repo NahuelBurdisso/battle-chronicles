@@ -1,0 +1,91 @@
+﻿# Battle Chronicles - prose fragments.
+#
+# THE ARMS ONLY COMPARE FLAGS. Every classification decision was made in
+# bc_context_effects.txt, where it could be logged. Nothing here decides
+# anything; it selects a sentence for a decision already recorded. If a
+# fragment renders wrong, the marker in the log says which of the two it was.
+#
+# type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
+# variable-held character. Vanilla's Custom2 second argument is always a saved
+# scope or ROOT.Char - a variable-held character has zero uses in vanilla or
+# AGOT - so the mod does not use Custom2 at all.
+#
+# THE FALLBACK ARM IS LAST AND HAS NO TRIGGER. CK3 takes the first matching arm
+# in order, so a trigger-less arm anywhere but last would swallow the ones below
+# it. The fallback is not decoration: it is what renders when the ground is
+# unknown, which is the correct output for a battle whose province did not
+# resolve.
+#
+# NESTED, NOT SIBLING, on the variable read. The bare `exists` row and the
+# trigger_if are safe as siblings - only the READ has to be nested, which is
+# what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
+# so the bare `exists` beside it is the row that actually rejects.
+
+# --- SPIKE. The only fragment until a run proves this shape renders. ---------
+bc_banner_falls_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_banner_falls_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_banner_falls_any
+	}
+}
