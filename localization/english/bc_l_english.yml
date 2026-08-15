@@ -122,6 +122,15 @@
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
  bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it."
 
+# --- shared fragments: the bond ---------------------------------------------
+
+ bc_frag_bond_nemesis:0 " The man commanding here knows whose banner that is across the field, and has known all morning."
+ bc_frag_bond_kin:0 " The man commanding here has eaten at a table with men on the other side."
+ bc_frag_bond_countryman:0 " Both sides are shouting in the same tongue."
+ bc_frag_bond_heathen:0 " Whatever the other side was praying to at dawn, the man commanding here was not."
+ bc_frag_bond_stranger:0 " Nobody across the field is anybody to the man commanding here."
+ bc_frag_bond_any:0 ""
+
 # --- aftermath --------------------------------------------------------------
 
 # The desc NAMES the nickname. It used to end "calling him something", which left

@@ -89,3 +89,79 @@ bc_banner_falls_ground = {
 		localization_key = bc_frag_banner_falls_any
 	}
 }
+
+# --- the bond, shared by all ten moments -------------------------------------
+#
+# SHARED AND NOT PER-MOMENT, unlike the ground clauses. "against his own blood"
+# reads the same after a banner falling as after a flank collapsing; "in the
+# sand" does not - a standard goes down IN the sand, a flank collapses AMONG the
+# trees. The verb has to agree with the ground and does not have to agree with
+# the foe.
+#
+# FIVE VALUES PLUS A FALLBACK, matching bc_write_bond_effect exactly. The five
+# are nemesis, kin, countryman, heathen, stranger. `stranger` gets a real clause
+# rather than sharing the fallback, because "a man he has never heard of" is a
+# fact worth saying and the fallback has to cover the case where NOTHING is
+# known - which is a different thing.
+#
+# THE FALLBACK IS AN EMPTY STRING and that is deliberate. Every other class can
+# say something generic when it knows nothing. This one cannot: any sentence
+# about the foe presumes a foe, and the case this arm covers is precisely that
+# there may not have been one. Silence is the only honest reading.
+bc_bond_clause = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_bond_nemesis
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:nemesis
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_kin
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:kin
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_countryman
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:countryman
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_heathen
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:heathen
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_stranger
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:stranger
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_any
+	}
+}
