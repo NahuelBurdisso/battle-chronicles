@@ -138,6 +138,44 @@ bc_mark_chronicle_effect = {
 	}
 }
 
+# The commander-only variant. bc_mark_chronicle_effect above stays exactly as it
+# is, at a flat 15 days, because the knight events call it - including
+# bc_shieldbrother_forged, which calls it TWICE on two different characters. Do
+# not collapse those two calls and do not point them here: a knight has no
+# bc_battle_size, so bc_chronicle_flag_days_value would fall to its 15-day else
+# arm on every single knight in every combat in the world. It would happen to
+# produce the right number and would log a read of nothing, but it would be a
+# lie about why.
+#
+# THE FLOOR DIAG IS FIRST, AND THAT IS LOAD-BEARING. It has to read both pieces
+# of state BEFORE add_character_flag rewrites one of them. Every commander event
+# calls this effect near the top of its `effect` block - after
+# bc_battle_open_effect, before any bc_record_moment_effect, before any
+# trigger_event - so here bc_battle_moments still holds the state from BEFORE
+# this moment. Put this block below add_character_flag and it is always false.
+#
+# WHAT THE LIMIT MEANS: is_valid has already passed
+# bc_chronicle_ready_commander_trigger. If the cooldown flag is set, that
+# trigger's first arm was FALSE, so the only thing that let this event through
+# was the floor arm. The two rows below re-test exactly that pair, so the marker
+# fires when and only when the floor did work the cooldown would have blocked -
+# and reading it needs no attribution of log lines to a particular battle.
+bc_mark_chronicle_commander_effect = {
+	if = {
+		limit = {
+			has_character_flag = bc_chronicle_recent
+			NOT = { exists = var:bc_battle_moments }
+		}
+		debug_log = "BC: floor admitted"
+	}
+
+	add_character_flag = {
+		flag = bc_chronicle_recent
+		days = bc_chronicle_flag_days_value
+	}
+	debug_log = "BC: chronicle mark commander"
+}
+
 # --- pop-up throttle --------------------------------------------------------
 # One prompt per 60 days per commander. A long siege would otherwise produce a
 # stream of them. This is a FLAG on purpose: modifiers are wiped at combat end,
