@@ -20,8 +20,11 @@
 # make the NEXT battle read the LAST battle's ground. Scratch that is missing
 # resolves to a fallback arm, which is the correct failure.
 #
-# CALLED FROM bc_battle_open_effect, on the commander, at the top of every phase
-# event. See bc_ledger_effects.txt:29-54 for why that call is unconditional.
+# CALLED FROM bc_battle_open_effect, on the commander, UPSTREAM OF EVERY READ in
+# every phase event - not literally at the top of every `effect` block, since the
+# three knight events call it nested. See that effect's UNCONDITIONAL, NOT
+# WRITE-IF-UNSET paragraph in bc_ledger_effects.txt for why the call is
+# unconditional, and its THE ANCHOR comment for the nesting.
 
 # --- the ground -------------------------------------------------------------
 #

@@ -98,7 +98,7 @@ bc_battle_open_effect = {
 	# reaching for it would make every battle read as "under 2,000".
 	#
 	# 10,000 is bc_battle_is_notable_trigger's own lower size row
-	# (bc_scripted_triggers.txt:153). 2,000 was INVENTED — the calibration run
+	# (bc_scripted_triggers.txt:211). 2,000 was INVENTED — the calibration run
 	# recorded `under 5k` as one undivided bucket and never subdivided it. It was
 	# then measured over 143 battles, counted per side against the world rather
 	# than against this variable: 5k+ 46, 3k 42, 2k 31, 1k 14, under-1k 4. The

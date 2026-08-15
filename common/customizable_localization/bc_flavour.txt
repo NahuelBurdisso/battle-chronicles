@@ -16,6 +16,18 @@
 # and compares a NUMBER, because bc_battle_size is written as one. Its own header
 # says what that costs.
 #
+# CITATIONS INTO bc_ledger_effects.txt NAME A PARAGRAPH, NOT A LINE, AND THAT IS
+# A RULE RATHER THAN A STYLE. That file's comments are long and get edited often,
+# so every edit shifts every line below it. Four consecutive review rounds lost
+# their Critical finding to a citation that had been correct when written and was
+# silently wrong after an unrelated comment above it grew - the last one shifted
+# by three and was hand-corrected by one, which left four citations pointing at
+# an `exists` guard, a debug_log line, and two paragraph tails. A paragraph name
+# like `THE ABSENT SIZE CASE IS REAL` or `A BUCKET, 1/2/3` cannot rot silently:
+# grep either finds it or the paragraph was renamed, which is a visible event.
+# Line numbers survive here only for files this mod edits rarely, and for
+# same-file references the rule is stricter still - name the key.
+#
 # type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
 # variable-held character. Vanilla's Custom2 second argument is always a saved
 # scope or ROOT.Char - a variable-held character has zero uses in vanilla or
@@ -34,10 +46,11 @@
 # it never renders from the ten moment toasts, because bc_write_bond_effect
 # writes on every path and runs upstream of all ten - but it would render from a
 # pop-up option's toast whose option is ANSWERED after the combat ended, because
-# that is the case in which bc_clear_scratch_effect has already run
-# (bc_ledger_effects.txt:519-523). Note the verb: what :528-530 calls the normal
-# case is the pop-up ARRIVING mid-battle, and a pop-up answered when it arrives
-# still finds the variable there. No pop-up option toast exists yet.
+# that is the case in which bc_clear_scratch_effect has already run (the KNOWN
+# LEAK paragraph above that effect in bc_ledger_effects.txt). Note the verb: what
+# the close of that paragraph calls the normal case is the pop-up ARRIVING
+# mid-battle, and a pop-up answered when it arrives still finds the variable
+# there. No pop-up option toast exists yet.
 #
 # SO CHECK THE WRITER **AND** THE CALL SITE. Checking only the writer gives the
 # wrong answer for the pop-up case, and no fallback here may be deleted on the
@@ -169,24 +182,26 @@ bc_banner_falls_ground = {
 # THE FALLBACK NEVER RENDERS FROM THE TEN MOMENT TOASTS - and that is a claim
 # about those ten call sites, not about the variable. bc_write_bond_effect writes
 # bc_battle_bond on every one of its six paths - five ladder arms and the
-# leaderless `else` - with no leading remove_variable, and bc_ledger_effects.txt:144
-# calls it unconditionally from bc_battle_open_effect. All ten toasts run
-# downstream of that call: seven commander sites in the same effect block, and
-# three knight sites behind the same `scope:combat_side.side_commander ?=` link,
-# which for bc_shieldbrother_forged is a SECOND block on that link rather than
-# the same one (bc_knight_phase_events.txt:231 and :285). Either way a failed
-# `?=` skips the open call and the toast together.
+# leaderless `else` - with no leading remove_variable, and bc_battle_open_effect
+# calls it unconditionally (`bc_write_bond_effect = yes`, bc_ledger_effects.txt).
+# All ten toasts run downstream of that call: seven commander sites in the same
+# effect block, and three knight sites behind the same
+# `scope:combat_side.side_commander ?=` link, which for bc_shieldbrother_forged
+# is a SECOND block on that link rather than the same one
+# (bc_knight_phase_events.txt:231 and :285). Either way a failed `?=` skips the
+# open call and the toast together.
 #
 # DO NOT SHORTEN THAT TO "UNREACHABLE" AND DELETE THE ARM. A bond clause on a
 # POP-UP OPTION's toast would reach it correctly whenever that option is answered
-# after the combat ended: bc_clear_scratch_effect (bc_ledger_effects.txt:531) does
-# `remove_variable = bc_battle_bond` at :539, and eight of the mod's eighteen seam
-# call sites are pop-up options, which the player may leave sitting in the queue.
-# bc_ledger_effects.txt:435-437 records exactly this hazard for bc_battle_size,
-# and states the same condition in the same words: `Answered after the combat
-# ended`. Answered while the battle is still running - and :526-527 says the leak
-# reaches only a player who leaves a pop-up unanswered through the end of one -
-# the variable is still there. So the arm is not routine; it is the tail, and the
+# after the combat ended: bc_clear_scratch_effect (bc_ledger_effects.txt) does
+# `remove_variable = bc_battle_bond`, and eight of the mod's eighteen seam call
+# sites are pop-up options, which the player may leave sitting in the queue.
+# That file's THE ABSENT SIZE CASE IS REAL paragraph, above bc_wound_effect,
+# records exactly this hazard for bc_battle_size, and states the same condition
+# in the same words: `Answered after the combat ended`. Answered while the battle
+# is still running - and the KNOWN LEAK paragraph says the leak reaches only a
+# player who leaves a pop-up unanswered through the end of one - the variable is
+# still there. So the arm is not routine; it is the tail, and the
 # tail is real.
 #
 # THE STRING IS EMPTY because a path that left the variable unwritten could not
@@ -254,19 +269,20 @@ bc_bond_clause = {
 #
 # bc_battle_size IS A NUMBER, NOT A FLAG, and this is the ONLY class in this file
 # that compares one. The size ladder inside bc_battle_open_effect
-# (bc_ledger_effects.txt:115-128) writes it with `value = 3` / `2` / `1`. Every
-# other keyed class here compares `var:X = flag:y`. Writing `flag:huge` in an arm
+# (bc_ledger_effects.txt) writes it with `value = 3` / `2` / `1`. Every other
+# keyed class here compares `var:X = flag:y`. Writing `flag:huge` in an arm
 # below would be a SILENT no-match - validate passes it clean, and the clause
 # would simply never render. ON THE TOAST that is indistinguishable from a
 # battle whose size was never written: both show nothing. IN THE LOG it is not.
-# The ladder emits `BC: size 3` / `2` / `1` (bc_ledger_effects.txt:118, :123,
-# :127), so a size marker with no clause on the toast is this bug, and no size
-# marker at all is the other one. Do not diagnose from the toast alone.
-# Plan B task 3 step 4 has a mechanical check that reads both this definition and
-# the writer and prints the two value lists; run it after touching either.
+# The ladder emits `BC: size 3` / `2` / `1`, so a size marker with no clause on
+# the toast is this bug, and no size marker at all is the other one. Do not
+# diagnose from the toast alone. Plan B task 3 step 4 has a mechanical check that
+# reads both this definition and the writer and prints the two value lists; run
+# it after touching either.
 #
 # THE ARMS COMPARE FOR EQUALITY, where every size gate elsewhere in the mod uses
-# `>=` (bc_script_values.txt:114 and :118, bc_ledger_effects.txt:270 and :473,
+# `>=` (bc_script_values.txt:114 and :118, the size gates inside
+# bc_record_moment_effect and bc_wound_effect in bc_ledger_effects.txt,
 # bc_eve_effects.txt:75). That is correct while the writer emits exactly 3, 2
 # and 1 and nothing else, and the step 4 check is what keeps it correct. It is
 # recorded because a fourth band would break the two forms differently, and
@@ -285,8 +301,9 @@ bc_bond_clause = {
 #
 # THE BUCKETS ARE 10,000+ / 2,000+ / under, and they BELONG TO THE WRITER. The
 # derivation, the measured distribution and the standing instruction not to
-# re-guess the 2,000 boundary are all at bc_ledger_effects.txt:98-106. This file
-# only names the three values the ladder writes; changing a boundary is an edit
+# re-guess the 2,000 boundary are all in the A BUCKET, 1/2/3 paragraph above the
+# size ladder in bc_ledger_effects.txt. This file only names the three values the
+# ladder writes; changing a boundary is an edit
 # there, not here.
 #
 # THE THREE STRINGS GRADE ALONG ONE AXIS: how much of the fight is not yet in
@@ -305,10 +322,10 @@ bc_bond_clause = {
 # before rewriting an arm; read this before rewriting the AXIS.
 #
 # THE SUBJECT IS BOTH HOSTS, NOT THE COMMANDER'S OWN MEN. The size ladder sets
-# bc_battle_size by comparing num_total_troops on the COMBAT scope
-# (bc_ledger_effects.txt:116) - num_total_troops is a trigger, not a readable
-# value (bc_ledger_effects.txt:87-92), which is why the ladder compares rather
-# than assigns - and the combat is both sides. A clause phrased as a claim about
+# bc_battle_size by comparing num_total_troops on the COMBAT scope - and
+# num_total_troops is a trigger, not a readable value (the A BUCKET, 1/2/3
+# paragraph in bc_ledger_effects.txt), which is why the ladder compares rather
+# than assigns. The combat is both sides. A clause phrased as a claim about
 # his men would therefore report something the variable never measured, and would
 # collide with the moments' own gates: bc_flank_collapses fires only when he is
 # outnumbered (bc_commander_phase_events.txt:221) and bc_van_breaks_through only
@@ -400,9 +417,10 @@ bc_bond_clause = {
 # AND REACHABLE FROM A POP-UP OPTION'S. The ladder is an if/else_if/else, so it
 # writes on all three paths with no leading remove_variable, and it sits above
 # bc_write_bond_effect in the same effect - so every argument in bc_bond_clause's
-# header applies here unchanged. bc_ledger_effects.txt:435-437 makes the pop-up
-# case for THIS variable by name: `Answered after the combat ended, it runs after
-# bc_clear_scratch_effect and there is no bc_battle_size to read.`
+# header applies here unchanged. bc_ledger_effects.txt's THE ABSENT SIZE CASE IS
+# REAL paragraph makes the pop-up case for THIS variable by name: `Answered
+# after the combat ended, it runs after bc_clear_scratch_effect and there is no
+# bc_battle_size to read.`
 #
 # NOTHING CALLS THIS YET. Wiring it into the ten toasts is Plan B task 4.
 bc_scale_clause = {

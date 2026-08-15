@@ -199,9 +199,9 @@ bc_start_popup_cooldown_effect = {
 #
 # Longer than 60 because the eve is rarer by construction - it gates on
 # var:bc_battle_size >= 3, which is num_total_troops >= 10000 on the COMBAT
-# scope (bc_ledger_effects.txt:115-118), so ten thousand men across both hosts,
-# not per side - and because two eves in a season reads as a tic rather than as
-# an occasion.
+# scope (the size ladder in bc_battle_open_effect, bc_ledger_effects.txt), so ten
+# thousand men across both hosts, not per side - and because two eves in a season
+# reads as a tic rather than as an occasion.
 #
 # A FLAG, not a modifier, for the reason bc_start_popup_cooldown_effect records:
 # modifiers are wiped at combat end, so a modifier-based lockout silently resets
