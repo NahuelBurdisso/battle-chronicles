@@ -43,3 +43,35 @@ bc_aftermath = {
 	bc_aftermath_default = {}
 	bc_aftermath_generous = {}
 }
+
+# The rung cap, not an on/off switch for the counter.
+#
+# AGOT hangs murder schemes off `nemesis`. A mod that silently manufactures
+# nemeses is changing far more than battles, so the top rung is opt-in and the
+# default stops at `rival`.
+#
+# THE CAP CLAMPS THE RUNG, IT DOES NOT SKIP THE AWARD. The rule test sits inside
+# the TOP arm's limit in bc_rivalry_set_relation_effect, so under bc_rivalry_rival
+# a counter of 5 fails that arm, falls through to `>= 2`, and sets `rival` - not
+# nothing. Putting the rule test in an outer gate instead would make a man who
+# beat you five times LESS hated than one who beat you twice.
+#
+# bc_rivalry_off SUPPRESSES THE RELATION ONLY. bc_nemesis, bc_nemesis_losses and
+# bc_facing_nemesis_trigger all keep working, so a player who turns it off still
+# gets the narrative - the man who has beaten you twice - without the mod touching
+# CK3's relation graph or AGOT's murder schemes. Suppressing the counter too would
+# make the off switch delete the feature rather than its side effects, and would
+# leave bc_rivalry_clear_effect with nothing to remove.
+#
+# THE COUNTER IS NEVER CAPPED. It keeps climbing past the cap, so lowering this
+# design's own thresholds in a later version is not a data migration. Raising the
+# RULE mid-campaign is impossible anyway - game rules are baked into a save.
+bc_rivalry = {
+	categories = { flavor }
+
+	default = bc_rivalry_rival
+
+	bc_rivalry_off = {}
+	bc_rivalry_rival = {}
+	bc_rivalry_nemesis = {}
+}
