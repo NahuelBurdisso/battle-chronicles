@@ -610,3 +610,19 @@ different fixes.
   | a band | no clause at all | either `Custom()` does not render in a toast desc, or `scope:bc_chronicle_subject` is not addressable from loc. Both kill the design as written; before abandoning it, retry once with `bc_commander`, which is saved on the same character fifteen lines above the toast (`bc_commander_phase_events.txt:65`; the toast is at `:80-85`). If that renders, the anchor is the problem and not the mechanism. |
   | a band | clause present, wrong band | the arms read the variable off the wrong character — the anchor resolves but not to the commander who holds the scratch. |
   | `BC: ground missing` | no clause | not a spike failure — `combat.location` did not resolve at a phase event. Fix the read site in `bc_write_ground_effect` and run again. |
+- **The widened eve.** `bc_chronicles.0011` now assembles three paragraphs and
+  can offer five options. Nothing static proves a `first_valid` picks the arm
+  intended, or that an `option` `trigger` hides rather than greys.
+
+  | markers | screen | verdict |
+  |---|---|---|
+  | `BC: eve ground <band>` | a third paragraph naming that band | both chains work |
+  | `BC: eve ground <band>` | third paragraph reads "The field is what it is" on rough or wooded ground | `scope:bc_eve_ground` is saved but the band triggers do not match through it — check the scope's type, not the triggers |
+  | `BC: eve ground missing` | no third paragraph at all | the ground scope never saved. The insert is in the wrong branch of `bc_eve_offer_effect`. |
+  | any | option d visible on open ground | the `trigger` is not gating; every option in the mod is then suspect |
+  | `BC: eve option ground` counts | — | the option is reachable and taken. There is no "offered but not taken" marker. |
+- **The `bc_ground_held` modifier on a character screen.** It is the fifth
+  family-2 modifier and the first added since the cleanup rule was written. The
+  run must show it appear when option d is taken and be **gone** by the next
+  battle of the same war. If it is still there, `bc_cleanup_effect` did not run
+  or did not reach the new line.

@@ -28,8 +28,8 @@
 # taken as the lines form - on the first moment of the battle, before any of it
 # has resolved.
 #
-# TWO OPTIONS APPLY A FAMILY-2 MODIFIER BY NAME, and these are the only call sites
-# in the mod that do. Everywhere else the (KIND, SWING) table inside
+# FOUR OPTIONS APPLY A FAMILY-2 MODIFIER BY NAME, and these are the only call
+# sites in the mod that do. Everywhere else the (KIND, SWING) table inside
 # bc_record_moment_effect decides which modifier a moment implies. There is no
 # moment here - nothing has happened yet - so there is no seam call to route
 # through and the option names the posture directly. It still goes through
@@ -47,9 +47,28 @@ bc_chronicles.0011 = {
 	title = bc_chronicles.0011.t
 	theme = martial
 
-	# first_valid, not a bare desc. The nemesis branch is the read-back plan 4
-	# promises and the eve is the cheapest place in the mod to deliver it - one
-	# desc branch, no new event, no new state.
+	# THREE PARAGRAPHS, ASSEMBLED: what is happening, who is across the field,
+	# what the field is. `desc` blocks concatenate in order; `first_valid` picks
+	# exactly one of its children. Each chain ends in a trigger-less child for
+	# the same reason the prose fragments have a fallback arm - an eve whose foe
+	# or province did not resolve must still render a whole paragraph, not a gap.
+	#
+	# BOTH NEW CHAINS READ SAVED SCOPES, NOT SCRATCH. See bc_eve_effects.txt: the
+	# pop-up renders when the player gets round to it, which can be after the
+	# combat ended and bc_clear_scratch_effect ran.
+	#
+	# THE FOE CHAIN CARRIES THE SAME FIVE VALUES AS THE BOND LADDER BUT IN A
+	# DIFFERENT ORDER - nemesis, kin, heathen, countryman, stranger, where the
+	# ladder in bc_write_bond_effect runs nemesis, kin, countryman, heathen,
+	# stranger. Heathen is lifted above countryman ON PURPOSE: a man of your own
+	# people who prays to something else is the more interesting sentence, and
+	# under the ladder's order he never gets one. The two orders disagree and
+	# that is the intent - the ladder writes a fact, this chain picks a line.
+	#
+	# THE stranger ARM IS A TRUE FALLBACK AND HAS TO STAY REACHABLE ONLY BY
+	# STRANGERS. Its text says "a banner nobody here can name", which is a lie
+	# about a countryman. That is why the countryman arm is here and not dropped:
+	# without it the largest match-up class on the map falls through to it.
 	desc = {
 		desc = bc_chronicles.0011.desc_intro
 		first_valid = {
@@ -57,7 +76,80 @@ bc_chronicles.0011 = {
 				trigger = { bc_eve_facing_nemesis_trigger = yes }
 				desc = bc_chronicles.0011.desc_nemesis
 			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_foe
+					trigger_if = {
+						limit = { exists = scope:bc_eve_foe }
+						scope:bc_eve_foe = { is_close_family_of = root }
+					}
+				}
+				desc = bc_chronicles.0011.desc_kin
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_foe
+					trigger_if = {
+						limit = { exists = scope:bc_eve_foe }
+						NOT = { scope:bc_eve_foe = { faith = root.faith } }
+					}
+				}
+				desc = bc_chronicles.0011.desc_heathen
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_foe
+					trigger_if = {
+						limit = { exists = scope:bc_eve_foe }
+						scope:bc_eve_foe = { culture = root.culture }
+					}
+				}
+				desc = bc_chronicles.0011.desc_countryman
+			}
 			desc = bc_chronicles.0011.desc_stranger
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_ground
+					trigger_if = {
+						limit = { exists = scope:bc_eve_ground }
+						scope:bc_eve_ground = { bc_ground_is_rough_trigger = yes }
+					}
+				}
+				desc = bc_chronicles.0011.desc_ground_rough
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_ground
+					trigger_if = {
+						limit = { exists = scope:bc_eve_ground }
+						scope:bc_eve_ground = { bc_ground_is_forest_trigger = yes }
+					}
+				}
+				desc = bc_chronicles.0011.desc_ground_forest
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_ground
+					trigger_if = {
+						limit = { exists = scope:bc_eve_ground }
+						scope:bc_eve_ground = { bc_ground_is_winter_trigger = yes }
+					}
+				}
+				desc = bc_chronicles.0011.desc_ground_winter
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_ground
+					trigger_if = {
+						limit = { exists = scope:bc_eve_ground }
+						scope:bc_eve_ground = { bc_ground_is_desert_trigger = yes }
+					}
+				}
+				desc = bc_chronicles.0011.desc_ground_desert
+			}
+			desc = bc_chronicles.0011.desc_ground_open
 		}
 	}
 
@@ -91,5 +183,54 @@ bc_chronicles.0011 = {
 		name = bc_chronicles.0011.c
 
 		add_prestige = -25
+	}
+
+	# TWO CONTEXTUAL OPTIONS. `trigger` on an event option HIDES it when false,
+	# which is the behaviour wanted: an option greyed out on every plain would
+	# advertise a mechanic the player cannot reach. On open ground against a
+	# stranger this event is exactly what it was before.
+	#
+	# NEITHER APPLIES MOMENTUM. The file header states the rule: the battle has
+	# not started, the eve is about shape, not advantage. Both go through
+	# bc_add_verb_effect, which is family 2.
+	#
+	# BOTH TRIGGERS READ SCOPES, so a late-answered eve still renders the same
+	# option set it was offered with. That is the whole reason bc_eve_ground is a
+	# scope and not scratch.
+	#
+	# DECISION TABLE for the two markers below. Their denominator is eves
+	# ANSWERED, which is neither the moment count nor `BC: eve offered`:
+	#   both 0 while `BC: eve offered` counts  the options are never reachable,
+	#       or the eve is being dismissed. Not a trigger bug on its own.
+	#   `eve option ground` 0 while `BC: eve ground missing` is 0  the ground
+	#       scope resolves and the bands still never match: check the trigger.
+	#   either counting                        the option was taken. There is no
+	#       marker for "offered but not taken"; CK3 gives no hook for it.
+	option = {
+		name = bc_chronicles.0011.d
+		trigger = {
+			exists = scope:bc_eve_ground
+			trigger_if = {
+				limit = { exists = scope:bc_eve_ground }
+				scope:bc_eve_ground = {
+					OR = {
+						bc_ground_is_rough_trigger = yes
+						bc_ground_is_forest_trigger = yes
+					}
+				}
+			}
+		}
+		bc_add_verb_effect = { MODIFIER = bc_ground_held }
+		debug_log = "BC: eve option ground"
+	}
+
+	# bc_eve_facing_nemesis_trigger already guards its own reads - it is the
+	# trigger the desc branch above uses - so this needs no wrapper of its own.
+	option = {
+		name = bc_chronicles.0011.e
+		trigger = { bc_eve_facing_nemesis_trigger = yes }
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		add_stress = 5
+		debug_log = "BC: eve option nemesis"
 	}
 }
