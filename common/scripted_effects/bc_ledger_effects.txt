@@ -202,7 +202,7 @@ bc_record_moment_effect = {
 		debug_log = "BC: moment swing up"
 	}
 
-	bc_record_effective_tier_effect = { TIER = $TIER$ KIND = $KIND$ }
+	bc_record_effective_tier_effect = { TIER = $TIER$ KIND = $KIND$ SWING = $SWING$ }
 
 	# Family 2 needs a real battle. Size 1 is a skirmish and gets the tide only -
 	# spec Section 6, "verb families gate on size".
@@ -256,6 +256,17 @@ bc_record_effective_tier_effect = {
 		}
 		bc_write_style_effect = { RANK = 3 KIND = $KIND$ }
 		debug_log = "BC: moment decisive"
+
+		# Family 3 hangs here and ONLY here. This arm IS the effective tier: it is
+		# the point at which the ceiling has already been applied and the answer is
+		# `decisive`. bc_wound_effect's header explains at length why the obvious
+		# alternative - reading var:bc_battle_tier - is wrong.
+		#
+		# LAST IN THE ARM ON PURPOSE. Effects in a block run top to bottom, so
+		# "BC: wound" can only ever be written AFTER the "BC: moment decisive" that
+		# caused it. The two counts are read as a ratio and that ordering is what
+		# makes the pairing legible in a 500k-line log.
+		bc_wound_effect = { SWING = $SWING$ }
 	}
 	else_if = {
 		limit = {
