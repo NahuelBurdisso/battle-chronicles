@@ -126,3 +126,48 @@ bc_chronicle_flag_days_value = {
 		value = 15
 	}
 }
+
+# --- rivalry step size ------------------------------------------------------
+#
+# ONE STEP SIZE, USED IN ALL FOUR ARITHMETIC SITES: the create branch, the
+# escalate branch, the floor guard, and the decrement. Section 4 of the design
+# records that an earlier draft hardcoded the create branch to 1, which quietly
+# made "a wipe takes a stranger straight to rival" false and made the design's own
+# worked example unreachable. Do not inline the 1 anywhere.
+#
+# scope:wipe IS ENGINE-PROVIDED AND THIS VALUE IS LIVE TODAY. It is not plan 5's
+# and no script saves it: AGOT documents it in its own on_action headers, at
+# common/on_action/combat_on_actions.txt:13 above on_combat_end_winner and :527
+# above on_combat_end_loser, and it survives into events raised from those hooks'
+# `events = { }` lists. Plan 5 only wraps the read in a named trigger. Test this
+# branch when you test the plan; do not assume it is dormant.
+#
+# THE COMPARISON IS NESTED, NOT A SIBLING OF THE `exists`. Shipped AGOT uses both
+# idioms for this scope in one file - `exists = scope:wipe` as the entire test at
+# :100, `scope:wipe = yes` at :758 - so it is unsettled whether the scope
+# always exists carrying a boolean or exists only when true. Under the second
+# reading a sibling comparison would read a missing scope on every combat end in
+# the world. `exists` is safe on a missing scope; the COMPARISON is what has to be
+# guarded, and CK3 does not short-circuit. Plan 5 task 1 replaces this exact body
+# with a call to bc_was_wipe_trigger, which is the same four lines under a name.
+#
+# SHAPE PRECEDENT, both verified by reading the file: bare `value = X` in each
+# branch with no base value outside is swing_scales_discounts_multiplier_value,
+# 00_diarchy_values.txt:3224-3237; trigger_if inside a script value's limit, as a
+# nested guarded comparison beside a sibling exists row, is
+# journey_province_reference_value, 00_activity_values.txt:2150-2161.
+bc_rivalry_step_value = {
+	if = {
+		limit = {
+			exists = scope:wipe
+			trigger_if = {
+				limit = { exists = scope:wipe }
+				scope:wipe = yes
+			}
+		}
+		value = 2
+	}
+	else = {
+		value = 1
+	}
+}
