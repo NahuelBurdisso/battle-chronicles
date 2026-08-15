@@ -1,0 +1,54 @@
+﻿# Battle Chronicles - family 2, the character of the fight.
+#
+# Family 1 (bc_momentum_modifiers.txt) is the TIDE: pure `advantage`, one axis,
+# up or down. Family 2 is the CHARACTER of the fight: what kind of battle this
+# turned into. Every one of these is a trade, not a bonus - the army fights
+# differently, not better.
+#
+# NO CALL SITE NAMES ONE. They are selected by bc_apply_verb_effect from the
+# (KIND, SWING) an event already passes to the seam. If you find yourself adding
+# `bc_bloodied` to an event, the KIND table is wrong, not the event.
+#
+# NO `stacking = yes` ON ANY OF THESE, deliberately. stacking is opt-in in CK3 -
+# see 00_activity_tour_modifiers.txt:4 and 00_activity_hunt_modifiers.txt:286,
+# which set it explicitly - so re-applying one of these inside the same battle
+# REFRESHES its 20 days rather than doubling the effect. That is what we want: a
+# battle that goes bloody twice is still one bloody battle, and stacking would
+# make a long siege battle grotesque.
+#
+# These are `army_*` and `knight_*` tags, so unlike the momentum modifiers they
+# do NOT appear in the combat advantage breakdown. They appear in the army stat
+# breakdown and in the character's modifier list. Both render the localized name
+# and, if present, the _desc.
+#
+# ALL FOUR TAGS CONFIRMED IN THE API DUMP, docs/api/1.19.0.6/modifiers.log, each
+# `Use areas: character`. Nothing in this workspace validates a modifier tag -
+# a misspelled one is a silent no-op - so that check is the only one there is.
+#
+# EVERY ONE OF THESE MUST APPEAR IN bc_cleanup_effect. That is the one rule.
+
+# Traded blood for ground. He is winning the exchange and paying for it.
+bc_bloodied = {
+	icon = martial_positive
+	army_damage_mult = 0.15
+	army_toughness_mult = -0.10
+}
+
+# Dug in and refused to move. Nothing gets through and nothing gets done.
+bc_shieldwall = {
+	icon = martial_positive
+	army_toughness_mult = 0.15
+	army_damage_mult = -0.10
+}
+
+# The knights went in hard and early and the horses are blown.
+bc_spent_horse = {
+	icon = martial_negative
+	knight_effectiveness_mult = -0.20
+}
+
+# They are running and we are on them.
+bc_pursuit = {
+	icon = martial_positive
+	army_pursuit_mult = 0.15
+}
