@@ -122,6 +122,7 @@ bc_cleanup_effect = {
 	remove_character_modifier = bc_shieldwall
 	remove_character_modifier = bc_spent_horse
 	remove_character_modifier = bc_pursuit
+	remove_character_modifier = bc_ground_held
 }
 
 # --- pacing -----------------------------------------------------------------

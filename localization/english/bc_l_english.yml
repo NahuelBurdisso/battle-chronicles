@@ -38,6 +38,8 @@
  bc_spent_horse_desc:0 "The knights went in hard and went in early. There is nothing left in the animals."
  bc_pursuit:0 "Hard on Their Heels"
  bc_pursuit_desc:0 "The enemy is giving ground, and there is no order left in the giving."
+ bc_ground_held:0 "The Ground Is Ours"
+ bc_ground_held_desc:0 "They chose the ground and they have not stepped off it. Moving them is a day's work; moving them forward is not happening."
 
  bc_valiant_in_battle_opinion:0 "Stood Fast in Battle"
  bc_craven_in_battle_opinion:0 "Shamed Himself in Battle"

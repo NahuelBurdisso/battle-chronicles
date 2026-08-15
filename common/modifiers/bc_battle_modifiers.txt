@@ -5,9 +5,13 @@
 # turned into. Every one of these is a trade, not a bonus - the army fights
 # differently, not better.
 #
-# NO CALL SITE NAMES ONE. They are selected by bc_apply_verb_effect from the
-# (KIND, SWING) an event already passes to the seam. If you find yourself adding
-# `bc_bloodied` to an event, the KIND table is wrong, not the event.
+# ONE EVENT NAMES THESE DIRECTLY AND IT IS THE ONLY ONE. Everywhere else they
+# are selected by bc_apply_verb_effect from the (KIND, SWING) an event already
+# passes to the seam. The exception is bc_chronicles.0011, the eve, whose four
+# option effects name a modifier because nothing has happened yet - there is no
+# moment to route through. See bc_eve_events.txt:31-37, which carries the
+# reasoning. If you find yourself naming one from any OTHER event, the KIND
+# table is wrong, not the event.
 #
 # NO `stacking = yes` ON ANY OF THESE, deliberately. stacking is opt-in in CK3 -
 # see 00_activity_tour_modifiers.txt:4 and 00_activity_hunt_modifiers.txt:286,
@@ -51,4 +55,24 @@ bc_spent_horse = {
 bc_pursuit = {
 	icon = martial_positive
 	army_pursuit_mult = 0.15
+}
+
+# Took the broken ground and would not come off it. He cannot be moved and he
+# cannot move: a man who has anchored himself to a hillside or a treeline is not
+# chasing anybody off it.
+#
+# BOTH TAGS ARE ALREADY IN USE IN THIS FILE - army_toughness_mult by
+# bc_shieldwall, army_pursuit_mult by bc_pursuit - so both are confirmed against
+# docs/api/1.19.0.6/modifiers.log by the same evidence the header cites. Nothing
+# in this workspace validates a modifier tag; reusing a proven one is the only
+# check available.
+#
+# NOT a second bc_shieldwall. Shieldwall trades damage for toughness and is
+# something the line does. This trades PURSUIT for toughness and is something
+# the ground does - which is why it is offered only where the ground is worth
+# holding.
+bc_ground_held = {
+	icon = martial_positive
+	army_toughness_mult = 0.15
+	army_pursuit_mult = -0.15
 }
