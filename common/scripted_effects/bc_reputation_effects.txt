@@ -81,3 +81,140 @@ bc_style_streak_effect = {
 		debug_log = "BC: style reset"
 	}
 }
+
+# --- the style award --------------------------------------------------------
+#
+# Six styles, six traits. Called only when the streak has reached 3 AND the
+# budget gate passed - both are the caller's business, in the chain.
+#
+#   bloodied    aggressive_attacker
+#   entrenched  unyielding_defender
+#   adapted     flexible_leader
+#   measured    cautious_leader
+#   wild        reckless
+#   ordered     organizer
+#
+# THE COMPARISON IS `var:bc_battle_style = flag:bloodied`. bc_battle_style holds a
+# flag value, written as `set_variable = { ... value = flag:$KIND$ }` by the seam,
+# so both sides are flag values and no conversion happens anywhere in B. This is
+# NOT the `flag:$PARAM$ = flag:literal` idiom used for scripted-effect parameters
+# - there is no parameter here, the left side is a variable read.
+#
+# EACH ARM CARRIES ITS OWN `NOT = { has_trait = X }`. It cannot be hoisted: the
+# trait differs per arm. Without it, a commander who already holds
+# aggressive_attacker and keeps fighting that way re-enters this branch every
+# third notable battle and spends the reward budget on a no-op add_trait.
+#
+# reckless AND cautious_leader ARE `opposites` OF EACH OTHER, and they are the
+# ONLY such pair among the twelve traits B can award - verified across the whole
+# of AGOT's 00_traits.txt, not a window of it. `has_trait` does not catch this: a
+# commander holding reckless who builds a `measured` streak passes every gate and
+# the engine then SILENTLY refuses the add_trait. The streak resets, the reward is
+# consumed, and nothing happens - forever. So the opposite is removed and the new
+# trait replaces it. A man who fought recklessly for a decade and has now won
+# three battles by caution has changed.
+#
+# THE `else` ARM IS REACHABLE AND IS NOT PADDING. Every one of the six arms can
+# fail its has_trait row and the whole ladder can fall through - that is exactly
+# the case the marker exists to report. It also catches a bc_battle_style holding
+# a kind not in this table, which would mean the seam's KIND vocabulary and this
+# ladder have drifted apart.
+bc_style_award_effect = {
+	if = {
+		limit = {
+			var:bc_battle_style = flag:bloodied
+			NOT = { has_trait = aggressive_attacker }
+		}
+		add_trait = aggressive_attacker
+		bc_style_award_toast_effect = { TRAIT = aggressive_attacker }
+	}
+	else_if = {
+		limit = {
+			var:bc_battle_style = flag:entrenched
+			NOT = { has_trait = unyielding_defender }
+		}
+		add_trait = unyielding_defender
+		bc_style_award_toast_effect = { TRAIT = unyielding_defender }
+	}
+	else_if = {
+		limit = {
+			var:bc_battle_style = flag:adapted
+			NOT = { has_trait = flexible_leader }
+		}
+		add_trait = flexible_leader
+		bc_style_award_toast_effect = { TRAIT = flexible_leader }
+	}
+	else_if = {
+		limit = {
+			var:bc_battle_style = flag:measured
+			NOT = { has_trait = cautious_leader }
+		}
+		if = {
+			limit = { has_trait = reckless }
+			remove_trait = reckless
+		}
+		add_trait = cautious_leader
+		bc_style_award_toast_effect = { TRAIT = cautious_leader }
+	}
+	else_if = {
+		limit = {
+			var:bc_battle_style = flag:wild
+			NOT = { has_trait = reckless }
+		}
+		if = {
+			limit = { has_trait = cautious_leader }
+			remove_trait = cautious_leader
+		}
+		add_trait = reckless
+		bc_style_award_toast_effect = { TRAIT = reckless }
+	}
+	else_if = {
+		limit = {
+			var:bc_battle_style = flag:ordered
+			NOT = { has_trait = organizer }
+		}
+		add_trait = organizer
+		bc_style_award_toast_effect = { TRAIT = organizer }
+	}
+	else = {
+		debug_log = "BC: award blocked has trait"
+	}
+}
+
+# One toast shape for every style award, so the six call sites cannot drift.
+#
+# ROUTED, NOT BROADCAST. bc_addressed_toast_effect (bc_reward_effects.txt) raises
+# on the subject if he is human and on his liege if he is not, because nearly
+# every commander in the world is AI and a toast raised on a man nobody plays
+# reaches nobody. This is the ADDRESSING argument and it never depended on DIAG Q4.
+#
+# THE SUBJECT MUST BE A SAVED SCOPE. bc_addressed_toast_effect's liege arm has
+# already changed scope by the time left_icon is evaluated, and a scripted effect
+# does not rebind ROOT.
+#
+# THE TRAIT KEY IS ONLY IN THE DESC LOC KEY, not passed to the toast as data.
+# There is one desc key per trait, so the localization can say what the man became
+# in words rather than printing a trait name into a sentence. Nothing automated
+# catches a typo in those six names - validate's loc cross-check covers top-level
+# DEFINITION keys in three directories, and a key REFERENCED from a scripted
+# effect is neither. Task 8 step 4 pairs them by hand; that is the only check.
+#
+# bc_award_taken IS THE AT-MOST-ONE-AWARD MARKER, and this is the only correct
+# place for it. Task 6's chain reads it to suppress everything downstream. Setting
+# it here rather than in the chain means it is written once per award ACTUALLY
+# MADE - a style ladder that falls through on has_trait sets nothing, and terrain
+# still gets its turn. Setting it in the chain instead would burn the battle's
+# single award on a ladder that awarded nothing.
+# It is SCRATCH with a lifetime of one effect call; bc_reputation_effect removes
+# it unconditionally at the end.
+bc_style_award_toast_effect = {
+	save_scope_as = bc_award_subject
+	set_variable = { name = bc_award_taken value = 1 }
+	debug_log = "BC: style award"
+	bc_addressed_toast_effect = {
+		TYPE = event_toast_effect_good
+		TITLE = bc_style_award_toast
+		DESC = bc_style_award_$TRAIT$_desc
+		SUBJECT = scope:bc_award_subject
+	}
+}
