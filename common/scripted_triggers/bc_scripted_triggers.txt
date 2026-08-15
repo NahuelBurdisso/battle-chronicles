@@ -30,22 +30,45 @@ bc_side_is_outnumbering_trigger = {
 }
 
 # --- ground -----------------------------------------------------------------
-# scope:combat_side.combat.location is a province scope, so `terrain = x` works
-# there directly. Proven in game (probe 4). Plain vanilla terrain keys only, so
-# the mod never hard-depends on Seasons of Ice and Fire.
-
+# scope:combat_side.combat.location is a province scope, so a terrain check works
+# there directly. Proven in game (probe 4).
+#
+# NEVER `terrain = X`. ALWAYS `agot_is_X_terrain = yes`. AGOT's
+# common/terrain_types/01_agot_terrains.txt defines road variants as DISTINCT
+# terrain types - `majorroad_hills` is not `hills` - and adds seven bases vanilla
+# has no key for. These two triggers shipped with bare keys and so missed 424 and
+# 51 provinces respectively, silently, from the first live run onward. AGOT's 23
+# helpers in common/scripted_triggers/00_agot_terrain_type_triggers.txt each fold
+# a base key together with its two road variants; that is the only correct way to
+# ask what ground a battle is on.
+#
+# The helpers are base AGOT, not Seasons of Ice and Fire. An earlier version of
+# this comment justified the bare keys as avoiding a hard dependency on a submod.
+# That was the wrong file: 2962333032 is `name="A Game of Thrones"` itself, and
+# descriptor.mod already declares `dependencies = { "A Game of Thrones" }`.
+#
 # `mountains` used to appear in BOTH lists, so in the mountains the ground
 # simultaneously favoured you and bogged you down and the two events fought over
 # the same roll. It belongs to the bogging list: hills and forest already carry
-# "good defensive ground", while wetlands and jungle on their own are close to
-# nonexistent in Westeros - the Neck and nothing else - so without mountains the
-# bogged-down event would never be seen at all.
+# "good defensive ground".
+#
+# the_bog and taiga_bog are new to the bogging list and are the point of it. The
+# old comment argued that wetlands and jungle alone are "close to nonexistent in
+# Westeros - the Neck and nothing else". That was right about the Neck and wrong
+# about the key: AGOT models the Neck as `the_bog`, 139 provinces including road
+# variants, which the old trigger did not match at all. highlands and
+# terraced_hills join the favouring list for the same reason - they are AGOT's own
+# variations on hills. terraced_hills currently has zero provinces on the map; it
+# is listed anyway so the pair stays exhaustive over what "hill-like" means if
+# AGOT ever places one.
 
 bc_terrain_favours_us_trigger = {
 	scope:combat_side.combat.location = {
 		OR = {
-			terrain = hills
-			terrain = forest
+			agot_is_hills_terrain = yes
+			agot_is_forest_terrain = yes
+			agot_is_highlands_terrain = yes
+			agot_is_terraced_hills_terrain = yes
 		}
 	}
 }
@@ -53,9 +76,11 @@ bc_terrain_favours_us_trigger = {
 bc_terrain_bogs_us_down_trigger = {
 	scope:combat_side.combat.location = {
 		OR = {
-			terrain = wetlands
-			terrain = jungle
-			terrain = mountains
+			agot_is_wetlands_terrain = yes
+			agot_is_jungle_terrain = yes
+			agot_is_mountains_terrain = yes
+			agot_is_the_bog_terrain = yes
+			agot_is_taiga_bog_terrain = yes
 		}
 	}
 }
