@@ -616,9 +616,11 @@ different fixes.
 
   | markers | screen | verdict |
   |---|---|---|
-  | `BC: eve ground <band>` | a third paragraph naming that band | both chains work |
-  | `BC: eve ground <band>` | third paragraph reads "The field is what it is" on rough or wooded ground | `scope:bc_eve_ground` is saved but the band triggers do not match through it — check the scope's type, not the triggers |
-  | `BC: eve ground missing` | no third paragraph at all | the ground scope never saved. The insert is in the wrong branch of `bc_eve_offer_effect`. |
+  | `BC: ground <band>` (write-path marker, not the eve's own read) | a third paragraph naming that band | the write path and the eve's `scope:bc_eve_ground` read agreed — both work. A mismatch between the write-path band and the rendered paragraph is itself informative: the scope saved the province but a subsequent battle overwrote `BC: ground <band>` while the scope still points to the first one. |
+  | `BC: ground rough` or `BC: ground forest` | third paragraph reads "The field is what it is" | `scope:bc_eve_ground` is saved but the band triggers do not match through it — check the scope's type, not the triggers. This is a real failure: rough and forest both have named arms. |
+  | `BC: ground jungle` | third paragraph reads "The field is what it is" | same diagnosis as above — jungle now has a named arm and should not reach the fallback. |
+  | `BC: eve ground missing` | third paragraph reads "The field is what it is" | correct behaviour: the ground scope never saved, the fallback renders as designed. Not a trigger bug. The insert may be in the wrong branch of `bc_eve_offer_effect` if this counts while `BC: eve offered` counts equally. |
+  | `BC: ground open` or unresolved province | third paragraph reads "The field is what it is" | correct: open is the only band that legitimately rides the fallback, and an unresolved province also reaches it. |
   | any | option d visible on open ground | the `trigger` is not gating; every option in the mod is then suspect |
   | `BC: eve option ground` counts | — | the option is reachable and taken. There is no "offered but not taken" marker. |
 - **The `bc_ground_held` modifier on a character screen.** It is the fifth

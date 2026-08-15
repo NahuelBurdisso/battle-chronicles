@@ -14,13 +14,18 @@
 #
 # THIS FILE HOLDS THESE SIX TRIGGERS AND NOTHING ELSE. tools/ck3lib/validate.py
 # checks the partition by counting every `agot_is_*_terrain` mention in this
-# file and comparing the multiset against the 23 base helpers. Adding an
-# unrelated trigger here that happens to mention a terrain will break that
-# check, correctly and confusingly.
+# file and comparing the multiset against the 23 base helpers. Adding anything
+# to this file that mentions a terrain — a trigger, a comment, or anything else
+# — will break that check, correctly and confusingly.
 #
 # SCOPE: PROVINCE. Every caller enters a province scope first - the bucket
 # effect via scope:bc_battle_province, the moment writer via
-# scope:combat_side.combat.location.
+# scope:combat_side.combat.location, and two call sites in bc_eve_events.txt via
+# scope:bc_eve_ground (the ground desc chain and the option d trigger). The eve
+# callers read scope:bc_eve_ground, a saved scope that is durable across battles
+# — a player who leaves one eve unanswered may see the next rendered against the
+# previous battle's ground. That is a materially different risk profile from the
+# other two callers, which read combat.location fresh on every phase event.
 
 bc_ground_is_desert_trigger = {
 	OR = {

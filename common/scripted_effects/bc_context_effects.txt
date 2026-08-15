@@ -6,6 +6,14 @@
 # Script can log. So script decides which situation obtains and writes a flag,
 # and the prose only ever compares flags.
 #
+# ONE EXCEPTION: the eve (bc_eve_events.txt:bc_chronicles.0011). Its desc chain
+# and option triggers classify directly — is_close_family_of, faith, culture,
+# and four band triggers — because the eve renders after bc_clear_scratch_effect
+# has run, so it must read durable saved scopes rather than scratch that no
+# longer exists. The rule still holds everywhere else. The consequence is that
+# the eve's chains are uninstrumented — there is no marker that says which
+# paragraph rendered.
+#
 # EVERYTHING HERE IS SCRATCH, on the SIDE COMMANDER, cleared by
 # bc_clear_scratch_effect at combat end. Nothing here is a saved scope carrying
 # meaning: a saved scope is not cleared when a combat ends, so a stale one would
@@ -114,6 +122,23 @@ bc_write_ground_effect = {
 #
 # The two creed markers sum to the moment count MINUS `BC: bond nofoe`, because
 # a battle with no enemy commander has no creed to compare.
+#
+# DO NOT "RECONCILE" THIS LADDER WITH THE EVE. The desc chain in
+# bc_eve_events.txt carries the same five values in a different order —
+# nemesis, kin, heathen, countryman, stranger — with heathen deliberately above
+# countryman, because the eve picks a line nobody reads back. This ladder writes
+# a fact that other systems read back: bc_battle_bond drives the aftermath award
+# and the fragment vocabulary. Lifting `heathen` above `countryman` here would
+# silently change what `BC: bond countryman` and `BC: bond heathen` count and
+# shift the prose vocabulary for the remaining fragment work. The two orders
+# disagree and that is the intent. See bc_eve_events.txt for the reciprocal note.
+#
+# NOTE ON SCOPE: bc_battle_bond and bc_battle_creed are written on the caller's
+# current scope, not explicitly through scope:bc_chronicle_subject. This is safe
+# today because the only caller is bc_battle_open_effect, where the current scope
+# and the anchor are the same character — but the "IS NOT OPTIONAL" anchor rule
+# in bc_write_ground_effect's header protects only that effect's explicit write,
+# not these two.
 bc_write_bond_effect = {
 	if = {
 		limit = { exists = var:bc_battle_foe }

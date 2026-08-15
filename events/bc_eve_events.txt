@@ -108,6 +108,16 @@ bc_chronicles.0011 = {
 			}
 			desc = bc_chronicles.0011.desc_stranger
 		}
+		# THE GROUND CHAIN HAS FIVE NAMED BANDS PLUS A FALLBACK. The fallback
+		# text ("The field is what it is. Nothing on it will decide anything for
+		# you.") is the open-ground text, and `open` is the only band that
+		# legitimately rides it — an unresolved province also reaches it, which
+		# is the correct failure. Jungle was added after the terrain census at
+		# README.md Q5 measured jungle at 8/137 and desert at 0/137: the
+		# fallback sentence is false about a jungle in the same way the
+		# `stranger` arm's text is false about a countryman, and a band measured
+		# at 8/137 earns a bespoke line. Desert's zero is a sample result, not
+		# a map truth — Dorne and Essos exist — so its arm stays.
 		first_valid = {
 			triggered_desc = {
 				trigger = {
@@ -128,6 +138,16 @@ bc_chronicles.0011 = {
 					}
 				}
 				desc = bc_chronicles.0011.desc_ground_forest
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:bc_eve_ground
+					trigger_if = {
+						limit = { exists = scope:bc_eve_ground }
+						scope:bc_eve_ground = { bc_ground_is_jungle_trigger = yes }
+					}
+				}
+				desc = bc_chronicles.0011.desc_ground_jungle
 			}
 			triggered_desc = {
 				trigger = {

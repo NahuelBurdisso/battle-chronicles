@@ -20,7 +20,7 @@
 # Scratch and ledger must be variables — bc_cleanup_effect strips every modifier
 # at combat end, so anything modifier-shaped cannot persist by construction.
 #
-# CLEARING MEANS remove_variable, NEVER set_variable value = 0. Three scratch
+# CLEARING MEANS remove_variable, NEVER set_variable value = 0. Nine scratch
 # variables cannot hold zero, and absence-versus-zero is load-bearing: it is how
 # the seam detects the first moment of a battle and which arm of the pacing floor
 # fires.
@@ -506,10 +506,11 @@ bc_wound_effect = {
 
 # --- scratch clearing -------------------------------------------------------
 #
-# remove_variable, NEVER set_variable value = 0. Three of the six cannot hold
+# remove_variable, NEVER set_variable value = 0. Six of the nine cannot hold
 # zero — bc_battle_style is a flag, bc_battle_foe is a character,
-# bc_battle_wounded is a presence test — and absence-versus-zero is what the seam
-# and the pacing floor both test.
+# bc_battle_wounded is a presence test, bc_battle_ground is a flag,
+# bc_battle_bond is a flag, bc_battle_creed is a flag — and absence-versus-zero
+# is what the seam and the pacing floor both test.
 #
 # bc_battle_wounded is listed although nothing writes it until plan 6. Clearing a
 # variable that does not exist is a no-op AT RUNTIME, but it is NOT silent: the
