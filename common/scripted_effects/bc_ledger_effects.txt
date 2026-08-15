@@ -308,6 +308,88 @@ bc_write_style_effect = {
 	}
 }
 
+# --- family 3, the flesh ----------------------------------------------------
+#
+# bc_wound_effect = { SWING = up|down }
+#
+# CALLED FROM THE DECISIVE ARM OF bc_record_effective_tier_effect, AND NOWHERE
+# ELSE. That placement IS gate 1a: the arm is the definition of "this moment
+# resolved to decisive", after the ceiling has been applied.
+#
+# DO NOT REWRITE THIS AGAINST var:bc_battle_tier. The spec says to and the spec is
+# wrong on that one word. bc_battle_tier is a HIGH-WATER MARK - bc_write_style_effect
+# above only ever writes it upward, so once any moment of a battle has been
+# decisive it reads 3 for the rest of the battle. Gating on it would let a MINOR
+# moment wound a commander because a decisive one happened six moments earlier.
+#
+# THE COMMANDER, ALWAYS. Every seam call site in bc_knight_phase_events.txt sits
+# inside a `scope:combat_side.side_commander ?= { }` block, which plan 1 task 11
+# step 4 asserts and plan 6 task 5 re-asserts. wounded_1 carries
+# `disables_combat_leadership = yes`; landing it on a courtier knight - of which
+# one battle produces 41 rolls - is the failure this whole chain prevents.
+#
+# `flag:$SWING$ = flag:down`, NEVER `$SWING$ = down`. A bare comparison substitutes
+# textually to `down = down`, an unknown key, which is a SILENT NO-OP that validate
+# passes - every wound would fire regardless of swing. Same failure as
+# `$TIER$ = decisive`; same shipped fix (vanilla 00_animal_effects.txt:1659).
+#
+# THE SWING ROW IS INERT TODAY AND STAYS. Both TIER = decisive call sites already
+# pass SWING = down, so this row rejects nothing as the mod stands. SWING exists in
+# the seam's signature BECAUSE of this gate - spec Section 1 says so - and the
+# first `decisive` + `up` site anyone adds would otherwise wound a man for winning.
+#
+# THE SIZE READ IS NESTED, THE OTHER FOUR ROWS ARE NOT. CK3 does not short-circuit
+# and guarantees no evaluation order among siblings, so a comparison in the outer
+# limit would evaluate even when the variable is absent. `exists`, `has_trait`,
+# `has_game_rule` and a flag comparison are all safe on absence; only
+# `var:bc_battle_size >= 3` is a read.
+#
+# THE ABSENT SIZE CASE IS REAL. bc_chronicles.0001 opt c is one of the two decisive
+# call sites and it is a POP-UP OPTION. Answered after the combat ended, it runs
+# after bc_clear_scratch_effect and there is no bc_battle_size to read.
+#
+# max = 1 IS THE LINE THAT KEEPS "DEATH NEVER". rank is a DELTA (effects.log:3507),
+# `wounded` is a real trait group (AGOT 00_traits.txt:6346), and max caps the new
+# rank. The has_trait guard makes this a no-op on an already-wounded man; max = 1
+# makes the ceiling structural, so the mod cannot create a wounded_2 even if the
+# guard is later loosened. A mod-created wounded_2 would put a commander one
+# VANILLA wound from wounded_3, which is the doorway to every lethal path in
+# 20_health_effects.txt - indirectly lethal while satisfying "death never" in
+# letter.
+#
+# NO DURATION, NO TIMED REMOVAL, NO RECOVERY EVENT. Vanilla's
+# wounded_recovery_pulse (AGOT health_on_actions.txt:369) fires four times a year
+# off yearly_health_pulse and triggers on `has_trait = wounded`, so a raw
+# change_trait_rank inherits the entire recovery system for free. Anything written
+# here to take the trait away would race it.
+#
+# bc_battle_wounded IS SET INSIDE THE INNER `if`, NOT THE OUTER ONE. It records
+# that a wound HAPPENED, not that one was considered. Setting it outside would let
+# the first decisive-and-down moment of a SMALL battle block the wound for the rest
+# of that battle - a bug that would only ever show up as "wounds are rarer than the
+# gates say".
+bc_wound_effect = {
+	if = {
+		limit = {
+			flag:$SWING$ = flag:down
+			NOT = { has_game_rule = bc_wounds_off }
+			NOT = { exists = var:bc_battle_wounded }
+			NOT = { has_trait = wounded }
+			exists = var:bc_battle_size
+		}
+		if = {
+			limit = { var:bc_battle_size >= 3 }
+			change_trait_rank = {
+				trait = wounded
+				rank = 1
+				max = 1
+			}
+			set_variable = { name = bc_battle_wounded value = yes }
+			debug_log = "BC: wound"
+		}
+	}
+}
+
 # --- scratch clearing -------------------------------------------------------
 #
 # remove_variable, NEVER set_variable value = 0. Three of the six cannot hold
