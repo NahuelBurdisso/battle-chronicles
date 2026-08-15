@@ -113,6 +113,15 @@ bc_cleanup_effect = {
 	remove_character_modifier = bc_momentum_minor
 	remove_character_modifier = bc_momentum_major
 	remove_character_modifier = bc_momentum_decisive
+	# Family 2, from bc_battle_modifiers.txt, whose header states the same rule
+	# from the other end. NOT in bc_clear_faltering_effect above - that one runs
+	# MID-BATTLE from bc_rally_effect, and adding these to it would make every
+	# rally strip the character of the fight along with the setback, silently and
+	# with no marker.
+	remove_character_modifier = bc_bloodied
+	remove_character_modifier = bc_shieldwall
+	remove_character_modifier = bc_spent_horse
+	remove_character_modifier = bc_pursuit
 }
 
 # --- pacing -----------------------------------------------------------------
