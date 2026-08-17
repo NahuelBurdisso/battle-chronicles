@@ -7939,3 +7939,110 @@ bc_the_heir_is_a_child = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-NINE. The body he was dealt, and what was decided about it.
+#
+# THE MOD READS WHAT A MAN CAN DO AND HAS NEVER READ WHAT HE WAS BORN WITH.
+# `prowess` and `martial` sit on nearly every chance block in this file and
+# both describe a man today. Nothing in ninety-six commander gates or
+# sixty-four knight gates has ever asked what he has been carrying since birth
+# and what the people around him settled about him before he could hold
+# anything.
+#
+# ONE TRIGGER, TWO OPPOSITE SIDE ROWS. bc_his_body_was_dealt_to_him_trigger is
+# the engine's own `num_of_bad_genetic_traits >= 1`, which is deliberately
+# indiscriminate - a clubfoot and a stutter count the same. That is the point:
+# neither moment is about the defect, both are about the verdict that came with
+# it. A second gate at `>= 2` would be a strict subset and dead code, which is
+# the same reason batch seventy-six used one winter trigger and not two bands.
+#
+# NEITHER MOMENT IS bc_he_is_unwell, which reads the illness flag - a thing
+# that arrived and may leave. This was there first and will outlast the war.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The story is already written. He was born with something the world decided
+# about, and he is losing.
+#
+# `entrenched`/`down`. He knows exactly what will be said about this afternoon
+# before the afternoon is over, and he knows it will be said about his body and
+# not about the ford or the numbers or the rain. The one thing that unwrites it
+# is a line that is still standing at dusk, so that is what he spends the rest
+# of the day producing - not a counterattack, not a gamble, a held shape while
+# going backwards. The verb table hands out bc_shieldwall, which is right: an
+# army braced while losing is exactly what this is.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads his birth and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_he_is_unwell. That template is about a man carrying a fever
+# into a battle. This one is about a man carrying a verdict, and the two sets
+# do not overlap - a man can be in both at once without either being the other.
+#
+# THE DESC MAY NOT NAME WHAT HE WAS BORN WITH. The gate covers a stutter and a
+# clubfoot equally and the toast has to be true of both, so it may not describe
+# his body, may not have him move badly, and may not have anybody look at him.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_story_is_already_written = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_body_was_dealt_to_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a shape on purpose, while losing, is a thing a man has to be
+		# able to do as well as want to do.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_story_is_already_written"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_story_is_already_written_toast
+			desc = bc_the_story_is_already_written_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

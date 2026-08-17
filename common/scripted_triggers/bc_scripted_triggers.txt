@@ -1583,3 +1583,34 @@ bc_his_heir_is_a_child_trigger = {
 bc_he_stands_to_inherit_trigger = {
 	any_heir_title = { count >= 1 }
 }
+
+
+# --- the body he was dealt ---------------------------------------------------
+#
+# THE MOD READS WHAT A MAN CAN DO AND HAS NEVER READ WHAT HE WAS BORN WITH.
+# `prowess` and `martial` are on nearly every chance block in the file, the
+# illness flag is read by bc_he_is_unwell_trigger, and both of those are about
+# a man's condition today. Nothing in ninety-six commander gates or sixty-four
+# knight gates has ever asked what he has been carrying since he was born and
+# what everyone around him decided about it before he could hold anything.
+#
+# `num_of_bad_genetic_traits` IS THE ENGINE'S OWN COUNT and the right test
+# because it is deliberately indiscriminate. It covers a clubfoot and a stutter
+# equally, a hunched back and a dull wit, and the moment is the same in every
+# case: not the defect, but the thing that was decided about him on account of
+# it. A gate written as a list of specific traits would be a gate about bodies.
+# This one is a gate about being written off.
+#
+# THIS IS NOT bc_he_is_unwell_trigger, WHICH READS `has_trait_with_flag =
+# illness`. That is a fever or a wasting sickness - a thing that arrived, that
+# a man was without last year and may be without next year. This is the thing
+# that was there first and will outlast the war. The two sets do not overlap,
+# and a man can be in both at once without either moment being the other.
+#
+# ONE TRIGGER, TWO OPPOSITE SIDE ROWS, for the same reason batch seventy-six
+# used one winter trigger rather than two severity bands: a second gate reading
+# `num_of_bad_genetic_traits >= 2` would be a strict subset of this one and
+# would be dead code wherever the side rows agreed.
+bc_his_body_was_dealt_to_him_trigger = {
+	num_of_bad_genetic_traits >= 1
+}

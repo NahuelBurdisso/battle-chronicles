@@ -2917,3 +2917,52 @@
 
  bc_knight_a_hall_is_waiting_for_him_toast:0 "He Need Not Be Here At All"
  bc_knight_a_hall_is_waiting_for_him_toast_desc:0 "Of the men along this stretch he is the only one whose falling would move anything beyond a widow and a shallow trench, and the ones to either side of him are worth exactly what this afternoon is worth and not a copper more. He is standing where they are standing. He has been all day. Nobody put him here and nobody would have questioned it if he had spent the battle somewhere with a better view, and the rank holds the way it is holding partly because of that - men will keep their feet a long time next to someone who could be elsewhere and is not.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-NINE. The body he was dealt, and what was decided about it.
+#
+# NEITHER DESC MAY NAME WHAT HE WAS BORN WITH. The gate is the engine's count
+# of bad genetic traits and it is indiscriminate on purpose - it covers a
+# clubfoot, a stutter, a hunched back and a dull wit with the same number - so
+# every sentence in both toasts has to be true of all of them. No limp, no
+# stammer, no shortness, no crooked anything. Neither desc may describe his
+# body at all, and neither may name a thing he cannot do.
+#
+# NEITHER MAY HAVE ANYBODY SAY IT. No jeer, no whisper, no captain hesitating,
+# no man in the rank glancing. The verdict in both moments is old and settled
+# and does not need saying today, and a desc that stages somebody saying it
+# turns a lifetime into an incident.
+#
+# THE FIRST MAY NOT HAVE HIM PROTEST IT, and may not have him prove anybody
+# wrong. He is losing; the line holds and that is all. It may not turn the
+# battle, may not have him make a speech, may not have him think about his
+# father or his childhood, and may not name whatever will be said about him
+# afterwards - it may only let him know that it is already written. It may not
+# let him be bitter about it either, because bitterness is a thing you feel the
+# first few hundred times.
+#
+# THE SECOND IS AN ABSENCE AND THE ABSENCE IS THE WHOLE MOMENT. Nobody is
+# looking at him. It may not have anybody praise him, thank him, be surprised
+# by him, or defer to him; it may not have him notice that nobody is looking,
+# because noticing is looking; it may not have him fight in some clever
+# compensating way; and it may not kill anybody. He is doing the work and the
+# work costs and that is the entire content.
+#
+# NEITHER MAY USE THE WORD "despite". It is the word both moments are built to
+# avoid, and it would undo either of them in a single sentence.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here".
+ bc_the_story_is_already_written_toast:0 "The Account Of This Was Settled Long Ago"
+ bc_the_story_is_already_written_toast_desc:0 "He knows what will be said about today, and he knows it will not be said about the ford or the numbers or the hour the rain started. That account was closed before he was old enough to argue with it and nothing he does out here will reopen it. So he does not try. He gives the one order the afternoon still allows - stand, and go backwards slowly, and be a shape at dusk instead of a rout at four - and he gives it in the flat voice of a man who has long since stopped spending anything on being understood. The line does what he tells it. That is not nothing, and it is also not going to change a word.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nobody_has_looked_at_him_since_dawn_toast:0 "There Is No Audience Out Here"
+ bc_knight_nobody_has_looked_at_him_since_dawn_toast_desc:0 "The men to either side of him have not had a spare thought to spend on anything but the ground in front of their own feet since the light came up, and they are not going to find one before dark. There is only the next shield and the next step and the arm that has to keep coming up, and the arm is getting slower and comes up anyway. He is bleeding somewhere that will need attention tonight. The far side has been going backwards since noon. Nothing he has done today has been for anyone's benefit but the man beside him, and the man beside him has been too busy to work out whose help he is taking.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

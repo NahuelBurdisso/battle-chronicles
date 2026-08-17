@@ -5560,3 +5560,94 @@ bc_knight_a_hall_is_waiting_for_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Nobody along the rank has had a spare thought about him since dawn, and the
+# side is winning.
+#
+# `bloodied`/`up` AND bc_bloodied. He has spent his whole life being looked at
+# first and counted second, and the rank has been too busy since the first hour
+# to do either. He is not proving anything - proving is a thing you do to an
+# audience and there is not one. He is doing the work, and the work costs, and
+# the far side is going backwards.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his birth and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_no_house_behind_him, bc_knight_twice_as_good OR
+# bc_knight_the_squires_best_day. Those read `is_lowborn`, the bastard trait
+# and the squire trait - three things a man's parents did. This one is what his
+# body did, and a trueborn heir of a great house answers no to all three and
+# yes to this.
+#
+# THE DESC MAY NOT NAME WHAT HE WAS BORN WITH, may not describe his body, may
+# not have him fight in some compensating way, may not have anybody praise him
+# or be surprised by him, and may not kill anybody. The moment is an absence -
+# nobody is looking - and the second somebody looks it is a different moment.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_nobody_has_looked_at_him_since_dawn = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_body_was_dealt_to_him_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being in the front rank for an entire afternoon without anybody
+		# needing to think about him takes a man who can hold a place.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nobody_has_looked_at_him_since_dawn"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_nobody_has_looked_at_him_since_dawn_toast
+				desc = bc_knight_nobody_has_looked_at_him_since_dawn_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
