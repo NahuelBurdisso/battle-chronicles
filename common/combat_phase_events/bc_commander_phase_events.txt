@@ -1567,3 +1567,210 @@ bc_the_green_closes_in = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE FIFTH: WHO IS ACROSS THE FIELD
+#
+# THE BOND LADDER HAS FOUR ANSWERS AND ONE OF THEM HAD A MOMENT. Every toast in
+# the mod ends with a clause naming the foe as a nemesis, kin, a countryman or a
+# heathen - bc_write_bond_effect has classified all four since the prose work -
+# but only kin was ever a REASON for a moment to fire (bc_kin_across_the_line).
+# Nemesis was a `chance` modifier on nineteen templates and a gate on none. This
+# batch makes the other three gates, which is the last cheap axis the commander
+# side has: no new state, no new modifier, and two new triggers that read
+# exactly what the ladder reads.
+#
+# THE GATES OVERLAP AND THE CLAUSE MAY DISAGREE WITH THEM. bc_foe_is_countryman
+# _trigger and bc_foe_is_heathen_trigger each test one property, while the
+# ladder tests culture before faith and stops - so a same-culture, different-
+# faith foe passes both gates here and is called `countryman` in the clause
+# under the toast. That is not a defect to fix in either place: a gate asks one
+# question and a clause reports one classification. See the header on the two
+# triggers in bc_scripted_triggers.txt.
+#
+# ALL THREE AT base = 30, the batch default, and each grants a different thing,
+# which is what keeps them from being three copies of one template.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The old grudge. bc_facing_nemesis_trigger AS A GATE for the first time.
+#
+# IT WAS ALREADY IN NINETEEN chance BLOCKS at factor 1.5, and a weight is not a
+# case: it makes every other moment slightly likelier against a man you hate,
+# and it never once produces a moment that is ABOUT hating him. This is that
+# moment, and it is the reason the trigger was written.
+#
+# NO SECOND ROW. The gate is already the narrowest in the file - it needs a live
+# nemesis relation, recorded by bc_rivalry_effect on some earlier battle, AND
+# that man commanding the other side today.
+# ---------------------------------------------------------------------------
+bc_the_old_grudge = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_facing_nemesis_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# NO bc_facing_nemesis_trigger ROW HERE, unlike nineteen other
+		# templates. It is the gate; a factor on it would be a factor of one.
+		modifier = {
+			add = 20
+			has_trait = wrathful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = forgiving
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_old_grudge"
+
+		bc_momentum_minor_effect = yes
+		add_stress = 10
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_old_grudge_toast
+			desc = bc_the_old_grudge_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Gods on both sides. The foe holds another faith.
+#
+# THE ONLY COMMANDER TEMPLATE THAT PAYS IN PIETY, matching the eve's option h,
+# which is the only OPTION that does. The pairing is deliberate: a man who
+# preached the war on the eve and a man who finds his priests useful in the
+# middle of it are the same story told twice, and a player who takes h and then
+# reads this has had the same idea the mod had.
+#
+# THE ZEALOT ROW IS A WEIGHT AND NOT A GATE, unlike bc_the_zealot_will_not_stop,
+# which needs the trait. A man who does not care what they pray to still gets
+# the moment; he just gets it less often.
+# ---------------------------------------------------------------------------
+bc_gods_on_both_sides = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_foe_is_heathen_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = zealous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_gods_on_both_sides"
+
+		bc_momentum_minor_effect = yes
+		add_piety = 50
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_gods_on_both_sides_toast
+			desc = bc_gods_on_both_sides_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The same tongue. The foe is of his own culture.
+#
+# NO RUNG AND THEREFORE NO STACKING GUARD, the third template in the mod built
+# that way and for the reason the other two were: bc_kin_across_the_line and
+# bc_knight_meets_his_cousin both say that recognising the other side is a thing
+# that happens to a man rather than a thing that moves a battle. Hearing your
+# own words shouted back is the weakest of the three recognitions, so it is the
+# one that costs the least - five stress against their ten and fifteen.
+# ---------------------------------------------------------------------------
+bc_the_same_tongue = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_countryman_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_same_tongue"
+
+		add_stress = 5
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_same_tongue_toast
+			desc = bc_the_same_tongue_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

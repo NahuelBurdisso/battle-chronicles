@@ -222,6 +222,35 @@ bc_foe_is_kin_trigger = {
 	}
 }
 
+# The other two answers the bond ladder gives, in the same shape and reading the
+# same two properties it reads.
+#
+# THE LADDER IS THE SPECIFICATION FOR BOTH. bc_write_bond_effect tests culture
+# BEFORE faith and each of these tests only its own property, so THESE TWO ARE
+# NOT MUTUALLY EXCLUSIVE the way the ladder's arms are: a man of the same
+# culture and a different faith answers yes to both here and is recorded as
+# `countryman` there. That is correct for a gate - a phase event asks one
+# question - and it is the reason a template must not assume the clause under
+# its own toast will agree with its gate. Nothing in the mod requires them to.
+#
+# WRITTEN LIKE THE LADDER, foe's scope entered and root's property read from
+# outside it, so the two places can be diffed by eye.
+bc_foe_is_countryman_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = { culture = root.culture }
+	}
+}
+
+bc_foe_is_heathen_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = { NOT = { faith = root.faith } }
+	}
+}
+
 # He is not the man whose war this is.
 #
 # side_primary_participant is the WAR LEADER of this side, and this trigger

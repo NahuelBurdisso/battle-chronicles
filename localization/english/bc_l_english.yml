@@ -425,6 +425,34 @@
  bc_the_green_closes_in_toast:0 "The Heat and the Green"
  bc_the_green_closes_in_toast_desc:0 "Nothing here is more than ten paces away and half of it is still moving. Men are going down to the heat who were never touched by anything with an edge.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- who is across the field, 2026-08-17 ------------------------------------
+#
+# Three toasts whose GATE is the man opposite rather than the ground, the odds
+# or the commander's own traits. Each one is read immediately before a bond
+# clause that names the same relation in plain words, so NONE OF THESE THREE
+# DESCS MAY STATE THE RELATION. bc_frag_bond_nemesis already says there is old
+# business; bc_frag_bond_heathen already says the prayers differ;
+# bc_frag_bond_countryman already says the tongue is shared. A desc that said it
+# too would print the same fact twice in two sentences.
+#
+# So each desc shows what the man DOES about it instead: the grudge changes
+# where he puts himself, the faith changes who he sends down the line, the
+# shared tongue changes what he can and cannot stop hearing.
+#
+# THE SPENT PHRASES IN THIS BLOCK: "his own tongue shouted back" (bond
+# countryman_b and eve countryman_c both have it), "old business" (bond
+# nemesis_b), "two sets of prayers" (bond heathen_c and eve heathen_b), "the
+# device on the other side" (bc_kin_across_the_line_toast_desc).
+
+ bc_the_old_grudge_toast:0 "He Puts Himself Opposite"
+ bc_the_old_grudge_toast_desc:0 "He moves his standard down the line until it is square on to the one he came here for, and the men around him understand that they are now standing where the day will be decided.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_gods_on_both_sides_toast:0 "Gods on Both Sides"
+ bc_gods_on_both_sides_toast_desc:0 "The holy men are sent out along the front rank instead of being kept safe behind it, and they are still working when the lines touch. Men who could barely stand an hour ago are shouting themselves hoarse.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_same_tongue_toast:0 "He Can Understand the Screaming"
+ bc_the_same_tongue_toast_desc:0 "Everything carried across from the other side arrives in words he has known since he was a boy — orders, oaths, and the noise men make when they are hit. He can do nothing with any of it except hear it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
 # THREE VARIANTS PER VALUE SINCE 2026-08-17, picked by `random_valid = yes` in

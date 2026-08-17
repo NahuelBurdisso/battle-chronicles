@@ -590,6 +590,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | per-moment ground clauses | the spike had been the only one for two months; the other nine moments now each name their band. **All ten shipped moments name their ground.** Plan B tasks 6-14's *ground* half is done — the *core* sets, which replace a literal rather than following it, still wait on a run | 9 sets, 63 keys |
 | commander, the last two bands | rough (paired with losing, so it answers `bc_banner_falls` instead of nesting inside `bc_too_wide_to_see`) and jungle (the band alone), plus the two missing combat-side band wrappers | 2 templates, base 30 and 40 |
 | knight, the fourth three | the battle itself, read from inside the ranks — casualties, war length, host size. All three triggers were written for commander cases and had never been asked from a knight's root | 3 templates, base 80 |
+| commander, who is across the field | the bond ladder had four answers and only *kin* had ever been a reason for a moment. Nemesis becomes a **gate** for the first time (it was a ×1.5 `chance` row on nineteen templates and a gate on none); heathen and countryman get the two new foe triggers | 3 templates, base 30 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -597,9 +598,15 @@ something needed them; `bc_the_broken_ground_holds` and `bc_the_green_closes_in`
 are that something, and the wrapper set now matches `bc_ground_triggers.txt` one
 for one.
 
-**Template totals are now commander 25, knight 12.** Weight against vanilla's
-`commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70;
-on the knight side, twelve templates at 80 against `knight_none`'s 2000.
+**The two new foe triggers are not a ladder.** `bc_foe_is_countryman_trigger`
+and `bc_foe_is_heathen_trigger` each test one property of the man opposite, so
+unlike the arms of `bc_write_bond_effect` they are not mutually exclusive — a
+foe can be both, and both templates can be valid on the same roll. The bond
+*clause* still picks one, because that is a ladder; the *gates* are not.
+
+**Template totals are now commander 28, knight 12.** Weight against vanilla's
+`commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
++ 90; on the knight side, twelve templates at 80 against `knight_none`'s 2000.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 
