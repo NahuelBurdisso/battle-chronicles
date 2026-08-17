@@ -586,7 +586,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | knight, the second three | the WINNING side (every shipped knight case gated on losing), outnumbering, ground | 3 templates, base 80 |
 | knight, the third three | winter ground, age, kin — asked about the knight | 3 templates, base 80 |
 | eve | two contextual options: horse country (`f`, the only option applying two modifiers and the only one applying a negative) and kin (`g`) | 7 options total |
-| prose pools | bond clause 5→15 arms; eve foe 3 lines per value; eve ground 2 per band; memories 3 per perspective; nicknames re-cut into six style ladders over 35 keys | — |
+| prose pools | bond clause 5→15 arms; **scale clause 3→9 arms**, the most-read prose in the mod since it closes every moment toast; eve foe 3 lines per value; eve ground 2 per band; memories 3 per perspective; nicknames re-cut into six style ladders over 35 keys | — |
 | commander, the last two bands | rough (paired with losing, so it answers `bc_banner_falls` instead of nesting inside `bc_too_wide_to_see`) and jungle (the band alone), plus the two missing combat-side band wrappers | 2 templates, base 30 and 40 |
 | knight, the fourth three | the battle itself, read from inside the ranks — casualties, war length, host size. All three triggers were written for commander cases and had never been asked from a knight's root | 3 templates, base 80 |
 

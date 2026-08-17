@@ -780,11 +780,54 @@ bc_bond_clause = {
 # that carries it, and after the bond clause. Last because it is the widest: the
 # literal is one man's moment, the bond is one man's foe, and this is the whole
 # field. Nothing else calls it.
+# POOLED SINCE 2026-08-17, THREE VARIANTS PER BAND. This clause renders on the
+# END of every moment toast in the mod, which makes it the single most repeated
+# sentence a player reads - the 2026-08-15 run recorded 131 size-3 moments, so
+# one string for band 3 was one string read 131 times in 44 battles. The bond
+# clause above was pooled first and for the same reason; this is the same edit
+# on the wider of the two.
+#
+# THE EQUALITY ARMS AND THE BUCKETS ARE UNCHANGED. Pooling adds arms that match
+# the SAME value, it does not touch which value matches, so every warning in the
+# header above - `flag:huge` would be a silent no-match, a fourth band breaks
+# equality and `>=` differently - applies to the twelve arms exactly as it
+# applied to the three.
+#
+# THE FALLBACK IS A COMPLEMENT, NOT A BARE ARM, which is the one structural
+# change. Under `random_valid` an untriggered arm is valid on EVERY render, so
+# the old `bc_frag_scale_any` would have taken a one-in-four share of every
+# toast and rendered the empty string in place of a clause that was available.
+# The `trigger_if`-with-no-`trigger_else` shape is true exactly when its limit is
+# false, so this arm is valid on the two paths that have nothing to say - the
+# variable is absent, or it holds a fourth number no arm claims - and on no
+# others. bc_bond_clause's own fallback carries the long form of this argument.
 bc_scale_clause = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_scale_huge
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 3
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_huge_b
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 3
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_huge_c
 		trigger = {
 			exists = var:bc_battle_size
 			trigger_if = {
@@ -804,6 +847,26 @@ bc_scale_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_scale_large_b
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 2
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_large_c
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 2
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_scale_small
 		trigger = {
 			exists = var:bc_battle_size
@@ -814,6 +877,36 @@ bc_scale_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_scale_small_b
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 1
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_small_c
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 1
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_scale_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				NOR = {
+					var:bc_battle_size = 3
+					var:bc_battle_size = 2
+					var:bc_battle_size = 1
+				}
+			}
+		}
 	}
 }

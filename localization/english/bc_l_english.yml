@@ -500,9 +500,30 @@
 # (desc_ground_jungle, with "goes in there" in desc_ground_forest), which is why
 # no arm here says "gone in". Treat neither list as complete.
 
+# THREE VARIANTS PER BAND SINCE 2026-08-17, pooled by `random_valid = yes` in
+# bc_flavour.txt. This is the most-read prose in the mod - it closes every moment
+# toast, and the 2026-08-15 run recorded 131 size-3 moments in 44 battles, so the
+# huge string alone was read 131 times in one campaign.
+#
+# EVERY ARM STILL OPENS WITH A LEADING SPACE. It is appended directly to the end
+# of a sentence with no separator, and the three originals carry it; an arm
+# without one runs into the full stop before it.
+#
+# THE THREE ORIGINALS ALL SAY "not yet in the fighting" AND THE SIX NEW ONES
+# MUST NOT. That phrase is the reason a player recognises this clause on sight,
+# which is precisely the problem being fixed. The `_b` arms say the same thing
+# about companies and standards rather than about men; the `_c` arms say
+# something about the size of the fight instead of about the reserve, which is
+# the same fact from the other end.
  bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting."
+ bc_frag_scale_huge_b:0 " Whole companies have not struck a blow and may not strike one before dark."
+ bc_frag_scale_huge_c:0 " There are more banners standing here than any one man could put a name to."
  bc_frag_scale_large:0 " In a fight this size, a good part of the men are not yet in the fighting."
+ bc_frag_scale_large_b:0 " A good many standards are still waiting their turn at it."
+ bc_frag_scale_large_c:0 " Enough are engaged to settle it and enough are not to drag it out."
  bc_frag_scale_small:0 " In a fight this small, the men not yet in the fighting are few."
+ bc_frag_scale_small_b:0 " Everybody who came is in it, or will be inside the hour."
+ bc_frag_scale_small_c:0 " It is a small enough thing that one company could tip it either way."
  bc_frag_scale_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
