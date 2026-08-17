@@ -2615,3 +2615,91 @@ bc_never_learned_the_trade = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE SAME NAME ON BOTH SIDES, 2026-08-17.
+#
+# THE MOD READ KIN AND STOPPED THERE. `is_close_family_of` appears sixteen
+# times - parent, child, sibling, on both the commander and the knight side -
+# and the house never appeared at all. In Westeros that is the wrong place to
+# stop: the wars that define the setting are fought BETWEEN branches of the
+# same name far more often than between brothers, and every one of those men
+# is carrying a shield the other one recognises.
+#
+# THE GATE IS bc_foe_is_house_trigger AND IT IS DISJOINT FROM THE KIN GATE by
+# construction - its own header records why and how. So these two templates
+# cannot collide with bc_kin_across_the_line or bc_knight_meets_his_cousin,
+# and the four together cover the two cases separately rather than the wider
+# one swallowing the narrower.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He has won it, and he is not going to finish it.
+#
+# THE WINNING SIDE IS THE POINT. A man losing to his own house has no decision
+# to make; a man WINNING against it has exactly one, and he makes it by
+# omission - the line stops at the top of the field and nobody gives the order
+# to go on. The men notice. Nobody says anything.
+#
+# `ordered`/`down`, WHICH HANDS OUT NOTHING, AND THAT IS THE WHOLE MECHANIC.
+# The seam's table gives bc_pursuit to `ordered`/`up` and deliberately gives
+# nothing to `ordered`/`down` - a formation that keeps its shape while it
+# declines to press. That cell was written for a pursuit that walks into trees
+# and stops being one, and this is the same shape reached for a reason a man
+# chose. He keeps his order and forgoes the pursuit modifier: the cost of the
+# decision is the modifier he does not get.
+#
+# NO RUNG IN EITHER DIRECTION. The side is winning and stays winning - nothing
+# about the battle's standing changed, only what was done with it.
+# ---------------------------------------------------------------------------
+bc_he_will_not_chase_them = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_house_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_will_not_chase_them"
+
+		add_stress = 10
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_he_will_not_chase_them_toast
+			desc = bc_he_will_not_chase_them_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

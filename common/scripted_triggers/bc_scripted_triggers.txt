@@ -251,6 +251,53 @@ bc_foe_is_heathen_trigger = {
 	}
 }
 
+# The same name on both sides, and NOT the same blood.
+#
+# THIS IS NOT bc_foe_is_kin_trigger WIDENED - the two are DISJOINT by
+# construction, and the final NOT is what makes them so. `is_close_family_of`
+# is parent, child, sibling; a house is everything else that shares the name.
+# The distinction is the whole template: a man across the field from his
+# brother is a tragedy the mod already writes, and a man across the field from
+# a third cousin whose grandfather took the other side of a succession is a
+# different sentence entirely, and the commoner one in Westeros.
+#
+# HOUSE, NOT DYNASTY. In AGOT the unit that means anything on a shield is the
+# house - the cadet branches ARE the story - and both comparisons have AGOT
+# precedent (`house = scope:attacker.house` at
+# common/casus_belli_types/05_fp3_wars.txt:1282, `dynasty = scope:attacker.dynasty`
+# at common/casus_belli_types/00_agot_adventurer_wars.txt:384). Widening this
+# to dynasty would put every branch of a great house in one bucket, which is
+# the opposite of the case being written.
+#
+# BOTH HOUSES ARE `exists`-GUARDED, AND THAT GUARD IS LEAD-LINED. A lowborn
+# character has no house at all, and CK3 does not short-circuit, so an
+# unguarded `house = root.house` between two lowborn commanders is a
+# comparison between two absent links - which this mod may not gamble on
+# resolving to false. bc_knight_no_house_behind_him gates on exactly those men
+# existing, so they are not hypothetical. Vanilla's bare `exists = house` is at
+# common/casus_belli_types/01_ep1_wars.txt:81.
+#
+# `root`, NOT `prev`, inside the entered scope, for the reason recorded on
+# bc_foe_is_countryman_trigger.
+bc_foe_is_house_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		exists = house
+		trigger_if = {
+			limit = { exists = house }
+			scope:combat_side.enemy_side.side_commander = {
+				exists = house
+				trigger_if = {
+					limit = { exists = house }
+					house = root.house
+				}
+			}
+		}
+		NOT = { is_close_family_of = scope:combat_side.enemy_side.side_commander }
+	}
+}
+
 # He is not the man whose war this is.
 #
 # side_primary_participant is the WAR LEADER of this side, and this trigger

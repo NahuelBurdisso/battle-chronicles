@@ -1382,3 +1382,30 @@
 
  bc_knight_no_house_behind_him_toast:0 "Nothing Behind Him but the Shield"
  bc_knight_no_house_behind_him_toast_desc:0 "The device on that shield is one he chose himself and nobody has been obliged to remember it before today. He is further into this than the men either side of him, and staying there, because the whole of what he might yet be is standing in the ten feet in front of him and the host is winning enough for it to be seen.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the same name on both sides (2026-08-17) -------------------------------
+#
+# THE TWO ARE THE SAME FACT READ FROM OPPOSITE ENDS and the descs must make
+# that legible without either explaining the other. The commander is a man who
+# can afford mercy and spends it; the knight is a man who cannot afford to be
+# overlooked and does not intend to be. Neither is written as noble.
+#
+# NEITHER MAY SAY "BROTHER" OR "COUSIN". bc_foe_is_house_trigger excludes close
+# family outright, and bc_kin_across_the_line and bc_knight_meets_his_cousin
+# own that ground with prose that names it. What these two share with the man
+# opposite is a NAME, and the descs say so - the shield, the arms, the word
+# itself - and never a degree of blood.
+#
+# THE COMMANDER'S DESC MAY NOT NAME THE ORDER HE DID NOT GIVE as a mercy or as
+# a failure. He simply does not give it and the men simply notice, which is
+# what the ordered/down cell means mechanically as well: nothing is handed out.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the usual price" and "the going
+# rate" (the knight toasts that already close that way), "nothing behind him
+# but the shield" (bc_knight_no_house_behind_him_toast, which is about a man
+# with NO name and must not blur into these two, who have one).
+ bc_he_will_not_chase_them_toast:0 "The Order Nobody Hears Him Give"
+ bc_he_will_not_chase_them_toast_desc:0 "The other host is coming apart at the far end of the field and this is the moment the horse goes after it. The horse is standing. He is watching a shield down there with his own arms on it going the other way, and he says nothing at all until there is nothing left worth saying it about. Two of his captains looked at him. Neither asked.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_other_branch_toast:0 "The Same Name, and the Lesser Half of It"
+ bc_knight_the_other_branch_toast_desc:0 "The man commanding the other host carries the name he carries and got the better share of it two generations before either of them was born. He has been in front of the line since the second charge, where every man on both sides can see whose arms those are, and he has not once looked for a place to stand that is safer than the one he is in.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

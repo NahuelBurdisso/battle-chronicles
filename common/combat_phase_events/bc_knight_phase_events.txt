@@ -2278,3 +2278,85 @@ bc_knight_no_house_behind_him = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The other man with his arms on his shield, and the reason he is fighting
+# harder than anybody near him.
+#
+# THE COMMANDER'S VERSION OF THIS GATE IS A MAN DECLINING TO PRESS
+# (bc_he_will_not_chase_them). This is the opposite reading of the same fact
+# and both are true of Westeros: the head of a house can afford to be
+# merciful to a cousin, and the cousin cannot afford to be anything but
+# conspicuous. A knight sharing a name with the man commanding the other host
+# is, by construction of bc_foe_is_house_trigger, from a branch - and a branch
+# knight in front of the senior line has one afternoon in his life to settle
+# what he is worth.
+#
+# NOT bc_knight_meets_his_cousin AGAIN. That template takes
+# bc_foe_is_kin_trigger, which is close family; this takes the house gate,
+# whose final `NOT` excludes close family outright. The two are disjoint and
+# the trigger's header carries the argument.
+#
+# NO SIDE ROW. Winning or losing does not change what he is doing - the
+# audience he is performing for is on the other side of the field either way,
+# and a branch knight going too far forward on a losing day is the same story
+# with a worse ending.
+#
+# `bloodied`/`up` AND NO RUNG. He buys ground at the going rate and one knight
+# does not move the side's standing, which is the rule bc_knight_knows_that_man
+# records.
+# ---------------------------------------------------------------------------
+bc_knight_the_other_branch = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_house_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_other_branch"
+
+		add_prestige = 75
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_other_branch_toast
+				desc = bc_knight_the_other_branch_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
