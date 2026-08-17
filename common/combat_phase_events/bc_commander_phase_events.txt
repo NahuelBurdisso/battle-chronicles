@@ -8871,3 +8871,107 @@ bc_the_argument_that_he_has_one = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-EIGHT. The marriage.
+#
+# `is_married`, `any_spouse` AND `num_of_spouses` ALL RETURNED ZERO OVER THE
+# WHOLE MOD. Eighty-seven batches read a man's blood, his house, his heirs, his
+# education, his faith, his body and his crimes, and never once read the single
+# arrangement that most of those things exist to produce. In a setting where a
+# wedding is a treaty, that is the largest thing this chronicle had not
+# noticed.
+#
+# NEITHER GATE IS `is_married = yes`, which is nearly every landed man over
+# twenty in the game. One asks whether the marriage and the battle are the same
+# object; the other asks whether there is a child on the way.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The man on the other side is her brother, or her father, and this is going
+# badly.
+#
+# `ordered`/`down` AND NO MODIFIER. He is losing and he is losing carefully,
+# and the care is not tactical. There is a version of this afternoon that ends
+# with a field full of her family and a version that ends with a field full of
+# his, and the second one is arriving; what he can still control is how much of
+# the first one goes with it. So the line comes back in order and it comes back
+# slowly and nothing gets committed that cannot be recalled, because whatever
+# else tonight is, there is a room somewhere in it that he will have to sit
+# down in.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a spouse iteration
+# and the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_foe_is_house_trigger or bc_foe_is_kin_trigger. Those are men
+# who share his
+# name or his ancestors, and the mod has read them for a long time. This one
+# is a stranger who became family by contract, which in this setting is the
+# more binding of the two and the one that is easier to be standing opposite.
+#
+# THE DESC MAY NOT NAME HER, may not say what she is to the man opposite, may
+# not have him picture her, may not mention a wedding or a contract or an
+# alliance, may not have him regret the match, and may not have him think about
+# what she will hear. See the loc header.
+# ---------------------------------------------------------------------------
+bc_a_room_somewhere_in_tonight = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_married_into_the_other_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Coming back in order while losing is the hardest thing a commander
+		# does and the one that most rewards being good at this.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = just
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arbitrary
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_a_room_somewhere_in_tonight"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_a_room_somewhere_in_tonight_toast
+			desc = bc_a_room_somewhere_in_tonight_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

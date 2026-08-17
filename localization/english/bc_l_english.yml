@@ -3351,3 +3351,52 @@
 
  bc_knight_what_a_run_of_afternoons_gets_called_toast:0 "He Is One Of Several Thousand Men Making It"
  bc_knight_what_a_run_of_afternoons_gets_called_toast_desc:0 "He came for the ordinary reasons, which is to say his lord came and there was no version of the summer in which he stayed home. Somewhere in the last few hours the thing they are all doing quietly stopped being an opinion that people hold and started being a thing that is true. Nobody announced it. It is simply visible in which direction the ground is moving. What he understands now, without ever putting it into words, is that a thing like this is not handed to anybody in a room - it is what a long enough run of days like this one gets called afterwards, and he is inside one, and his part of it is about eight feet wide. So he works it faster.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-EIGHT. The marriage.
+#
+# NEITHER DESC MAY NAME A WOMAN or describe her in any way - no age, no hair,
+# no room, no window, no waiting. Both gates read a link to somebody who is not
+# on this field, and the moment is what the link does to a man who is, which
+# means she may be the reason for the whole toast and may not appear in it.
+#
+# THE FIRST MAY NOT SAY WHAT THE MAN OPPOSITE IS TO HER. No brother, no father,
+# no uncle, no by-marriage anything. It may not mention a wedding, a contract,
+# an alliance or a betrothal, may not have him regret the match, may not have
+# him think about what she will be told or who will tell her, and may not let
+# him hate the man opposite or forgive him. What it is allowed is the shape of
+# a careful retreat and one sentence about why it is careful.
+#
+# THE SECOND MAY NOT GUESS THE SEX OF THE CHILD, may not have him picture it,
+# may not have him choose a name or think of one, may not have him promise
+# anything to anybody, and may not have him afraid. Fear is the obvious version
+# and it is wrong: what the gate produces is not a frightened man, it is a man
+# whose shield is in the correct place for four hours instead of the
+# comfortable place, which is a much duller and much better thing.
+#
+# THE SECOND ALSO MAY NOT ASSUME HE IS A MAN WAITING ON NEWS. The gate catches
+# a pregnant knight as well, deliberately, and every sentence in the toast has
+# to be true from inside either body.
+#
+# NEITHER MAY USE THE WORDS "wife", "husband", "child", "home" or "family".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin".
+ bc_a_room_somewhere_in_tonight_toast:0 "Nothing Gets Committed That Cannot Be Recalled"
+ bc_a_room_somewhere_in_tonight_toast_desc:0 "He is losing, and he is losing slowly and tidily, and the tidiness is not a tactic. There is a version of this afternoon in which the ground behind him fills up with people he is bound to, and a version in which it fills up with people the man opposite is bound to, and the second one is arriving whether he likes it or not. What is still his to decide is how much of the first one arrives alongside it. So the line comes back a step at a time and holds each step for longer than it strictly needs to, and nothing is thrown at anything on the chance that it works, because whatever else tonight turns out to be, there is a room in it he is going to have to sit down in.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_a_half_step_more_careful_toast:0 "The Shield Is Where It Ought To Be, Not Where It Is Comfortable"
+ bc_knight_a_half_step_more_careful_toast_desc:0 "Something changed a few weeks ago that has nothing to do with this field, and the result of it on this field is very small and completely constant: every single thing done since dawn has been done a half step more carefully than it would have been last summer. No stepping out after a man who is probably beatable. No taking the opening that is probably an opening. Four hours of holding a heavy thing exactly where it is supposed to be rather than where the arm wants it, which nobody has noticed and nobody will thank him for, and which has quietly kept two other people upright all afternoon. The far side is going backwards. He is not going after them any faster than the line is.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

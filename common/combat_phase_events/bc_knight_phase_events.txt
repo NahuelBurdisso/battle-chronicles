@@ -6386,3 +6386,92 @@ bc_knight_what_a_run_of_afternoons_gets_called = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# There is a child coming, and the side is winning.
+#
+# `entrenched`/`up` AND bc_shieldwall, and the modifier is the point rather
+# than a decoration. Everything he does for the rest of the afternoon is going
+# to be a half step more careful than it was yesterday. He does not leave the
+# line. He does not take the opening that is probably an opening. He holds his
+# shield where it is supposed to be for four hours instead of where it is
+# comfortable, and every man on either side of him is safer for it without
+# anybody working out why. That is what a shieldwall is made of and it is
+# almost never made of courage.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads a pregnancy and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_a_hall_is_waiting_for_him or the succession templates,
+# which are about what a man stands to get. Nothing is coming to him here. A
+# thing is coming that will need him, which is the opposite arrangement.
+#
+# THE DESC MAY NOT NAME HER OR THE CHILD, may not guess the sex, may not have
+# him picture either of them, may not mention a name he has chosen, may not
+# have him promise anything, and may not have him afraid. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_a_half_step_more_careful = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_a_child_of_his_is_on_the_way_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a shield where it ought to be for four hours is work, and
+		# the men who can do it are the men who are good at this.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = content
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_half_step_more_careful"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_a_half_step_more_careful_toast
+				desc = bc_knight_a_half_step_more_careful_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

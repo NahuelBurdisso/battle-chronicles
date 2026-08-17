@@ -1979,3 +1979,61 @@ bc_he_stands_for_an_uncrowned_man_trigger = {
 		}
 	}
 }
+
+
+# --- the marriage --------------------------------------------------------
+#
+# `is_married`, `any_spouse` AND `num_of_spouses` ALL RETURNED ZERO OVER THE
+# WHOLE MOD. Eighty-seven batches have read a man's blood, his house, his
+# heirs, his education, his faith, his body and his crimes, and not one of them
+# has read the single arrangement that most of those things exist to produce.
+# In a setting where a wedding is a treaty and a treaty is a wedding, the
+# chronicle has fought two hundred moments without once noticing that the man
+# in front of it is married.
+#
+# THE FIRST GATE IS NOT `is_married = yes`. That is nearly every landed man
+# over twenty in the game and a gate that fires for nearly everybody is not a
+# gate. What it asks is whether the marriage and the battle are the same
+# object: is the man commanding the other side close family to the woman he
+# is married to.
+#
+# `is_close_family_of` RATHER THAN A HOUSE COMPARISON, and that is the sharper
+# question by a long way. A house test would catch every third cousin of a
+# great house and there are hundreds of those; close family is her father, her
+# mother, her brother, her sister, her child. The mod already uses this trigger
+# in twelve places, all of them about the man himself - this is the first time
+# it is asked about somebody who is not on the field at all.
+#
+# THE ENEMY COMMANDER IS AN OPTIONAL LINK and is guarded the way every optional
+# link in this file is guarded. `enemy_side` rather than `var:bc_battle_foe`,
+# because the variable is written inside a moment's effect and does not exist
+# during a battle's first is_valid.
+bc_he_married_into_the_other_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		any_spouse = {
+			is_close_family_of = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
+
+# There is a child coming and it does not know about today.
+#
+# THE `OR` IS NOT REDUNDANT. This mod's knight pool is drawn from whoever the
+# game hands it, and AGOT hands it women often enough to matter - Mormonts,
+# wildlings, the odd Dornishwoman with a spear. `any_spouse = { is_pregnant }`
+# catches the man waiting on news and misses the woman carrying it; the second
+# half catches her. Both are the same moment from inside two different bodies
+# and the toast is written to be true of either.
+#
+# NO `is_married` COMPANION. A pregnancy implies the arrangement that produced
+# it as far as this gate is concerned, and the spouse iteration cannot return
+# anything if there is no spouse, so the extra row would only be a second way
+# of asking a question already answered.
+bc_a_child_of_his_is_on_the_way_trigger = {
+	OR = {
+		is_pregnant = yes
+		any_spouse = { is_pregnant = yes }
+	}
+}
