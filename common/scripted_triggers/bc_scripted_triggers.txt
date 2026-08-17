@@ -103,8 +103,11 @@ bc_terrain_bogs_us_down_trigger = {
 # bc_write_ground_effect carries a `BC: ground missing` marker for exactly that
 # case - and CK3 does not short-circuit among siblings.
 #
-# Only four of the six bands are wrapped: those are the four a phase event
-# gates on today. Add the others when something needs them, not before.
+# ALL SIX BANDS ARE WRAPPED SINCE 2026-08-17. Four were wrapped before, with a
+# note here to add the others when something needed them; the rough and jungle
+# gates below are that something. The set is now closed and matches the six in
+# bc_ground_triggers.txt one for one, which is the state a reader should expect:
+# any band that prose can name, a gate can name too.
 #
 # These are rooted on a CHARACTER but never touch that character, so a knight
 # event may use them exactly as a commander event does: `scope:combat_side` is
@@ -141,6 +144,29 @@ bc_field_is_open_trigger = {
 	trigger_if = {
 		limit = { exists = scope:combat_side.combat.location }
 		scope:combat_side.combat.location = { bc_ground_is_open_trigger = yes }
+	}
+}
+
+# Hills, mountains and bog. The commonest ground in the game as played: 58 of
+# 137 in the DIAG run's Q5 terrain census, more than forest and winter together.
+# A gate on this band alone would fire constantly, which is why the template
+# that uses it pairs it with a second condition.
+bc_field_is_rough_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_rough_trigger = yes }
+	}
+}
+
+# The rarest of the six that is not desert: 8 of 137 in the DIAG run's Q5
+# terrain census, against rough's 58. Rare enough that a gate on it wants no
+# second condition, common enough that it is not a dead row.
+bc_field_is_jungle_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_jungle_trigger = yes }
 	}
 }
 

@@ -1423,3 +1423,147 @@ bc_the_practised_eye = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE FOURTH: THE LAST TWO BANDS
+#
+# CLOSING THE GROUND SET, NOT OPENING A NEW AXIS. Three earlier templates gate
+# on a band - bc_winter_bites, bc_dust_and_thirst, bc_the_woods_hide_us - and
+# bc_scripted_triggers.txt carried a note that only four of the six bands had a
+# combat-side wrapper because only four were gated on. The two below are the
+# reason the other two now exist. Every band the prose can name, an event can
+# name; a reader who sees "rough" in the eve text will not wonder why nothing
+# in the battle ever reads it.
+#
+# NEITHER IS A SUBSET OF AN EXISTING GATE, the rule that killed the obvious
+# first draft of the rough one. Rough plus bc_host_is_vast_trigger would have
+# been a strict subset of bc_too_wide_to_see, which gates on the vast host
+# ALONE and grants faltering - so it could only have taken weight from a
+# calibrated event. Rough plus losing is instead the answer to bc_banner_falls,
+# the same shape bc_the_wrath_takes_him has against the same pair: same
+# situation, opposite grant, so the two compete rather than nest.
+#
+# WEIGHT. bc_the_broken_ground_holds is 30, the batch default, because rough is
+# the widest band by member count and the gate is not narrow. bc_the_green_
+# closes_in is 40, matching bc_winter_bites and bc_dust_and_thirst, because a
+# band that only Sothoryos and the Summer Isles can produce needs the help on
+# the rare occasion it is asked at all. Running total against commander_none's
+# 1000 is now roughly 400 + 300 + 180 + 70; this batch is still cheap and is
+# still not the first thing to cut - that remains the character batch.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The broken ground holds. Losing, on hills or bog or mountain, and the ground
+# is what stops the rout.
+#
+# THE ANSWER TO bc_banner_falls. That template reads the same losing side and
+# grants faltering; this one says the ground gave the line something to stand
+# behind. Both are valid on the same roll and the pick decides which story the
+# battle tells, which is the intended behaviour of the weight system and not a
+# collision.
+# ---------------------------------------------------------------------------
+bc_the_broken_ground_holds = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_field_is_rough_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Reading ground is a martial skill, the same bar bc_the_woods_hide_us
+		# and bc_ground_favours_us use.
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_broken_ground_holds"
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_broken_ground_holds_toast
+			desc = bc_the_broken_ground_holds_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The green closes in. The jungle band, which is the sixth and last.
+#
+# JUNGLE IS RARE BUT NOT ZERO, and the number is measured: the DIAG run's Q5
+# terrain census read jungle 8 of 137 against rough 58 and desert 0. So unlike
+# bc_dust_and_thirst this is not a row waiting on a campaign in another
+# continent - it is a row that will fire a few times in an ordinary game, which
+# is precisely the frequency a distinctive line wants.
+#
+# GATED ON THE BAND ALONE, no second condition, because eight in a hundred and
+# thirty-seven with a second gate on top is a row that never fires at all
+# rather than a row that fires seldom.
+# ---------------------------------------------------------------------------
+bc_the_green_closes_in = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		bc_field_is_jungle_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_green_closes_in"
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_green_closes_in_toast
+			desc = bc_the_green_closes_in_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

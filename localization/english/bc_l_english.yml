@@ -259,6 +259,25 @@
  bc_the_practised_eye_toast:0 "The Practised Eye"
  bc_the_practised_eye_toast_desc:0 "A host this size does not fit in one head unless somebody taught you how to hold it there. Somebody did, and he is putting the far wing where it needs to be while it is still forming up.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- the last two ground bands, 2026-08-17 ----------------------------------
+#
+# These two finish the set the other three band toasts started - winter, desert
+# and woods are above at lines 141-148. WRITE THE GROUND, NOT THE WEATHER: those
+# three each name a thing underfoot or overhead that the ground itself produced,
+# and these do the same, so the six read as one family when a player meets two
+# of them in the same war.
+#
+# THE SPENT PHRASES IN THIS BLOCK, which the earlier band descs already used and
+# which must not appear again here: "the cold", "the dust", "the trees", "among
+# trees", "arrows come from cover". The rough desc reaches for stone and slope;
+# the jungle desc reaches for heat and green.
+
+ bc_the_broken_ground_holds_toast:0 "The Broken Ground Holds"
+ bc_the_broken_ground_holds_toast_desc:0 "The line gives way and then stops giving, because there is a spine of rock behind it that no one has to be told to stand on. What was a rout a moment ago is a hundred men with their backs to a slope.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_green_closes_in_toast:0 "The Green Closes In"
+ bc_the_green_closes_in_toast_desc:0 "Nothing here is more than ten paces away and half of it is still moving. Men are going down to the heat who were never touched by anything with an edge.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
 # THREE VARIANTS PER VALUE SINCE 2026-08-17, picked by `random_valid = yes` in
