@@ -1265,6 +1265,37 @@
 # once" (bc_his_blood_in_the_ranks_toast_desc), "where he can be seen doing it"
 # (same), "keeping score" (the second's own chance-row comment, which is not
 # loc but reads oddly repeated).
+# --- what he is already carrying (2026-08-17) -------------------------------
+#
+# The three stress templates, two commander and one knight. NONE OF THEM NAMES
+# THE STRESS. The word does not belong in a thirteenth-century field and the
+# number behind it is an abstraction the player already has a tooltip for; what
+# these three write is what a man at the second breaking point looks like from
+# ten feet away.
+#
+# NONE OF THEM SAYS WHAT PUT IT THERE. Stress arrives from anywhere in the
+# game - a dead child, a broken vow, a decade of the wrong decisions - and this
+# mod has contributed thirty-four points of it without knowing about any of the
+# rest. A desc naming a cause would be inventing one.
+#
+# THE SECOND AND THIRD MAY NOT READ AS COURAGE. bc_he_cannot_stop is a man who
+# cannot put a thing down and bc_knight_the_quiet_place is a man who has found
+# the only hour of his year with no room in it for thinking. The mod already
+# has brave men; these are not more of them.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he is still on his feet"
+# (bc_knight_the_old_wound_toast_desc), "doing it wrong now" (same), "past the
+# point where anybody would have called it enough" is this block's own and may
+# not be reused by a later one.
+ bc_the_hands_are_not_steady_toast:0 "The Orders Are Arriving Wrong"
+ bc_the_hands_are_not_steady_toast_desc:0 "He is standing where he should be standing and saying the wrong things from it. Two of the last four orders contradicted each other and the men carrying them have started arriving back for a second telling. Nothing is wrong with the army. Everything is wrong with what the army is being asked for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_cannot_stop_toast:0 "One More, and Then One More"
+ bc_he_cannot_stop_toast_desc:0 "It is going his way and it is not enough, and there is no sign of what would be. He has spent the reserve, called it back and spent it again, and every man who has suggested that this might be the moment to hold has been sent away with something to do.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_quiet_place_toast:0 "The Only Quiet Hour He Gets"
+ bc_knight_the_quiet_place_toast_desc:0 "Whatever he has been carrying around all year, there is no room for it in the next four feet, and he has gone into those four feet like a man going indoors out of weather. He is buying ground at the usual price and he does not appear to have noticed paying.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
  bc_knight_for_a_friend_toast:0 "Where His Friend Can See Him"
  bc_knight_for_a_friend_toast_desc:0 "He has put himself in the part of the line that matters most to one particular man watching, and it has changed how he is fighting - further forward than his own good sense would have taken him, and staying there. The ground he is standing on has been bought at the going rate.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 

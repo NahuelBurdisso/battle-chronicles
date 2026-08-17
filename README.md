@@ -600,6 +600,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | commander, what he has to lose | twenty-eight commander templates and **not one read his station** — a king and a landless sworn sword got the same chronicle. One question, three answers: a crown on a *losing* field (narrowed so it does not own a player-king's chronicle), `is_landed = no`, and close family among his **own** knights. The third is the first gate in the mod to ask *who* the side's knights are; `bc_shieldbrother_forged` only ever counted them | 3 templates, base 40, 30, 40 |
 | knight, the body batch | twenty-one templates read prowess eleven times and **never once asked what shape the man is in** — prowess is a number about how well he fights, not what he is fighting with. The `wounded_*` ladder while losing, `maimed`/`one_legged` with no side row at all, `one_eyed`/`disfigured` while winning. The health traits are the one axis the whole mod had never read, and a battlefield is where vanilla hands them out | 3 templates, base 80 |
 | the eve's winter option | `d` took rough/forest/jungle and `f` took open/desert; **winter was the one band with no option of its own**, and deliberately so — its paragraph is neither a thing to hold nor a road to ride down. So `i` is not about the ground. It is **the only option in the mod that costs gold and the only one with a resource gate**: stress, prestige and piety are as available to a landless knight as to a king, and coin is not | 1 option, 8 → 9 |
+| what he is already carrying | **the mod writes stress thirty-four times and had never read it back** — eleven `add_stress` in each phase event file, nine across the pop-ups, three in the eve, and `stress_level` in no gate anywhere. Every one of those writes says a battle costs a man something and not one of them was allowed to matter afterwards. Stress is not temperament: `craven` is a man who has always been like this, level 2 is a man who was fine in the spring. Commander misreading it while losing (`measured`/`down`, which grants nothing, and that is the point), commander who cannot stop while winning, and one knight case — a knight has no army, so he has only one answer | 3 templates, base 40, 30, 80 |
 | the first knight pop-up | **four pop-ups shipped and all four assume the player is the man giving orders** — in AGOT he is very often somebody's sworn sword instead, and the mod had never asked him anything. `bc_knight_pulls_him_out` grows a branch on the `bc_flank_collapses` pattern, `else` arm unchanged. Two things are new: `bc_battle_open_effect` is **hoisted before the raise** so `scope:bc_chronicle_subject` carries the commander across the `trigger_event` boundary (`scope:combat_side` does not), and **every rung and ledger write in the event is wrapped in that scope** — a knight carries none of the army modifiers, and writing them bare would hang them where nothing reads them | 1 event, 4 options |
 | knight, the two men who matter | **`has_relation_*` appeared in no gate anywhere in the mod** — the rivalry ladder *writes* relations and nothing has ever read one. Friend of his own commander (no side row), rival of his own commander (`ordered`/`down`, the cell that hands out nothing by design, and it must not read as cowardice — `bc_knight_shames_himself` owns that ground), and rival of the commander **opposite** while winning. The third is the first time a knight is allowed to notice who is in command on the other side; every shipped use of `enemy_side.side_commander` was rooted on a commander | 3 templates, base 80 |
 | commander, what the men think of him | **`dread` appeared nowhere in the mod** — not a gate, not a `chance` row, not a trigger. It is the one number that is *about* the relation between a commander and his own ranks, and temperament does not stand in for it: a mild man who hanged a town has dread, a loud one who never did anything does not. `>= medium_dread` while losing (the line holds), `<= low_dread` while losing (it comes apart in pieces), `>= major_dread_value` with no side row at all (he does not have to ask). Thresholds are the vanilla **named** values, checked against AGOT's override of the same file — 20/40/70 both sides | 3 templates, base 40, 30, 30 |
@@ -622,17 +623,18 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **eighty**, its "3, 3, 4 and 3" are
-16, 14, 19 and 9, and the fall-through set is twenty-two sites rather than five. The
+plan 1's eighteen call sites are now **eighty-three**, its "3, 3, 4 and 3" are
+17, 14, 20 and 9, and the fall-through set is twenty-three sites rather than five. The
 table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 34, knight 25.** Weight against vanilla's
+**Template totals are now commander 36, knight 26.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100; on the knight side, twenty-five templates against `knight_none`'s
-2000 — twenty-four at 80 and `bc_knight_pulls_him_out` at 60, held below the
-rest because it is the one knight moment that writes something permanent.
++ 90 + 110 + 100 + 70; on the knight side, twenty-six templates against
+`knight_none`'s 2000 — twenty-five at 80 and `bc_knight_pulls_him_out` at 60,
+held below the rest because it is the one knight moment that writes something
+permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 

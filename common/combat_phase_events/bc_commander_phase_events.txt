@@ -2286,3 +2286,159 @@ bc_the_hard_hand = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE EIGHTH ON THIS SIDE: WHAT HE IS ALREADY CARRYING
+#
+# THE MOD WRITES STRESS THIRTY-FOUR TIMES AND HAS NEVER ONCE READ IT BACK.
+# `add_stress` appears eleven times in this file, eleven in the knight file,
+# nine across the pop-ups and three in the eve - and `stress_level` appears
+# nowhere at all. Every one of those writes is the mod saying a battle costs a
+# man something; not one of them has ever been allowed to matter afterwards.
+#
+# STRESS IS NOT TEMPERAMENT AND THE EIGHT TRAIT TEMPLATES DO NOT COVER IT.
+# `has_trait = craven` is a man who has always been like this. Stress level 2 is
+# a man who was fine in the spring, and the difference is the only thing on the
+# field that this mod itself has been putting there.
+#
+# `stress_level` IS AN ENGINE TRIGGER, confirmed in ../../docs/api/1.19.0.6/
+# triggers with the comparison traits and `Supported Scopes: character`, and
+# AGOT writes the exact comparison this batch uses at events/activities/
+# tournaments/ep2_locale_events.txt:5397, where its own comment glosses
+# `stress_level >= 2` as "the second breaking point of stress".
+#
+# THE TWO COMMANDER CASES ARE DISJOINT: one pairs with losing and one with
+# winning, so they can never compete for the same roll. No shipped `is_valid`
+# reads stress at all, so nothing else here needs the subset argument.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He is at the second breaking point and the day is going against him.
+#
+# WHAT GOES WRONG IS THE ORDERS, NOT THE MAN'S COURAGE. He is still standing
+# where he should be. What has stopped working is the part of him that decides
+# what to do next, and a battle is nothing but a series of those decisions
+# arriving faster than they can be made.
+#
+# `measured`/`down` GRANTS NOTHING, AND HERE THAT IS THE WHOLE POINT. There is
+# no army modifier that means "the man in charge is misreading it" - the army
+# is doing exactly what it was told and what it was told was wrong. The
+# faltering rung is the consequence and the ledger entry is the record; no verb
+# is the honest third answer.
+# ---------------------------------------------------------------------------
+bc_the_hands_are_not_steady = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		stress_level >= 2
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Past the second breaking point and into the third.
+		modifier = {
+			add = 30
+			stress_level >= 3
+		}
+		modifier = {
+			factor = 0.5
+			martial >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_hands_are_not_steady"
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_hands_are_not_steady_toast
+			desc = bc_the_hands_are_not_steady_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The same man on a day that is going his way, which does not help him.
+#
+# HE CANNOT STOP. The side is winning and he keeps spending it - one more push,
+# and then one more, past the point where anybody would have called it enough.
+# That is not courage and the prose must not write it as courage; it is a man
+# who cannot put a thing down.
+#
+# `wild`/`up` AND A GUARDED MOMENTUM RUNG. The tide moves and the horses pay
+# for the moving, which is bc_spent_horse exactly. bc_the_wrath_takes_him and
+# bc_the_old_grudge are the shipped templates that mean this; both reach it
+# from temperament, and this one reaches it from a number the mod put there
+# itself.
+# ---------------------------------------------------------------------------
+bc_he_cannot_stop = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		stress_level >= 2
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			stress_level >= 3
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_cannot_stop"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_cannot_stop_toast
+			desc = bc_he_cannot_stop_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

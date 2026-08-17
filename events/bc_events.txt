@@ -7,7 +7,7 @@
 # own is what makes it obvious at a glance which of the mod's events the player
 # can actually see and click.
 #
-# Five templates out of the fifty-nine ever become a pop-up, and only when the
+# Five templates out of the sixty-two ever become a pop-up, and only when the
 # player is personally in the moment and is not inside the 60-day pop-up
 # cooldown. Everything else is a toast, because that is what vanilla and AGOT do
 # and the mod should read as native.

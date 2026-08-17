@@ -2103,3 +2103,87 @@ bc_knight_knows_that_man = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE TENTH ON THIS SIDE: WHAT HE IS ALREADY CARRYING
+#
+# THE KNIGHT HALF OF THE STRESS BATCH. The argument is in the commander file's
+# batch header and is not repeated: the mod writes stress thirty-four times and
+# had never read it back, and stress is not temperament.
+#
+# ONE TEMPLATE HERE AND TWO THERE, because a knight has only one answer to
+# this. A commander at the second breaking point can be misreading a battle or
+# refusing to stop winning one - both are things a man does with an army. A
+# knight has no army. He has the next few feet in front of him, and the only
+# thing stress changes is how he goes at them.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The one thing out here that is quieter than the rest of his life.
+#
+# THE FIGHTING IS THE RELIEF AND THAT IS THE WHOLE TEMPLATE. He is at the
+# second breaking point everywhere else and in the middle of this he is not
+# thinking about any of it, because there is no room to. It is not courage and
+# the prose may not write it as courage.
+#
+# `add_stress = -15` IS THE SECOND NEGATIVE STRESS IN THE MOD and the largest.
+# The precedent and the reason it is not the `add_gold = -N` trap are recorded
+# on bc_knight_knows_that_man above. Fifteen against the ten the pop-up options
+# hand out, because this is the only place in the mod where the battle itself
+# is the thing doing the mending.
+#
+# `bloodied`/`up` AND NO RUNG. He buys ground at the usual price. One knight
+# fighting past himself does not turn a battle, so the side's standing does not
+# move and the tier is minor - the same reasoning bc_knight_knows_that_man
+# records.
+# ---------------------------------------------------------------------------
+bc_knight_the_quiet_place = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		stress_level >= 2
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			stress_level >= 3
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_quiet_place"
+
+		add_stress = -15
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_quiet_place_toast
+				desc = bc_knight_the_quiet_place_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
