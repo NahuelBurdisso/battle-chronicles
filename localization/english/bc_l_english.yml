@@ -1728,3 +1728,40 @@
 
  bc_no_name_at_all_toast:0 "No Name At All"
  bc_no_name_at_all_toast_desc:0 "There is no house behind him, no seat, nothing that would get him a bed in a keep on a wet night, and the men who have been doing what he says since morning are winning with it. They are shouting to each other about the ford and the flank and about him, using the only thing they have to call him by, which is not much of a thing but is being used a great deal. Whatever else comes of today, a few hundred men now know exactly whose afternoon this was.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- whose war it is (2026-08-17) -------------------------------------------
+#
+# THE FIRST MAY NOT SAY THE WORD "FAULT" OR ANY SYNONYM FOR IT. What is true
+# is narrower and harder: there is no one above him in this. Every other man
+# on the field can say afterwards that he was sent, and he cannot, and that
+# is a fact about the chain of command rather than a verdict on his judgement.
+# The moment he is written as guilty the desc has become a small morality
+# play and stopped being a battle.
+#
+# THE FIRST ALSO MAY NOT CONCEDE THE WAR. It is one bad afternoon in a
+# quarrel the mod knows nothing else about, and the aftermath decides what it
+# costs.
+#
+# THE SECOND AND THIRD SHARE A TRIGGER AND MUST NOT SHARE AN IMAGE. Both are
+# looking at the same banner. The commander's is an arithmetic problem - that
+# man, if he changes his mind, ends this, and he is having a bad afternoon
+# where everyone can see. The knight's is a distance in yards that is not
+# going to close. Do not let the knight's desc reason about the war and do
+# not let the commander's desc want to reach anybody.
+#
+# NOBODY IS CAPTURED, WOUNDED OR KILLED IN ANY OF THE THREE. The standing
+# rule holds and it is sharpest here, where the temptation is a lord in
+# reach. The mod does not narrate a capture it has not caused.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "no house behind him"
+# (bc_no_name_at_all), "the ground behind him is empty"
+# (bc_knight_the_bottom_of_it), "it has turned over", "he has stopped
+# counting".
+ bc_the_war_has_his_name_on_it_toast:0 "There Is Nobody Above Him In This"
+ bc_the_war_has_his_name_on_it_toast_desc:0 "The men going backwards past him were raised on his word, marched here on his word, and are being pushed off this ground for a quarrel that has his name written at the top of it in a maester's hand. There is no rider he can send to ask what to do. Every other man here will be able to say he was sent; he will have to say something else, and he has an hour or two yet before anyone asks him for it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_man_who_started_it_toast:0 "The Man Who Started It Is Here"
+ bc_the_man_who_started_it_toast_desc:0 "It is not a castellan over there and it is not a son sent out to learn the trade. The banner in the middle of that line belongs to the man who could have let all of this alone and did not, and he has come out to see it done himself, and it is not being done. He is having to be told things by riders who do not want to tell him. Whatever else is decided today, it is being decided in front of the one man it belongs to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_banner_answerable_toast:0 "Three Hundred Yards Of It"
+ bc_knight_the_banner_answerable_toast_desc:0 "He can see the banner. It has not moved all morning and it is not far - a field, a ditch, a great many men - and everything that has happened to him today comes from under it. He has spent himself twice trying to get closer and the ground between has only got worse for the trying. His horse is finished and his arms are heavy and the distance is exactly what it was when he first looked up and found it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

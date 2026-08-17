@@ -4166,3 +4166,172 @@ bc_no_name_at_all = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHOSE WAR IT IS, 2026-08-17.
+#
+# THE MOD HAS ASKED THIS QUESTION ONCE, IN ONE DIRECTION, SINCE PLAN 1.
+# `side_primary_participant` appears in exactly one gate anywhere -
+# bc_his_lords_war, which asks whether the commander is NOT the war leader -
+# and nowhere else. The affirmative case and the entire other side of the
+# field were never asked. Three templates here: the man whose war it is
+# losing it, the man who started it standing across the field, and a knight
+# looking at the same banner from four feet lower down.
+#
+# THE AFFIRMATIVE TRIGGER IS NOT THE NEGATION OF THE SHIPPED ONE, and the
+# header on bc_this_is_his_own_war_trigger says why at length: a side with no
+# war leader answers no to the shipped trigger because of its `exists`, so
+# `NOT = { bc_fighting_his_lords_war_trigger = yes }` would answer YES there.
+# Both had to be written affirmatively.
+#
+# bc_foe_leader_commands_in_person_trigger IS THE FIRST TRIGGER IN THE MOD
+# THAT COMPARES TWO MEMBERS OF ONE SIDE. Everything else reads a property off
+# a character. This one asks whether the enemy's commander and the enemy's
+# war leader are the same man, which is the only thing available here that
+# separates a lord's own host from a host his castellan is walking about.
+#
+# THIS IS NOT bc_facing_nemesis_trigger AGAIN. That one is about a personal
+# relation between two men; this is about an office. A man can be commanding
+# in person and be nothing to you, and your nemesis can be somebody's
+# under-captain. The two are orthogonal and neither implies the other.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The war has his name on it and it is going badly.
+#
+# THE ONE THING THIS TEMPLATE HAS THAT NO OTHER LOSING TEMPLATE HAS is that
+# there is nobody above him in it. Every other man on this field can tell
+# himself afterwards that he was sent. The desc is about that and not about
+# guilt, which is a bigger word than the situation needs.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. There is no army modifier for a
+# man understanding his own position, and the faltering rung is the whole
+# mechanical cost. Ten stress, the file's usual.
+#
+# NO PRESTIGE EITHER DIRECTION. Losing a war of your own is expensive in ways
+# the aftermath already prices; charging for it twice at the phase level
+# would double-count.
+# ---------------------------------------------------------------------------
+bc_the_war_has_his_name_on_it = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_this_is_his_own_war_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who thinks well of himself has further to fall in one morning.
+		modifier = {
+			add = 20
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_war_has_his_name_on_it"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_war_has_his_name_on_it_toast
+			desc = bc_the_war_has_his_name_on_it_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man who started it is standing over there.
+#
+# THE WINNING ROW IS LOAD-BEARING AND IT IS NOT DECORATION. The content is
+# that the one man who could end this war by changing his mind is on the
+# field and having a bad afternoon, which is only true on the winning side.
+# Losing, the same gate is a template about being frightened of a banner, and
+# the mod has three of those already.
+#
+# FIFTY PRESTIGE, THE FILE'S USUAL. It is not the hedge knight's number and
+# not the lowborn's: nothing has been proved about who he is, only about who
+# is in front of him.
+#
+# `bloodied`/`up`. A host that has worked out whose banner that is fights the
+# next quarter hour harder and worse, and bc_bloodied is exactly that trade.
+# ---------------------------------------------------------------------------
+bc_the_man_who_started_it = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_leader_commands_in_person_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		# A man who keeps accounts notices whose name is at the top of this one.
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_man_who_started_it"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_man_who_started_it_toast
+			desc = bc_the_man_who_started_it_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

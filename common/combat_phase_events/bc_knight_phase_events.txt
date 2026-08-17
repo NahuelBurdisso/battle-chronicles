@@ -3039,3 +3039,80 @@ bc_knight_the_bottom_of_it = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The banner that is answerable for all of this, and he cannot get to it.
+#
+# THE SAME TRIGGER AS bc_the_man_who_started_it, POINTED THE OTHER WAY. The
+# commander's version takes the winning row and is about an opportunity; this
+# one takes the losing row and is about a distance. Neither is a subset of
+# the other - the side rows are opposite - and they are rolled from separate
+# pools anyway.
+#
+# THE TRIGGER READS NOTHING ABOUT THE MAN CALLING IT, which is why a knight
+# may ask it at all. Its companion, bc_this_is_his_own_war_trigger, tests
+# `this` against the side's war leader and would be permanently false here: a
+# knight is never the war leader of his own side. That half of the batch is
+# commander-only by construction, not by choice.
+#
+# `wild`/`down` AND bc_spent_horse. This is a man burning himself on ground he
+# is not going to cross. The modifier is the correct consequence and the
+# faltering rung is the correct rung, and the two together are the whole of
+# what he gets for it.
+# ---------------------------------------------------------------------------
+bc_knight_the_banner_answerable = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_leader_commands_in_person_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = wrathful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_banner_answerable"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_banner_answerable_toast
+				desc = bc_knight_the_banner_answerable_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

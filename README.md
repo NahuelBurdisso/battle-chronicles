@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 56 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 36 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 58 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 37 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Forty batches, one per row of the table below, none of which needed a
+Forty-one batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -625,6 +625,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | the top of the ladder | the rung modifiers are read in exactly one way and it is not a question: every use of `bc_has_momentum_trigger` and `bc_is_faltering_trigger` in the mod is a `NOT` inside a grant, a guard stopping a second rung landing. The mod knows the difference between minor, major and decisive, writes it on the commander, and has **never asked which rung a host is on**. Only the top tier is gated, on purpose — minor momentum is the mod's ordinary weather and a template gated on it would fire everywhere and say nothing. `bc_momentum_decisive` takes **no side row**, because the rung *is* the side row: nobody carries it on a field that is going badly. It grants `bc_pursuit` and no rung, since a host at the top of the ladder has nowhere to be moved to. **The faltering half cannot be a commander template at all**: `bc_rally_the_line`'s gate is ready + faltering and nothing else, so any commander gate on `bc_faltering_decisive` is a strict subset of a shipped one and no added row can fix that. On the knight side no `is_valid` reads the rungs, so the gate is free — and it too writes no rung, because the guard could never pass and dead code that reads like a live effect is worse than nothing | 2 templates, base 40, 80 |
 | the counts that had gone stale | no new content — a sweep of **comments that stated a number and were passed by the code**. "The three `type = knight` events" was written when there were three and there are thirty-one; "five templates out of the sixty-two"; "three of the thirteen moment literals"; "ALL FIFTEEN NAME THEIR SUBJECT". A comment that is wrong is worse than no comment, because the next reader trusts it. Where a count is not load-bearing the number is now **written out of the sentence** ("every `type = knight` event") rather than corrected, since correcting it only resets the clock; where it is load-bearing the paragraph carries the `grep` that regenerates it. The batch also disarms a **latent trap in the checker**: `validate` verifies every `file.txt:NNN` citation inside a comment against the *current* file, so the two deliberately *historical* citations (to line 258 of a superseded build) turned into hard errors the moment a comment above them grew five lines. Both are reworded out of `file:line` punctuation, and a header paragraph now records that prose is the correct form for a claim about a build that no longer exists | 6 files, 0 templates |
 | what the host had opinions about this morning | **`is_female` appears zero times anywhere in the mod** and `is_lowborn` only inside a comment, while fifty-four commander templates ask what a man is good at, what he was raised to, what he owns, what he believes, what he fears and what shape his body is in. Those are the two facts Westeros argues about *before* it argues about tactics, and the mod read neither. **Both take the winning row, and that is the whole design.** On a losing field either fact becomes the host's explanation for the defeat — a sentence about prejudice being confirmed — which is a claim about what men think that the code cannot support; winning, the same fact is a thing that has visibly stopped mattering over the course of one morning, and the side row is the evidence. Neither is the station axis again: `bc_nothing_but_the_horse` gates on `is_landed = no` and birth is not tenure. `ordered`/`up` for the first (the gap between an order leaving her and a line moving has closed to nothing) and `adapted`/`up` plus **75 prestige** for the second — above the file's usual 50 and below the hedge knight's 150, because a lowborn commander has already been given the thing a hedge knight never gets | 2 templates, base 30, 30 |
+| whose war it is | `side_primary_participant` appeared in **exactly one gate in the whole mod** — `bc_his_lords_war`, which asks whether the commander is *not* the war leader — and the affirmative case and the entire other side of the field had never been asked. Two new triggers. `bc_this_is_his_own_war_trigger` **cannot be written as the negation of the shipped one**: that trigger's `exists` makes it false on a leaderless side, so a `NOT` around it answers *yes* there; both had to be affirmative so a leaderless side answers no to both. `bc_foe_leader_commands_in_person_trigger` is the **first trigger in the mod that compares two members of one side** — enemy commander against enemy war leader — which is the only thing available here that separates a lord's own host from one his castellan is walking about, and it is orthogonal to `bc_facing_nemesis_trigger`: an office, not a relation. Commander losing his own war (`measured`/`down`, which grants nothing, and the desc may not say *fault* — what is true is only that there is nobody above him in it), commander winning against the man who started it (`bloodied`/`up`, 50 prestige), and the same foe trigger on the knight side while losing (`wild`/`down` and `bc_spent_horse`: a distance in yards that is not going to close). The knight cannot have the other half — a knight is never his own side's war leader, so that gate would be permanently false | 3 templates, base 30, 30, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -643,16 +644,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **a hundred and thirteen**, its "3, 3, 4 and 3"
-are 24, 17, 24 and 13, and the fall-through set is thirty-five sites rather than
+plan 1's eighteen call sites are now **a hundred and sixteen**, its "3, 3, 4 and 3"
+are 25, 17, 25 and 13, and the fall-through set is thirty-six sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 56, knight 36.** Weight against vanilla's
+**Template totals are now commander 58, knight 37.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60; on the knight side, thirty-six templates against
-`knight_none`'s 2000 — thirty-five at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60; on the knight side, thirty-seven templates against
+`knight_none`'s 2000 — thirty-six at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

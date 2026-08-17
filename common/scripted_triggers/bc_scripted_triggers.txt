@@ -356,6 +356,59 @@ bc_fighting_his_lords_war_trigger = {
 	}
 }
 
+# The war is his own.
+#
+# NOT THE `NOT` OF THE TRIGGER ABOVE, AND IT MATTERS. Wrapping
+# bc_fighting_his_lords_war_trigger in a NOT would answer YES on a side with no
+# war leader at all, because that trigger's `exists` makes it false there and
+# the NOT flips it. This one has to be written affirmatively so a leaderless
+# side answers no to both. Do not "simplify" it into the negation.
+#
+# `this`, NOT `root`. Written for the commander file, where the phase event's
+# root is the commander being rolled for and `this` is the same character. A
+# knight template must not call it - a knight is by definition not the war
+# leader of his side, so it would be a gate that is always false. The knight
+# side's version of this question is the foe trigger below, which reads
+# nothing about the man calling it.
+bc_this_is_his_own_war_trigger = {
+	exists = scope:combat_side.side_primary_participant
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_primary_participant }
+		this = scope:combat_side.side_primary_participant
+	}
+}
+
+# The man whose war this is, is commanding the other side in person.
+#
+# THIS IS THE FIRST TRIGGER IN THE MOD THAT COMPARES TWO MEMBERS OF THE SAME
+# SIDE. Every other reads one property off one character. It says the enemy's
+# war leader and the enemy's commander are the same man, which is the one thing
+# available here that distinguishes a lord's host from a lord's deputy's host.
+#
+# TWO `exists` AND ONE `limit` CARRYING BOTH. Either link can be absent - a
+# side can be leaderless and a combat can have no war - and CK3 does not
+# short-circuit, so both guards are required and the trigger_if's limit has to
+# repeat both. The comparison is `this = ...` from inside the commander's
+# scope, the same idiom bc_fighting_his_lords_war_trigger uses.
+#
+# ROLE-AGNOSTIC BY CONSTRUCTION. It reads no property of the character calling
+# it, so it answers the same question from a commander root and a knight root.
+# That is deliberate: it is the one enemy-side question a knight is as
+# entitled to ask as his commander, because it is answered by a banner.
+bc_foe_leader_commands_in_person_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	exists = scope:combat_side.enemy_side.side_primary_participant
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side.side_commander
+			exists = scope:combat_side.enemy_side.side_primary_participant
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			this = scope:combat_side.enemy_side.side_primary_participant
+		}
+	}
+}
+
 # His own blood, on his own side, in the knight list.
 #
 # THE SAME is_close_family_of AS bc_foe_is_kin_trigger, pointed the other way.
