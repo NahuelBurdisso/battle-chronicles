@@ -4080,3 +4080,92 @@ bc_knight_word_came_down_the_line = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man who swore in front of a tree.
+#
+# THE THIRD RELIGION, IN THE OTHER POOL. `the_pact_religion` holds the old gods
+# (00_agot_the_pact.txt:213). The two pools roll separately, so this is not the
+# distinctness question at all - it is the fact asked of a man in the line
+# rather than a man on a horse, which is where it belongs: what the old gods
+# have on a battlefield is an absence of liturgy, and an absence is only
+# audible from four feet away.
+#
+# NO FIELD ROW, DELIBERATELY. The obvious version of this template puts him in
+# a wood, and `bc_field_is_forest_trigger` with a winning row is already
+# `bc_knight_the_wood_takes_them`'s gate - adding a religion row to it would make
+# this a strict subset of a shipped template, which the mod does not allow. It
+# is also wrong on its own terms: a northman who is a long way from any
+# godswood is the more interesting half of this, and he is the half nothing in
+# the mod has ever mentioned.
+#
+# LOSING. The southron knight on a bad afternoon has a septon somewhere behind
+# the line and a set of words to say; this man has neither, and the template is
+# the difference between those two facts rather than anything about courage.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. There is no army modifier for a
+# man having nothing to say, and there should not be. The faltering rung and
+# the stress are the whole cost, and the rung is guarded because the afternoon
+# has probably set it already.
+#
+# THE DESC MAY NOT PRAY ALOUD, MAY NOT PUT A TREE ON THE FIELD AND MAY NOT
+# MAKE HIM DOUBT THE GODS. He is not having a crisis. He is having an ordinary
+# bad hour with nothing to fill the silence with, which is the entire point.
+# ---------------------------------------------------------------------------
+bc_knight_nothing_to_say_over_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_religion = religion:the_pact_religion
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = zealous
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_to_say_over_him"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nothing_to_say_over_him_toast
+				desc = bc_knight_nothing_to_say_over_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

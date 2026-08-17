@@ -2226,3 +2226,38 @@
 
  bc_he_learned_it_too_toast:0 "He Was Already Standing There"
  bc_he_learned_it_too_toast_desc:0 "Every move he has made this afternoon has been the correct move for this kind of country, and every one of them has arrived at a place where somebody was already waiting. It is not that he has been outfought. It is that he has spent long enough here to stop noticing that the campaign has been teaching the other side the same lessons at the same speed, and this is the hour in which that arithmetic finishes.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-FIVE. Three sets of gods, and what the man beside him expects.
+#
+# NONE OF THE THREE DESCS MAY QUOTE A CREED. The mod gates on `has_religion`
+# and knows nothing else - not which faith inside the religion, not which
+# septon or priest or grove, not what anybody was taught. A remembered line of
+# scripture in a toast is a fact about a branch the gate did not test.
+#
+# NONE MAY PERFORM A MIRACLE OR MAKE A GOD DO ANYTHING. Every one of these is
+# about what the men present assume will happen next, which is the only way a
+# god reaches a battlefield in this mod.
+#
+# THE FIRST MAY NOT PROMISE THEY HOLD AND MAY NOT LOOK LIKE A RALLY -
+# `bc_rally_the_line` owns that, and nothing here reverses.
+#
+# THE SECOND MAY NOT BURN ANYBODY AND MAY NOT PUT A PRIEST IN COMMAND. The
+# commander is still the commander; the mod has no way to put anyone else
+# there.
+#
+# THE THIRD MAY NOT PRAY ALOUD, MAY NOT PUT A TREE ON THE FIELD AND MAY NOT
+# MAKE HIM DOUBT. He is not having a crisis of faith, he is having an ordinary
+# bad hour with nothing to fill the silence with.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting".
+ bc_they_do_not_ask_for_terms_toast:0 "Nobody Here Is Selling Himself Back"
+ bc_they_do_not_ask_for_terms_toast_desc:0 "A herald came across an hour ago and went away again with the same answer he arrived with, and the men who heard it did not react to it in any way, because it had not occurred to any of them that a different answer was available. They are giving ground about a foot at a time and charging for every foot of it. Whatever the other host thought this last hour was going to cost, it is costing more than that.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_fire_is_ahead_of_him_toast:0 "They Have Stopped Waiting For The Order"
+ bc_the_fire_is_ahead_of_him_toast_desc:0 "He sent the centre forward and the centre went a good deal further than he sent it, and the two wings went with it without being asked, and the whole thing is now perhaps eighty yards past where he intended it to stop. It is working. It is also no longer entirely his, and he has spent the last few minutes riding along behind an army that is certain of something, trying to decide whether to spend the afternoon steering it or the afternoon getting it back.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nothing_to_say_over_him_toast:0 "There Are No Words For This Part"
+ bc_knight_nothing_to_say_over_him_toast_desc:0 "The man on his left went down twenty minutes ago and there was nothing to be said over him, so nothing was. Down the line somebody southron is being given the whole of it, the seven of them named one after another by a voice getting steadily higher, and it is carrying rather better than the fighting is. He has been listening to it and doing his work and has not yet decided which of the two of them is worse off.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -5637,3 +5637,184 @@ bc_he_learned_it_too = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE GODS ON THE FIELD, 2026-08-17.
+#
+# THE MOD HAS ASKED ABOUT FAITH EXACTLY ONCE AND ONLY COMPARATIVELY.
+# `bc_foe_is_heathen_trigger` reads `NOT = { faith = root.faith }` on the man
+# opposite; nothing anywhere reads what a commander or a knight actually
+# believes. In a setting whose armies are told apart by their gods more
+# reliably than by their banners, seventy-three commander templates and
+# forty-eight knight templates had no opinion on the subject.
+#
+# `has_religion = religion:X`, NOT `faith = faith:X`, AND THIS IS THE WHOLE
+# TECHNICAL POINT OF THE BATCH. AGOT splits every one of its religions into
+# several faiths - the Seven alone ships `fots_seven` and `fots_blessed` and
+# more, R'hllor ships `rhllor_fc` and `rhllor_fots`, the old gods ship
+# `old_gods_wnw` and `old_gods_btw_fnf` - so a gate written against one faith
+# key silently drops every worshipper of the same gods who happens to belong to
+# a different branch of them. The religion is the level at which "he keeps
+# these gods" is true, and `has_religion` is the documented character trigger
+# for it in the 1.19.0.6 dump. Nothing below names a faith.
+#
+# THE THREE RELIGIONS ARE AGOT'S OWN, verified in its religion_types folder:
+# `the_ways_religion` holds the drowned_god faith (00_agot_the_ways.txt:219),
+# `the_rhllor_religion` is the Lord of Light, and `the_pact_religion` holds
+# old_gods_wnw (00_agot_the_pact.txt:213). This mod defines no religions and
+# reads three of the twenty-two.
+#
+# NONE OF THE THREE TEMPLATES IS ABOUT THEOLOGY AND ALL THREE ARE ABOUT WHAT
+# THE MAN NEXT TO HIM EXPECTS. A god only reaches a battlefield through what
+# everybody present assumes will happen next, and that is the only mechanism
+# any of these descs is allowed to use.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The men who do not think losing is the worst of it.
+#
+# LOSING, BECAUSE THIS FAITH HAS NOTHING PARTICULAR TO SAY ABOUT WINNING. Every
+# host in the world holds together while it is winning; what the drowned god's
+# men are famous for is the other hour, and a template that fired on a good
+# afternoon would be describing something no more ironborn than anyone else.
+#
+# `entrenched`/`down` AND bc_shieldwall, WHICH IS THE ENTIRE CONSEQUENCE. Not
+# `bloodied`: they are not killing more of the other side, they are declining
+# to move, and the modifier for a line that has stopped receding is exactly the
+# one this KIND hands out. The moment must not look like a rally -
+# bc_rally_the_line owns that and this is not it. Nothing here reverses.
+#
+# NO PRESTIGE AND A GUARDED FALTERING RUNG. He is still losing. The point of
+# the moment is what it costs the other host to keep winning.
+#
+# THE DESC MAY NOT QUOTE THE CREED, MAY NOT DROWN ANYBODY AND MAY NOT PROMISE
+# THEY HOLD. It is a state, not an outcome, and the aftermath chain owns
+# outcomes.
+# ---------------------------------------------------------------------------
+bc_they_do_not_ask_for_terms = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_religion = religion:the_ways_religion
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = zealous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_do_not_ask_for_terms"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_they_do_not_ask_for_terms_toast
+			desc = bc_they_do_not_ask_for_terms_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A host that has decided its god is winning.
+#
+# WINNING, AND IT IS THE ONLY SIDE OF THIS RELIGION WORTH A MOMENT. A losing
+# host of the Lord of Light is a losing host; a winning one is the specific
+# problem of an army that has stopped needing to be told to go forward, which
+# is not a good thing and is not written here as one.
+#
+# `wild`/`up` AND bc_spent_horse. The verb table sends `wild` to the same
+# modifier in both directions and that is exactly right here: this is a moment
+# about a host spending itself, and the fact that it is spending itself in the
+# direction of a victory does not make the spending cheaper. A commander who
+# reads this toast and thinks it is unambiguously good has read it correctly -
+# so has one who thinks it is a warning.
+#
+# NO RUNG, DELIBERATELY. Momentum is the mod's word for a side's standing
+# improving, and nothing here improves it: the men are already going forward.
+# Granting a rung would say the commander achieved this, and the whole template
+# is about a thing happening slightly out of his hands. Precedent for a
+# rung-less template is bc_knight_will_not_be_carried and now bc_knight_the_spurs_they_took.
+#
+# THE DESC MAY NOT PERFORM A MIRACLE, MAY NOT BURN ANYONE AND MAY NOT PUT A
+# PRIEST IN COMMAND. The red priests are a fact of this religion; the man
+# holding the army together is still the commander, and the mod has no way to
+# put anybody else there.
+# ---------------------------------------------------------------------------
+bc_the_fire_is_ahead_of_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_religion = religion:the_rhllor_religion
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = zealous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_fire_is_ahead_of_him"
+
+		add_prestige = 50
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_fire_is_ahead_of_him_toast
+			desc = bc_the_fire_is_ahead_of_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
