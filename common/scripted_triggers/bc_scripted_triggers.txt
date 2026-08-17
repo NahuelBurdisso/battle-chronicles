@@ -1458,3 +1458,47 @@ bc_foe_is_from_across_the_sea_trigger = {
 		}
 	}
 }
+
+
+# --- the season, which is not the terrain ------------------------------------
+#
+# THE MOD HAS A WINTER AND IT IS THE WRONG ONE. bc_field_is_winter_trigger
+# wraps bc_ground_is_winter_trigger, which is `agot_is_frozen_flats_terrain` or
+# `agot_is_glacier_terrain` - a TERRAIN band, a permanent property of a few
+# provinces at the top of the map, as true in the eighth year of a summer as in
+# the third year of a winter. In a setting whose entire motto is about a season
+# arriving, the mod has never once asked whether it has.
+#
+# `has_winter_combat_trigger` IS AGOT'S OWN ANSWER AND IS THE RIGHT ONE OF THE
+# THREE IT OFFERS. 00_weather_triggers.txt:63 defines it as exactly the three
+# province modifiers winter_mild_modifier, winter_normal_modifier and
+# winter_harsh_modifier - the engine's seasonal state and nothing else. Its
+# sibling `has_winter_trigger` at :43 adds an AGOT clause granting PERMANENT
+# winter to everything in world_westeros_the_north outside the Neck and to all
+# of world_westeros_beyond_the_wall, which would make this gate always-true for
+# every battle a northern lord ever fights and would turn a moment about a
+# season arriving into a moment about a map region. AGOT itself separates the
+# two and names the tighter one for combat; this follows it.
+#
+# THIS IS NOT bc_field_is_winter_trigger AND NEITHER CONTAINS THE OTHER. A
+# glacier in the fourth year of a long summer answers yes to that one and no to
+# this. A Riverlands wheat field in a hard winter answers no to that one and
+# yes to this. They overlap and overlap is not subset, so a template here can
+# never be dead code under bc_winter_bites or bc_knight_stands_in_the_snow -
+# and in any case those two own the argument that cold HURTS, which is not the
+# argument either template on this trigger makes.
+#
+# THE SEVERITY BANDS ARE DELIBERATELY NOT SPLIT. winter_harsh_modifier alone
+# would be a strict subset of this, so a template gated on harsh would be dead
+# code under any template gated on this unless the side rows were disjoint -
+# which is a trap worth not laying. One trigger, two opposite side rows.
+#
+# THE GUARD IS THE STANDING ONE for combat.location, which this file already
+# guards a dozen times over.
+bc_season_is_winter_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { has_winter_combat_trigger = yes }
+	}
+}

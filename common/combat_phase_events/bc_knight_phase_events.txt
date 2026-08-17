@@ -5283,3 +5283,93 @@ bc_knight_the_reach_is_wrong = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The light is going. It is winter, and the side is losing.
+#
+# `ordered`/`down`, THE PAIR THE LEDGER DESCRIBES AS A FORMATION THAT KEEPS ITS
+# SHAPE WHILE GOING BACKWARDS. That is precisely this. A winter afternoon has a
+# hard edge on it, everyone in the rank has worked out roughly where that edge
+# is, and the arithmetic that follows is not about winning: it is that a line
+# which holds until dark walks away and a line which breaks before dark gets
+# ridden down in it. So the shape holds, and it holds for a reason that has
+# nothing to do with courage. The verb table hands out nothing on this pair,
+# which is right - bc_pursuit is for a formation going forwards.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the season and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_stands_in_the_snow, which is `entrenched`/`up`, gated
+# on prowess and winter TERRAIN, and is about a hard man being equal to the
+# cold. This man is not being asked to be equal to anything. He is watching a
+# clock that is made of daylight.
+#
+# THE DESC MAY NOT END THE BATTLE, may not have anybody ordered to hold, may
+# not kill anybody and may not make him brave about it. The holding here is
+# arithmetic. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_light_is_going = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_season_is_winter_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has done a winter campaign before knows what the hour costs
+		# and does the sum without being told.
+		modifier = {
+			add = 30
+			has_trait = winter_soldier
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_light_is_going"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_light_is_going_toast
+				desc = bc_knight_the_light_is_going_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

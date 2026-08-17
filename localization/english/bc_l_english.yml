@@ -2782,3 +2782,48 @@
 
  bc_knight_the_reach_is_wrong_toast:0 "His Feet Have Sorted It Out"
  bc_knight_the_reach_is_wrong_toast_desc:0 "The first exchange went wrong for reasons he could not have named, and so did the second: the distance he has been keeping since he was nine years old turns out to be about a hand too short today, and the guard he expects to see is not where it is kept. By the fourth he is standing somewhere slightly different and it has stopped going wrong. He could not explain any of that and will not try. The man opposite is not worse than him and has not been beaten; the two of them have simply arrived at the same problem from opposite ends of the world, and one of them has caught up.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-SIX. The season, which is not the terrain.
+#
+# NEITHER DESC MAY PUT A LENGTH ON THE WINTER. Nobody in this setting knows one
+# - not the maesters, not the man who has lived through two - and both moments
+# depend on that being unavailable. No toast may say how long it has run, how
+# long it has left, or that anybody has an opinion worth acting on.
+#
+# NEITHER MAY BE ABOUT BEING COLD. bc_winter_bites and
+# bc_knight_stands_in_the_snow already own cold as a condition, in both
+# directions. These two are about time: a season that outlasts the thing being
+# fought over, and an afternoon with an edge on it. Snow may fall on either
+# desc as scenery and may not be the subject of either.
+#
+# NEITHER MAY END OR TURN THE BATTLE. The first is winning at the end of it and
+# the second is losing at the end of it. Dark does not arrive inside either
+# toast; it is a thing being counted toward.
+#
+# THE FIRST MAY NOT TAKE THE WIN AWAY FROM HIM and may not make him regret
+# fighting. The field is his and the toast says so. What has changed is his
+# estimate of what having it is worth by spring. It may not have him address
+# anybody, may not name a granary, a store or a number, and may not have him
+# decide anything about the campaign - he is a man doing a sum, not writing an
+# order.
+#
+# THE SECOND MAY NOT MAKE HIM BRAVE ABOUT IT. Nobody in that rank is being
+# heroic; they have worked out that a line which holds until dark walks away
+# and a line which breaks before dark does not. It may not have anybody order
+# them to hold, may not kill anybody, and may not let him be certain how long
+# is left - he is guessing at the light like everyone else.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of".
+ bc_the_winter_outlasts_the_war_toast:0 "The Season Does Not Care Who Won"
+ bc_the_winter_outlasts_the_war_toast_desc:0 "The field is his. The far side has stopped being an army in the way that matters and the rest of the afternoon is going to be tidying. Standing in it, breathing something that hurts to breathe, what he finds himself doing is not counting the enemy dead but counting forward: what is in the ground here, what is not, how many mouths came with him, and how much of any of that survives the thing the world is currently doing. He has won a battle inside a problem the battle is not the size of, and it will still be going on long after everyone has agreed who holds this ford.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_light_is_going_toast:0 "There Is Not Much Afternoon Left"
+ bc_knight_the_light_is_going_toast_desc:0 "Nobody along this stretch is talking about winning any more. What is being worked out, silently and by every man in the rank at about the same speed, is how far off the dark is and whether the shape they are standing in can last that long, because a line still in one piece when the light goes gets to walk away from this and a line that comes apart before then does not get to do anything at all. So it goes backwards at the pace of men who have all done the same sum and none of them have said it. It is not courage. It is a clock made out of daylight, and everybody here can read it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

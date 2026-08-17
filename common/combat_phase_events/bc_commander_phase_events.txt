@@ -7618,3 +7618,110 @@ bc_the_wrong_war_entirely = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-SIX. The season, which is not the terrain.
+#
+# THE MOD HAD A WINTER AND IT WAS THE WRONG ONE. bc_field_is_winter_trigger is
+# frozen flats and glacier - a terrain band, a permanent property of a handful
+# of provinces, as true in the eighth year of a long summer as in the third
+# year of a winter. In a setting whose motto is about a season arriving, ninety
+# -three commander gates and sixty-one knight gates had never asked whether it
+# had.
+#
+# THE ARGUMENT IS TIME AND NOT COLD, WHICH IS THE WHOLE REASON THIS IS NOT
+# bc_winter_bites. That template and bc_knight_stands_in_the_snow between them
+# own everything the mod has to say about cold as a CONDITION - it hurts the
+# army, and a hard man endures it. Neither of these two is about being cold.
+# They are about a battle turning out to be a small event inside a much longer
+# one, which is a thing only a real season can do to a day.
+#
+# THE SIDE ROWS ARE CROSSED FOR THE SAME REASON AS BATCH SEVENTY-THREE'S. The
+# winning commander gets the news that his win is not the size of the problem;
+# the losing knight gets the news that the problem has a deadline. Neither of
+# those observations is available to a man whose day is going the other way.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The winter outlasts the war. It is winter, and the side is winning.
+#
+# `measured`/`up`. He has the field and is going to keep it, and the reading he
+# has just done is about scale rather than about this afternoon: everything won
+# here has to be fed through a season nobody can put an end date on. That is a
+# judgement and not an event, and the verb table has nothing for a man
+# correctly estimating a problem, which is what `measured` is for.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED, and granting it is not in tension
+# with the sober reading. The host is winning and keeps winning; what has
+# changed is only what he thinks winning is worth by spring.
+#
+# FIFTY PRESTIGE. For the win, which is real, and which the toast is careful
+# not to take away from him.
+#
+# THIS IS NOT bc_the_long_war. That reads how long THIS WAR has run - a number
+# the mod keeps about a conflict - and would fire in the third summer of a
+# border squabble. This reads the world.
+#
+# THE DESC MAY NOT PUT A LENGTH ON THE WINTER. Nobody in this setting knows
+# one, including the maesters, and a toast that guessed would be inventing the
+# single fact the whole moment depends on being unavailable. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_winter_outlasts_the_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_season_is_winter_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has to feed his own people through it is doing this
+		# arithmetic already and does not need the battle to prompt him.
+		modifier = {
+			add = 30
+			is_landed = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_winter_outlasts_the_war"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_winter_outlasts_the_war_toast
+			desc = bc_the_winter_outlasts_the_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
