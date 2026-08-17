@@ -803,6 +803,28 @@
  bc_chronicles.0003.desc:0 "The leading ranks have found the seam and put a wedge in it, and the wedge is going deeper than anyone intended.\n\nIt can be driven all the way. It can also be driven so far that it comes out the far side alone, with the enemy closed up behind it."
  bc_chronicles.0003.a:0 "Press it. Everything behind the wedge."
  bc_chronicles.0003.b:0 "Hold them. Keep the line whole."
+# --- pop-up contextual options (2026-08-17) ---------------------------------
+#
+# Five options added across the three pop-ups, on the pattern the eve set with
+# its f, g and h. They are gated on the MAN and never on the battle, because a
+# pop-up is a character_event and scope:combat_side does not cross the
+# trigger_event boundary - see the block comment in bc_events.txt.
+#
+# EVERY ONE OF THEM NAMES ITS PRICE OR ITS PAYMENT IN THE TEXT. The eve's f set
+# that rule for the same reason it applies here: the player is choosing before
+# he knows how the battle ends, and an option whose cost only shows up in the
+# modifier tooltip is a choice made blind. 0001.e names the coin, 0002.d names
+# the horses, 0003.c names what is being given up to get the plunder.
+#
+# THE SPENT PHRASES IN THE POP-UP OPTIONS, which these five may not reuse:
+# "carry it myself", "ride the length of the line", "where they can see me",
+# "the spoils" (0002.b promises them), "keep the line whole", "no man steps
+# back". 0003.c therefore says baggage and wagons rather than spoils.
+ bc_chronicles.0001.d:0 "Have the prayers said aloud, and loudly. Let them hear whose side this is."
+ bc_chronicles.0001.e:0 "Open the war chest. Coin in hands, now, and they stand."
+ bc_chronicles.0002.d:0 "Everything still horsed, at the men doing the pushing. The horses will not be good for anything after."
+ bc_chronicles.0003.c:0 "Let them have the baggage train. The wagons are worth more than the pursuit."
+ bc_chronicles.0003.d:0 "Wheel the wedge onto their flank and roll it up."
 
 # --- nickname tooltips ------------------------------------------------------
 #

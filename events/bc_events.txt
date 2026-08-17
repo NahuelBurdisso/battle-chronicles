@@ -61,6 +61,64 @@ bc_chronicles.0001 = {
 		bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
 		add_prestige = 50
 	}
+
+	# ===================================================================
+	# THE CONTEXTUAL OPTIONS, 2026-08-17. Same idea as the eve's f, g and h:
+	# an option that only some men are offered, so two players meeting the
+	# same pop-up do not meet the same choice.
+	#
+	# THEY CAN ONLY ASK ABOUT THE MAN, NEVER ABOUT THE BATTLE. This file's
+	# header states the constraint and it is real: a pop-up is a
+	# character_event reached by trigger_event, so scope:combat_side is not
+	# carried across the boundary and there is nothing here to ask about the
+	# ground, the odds or the foe. Traits, stats and purse are the whole
+	# vocabulary available, which is why every contextual option in the mod's
+	# three pop-ups is gated on one of those.
+	#
+	# NEITHER IS A CHEAPER `a`. Option a is the brave answer and costs
+	# stress; d is the same answer bought with faith, and e is the same
+	# answer bought with money. All three leave the commander with a rung,
+	# which is the point - the pop-up is the outcome, so an option that led
+	# nowhere would be a dead click.
+	# ===================================================================
+
+	# The zealot's answer. bc_the_zealot_will_not_stop is the trait's phase
+	# event and gates on a bloody field; this is the same man on a bad day
+	# with no field condition at all, because a pop-up cannot ask about one.
+	#
+	# `bloodied` AND NOT `entrenched`, unlike option a. Both grant a rung, but
+	# a is a line that will not move and this is a line that is spending
+	# itself; bc_bloodied trades toughness for damage and is the honest
+	# reading of men who have been told the gods are watching.
+	option = {
+		name = bc_chronicles.0001.d
+		trigger = { has_trait = zealous }
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+		add_piety = 50
+		add_stress = 10
+		debug_log = "BC: popup 0001 option zealous"
+	}
+
+	# Bought. `remove_short_term_gold` and not `add_gold = -150`, for the
+	# reason proven in game and recorded at bc_chronicles.0002.b: a negative
+	# add_gold throws a script error and the option silently pays nothing.
+	# This is the second gold option in the mod and it uses the same call.
+	#
+	# 150 AND NOT 100. The rally option charges 100 to climb out of faltering;
+	# this charges more to avoid falling into it, because a man who still has
+	# a line to hold is in the better position and should not get the cheaper
+	# price.
+	option = {
+		name = bc_chronicles.0001.e
+		trigger = { gold >= 150 }
+
+		remove_short_term_gold = 150
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+		debug_log = "BC: popup 0001 option paid"
+	}
 }
 
 # ---------------------------------------------------------------------------
@@ -109,6 +167,27 @@ bc_chronicles.0002 = {
 		bc_clear_faltering_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 	}
+
+	# The brave man's answer, and the only option in the mod that hands the
+	# side a PENALTY on the way to a good outcome: `wild` maps to
+	# bc_spent_horse, so this rallies the line and blows the horses doing it.
+	#
+	# IT IS GATED ON THE TRAIT AND NOT ON PROWESS, which is what separates it
+	# from option a. a is the commander riding the line to be seen, and asks
+	# whether he is good enough to be believed doing it; this is the commander
+	# throwing whatever is still mounted at the men doing the pushing, and asks
+	# only whether he is the sort to order it. A brave commander with prowess 6
+	# has no other way out of this pop-up except paying for it or standing
+	# still.
+	option = {
+		name = bc_chronicles.0002.d
+		trigger = { has_trait = brave }
+
+		bc_rally_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+		add_stress = 15
+		debug_log = "BC: popup 0002 option brave"
+	}
 }
 
 # ---------------------------------------------------------------------------
@@ -143,5 +222,41 @@ bc_chronicles.0003 = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 		add_prestige = 50
+	}
+
+	# Let them have the baggage. THE ONLY OPTION IN THE MOD THAT PAYS THE
+	# PLAYER AND CHARGES THE ARMY: gold in hand, `wild` on the record, and
+	# therefore bc_spent_horse on the side. It is the commander-scale version
+	# of bc_knight_strips_the_dead and it is deliberately the same trade.
+	#
+	# NO RUNG IN EITHER DIRECTION. Faltering would be too much - the side is
+	# breaking through, and a sack does not undo that - and momentum would
+	# pretend the disorder was free.
+	option = {
+		name = bc_chronicles.0003.c
+		trigger = { has_trait = greedy }
+
+		add_gold = 100
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+		debug_log = "BC: popup 0003 option plunder"
+	}
+
+	# The trained answer, gated on martial rather than on a trait so that it
+	# is reachable by a man with no relevant personality at all - two of the
+	# five contextual options in this file are trait-gated and a third purse-
+	# gated, and a commander can be none of those things.
+	#
+	# `ordered`/`up` IS bc_pursuit, which is the one KIND the verb table
+	# reads SWING on, and this is the only place in the mod where a player
+	# CHOOSES it. Wheeling a broken van onto the enemy flank is what the
+	# pursuit modifier is for.
+	option = {
+		name = bc_chronicles.0003.d
+		trigger = { martial >= 14 }
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+		add_prestige = 25
+		debug_log = "BC: popup 0003 option wheel"
 	}
 }
