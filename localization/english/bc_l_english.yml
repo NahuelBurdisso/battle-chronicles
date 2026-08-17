@@ -1506,3 +1506,37 @@
 
  bc_he_holds_one_place_toast:0 "Everybody Comes to Him"
  bc_he_holds_one_place_toast_desc:0 "He has not moved from the rise since the host formed up and nobody expected him to. The captains have been coming and going all afternoon on a rota somebody worked out years ago, and the whole army knows where the answer to any question is standing. It is not the way it is done in the songs. It is working.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the other three numbers (2026-08-17) -----------------------------------
+#
+# THREE DESCS, THREE DIFFERENT KINDS OF COMPETENCE, AND NONE OF THEM IS "he is
+# good at fighting". That sentence is already written a dozen times in this
+# file off `martial` and `prowess`, and if any of these three drifts back
+# towards it the template has been wasted.
+#
+# THE FIRST MAY NOT EXPLAIN THE TRICK. The whole texture of an intrigue moment
+# is that the men in the ranks do not know what happened and the man across the
+# field is still working it out. A desc that spells out the manoeuvre turns it
+# into a tactics toast, which is bc_ground_favours_us's ground.
+#
+# THE SECOND IS ABOUT A BOOK AND MUST SAY SO PLAINLY. Every other losing desc
+# in this file gets its knowledge out of the man's own past on a field. This
+# one gets it out of a page, read in a room, years before any of this - and
+# that is the only thing making it a new sentence.
+#
+# THE THIRD MAY NOT MENTION FEAR OR OBLIGATION IN ANY FORM. The instant it
+# says the men stay because of what leaving would cost them, it is
+# bc_they_fear_me_more with different words. They stay because of him.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he has not moved" (twice already -
+# bc_the_gods_are_watching, bc_he_holds_one_place), "years ago" (the rota in
+# bc_he_holds_one_place), "the only fixed thing" (bc_the_gods_are_watching),
+# "coming apart in pieces" (the dread block).
+ bc_the_trick_they_did_not_see_toast:0 "What Was Never on the Left"
+ bc_the_trick_they_did_not_see_toast_desc:0 "The men the other side has been carefully avoiding all morning were not there, and had not been there since before the sun came up. Nobody in the ranks understands what has just happened to the field; they only know it opened where it had no business opening, and that somebody is already going through the gap. He has not explained it to anyone and does not intend to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_has_read_about_this_toast:0 "He Has Seen This Written Down"
+ bc_he_has_read_about_this_toast_desc:0 "It is going wrong in a shape he recognises, and not from any field he has stood on. Somebody set this down two centuries ago and he read it in a cold room as a boy, and he knows which part of the line goes first and roughly how long the rest of it lasts after that. The order he is giving now is being given while it is still early enough to be worth giving.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_they_came_for_him_toast:0 "Nobody Has Gone Home"
+ bc_they_came_for_him_toast_desc:0 "They are being pushed back and they are being pushed back in one piece. Two of the lords holding that end of the line came to this war on nothing but their own word, with somewhere better to be this afternoon and every reason to remember it, and neither of them has so much as glanced behind him. None of that was arranged out here. It was arranged at a long table, over a great many years, by a man who was good at tables.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -3040,3 +3040,255 @@ bc_he_holds_one_place = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE OTHER THREE NUMBERS, 2026-08-17.
+#
+# THE MOD HAS READ EXACTLY TWO OF THE FIVE SKILLS. `martial` appears twelve
+# times in this file and `prowess` fourteen times in the knight file, and
+# `diplomacy`, `intrigue` and `learning` appear ZERO times anywhere in the
+# mod - not in a gate, not in a `chance` row, not in a comment. That is a
+# defensible default for a battle mod and it is also the reason every
+# commander case reads like the same man: forty-three templates and the only
+# thing any of them knows how to say about competence is how good he is at
+# fighting.
+#
+# THE THREE ARE NOT A LADDER AND MUST NOT BE WRITTEN AS ONE. They are three
+# different claims about why a man is standing where he is standing, and each
+# one takes the side row that makes its own claim legible:
+#
+#   intrigue  - he arranged something the other man did not see. Winning,
+#               because a trick that failed is not a trick anybody writes down.
+#   learning  - he knows the shape of what is happening because he has read
+#               about it happening before. Losing, because knowing the shape
+#               of a rout is only worth anything while there is still time.
+#   diplomacy - the lords under him came for HIM. Losing, because a host that
+#               is winning does not have to be held together.
+#
+# THE BAR IS 14 ON ALL THREE, which is the same bar this file already uses
+# for `martial` in four places. It is deliberately not 16: these are not
+# gates on a legendary schemer, they are gates on a man who is genuinely good
+# at the thing, and 16 in a non-martial skill is rare enough in an AGOT save
+# that the templates would hardly ever be read.
+#
+# NONE OF THE THREE COLLIDES WITH THE EDUCATION BATCH ABOVE, and two of them
+# can be true of the same man at the same time as bc_never_learned_the_trade
+# - a Citadel-taught heir losing a battle satisfies that gate AND the
+# learning gate here. That is correct and not a bug: they are separate rolls
+# in one pool, only one fires, and they are not the same sentence. One says
+# he is not a soldier. The other says he can see exactly what is about to
+# happen. A maester's son on a bad afternoon is both.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The man who won this an hour ago, somewhere the other commander could not
+# see.
+#
+# WINNING IS PART OF THE CLAIM, not a mood row. A feint is only a feint in
+# retrospect; on a losing field the identical order is a mistake, and the mod
+# already owns that sentence three or four times over.
+#
+# `adapted`/`up`, WHICH HANDS OUT NOTHING. bc_pursuit would be the obvious
+# reward and it is wrong here - pursuit is what a host gets for doing the
+# correct thing at the correct moment, and this host did not do anything
+# except arrive where it was sent. The whole gain is the momentum rung,
+# because what changed is the situation and not the men.
+#
+# NO `martial` ROW ANYWHERE IN THE CHANCE BLOCK, on purpose. Weighting this
+# by martial would quietly turn it back into a template about a good soldier,
+# which is the thing the batch exists to stop.
+# ---------------------------------------------------------------------------
+bc_the_trick_they_did_not_see = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		intrigue >= 14
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			intrigue >= 18
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = deceitful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_trick_they_did_not_see"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_trick_they_did_not_see_toast
+			desc = bc_the_trick_they_did_not_see_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man who recognises this. Not because he has done it, because he has
+# read it.
+#
+# LOSING AND `measured`/`up`, WHICH IS THE UNUSUAL PART. Almost every losing
+# template in this file takes `down`. The claim is narrow and specific: he is
+# not turning the battle around, he is seeing the collapse one step before it
+# arrives and giving the order that stops it being a collapse. The rung is
+# the whole of it. `measured` hands out no modifier, which is right - there
+# is no army modifier for a commander recognising a shape.
+#
+# IT IS NOT A SECOND bc_the_gods_are_watching. That one is a man refusing to
+# move and taking no rung at all; this one is a man moving early and taking
+# the rung. The two share a side row and nothing else.
+#
+# `NOT = { has_trait = education_martial_4 }` IS DELIBERATELY ABSENT. A
+# martially-raised man with learning 14 is a perfectly good subject for this
+# and excluding him would be the template arguing that reading and training
+# are alternatives. They are not.
+# ---------------------------------------------------------------------------
+bc_he_has_read_about_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		learning >= 14
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			learning >= 18
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = education_learning_4
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_has_read_about_this"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_has_read_about_this_toast
+			desc = bc_he_has_read_about_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The host that gives ground in one piece because the men holding the flanks
+# are the men who chose to come.
+#
+# THIS IS NOT THE DREAD AXIS AGAIN AND THE DISTINCTION IS THE WHOLE POINT.
+# bc_they_fear_me_more is a host that holds because leaving is worse than
+# staying. This is a host that holds because the lords in it like the man
+# they came with. The two produce the same shieldwall and they are not the
+# same fact about him, and a commander can score high on both - the pool
+# rolls one.
+#
+# `entrenched`/`down` IS THE RAREST CELL IN THE SEAM and it is the correct
+# one. `entrenched` hands out bc_shieldwall; `down` takes the faltering rung.
+# Together they say exactly what is happening: the host is losing, and it is
+# losing in formation rather than in pieces. Every other losing template that
+# grants a modifier is granting it for something the men did; this one grants
+# it for something the man is.
+#
+# NO STRESS. He is not paying for this - the whole content of the moment is
+# that the thing holding is not costing him anything, because it was built
+# years ago at somebody else's table.
+# ---------------------------------------------------------------------------
+bc_they_came_for_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		diplomacy >= 14
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			diplomacy >= 18
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = gregarious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_came_for_him"
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_they_came_for_him_toast
+			desc = bc_they_came_for_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

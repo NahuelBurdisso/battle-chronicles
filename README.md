@@ -27,7 +27,7 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 43 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 46 commander moments (7 shipped by plan 1, the rest from the content sessions) |
 | `common/combat_phase_events/bc_knight_phase_events.txt` | 31 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Thirty-three batches, one per row of the table below, none of which needed a
+Thirty-four batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -617,6 +617,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | where he learned it, and the man with no house | the education axis appeared **once in the whole mod, in a comment, and in no gate** — thirty-six commander templates read martial, prowess, temperament, dread, stress, station, age and the health traits, and none asked what the man was *raised* to do. Education is not martial: martial is how good he is now, the education trait is where he started. `education_martial_4` while winning (`ordered`/`up`, the top rung only — half a Westerosi host would clear `_3`), and the `NOR` of all four martial keys while losing (`measured`/`down`, which grants nothing on purpose: he is very often the cleverest man on the field, applying a good mind to a problem it was never shaped for). The keys are **listed, not grouped** — AGOT's override defines them at :480/:524/:561/:599 with `category = education` and no `group` line, so there is no group key to test. On the knight side `is_lowborn` had never been read either: the hedge knight on a winning field, **the largest prestige a knight template hands out (150)** because it is the only currency a man with no house has. Birth is not tenure, so this is not the station axis again | 3 templates, base 30, 30, 80 |
 | the eve reads the man | nine eve options and **every contextual one gated on something outside him** — three on the ground, three on who is across the field. `j` asks what his own men think of him (`dread >= medium_dread`) and grants `bc_pursuit` alone, which only `f` had ever granted and only paired with `bc_spent_horse` behind a ground gate: same modifier, different reason, and `f` spends the horses while this spends him. `k` asks what the war has already cost him (`stress_level >= 2`) and is **the only option in the mod that buys relief instead of a posture** — no modifier at all, `add_stress = -15` for 50 prestige, twice what `c` pays for nothing so that it does not strictly dominate `c`. Neither touches a saved scope, so neither can go stale on a late-answered eve | 2 options, 9 → 11 |
 | the lifesaver | twenty-four templates shipped since plan 1 and **only the nemesis memory left anything permanent** — and that one runs commander-to-commander. This is the first thing the mod writes between a knight and the man commanding him: a memory the *rescued* man carries, plus `bc_lifesaver_opinion` at `0.02` a month, the slowest decay in the file. The knight gets prestige and the `participants` tag; he does not get his own copy, because doing the pulling is a career and being pulled out is one day | 1 template, 1 type, 1 modifier |
+| the other three numbers | the mod has read **two of the five skills**. `martial` appears twelve times in the commander file and `prowess` fourteen in the knight file; `diplomacy`, `intrigue` and `learning` appeared **zero times anywhere in the mod** — not a gate, not a `chance` row, not a comment. That is why forty-three commander cases read like the same man: the only thing any of them could say about competence was how good he is at fighting. Three templates, three unrelated claims, each taking the side row that makes its own claim legible. Intrigue while **winning** — a feint that failed is not a feint anybody writes down — on `adapted`/`up`, which hands out nothing, because the host did not do anything except arrive where it was sent. Learning while **losing**, on `measured`/`up`: he is not turning it around, he is recognising the shape one step early, and the rung is the whole of it. Diplomacy while **losing**, on `entrenched`/`down`, **the rarest cell in the seam** — the host gives ground in one piece because the lords holding the flank came for *him*, which is not the dread axis: `bc_they_fear_me_more` is a host that stays because leaving is worse. The bar is 14 on all three, the same bar the commander file already uses for `martial`; 16 in a non-martial skill is rare enough in an AGOT save that the templates would hardly ever be read | 3 templates, base 30 |
 | the counts that had gone stale | no new content — a sweep of **comments that stated a number and were passed by the code**. "The three `type = knight` events" was written when there were three and there are thirty-one; "five templates out of the sixty-two"; "three of the thirteen moment literals"; "ALL FIFTEEN NAME THEIR SUBJECT". A comment that is wrong is worse than no comment, because the next reader trusts it. Where a count is not load-bearing the number is now **written out of the sentence** ("every `type = knight` event") rather than corrected, since correcting it only resets the clock; where it is load-bearing the paragraph carries the `grep` that regenerates it. The batch also disarms a **latent trap in the checker**: `validate` verifies every `file.txt:NNN` citation inside a comment against the *current* file, so the two deliberately *historical* citations (to line 258 of a superseded build) turned into hard errors the moment a comment above them grew five lines. Both are reworded out of `file:line` punctuation, and a header paragraph now records that prose is the correct form for a claim about a build that no longer exists | 6 files, 0 templates |
 
 **All six ground bands are now gated on as well as narrated.**
@@ -636,13 +637,13 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **ninety-five**, its "3, 3, 4 and 3" are
-21, 15, 21 and 10, and the fall-through set is twenty-eight sites rather than five. The
+plan 1's eighteen call sites are now **ninety-eight**, its "3, 3, 4 and 3" are
+21, 16, 21 and 10, and the fall-through set is thirty sites rather than five. The
 table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 43, knight 31.** Weight against vanilla's
+**Template totals are now commander 46, knight 31.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
 + 90 + 110 + 100 + 70 + 60; on the knight side, thirty-one templates against
 `knight_none`'s 2000 — thirty at 80 and `bc_knight_pulls_him_out` at 60,
