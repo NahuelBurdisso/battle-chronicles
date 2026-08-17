@@ -1174,3 +1174,33 @@ bc_field_is_coastal_trigger = {
 		scope:combat_side.combat.location = { is_coastal = yes }
 	}
 }
+
+
+# --- the men who are here for money ------------------------------------------
+#
+# AGOT IS FULL OF FREE COMPANIES AND THE MOD HAD NEVER ASKED ABOUT ONE. The
+# Golden Company, the Second Sons, the Windblown, the Stormcrows - a whole
+# category of host that is not a levy, not a lord's sworn men and not a holy
+# order, and a hundred and forty templates had treated every commander on the
+# field as a man leading people who owe him something.
+#
+# THE IDIOM IS AGOT'S OWN. 00_government_types.txt:375 defines
+# `mercenary_government` and :397 gives it the flag `government_is_mercenary`,
+# and AGOT's own scripts test it that way - see 00_agot_lmf_marriage_triggers
+# .txt:645 and 00_clothing_triggers.txt:134. `government_has_flag` is a plain
+# character trigger in the 1.19.0.6 dump ("checks if the government of the
+# character has a specific flag"), so there is nothing optional to guard here.
+#
+# NOT `is_mercenary_company`, WHICH AGOT ALSO USES. That one scopes on a
+# landed_title and would need a `primary_title` walk and a guard to reach the
+# same answer, and it answers about the TITLE rather than the man. AGOT's
+# marriage triggers use both idioms interchangeably; the flag is the shorter
+# one and the one that works on a man who is commanding rather than holding.
+#
+# THIS IS NOT `gold < 0`, WHICH THE MOD ALREADY READS. bc_knight_nobody_pays_
+# _for_him is a man who is personally in debt while he loses. A sellsword
+# captain may be the richest man on the field; the question here is what his
+# men are, not what his purse is.
+bc_he_leads_a_free_company_trigger = {
+	government_has_flag = government_is_mercenary
+}

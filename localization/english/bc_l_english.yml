@@ -2528,3 +2528,41 @@
 
  bc_knight_he_leaves_the_horse_in_the_shallows_toast:0 "The Ground Made The Decision"
  bc_knight_he_leaves_the_horse_in_the_shallows_toast_desc:0 "The animal has been in up to the hocks for a quarter of an hour and has gone from a weapon to a thing that has to be kept alive, so he swings down into water that comes over the top of his boots and hands it off to nobody in particular. On foot he is a shorter, slower, better-armoured man than he was, and he is now fighting at the only place on this field where being pushed backwards has an actual limit.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# --- the men who are here for money ------------------------------------------
+#
+# TWO MOMENTS IN A FREE COMPANY. The first is a captain losing men who are his
+# stock rather than his subjects; the second is a rider in the same company on
+# the one afternoon of the year the arrangement pays properly.
+#
+# NEITHER MAY NAME A COMPANY. No Golden Company, no Second Sons, no Windblown,
+# no Stormcrows. The gate asked whether the government is a mercenary one and
+# nothing else, and the mod does not invent an organisation for a man who has
+# one already.
+#
+# NEITHER MAY TAKE THE HOST OFF THE FIELD. A phase event does not end a battle,
+# so no withdrawal, no disengagement, no terms and nobody riding away.
+#
+# NEITHER MAY MENTION A SPECIFIC SUM. The mod has never put a number of gold in
+# a toast and is not starting; the point is what men cost, not what they cost
+# in coin.
+#
+# THE FIRST MAY NOT SAY THE COMPANY IS BEATEN and may not have it break. The
+# entire moment is that it does not break. It may not make him regretful about
+# the trade either - he is doing arithmetic, and it is arithmetic he does well.
+#
+# THE SECOND MAY NOT SACK ANYTHING, may not take a prisoner, may not find any
+# named object, and may not let him leave the battle. He is riding down men who
+# are already running, in the direction where their carts are.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it".
+ bc_they_are_not_his_smallfolk_toast:0 "Every Man Here Was Bought Once"
+ bc_they_are_not_his_smallfolk_toast_desc:0 "The line is going backwards and it is going backwards the way it was taught to, a step at a time with the ranks still in the order somebody spent years putting them in, because the alternative has been explained to every man in it in terms he understood. A lord who spends a thousand men has spent a thousand of somebody's sons and will hear about it in eight months. He has spent a thousand of the only thing he owns, and he is watching the rate of it with the attention of a man watching a granary burn.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_where_the_wages_are_toast:0 "The Contract Never Mentioned This Part"
+ bc_knight_where_the_wages_are_toast_desc:0 "The men in front of him stopped being an enemy some minutes ago and became a crowd going the same direction, and behind the crowd, at the pace of an ox, is everything the crowd owns. He is not the first rider to work this out and he will not be the last one down that road today. The horse under him has one such afternoon in it and is spending the whole of it now, which he knows, and which is not going to stop him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

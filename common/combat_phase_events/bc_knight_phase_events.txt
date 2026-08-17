@@ -4732,3 +4732,98 @@ bc_knight_he_leaves_the_horse_in_the_shallows = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# Where the wages actually are. He rides in a free company, and it is winning.
+#
+# THE GATE IS A WALK TO THE COMMANDER, NOT A CHECK ON HIM. The company holds
+# the government; a man riding in the company may be a courtier with no
+# government of his own to test. Asking the captain is the certain question
+# and the one this moment is actually about - it is the company's afternoon,
+# not his. Guarded on the standard pattern, `exists` as a sibling and the READ
+# inside a trigger_if that repeats it, same as
+# bc_knight_nothing_is_coming_from_behind.
+#
+# `wild`/`up`, AND THIS IS WHAT THAT PAIR WAS FOR. The ledger's own comment
+# calls it "a moment that grants momentum and blows the horses in the same
+# breath", and a company's winning hour is that shape exactly: the enemy is
+# going and the baggage is behind him, and no contract in Essos or Westeros
+# has ever paid a rider as well as the enemy's own train does. He goes. It
+# helps - the side gets a rung out of it - and bc_spent_horse is the bill,
+# because horses ridden that way come back walking.
+#
+# THIS IS NOT bc_knight_nobody_pays_for_him, which is `gold < 0` on the knight
+# himself while he LOSES. That is a man with no money. This is a man with a
+# very clear idea of where money is.
+#
+# FIFTY PRESTIGE AND A GUARDED MOMENTUM RUNG. The gate does not check for the
+# rung, so the grant is live.
+#
+# THE DESC MAY NOT SACK A TOWN, may not take prisoners and may not have him
+# find anything in particular. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_where_the_wages_are = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { bc_he_leads_a_free_company_trigger = yes }
+		}
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who can still catch them is a man who will try to.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = greedy
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = generous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_where_the_wages_are"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_where_the_wages_are_toast
+				desc = bc_knight_where_the_wages_are_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

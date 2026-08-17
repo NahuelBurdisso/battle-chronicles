@@ -6960,3 +6960,110 @@ bc_the_sea_holds_that_flank = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE MEN WHO ARE HERE FOR MONEY, 2026-08-17.
+#
+# EVERY COMMANDER IN THIS MOD HAS BEEN A LORD SO FAR. Sixty-eight batches
+# asked about his ground, his faith, his war, his body, his oath and his
+# opinion of the man next to him, and all of them assumed the host behind him
+# was made of people who owe him something. AGOT is not short of the other
+# kind, and CK3 marks it plainly: `government_is_mercenary`, which the trigger
+# header quotes AGOT's own scripts on.
+#
+# THE ARGUMENT BOTH TEMPLATES RUN ON. A lord who loses two thousand men has
+# lost two thousand of his own smallfolk and will feel it at harvest. A
+# captain who loses two thousand men has lost the thing he sells. That single
+# difference changes what a bad hour looks like from the front and what a good
+# one is FOR, and it is the only thing in the mod that distinguishes a host
+# from an army.
+#
+# ONE COMMANDER MOMENT AND ONE KNIGHT MOMENT, AND THE KNIGHT'S GATE IS A WALK.
+# The captain has the government; a man riding in his company may or may not
+# be carrying it himself, so the knight template asks the commander instead,
+# on the pattern bc_knight_nothing_is_coming_from_behind established.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# They are not his smallfolk. A free company, and the side is losing.
+#
+# `ordered`/`down`, WHICH IS THE POINT AND NOT A HEDGE. A levy that starts
+# going backwards comes apart, because the men in it have somewhere else to
+# be and no reason to be here after the reason stops working. A company that
+# comes apart has destroyed its own value, so it does not come apart - it goes
+# backwards in step, which is a thing that has to be taught and paid for and
+# is exactly what the buyer thought he was buying. The verb table hands out
+# nothing for `ordered`/`down`, and that is correct twice over: bc_pursuit is
+# for a side chasing, and a company holding its shape while losing is not
+# earning an army modifier, it is refusing to spend one.
+#
+# THE FALTERING RUNG IS STILL GRANTED. Keeping shape is not winning, and the
+# ledger should say the afternoon went against him. The gate does not check
+# for the rung, so the guarded grant is live.
+#
+# TEN STRESS AND NO PRESTIGE. The company will be paid whatever happens; what
+# he is losing today is stock, and nobody hands a man prestige for the tidiness
+# of a defeat.
+#
+# THE DESC MAY NOT TAKE THE COMPANY OFF THE FIELD. A phase event does not end
+# a battle, and a captain who has withdrawn is not in the chronicle any more.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_they_are_not_his_smallfolk = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_leads_a_free_company_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The arithmetic gets louder the further behind the numbers already
+		# are.
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = zealous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_are_not_his_smallfolk"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_they_are_not_his_smallfolk_toast
+			desc = bc_they_are_not_his_smallfolk_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
