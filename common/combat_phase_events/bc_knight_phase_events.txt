@@ -296,3 +296,231 @@ bc_shieldbrother_forged = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17 - three more knight cases.
+#
+# WHY. Ten commander templates and three knight ones produced 233 firings in
+# 44 battles, so the same sentences repeat inside a single war. The rate
+# limiter is the per-character cooldown, not the weights, so a template that
+# fires in a slot an old one already owned buys variety at no rate cost.
+# docs/specs/2026-08-17-battle-chronicles-cases-design.md carries the argument
+# in full.
+#
+# WHAT IS NEW HERE. Every knight case shipped before this batch gates on
+# `bc_side_is_losing_trigger`. A knight on a WINNING side matched nothing but
+# bc_shieldbrother_forged, so two of the three below open that half of the
+# space, and the third opens ground - an axis no knight event read at all.
+#
+# WEIGHTS: base = 80, roughly half the shipped 150. The competition is vanilla
+# `knight_none` at base = 2000; the three shipped total 360, and three more at
+# 150 would have doubled the mod's share of a knight roll. 80 was chosen over
+# the commander batch's 30 because a knight roll is a much harder pool to be
+# seen in - the file header records that base = 40 with narrow gates produced
+# ZERO fires across a whole session.
+#
+# MOMENTUM STACKING. Each grant below sits behind an explicit
+# `NOT = { bc_has_momentum_trigger = yes }` (or the faltering equivalent)
+# evaluated INSIDE the side_commander scope. It cannot go in `is_valid`: that
+# block is rooted on the KNIGHT, and bc_has_momentum_trigger reads
+# has_character_modifier on its own root, so there it would test the wrong
+# man's modifiers. The two shipped combat knight events do not carry this
+# guard and can therefore put a second live rung on a commander who already
+# has one; that is a real defect, but fixing it changes calibrated behaviour
+# and is left for a run to confirm rather than folded into a content batch.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# A knight unhorses a lord. The winning-side counterpart to holds_the_breach,
+# and the only knight case that grants a major rung.
+#
+# No death and no maiming: the mod's standing rule. The man goes down, not out.
+# ---------------------------------------------------------------------------
+bc_knight_unhorses_a_lord = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 12
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 60
+			prowess >= 16
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_unhorses_a_lord"
+
+		add_prestige = 150
+
+		if = {
+			limit = { exists = liege }
+			reverse_add_opinion = {
+				target = liege
+				modifier = bc_valiant_in_battle_opinion
+				opinion = 15
+			}
+		}
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_major_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_unhorses_a_lord_toast
+				desc = bc_knight_unhorses_a_lord_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A knight takes a captive. Opens the OUTNUMBERING axis, which no knight event
+# reads: men yield when the fight is already decided, not when it is even.
+#
+# The gold is the point of the case - a captive is a ransom - but it is kept
+# to 25 deliberately. The mod has no other economic effect and this batch is
+# not the place to open one.
+# ---------------------------------------------------------------------------
+bc_knight_takes_a_captive = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 8
+		bc_side_is_winning_trigger = yes
+		bc_side_is_outnumbering_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = greedy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_takes_a_captive"
+
+		add_prestige = 50
+		add_gold = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_takes_a_captive_toast
+				desc = bc_knight_takes_a_captive_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# A knight is ridden down. Ground, which no knight event has read until now.
+#
+# DISTINCTNESS. `losing` alone would have been a superset of
+# bc_knight_holds_the_breach's gate and would only have stolen weight from it.
+# The open band narrows it to horse country and gives the case its only reason
+# to exist: on open ground the man who breaks has nowhere to break to.
+#
+# He is not killed and not maimed. bc_wound_effect is not called here - the
+# wound family stays the deliberate exception it has always been.
+# ---------------------------------------------------------------------------
+bc_knight_is_ridden_down = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_losing_trigger = yes
+		bc_field_is_open_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 2
+			prowess <= 8
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_is_ridden_down"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_is_ridden_down_toast
+				desc = bc_knight_is_ridden_down_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

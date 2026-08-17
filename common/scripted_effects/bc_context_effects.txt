@@ -169,8 +169,11 @@ bc_write_bond_effect = {
 		limit = { exists = var:bc_battle_foe }
 
 		# bc_facing_nemesis_trigger, NOT a hand-rolled comparison.
-		# bc_scripted_triggers.txt:257-268 already nests both reads behind their
-		# own `exists` in a trigger_if AND carries the `is_alive = yes` row. A
+		# That trigger's own body in bc_scripted_triggers.txt already nests both
+		# reads behind their own `exists` in a trigger_if AND carries the
+		# `is_alive = yes` row. Cited by name, not by line: the line number has
+		# rotted twice now, both times because a band wrapper was inserted above
+		# it. A
 		# hand-rolled `limit = { exists = var:bc_nemesis  var:bc_battle_foe =
 		# var:bc_nemesis }` would read var:bc_nemesis as a SIBLING of its own
 		# exists, which is the rule at the top of this file, and would drop the

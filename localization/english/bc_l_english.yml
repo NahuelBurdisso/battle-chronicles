@@ -179,6 +179,31 @@
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
  bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the second three (2026-08-17) ------------------------
+#
+# Design: docs/specs/2026-08-17-battle-chronicles-cases-design.md
+#
+# Same three-sentence render as every other desc, so the same collision rules
+# apply, PLUS three the knight block spends on its own: `the line` (holds the
+# breach spends it twice), `one man` / `every man` (both shipped knight descs),
+# and `the press` (shieldbrothers). None of the three below reuses any of them.
+#
+# THE SUBJECT IS THE KNIGHT BUT THE SCOPE IS THE COMMANDER. These descs render
+# inside a toast raised on `scope:combat_side.side_commander`, so
+# bc_chronicle_subject is the COMMANDER, not the man in the sentence - exactly
+# as it is for the shipped three. The literal therefore says `he` about the
+# knight and the appended clauses say `the man commanding here` about someone
+# else, and that reads correctly only because the clauses name their subject
+# every time. Do not write a clause that says a bare `he`.
+ bc_knight_unhorses_a_lord_toast:0 "A Lord Goes Down"
+ bc_knight_unhorses_a_lord_toast_desc:0 "The spear takes the horse first and the rider after it. Whoever that was in the good armour is on his back in the churn now, and shouting for help.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_takes_a_captive_toast:0 "Yielded"
+ bc_knight_takes_a_captive_toast_desc:0 "Sword reversed, gauntlet off, a name given quickly and clearly. Both of them know what the name is worth by the hour.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_is_ridden_down_toast:0 "Ridden Down"
+ bc_knight_is_ridden_down_toast_desc:0 "Flat country, and nothing on it to put your back against. He is still turning when the horses reach him.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
  bc_frag_bond_nemesis:0 " The man commanding here does not have to ask whose colours are across the field."

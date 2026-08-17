@@ -103,8 +103,12 @@ bc_terrain_bogs_us_down_trigger = {
 # bc_write_ground_effect carries a `BC: ground missing` marker for exactly that
 # case - and CK3 does not short-circuit among siblings.
 #
-# Only three of the six bands are wrapped: those are the three a phase event
+# Only four of the six bands are wrapped: those are the four a phase event
 # gates on today. Add the others when something needs them, not before.
+#
+# These are rooted on a CHARACTER but never touch that character, so a knight
+# event may use them exactly as a commander event does: `scope:combat_side` is
+# set for both event types.
 
 bc_field_is_winter_trigger = {
 	exists = scope:combat_side.combat.location
@@ -127,6 +131,16 @@ bc_field_is_forest_trigger = {
 	trigger_if = {
 		limit = { exists = scope:combat_side.combat.location }
 		scope:combat_side.combat.location = { bc_ground_is_forest_trigger = yes }
+	}
+}
+
+# Horse country. The open band was the third most common ground in the
+# 2026-08-15 sweep (56 of 360 writes), so a gate on it is not a rare gate.
+bc_field_is_open_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_open_trigger = yes }
 	}
 }
 
