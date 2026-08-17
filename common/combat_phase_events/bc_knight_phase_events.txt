@@ -1803,3 +1803,273 @@ bc_knight_pulls_him_out = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE NINTH ON THIS SIDE: THE TWO MEN WHO MATTER TO HIM
+#
+# `has_relation_*` APPEARS IN NO GATE ANYWHERE IN THE MOD. The rivalry ladder
+# WRITES relations (`set_relation_nemesis` in bc_rivalry_effects.txt) and
+# bc_side_has_kin_knight_trigger reads blood, but no `is_valid` in either phase
+# event file has ever asked whether two men on the field already have a history
+# with each other. Twenty-two knight templates ask what he is, how good he is,
+# what shape he is in and what the battle is doing, and not one asks who he is
+# standing near.
+#
+# THE AXIS IS DELIBERATELY THE KNIGHT'S, NOT THE COMMANDER'S. The commander
+# side got the vertical relation in this session's station batch, from the top
+# down: bc_his_blood_in_the_ranks is a commander noticing a knight. These three
+# are the same field read from underneath, which is a different day.
+#
+# THE THIRD ONE READS THE OTHER SIDE. `scope:combat_side.enemy_side.
+# side_commander` is the link bc_foe_is_heathen_trigger already uses, but every
+# shipped use of it is rooted on a COMMANDER. A knight has never once been
+# allowed to notice who is in command opposite, and a rival across a field is
+# the most obvious reason he would.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate, and the relation rows make
+# it easy: no shipped `is_valid` reads a relation at all. The first pairs with
+# nothing, the second with nothing, the third with winning - where the shipped
+# knight gates are bc_knight_the_face_they_run_from (one_eyed/disfigured) and
+# the ground and battle batches, none of which can ask about a relation.
+#
+# ALL THREE GUARD THE COMMANDER LINK THE WAY bc_knight_pulls_him_out DOES -
+# `exists` first, then everything that reads it inside a `trigger_if` on the
+# same `exists`, because CK3 does not short-circuit. The identity test
+# (`NOT = { this = ... }`) is only needed on the two that read the OWN side's
+# commander; a knight cannot be the enemy side's commander.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He is fighting where his friend can see him, and it is making a difference
+# to how he fights.
+#
+# NO SIDE ROW. The moment is true on a winning field and a losing one, and it
+# is about the man rather than about the day - bc_knight_will_not_be_carried is
+# the shipped precedent on this side for a gate with no second row.
+#
+# `bloodied`/`up` AND A GUARDED MOMENTUM RUNG. He buys ground and pays the
+# usual price for it; bc_bloodied is the modifier that means exactly that, and
+# the guard sits INSIDE the commander block because bc_has_momentum_trigger
+# reads its own root and `is_valid` here is rooted on the knight.
+# ---------------------------------------------------------------------------
+bc_knight_for_a_friend = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { this = scope:combat_side.side_commander }
+			has_relation_friend = scope:combat_side.side_commander
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_for_a_friend"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_for_a_friend_toast
+				desc = bc_knight_for_a_friend_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other half of the vertical relation. He is here, he is armed, and he is
+# doing precisely what he was told and not one thing more.
+#
+# THIS IS NOT COWARDICE AND THE PROSE MUST NOT MAKE IT ONE. bc_knight_shames_
+# himself is the mod's craven case and it already owns that ground. A rival who
+# holds his exact place is doing his duty in a way nobody can put a name to,
+# which is a different and worse problem for the man giving the orders.
+#
+# `ordered`/`down` AND A GUARDED FALTERING RUNG - the formation keeps its shape
+# and goes nowhere with it, which is the cell bc_knight_walks_them_back opened
+# and the only KIND/SWING pair in the table whose `else` arm hands out nothing
+# by design.
+#
+# NO PRESTIGE EITHER WAY. He has not disgraced himself and he has not done
+# anything, and the ledger should say so by staying quiet.
+# ---------------------------------------------------------------------------
+bc_knight_owes_him_nothing = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { this = scope:combat_side.side_commander }
+			has_relation_rival = scope:combat_side.side_commander
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who was keeping score anyway.
+		modifier = {
+			add = 40
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = forgiving
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_owes_him_nothing"
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_owes_him_nothing_toast
+				desc = bc_knight_owes_him_nothing_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The first time a knight is allowed to notice who is in command opposite.
+#
+# NO IDENTITY TEST NEEDED. A knight of this side cannot be the enemy side's
+# commander, so the `exists` and the `trigger_if` on it are the whole guard -
+# unlike the two above, which both have to rule out the knight being his own
+# side's commander.
+#
+# WINNING IS THE SECOND ROW BECAUSE THE MOMENT NEEDS ROOM. Going at the man
+# commanding the other army is something a knight does when there is a way
+# forward to do it in; on a collapsing side it is not a charge, it is a man
+# being carried backwards past somebody he hates.
+#
+# `wild`/`up` AND NO RUNG. He gets there, or gets close enough that the field
+# talks about it, and the horses pay for the getting - bc_spent_horse is the
+# modifier and it is a cost, not a reward. The side's standing does not move,
+# because one knight going hunting is not a turn in the battle; that is why the
+# tier is `minor` and no rung is granted.
+#
+# `add_stress = -10` IS THE MOD'S FIRST NEGATIVE STRESS AND IT IS LEGAL. The
+# 1.19.0.6 effect dump documents add_stress as "increases (or decreases) stress
+# of a character" and vanilla writes the negative form at events/dlc/fp1/
+# fp1_major_decision_events.txt:1404. This is NOT the `add_gold = -N` trap:
+# that one throws a script error and has to be written as
+# remove_short_term_gold, and the difference was checked rather than assumed.
+# He has wanted this for years and he has just had some of it.
+# ---------------------------------------------------------------------------
+bc_knight_knows_that_man = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_winning_trigger = yes
+		exists = scope:combat_side.enemy_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.enemy_side.side_commander }
+			has_relation_rival = scope:combat_side.enemy_side.side_commander
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_knows_that_man"
+
+		add_prestige = 50
+		add_stress = -10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_knows_that_man_toast
+				desc = bc_knight_knows_that_man_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

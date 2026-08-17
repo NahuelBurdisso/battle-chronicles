@@ -1215,6 +1215,36 @@
 # (bc_knight_the_old_wound). "Pulled Me Out" is the opinion modifier's name and
 # is deliberately NOT repeated in the toast - the opinion is the rescued man's
 # word for it afterwards, the toast is what the field saw at the time.
+# --- the two men who matter to him (2026-08-17) -----------------------------
+#
+# The three knight relation templates. NONE OF THE THREE NAMES THE RELATION.
+# `has_relation_friend` and `has_relation_rival` are engine relations with no
+# story attached - the game hands them out through events the mod never sees -
+# so a desc explaining how the two men came to it would be inventing history.
+# All three write what the relation is doing to the fighting today.
+#
+# THE SECOND MUST NOT READ AS COWARDICE. bc_knight_shames_himself is the mod's
+# craven case and owns that ground; this man is obeying, exactly, and the whole
+# point is that nobody can put a name to what is wrong with it.
+#
+# THE THIRD NAMES THE ENEMY COMMANDER'S EXISTENCE BUT NOT HIS NAME. A toast is
+# rendered from the commander's scope and the only character scopes it has are
+# bc_knight and bc_chronicle_subject - the man opposite is in neither, and the
+# ground clause hangs off the subject like every other toast in the file.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "and he has not lost sight of him
+# once" (bc_his_blood_in_the_ranks_toast_desc), "where he can be seen doing it"
+# (same), "keeping score" (the second's own chance-row comment, which is not
+# loc but reads oddly repeated).
+ bc_knight_for_a_friend_toast:0 "Where His Friend Can See Him"
+ bc_knight_for_a_friend_toast_desc:0 "He has put himself in the part of the line that matters most to one particular man watching, and it has changed how he is fighting - further forward than his own good sense would have taken him, and staying there. The ground he is standing on has been bought at the going rate.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_owes_him_nothing_toast:0 "Exactly What He Was Told"
+ bc_knight_owes_him_nothing_toast_desc:0 "He is where he was put and he has not left it. He is also not one step ahead of it, and the difference between those two things is the whole afternoon. Nothing he has done could be called a failure and nothing he has done has helped.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_knows_that_man_toast:0 "He Has Been Waiting for This"
+ bc_knight_knows_that_man_toast_desc:0 "There is a man giving orders on the other side of this that he has wanted a bad afternoon for years, and today the line is going forward far enough that getting near him has stopped being a fantasy. He is spending the horse to find out how near.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
  bc_knight_pulls_him_out_toast:0 "He Went In After Him"
  bc_knight_pulls_him_out_toast_desc:0 "[bc_chronicle_subject.GetName] went down with the press closing over him and it was [bc_knight.GetName] who turned back into it. He came out of that with a man on his shoulder and the men who watched it have not stopped talking about it since.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
