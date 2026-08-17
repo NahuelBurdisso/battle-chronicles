@@ -6862,3 +6862,101 @@ bc_it_all_comes_down_to_the_crossings = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE EDGE THAT CANNOT BE TURNED, 2026-08-17.
+#
+# THE MOD HAD NEVER LOOKED AT THE WATER. Batch sixty-three found the river and
+# read it as a thing running ACROSS the field - crossings, frontage, footing.
+# The coast is the other water fact and it is the opposite shape: the sea is
+# at ONE EDGE, and an edge is a flank that does not exist. Nobody rides around
+# it, nobody rolls it up, and every reserve the enemy has must be spent on the
+# frontage rather than on the end of the line.
+#
+# TWO TEMPLATES, AND THEY DO NOT SHARE AN ARGUMENT. The commander's is
+# arithmetic - he is holding a shorter line than the field is wide and he
+# knows it. The knight's is the same edge from the waterline, where a horse is
+# a liability and mail is worse than a liability, and it goes in the knight
+# file because it needs a man in the shallows rather than a man reading them.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The flank the enemy cannot buy. Coastal, and the side is winning.
+#
+# `bc_field_is_coastal_trigger`, WHICH IS NEW AND IS NOT THE RIVER GATE. Both
+# can be true of the same province and both are province flags rather than
+# terrain bands, but they are different tactical facts and this template is
+# only ever about the edge. See the trigger's header.
+#
+# `measured`/`up`, THE RAREST PAIR IN THE MOD AND THE ONE THIS ACTUALLY IS. He
+# is not spending anything to hold the coast flank; the coast holds it. What
+# he has is men he did not have to commit, which is precisely what `measured`
+# means in the ledger - husbanded rather than won. The verb table hands out
+# nothing for it, which is right: no army modifier belongs to an accident of
+# the map, and the fifty prestige plus the momentum rung are the whole reward.
+#
+# THE MOMENTUM RUNG IS GUARDED because a man who already has one does not get
+# a second, and the gate does not check for the rung, so the grant is live.
+#
+# THE DESC MAY NOT PUT SHIPS ON THE WATER and may not have anybody land behind
+# either host - that is a different battle and the gate did not check for it.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_sea_holds_that_flank = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_field_is_coastal_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Seeing that the map has done half the work for you is a thing you
+		# either do at first light or never.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_sea_holds_that_flank"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_sea_holds_that_flank_toast
+			desc = bc_the_sea_holds_that_flank_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

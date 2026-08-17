@@ -1138,3 +1138,39 @@ bc_field_is_riverside_trigger = {
 		scope:combat_side.combat.location = { is_riverside_province = yes }
 	}
 }
+
+
+# --- the edge that cannot be turned ------------------------------------------
+#
+# THE SEA APPEARS NOWHERE IN THIS MOD. A hundred and sixty-odd call sites and
+# a hundred and forty templates, and a grep of the localisation for "sea",
+# "shore", "coast", "tide" and "surf" returns nothing at all - every match is
+# "seam", "season" or "seat". Westeros is a coastline with some land behind it
+# and the chronicle had never once looked at the water.
+#
+# `is_coastal` IS AN ENGINE TRIGGER ON THE PROVINCE - "is the province a
+# coastal province (next to sea, not including lakes)" - and is a different
+# question from the landed_title triggers next to it in the dump.
+# `is_coastal_county` and `has_coastal_province` both scope on a title and
+# would answer about the county, which is not what a battle is fought in.
+#
+# THIS IS NOT bc_field_is_riverside_trigger. A riverside province has water
+# ACROSS it, which is what batch sixty-three was about: crossings, frontage,
+# footing. A coastal province has water at ONE EDGE of it, which is a
+# completely different tactical fact - it is a flank that does not exist. The
+# two can be true of the same province and the two moments below are about the
+# edge, never about a crossing.
+#
+# AND IT IS NOT A TERRAIN BAND. Like the river, the coast is a flag on the
+# province rather than one of AGOT's 23 terrain helpers, so it does not go in
+# bc_ground_triggers.txt - that file holds the six bands and nothing else and
+# the validator counts every `agot_is_*_terrain` mention in it against the 23.
+#
+# THE GUARD IS THE STANDING ONE, copied from bc_field_is_riverside_trigger.
+bc_field_is_coastal_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { is_coastal = yes }
+	}
+}

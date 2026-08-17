@@ -2493,3 +2493,38 @@
 
  bc_knight_the_water_is_over_his_boots_toast:0 "Nobody Fights Well On Stones He Cannot See"
  bc_knight_the_water_is_over_his_boots_toast_desc:0 "He has been standing in it long enough to stop noticing the cold and not long enough to trust his footing, and every man he has put down in the last half hour went down inside the length of his own arm, because there is no other range available here. The side is winning. This particular twenty yards of it is being bought at a price that will not appear in anybody's account of the day.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# --- the edge that cannot be turned ------------------------------------------
+#
+# TWO MOMENTS ON A COASTAL FIELD. The first is the commander with a flank the
+# enemy cannot buy; the second is a knight at the waterline getting off a
+# horse that has stopped being any use.
+#
+# NEITHER MAY PUT A SHIP ANYWHERE. No sails on the horizon, no landing behind
+# either host, no fleet coming, no fleet leaving. The gate checked whether the
+# province touches salt water and nothing else, and a ship is an entire other
+# battle that the mod has no business inventing in a toast.
+#
+# NEITHER MAY DROWN ANYBODY AND NEITHER MAY KILL ANYBODY. The mod does not
+# kill in a phase event.
+#
+# THE FIRST MAY NOT SAY THE ENEMY IS BEATEN and may not have him commit the
+# men he has saved. The whole moment is that they are still standing there
+# unspent, which is what `measured` means.
+#
+# THE SECOND MAY NOT PUT HIM BACK ON THE HORSE, may not have the horse die,
+# and may not turn the dismount into a victory. He gets off because the ground
+# made him, the side is still going backwards when the toast ends, and the
+# horse is simply somewhere behind him being no use to anyone.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see".
+ bc_the_sea_holds_that_flank_toast:0 "One End Of It Is Not His Problem"
+ bc_the_sea_holds_that_flank_toast_desc:0 "Whoever is commanding opposite him has spent the morning looking for the end of this line and there is not one, because it runs into salt water and stops. Every man sent to find a way round has come back or not come back, and the effect either way is that the fighting is happening exactly where he decided it would. He has companies standing behind the right that have not been asked for anything yet, and the longer that stays true the more the afternoon belongs to him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_leaves_the_horse_in_the_shallows_toast:0 "The Ground Made The Decision"
+ bc_knight_he_leaves_the_horse_in_the_shallows_toast_desc:0 "The animal has been in up to the hocks for a quarter of an hour and has gone from a weapon to a thing that has to be kept alive, so he swings down into water that comes over the top of his boots and hands it off to nobody in particular. On foot he is a shorter, slower, better-armoured man than he was, and he is now fighting at the only place on this field where being pushed backwards has an actual limit.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

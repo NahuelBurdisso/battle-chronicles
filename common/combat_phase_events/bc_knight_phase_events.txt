@@ -4640,3 +4640,95 @@ bc_knight_the_water_is_over_his_boots = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# He leaves the horse in the shallows. Coastal, and the side is losing.
+#
+# THE SAME EDGE FROM THE OTHER END. The commander's coastal moment is a man
+# counting a shorter line; this one is a man standing on the part of it that
+# the sea is not helping. Wet sand carries a walking man and does not carry a
+# destrier, and the fighting on a shoreline ends up at the waterline because
+# that is the only direction anyone can be pushed.
+#
+# `adapted`/`down`, THE RAREST PAIR IN THE LEDGER AND THE LITERAL TRUTH OF IT.
+# He changes how he fights - he gets off, which is the largest decision a
+# knight makes in an afternoon - and the side is still going backwards. The
+# verb table hands out nothing for `adapted` in either direction, and nothing
+# is correct: dismounting is not a thing that improves an army, it is a thing
+# a man does because the ground took the choice away.
+#
+# THIS IS NOT bc_knight_on_the_broken_ground, which is rough terrain, prowess
+# 10 and no side row at all, and is `entrenched`/`up` - a man who is better on
+# bad ground than the enemy. This is a man whose ground has stopped carrying
+# his horse while he loses.
+#
+# AND IT IS NOT A DROWNING. The mod does not kill in a phase event and mail in
+# a foot of water is a fact about the afternoon, not an ending. See the loc
+# header.
+#
+# THE FALTERING RUNG IS GUARDED and the gate does not check for it, so the
+# grant is live. Ten stress, no prestige - nobody writes down the hour a
+# knight walked.
+# ---------------------------------------------------------------------------
+bc_knight_he_leaves_the_horse_in_the_shallows = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_field_is_coastal_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Getting off is easier to decide when there is no line left to be
+		# seen from the saddle.
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_leaves_the_horse_in_the_shallows"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_leaves_the_horse_in_the_shallows_toast
+				desc = bc_knight_he_leaves_the_horse_in_the_shallows_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
