@@ -1068,12 +1068,25 @@
 
  bc_chronicles.0002.t:0 "Rally the Line"
  bc_chronicles.0002.desc:0 "The line has not broken. It is doing something worse, and slower: it is thinking about breaking.\n\nMen at the back are looking over their shoulders and measuring the distance. Nothing has been decided yet. It will be decided in the next few moments, by whoever speaks into them."
+# THE TWO ADDED 2026-08-17 MAY NOT BREAK THE LINE AND MAY NOT STEADY IT. This
+# pop-up is only reachable while faltering and every option is a different way
+# out, including the one where he says nothing, so the desc has to leave all
+# four standing. It may not name the thing that frightened them either - the
+# mod does not know what it was.
+ bc_chronicles.0002.desc_b:0 "Nothing has given way. What has happened is quieter than that: the whole line has taken half a step it did not mean to take, and taken it backwards, and every man in it did that on his own.\n\nThey are still facing the right way. They are standing a little further apart than they were an hour ago, and they are listening for something, and it is not the enemy they are listening for."
+ bc_chronicles.0002.desc_c:0 "The front rank is doing its work. It is the four ranks behind it that have gone strange - too quiet, and full of men who have started to think about the road.\n\nNobody has run. A man who is going to run stands exactly like this first, for about as long as this, and then somebody either speaks or does not.\n\nThere is time to do one thing."
  bc_chronicles.0002.a:0 "Ride the length of the line where they can see me."
  bc_chronicles.0002.b:0 "Promise them the spoils, and pay it out now."
  bc_chronicles.0002.c:0 "Say nothing. Let them steady themselves."
 
  bc_chronicles.0003.t:0 "The Van Breaks Through"
  bc_chronicles.0003.desc:0 "The leading ranks have found the seam and put a wedge in it, and the wedge is going deeper than anyone intended.\n\nIt can be driven all the way. It can also be driven so far that it comes out the far side alone, with the enemy closed up behind it."
+# THE TWO ADDED 2026-08-17 MAY NOT SAY WHETHER THE WEDGE HOLDS. All four
+# options act on it - pressed, halted, turned onto the flank, or traded for the
+# baggage - so neither may close it off, and neither may put the wagons out of
+# reach or the flank out of the question.
+ bc_chronicles.0003.desc_b:0 "Somewhere in the last few minutes the leading ranks stopped pushing and started walking, and nobody sent word back about it.\n\nThey are a long way in. The men who went in first can see the other host's baggage over the heads in front of them, and the men who went in last can see their own line getting smaller behind them.\n\nIt is going the way a thing goes when it is either about to be a victory or about to be a very expensive lesson."
+ bc_chronicles.0003.desc_c:0 "The point of the van has gone through something that was supposed to hold and is still going.\n\nFrom here it looks like a finger pushed into cloth - deep, and thinning, and with the cloth closing quietly along both sides of it. The men in it have not noticed the sides. They can only see forward.\n\nWhatever is going to be done about that has to be done in the next few minutes and by somebody who can see the whole of it."
  bc_chronicles.0003.a:0 "Press it. Everything behind the wedge."
  bc_chronicles.0003.b:0 "Hold them. Keep the line whole."
 # --- pop-up contextual options (2026-08-17) ---------------------------------
@@ -1114,6 +1127,11 @@
 # different manoeuvre and must not borrow the same verb.
  bc_chronicles.0004.t:0 "The Left Is Gone"
  bc_chronicles.0004.desc:0 "The flank does not break so much as dissolve. One moment there are ranks there and the next there are men running between them, and the enemy is already pouring into the space where an army used to be.\n\nWhatever is decided now, it is decided about a battle that has just become smaller. The only question left is how much smaller."
+# THE TWO ADDED 2026-08-17 MAY NOT LOSE THE BATTLE. The flank is gone; the
+# battle is not, and one of the four options is to bring a second line round
+# in order. Neither may say the host is surrounded or that the field is lost.
+ bc_chronicles.0004.desc_b:0 "There were ranks on the left an hour ago and there is a crowd there now, moving the wrong way, and behind the crowd there is grass.\n\nThe enemy over there has stopped fighting anybody, because there is nobody to fight, and they are looking along the inside of what used to be a line. It has occurred to them what that means. It has occurred to everyone.\n\nThe rest of the host is still where it was put and has not been told anything."
+ bc_chronicles.0004.desc_c:0 "It did not break in a place. It stopped being an army from the outside inward, one file at a time, in the space of about a minute, and the men doing it were not cowards this morning.\n\nWhat is left is two thirds of a battle line with an open side, and an enemy that now has somewhere to walk. The centre does not know yet. The centre will know very soon.\n\nEverything after this is about the size of the hole."
  bc_chronicles.0004.a:0 "Bend the line back and brace it. They can have the ground."
  bc_chronicles.0004.b:0 "Nothing. Let it go and save what is still standing."
  bc_chronicles.0004.c:0 "Everything still mounted, into the gap, with me at the front of it."
@@ -1143,6 +1161,13 @@
 # never see - but an AI knight in the same battle can produce it).
  bc_chronicles.0005.t:0 "He Is Down"
  bc_chronicles.0005.desc:0 "[bc_chronicle_subject.GetName] is somewhere in that, and he is not coming out of it upright without help.\n\nThe press closed over the place where he went down and it has not opened since. It is perhaps thirty feet. Thirty feet is nothing at a walk and it is a very long way through this.\n\nThe men either side of you have not moved. They are waiting to see what you do, which means that whatever you do, they will do."
+# THE TWO ADDED 2026-08-17 MAY NOT KILL HIM AND MAY NOT GET HIM OUT. The four
+# options are the whole of the resolution - going himself, staying, taking the
+# line in with him, or sending three men - and one of them costs him the man,
+# so a desc that has him dead or already moving takes that away. THE DISTANCE
+# STAYS THIRTY FEET: option a is the word "thirty" and nothing else works.
+ bc_chronicles.0005.desc_b:0 "[bc_chronicle_subject.GetName] went down about thirty feet to the right and has not come back up.\n\nThat is not the same as dead and everybody watching knows the difference. A man on the ground in that has some time, and the amount of it is not something anyone here can estimate.\n\nThe press over the place has thickened rather than moved. And the men on either side of you have gone quiet in the particular way men go quiet when they have decided to do whatever you do."
+ bc_chronicles.0005.desc_c:0 "There is a churn about thirty feet off where the footing is bad and too many people are standing on one piece of ground, and [bc_chronicle_subject.GetName] is under it somewhere.\n\nHe was up a moment ago. It is the sort of thirty feet that takes a long time and costs whatever it costs on the way, and the shortest version of it goes through the middle.\n\nNobody near you is looking at the enemy. They are all looking at you."
  bc_chronicles.0005.a:0 "Thirty feet. I have been further into worse."
  bc_chronicles.0005.b:0 "If I go, this part of the line goes with me. I stay where I was put."
  bc_chronicles.0005.c:0 "On me — everyone on this side of the banner. We are going through it together."

@@ -153,7 +153,17 @@ bc_chronicles.0001 = {
 bc_chronicles.0002 = {
 	type = character_event
 	title = bc_chronicles.0002.t
-	desc = bc_chronicles.0002.desc
+	# THREE OPENINGS, POOLED 2026-08-17, ON THE SAME ARGUMENT AS 0001'S. A
+	# `random_valid` of bare descs is always valid, so the paragraph cannot
+	# come out empty, and none of the three may resolve what the options
+	# below are for.
+	desc = {
+		random_valid = {
+			desc = bc_chronicles.0002.desc
+			desc = bc_chronicles.0002.desc_b
+			desc = bc_chronicles.0002.desc_c
+		}
+	}
 	theme = martial
 
 	left_portrait = {
@@ -221,7 +231,17 @@ bc_chronicles.0002 = {
 bc_chronicles.0003 = {
 	type = character_event
 	title = bc_chronicles.0003.t
-	desc = bc_chronicles.0003.desc
+	# THREE OPENINGS, POOLED 2026-08-17, ON THE SAME ARGUMENT AS 0001'S. A
+	# `random_valid` of bare descs is always valid, so the paragraph cannot
+	# come out empty, and none of the three may resolve what the options
+	# below are for.
+	desc = {
+		random_valid = {
+			desc = bc_chronicles.0003.desc
+			desc = bc_chronicles.0003.desc_b
+			desc = bc_chronicles.0003.desc_c
+		}
+	}
 	theme = martial
 
 	left_portrait = {
@@ -320,7 +340,17 @@ bc_chronicles.0003 = {
 bc_chronicles.0004 = {
 	type = character_event
 	title = bc_chronicles.0004.t
-	desc = bc_chronicles.0004.desc
+	# THREE OPENINGS, POOLED 2026-08-17, ON THE SAME ARGUMENT AS 0001'S. A
+	# `random_valid` of bare descs is always valid, so the paragraph cannot
+	# come out empty, and none of the three may resolve what the options
+	# below are for.
+	desc = {
+		random_valid = {
+			desc = bc_chronicles.0004.desc
+			desc = bc_chronicles.0004.desc_b
+			desc = bc_chronicles.0004.desc_c
+		}
+	}
 	theme = martial
 
 	left_portrait = {
@@ -418,7 +448,17 @@ bc_chronicles.0004 = {
 bc_chronicles.0005 = {
 	type = character_event
 	title = bc_chronicles.0005.t
-	desc = bc_chronicles.0005.desc
+	# THREE OPENINGS, POOLED 2026-08-17, ON THE SAME ARGUMENT AS 0001'S. A
+	# `random_valid` of bare descs is always valid, so the paragraph cannot
+	# come out empty, and none of the three may resolve what the options
+	# below are for.
+	desc = {
+		random_valid = {
+			desc = bc_chronicles.0005.desc
+			desc = bc_chronicles.0005.desc_b
+			desc = bc_chronicles.0005.desc_c
+		}
+	}
 	theme = martial
 
 	left_portrait = {
