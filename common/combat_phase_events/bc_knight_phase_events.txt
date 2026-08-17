@@ -4463,3 +4463,99 @@ bc_knight_exactly_what_was_asked = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# THE FREE FOLK, LOSING, AND IN THE OTHER POOL ON PURPOSE. The fact is about a
+# man in a line rather than a man on a horse: a wildling host has a leader
+# because enough individual men decided it had one, and the decision is made
+# again every hour by every one of them. From the saddle that is invisible
+# until it has already happened. From inside the line it is the loudest thing
+# on the field.
+#
+# bc_he_is_free_folk_trigger IS A CULTURE READ, NOT A TRAIT READ. AGOT marks
+# its wildling cultures with a variable and the wrapper asks the culture, so a
+# kneeler raised beyond the Wall counts and a free folk man who took a southron
+# seat does not stop counting - which is the right way round for a template
+# about what a man expects an army to be.
+#
+# `ordered`/`down`, WHICH FALLS THROUGH THE VERB TABLE AND HANDS OUT NOTHING.
+# That is the most deliberate choice in this batch. Nothing has broken: the
+# line is still there, still fighting, still where it was. What is leaking is
+# consent, and the mod refuses to model consent leaking as an army modifier,
+# because the moment it does so the template becomes a prediction that these
+# men will run - which is a thing the mod does not know and would be a slander
+# on a host that beat the Watch more often than it lost to it.
+#
+# THE FALTERING RUNG IS THE WHOLE COST, guarded, inside the commander block
+# like every knight-pool grant, because the rung is a fact about the side.
+#
+# NOT A SUBSET OF bc_knight_exactly_what_was_asked. That one is a professional
+# withholding the unasked-for extra from a man he dislikes; this is a man who
+# owes nothing to begin with and likes the fellow well enough. Opinion is not
+# read here and culture is not read there.
+#
+# THE DESC MAY NOT HAVE HIM LEAVE, MAY NOT HAVE ANYBODY ELSE LEAVE, AND MAY
+# NOT SNEER AT KNEELERS. He is still fighting when the toast ends. The whole
+# moment is the arithmetic being available, not the sum being done.
+# ---------------------------------------------------------------------------
+bc_knight_nobody_here_is_sworn = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_free_folk_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = fickle
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nobody_here_is_sworn"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nobody_here_is_sworn_toast
+				desc = bc_knight_nobody_here_is_sworn_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

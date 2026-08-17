@@ -1008,3 +1008,34 @@ bc_the_war_is_his_trigger = {
 bc_he_is_unwell_trigger = {
 	has_trait_with_flag = illness
 }
+
+
+# --- the two armies at the edge of the map -----------------------------------
+#
+# BOTH OF THESE WRAP AN AGOT TRIGGER RATHER THAN A TRAIT OR A CULTURE KEY, and
+# both wrap it for the same reason: the thing being asked about is a set, and
+# AGOT already maintains the set.
+#
+# agot_is_member_of_nights_watch (00_agot_nights_watch_triggers.txt:15) is an OR
+# over `nightswatch`, `nightswatch_temp` and `nightswatch_historical`. Writing
+# `has_trait = nightswatch` here instead would miss the temporary members - the
+# men AGOT's own mega-war content puts on the Wall for a campaign - and every
+# historical black brother in the bookmarks, which between them are most of the
+# ones a player will ever fight beside.
+#
+# agot_is_wildling_culture (00_agot_cultural_triggers.txt:62) is
+# `has_variable = wildling_culture` READ ON A CULTURE, which is why the wrapper
+# below spells `culture = { ... }` around it. AGOT sets that variable on its
+# wildling cultures at game start; a hand-written OR of culture keys would miss
+# every culture the mod adds later and every one a player converts.
+#
+# NEITHER NEEDS THE exists/trigger_if SCAFFOLDING. `has_trait` and
+# `has_variable` are safe on any character and any culture, and `culture` is
+# not an optional link on a living character.
+bc_sworn_to_the_wall_trigger = {
+	agot_is_member_of_nights_watch = yes
+}
+
+bc_he_is_free_folk_trigger = {
+	culture = { agot_is_wildling_culture = yes }
+}

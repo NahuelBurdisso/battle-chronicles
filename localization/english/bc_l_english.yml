@@ -2375,3 +2375,32 @@
 
  bc_knight_exactly_what_was_asked_toast:0 "To The Letter, And Not A Step Past It"
  bc_knight_exactly_what_was_asked_toast_desc:0 "Every order that reached him has been carried out exactly, which is the whole of it. Twice this hour there has been a half-chance on his right that a man might have gone for without being told, and both times he has looked at it and stayed where he was put, and both times he has been entirely within his instructions. A bad afternoon runs on the things nobody thinks to ask for. This one is not getting any.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SIXTY. The Watch and the free folk: no exit, and nothing but exits.
+#
+# NEITHER DESC MAY BE A LAST STAND OR KILL ANYBODY NAMED. Both are afternoons
+# in the middle of something and the mod does not end battles in a toast.
+#
+# THE FIRST MAY NOT QUOTE THE OATH, NAME A CASTLE OR A RANGING, AND MAY NOT
+# PUT WILDLINGS ACROSS THE FIELD. The gate says who these men are and nothing
+# at all about who they are fighting; the Watch has been pulled into southron
+# quarrels often enough that the enemy may not be assumed.
+#
+# THE FIRST MAY NOT CALL IT BRAVERY. A line that cannot leave gets closer
+# together because those are the only two things available to it.
+#
+# THE SECOND MAY NOT HAVE HIM LEAVE, MAY NOT HAVE ANYONE ELSE LEAVE, AND MAY
+# NOT SNEER AT KNEELERS. He is still fighting when the toast ends. The moment
+# is that the arithmetic is available, not that anybody has done the sum.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter".
+ bc_there_is_nowhere_to_desert_to_toast:0 "The Line Is Getting Narrower And Not Shorter"
+ bc_there_is_nowhere_to_desert_to_toast_desc:0 "The flanks have come in twice in the last half hour, not because anyone ordered it but because there is nothing on either side of this field that a man in black could walk toward and still be alive in a month. So the front narrows and thickens and the men in it work at the range of about a foot, and the whole apparatus has quietly stopped being an army manoeuvring and started being a wall with hands.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nobody_here_is_sworn_toast:0 "He Picked This Man In A Different Month"
+ bc_knight_nobody_here_is_sworn_toast_desc:0 "Nobody in this host swore anything to anybody. He came because the man leading it had been right three times running, and standing here in the fourth hour of being wrong he can feel exactly how much of an army is a stack of private opinions that have not yet been revised. He is still working. The man on his left is still working. Neither of them has said the obvious thing, and both of them know the sum and how easy it would be to do.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

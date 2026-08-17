@@ -6295,3 +6295,110 @@ bc_they_have_the_shape_of_it_now = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE TWO ARMIES AT THE EDGE OF THE MAP, 2026-08-17.
+#
+# EVERY TEMPLATE IN SIXTY-FOUR BATCHES HAS ASSUMED A FEUDAL ARMY. Lords,
+# knights, oaths that come with land, men who can be ransomed, a chain of
+# command that ends in somebody with a seat. AGOT ships two hosts that are not
+# that at all, they fight each other constantly, and the mod has never once
+# noticed either of them.
+#
+# THE PAIR IS ABOUT WHAT HOLDS AN ARMY TOGETHER WHEN THE USUAL THING IS ABSENT.
+# The Watch has a vow and no exit - discharge is death, desertion is death, and
+# the man beside you came here instead of a rope. The free folk have an exit
+# and nothing else - nobody is sworn, nobody is owed, and a man follows the man
+# he picked for exactly as long as he still thinks it was a good pick. They are
+# the same question answered in opposite directions, which is why they are one
+# batch, and both take the losing side because that is the hour the answer
+# gets tested.
+#
+# NEITHER TEMPLATE MAY BE A LAST STAND. The mod does not end battles in phase
+# events and does not kill anybody in them; both of these are afternoons in the
+# middle of something.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# THE WATCH, LOSING. bc_sworn_to_the_wall_trigger wraps AGOT's own set of three
+# traits, which matters here more than usual - a great many of the black
+# brothers a player will ever see on a field are `nightswatch_historical` from
+# a bookmark or `nightswatch_temp` from AGOT's mega-war content, and a bare
+# `has_trait = nightswatch` would have quietly excluded them.
+#
+# NOT A SUBSET OF ANYTHING SHIPPED. No commander template is gated on a side
+# row alone, checked mechanically over both files, and nothing in the mod has
+# ever read an order membership - bc_is_kingsguard_trigger is the one
+# comparable gate and it lives in the knight pool.
+#
+# `entrenched`/`down` AND bc_shieldwall. The modifier is the correct one and
+# the reason is not courage: a line that cannot leave gets closer together,
+# because the only two things available to it are standing still and standing
+# still in a tighter formation. The template is careful not to call that
+# bravery, and the desc is under the same instruction.
+#
+# THE FALTERING RUNG IS GRANTED, GUARDED, LIKE EVERY OTHER LOSING TEMPLATE.
+# Holding is not winning and this side is still going backwards.
+#
+# THE DESC MAY NOT QUOTE THE OATH, NAME A CASTLE, OR PUT WILDLINGS ACROSS THE
+# FIELD. The gate says who these men are and says nothing whatever about who
+# they are fighting - the Watch has been dragged into southron wars often
+# enough that assuming the enemy is beyond the Wall would be inventing a fact.
+# ---------------------------------------------------------------------------
+bc_there_is_nowhere_to_desert_to = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_sworn_to_the_wall_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_is_nowhere_to_desert_to"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_is_nowhere_to_desert_to_toast
+			desc = bc_there_is_nowhere_to_desert_to_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
