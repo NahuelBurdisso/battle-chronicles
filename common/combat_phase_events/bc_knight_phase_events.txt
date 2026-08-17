@@ -3191,3 +3191,83 @@ bc_knight_the_leash_holds = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The white cloak, and it does not matter which way this is going.
+#
+# NO SIDE ROW, AND THAT IS THE WHOLE CONTENT. Every other knight template in
+# this file asks whether the day is going well before it says anything. This
+# one does not, because the order's entire claim about itself is that the
+# answer changes nothing about what he does, and a side row would be the
+# template quietly disagreeing with that.
+#
+# `entrenched`/`up` AND bc_shieldwall FROM EITHER DIRECTION. The men near him
+# form on the most visible thing on the field, which is him, and a line that
+# has something to form on is braced whether it is going forward or not. The
+# rung is guarded on momentum like the rest of the `up` grants.
+#
+# A HUNDRED PRESTIGE, WHICH IS THE FILE'S HIGH NUMBER SHORT OF THE HEDGE
+# KNIGHT'S 150. Everything a man in that cloak does is watched and repeated,
+# which is exactly what prestige measures, and it is the one award in this
+# file that needs no argument about whether anybody saw it.
+#
+# THE DESC MAY NOT PUT A KING ON THE FIELD. A Kingsguard is very often on
+# detached service and the mod has no idea who he is guarding today; nothing
+# available here can support it.
+# ---------------------------------------------------------------------------
+bc_knight_the_white_cloak = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_is_kingsguard_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 14
+		}
+		# A cloak the singers already have a name for is watched harder.
+		modifier = {
+			factor = 1.5
+			has_any_nickname = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_white_cloak"
+
+		add_prestige = 100
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_white_cloak_toast
+				desc = bc_knight_the_white_cloak_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

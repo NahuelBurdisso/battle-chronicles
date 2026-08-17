@@ -1872,3 +1872,38 @@
 
  bc_knight_the_leash_holds_toast:0 "He Could Have Gone At Dawn"
  bc_knight_the_leash_holds_toast_desc:0 "He could have gone at dawn and it would have cost him one thing only, and he knows the price of it to the penny. He is still here. The rank he is standing in has no idea any of this is true and would not care much if it did.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the office he holds at home (2026-08-17) -------------------------------
+#
+# THE FIRST IS WRITTEN AT THE DISTANCE OF THE DRILL, NOT THE AFTERNOON. What
+# is being praised happened over two years of winters on a muddy field behind
+# a town, and the toast is the moment he sees it come back. It may not become
+# a sentence about him being clever today - bc_the_orders_are_taken already
+# owns the closing gap, and this is the thing that was true before anyone
+# rode out.
+#
+# THE SECOND MAY NOT MAKE HIM A COWARD OR A FOOL, and that is the hardest
+# constraint in the block. He is good at a job that is not this one. He reaches
+# for the thing that has always worked, which is walls and patience, and out
+# here it is the wrong reach - but a desc that sneers has turned into
+# bc_knight_shames_himself with a council seat.
+#
+# THE THIRD MAY NOT PUT A KING ON THE FIELD. A Kingsguard is very often on
+# detached service, the mod has no idea who he is guarding today, and nothing
+# available here can support it. It also renders on a field going either way,
+# so every sentence in it has to be true of both - the second time this
+# session that constraint has come up and the harder of the two, because the
+# temptation to write the cloak as winning is strong.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he could have gone at dawn"
+# (bc_knight_the_leash_holds), "the men have noticed"
+# (bc_nothing_is_stopping_this), "he has stopped counting", "it has turned
+# over".
+ bc_the_marshals_own_work_toast:0 "Two Years Of Winters"
+ bc_the_marshals_own_work_toast_desc:0 "The wing wheels because a serjeant three ranks back knows the horn call, and he knows it because of a wet field behind a town where nobody wanted to be and where the same call was blown four hundred times. None of that was interesting at the time and none of it was thanked. It is happening now, in front of him, at the speed it was supposed to happen at.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_castellan_outdoors_toast:0 "He Has Always Had A Wall"
+ bc_the_castellan_outdoors_toast_desc:0 "Every hard hour of his life has been spent behind good stone with the other fellow outside it, and he was very good at those hours. So he does what has always worked: closes the ranks, shortens the front, tells them to stand and let it come to them. Out here there is no gate to hold and nothing at his back, and the thing coming to them has room to go round.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_white_cloak_toast:0 "The White Cloak"
+ bc_knight_the_white_cloak_toast_desc:0 "It is filthy by now and it is still the most visible thing on this field, and men who have never been told his name are putting their shoulders where they can see it. He is not doing anything remarkable. He is doing the ordinary work at the ordinary pace with a great many people watching, which is the whole of what the cloak is for, and it works the same today whichever way today is going.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

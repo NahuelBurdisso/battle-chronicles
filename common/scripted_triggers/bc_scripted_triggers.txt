@@ -740,3 +740,37 @@ bc_eve_facing_nemesis_trigger = {
 		var:bc_nemesis = scope:bc_eve_foe
 	}
 }
+
+# He wears a white cloak.
+#
+# SEVEN ROWS BECAUSE AGOT MODELS THE KINGSGUARD AS SEVEN SEPARATE COUNCIL
+# POSITIONS, not as one with seven holders: `kingsguard_lord_commander` plus
+# `kingsguard_1` through `kingsguard_6`, all defined in
+# common/council_positions/00_agot_council_kingsguard.txt. There is no single
+# key that means "is in the Kingsguard", so the OR is the whole of the
+# available answer and dropping any row silently loses a seventh of the order.
+#
+# NOT A TRAIT AND NOT A TITLE. The temptation is to look for a `kingsguard`
+# trait; there is none. The temptation after that is to test for a knighthood
+# or a vow trait, which would collect a great many men who are not in the
+# order at all.
+#
+# NO SCOPE WALK AND NO GUARD. `has_council_position` reads off the character
+# in scope and answers no for a character who holds none, so this is one of the
+# few triggers in this file that needs no `exists` and no trigger_if. It is
+# safe from any character scope, including one entered from another.
+#
+# THE LORD COMMANDER IS NOT SEPARATED OUT HERE. If a template ever wants him
+# alone, gate on `kingsguard_lord_commander` directly rather than adding a
+# second trigger - one row is not worth a name.
+bc_is_kingsguard_trigger = {
+	OR = {
+		has_council_position = kingsguard_lord_commander
+		has_council_position = kingsguard_1
+		has_council_position = kingsguard_2
+		has_council_position = kingsguard_3
+		has_council_position = kingsguard_4
+		has_council_position = kingsguard_5
+		has_council_position = kingsguard_6
+	}
+}

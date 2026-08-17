@@ -4495,3 +4495,158 @@ bc_the_leash_runs_the_other_way = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE OFFICE HE HOLDS AT HOME, 2026-08-17.
+#
+# `has_council_position` APPEARED NOWHERE IN THE MOD. Sixty commander
+# templates and nothing has ever asked what job a man does when there is no
+# battle - which is a strange gap in a game where the council seat is very
+# often the reason he is the one holding the host at all. CK3 sends the
+# marshal; AGOT sends the castellan when the marshal is dead.
+#
+# TWO SEATS, NOT EIGHT, AND THE OTHER SIX ARE NOT OVERSIGHTS. A steward, a
+# spymaster or a chaplain in command is a man doing something other than his
+# job, and the mod already has a template for a man out of his depth. The
+# marshal and the castellan are the two seats that make a claim about how he
+# ought to command, and the claims are opposite: one has drilled these men for
+# years and one has spent those years behind a wall.
+#
+# NO TRIGGER FOR EITHER. `has_council_position` reads off the character in
+# scope and answers no for a man who holds no seat, so both gates are a single
+# inline row and neither needs an `exists`. Only the Kingsguard needed a
+# scripted trigger, because AGOT models the order as seven separate positions.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The marshal is watching the thing he built do what he built it for.
+#
+# `ordered`/`up` AND bc_pursuit, WHICH IS THE ONE CELL THAT FITS. The claim is
+# not that he is clever today; it is that the host is executing, and the
+# reason it is executing is two years of winters he spent on it. That is
+# exactly what the `ordered` row's `up` half is for.
+#
+# NOT bc_the_orders_are_taken WITH A DIFFERENT GATE. That template is about a
+# gap closing over the course of one morning. This one is about a thing that
+# was already true before anybody rode out, and the desc has to be written at
+# that distance - the drill, not the afternoon.
+#
+# NO PRESTIGE. Doing your own job well is not a deed.
+# ---------------------------------------------------------------------------
+bc_the_marshals_own_work = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_council_position = councillor_marshal
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 16
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_marshals_own_work"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_marshals_own_work_toast
+			desc = bc_the_marshals_own_work_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The castellan is outdoors.
+#
+# `entrenched`/`down` AND bc_shieldwall, AND THE MODIFIER IS THE JOKE. A man
+# who has spent his life minding a wall reaches for the thing that has always
+# worked, which is to close up and let them come, and out here that is how a
+# host is surrounded rather than how it is saved. The mod hands him the
+# shieldwall because that is what he did; whether it was right is the
+# aftermath's business.
+#
+# THIS IS NOT A TEMPLATE ABOUT A COWARD OR A FOOL. He is good at a job that is
+# not this one, and the desc has to keep that respect or it turns into
+# bc_knight_shames_himself with a council seat.
+# ---------------------------------------------------------------------------
+bc_the_castellan_outdoors = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_council_position = councillor_castellan
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			stewardship >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_castellan_outdoors"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_castellan_outdoors_toast
+			desc = bc_the_castellan_outdoors_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
