@@ -546,6 +546,12 @@
  bc_chronicles.0011.desc_ground_open:0 "The field is what it is. Nothing on it will decide anything for you."
  bc_chronicles.0011.d:0 "Let the ground fight for us."
  bc_chronicles.0011.e:0 "This time he does not ride away."
+# The two contextual options added 2026-08-17. f is horse country, g is kin.
+# f names its own price in the text, because it is the only option in the mod
+# that applies a negative modifier and the player is choosing before he knows
+# anything - an unpriced gamble presented as a free one would be a cheat.
+ bc_chronicles.0011.f:0 "Loose the horse early. Spend them."
+ bc_chronicles.0011.g:0 "Hold. Nobody over there dies who does not have to."
 
 # --- the flesh --------------------------------------------------------------
 

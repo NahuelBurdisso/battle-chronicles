@@ -301,4 +301,93 @@ bc_chronicles.0011 = {
 		add_stress = 5
 		debug_log = "BC: eve option nemesis"
 	}
+
+	# =======================================================================
+	# TWO MORE CONTEXTUAL OPTIONS, 2026-08-17.
+	#
+	# An option costs nothing to add. This is NOT true of a phase event, whose
+	# `chance` competes for one roll against vanilla's `commander_none` - see
+	# docs/specs/2026-08-17-battle-chronicles-cases-design.md - but every
+	# option whose `trigger` passes is simply shown. So the only questions
+	# here are whether the gate is safe and whether the choice is a real one.
+	#
+	# BOTH GATES READ ONLY SAVED SCOPES AND ROOT, exactly as d and e do, for
+	# the reason in this file's header: the pop-up is answered whenever the
+	# player gets round to it, which can be after bc_clear_scratch_effect ran.
+	# =======================================================================
+
+	# THE ONLY OPTION IN THE MOD THAT APPLIES TWO MODIFIERS, AND THE ONLY ONE
+	# THAT APPLIES A NEGATIVE. That is the point of it: every other eve option
+	# picks a posture, and this one buys something with a named price.
+	# bc_pursuit was the one family-2 modifier the eve never offered.
+	#
+	# BOTH GO THROUGH bc_add_verb_effect, so both take the family's 20 days
+	# from one place, and neither is momentum - the file header's rule holds.
+	# The two are different modifier KEYS on different tags
+	# (army_pursuit_mult, knight_effectiveness_mult), so they do not refresh
+	# or overwrite one another; see bc_battle_modifiers.txt on why none of the
+	# family carries `stacking = yes`.
+	#
+	# THE GATE IS OPEN OR DESERT, WHICH IS ALMOST THE COMPLEMENT OF OPTION d.
+	# d takes rough, forest and jungle - the three bands whose paragraph is
+	# about a thing standing between the two armies. This takes the two whose
+	# paragraph is about there being nothing there: `Nothing on it will decide
+	# anything for you` and `no water between here and the horizon`. Winter is
+	# in neither, and that is deliberate rather than an oversight - its
+	# paragraph is about what the day is doing to the men, which is a reason
+	# to hold and not a reason to ride.
+	#
+	# ARGUED FROM THE BANDS, NOT FROM THE TERRAIN. Option d's header records
+	# three earlier comments that died arguing this the other way round, and
+	# names the reason: the six bands were extracted as an exhaustive PROSE
+	# partition of AGOT's 23 terrain helpers, not a tactical one, so band
+	# membership is mixed and only the band is a defensible unit. The same
+	# approximation and the same cost apply here.
+	option = {
+		name = bc_chronicles.0011.f
+		trigger = {
+			exists = scope:bc_eve_ground
+			trigger_if = {
+				limit = { exists = scope:bc_eve_ground }
+				scope:bc_eve_ground = {
+					OR = {
+						bc_ground_is_open_trigger = yes
+						bc_ground_is_desert_trigger = yes
+					}
+				}
+			}
+		}
+		bc_add_verb_effect = { MODIFIER = bc_pursuit }
+		bc_add_verb_effect = { MODIFIER = bc_spent_horse }
+		debug_log = "BC: eve option horse"
+	}
+
+	# The kin case, which the desc chain has always had an arm for and the
+	# option set never did. It matches bc_kin_across_the_line in the commander
+	# batch and reads the same relation, `is_close_family_of`, so the eve and
+	# the moment agree about who counts as kin.
+	#
+	# IT RE-SPENDS bc_shieldwall, WHICH OPTION b ALREADY GRANTS, AND THAT IS
+	# FINE. The case is the choice, not a sixth modifier. What separates it
+	# from b is the 10 stress: a man who holds his line because the ground
+	# says so pays nothing, and a man who holds it because his brother is on
+	# the other side pays for the day. Do not "tidy" this by inventing a
+	# modifier - the mod has five in family 2 and the header of
+	# bc_battle_modifiers.txt says what adding a sixth has to clear.
+	#
+	# NESTED, NOT SIBLING, on the scope read. Same idiom as the desc_kin arm
+	# fifty lines above, and for the same reason.
+	option = {
+		name = bc_chronicles.0011.g
+		trigger = {
+			exists = scope:bc_eve_foe
+			trigger_if = {
+				limit = { exists = scope:bc_eve_foe }
+				scope:bc_eve_foe = { is_close_family_of = root }
+			}
+		}
+		bc_add_verb_effect = { MODIFIER = bc_shieldwall }
+		add_stress = 10
+		debug_log = "BC: eve option kin"
+	}
 }
