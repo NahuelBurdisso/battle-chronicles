@@ -3614,3 +3614,180 @@ bc_knight_twice_as_good = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE BODY HE WAS BORN WITH, 2026-08-17.
+#
+# THE MOD HAS A HEALTH BATCH AND HAS NEVER ASKED ABOUT BUILD. `wounded_*`,
+# `maimed`, `one_eyed` and `one_legged` are all read, and all four are things
+# that HAPPENED to a man. `physique_good_*` and `physique_bad_*` appear zero
+# times, and they are the other question: not what the war did to him but what
+# he was handed before any of it started.
+#
+# THE LADDERS ARE OR-ED AT THE TOP TWO RUNGS AND THE THIRD IS A `chance` ROW.
+# Same shape as the `wounded_*` ladder in bc_knight_the_old_wound. Gating on
+# the extreme rung alone would make both templates nearly unreachable - AGOT
+# hands out physique_good_1 and physique_bad_1 constantly and the far ends
+# rarely - and gating on all three would make "built for this" true of half
+# the array, which is not a moment.
+#
+# NOT A SUBSET OF THE PROWESS TEMPLATES, AND THE DISTINCTION IS THE WHOLE
+# POINT. Prowess is how well he fights. This is what he is carrying while he
+# does it, and the mod has men who are good at this and built wrong for it,
+# which is a more interesting afternoon than either alone.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He was built for this and it is the one day it pays.
+#
+# `entrenched`/`up` AND bc_shieldwall. This is not a man doing something
+# clever or something brave - it is a man who is simply harder to move than
+# the men on either side of him, and what a line does around a fixed point is
+# exactly what that modifier means.
+#
+# THE DESC MAY NOT MAKE HIM A GOOD FIGHTER. Prowess is a separate question and
+# has its own templates; this one is about mass and reach and a long arm, and
+# a knight of prowess 6 may fire it.
+#
+# FIFTY PRESTIGE. The men can see it from a distance, which is most of why it
+# is worth anything.
+# ---------------------------------------------------------------------------
+bc_knight_built_for_it = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		OR = {
+			has_trait = physique_good_2
+			has_trait = physique_good_3
+		}
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = physique_good_3
+		}
+		modifier = {
+			factor = 1.5
+			prowess >= 12
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_built_for_it"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_built_for_it_toast
+				desc = bc_knight_built_for_it_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The harness weighs what it weighs.
+#
+# THE OTHER END OF THE SAME LADDER AND THE LOSING ROW. A battle is hours of
+# carrying sixty pounds about, and the mod has never once said that this costs
+# different men different amounts. It costs this one more, and it has been
+# costing him since before the fighting started.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. There is no army modifier for a
+# man being tired. The faltering rung and the stress are the cost, and the
+# reason it is faltering rather than nothing at all is that he is in the line
+# and the line is where the tiredness goes.
+#
+# THE DESC MAY NOT WOUND HIM, KILL HIM OR SEND HIM RUNNING - the standing
+# rule, and bc_knight_shames_himself owns running. He is still there. That is
+# the point of him.
+#
+# `stubborn` RAISES IT. The template is about a man staying in a place his
+# body has stopped agreeing with, which is what the trait describes.
+# ---------------------------------------------------------------------------
+bc_knight_it_weighs_the_same = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		OR = {
+			has_trait = physique_bad_2
+			has_trait = physique_bad_3
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = physique_bad_3
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_it_weighs_the_same"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_it_weighs_the_same_toast
+				desc = bc_knight_it_weighs_the_same_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -4997,3 +4997,81 @@ bc_they_have_their_reason = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The small man, and the hour nobody is laughing.
+#
+# `dwarf`, WHICH APPEARS NOWHERE ELSE IN THE MOD AND IS ONE OF THE MOST
+# LOADED TRAITS IN THE SETTING. A dwarf who holds a host has already won an
+# argument nobody in it will admit to having had, and an afternoon that is
+# going his way is the only hour of the year when the argument stays won.
+#
+# THE WINNING ROW ONLY, AND NOT BECAUSE THE LOSING ONE WOULD BE UNKIND. The
+# losing version is a template about men blaming a body for a battle, and the
+# mod already has bc_they_have_their_reason, which is that moment written
+# about a different accident of birth and does not need a second draft.
+#
+# `adapted`/`up`, WHICH HANDS OUT NOTHING, AND THAT IS THE ARGUMENT. He is not
+# winning this by presence - nobody is dressing on him and no line is bracing
+# because he rode past. He is winning it by having arranged it, and the mod
+# has one KIND that means the commander READ the field, and no army modifier
+# belongs to it.
+#
+# FIFTY PRESTIGE AND A MOMENTUM RUNG. What he gets out of the afternoon is
+# that it happened in front of witnesses.
+#
+# THE DESC MAY NOT MAKE HIM A FIGHTER AND MAY NOT PUT HIM IN THE LINE. It also
+# may not have anybody say anything about his height - see the loc header.
+# ---------------------------------------------------------------------------
+bc_the_small_man = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_trait = dwarf
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = intellect_good_3
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_small_man"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_small_man_toast
+			desc = bc_the_small_man_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

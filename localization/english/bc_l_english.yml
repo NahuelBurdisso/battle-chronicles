@@ -2059,3 +2059,33 @@
 
  bc_knight_twice_as_good_toast:0 "Good Enough Is Not Available"
  bc_knight_twice_as_good_toast_desc:0 "The day is already going their way and he has not changed his pace since the first hour. Men either side of him have taken the moment everyone takes - a breath, a look around, a drink - and he has not, because a share of a good day is not a thing he will be given afterwards and he has known that since he was small. So he goes on working at a rate the line cannot hold, and the line tries to hold it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the body he was born with (2026-08-17) ----------------------------------
+#
+# THE FIRST MAY NOT MAKE HIM A GOOD FIGHTER. The gate is build, not prowess,
+# and a knight of prowess 6 can fire it. What is true of him is mass, reach
+# and a long arm, and none of that is skill.
+#
+# THE SECOND MAY NOT WOUND HIM, KILL HIM OR SEND HIM RUNNING - the standing
+# rule and bc_knight_shames_himself's territory. He is still standing there,
+# which is the whole of what the template says about him.
+#
+# THE THIRD MAY NOT PUT A JOKE IN ANYONE'S MOUTH AND MAY NOT ANSWER ONE. A man
+# in a host does not say a word about his commander's height while there is
+# fighting on, and a desc that has him proving somebody wrong makes the moment
+# about the somebody. It is about an afternoon going the way he arranged it.
+# It also may not have him fighting or in the line - he is not there.
+#
+# NONE OF THE THREE MAY USE THE WORD FOR WHAT HE IS. The trait gates it; the
+# prose does not need to name it and reads as gawping when it does.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "he has
+# stopped counting", "nobody has told him to slow down".
+ bc_knight_built_for_it_toast:0 "Harder to Move Than Anything Beside Him"
+ bc_knight_built_for_it_toast_desc:0 "Whatever else is true of him, he is a great deal of man, and for about a quarter of an hour that has been the most important fact on this part of the field. Things come at him and stop. The two men either side have quietly given up their own footing and taken his, and the shape of the line here now has a corner in it that the other host keeps walking into.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_it_weighs_the_same_toast:0 "It Weighs What It Weighs"
+ bc_knight_it_weighs_the_same_toast_desc:0 "Sixty pounds of harness weighs sixty pounds on everybody and it has not been the same sixty pounds for him since the second hour. He is doing the work at half speed and a beat late, and he knows he is a beat late, and he has been correcting for it all afternoon with the only thing he has left, which is being there. Nobody has said anything to him about it. He has said a great deal to himself.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_small_man_toast:0 "It Is Going the Way He Said It Would"
+ bc_the_small_man_toast_desc:0 "He has not touched a weapon today and does not intend to. What he has done is put the right men in the wrong place for the other fellow four separate times since noon, and the fourth one has just come apart in exactly the direction he said it would at breakfast. The riders coming back to him are taking their hats off first now, which they were not doing this morning.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
