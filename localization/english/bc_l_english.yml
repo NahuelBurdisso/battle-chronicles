@@ -118,6 +118,56 @@
  bc_lines_bogged_down_toast:0 "The Lines Bog Down"
  bc_lines_bogged_down_toast_desc:0 "Neither host can move. The battle becomes a matter of who tires of the mud last.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- commander chronicles, the second ten (2026-08-17) -----------------------
+#
+# Design: docs/specs/2026-08-17-battle-chronicles-cases-design.md
+#
+# EVERY ONE OF THESE RENDERS AS THREE SENTENCES, NOT ONE: this literal, then
+# bc_bond_clause, then bc_scale_clause. So each was written against the curated
+# shortlist further down this file, and specifically against the two clauses that
+# always follow. The words that cost the most here are `field` (both
+# bc_frag_bond_nemesis and bc_frag_bond_kin spend it), singular `man` (all five
+# bond arms carry `the man commanding here`), and `the men` / `a fight` /
+# `the fighting` (all three scale arms). TWO EVENTS WERE RENAMED rather than
+# have their prose bend around the collision - bc_the_killing_is_general and
+# bc_kin_across_the_line were bc_the_field_is_a_slaughter and
+# bc_kin_across_the_field in the first draft.
+#
+# NO PER-MOMENT GROUND FRAGMENTS HERE. Those are Plan B tasks 5-14 and remain
+# gated on a run. Appending the two shared clauses is the SAFE half of that gate:
+# each literal below stands as a finished sentence, so if Custom() turns out not
+# to compose, these toasts read exactly as they would have anyway.
+
+ bc_winter_bites_toast:0 "Winter Bites"
+ bc_winter_bites_toast_desc:0 "The cold does what the enemy could not. Fingers stop closing on spear-shafts, and the ranks shuffle in place to keep the blood moving.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_dust_and_thirst_toast:0 "Dust and Thirst"
+ bc_dust_and_thirst_toast_desc:0 "The dust stands as high as a horse's chest and will not settle. Waterskins went dry before noon.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_woods_hide_us_toast:0 "The Woods Hide Us"
+ bc_the_woods_hide_us_toast_desc:0 "Numbers count for less among trees. Arrows come from cover, and the cover is empty by the time anyone reaches it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_long_war_toast:0 "The Long War"
+ bc_the_long_war_toast_desc:0 "Two years of this now. The veterans have stopped flinching, and stopped hurrying along with it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_too_wide_to_see_toast:0 "Too Wide to See"
+ bc_too_wide_to_see_toast_desc:0 "The line runs past what one pair of eyes can hold. An order sent to the far wing will arrive at a battle that has already changed.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_killing_is_general_toast:0 "The Killing Is General"
+ bc_the_killing_is_general_toast_desc:0 "The dying has stopped being something that happens here and there. One host is coming apart, and it is not this one.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_kin_across_the_line_toast:0 "Kin Across the Line"
+ bc_kin_across_the_line_toast_desc:0 "He knows the device on the other side better than he knows his own. Somebody will have to explain this at a funeral.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_old_wolf_toast:0 "The Old Wolf"
+ bc_the_old_wolf_toast_desc:0 "He has stood in this exact noise before, more times than the boys around him have years. He does not shout. He points.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_green_boy_toast:0 "The Green Boy"
+ bc_the_green_boy_toast_desc:0 "He has read about this. The reading covered none of the noise, and none of how long it goes on.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_his_lords_war_toast:0 "His Lord's War"
+ bc_his_lords_war_toast_desc:0 "It is not his quarrel and never was. He serves it well regardless, which is what the oath was for.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- knight chronicles ------------------------------------------------------
 
  bc_knight_holds_the_breach_toast:0 "He Holds the Breach"

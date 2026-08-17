@@ -428,3 +428,614 @@ bc_lines_bogged_down = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE SECOND TEN, 2026-08-17. Design:
+# docs/specs/2026-08-17-battle-chronicles-cases-design.md
+#
+# WHY MORE TEMPLATES DOES NOT MEAN MORE INTERRUPTIONS. The rate limiter is
+# bc_chronicle_ready_commander_trigger, not the weights - this file's own header
+# says so and the code agrees. A commander who has just taken a moment makes
+# EVERY event in this file invalid for the next bc_chronicle_flag_days_value
+# days, so a blocked roll is not a Battle Chronicles roll at all; it goes to
+# vanilla's commander_none. Adding templates therefore mostly changes WHICH
+# moment a battle produces, not how many.
+#
+# IT IS NOT PURELY FREE, AND THE HONEST HALF IS THIS. Six of the original seven
+# carry a situational gate, so an even battle on open ground with an unremarkable
+# commander currently matches NOTHING and passes in silence. Those battles will
+# now speak. That is an accepted, deliberate rate increase in the one place the
+# mod was mute, and it is still capped by the same cooldown.
+#
+# BASE 30 IS THE DEFAULT HERE, against 40-100 for the original seven. `chance` is
+# a weight against every other VALID event, including commander_none at
+# base = 1000, so ten more templates at the old bases would roughly triple the
+# mod's share of the pool. Thirty keeps the calibrated seven dominant among BC
+# events while still letting the new ones appear. Two exceptions, both argued at
+# their event.
+#
+# NO POP-UPS IN THIS BATCH. A pop-up spends bc_popup_cooldown, and the three
+# shipped ones already compete with the eve for it. These are toasts only, which
+# is also why none of them branches on bc_can_interrupt_player_trigger.
+#
+# NO NEW MODIFIERS AND NO NEW GAME RULE. Every one of these routes through the
+# existing (KIND, SWING) table in bc_apply_verb_effect and the existing
+# momentum/faltering pairs.
+#
+# STACKING, THE RULE THAT DECIDES EVERY is_valid BELOW: a template that grants
+# momentum gates `NOT = { bc_has_momentum_trigger = yes }`, one that grants
+# faltering gates `NOT = { bc_is_faltering_trigger = yes }`, and one that grants
+# neither needs neither. bc_faltering_minor and bc_faltering_major are different
+# modifier keys, so two live at once runs off the end of the ladder the mod is
+# tuned against.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Winter bites. The first event in the mod to gate on a GROUND BAND rather than
+# on the older favours/bogs pair - and the bands are the same six the prose and
+# the reputation streaks use, so a winter battle now reads as winter in three
+# places at once.
+#
+# base = 40, above the batch default: the winter band was 38 of 360 classified
+# fires in the 2026-08-17 session, so the gate is genuinely narrow.
+# ---------------------------------------------------------------------------
+bc_winter_bites = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		bc_field_is_winter_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_winter_bites"
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_winter_bites_toast
+			desc = bc_winter_bites_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Dust and thirst. The desert band.
+#
+# THE DESERT BAND SCORED ZERO in both terrain censuses taken so far - the DIAG
+# run's Q5 (0 of 137) and the 2026-08-17 session (0 of 360). That is a statement
+# about where these campaigns were fought, not about the map: the band holds
+# desert, desert_mountains, oasis and canyon, and Dorne and the eastern
+# continent are made of them. This is deliberately a row that ages into
+# relevance, the same argument bc_battle_is_notable_trigger's 20,000 row makes.
+# Do not delete it for scoring zero on a Westerlands campaign.
+# ---------------------------------------------------------------------------
+bc_dust_and_thirst = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		bc_field_is_desert_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_dust_and_thirst"
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_dust_and_thirst_toast
+			desc = bc_dust_and_thirst_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The woods hide us. Forest ground read by the WEAKER side.
+#
+# THE OUTNUMBERED ROW IS WHAT MAKES THIS A NEW CASE RATHER THAN A THEFT.
+# bc_ground_favours_us already fires on forest - forest is in its favouring
+# list - so without that row this would be a strict subset of a calibrated
+# event and would only take weight from it. Being outnumbered in woods is the
+# distinct situation: the trees are worth more to the side with fewer men.
+# ---------------------------------------------------------------------------
+bc_the_woods_hide_us = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_field_is_forest_trigger = yes
+		bc_side_is_outnumbered_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Using ground is a martial skill, the same read bc_ground_favours_us
+		# makes and at the same bar.
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_woods_hide_us"
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_woods_hide_us_toast
+			desc = bc_the_woods_hide_us_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The long war. Two years of it, read off the war behind the battle - an axis
+# nothing in the mod has ever looked at.
+# ---------------------------------------------------------------------------
+bc_the_long_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		bc_war_is_long_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_long_war"
+
+		bc_faltering_minor_effect = yes
+		add_stress = 5
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_long_war_toast
+			desc = bc_the_long_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Too wide to see. Fifteen thousand men on one field, counting both hosts.
+#
+# num_total_troops is a TRIGGER ONLY - it cannot be read into a variable, which
+# is the trap bc_battle_open_effect's header documents at length. Asking it here,
+# in a gate, is the one context where that limitation costs nothing.
+# ---------------------------------------------------------------------------
+bc_too_wide_to_see = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		bc_host_is_vast_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A great captain keeps hold of a great host; a poor one loses it.
+		modifier = {
+			factor = 2
+			martial <= 8
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_too_wide_to_see"
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_too_wide_to_see_toast
+			desc = bc_too_wide_to_see_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The killing is general. Two fifths of the enemy already dead, asked while the
+# number is still climbing.
+#
+# THE BAR IS 40, NOT THE NOTABILITY TRIGGER'S 50, and the difference is not an
+# oversight. That row grades a FINISHED battle; this one is asked every five
+# days from the middle of one, so the same number would be a strictly harder
+# test. See bc_field_is_bloody_trigger.
+#
+# NAMED OFF `field` DELIBERATELY. The first draft was bc_the_field_is_a_slaughter
+# and the word is spoken for: bc_frag_bond_nemesis and bc_frag_bond_kin both
+# carry `field`, and a bond fragment renders in the sentence IMMEDIATELY AFTER
+# this toast's literal on every fire. The loc file's curated shortlist is the
+# list to check a new toast against, and it is the reason two events in this
+# batch were renamed before their prose was written rather than after.
+# ---------------------------------------------------------------------------
+bc_the_killing_is_general = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_field_is_bloody_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_killing_is_general"
+
+		bc_momentum_major_effect = yes
+		bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_killing_is_general_toast
+			desc = bc_the_killing_is_general_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Kin across the line. The foe as a person, in a GATE - the bond ladder has
+# known this since Plan A but only ever spent it on prose.
+#
+# ITS BOND FRAGMENT IS NOT A FREE SECOND SENTENCE, IT IS A CONSTRAINT. This gate
+# is bc_foe_is_kin_trigger and the bond ladder's `kin` arm is the same
+# is_close_family_of test, so whenever this toast fires the bond clause after it
+# resolves to bc_frag_bond_kin or - if the kinsman is also the nemesis, which the
+# ladder ranks first - bc_frag_bond_nemesis. Either way the relation is ALREADY
+# STATED in the following sentence. The literal must therefore not restate it;
+# it says what the relation costs him instead.
+#
+# THE SAME is_close_family_of THE BOND LADDER USES, through
+# bc_foe_is_kin_trigger, so a battle gated as a kinslaying cannot then have its
+# toast call the man a stranger.
+#
+# base = 50: the second exception to the batch default. Close family across a
+# battle line is rare enough that at 30 it would be a template nobody ever sees,
+# and it is the most characterful of the ten when it does happen.
+#
+# NO MOMENTUM EITHER WAY, so it needs no stacking gate. This is a moment about
+# the man, not about the battle - the only mechanical trace is stress.
+# ---------------------------------------------------------------------------
+bc_kin_across_the_line = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_kin_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who feels things feels this one harder.
+		modifier = {
+			add = 25
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_kin_across_the_line"
+
+		add_stress = 15
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_kin_across_the_line_toast
+			desc = bc_kin_across_the_line_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The old wolf. Age, upward - and the first time the mod has read it.
+# ---------------------------------------------------------------------------
+bc_the_old_wolf = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		age >= 55
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The older he is, the more of them he has seen.
+		modifier = {
+			add = 30
+			age >= 65
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_old_wolf"
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_old_wolf_toast
+			desc = bc_the_old_wolf_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The green boy. Age, downward. The mirror of the one above, and the pair is
+# the point: the same axis should be able to cut both ways or it is not an axis.
+# ---------------------------------------------------------------------------
+bc_the_green_boy = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		age <= 21
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A brave boy is in less trouble than a craven one.
+		modifier = {
+			factor = 2
+			has_trait = craven
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_green_boy"
+
+		bc_faltering_minor_effect = yes
+		add_stress = 10
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_green_boy_toast
+			desc = bc_the_green_boy_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# His lord's war. The commander is not the man whose quarrel this is.
+#
+# THE WIDEST GATE OF THE TEN, and knowingly so - most commanders in the world are
+# not war leaders. Two rows narrow it: the side must be winning, and momentum
+# must be free. It stays at base = 30 for that reason and should be the first
+# weight re-examined if the next sweep shows this batch crowding the original
+# seven.
+#
+# THE TRIGGER MAKES NO CLAIM THAT THE LORD IS PRESENT. side_primary_participant
+# is the war leader of the side and he may be a kingdom away; the prose is
+# written about fighting another man's war, not about being watched. Do not
+# rewrite it the other way - nothing available here could support that.
+# ---------------------------------------------------------------------------
+bc_his_lords_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		bc_fighting_his_lords_war_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A dutiful man makes more of the obligation.
+		modifier = {
+			add = 20
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_his_lords_war"
+
+		bc_momentum_minor_effect = yes
+		add_prestige = 25
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_his_lords_war_toast
+			desc = bc_his_lords_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
