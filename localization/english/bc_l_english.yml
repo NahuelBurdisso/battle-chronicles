@@ -2169,3 +2169,31 @@
 
  bc_the_man_who_has_done_this_before_toast:0 "He Knows That Banner Too Well"
  bc_the_man_who_has_done_this_before_toast_desc:0 "The shape of it came apart in the same direction it came apart last time and he recognised the direction before the messengers did. Everything is going the way it went before, and he is doing the only thing left that he can still choose to do, which is stand exactly where he is standing and make the men either side of him do the same. The banner opposite has not moved either. Neither of them is going anywhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-THREE. The commander's wound, seen from the ranks.
+#
+# NEITHER DESC MAY SAY WHERE THE WOUND IS. The trait is `wounded` and the mod
+# knows nothing beyond that - no limb, no weapon, no rider who brought him in.
+# A toast that supplies one puts a fact in the player's world that the four
+# other files touching this trait would contradict.
+#
+# NEITHER MAY HEAL HIM OR GET HIM OFF THE FIELD. Vanilla's recovery pulse owns
+# how long `wounded` lasts and the battle is not over.
+#
+# NEITHER MAY BE ABOUT AN OLD WOUND. `bc_battle_wounded` is cleared at combat
+# end and means "hit today"; `bc_knight_the_old_wound` owns the other reading,
+# on the knight himself.
+#
+# THE SECOND MAY NOT LET THE RUMOUR BE TRUE. He is wounded and he is
+# commanding. `bc_banner_falls` owns the banner going down and
+# `bc_chronicles.0002` owns a line deciding what it is frightened of.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "word went
+# down the line" in the prose itself, "nobody has told him".
+ bc_knight_the_lord_is_still_up_toast:0 "The Man on the Grey Has Not Sat Down"
+ bc_knight_the_lord_is_still_up_toast_desc:0 "Half the men in this part of the line saw it happen and have been working from the same short list of facts since: he was hit, he did not come off, and the horse is still turned the way it was turned before. They have not fought better this afternoon than they fought this morning. They have fought considerably harder, and the other host has been paying the difference for about a quarter of an hour without quite understanding where the bill came from.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_word_came_down_the_line_toast:0 "By the Fifth Rank It Is a Worse Story"
+ bc_knight_word_came_down_the_line_toast_desc:0 "What happened is that he was hit and stayed up. What arrives here, four mouths later and travelling against the direction of the fighting, is a good deal shorter than that and stops after the first half. The orders keep coming and they are the same orders they have been all day, and the men taking them have started asking the rider who sent them, which is a question nobody asked at noon and which nothing in the answer can now settle.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

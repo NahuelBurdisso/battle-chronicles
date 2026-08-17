@@ -3883,3 +3883,200 @@ bc_knight_the_spurs_they_took = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE WOUND THE MOD GAVE HIM THIS AFTERNOON, 2026-08-17.
+#
+# `bc_battle_wounded` IS SET BY bc_wound_effect ON THE COMMANDER AND HAS ONLY
+# EVER BEEN READ BY bc_wound_effect ITSELF, as the once-per-battle guard that
+# stops a second decisive-and-down moment wounding him twice. The mod puts a
+# `wounded` trait on a commander in front of the player, sends a toast about
+# it, and then for the rest of that battle behaves exactly as though it had
+# not happened.
+#
+# THESE ARE KNIGHT TEMPLATES AND THAT IS THE WHOLE REASON THEY EXIST. The
+# commander pool cannot have them: `bc_he_cannot_get_there` is already gated on
+# `wounded_1/2/3` and losing, and a gate of "was wounded in THIS battle" is a
+# strict subset of that one - the wound effect only fires when the man does not
+# already hold the trait, so every commander carrying `bc_battle_wounded` also
+# passes the `wounded_*` OR. The distinctness rule forbids that. From the
+# knight list it is not a subset of anything: the two pools roll separately,
+# and the fact being read is about somebody else entirely.
+#
+# THE VARIABLE IS SCRATCH AND THAT IS FINE HERE. bc_clear_scratch_effect
+# removes it at combat end, so it means "wounded during the battle now being
+# fought" and nothing else - which is precisely the reading these templates
+# want, and the reason neither of them may say anything about old wounds.
+# `bc_knight_the_old_wound` owns those, on the knight himself.
+#
+# NO NEW SCRIPTED TRIGGER. The walk is inline, the same shape
+# `bc_knight_he_has_lost_count` uses for `var:bc_battle_moments`: `exists` on
+# the scope as a sibling, the read nested in a trigger_if. `exists` on a
+# missing variable is itself safe, so the inner row needs no further guard.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# They can see he is still up there.
+#
+# WINNING, AND THE ORDER OF EVENTS IS THE POINT. A wound only ever comes out
+# of a decisive-or-major moment that went DOWN, in a battle big enough to
+# qualify - so a knight reading this on a winning field is standing in a host
+# that was hit hard enough to cost it its commander's blood and is winning
+# anyway. That sequence is the moment. It cannot be written as a commander
+# template because from the saddle it is not visible at all.
+#
+# `bloodied`/`up` AND bc_bloodied. Men who have watched the banner-holder take
+# a hit and stay in the saddle do not fight more cleverly, they fight harder
+# and the other side pays for it. That is the one modifier in the table that
+# means exactly that.
+#
+# NO RUNG. One knight's view of the field does not move the side's standing -
+# the rule bc_knight_knows_that_man records - and the wound moment that caused
+# this already moved it downward on its own terms.
+#
+# THE DESC MAY NOT HEAL HIM, MAY NOT GET HIM OFF THE FIELD AND MAY NOT SAY
+# WHERE THE WOUND IS. The trait is `wounded` and nothing in the mod knows more
+# than that; the recovery pulse owns how long it lasts.
+# ---------------------------------------------------------------------------
+bc_knight_the_lord_is_still_up = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { exists = var:bc_battle_wounded }
+		}
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_lord_is_still_up"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_lord_is_still_up_toast
+				desc = bc_knight_the_lord_is_still_up_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The same fact, arriving down a line that is already going backwards.
+#
+# THE DIAGONAL, AND THE FACT DOES NOT CHANGE - ONLY WHO IS TELLING IT. A host
+# that is winning watches its commander bleed; a host that is losing hears
+# about it fourth-hand, and by the time the sentence reaches the fifth rank it
+# has become something worse than what happened. Nothing in either template
+# says the commander is doing anything differently, because he is not: the
+# variable records a wound, not a collapse.
+#
+# `ordered`/`down`, WHICH HANDS OUT NOTHING. This is the one place in the mod
+# where that cell is exactly right rather than merely available: the orders
+# are still correct and still arriving, and the men receiving them have
+# stopped being certain who sent them. There is no army modifier for a chain
+# of command that is intact and no longer believed, and inventing one would
+# make this template say the line broke, which it must not.
+#
+# A GUARDED FALTERING RUNG AND TEN STRESS. The rung is on the commander, where
+# every knight template's state writes go, and it is guarded because the wound
+# moment may well have set it already.
+#
+# THE DESC MAY NOT KILL HIM, MAY NOT DEPOSE HIM AND MAY NOT LET THE RUMOUR BE
+# TRUE. bc_banner_falls owns the banner going down and bc_chronicles.0002 owns
+# a line deciding what it is frightened of; this is the hour before either.
+# ---------------------------------------------------------------------------
+bc_knight_word_came_down_the_line = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { exists = var:bc_battle_wounded }
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_host_is_vast_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_word_came_down_the_line"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_word_came_down_the_line_toast
+				desc = bc_knight_word_came_down_the_line_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
