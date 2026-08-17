@@ -356,9 +356,60 @@ bc_fighting_his_lords_war_trigger = {
 	}
 }
 
+# The man whose war this is holds something over him.
+#
+# `has_hook` APPEARED NOWHERE IN THE MOD BEFORE THIS. It is the one trigger
+# available here that answers WHY a man is standing on a field he did not
+# choose, and the mod has been writing about obligation - bc_his_lords_war,
+# bc_nothing_but_the_horse, the whole station batch - without ever asking the
+# question the game can actually answer.
+#
+# THE DIRECTION IS THE WAR LEADER ON HIM, and the reverse trigger below is a
+# different sentence entirely, not a formatting variant. Keep them apart.
+#
+# `root`, NOT `this`, INSIDE THE ENTERED SCOPE. `has_hook = root` is read from
+# the war leader's scope and asks about the character the phase event is
+# rolling for. The same rule and the same reason as bc_side_has_kin_knight_trigger
+# below: once a scope has been entered, `this` is the man whose scope it is.
+#
+# THE `NOT = { this = ... }` ROW IS NOT REDUNDANT DEFENSIVENESS. A man cannot
+# hold a hook on himself, so the row cannot change the answer - it is there
+# because the prose these gate is about somebody ELSE having leverage, and a
+# reader who deletes the row has to notice that first.
+#
+# ROLE-AGNOSTIC. Nothing here reads a property only a commander has, so the
+# knight file may call it, and a knight is never his own side's war leader.
+bc_his_lord_holds_a_hook_trigger = {
+	exists = scope:combat_side.side_primary_participant
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_primary_participant }
+		NOT = { this = scope:combat_side.side_primary_participant }
+		scope:combat_side.side_primary_participant = { has_hook = root }
+	}
+}
+
+# He holds something over the man whose war this is.
+#
+# THE SAME TWO CHARACTERS, THE OTHER WAY ROUND, AND A DIFFERENT AFTERNOON. The
+# trigger above is about a man who was made to come; this one is about a man
+# who came anyway while holding the leash. Both can be true at once, which is
+# a knot the mod does not try to describe - if both templates are ever gated
+# so they can fire in one battle, that is the case to think about.
+#
+# NO ENTERED SCOPE NEEDED. `has_hook` is read from the caller's own scope
+# against a target, so this half needs no `root` and no inner scope.
+bc_he_holds_his_lords_hook_trigger = {
+	exists = scope:combat_side.side_primary_participant
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_primary_participant }
+		NOT = { this = scope:combat_side.side_primary_participant }
+		has_hook = scope:combat_side.side_primary_participant
+	}
+}
+
 # The war is his own.
 #
-# NOT THE `NOT` OF THE TRIGGER ABOVE, AND IT MATTERS. Wrapping
+# NOT THE `NOT` OF bc_fighting_his_lords_war_trigger, AND IT MATTERS. Wrapping
 # bc_fighting_his_lords_war_trigger in a NOT would answer YES on a side with no
 # war leader at all, because that trigger's `exists` makes it false there and
 # the NOT flips it. This one has to be written affirmatively so a leaderless

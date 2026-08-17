@@ -3116,3 +3116,78 @@ bc_knight_the_banner_answerable = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# He is here on somebody's leash and he has not put it down.
+#
+# THE SAME TRIGGER AS bc_the_thing_they_have_on_him AND A DIFFERENT MAN. A
+# commander who was made to come has an afternoon of understanding it; a
+# knight who was made to come has an afternoon of standing in it, which is
+# shorter and worse. The two are rolled from separate pools and take the same
+# losing row deliberately - a hook on a winning field is a thing nobody is
+# thinking about, and neither template is written about that.
+#
+# `entrenched`/`down` AND bc_shieldwall, WHICH IS THE POINT. He could have
+# gone at any hour today and it would have cost him only the thing they hold,
+# and he has not gone. The modifier is the correct consequence: a line does
+# not know why a man is still in it, only that he is.
+#
+# NO PRESTIGE. Nothing has been proved to anybody. The one person who could
+# say what this was worth is not on the field.
+# ---------------------------------------------------------------------------
+bc_knight_the_leash_holds = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_lord_holds_a_hook_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_leash_holds"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_leash_holds_toast
+				desc = bc_knight_the_leash_holds_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

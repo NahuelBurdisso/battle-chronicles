@@ -4335,3 +4335,163 @@ bc_the_man_who_started_it = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHY HE IS HERE, 2026-08-17.
+#
+# `has_hook` APPEARED NOWHERE IN THE MOD. Fifty-eight commander templates ask
+# what a man can do, what he owns, what he believes, what he fears and whose
+# war it is, and not one asks the only question the game can actually answer
+# about WHY he came: whether somebody is holding something over him. The mod
+# has been writing about obligation since plan 1 - bc_his_lords_war,
+# bc_nothing_but_the_horse, the whole station batch - on inference.
+#
+# THIS IS THE STATION AXIS' THIRD VISIT AND IT IS NOT THE SAME QUESTION.
+# bc_nothing_but_the_horse asks what he owns, bc_the_war_has_his_name_on_it
+# asks whose quarrel it is, and this asks what it cost him to be asked. A
+# landed man with a name on the war can still be here on a leash.
+#
+# THE TWO TEMPLATES ARE THE SAME TWO CHARACTERS POINTED OPPOSITE WAYS and
+# they take opposite side rows for it. Held, on a field going badly: the worst
+# afternoon in the mod to be a man who did not choose this. Holding, on a
+# field going well: a debt being paid in the only currency that clears it.
+#
+# BOTH TRIGGERS CAN BE TRUE AT ONCE - two men can hold hooks on each other -
+# and the side rows keep the two templates out of the same battle in the
+# ordinary case without the mod having to describe the knot.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He was made to come and it is going badly.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING, and that is the correct
+# mechanical content twice over: there is no army modifier for a man
+# understanding what he is doing here, and the men do not know any of this.
+# The faltering rung and ten stress are the whole cost.
+#
+# THE DESC MAY NOT LET HIM CONSIDER LEAVING. He is a commander in the middle
+# of a battle; the leash is why he is on the field and not a live option he is
+# weighing this hour. A template that makes it a decision has written a
+# different and much smaller moment.
+# ---------------------------------------------------------------------------
+bc_the_thing_they_have_on_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_lord_holds_a_hook_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		# A man who expects to be used notices sooner that he is being used.
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_thing_they_have_on_him"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_thing_they_have_on_him_toast
+			desc = bc_the_thing_they_have_on_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He came holding the leash, and he is winning with it.
+#
+# FIFTY PRESTIGE AND `adapted`/`up`. He is not doing anything on the field
+# that the men can see is different; what has changed is the size of the
+# account, and prestige is the only part of that the mod can actually settle.
+#
+# THE DESC MAY NOT NAME THE HOOK. The mod does not know what it is - a secret,
+# a debt, a favour, a letter - and a desc that invents one is writing content
+# the save file will contradict. What it may say is that the man at the top of
+# this war owes him one more thing than he did at dawn.
+#
+# NO STRESS ROW EITHER DIRECTION. Relief would make it a template about being
+# safe, which is not what is happening.
+# ---------------------------------------------------------------------------
+bc_the_leash_runs_the_other_way = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_holds_his_lords_hook_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			intrigue >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_leash_runs_the_other_way"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_leash_runs_the_other_way_toast
+			desc = bc_the_leash_runs_the_other_way_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

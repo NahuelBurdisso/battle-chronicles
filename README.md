@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 58 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 37 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 60 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 38 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Forty-five batches, one per row of the table below, none of which needed a
+Forty-six batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -630,6 +630,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | four of the ten moment ground sets pooled | the shared clause was the *thin* case; these are the **worn** one. Each of the ten per-moment sets was first-match with **one string per band**, so a player whose war is fought in one region reads the same sentence under `bc_banner_falls` every time it fires — and the ten produced **233 firings in 44 battles**, which is the number this whole session answers. The four losing-field moments (banner, rally, flank, bogged) go to **two strings per band**, 24 keys. This is exactly the migration `bc_van_breaks_through_ground`'s header prescribed for a worn band, done for all six bands at once. **The fallback conversion is the part that is easy to forget and is not optional**: under first-match a trigger-less last arm can never be reached while a band matches, but under `random_valid` it is valid on *every* render and would take a share of every toast to print an empty string — so all four fallbacks are rewritten as NOR complements. The six sets that remain first-match correctly keep theirs bare | 24 keys, 4 sets pooled |
 | the three winning-field ground sets pooled | van, horse and favours get the same treatment as the four before them — two strings per band, `random_valid = yes`, fallback rewritten as a NOR complement. **Seven of the ten are now pooled**; the three knight sets remain first-match. The batch also retires the paragraph that argued *against* pooling these: it said one string per band was right because six bands already give six different sentences, which was **sound about the set and wrong about the player** — a war is fought in a region, a region is one band, and a player who reads a moment twenty times reads its `rough` string twenty times. That same paragraph provided for the fix ("pool that band alone"); the answer turned out to be all six bands at once | 18 keys, 3 sets pooled |
 | the last three ground sets pooled, and a rule that stopped being true | breach, shames and shieldbrother finish the migration: **all ten moment ground sets are now two strings per band, `random_valid = yes`, twelve arms and a complement**, and there is no first-match ground set left in the file. The batch also retires a rule in the file's top header that a reader would have trusted — *"the fallback arm is last and has no trigger… every definition here ends in one"*. It was true when it was written and is now false of **every one of the thirteen definitions**: under first-match a bare last arm is unreachable while a band matches, but under `random_valid` it is valid on *every* render and takes a share of every toast to print nothing. Both rules put the fallback last; they disagree only about whether it may be bare, and under `random_valid` it may not | 18 keys, 3 sets pooled |
+| why he is here | **`has_hook` appeared nowhere in the mod** — not a gate, not a `chance` row. Fifty-eight commander templates asked what a man can do, owns, believes and fears, and whose war it is, and none asked the only question the game can answer about *why he came*. This is the station axis' third visit and a different question each time: `bc_nothing_but_the_horse` asks what he owns, `bc_the_war_has_his_name_on_it` asks whose quarrel it is, this asks what it cost him to be asked — a landed man with his name on the war can still be here on a leash. Two triggers, the same two characters pointed opposite ways, and they take opposite side rows for it: held on a losing field (`measured`/`down`, no modifier — the men do not know any of this) and holding on a winning one (`adapted`/`up`, 50 prestige — nothing on the field looks different, only the size of the account). The knight takes the held half and `entrenched`/`down` with `bc_shieldwall`, because he could have gone at any hour and has not, and **a line does not know why a man is still in it, only that he is**. No desc may name the hook: the mod does not know what it is and a save file will contradict an invented one | 3 templates, base 30, 30, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -648,16 +649,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **a hundred and sixteen**, its "3, 3, 4 and 3"
-are 25, 17, 25 and 13, and the fall-through set is thirty-six sites rather than
+plan 1's eighteen call sites are now **a hundred and nineteen**, its "3, 3, 4 and 3"
+are 25, 18, 25 and 13, and the fall-through set is thirty-eight sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 58, knight 37.** Weight against vanilla's
+**Template totals are now commander 60, knight 38.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60; on the knight side, thirty-seven templates against
-`knight_none`'s 2000 — thirty-six at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60; on the knight side, thirty-eight templates against
+`knight_none`'s 2000 — thirty-seven at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

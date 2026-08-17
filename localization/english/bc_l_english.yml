@@ -1837,3 +1837,38 @@
 
  bc_knight_the_banner_answerable_toast:0 "Three Hundred Yards Of It"
  bc_knight_the_banner_answerable_toast_desc:0 "He can see the banner. It has not moved all morning and it is not far - a field, a ditch, a great many men - and everything that has happened to him today comes from under it. He has spent himself twice trying to get closer and the ground between has only got worse for the trying. His horse is finished and his arms are heavy and the distance is exactly what it was when he first looked up and found it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- why he is here (2026-08-17) --------------------------------------------
+#
+# NONE OF THE THREE MAY NAME THE HOOK. The mod does not know what it is - a
+# secret, a debt, a letter, a child in somebody's hall - and a desc that
+# invents one is writing content the save file will contradict on the next
+# read. What may be said is only that it exists, that both men know it, and
+# what it is worth this afternoon.
+#
+# THE FIRST MAY NOT LET HIM CONSIDER LEAVING. He is a commander in the middle
+# of a battle and the leash is why he is standing here at all, not an option
+# he is weighing this hour. Make it a decision and the moment shrinks to a
+# man sulking.
+#
+# THE SECOND MAY NOT GLOAT AND MAY NOT NAME A PRICE. He is not going to
+# collect this afternoon and he is not thinking about the terms. What has
+# changed is the size of the account, and one sentence noticing that is the
+# whole of it.
+#
+# THE THIRD IS THE SHORTEST OF THE THREE AND SHOULD BE. A knight in the ranks
+# has no room for the reasoning the commander gets; he has the leash and the
+# next four feet. Write it at that length.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "there is nobody above him in this"
+# (bc_the_war_has_his_name_on_it), "no house behind him" (bc_no_name_at_all),
+# "the man who could have let all of this alone" (bc_the_man_who_started_it),
+# "it has turned over", "he has stopped counting".
+ bc_the_thing_they_have_on_him_toast:0 "He Did Not Choose This Field"
+ bc_the_thing_they_have_on_him_toast_desc:0 "There was a conversation in a warm room some months ago that ended with him agreeing to be here, and the agreeing was not really the word for it. He has thought about that room perhaps twice since. He is thinking about it now, with the left of his line going and the light getting on, and the thought is not doing him any good and will not stop.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_leash_runs_the_other_way_toast:0 "The Account Grows"
+ bc_the_leash_runs_the_other_way_toast_desc:0 "He rode out for this on his own account and with his own men, and he did not have to, and the man at the top of this war knows exactly why he did not have to. Nothing on the field looks any different for it. What is different is that by tonight there will be one more thing owed in that direction, and both of them will have been counting all day.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_leash_holds_toast:0 "He Could Have Gone At Dawn"
+ bc_knight_the_leash_holds_toast_desc:0 "He could have gone at dawn and it would have cost him one thing only, and he knows the price of it to the penny. He is still here. The rank he is standing in has no idea any of this is true and would not care much if it did.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
