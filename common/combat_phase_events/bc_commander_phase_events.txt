@@ -5997,3 +5997,195 @@ bc_his_own_war = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE BODY THAT ARRIVED, NOT THE BODY THE BATTLE MADE, 2026-08-17.
+#
+# The body batch and plan 6's wound both ask the same question - what did the
+# fighting do to him - and between them they own six gates. Nothing in sixty
+# batches has asked the other question, which is what he brought with him. In
+# a setting where more captains are finished by a fever in a tent than by
+# anything with an edge on it, the mod has had no opinion on a commander who
+# was already sick when the horns went.
+#
+# THE GATE IS bc_he_is_unwell_trigger, `has_trait_with_flag = illness`, which
+# covers sixteen AGOT traits and will cover the seventeenth for free.
+#
+# NEITHER TEMPLATE MAY BE A DEATHBED. The mod does not kill anybody in a phase
+# event and is not going to start; both of these are about a man doing his job
+# through something, and both are careful to leave him doing it.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# A NOTE THAT BELONGS ON bc_he_cannot_get_there AND IS PUT HERE BECAUSE THIS
+# IS THE BATCH THAT FOUND IT. `_traits.info:75` defines
+# `disables_combat_leadership` as "this character is blocked from being a
+# commander", and wounded_1, wounded_2 and wounded_3 all set it in AGOT's
+# 00_traits.txt. So a man cannot be GIVEN an army while he is carrying a wound
+# trait, and bc_he_cannot_get_there is reachable only where the wound arrives
+# after he already has one - vanilla's own combat injuries and plan 6's wound
+# effect, both of which fire on a man who is already commanding. That template
+# is not dead and its comment is not wrong, but it is much rarer than its
+# `base = 40` suggests, and the reason is a field in a trait file rather than
+# anything in this mod. Whether the engine also pulls a commander who becomes
+# wounded mid-combat is not knowable without a run and is on the sweep list.
+#
+# NONE OF THE SIXTEEN ILLNESS TRAITS SETS THAT FIELD, which is checked in the
+# trigger's own header. A sick man may be handed an army; that is the whole
+# reason these two templates exist and the wound pair could not be written
+# this way.
+#
+# THIS ONE IS THE LOSING HALF AND IT IS NOT ABOUT PAIN. He is not brave here
+# and he is not suffering picturesquely; he is making the cheaper decision
+# every time, because the expensive decision costs him something he does not
+# have this afternoon, and the men pay the difference.
+#
+# `bloodied`/`down` AND bc_bloodied, WHICH IS THE POINT. The verb table's
+# bloodied row is casualties, and casualties are exactly what a commander buys
+# when he stops manoeuvring and starts closing because closing is shorter.
+#
+# NOT A SUBSET OF ANYTHING. bc_he_cannot_get_there is the wound ladder and no
+# illness trait is a wound trait; bc_the_gamble_that_does_not_pay is `reckless`
+# and this man is doing the opposite of gambling.
+#
+# THE DESC MAY NOT NAME THE ILLNESS. Sixteen traits share this gate and they
+# have nothing in common but that he is unwell - no cough, no rash, no fever
+# named, nothing a maester would write down.
+# ---------------------------------------------------------------------------
+bc_the_shorter_of_the_two_orders = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_unwell_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			age >= 50
+		}
+		modifier = {
+			factor = 1.5
+			bc_host_is_vast_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_shorter_of_the_two_orders"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_shorter_of_the_two_orders_toast
+			desc = bc_the_shorter_of_the_two_orders_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# THE WINNING HALF, AND THE REASON IT IS NOT THE SAME TEMPLATE TWICE. A sick
+# man losing spends the army because it is quicker. A sick man winning spends
+# nothing at all: he rides to one place, stays there, and gives about a third
+# of the orders he would normally give - and a great many of the orders a
+# commander normally gives are only there to prove he is still watching.
+#
+# `measured`/`up`, WHICH HANDS OUT NOTHING, AND THAT IS CORRECT. There is no
+# army modifier that means "he judged it well", and there should not be one:
+# what happened here is that he could not afford to be anywhere else, and it
+# turned out that the field did not need him anywhere else. The rung is the
+# whole reward, and it is guarded like every other momentum grant.
+#
+# `measured`/`up` IS ALSO THE RAREST PAIR IN THE MOD - four sites before this
+# one. It is rare because it needs a moment where the right thing happened and
+# the army did not have to do anything to get it, which is a narrow shape.
+# This is one.
+#
+# THE DESC MAY NOT NAME THE ILLNESS, MAY NOT HAVE HIM ALMOST FALL AND MAY NOT
+# HAVE ANYONE FUSS OVER HIM. The second is a deathbed by another route; the
+# third puts the moment in somebody else's hands, and this template is about a
+# man deciding to spend nothing.
+# ---------------------------------------------------------------------------
+bc_he_does_not_move_from_the_rise = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_unwell_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_does_not_move_from_the_rise"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_does_not_move_from_the_rise_toast
+			desc = bc_he_does_not_move_from_the_rise_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

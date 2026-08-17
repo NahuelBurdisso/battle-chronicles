@@ -2288,3 +2288,33 @@
 
  bc_his_own_war_toast:0 "There Is No One To Send To"
  bc_his_own_war_toast_desc:0 "Twice in the last hour he has turned in the saddle to send word to somebody, and twice there has been nobody at the end of it, because the name at the top of this quarrel is his own and has been since the first day of it. So the reserve went in. Then the escort went in. He is aware, in the flat and unhurried way a man is aware of weather, that there is nothing left behind him now and no one who will be asked about it afterward except him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-SEVEN. The body he arrived with.
+#
+# NEITHER DESC MAY NAME THE ILLNESS OR DESCRIBE A SYMPTOM THAT NAMES IT.
+# Sixteen traits share this gate - a pox, a plague, a cancer, a bad chest, a
+# bad joint - and they have nothing in common except that he is not well. No
+# cough, no rash, no named fever, nothing a maester would write down.
+#
+# NEITHER MAY BE A DEATHBED, MAY NOT HAVE HIM NEARLY FALL, AND MAY NOT PUT
+# ANYONE BESIDE HIM TO FUSS. He is doing his job through it and is still doing
+# it when the toast ends.
+#
+# THE FIRST MAY NOT SAY HE IS BRAVE ABOUT IT AND MAY NOT REVERSE THE HOUR. It
+# is a losing template about buying the shorter option and letting the men pay
+# the difference, which is the opposite of a gallant one.
+#
+# THE SECOND MAY NOT HAVE HIM WIN THE BATTLE, GIVE A SPEECH OR BE CHEERED -
+# the whole point is that he spends nothing, and a cheer is somebody else's
+# moment.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him".
+ bc_the_shorter_of_the_two_orders_toast:0 "Every Choice Today Has Been The Near One"
+ bc_the_shorter_of_the_two_orders_toast_desc:0 "There were two ways to answer the last push and he took the near one, as he took the near one before that, because the other would have meant crossing the field twice and he does not have two crossings in him this afternoon. Each of them was defensible. Together they have quietly turned a battle of movement into a battle of pushing, and pushing is being paid for in the ordinary currency by men who were not consulted about the exchange rate.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_does_not_move_from_the_rise_toast:0 "He Has Given Four Orders Since Noon"
+ bc_he_does_not_move_from_the_rise_toast_desc:0 "He picked his ground at midday and has not left it since, and in three hours he has sent four riders out, which is fewer than he has sent in any battle of his life. It turns out that most of what he usually does is telling men he is watching them. They knew. The captains have been running their own halves of it all afternoon and running them well, and the only thing on this field that has not moved is the one thing that did not need to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

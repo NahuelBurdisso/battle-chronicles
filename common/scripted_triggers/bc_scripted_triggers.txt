@@ -976,3 +976,35 @@ bc_the_war_is_his_trigger = {
 		scope:combat_side.combat.combat_war = { is_war_leader = root }
 	}
 }
+
+
+# --- the body he arrived with ------------------------------------------------
+#
+# THE MOD HAS ASKED ABOUT WOUNDS SIX TIMES AND ABOUT ILLNESS NEVER. Three
+# knight templates read the `wounded_*` ladder, bc_he_cannot_get_there reads it
+# on the commander, and plan 6 writes a wound of its own. Every one of those is
+# about damage the fighting did. Nobody in this mod has ever ridden out already
+# sick, which in this setting is the likelier of the two ways a great captain
+# stops being one.
+#
+# `has_trait_with_flag = illness` IS THE RIGHT GATE AND A TRAIT LIST IS NOT.
+# The flag is carried by sixteen traits in AGOT's own 00_traits.txt - ill,
+# pneumonic, great_pox, early_great_pox, lovers_pox, leper, gout_ridden,
+# consumption, cancer, typhus, bubonic_plague, smallpox, measles, dysentery,
+# ergotism and sickly - and a hand-written OR of sixteen keys would go stale the
+# first time AGOT or a patch adds a seventeenth. Vanilla's own has_any_illness
+# is written exactly this way in 20_health_triggers.txt:5.
+#
+# NONE OF THE SIXTEEN CARRIES `disables_combat_leadership`, WHICH IS WHY THIS
+# GATE IS REACHABLE AT ALL AND THE WOUND GATE LARGELY IS NOT. _traits.info:75
+# says that field means "this character is blocked from being a commander", and
+# wounded_1, wounded_2, wounded_3 and infirm all set it. A sick man may be given
+# an army; a wounded one may not. That asymmetry is checked, not assumed, and
+# the note on bc_he_cannot_get_there carries the other half of it.
+#
+# NO VARIABLE, SO NO GUARD. This is a plain character trigger on the rooted
+# character and needs none of the exists/trigger_if scaffolding the war and
+# ledger reads need.
+bc_he_is_unwell_trigger = {
+	has_trait_with_flag = illness
+}
