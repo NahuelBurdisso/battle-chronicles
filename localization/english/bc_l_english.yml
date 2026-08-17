@@ -1607,3 +1607,36 @@
 
  bc_knight_the_name_across_the_field_toast:0 "That Banner Is Going Backwards"
  bc_knight_the_name_across_the_field_toast_desc:0 "He has been hearing about the man under that standard since he was old enough to hold a shield, from people who had never been within a hundred leagues of him. He is within four hundred yards of him now, and the standard has moved twice, and both times it moved the wrong way. Getting this far has cost the front of the push almost everything it had. He is going to be telling people about this for thirty years.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the mod reads its own army state back (2026-08-17) ---------------------
+#
+# ALL THREE MAY SAY "ALREADY TODAY" AND NONE MAY SAY "LAST TIME". The gates
+# read a live verb modifier, and the verb families are wiped at combat end, so
+# what they are looking at was granted by an earlier moment in this same
+# battle or by the eve immediately before it. A desc that reaches back to a
+# previous battle is claiming something the code cannot support.
+#
+# THE FIRST MAY NOT BE ABOUT A DECISION. bc_he_will_not_chase_them is the
+# template where he could and will not; this one is the template where he
+# would and cannot. If a reader can confuse the two toasts, this one is
+# written wrong.
+#
+# THE SECOND IS A REVERSAL AND HAS TO FEEL LIKE ONE. The same men, the same
+# afternoon, the other way round. It should be uncomfortable rather than
+# tragic - nothing has been lost yet, it has simply turned over.
+#
+# THE THIRD IS AT GROUND LEVEL AND SEES NOTHING BUT CHURN. He does not know
+# there is a pursuit. He knows the ground he is walking on has been ridden
+# over twice and that nobody who went that way has come back past him.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he will not chase them", "the men
+# running away have his name" (the house block), "the horses have been at a
+# canter" (bc_they_are_shouting_his_name).
+ bc_the_horses_are_already_gone_toast:0 "Nothing Left to Chase With"
+ bc_the_horses_are_already_gone_toast_desc:0 "The other side has come apart and the road behind them is open and there is not one animal on this field with a gallop still in it. He sends what he has anyway and watches it go off at a walk. Everything he needed to end this today is standing in front of him with its head down and its sides going like a bellows.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_they_were_chasing_an_hour_ago_toast:0 "It Has Turned Over"
+ bc_they_were_chasing_an_hour_ago_toast_desc:0 "Not long ago these were the men going forward through a gap, loose and quick and shouting, and now the same men are strung out across ground they took at a run and something is coming back at them across it. Men in open order do not receive a push well. He is watching the shape of his own morning being used against him and there is no version of the next quarter of an hour that is cheap.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_horses_went_past_toast:0 "They Have Already Been Here"
+ bc_knight_the_horses_went_past_toast_desc:0 "The riders went by him a long while back, close enough that he had to step aside for them, and nobody has come the other way since. Now he is walking forward over ground that has been ridden across twice and churned into something that pulls at his feet, past things he does not look down at. Whatever is at the far end of this, the horses got there first and are still there.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

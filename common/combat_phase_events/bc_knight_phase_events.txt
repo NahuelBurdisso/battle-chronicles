@@ -2766,3 +2766,95 @@ bc_knight_the_name_across_the_field = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE KNIGHT HALF OF THE VERB-MODIFIER BATCH, 2026-08-17.
+#
+# THE ARGUMENT IS IN THE COMMANDER FILE'S BATCH HEADER and is not repeated:
+# the four verb modifiers are written at every call site in the mod and read
+# at none of them, and a gate on a live one is the first thing the mod has
+# that can say "again".
+#
+# THE GATE REACHES THROUGH scope:combat_side.side_commander AND MUST. This
+# file's tenth batch header already records why - the verb and rung families
+# both live on the side commander, and `is_valid` here is rooted on the
+# KNIGHT, so a bare `has_character_modifier = bc_pursuit` would ask whether
+# this particular knight is personally carrying an army modifier, which he
+# never is. That is not a hypothetical mistake; it is the exact mistake the
+# momentum guards in this file were written to avoid.
+#
+# THE `exists` GUARD IS NOT OPTIONAL. CK3 does not short-circuit, so the read
+# sits inside a `trigger_if` on its own `exists`, the same shape
+# bc_knight_knows_that_man uses for its enemy-commander read.
+#
+# WHAT HE CAN ACTUALLY SEE. A knight cannot see a modifier and cannot see a
+# ledger; what he can see is that the horses went past him a while ago and
+# have not come back, and that he is now walking into a place they have
+# already been. That is the entire content of the toast, and it is why this
+# is a separate template rather than the commander's with a different icon.
+#
+# `wild`/`up`: bc_spent_horse and a momentum rung. The push is going in and it
+# is going in behind cavalry that has been working since midday. It gains
+# ground and it costs the horses, which is precisely the pair `wild` exists
+# for.
+# ---------------------------------------------------------------------------
+bc_knight_the_horses_went_past = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_winning_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { has_character_modifier = bc_pursuit }
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_horses_went_past"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_horses_went_past_toast
+				desc = bc_knight_the_horses_went_past_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

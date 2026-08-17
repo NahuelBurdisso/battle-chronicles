@@ -3626,3 +3626,181 @@ bc_the_name_is_a_weight = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE MOD READS ITS OWN ARMY STATE BACK, 2026-08-17.
+#
+# THE FOUR VERB MODIFIERS ARE WRITTEN A HUNDRED AND FOUR TIMES AND READ ZERO
+# TIMES. bc_bloodied, bc_shieldwall, bc_spent_horse and bc_pursuit are handed
+# out by bc_apply_verb_effect at every call site in the mod and taken away
+# again by bc_cleanup_effect at combat end, and between those two moments
+# absolutely nothing in the mod ever asks whether one of them is live. The
+# rungs are read - bc_has_momentum_trigger and bc_is_faltering_trigger exist
+# for exactly that - and the verbs are not.
+#
+# READING THEM MAKES MOMENTS COMPOUND, WHICH THE MOD HAS NEVER DONE. Every
+# template shipped so far is written as though its battle started five minutes
+# ago: it asks about the man, the ground, the odds and the foe, and never once
+# about what has already happened on this field. A gate on a live verb
+# modifier is the first thing in the mod that can say "again".
+#
+# WHAT A LIVE VERB MODIFIER ACTUALLY MEANS, PRECISELY. bc_add_verb_effect
+# grants 20 days and bc_cleanup_effect wipes all four at combat end, so during
+# a battle a live verb was granted either by an earlier moment in THIS battle
+# or by the eve event immediately before it. It is never a leftover from last
+# month's war. The descs may therefore say "already today" and may not say
+# "in the last battle", and that distinction is load-bearing rather than
+# stylistic.
+#
+# ROOT IS THE COMMANDER IN THIS FILE AND THE MODIFIERS LIVE ON THE COMMANDER,
+# so a bare `has_character_modifier` is correct here and ONLY here. The knight
+# file's copy of this batch has to reach through scope:combat_side.side_
+# commander for the same reason its momentum guards do, which is recorded in
+# that file's tenth batch header.
+#
+# NEITHER TEMPLATE RE-GRANTS THE MODIFIER THAT GATED IT. That was available -
+# a deepening shieldwall is a real thing - and it is deliberately not done,
+# because a template whose grant satisfies its own gate will read as the same
+# toast twice to anybody unlucky with the cooldown.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The field is theirs and there is nothing left to take it with.
+#
+# `ordered`/`down` ON A WINNING FIELD, AND SWING IS NOT THE BATTLE. SWING is
+# the direction of the MOMENT, and this moment goes the wrong way in the
+# middle of an afternoon that is going the right way. The seam has always
+# allowed this and bc_he_will_not_chase_them is the shipped precedent.
+#
+# IT IS THE SECOND TEMPLATE ABOUT A PURSUIT THAT DOES NOT HAPPEN AND THAT IS
+# INTENDED. bc_he_will_not_chase_them is a decision - he could and he will
+# not, because the men running away have his name. This is arithmetic: he
+# would, and the horses did it an hour ago. The two are as different as a debt
+# and a gift and the loc is written to keep them apart.
+#
+# NO RUNG AT ALL. A momentum rung would be absurd on a moment that is about
+# not converting one, and a faltering rung would tell the player the battle is
+# slipping when it is not. The stress is the only cost, and it is the right
+# one: this is a man watching something he cannot buy walk away.
+# ---------------------------------------------------------------------------
+bc_the_horses_are_already_gone = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_character_modifier = bc_spent_horse
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_horses_are_already_gone"
+
+		add_stress = 10
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_horses_are_already_gone_toast
+			desc = bc_the_horses_are_already_gone_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# An hour ago these men were the ones doing the chasing.
+#
+# THE GATE IS A LIVE bc_pursuit ON A LOSING FIELD, which is a state the mod
+# has been producing since plan 1 and has never been able to notice: something
+# earlier today went well enough to hand this host a pursuit, and the
+# afternoon has turned over on top of it. Nothing else in the mod can say that
+# sentence, because nothing else in the mod remembers.
+#
+# `bloodied`/`down`: bc_bloodied AND the faltering rung. The turn is not free.
+# Men who were running forward in loose order half an hour ago are the worst
+# possible men to be receiving a push, and the cost lands on the army rather
+# than on the commander's judgement - which is why this is bloodied and not
+# measured.
+#
+# IT DOES NOT REMOVE bc_pursuit. Tempting, and wrong: the verb families are
+# owned by bc_cleanup_effect and a content template reaching into them would
+# put modifier lifetime in two places. The pursuit expiring on its own 20-day
+# timer or at combat end is correct, and the toast simply describes a host
+# that still has the modifier and no longer deserves it.
+# ---------------------------------------------------------------------------
+bc_they_were_chasing_an_hour_ago = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_character_modifier = bc_pursuit
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial <= 8
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_were_chasing_an_hour_ago"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_they_were_chasing_an_hour_ago_toast
+			desc = bc_they_were_chasing_an_hour_ago_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
