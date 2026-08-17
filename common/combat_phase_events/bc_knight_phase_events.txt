@@ -3271,3 +3271,173 @@ bc_knight_the_white_cloak = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE BOY IN THE ARRAY, 2026-08-17.
+#
+# `squire` APPEARS ZERO TIMES ANYWHERE IN THE MOD. Thirty-nine knight
+# templates ask how well he fights, what shape he is in, what he believes,
+# who he is related to and what the day is doing, and none of them asks
+# whether the man in the knight list has been a man for very long. In AGOT a
+# squire in an array is ordinary and the trait is handed out constantly.
+#
+# THE TRAIT, NOT is_agot_knight_trigger. AGOT's knight trigger counts a squire
+# with 100 track experience as a knight already, which is the right answer for
+# knighting ceremonies and the wrong one here: the question is what he is
+# today, in this line, and the trait answers it directly.
+#
+# TWO TEMPLATES, ONE GATE, OPPOSITE SIDE ROWS, and the pair is the point. The
+# same boy has the best day of his life or finds out what he agreed to, and
+# nothing about him decides which - only what the rest of the field is doing.
+# The mod has one other pair built this way, on nicknames, and the argument is
+# the same one.
+#
+# NO COMMANDER HALF. A squire does not hold a host. If AGOT ever produces one
+# the gate would be reachable and still wrong.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The best day of his life, and nobody has told him to slow down.
+#
+# `wild`/`up` AND bc_spent_horse WITH A MOMENTUM RUNG. This is the cell for a
+# moment that is genuinely good and genuinely costly in the same breath - the
+# two shipped uses are bc_the_wrath_takes_him and bc_the_old_grudge - and a
+# boy who has stopped being frightened is exactly that. He is riding it into
+# the ground and it is working.
+#
+# TWENTY-FIVE PRESTIGE, THE FILE'S SMALLEST AWARD. He is not being knighted
+# this afternoon and the mod may not imply it. What he has is that men who
+# will be alive tomorrow saw him.
+#
+# PROWESS >= 10, NOT 12. The rest of the file uses 12 because it is asking
+# about a knight. This is asking whether a boy is unusual for a boy.
+# ---------------------------------------------------------------------------
+bc_knight_the_squires_best_day = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = squire
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 10
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_squires_best_day"
+
+		add_prestige = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_squires_best_day_toast
+				desc = bc_knight_the_squires_best_day_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He finds out what he agreed to.
+#
+# FIFTEEN STRESS, WHICH IS THE FILE'S HIGH NUMBER. The usual is ten and it is
+# reserved for the mod's worst states; this is one, and the reason is that
+# nothing about it is going to stop happening for several hours.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING, AND NOT `wild`/`down`. Wild
+# would say he came apart, and the mod does not know that - what it knows is
+# that a thing he had a picture of has been replaced by the thing itself. The
+# faltering rung and the stress are the whole cost, and there is no army
+# modifier for a boy's education.
+#
+# THE DESC MAY NOT KILL HIM, WOUND HIM OR SEND HIM RUNNING. bc_knight_shames_
+# himself owns running and the standing rule owns the rest.
+# ---------------------------------------------------------------------------
+bc_knight_what_he_agreed_to = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = squire
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess <= 8
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_what_he_agreed_to"
+
+		add_stress = 15
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_what_he_agreed_to_toast
+				desc = bc_knight_what_he_agreed_to_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

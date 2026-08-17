@@ -4650,3 +4650,79 @@ bc_the_castellan_outdoors = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# A black brother is commanding, and there are fewer of them than there were.
+#
+# THE FIRST AGOT-SPECIFIC CHARACTER GATE IN THE MOD. Everything else here is
+# vanilla vocabulary that AGOT happens to inherit - skills, traits, council
+# seats, terrain helpers. `agot_is_member_of_nights_watch` is AGOT's own
+# trigger, defined in common/scripted_triggers/00_agot_nights_watch_triggers.txt
+# as an OR over `nightswatch`, `nightswatch_temp` and `nightswatch_historical`.
+#
+# CALL AGOT'S TRIGGER, DO NOT INLINE THE THREE TRAITS. The mod already takes
+# this dependency for the terrain helpers and for the same reason: if AGOT
+# adds a fourth way to be in the Watch, an inlined OR goes quietly wrong and
+# a called trigger does not.
+#
+# THE LOSING ROW IS THE ONLY ROW THIS TEMPLATE COULD TAKE. The Watch's
+# arithmetic is that it is always fewer than it was and nobody is sending
+# more, which is a sentence about a bad afternoon and reads as self-pity on a
+# good one.
+#
+# `bloodied`/`down` AND bc_bloodied. The men fight harder and worse because
+# there is nowhere behind them to be sent to, which is exactly the trade that
+# modifier makes.
+# ---------------------------------------------------------------------------
+bc_the_watch_has_no_reserve = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		agot_is_member_of_nights_watch = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = humble
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_watch_has_no_reserve"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_watch_has_no_reserve_toast
+			desc = bc_the_watch_has_no_reserve_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
