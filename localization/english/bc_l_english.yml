@@ -2089,3 +2089,23 @@
 
  bc_the_small_man_toast:0 "It Is Going the Way He Said It Would"
  bc_the_small_man_toast_desc:0 "He has not touched a weapon today and does not intend to. What he has done is put the right men in the wrong place for the other fellow four separate times since noon, and the fourth one has just come apart in exactly the direction he said it would at breakfast. The riders coming back to him are taking their hats off first now, which they were not doing this morning.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY. The man AGOT took the spurs from.
+#
+# THE DESC MAY NOT KNIGHT HIM AND MAY NOT PROMISE THAT ANYONE WILL. The trait
+# is a standing state, not a wound that closes, and a toast that hints at its
+# reversal writes a promise no other file in the mod can keep.
+#
+# IT MAY NOT SEND HIM RUNNING. bc_knight_shames_himself owns running, and this
+# man is the opposite case: he is the one still in the place he was put.
+#
+# IT MAY NOT SAY WHAT HE DID. Whatever it was, AGOT does not record it, the
+# player did not choose it, and inventing the crime would put a fact in the
+# player's world that no other file agrees with. The men around him do not
+# know either. That is most of the point.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he has nothing left to lose",
+# "the men have noticed", "nobody has told him to slow down".
+ bc_knight_the_spurs_they_took_toast:0 "He Stands Where They Put Him"
+ bc_knight_the_spurs_they_took_toast_desc:0 "Whatever it was, it was some years ago and in front of enough people that the story travels ahead of him. He was given the worst piece of the line this morning by a captain who did not trouble to look at him while saying it, and he has been standing in it since, without a device on him and without anyone to hold it if he goes down. The line is falling back everywhere else. It is not falling back here, and the four men nearest him have stopped asking themselves why they are still level with him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

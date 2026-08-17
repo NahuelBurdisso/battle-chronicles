@@ -574,7 +574,7 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". THIRTY-SIX of the
-# hundred and thirty-three call sites are adapted or measured - the five plan 1 shipped
+# hundred and thirty-four call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
 # .0002b and .0003b) plus thirty-one from later content batches - and every one of
 # them is supposed to fall through. Six more, all `ordered`/`down`, fall
@@ -596,11 +596,11 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at a hundred and thirty-three call sites:
+# at a hundred and thirty-four call sites:
 #
 #   measured/down 20  bloodied/up 19   entrenched/up 16  wild/down 15
 #   ordered/up 15     wild/up 12       bloodied/down 9   adapted/up 9
-#   ordered/down 6    entrenched/down 5  measured/up 4  adapted/down 3
+#   ordered/down 6    entrenched/down 6  measured/up 4  adapted/down 3
 #
 # The table's BEHAVIOUR has not changed as those cells filled - it never asked
 # about any pair but `ordered`'s. What changed is that plan 1's claim that a
@@ -633,9 +633,9 @@ bc_add_verb_effect = {
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
-# pair census above: bc_bloodied from 28 sites, bc_shieldwall from 21,
+# pair census above: bc_bloodied from 28 sites, bc_shieldwall from 22,
 # bc_spent_horse from 27, bc_pursuit from 15, and 42 falling through. Those five
-# sum to the hundred and thirty-three, which is the check.
+# sum to the hundred and thirty-four, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

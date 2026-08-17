@@ -1545,6 +1545,11 @@ bc_knight_will_not_be_carried = {
 		OR = {
 			has_trait = maimed
 			has_trait = one_legged
+			# AGOT SHIPS ITS OWN MAIMING TRAIT AND THIS OR NEVER SAW IT. `one_handed`
+			# (00_agot_traits.txt:1411) is category health with prowess -15 and is what
+			# AGOT hands a man who loses a hand - vanilla's `maimed` is not what its
+			# events grant. Every such knight fell through this gate silently.
+			has_trait = one_handed
 		}
 	}
 
@@ -1617,6 +1622,12 @@ bc_knight_the_face_they_run_from = {
 		OR = {
 			has_trait = one_eyed
 			has_trait = disfigured
+			# THE TWO AGOT FACES THIS TEMPLATE WAS ALWAYS ABOUT AND NEVER READ.
+			# `burned` (00_agot_traits.txt:1521) and `greyscale` (:1494) are AGOT's
+			# own, and the mod's most famous candidate for this moment carries the
+			# first of them rather than vanilla's `disfigured`.
+			has_trait = burned
+			has_trait = greyscale
 		}
 		bc_side_is_winning_trigger = yes
 	}
@@ -3786,6 +3797,87 @@ bc_knight_it_weighs_the_same = {
 				type = event_toast_effect_bad
 				title = bc_knight_it_weighs_the_same_toast
 				desc = bc_knight_it_weighs_the_same_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The spurs they took.
+#
+# AGOT SHIPS A TRAIT FOR A MAN WHO WAS A KNIGHT AND IS NOT ONE NOW, AND
+# NOTHING IN THIS MOD HAS EVER READ IT. `stripped_knight` (00_agot_traits.txt:154)
+# is category fame, opposite_opinion -10, monthly_prestige_gain_mult -0.01, and
+# opposites = { squire }. That last line is why this template cannot collide
+# with batch forty-three's pair: a man cannot hold both traits, so the squire's
+# best day and this are disjoint by AGOT's own definition rather than by
+# anything written here.
+#
+# LOSING, BECAUSE WINNING WOULD BE A STORY ABOUT GETTING THEM BACK. Nobody
+# gives spurs back in the middle of a rout, and a template that hinted they
+# might would be writing a promise the mod cannot keep. He is in the line on
+# the bad day, which is the only place the trait has anything to say.
+#
+# NO PRESTIGE, NOT EVEN A LITTLE. The trait's whole mechanical content is a
+# prestige penalty. Handing him prestige here would be the mod arguing with
+# the trait it just read, and the argument would be won by whichever ran last.
+#
+# NO RUNG AT ALL, WHICH IS DELIBERATE AND HAS PRECEDENT. bc_knight_will_not_be_carried
+# grants none either. Faltering would be wrong twice over: the side is already
+# losing, and this is a man doing the one thing he still can rather than a man
+# coming apart. `entrenched`/`down` means bc_shieldwall is the entire
+# consequence - the line holds a little longer where he is standing, and that
+# is all anyone will ever be able to say about him.
+#
+# THE DESC MAY NOT KNIGHT HIM, MAY NOT PROMISE TO, AND MAY NOT SEND HIM
+# RUNNING - bc_knight_shames_himself owns running, and the other two would
+# undo the trait.
+# ---------------------------------------------------------------------------
+bc_knight_the_spurs_they_took = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = stripped_knight
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_spurs_they_took"
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_spurs_they_took_toast
+				desc = bc_knight_the_spurs_they_took_toast_desc
 				left_icon = scope:bc_knight
 			}
 		}

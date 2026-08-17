@@ -28,7 +28,7 @@ reads the index, so a stale index can only ever report a pass).
 | Path | What |
 |---|---|
 | `common/combat_phase_events/bc_commander_phase_events.txt` | 67 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 45 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 46 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Fifty-four batches, one per row of the table below, none of which needed a
+Fifty-five batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -639,6 +639,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | the other four pop-ups | Finishes the class the previous batch opened. `bc_chronicles.0002` through `0005` each had **one fixed desc**, and each now has three, pooled the same way. The writing constraint is per-event and comes from that event's own options: **0002 may not break the line and may not steady it** (it is only reachable while faltering and one of its four options is to say nothing, so all four have to be left standing) and may not name what frightened them, because the mod does not know; **0003 may not say whether the wedge holds**, and may not put the baggage out of reach or the flank out of the question, since two options act on exactly those; **0004 may not lose the battle** — the flank is gone, the field is not, and one option brings a second line round in order; **0005 may not kill him and may not get him out**, because one of its options costs the commander the man, and **the distance stays thirty feet** since option a is that word and nothing else works | 8 new descs, no new templates |
 | the aftermath had no clauses at all | Every *moment* toast in the mod ends in three pooled clauses. **Not one aftermath toast did.** `bc_rivalry_grudge/rival/nemesis_desc`, `bc_dead_knights_toast_desc` and `bc_wounded_toast_desc` are the prose a player reads at the *end* of a battle — the part meant to be memorable — and each was a single fixed sentence pair that never varied over a whole campaign. Five new customizable_localization definitions of three arms each, appended to the fixed sentence exactly as the moment clauses are: **the desc keeps saying the fact, the clause says what it means.** These are the first **pure pools** in the file, and they sharpen a rule rather than break it. The batch that converted the ground sets recorded "no trigger-less arm remains anywhere in this file"; the actual rule is that a bare arm may not sit **among banded ones**, because under `random_valid` it is valid on every render and competes with all of them. A definition whose arms are *all* bare selects no fact, only a wording, which is the whole intent here — the file's top header and the ground-set header both now say so | 5 definitions, 15 fragments |
 | the body he was born with | The mod has a health batch and had **never asked about build**. `wounded_*`, `maimed`, `one_eyed` and `one_legged` are all read and all four are things that *happened* to a man; `physique_good_*` and `physique_bad_*` appeared zero times, and they are the other question — what he was handed before any of it started. Both ladders are OR-ed at the **top two rungs** with the third as a `chance` row, the same shape `bc_knight_the_old_wound` uses: gating on the extreme rung alone makes a template nearly unreachable, gating on all three makes "built for this" true of half the array. Winning is `entrenched`/`up` and `bc_shieldwall` — not clever and not brave, just a man harder to move than the men either side, which is precisely what a line does around a fixed point; the desc **may not make him a good fighter**, since prowess is a separate question and a knight of prowess 6 can fire it. Losing is the other end: sixty pounds of harness weighs sixty pounds on everybody and the mod had never said it costs different men different amounts. `measured`/`down`, which hands out nothing, because there is no army modifier for a man being tired. Third template, `dwarf`, one of the most loaded traits in the setting and used nowhere else: **winning row only**, and not out of delicacy — the losing version is men blaming a body for a battle, which the previous batch already wrote about a different accident of birth. `adapted`/`up`, hands out nothing, because nobody is dressing on him and no line braces because he rode past: he is winning it by having arranged it | 3 templates, base 80, 80, 30 |
+| the traits AGOT ships and the mod never read | Three of the body templates had been gating on **vanilla's** trait names inside a mod that ships its own. `bc_knight_will_not_be_carried` and `bc_he_holds_one_place` both OR'd `maimed` with `one_legged` and never saw `one_handed` (`00_agot_traits.txt:1411`), which is category health with prowess -15 and is what AGOT actually hands a man who loses a hand — its own events do not grant vanilla's `maimed`, so every such character fell through both gates in silence. `bc_knight_the_face_they_run_from` OR'd `one_eyed` with `disfigured` and missed `burned` (`:1521`) and `greyscale` (`:1494`), which are the two faces that template was always about; the setting's most famous candidate for that moment carries the first of them. Three OR patches, no new prose, and the class of bug is worth more than the fix: **a gate written against the base game is not a gate in a total conversion.** The new template is the same discovery from the other side — `stripped_knight` (`:154`) is a trait AGOT ships for a man who was a knight and is not one now, read nowhere in the mod until this batch. Losing only, because winning would be a story about getting the spurs back and nobody gives them back mid-rout. **No prestige**, since the trait's entire mechanical content is a prestige penalty and handing him prestige would be the mod arguing with the trait it just read. **No rung at all** (precedent: `bc_knight_will_not_be_carried`): faltering is wrong twice over when the side is already losing and the man is the one thing still holding. `entrenched`/`down`, so `bc_shieldwall` is the whole consequence. The desc **may not knight him, may not promise anyone will, and may not say what he did** — AGOT does not record the crime, the player did not choose it, and the men around him do not know either | 1 template + 3 gate fixes |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -657,16 +658,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **a hundred and thirty-three**, its "3, 3, 4 and 3"
-are 28, 21, 27 and 15, and the fall-through set is forty-two sites rather than
+plan 1's eighteen call sites are now **a hundred and thirty-four**, its "3, 3, 4 and 3"
+are 28, 22, 27 and 15, and the fall-through set is forty-two sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 67, knight 45.** Weight against vanilla's
+**Template totals are now commander 67, knight 46.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60; on the knight side, forty-five templates against
-`knight_none`'s 2000 — forty-four at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60; on the knight side, forty-six templates against
+`knight_none`'s 2000 — forty-five at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

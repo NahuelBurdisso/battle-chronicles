@@ -2990,6 +2990,9 @@ bc_he_holds_one_place = {
 		OR = {
 			has_trait = maimed
 			has_trait = one_legged
+			# THE SAME AGOT GAP AS bc_knight_will_not_be_carried'S, AND FIXED WITH IT.
+			# `one_handed` is AGOT's own maiming trait, 00_agot_traits.txt:1411.
+			has_trait = one_handed
 		}
 	}
 
