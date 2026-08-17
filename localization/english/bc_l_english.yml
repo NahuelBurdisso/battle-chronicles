@@ -137,11 +137,17 @@
 # it also already says he got up, so these say what he got up out of instead of
 # saying it twice.
  bc_frag_horse_killed_desert:0 " The horse takes the whole weight of him into the dry stones, and he rises off them anyway."
+ bc_frag_horse_killed_desert_b:0 " There is no cover between where the horse lies and where he needs to be."
  bc_frag_horse_killed_open:0 " Everybody within a bowshot watches the horse go down and watches him stand."
+ bc_frag_horse_killed_open_b:0 " He is the only man standing in a wide circle of nothing, and he stays standing."
  bc_frag_horse_killed_forest:0 " There was a root in it somewhere, and the horse found it before the enemy did."
+ bc_frag_horse_killed_forest_b:0 " He comes free of the stirrup with a branch across his back and keeps his feet."
  bc_frag_horse_killed_rough:0 " He lands where the country is all knuckles and edges, with nothing soft anywhere in it."
+ bc_frag_horse_killed_rough_b:0 " He gets one knee under him among the stones, and the second takes longer."
  bc_frag_horse_killed_jungle:0 " He hauls himself up out of the wet growth with half of it still hanging off him."
+ bc_frag_horse_killed_jungle_b:0 " The growth had hold of him before the fall did, and he tears clear of it on foot."
  bc_frag_horse_killed_winter:0 " The horse's blood steams where it spreads, and he steps out of the steam."
+ bc_frag_horse_killed_winter_b:0 " He goes down into the snow and stands up wearing it, and does not stop to shed it."
  bc_frag_horse_killed_any:0 ""
 
  bc_flank_collapses_toast:0 "The Flank Collapses"
@@ -179,11 +185,17 @@
 # LEADING SPACE ON EVERY ARM, empty fallback, and no space before the tag in the
 # desc above, exactly as the spike does it.
  bc_frag_van_breaks_desert:0 " They go through in a wall of sand and are on the far side before it settles."
+ bc_frag_van_breaks_desert_b:0 " Nothing out here was ever going to hold a line together once it began to part."
  bc_frag_van_breaks_open:0 " There is room out here to run it down, and they take all of it."
+ bc_frag_van_breaks_open_b:0 " It happens in plain view of both hosts and neither can pretend otherwise."
  bc_frag_van_breaks_rough:0 " The gap is where the stone lets men stand, and it is theirs now."
+ bc_frag_van_breaks_rough_b:0 " They take the one way through, and everything behind them follows it."
  bc_frag_van_breaks_forest:0 " The trees make it a hundred small fights, and the leading ranks win each one in turn."
+ bc_frag_van_breaks_forest_b:0 " They are past the first trunks before anyone opposite understands it has happened."
  bc_frag_van_breaks_jungle:0 " They are through and lost to sight in the same breath."
+ bc_frag_van_breaks_jungle_b:0 " The green that hid them coming hides how many have already gone through."
  bc_frag_van_breaks_winter:0 " The churned ice takes them forward faster than it took anyone else."
+ bc_frag_van_breaks_winter_b:0 " Their tracks run on ahead of the men making them, straight and deep and away."
  bc_frag_van_breaks_any:0 ""
 
  bc_ground_favours_us_toast:0 "The Ground Favours Us"
@@ -196,11 +208,17 @@
 # different things about the same place, which is why no arm below repeats the
 # literal's three nouns.
  bc_frag_favours_desert:0 " Their whole approach is over bare pan under a white sun."
+ bc_frag_favours_desert_b:0 " They will be dry before they are close, and they know it, and they are coming anyway."
  bc_frag_favours_open:0 " Even out here the land has one fold in it, and it is ours."
+ bc_frag_favours_open_b:0 " Flat as this is, it is our flat, and we have had since dawn to learn it."
  bc_frag_favours_rough:0 " They must come up at us, and the gully lets them come up a few at a time."
+ bc_frag_favours_rough_b:0 " There is one path up and it is wide enough for four men who are already tired."
  bc_frag_favours_forest:0 " Every man of theirs who gets through arrives alone and arrives late."
+ bc_frag_favours_forest_b:0 " We can hear them long before we can see them, and we have counted them twice."
  bc_frag_favours_jungle:0 " They have to cut their way to us, and the cutting is loud enough to count them by."
+ bc_frag_favours_jungle_b:0 " Whatever order they set out in, this country has taken it apart before they arrive."
  bc_frag_favours_winter:0 " The drifts choose the road for them, and the road ends where we are."
+ bc_frag_favours_winter_b:0 " They are wading and we are standing, and the difference has an hour yet to work."
  bc_frag_favours_any:0 ""
 
  bc_lines_bogged_down_toast:0 "The Lines Bog Down"

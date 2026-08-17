@@ -415,29 +415,28 @@ bc_banner_falls_ground = {
 # never to an empty toast. This one is appended, exactly as the spike is. The
 # CORE sets those tasks also write are what still wait, and nothing here is one.
 #
-# FIRST-MATCH, NOT POOLED, unlike bc_bond_clause and bc_scale_clause below. One
-# string per band is right here for the same reason it is right on the spike:
-# the six bands already give six different sentences, so the repetition a pool
-# fixes is not the repetition this set has. If a band is later found to be worn
-# out in play, pool that band alone - the fallback would then have to become a
-# complement, as the scale clause's did.
+# POOLED, NOT FIRST-MATCH - AND IT WAS WRITTEN THE OTHER WAY. What stood here
+# argued that one string per band was right because the six bands already give
+# six different sentences, so the repetition a pool fixes is not the repetition
+# this set has. That argument was sound about the SET and wrong about the
+# PLAYER: a war is fought in a region, a region is one band, and a player who
+# reads this moment twenty times reads its `rough` string twenty times. The
+# same paragraph provided for exactly this - "if a band is later found to be
+# worn out in play, pool that band alone" - and the answer turned out to be all
+# six bands at once, on the measured number the whole session answers: the ten
+# moments produced 233 firings in 44 battles.
 #
-# FOUR OF THE TEN ARE NOW POOLED AND THIS SET IS NOT ONE OF THEM, 2026-08-17.
-# bc_banner_falls_ground, bc_rally_the_line_ground, bc_flank_collapses_ground
-# and bc_lines_bogged_down_ground each carry TWO strings per band, take
-# `random_valid = yes`, and have had their fallback rewritten as a NOR
-# complement - the exact migration this paragraph prescribes, done for all six
-# bands at once rather than for one. The argument is the measured number the
-# whole session answers: the ten moments produced 233 firings in 44 battles,
-# and a player whose war is fought in one region reads a single sentence per
-# moment for the length of it.
+# SEVEN OF THE TEN ARE POOLED AS OF 2026-08-17. banner, rally, flank, bogged,
+# van, horse and favours each carry TWO strings per band with
+# `random_valid = yes`. The three knight sets - breach, shames, shieldbrother -
+# are still first-match with one.
 #
 # THE FALLBACK CONVERSION IS NOT OPTIONAL WHEN POOLING AND IT IS THE PART THAT
 # IS EASY TO FORGET. Under first-match a trigger-less last arm can never be
 # reached while a band matches; under `random_valid` it is valid on EVERY
-# render and would take a share of every toast to print an empty string. The
-# four pooled sets carry the complement; the six that remain first-match, this
-# one among them, correctly do not.
+# render and would take a share of every toast to print an empty string. Every
+# pooled set carries a NOR complement; the three that remain first-match
+# correctly do not.
 #
 # THE FALLBACK IS LOAD-BEARING FROM ANY CALL SITE, the same as the spike's, and
 # for the same reason: bc_write_ground_effect removes the variable first and has
@@ -445,8 +444,20 @@ bc_banner_falls_ground = {
 bc_van_breaks_through_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_van_breaks_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -466,7 +477,27 @@ bc_van_breaks_through_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_van_breaks_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_van_breaks_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -486,7 +517,27 @@ bc_van_breaks_through_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_van_breaks_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_van_breaks_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -506,7 +557,30 @@ bc_van_breaks_through_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_van_breaks_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_van_breaks_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 
@@ -839,8 +913,20 @@ bc_rally_the_line_ground = {
 bc_horse_killed_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_horse_killed_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -860,7 +946,27 @@ bc_horse_killed_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_horse_killed_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_horse_killed_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -880,7 +986,27 @@ bc_horse_killed_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_horse_killed_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_horse_killed_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -900,7 +1026,30 @@ bc_horse_killed_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_horse_killed_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_horse_killed_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 
@@ -1050,8 +1199,20 @@ bc_lines_bogged_down_ground = {
 bc_ground_favours_us_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_favours_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1071,7 +1232,27 @@ bc_ground_favours_us_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_favours_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_favours_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1091,7 +1272,27 @@ bc_ground_favours_us_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_favours_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_favours_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1111,7 +1312,30 @@ bc_ground_favours_us_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_favours_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_favours_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 
