@@ -630,6 +630,11 @@
  bc_frag_bond_stranger:0 " The man commanding here has never had cause to learn a name on the other side."
  bc_frag_bond_stranger_b:0 " The man commanding here could not pick the man opposite out of a crowd, and will not have to."
  bc_frag_bond_stranger_c:0 " Whatever quarrel the man commanding here has with that host, the war supplied it and nothing else did."
+ bc_frag_bond_nemesis_d:0 " The man commanding here has wanted this particular host in front of him for a long time."
+ bc_frag_bond_kin_d:0 " The man commanding here is being fought by people who were at his table."
+ bc_frag_bond_countryman_d:0 " The man commanding here has not heard one word across that field today that needed explaining to him."
+ bc_frag_bond_heathen_d:0 " The man commanding here holds nothing sacred that the other host would recognise."
+ bc_frag_bond_stranger_d:0 " The man commanding here is fighting a host he had no opinion of a season ago."
  bc_frag_bond_any:0 ""
 
 # --- shared fragments: the scale --------------------------------------------
@@ -787,7 +792,7 @@
 # (desc_ground_jungle, with "goes in there" in desc_ground_forest), which is why
 # no arm here says "gone in". Treat neither list as complete.
 
-# THREE VARIANTS PER BAND SINCE 2026-08-17, pooled by `random_valid = yes` in
+# FIVE VARIANTS PER BAND SINCE 2026-08-17, pooled by `random_valid = yes` in
 # bc_flavour.txt. This is the most-read prose in the mod - it closes every moment
 # toast, and the 2026-08-15 run recorded 131 size-3 moments in 44 battles, so the
 # huge string alone was read 131 times in one campaign.
@@ -796,12 +801,15 @@
 # of a sentence with no separator, and the three originals carry it; an arm
 # without one runs into the full stop before it.
 #
-# THE THREE ORIGINALS ALL SAY "not yet in the fighting" AND THE SIX NEW ONES
+# THE THREE ORIGINALS ALL SAY "not yet in the fighting" AND THE TWELVE NEW ONES
 # MUST NOT. That phrase is the reason a player recognises this clause on sight,
 # which is precisely the problem being fixed. The `_b` arms say the same thing
 # about companies and standards rather than about men; the `_c` arms say
 # something about the size of the fight instead of about the reserve, which is
-# the same fact from the other end.
+# the same fact from the other end. The `_d` and `_e` arms, added the same day,
+# say what the size does to the men's INFORMATION - how much of it anyone can
+# see, and how late word travels - which is the one thing about a battle's size
+# that is true whatever is happening on it.
  bc_frag_scale_huge:0 " In a fight this big, most of the men are not yet in the fighting."
  bc_frag_scale_huge_b:0 " Whole companies have not struck a blow and may not strike one before dark."
  bc_frag_scale_huge_c:0 " There are more banners standing here than any one man could put a name to."

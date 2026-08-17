@@ -1114,10 +1114,10 @@ bc_shieldbrother_forged_ground = {
 #
 # THE FIVE GROUPS REMAIN MUTUALLY EXCLUSIVE, which is what makes the random
 # safe: var:bc_battle_bond holds exactly one flag, so the valid set is always
-# the three variants of one value, never a mix of two.
+# the four variants of one value, never a mix of two.
 #
-# EVERY VARIANT OF A VALUE MUST MAKE THE SAME CLAIM. They are three ways of
-# saying one fact the ladder already decided, not three degrees of it. This is
+# EVERY VARIANT OF A VALUE MUST MAKE THE SAME CLAIM. They are four ways of
+# saying one fact the ladder already decided, not four degrees of it. This is
 # the bond's version of the monotonicity rule the scale clause's header states,
 # and it is the one thing a new variant can get wrong without anything
 # catching it.
@@ -1127,13 +1127,17 @@ bc_shieldbrother_forged_ground = {
 # saying a bare `he` would attach to the wrong man on those three. `The man
 # commanding here` is the shared frame and it is deliberate repetition.
 #
-# THE SCALE CLAUSE DELIBERATELY DID NOT GET THE SAME TREATMENT. Its header
-# closes two axes outright and requires the three strings to grade monotonically
-# along a third, and the loc file requires all three to carry `not yet in the
-# fighting` VERBATIM so the grading is legible in one reading. Variants bound by
-# all of that would differ by a few words and buy almost nothing. If someone
-# later disagrees, the four-row test in that header is what a variant has to
-# pass, not this paragraph.
+# THE SCALE CLAUSE DID GET THE SAME TREATMENT IN THE END, AND THIS PARAGRAPH
+# USED TO ARGUE THAT IT COULD NOT. The argument was that its header closes two
+# axes outright and requires the strings to grade monotonically along a third,
+# and that the loc file requires `not yet in the fighting` VERBATIM - so any
+# variant would differ by a few words and buy nothing. The mistake was reading
+# the verbatim requirement as binding on the WHOLE pool rather than on the
+# original arm of each band: what it protects is that the three originals grade
+# legibly against each other in one reading, and a variant that says something
+# else entirely about the same band does not touch that. The scale clause now
+# has five arms per band on exactly that basis. The four-row test in its header
+# is still what a new arm has to pass; this paragraph never was.
 bc_bond_clause = {
 	type = character
 
@@ -1161,6 +1165,16 @@ bc_bond_clause = {
 	}
 	text = {
 		localization_key = bc_frag_bond_nemesis_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:nemesis
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_nemesis_d
 		trigger = {
 			exists = var:bc_battle_bond
 			trigger_if = {
@@ -1200,6 +1214,16 @@ bc_bond_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_bond_kin_d
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:kin
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_bond_countryman
 		trigger = {
 			exists = var:bc_battle_bond
@@ -1221,6 +1245,16 @@ bc_bond_clause = {
 	}
 	text = {
 		localization_key = bc_frag_bond_countryman_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:countryman
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_countryman_d
 		trigger = {
 			exists = var:bc_battle_bond
 			trigger_if = {
@@ -1260,6 +1294,16 @@ bc_bond_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_bond_heathen_d
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:heathen
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_bond_stranger
 		trigger = {
 			exists = var:bc_battle_bond
@@ -1281,6 +1325,16 @@ bc_bond_clause = {
 	}
 	text = {
 		localization_key = bc_frag_bond_stranger_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:stranger
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_stranger_d
 		trigger = {
 			exists = var:bc_battle_bond
 			trigger_if = {
@@ -1494,8 +1548,8 @@ bc_bond_clause = {
 # equality and `>=` differently - applies to the sixteen arms exactly as it
 # applied to the three.
 #
-# WIDENED FROM THREE TO FIVE PER BAND, AND THIS IS THE ONE POOL WHERE THAT IS
-# WORTH THE KEYS. The arithmetic is on the 2026-08-15 run: 233 moments in 44
+# WIDENED FROM THREE TO FIVE PER BAND, AND THIS IS THE POOL WHERE THAT IS WORTH
+# THE MOST. The arithmetic is on the 2026-08-15 run: 233 moments in 44
 # battles, every one of them ending on this clause, and 131 of them in band 3
 # alone. At three arms a player fighting one war read the same size-3 sentence
 # roughly forty-four times; at five, twenty-six. No other pool in the mod is
