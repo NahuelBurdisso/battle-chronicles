@@ -204,6 +204,29 @@
  bc_knight_is_ridden_down_toast:0 "Ridden Down"
  bc_knight_is_ridden_down_toast_desc:0 "Flat country, and nothing on it to put your back against. He is still turning when the horses reach him.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the third three (2026-08-17) -------------------------
+#
+# Ground, age and kin - the three things a knight case has never read. Same
+# subject warning as the block above: the toast is raised on the COMMANDER, so
+# `he` in these literals is the knight and the appended bond clause is about
+# somebody else entirely. That only reads if every clause names its own subject,
+# which all fifteen of them do.
+#
+# bc_knight_meets_his_cousin IS THE ONE PLACE THE LITERAL AND THE CLAUSE CAN
+# COLLIDE ON MEANING RATHER THAN ON WORDS. If the commander is ALSO kin to the
+# man opposite the bond clause will say so, and the toast then reports two
+# separate kinships in two sentences. That is true, not a bug, and the literal
+# is written so it still parses when it happens - it says `his own name`, which
+# belongs to the knight and to nobody else in the sentence.
+ bc_knight_stands_in_the_snow_toast:0 "He Stands in the Snow"
+ bc_knight_stands_in_the_snow_toast_desc:0 "Everything is white and grey and slow, and he has not given up a step of it. Ice has frozen the mail to his surcoat where the blood ran down.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_old_sword_toast:0 "The Old Sword"
+ bc_knight_the_old_sword_toast_desc:0 "He is too old for this and has been for a decade, and he is still upright when younger backs have bent. Nothing he does today is quick and nothing he does today is wasted.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_meets_his_cousin_toast:0 "His Own Name, Opposite"
+ bc_knight_meets_his_cousin_toast_desc:0 "The device coming at him is his own name, worn by somebody who used to eat at the same table. Neither of them says anything anybody else can hear.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
 # Six templates gated on WHO THE MAN IS rather than on how the battle is going.

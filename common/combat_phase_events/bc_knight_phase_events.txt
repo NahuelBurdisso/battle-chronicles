@@ -524,3 +524,210 @@ bc_knight_is_ridden_down = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE SECOND - three knight cases about the knight himself.
+#
+# The six above ask what the knight DID and answer it out of prowess and the
+# state of the battle. None of them asks who he is. These three do: one reads
+# the ground he is standing on and his skill together, one reads his age, and
+# one reads who is commanding the other side.
+#
+# SAME base = 80 AND THE SAME MOMENTUM GUARD as the batch above, for the same
+# two reasons. Do not lift the guard into is_valid; that block is rooted on the
+# knight and bc_has_momentum_trigger reads its own root.
+#
+# bc_knight_meets_his_cousin GRANTS NO RUNG AT ALL and therefore carries no
+# guard. That is not an omission - it is the knight-side copy of the choice
+# bc_kin_across_the_line made: a man finding his own blood on the other side is
+# a thing that happens to him, not a thing that moves a battle. The stress is
+# the whole effect.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He stands in the snow. The winter band, which no knight case reads - the only
+# ground any of them has read until now is bc_knight_is_ridden_down's open.
+#
+# NO SIDE ROW. Winter is indifferent to who is winning, and the two side rows
+# are already spent four ways across the six above; leaving this one open is
+# how the case reaches battles the others cannot.
+# ---------------------------------------------------------------------------
+bc_knight_stands_in_the_snow = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 10
+		bc_field_is_winter_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who already holds the trait has done this before.
+		modifier = {
+			add = 40
+			has_trait = winter_soldier
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_stands_in_the_snow"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_stands_in_the_snow_toast
+				desc = bc_knight_stands_in_the_snow_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The old sword. Age, which nothing on the knight side reads.
+#
+# THE PROWESS ROW IS DELIBERATELY LOW AT 8. The commander-side pair splits age
+# into a good half and a bad half (bc_the_old_wolf, bc_the_green_boy); this is
+# only the good half, because a knight who is still being sent out at sixty is
+# self-selecting in a way a commander is not - commanding is a job you can hold
+# from a chair.
+# ---------------------------------------------------------------------------
+bc_knight_the_old_sword = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 8
+		age >= 55
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			age >= 65
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_old_sword"
+
+		add_prestige = 75
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_old_sword_toast
+				desc = bc_knight_the_old_sword_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He meets his cousin. bc_foe_is_kin_trigger, asked about the KNIGHT.
+#
+# THE TRIGGER IS ROOT-SAFE AND THAT IS WHY IT CAN BE USED HERE UNCHANGED. It
+# calls `is_close_family_of` on its own root with the enemy commander as the
+# target, and it walks to that commander through scope:combat_side, which is
+# set for a knight event exactly as it is for a commander one. So rooted on a
+# knight it asks whether THE KNIGHT is kin to the man opposite, which is a
+# different question from the one bc_kin_across_the_line asks and can be true
+# on a battle where that one is false.
+#
+# NO RUNG, NO GUARD, NO SIDE ROW. Only the stress and the record.
+# ---------------------------------------------------------------------------
+bc_knight_meets_his_cousin = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_kin_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# It weighs more on a man built to feel it.
+		modifier = {
+			add = 40
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_meets_his_cousin"
+
+		add_stress = 15
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_knight_meets_his_cousin_toast
+				desc = bc_knight_meets_his_cousin_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
