@@ -4818,3 +4818,182 @@ bc_the_short_war = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE NAME HE WAS GIVEN, 2026-08-17.
+#
+# NEITHER `bastard` NOR `legitimized_bastard` APPEARS ANYWHERE IN THE MOD, in
+# a setting where the surname a man was handed at birth is the first thing
+# anyone in the array knows about him. Sixty-four commander templates ask what
+# he is good at, what he believes, who he is angry with and what his lord has
+# on him, and none of them ask what his name is.
+#
+# NOT A SUBSET OF THE LOWBORN TEMPLATES, AND NOT THE SAME QUESTION. `bastard`
+# carries `dynasty_opinion = -15` in AGOT 00_traits.txt:11609, which is a modifier
+# on how a dynasty regards one of its own - a bastard is IN the house's blood
+# and outside its name, which is the entire problem and is exactly what
+# `is_lowborn` is not asking. bc_no_name_at_all and
+# bc_knight_no_house_behind_him are about a man with nobody behind him. These
+# are about a man with a great deal behind him that will not put his name on
+# anything.
+#
+# THE TWO TRAITS ARE MUTUALLY EXCLUSIVE BY DEFINITION, not by our arrangement:
+# AGOT 00_traits.txt:11599 lists `legitimized_bastard` in `bastard`'s
+# `opposites`, and AGOT's own 00_bastard_effects.txt removes one and adds the
+# other in the same block (:1077-1078). So the two gates below cannot both
+# be open on the same man and no ordering between them is needed.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The parchment settled it and the men were there before the parchment.
+#
+# `legitimized_bastard` AND THE WINNING ROW. The law has already given him the
+# answer; what it cannot give him is the memory of every man over forty in his
+# own host, and a victory is the one argument that does not need his name to
+# be on it. So he is winning the way a man wins when a good result is not
+# enough and it has to be a tidy one.
+#
+# `ordered`/`up` AND bc_pursuit, WHICH IS THE POINT. He does not let the win
+# get loose. The flanks are covered before they are needed and the chase goes
+# out in order, because a sloppy victory is the kind that gets talked about
+# afterwards in the wrong words.
+#
+# FIFTY PRESTIGE. He is buying something with this and the mod should say so -
+# but it is a payment on a debt he did not incur, not a windfall.
+#
+# `content` HALVES IT. A man who has stopped needing to prove the thing does
+# not command this way, and the trait is the mod's shortest way of saying so.
+# ---------------------------------------------------------------------------
+bc_the_parchment_and_the_men = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_trait = legitimized_bastard
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_parchment_and_the_men"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_parchment_and_the_men_toast
+			desc = bc_the_parchment_and_the_men_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# They already have the reason, and it is not the ground.
+#
+# `bastard` AND THE LOSING ROW. Every other commander in the mod who is losing
+# gets an argument about it afterwards - the terrain, the numbers, the hour,
+# the man opposite. This one will not, because the explanation was available
+# before the battle started and it is about him rather than about the day.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. There is no army modifier for
+# this. It does not make the line braver or steadier or looser; it makes the
+# afternoon mean something different to the man in the middle of it, and the
+# faltering rung with the stress is the whole of the cost.
+#
+# THE DESC MAY NOT HAVE ANYONE SAY IT OUT LOUD. Nobody in a host tells the
+# commander what they think of his birth while the fighting is on. The point
+# is that he does not need to be told.
+#
+# `paranoid` RAISES IT, WHICH IS THE ONE TRAIT ROW HERE THAT IS NOT ABOUT
+# COMMAND. A man who assumes he is being talked about is right this time.
+# ---------------------------------------------------------------------------
+bc_they_have_their_reason = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_trait = bastard
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial <= 8
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_have_their_reason"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_they_have_their_reason_toast
+			desc = bc_they_have_their_reason_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -3523,3 +3523,94 @@ bc_knight_nobody_pays_for_him = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# A good day is not enough for him and he knows the rate.
+#
+# `bastard` AND THE WINNING ROW, WHICH IS THE HALF THE COMMANDER FILE COULD
+# NOT TAKE. The commander half of this batch is the losing one, because what
+# happens to a bastard who loses is that nobody has to look for an
+# explanation. What happens to a bastard who is winning is entirely different
+# and it happens down in the array rather than at the top: the day is going
+# well and he is still working at a rate nobody else in the line is working
+# at, because a good day is not a thing he gets to keep unless it is
+# undeniable.
+#
+# NOT bc_knight_no_house_behind_him. That one is `is_lowborn` - a man with
+# nobody behind him, and being seen is the whole of his reward. This one has
+# a house behind him that is not going to say so, and being seen is not the
+# same currency at all. The two gates ask different questions and neither
+# contains the other; the reasoning is in the commander file's batch header.
+#
+# NOT bc_knight_the_glory_hound EITHER, which is a man taking a risk for the
+# story. This one is not taking a risk. He is being twice as careful and
+# twice as long about it, which is a different failure mode and gets a
+# different KIND.
+#
+# `bloodied`/`up` AND bc_bloodied. The rate is the moment, and the modifier -
+# harder and worse - is what a whole line looks like when the man at its
+# hinge will not let a thing be good enough.
+#
+# FIFTY PRESTIGE, and it is the one award in the file that is explicitly not
+# a reward. He is paying for something with it.
+# ---------------------------------------------------------------------------
+bc_knight_twice_as_good = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = bastard
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_twice_as_good"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_twice_as_good_toast
+				desc = bc_knight_twice_as_good_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -1968,3 +1968,35 @@
 
  bc_knight_nobody_pays_for_him_toast:0 "No Reason to Take Him Gently"
  bc_knight_nobody_pays_for_him_toast_desc:0 "The men coming at him can read harness as well as he can, and there is nothing on him that says somebody would send for him. He worked that out an hour ago. It means the door the others still have is not there for him, and a man who cannot put his hands up fights in a particular way - forward, and without much left over for the fellow beside him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the name he was given (2026-08-17) --------------------------------------
+#
+# NONE OF THE THREE MAY PRINT A SURNAME. Snow, Sand, Rivers, Stone, Flowers,
+# Pyke, Hill, Storm and Waters are all correct for somebody and wrong for
+# everybody else, and the mod has no idea which region it is standing in. The
+# descs say what the name does, never what it is.
+#
+# NONE OF THE THREE MAY HAVE A CHARACTER SAY IT OUT LOUD. Nobody remarks on a
+# man's birth to his face during a battle. What the mod may write is what he
+# assumes is being thought, which is the actual mechanism in all three.
+#
+# THE FIRST MAY NOT SOUND GRATEFUL AND MAY NOT SOUND BITTER. The decree is
+# years old and settled; what has not settled is the memory of the men.
+#
+# THE SECOND MAY NOT NAME THE REAL TACTICAL REASON HE IS LOSING - the point is
+# that nobody is going to go looking for it.
+#
+# THE THIRD MAY NOT BE ABOUT GLORY OR RISK. bc_knight_the_glory_hound owns the
+# man doing something dangerous for the story. This one is about a rate of
+# work, which is the opposite failing.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the arithmetic", "the men have
+# noticed", "he has stopped counting", "he could have gone at dawn".
+ bc_the_parchment_and_the_men_toast:0 "The Decree Is Years Old"
+ bc_the_parchment_and_the_men_toast_desc:0 "He is winning, and he is winning it neatly, which is not the same thing and is the thing he has decided to have. The flanks are covered before there is anything on them. The chase goes out in threes with a man over them who has been told twice. Every grey head in this host was standing somewhere when he was a different kind of person, and none of them will ever mention it, and he has never once commanded as though he believed that.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_they_have_their_reason_toast:0 "Nobody Will Have to Look Far"
+ bc_they_have_their_reason_toast_desc:0 "Another man loses an afternoon like this one and it gets argued about for a winter - the ground, the hour, the fellow on the left who was late. He is not going to get that argument. The answer is already written down and it was written before he ever sat a horse, and it will be said kindly by people who like him. He gives the next order anyway and it is a reasonable order.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_twice_as_good_toast:0 "Good Enough Is Not Available"
+ bc_knight_twice_as_good_toast_desc:0 "The day is already going their way and he has not changed his pace since the first hour. Men either side of him have taken the moment everyone takes - a breath, a look around, a drink - and he has not, because a share of a good day is not a thing he will be given afterwards and he has known that since he was small. So he goes on working at a rate the line cannot hold, and the line tries to hold it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
