@@ -502,6 +502,48 @@
  bc_battle_memory_lost_desc_second_perspective:0 "you stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
  bc_battle_memory_lost_desc_third_perspective:0 "[owner.GetName] stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
 
+# --- memory variants (2026-08-17) -------------------------------------------
+#
+# Two more per perspective, pooled by the `random_valid` block each memory type
+# already carried in bc_memories.txt. A knight who fights a long war collects
+# these by the dozen and they all read identically until now.
+#
+# THE PERSPECTIVES OF ONE VARIANT ARE THE SAME SENTENCE IN THREE VOICES, and
+# the engine picks a line per perspective block rather than picking a variant
+# once. Keeping the three pools in the same order is what keeps a comparison
+# between two of them looking deliberate; bc_memories.txt says so at the call
+# site too.
+#
+# `we` IS USED IN THE FIRST PERSON ONLY, and its second-person form is `you`
+# doing the work of a plural - the same thing the shipped `you were the ones
+# still standing on it` already does. Third person avoids the problem by naming
+# the man.
+#
+# NO FULL STOP, PAST TENSE, LOWER CASE. Same rule as the nine above.
+ bc_shieldbrother_memory_desc_b:0 "I held the flank beside [shieldbrother.GetFullName] until there was nobody left in front of us"
+ bc_shieldbrother_memory_desc_b_second_perspective:0 "you held the flank beside [shieldbrother.GetFullName] until there was nobody left in front of you"
+ bc_shieldbrother_memory_desc_b_third_perspective:0 "[owner.GetName] held the flank beside [shieldbrother.GetFullName] until there was nobody left in front of them"
+
+ bc_shieldbrother_memory_desc_c:0 "[shieldbrother.GetFullName] and I were the last two upright in that corner of it"
+ bc_shieldbrother_memory_desc_c_second_perspective:0 "you and [shieldbrother.GetFullName] were the last two upright in that corner of it"
+ bc_shieldbrother_memory_desc_c_third_perspective:0 "[owner.GetName] and [shieldbrother.GetFullName] were the last two upright in that corner of it"
+
+ bc_battle_memory_won_desc_b:0 "I was at [ROOT.Var('battle_location').GetProvince.GetName] on the day their line went, and I watched it go"
+ bc_battle_memory_won_desc_b_second_perspective:0 "you were at [ROOT.Var('battle_location').GetProvince.GetName] on the day their line went, and you watched it go"
+ bc_battle_memory_won_desc_b_third_perspective:0 "[owner.GetName] was at [ROOT.Var('battle_location').GetProvince.GetName] on the day their line went, and watched it go"
+
+ bc_battle_memory_won_desc_c:0 "we carried the day at [ROOT.Var('battle_location').GetProvince.GetName], and I have not forgotten what it cost"
+ bc_battle_memory_won_desc_c_second_perspective:0 "you carried the day at [ROOT.Var('battle_location').GetProvince.GetName], and have not forgotten what it cost"
+ bc_battle_memory_won_desc_c_third_perspective:0 "[owner.GetName] carried the day at [ROOT.Var('battle_location').GetProvince.GetName], and has not forgotten what it cost"
+
+ bc_battle_memory_lost_desc_b:0 "I was at [ROOT.Var('battle_location').GetProvince.GetName] on the day it broke, and I walked away from it"
+ bc_battle_memory_lost_desc_b_second_perspective:0 "you were at [ROOT.Var('battle_location').GetProvince.GetName] on the day it broke, and you walked away from it"
+ bc_battle_memory_lost_desc_b_third_perspective:0 "[owner.GetName] was at [ROOT.Var('battle_location').GetProvince.GetName] on the day it broke, and walked away from it"
+
+ bc_battle_memory_lost_desc_c:0 "we were beaten at [ROOT.Var('battle_location').GetProvince.GetName], and I remember the road afterwards better than the fighting"
+ bc_battle_memory_lost_desc_c_second_perspective:0 "you were beaten at [ROOT.Var('battle_location').GetProvince.GetName], and remember the road afterwards better than the fighting"
+ bc_battle_memory_lost_desc_c_third_perspective:0 "[owner.GetName] was beaten at [ROOT.Var('battle_location').GetProvince.GetName], and remembers the road afterwards better than the fighting"
+
 # --- pop-up events ----------------------------------------------------------
 
  bc_chronicles.0001.t:0 "The Banner Falls"

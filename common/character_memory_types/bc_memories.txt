@@ -13,6 +13,19 @@
 # `icon` must name a file that already exists in the vanilla memory icon set -
 # `battle.dds` is used by vanilla's own `witnessed_death_battle_good`.
 
+# THREE LINES PER PERSPECTIVE SINCE 2026-08-17. The `random_valid` wrapper was
+# always here - it is part of the shape copied from vanilla - and it held one
+# desc, so every shieldbrother in a save remembered the day in the same words.
+# Filling the pool is the whole change; no structure moved.
+#
+# THE THREE PERSPECTIVES OF ONE VARIANT ARE ONE SENTENCE IN THREE VOICES and
+# are NOT independently pooled by the engine - it picks a line per perspective
+# block. So the three pools are kept in the same ORDER, and a reader comparing
+# two of them side by side will usually see the same variant, which is what the
+# UI expects. Do not reorder one pool without reordering all three.
+#
+# ALL NINE ARE PAST TENSE AND LOWER CASE with no full stop, per the vanilla
+# standard in _character_memories.info: the UI builds a sentence around them.
 bc_shieldbrother_memory = {
 	categories = { positive war relationships friend }
 	icon = "battle.dds"
@@ -20,18 +33,24 @@ bc_shieldbrother_memory = {
 	description = {
 		random_valid = {
 			desc = bc_shieldbrother_memory_desc
+			desc = bc_shieldbrother_memory_desc_b
+			desc = bc_shieldbrother_memory_desc_c
 		}
 	}
 
 	second_perspective_description = {
 		random_valid = {
 			desc = bc_shieldbrother_memory_desc_second_perspective
+			desc = bc_shieldbrother_memory_desc_b_second_perspective
+			desc = bc_shieldbrother_memory_desc_c_second_perspective
 		}
 	}
 
 	third_perspective_description = {
 		random_valid = {
 			desc = bc_shieldbrother_memory_desc_third_perspective
+			desc = bc_shieldbrother_memory_desc_b_third_perspective
+			desc = bc_shieldbrother_memory_desc_c_third_perspective
 		}
 	}
 
@@ -67,18 +86,24 @@ bc_battle_memory_won = {
 	description = {
 		random_valid = {
 			desc = bc_battle_memory_won_desc
+			desc = bc_battle_memory_won_desc_b
+			desc = bc_battle_memory_won_desc_c
 		}
 	}
 
 	second_perspective_description = {
 		random_valid = {
 			desc = bc_battle_memory_won_desc_second_perspective
+			desc = bc_battle_memory_won_desc_b_second_perspective
+			desc = bc_battle_memory_won_desc_c_second_perspective
 		}
 	}
 
 	third_perspective_description = {
 		random_valid = {
 			desc = bc_battle_memory_won_desc_third_perspective
+			desc = bc_battle_memory_won_desc_b_third_perspective
+			desc = bc_battle_memory_won_desc_c_third_perspective
 		}
 	}
 
@@ -94,18 +119,24 @@ bc_battle_memory_lost = {
 	description = {
 		random_valid = {
 			desc = bc_battle_memory_lost_desc
+			desc = bc_battle_memory_lost_desc_b
+			desc = bc_battle_memory_lost_desc_c
 		}
 	}
 
 	second_perspective_description = {
 		random_valid = {
 			desc = bc_battle_memory_lost_desc_second_perspective
+			desc = bc_battle_memory_lost_desc_b_second_perspective
+			desc = bc_battle_memory_lost_desc_c_second_perspective
 		}
 	}
 
 	third_perspective_description = {
 		random_valid = {
 			desc = bc_battle_memory_lost_desc_third_perspective
+			desc = bc_battle_memory_lost_desc_b_third_perspective
+			desc = bc_battle_memory_lost_desc_c_third_perspective
 		}
 	}
 
