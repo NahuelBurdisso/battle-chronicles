@@ -112,6 +112,67 @@ bc_battle_memory_won = {
 	}
 }
 
+# --- the nemesis memory -----------------------------------------------------
+#
+# THE TOP RUNG OF THE RIVALRY LADDER LEFT NOTHING PERMANENT BEHIND. A third
+# defeat at the same man's hands sets `set_relation_nemesis`, and a relation is
+# exactly the thing that can be cleared - bc_rivalry_effects.txt's own header
+# describes the symmetric clear, and a commander who beats the man back down
+# loses the relation and every trace of the three fields with it. That is the
+# same argument bc_shieldbrother_memory was written to answer, pointed the other
+# way: opinion and relations fade, a memory can still be asked about in twenty
+# years.
+#
+# ONE MEMORY PER RIVALRY, NOT ONE PER DEFEAT. The call site fires it only on the
+# loss that makes the count exactly three, so the fourth and fifth beatings add
+# nothing. The memory is the moment a run of bad luck became a name.
+#
+# THE LOSER REMEMBERS AND THE WINNER DOES NOT, which is the one place this type
+# breaks the shieldbrother pattern of writing both sides. Being beaten three
+# times by one man is a thing that happens to somebody; beating a man three times
+# is a season's work and belongs to no single field, so there is no day for the
+# winner's memory to be about. The `participants` tag still names him, so the
+# winner appears in the sentence - he simply does not carry his own copy.
+#
+# `rival.dds` IS A VANILLA ICON, used by vanilla's own `became_rivals` in
+# character_memories_1.txt, and the category set `negative relationships rival`
+# is copied from the same block. Same rule as `battle.dds` above: the icon must
+# already exist in the vanilla set.
+bc_nemesis_memory = {
+	categories = { negative war relationships rival }
+	icon = "rival.dds"
+
+	description = {
+		random_valid = {
+			desc = bc_nemesis_memory_desc
+			desc = bc_nemesis_memory_desc_b
+			desc = bc_nemesis_memory_desc_c
+		}
+	}
+
+	second_perspective_description = {
+		random_valid = {
+			desc = bc_nemesis_memory_desc_second_perspective
+			desc = bc_nemesis_memory_desc_b_second_perspective
+			desc = bc_nemesis_memory_desc_c_second_perspective
+		}
+	}
+
+	third_perspective_description = {
+		random_valid = {
+			desc = bc_nemesis_memory_desc_third_perspective
+			desc = bc_nemesis_memory_desc_b_third_perspective
+			desc = bc_nemesis_memory_desc_c_third_perspective
+		}
+	}
+
+	participants = { nemesis }
+
+	duration = {
+		years = 40
+	}
+}
+
 bc_battle_memory_lost = {
 	categories = { negative martial war battle }
 	icon = "battle.dds"

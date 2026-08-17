@@ -87,6 +87,40 @@ bc_rivalry_set_relation_effect = {
 				target = scope:bc_rivalry_foe
 				reason = bc_reason_battle_nemesis
 			}
+
+			# THE ONLY PERMANENT THING THIS LADDER LEAVES. The relation above
+			# can be cleared - this file's header describes the symmetric
+			# clear - and when it goes it takes every trace of the three
+			# fields with it. bc_nemesis_memory outlives it, and the type's
+			# own header carries the argument.
+			#
+			# EXACTLY THREE, NOT THREE OR MORE. The arm's limit is `>= 3` so
+			# that the relation is re-set on every later loss, which is what a
+			# relation wants; a memory is not, and a fifth defeat should not
+			# put a fifth copy of the same day in his head. The equality test
+			# is the whole guard, and it is nested inside the arm where the
+			# counter is already proven to exist by the caller.
+			#
+			# A KNOWN AND ACCEPTED GAP: a player who turns the nemesis game
+			# rule on only after the fourth loss never reaches this arm at
+			# three and so never gets the memory. Widening the test to `>= 3`
+			# to cover it would create one memory per defeat forever after,
+			# which is worse.
+			#
+			# The `nemesis` tag has to match the participants list in
+			# bc_memories.txt, and it is what the loc reads back as
+			# [nemesis.GetFullName].
+			if = {
+				limit = { var:bc_nemesis_losses = 3 }
+				create_character_memory = {
+					type = bc_nemesis_memory
+					participants = {
+						nemesis = scope:bc_rivalry_foe
+					}
+				}
+				debug_log = "BC: nemesis memory"
+			}
+
 			debug_log = "BC: nemesis rung nemesis"
 		}
 		else_if = {

@@ -835,6 +835,35 @@
  bc_shieldbrother_memory_desc_b_second_perspective:0 "you held the flank beside [shieldbrother.GetFullName] until there was nobody left in front of you"
  bc_shieldbrother_memory_desc_b_third_perspective:0 "[owner.GetName] held the flank beside [shieldbrother.GetFullName] until there was nobody left in front of them"
 
+# --- the nemesis memory (2026-08-17) ----------------------------------------
+#
+# Written on the defeat that makes it three at the same man's hands, and only
+# ever on that one. THE LOSER CARRIES IT AND THE WINNER DOES NOT, so all nine
+# lines are about being beaten; the type's header in bc_memories.txt argues why.
+#
+# ALL NINE ARE PAST TENSE AND LOWER CASE with no full stop, the vanilla standard
+# the shieldbrother set follows.
+#
+# THE THREE VARIANTS ARE THREE READINGS OF THE SAME FACT, not three degrees of
+# it - the count is already three, and a variant hinting at four would be
+# reporting something the ladder never wrote. THE THREE POOLS STAY IN ORDER, for
+# the reason the shieldbrother header gives: the engine picks per perspective
+# block, so a reader comparing two of them expects the same variant.
+#
+# THEY MAY NOT REUSE THE RIVALRY TOASTS' WORDS. bc_rivalry_nemesis_desc already
+# spends "three fields, three defeats, one man" and "stopped thinking about the
+# war"; bc_reason_battle_nemesis spends "has broken him three times on the
+# field".
+ bc_nemesis_memory_desc:0 "[nemesis.GetFullName] took the field from me for the third time, and after that I stopped calling it luck"
+ bc_nemesis_memory_desc_second_perspective:0 "[nemesis.GetFullName] took the field from you for the third time, and after that you stopped calling it luck"
+ bc_nemesis_memory_desc_third_perspective:0 "[nemesis.GetFullName] took the field from [owner.GetName] for the third time, and after that nobody called it luck"
+ bc_nemesis_memory_desc_b:0 "I rode away from a third field that belonged to [nemesis.GetFullName], and I could name every man I left on it"
+ bc_nemesis_memory_desc_b_second_perspective:0 "you rode away from a third field that belonged to [nemesis.GetFullName], and you could name every man you left on it"
+ bc_nemesis_memory_desc_b_third_perspective:0 "[owner.GetName] rode away from a third field that belonged to [nemesis.GetFullName], and could name every man left on it"
+ bc_nemesis_memory_desc_c:0 "three times I drew up against [nemesis.GetFullName] and three times I was the one who had to explain it afterwards"
+ bc_nemesis_memory_desc_c_second_perspective:0 "three times you drew up against [nemesis.GetFullName] and three times you were the one who had to explain it afterwards"
+ bc_nemesis_memory_desc_c_third_perspective:0 "three times [owner.GetName] drew up against [nemesis.GetFullName] and three times it was [owner.GetName] who had to explain it afterwards"
+
  bc_shieldbrother_memory_desc_c:0 "[shieldbrother.GetFullName] and I were the last two upright in that corner of it"
  bc_shieldbrother_memory_desc_c_second_perspective:0 "you and [shieldbrother.GetFullName] were the last two upright in that corner of it"
  bc_shieldbrother_memory_desc_c_third_perspective:0 "[owner.GetName] and [shieldbrother.GetFullName] were the last two upright in that corner of it"
