@@ -1614,3 +1614,41 @@ bc_he_stands_to_inherit_trigger = {
 bc_his_body_was_dealt_to_him_trigger = {
 	num_of_bad_genetic_traits >= 1
 }
+
+
+# --- what his own faith makes of him -----------------------------------------
+#
+# THE MOD READS FAITH FORTY-THREE TIMES AND EVERY ONE OF THEM IS ABOUT THE MAN
+# OPPOSITE. bc_foe_is_heathen_trigger asks whether the far side prays to
+# something else; the eve and aftermath events ask what a victory or a burial
+# is worth to a faith. Not one of them has ever turned the question round and
+# asked what a man's OWN faith has already concluded about the man himself.
+#
+# `num_sinful_traits` AND `num_virtuous_traits` ARE THE ENGINE'S OWN COUNTS AND
+# THEY ARE EVALUATED AGAINST HIS OWN FAITH BY DEFAULT. Both accept an optional
+# `target = scope:faith` form for asking what somebody else's faith would make
+# of him; neither wrapper uses it, because the subject is what he was raised
+# inside and not what a stranger would say.
+#
+# TWO TRIGGERS AND NEITHER IS THE OTHER'S OPPOSITE. This is the important part.
+# A man is not scored on one axis from sinful to virtuous - the counts are two
+# independent tallies over the same trait list, and a man with three sins and
+# three virtues answers yes to both, while a man with a mild temperament and no
+# strong traits at all answers no to both. Writing one trigger and negating it
+# for the second moment would have been wrong and would have quietly made the
+# two templates mutually exclusive when they are not.
+#
+# THE THRESHOLD IS TWO, NOT ONE, ON BOTH SIDES. One sinful trait is most adult
+# characters in the game under most faiths, and a gate that fires for nearly
+# everybody is not a gate. Two is a man his septon has a settled opinion about.
+#
+# BOTH ARE ROOT-RELATIVE and both are used bare, on the commander in one
+# template and on the knight in the other - they read the scoped character and
+# nothing else, so there is no walk and no guard to get wrong.
+bc_his_own_faith_counts_against_him_trigger = {
+	num_sinful_traits >= 2
+}
+
+bc_his_own_faith_counts_for_him_trigger = {
+	num_virtuous_traits >= 2
+}

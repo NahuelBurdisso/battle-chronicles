@@ -2966,3 +2966,53 @@
 
  bc_knight_nobody_has_looked_at_him_since_dawn_toast:0 "There Is No Audience Out Here"
  bc_knight_nobody_has_looked_at_him_since_dawn_toast_desc:0 "The men to either side of him have not had a spare thought to spend on anything but the ground in front of their own feet since the light came up, and they are not going to find one before dark. There is only the next shield and the next step and the arm that has to keep coming up, and the arm is getting slower and comes up anyway. He is bleeding somewhere that will need attention tonight. The far side has been going backwards since noon. Nothing he has done today has been for anyone's benefit but the man beside him, and the man beside him has been too busy to work out whose help he is taking.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY. What his own faith makes of him.
+#
+# NEITHER DESC MAY NAME A FAITH, A GOD, A SEPT OR A GODSWOOD. The gate is the
+# engine's count against whatever the man happens to believe, so both toasts
+# have to be true for the Seven, the old gods, the Drowned God and R'hllor at
+# once. No prayer, no septon, no red priest, no heart tree, no oath sworn on
+# anything nameable. Neither desc may put a holy man on the page at all.
+#
+# NEITHER MAY NAME THE TRAITS THE COUNT IS COUNTING. The first may not say
+# which sins; the second may not say which virtues. The number is two or more
+# and the toast is not entitled to know which two.
+#
+# THE FIRST MAY NOT BE DEFIANT. He is not spitting at anything, not laughing at
+# anybody's judgement, and not enjoying being what he is - that is a smaller
+# and more familiar man than the one this gate found. It may not have him win
+# *because* of what he is, may not have an enemy call him anything, may not
+# have his own men be uneasy about him, and may not promise him a reckoning
+# later. What he has is a working understanding of what a field does and does
+# not care about, and he has had it a long time.
+#
+# THE SECOND MAY NOT RESCUE ANYTHING. He is losing when it starts and losing
+# when it ends. It may not have him hold a gap that saves the line, may not
+# have anybody thank him or notice him, may not kill anybody, may not let him
+# doubt what he is - doubt is a different and much easier moment - and may not
+# have him decide anything. He is doing it the way he has always done it, in
+# the order he has always done it, and the order is not producing the result
+# the order is supposed to produce.
+#
+# NEITHER MAY USE THE WORD "deserve", in any form. Both moments are built on
+# the field not having the concept, and one appearance of it in either toast
+# would put the concept back.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed".
+ bc_the_field_keeps_no_accounts_toast:0 "The Ground Has No Opinion Of Him"
+ bc_the_field_keeps_no_accounts_toast_desc:0 "A field wants four things answered and none of them are about the man answering. Where the ground rises. How many are on it. How far the far side has to come and how long that takes them. What hour it is. He worked that out somewhere a long way back, and he has been quietly better at afternoons like this one ever since than men who go into them expecting the world to be keeping a tally somewhere on their behalf. There is no tally. There is a slope, and a stream that is deeper than it looks, and a wing that came too late, and by the middle of the day all three of them are his.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_it_was_never_a_bargain_toast:0 "He Is Doing It The Way He Has Always Done It"
+ bc_knight_it_was_never_a_bargain_toast_desc:0 "Shield up, feet where they belong, the man on his left covered before himself, no step taken that the rank behind him cannot take too. He has done it in that order since he was young enough to be corrected for getting it wrong, and he is doing it in that order now, and the ground he is standing on is further back than the ground he started on and will be further back again within the hour. Nothing about the way he is fighting suggests he expects that to change. He was never told it would work. He was only ever told to do it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

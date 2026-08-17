@@ -8046,3 +8046,106 @@ bc_the_story_is_already_written = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY. What his own faith makes of him.
+#
+# FAITH IS READ FORTY-THREE TIMES IN THIS MOD AND EVERY ONE OF THEM IS ABOUT
+# THE MAN OPPOSITE. bc_foe_is_heathen_trigger asks what the far side prays to;
+# the eve and aftermath events ask what a victory or a burial is worth to a
+# faith. Not one has ever turned the question round and asked what a man's own
+# faith has already concluded about him.
+#
+# TWO TRIGGERS AND NEITHER IS THE OTHER'S NEGATION. num_sinful_traits and
+# num_virtuous_traits are two independent tallies over the same trait list, not
+# two ends of one scale: a man with three sins and three virtues answers yes to
+# both, and a mild man with no strong traits answers no to both. The two
+# templates are therefore not mutually exclusive, and they roll in different
+# pools in any case.
+#
+# THE THRESHOLD IS TWO ON BOTH SIDES. One sinful trait is most of the adult
+# population under most faiths, and a gate that fires for nearly everybody is
+# not a gate.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# His own faith has a settled opinion of him, and he is winning anyway.
+#
+# `measured`/`up`. Nothing on a field has ever asked what a man is. Ground,
+# numbers, distance, the hour - that is the whole list, and he worked that out
+# a long time before today and has been quietly good at it ever since, in a way
+# that men who expect the world to keep accounts never quite manage. The verb
+# table hands out nothing, which is right: this is a reading, and an army is
+# not braced or bled by its commander having stopped expecting to be rewarded.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his sins and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_foe_is_heathen OR ANY OF THE FAITH TEMPLATES, all of which are
+# about the men opposite. This one never looks across the field at all.
+#
+# THE DESC MAY NOT NAME A SIN, may not name his faith or its god, may not put a
+# septon or priest of any kind on the page, may not have him be defiant about
+# it, and may not have him win because of what he is. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_field_keeps_no_accounts = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_own_faith_counts_against_him_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Reading a field for what it is, and nothing else, is a skill before
+		# it is a disposition.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = zealous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_field_keeps_no_accounts"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_field_keeps_no_accounts_toast
+			desc = bc_the_field_keeps_no_accounts_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

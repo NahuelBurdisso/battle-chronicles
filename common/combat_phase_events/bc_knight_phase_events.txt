@@ -5651,3 +5651,94 @@ bc_knight_nobody_has_looked_at_him_since_dawn = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He has been the man his faith says to be, and the side is losing.
+#
+# `ordered`/`down` AND DELIBERATELY NO MODIFIER. He is doing the thing exactly
+# as he was taught it, in the order he was taught it, and it is not working.
+# The formation keeps its shape while going backwards, which is what the pair
+# means, and the verb table's `ordered` row is the one row that tests SWING and
+# hands out bc_pursuit only on `up` - so this moment produces no army modifier
+# at all. That is the point of choosing it. Virtue is not buying anything on
+# this field today, and the ledger should not pretend otherwise.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads his virtues and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_the_white_cloak, which reads bc_is_kingsguard_trigger.
+# That is membership of an order - what a man was admitted to. This reads what his own
+# faith makes of his character, and a Kingsguard with a bad temper answers no
+# to it while a hedge knight who has kept every promise he ever made answers
+# yes.
+#
+# THE DESC MAY NOT NAME A VIRTUE OR A VOW, may not name his faith or its god,
+# may not put a septon or priest on the page, may not have him pray, may not
+# have anybody thank him, may not kill anybody, and may not let the moment
+# rescue anything. He is losing at the end of it. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_it_was_never_a_bargain = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_own_faith_counts_for_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Keeping the shape while it goes backwards is work, and a man who
+		# cannot do the work is simply carried off with the rest.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = just
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_it_was_never_a_bargain"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_it_was_never_a_bargain_toast
+				desc = bc_knight_it_was_never_a_bargain_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
