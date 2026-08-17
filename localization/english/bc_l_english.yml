@@ -1471,3 +1471,29 @@
 
  bc_knight_they_sound_like_home_toast:0 "They Are Shouting in His Own Accent"
  bc_knight_they_sound_like_home_toast_desc:0 "The men on the other side of his shield are saying the same words for things that he says, in the same order, and one of them called for his mother in a way he recognised. He has not stopped and he has not slowed. He has simply gone quiet, and he is being extremely careful about what he does next, which out here is not the same as being safe.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the body, from the saddle (2026-08-17) ---------------------------------
+#
+# BOTH ARE ABOUT REACH AND NEITHER IS ABOUT PAIN. The knight body batch is
+# written from inside the ranks and is allowed to be about how it feels; from
+# the saddle the only thing a wound changes that an army notices is where the
+# man can get to and how fast. A desc here that dwells on the wound itself is
+# the knight batch's sentence in the wrong file.
+#
+# THE FIRST MAY NOT BLAME HIM AND MAY NOT EXCUSE HIM. His orders are right and
+# they are late, and the toast says both without deciding which matters. It
+# hands out no modifier for the same reason.
+#
+# THE SECOND MAY NOT READ AS TRIUMPH OVER ADVERSITY. He is not overcoming
+# anything; he worked out a method some years ago and it is simply how he
+# fights now. The men treat it as ordinary, because to them it is.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he is still on his feet" and "doing
+# it wrong now" (bc_knight_the_old_wound_toast_desc), "the orders are arriving
+# wrong" (bc_the_hands_are_not_steady, which is a man coming apart and must not
+# blur into a man who is simply too far away).
+ bc_he_cannot_get_there_toast:0 "It Is Half a Mile to Where He Is Needed"
+ bc_he_cannot_get_there_toast_desc:0 "Something is going wrong at the far end and he has known about it for a quarter of an hour, which is how long it took a rider to find him and will take another to get back. What he sent is the right thing to have sent. It was the right thing when the rider left.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_holds_one_place_toast:0 "Everybody Comes to Him"
+ bc_he_holds_one_place_toast_desc:0 "He has not moved from the rise since the host formed up and nobody expected him to. The captains have been coming and going all afternoon on a rota somebody worked out years ago, and the whole army knows where the answer to any question is standing. It is not the way it is done in the songs. It is working.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

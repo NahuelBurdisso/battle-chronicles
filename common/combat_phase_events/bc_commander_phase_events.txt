@@ -2871,3 +2871,172 @@ bc_the_gods_are_watching = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE BODY, FROM THE SADDLE, 2026-08-17.
+#
+# THE HEALTH TRAITS APPEAR ZERO TIMES IN THIS FILE. The knight side got them
+# in the body batch - `wounded_*`, `maimed`/`one_legged`, `one_eyed`/
+# `disfigured`, three templates - on the argument that prowess is a number
+# about how well a man fights and not about what he is fighting with. That
+# argument is not weaker for a commander; it is different. A knight's body
+# decides what he can do in the next four feet, and a commander's decides
+# whether he can be at the other end of the field in the next quarter hour.
+#
+# THESE TWO ARE ABOUT REACH, NOT ABOUT COURAGE OR PAIN. The knight templates
+# are written from inside the ranks and can afford to be about how it feels.
+# From the saddle the only thing a wound changes that an army notices is where
+# the man can get to and how fast, so that is what both descs are about.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He knows where he is needed and it is a long way off.
+#
+# THE SAME `wounded_*` LADDER AS bc_knight_the_old_wound AND THE SAME LOSING
+# ROW, in the other event pool. The two never compete - a `type = commander`
+# template and a `type = knight` template are rolled from different lists - so
+# this is not the distinctness question at all; it is the same fact asked of
+# the man whose job is the whole field instead of his own part of it.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. He is not doing anything wrong
+# and the army is not coming apart: the orders are correct and they are
+# arriving late, because the man who has to see the thing before he can order
+# it cannot get to where it can be seen. There is no army modifier for that
+# and there should not be - the faltering rung is the whole cost.
+# ---------------------------------------------------------------------------
+bc_he_cannot_get_there = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		OR = {
+			has_trait = wounded_1
+			has_trait = wounded_2
+			has_trait = wounded_3
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			has_trait = wounded_3
+		}
+		modifier = {
+			factor = 1.5
+			bc_host_is_vast_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_cannot_get_there"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_cannot_get_there_toast
+			desc = bc_he_cannot_get_there_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man who stopped trying to be everywhere years ago.
+#
+# NO SIDE ROW, AND THAT IS THE DIFFERENCE FROM THE TEMPLATE ABOVE. A wound is
+# a thing that happened to him and is still deciding his afternoon; a leg he
+# has not had for ten years is a thing he has already built a method around.
+# The first is about a gap and this is about what fills it - he picks one
+# place, he makes everybody come to him, and the host learns the shape of that
+# in the first hour.
+#
+# `adapted`/`up` AND A GUARDED MOMENTUM RUNG. `adapted` is the seam's word for
+# how the commander READ the battle rather than what the battle did to the
+# army, and it hands out no modifier by design - which is exactly right here,
+# because nothing about the men changed. What changed is that the man running
+# them has a working answer to a problem he did not choose, and the rung is
+# where that shows.
+# ---------------------------------------------------------------------------
+bc_he_holds_one_place = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		OR = {
+			has_trait = maimed
+			has_trait = one_legged
+		}
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_holds_one_place"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_holds_one_place_toast
+			desc = bc_he_holds_one_place_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
