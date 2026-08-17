@@ -8255,3 +8255,109 @@ bc_the_wrong_instrument_beautifully = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-TWO. How many banners are standing on this side.
+#
+# THE MOD HAS NEVER ASKED HOW MANY LORDS ARE ON ITS OWN SIDE. Every side-level
+# question in the file treats the side as one undifferentiated quantity of men
+# with one man at the top of it. A host in this setting is a stack of banners
+# and the man the battle is named after is not the only man on the field
+# giving orders.
+#
+# `any_side_commander` IS THE ENGINE'S OWN LIST OF "the commanders of every
+# army on the side, not just the one leading the battle" - a count of
+# independent hosts, which is to say a count of lords who each brought men and
+# each expect to be consulted. Nothing here had ever read it.
+#
+# THREE AND ONE, WITH THE GAP LEFT EMPTY ON PURPOSE. Two banners is the
+# ordinary case and neither moment is about the ordinary case.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Three banners or more, and every one of them did its part today.
+#
+# `ordered`/`up` AND bc_pursuit. What is unusual here is not that the men
+# fought - men usually fight - but that four or five separate lords, none of
+# whom is obliged to like any of the others, each did the thing they had agreed
+# to do at roughly the hour they had agreed to do it. That is the rarest event
+# on any field in this setting and it produces the one consequence a coalition
+# almost never gets: an intact order to pursue with. The verb table hands out
+# bc_pursuit, which is exactly what the pair is for.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the banner count and
+# the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THE CHANCE ROW READS `diplomacy`, WHICH IS ALMOST UNIQUE IN THIS FILE. Every
+# other commander template weights on martial or prowess. Holding four lords to
+# one plan for one afternoon is not a martial skill and pretending it is would
+# be the wrong reading of the moment.
+#
+# THIS IS NOT bc_host_is_vast, which counts men. Three small banners answer yes
+# to this and no to that, and one enormous host under one lord answers the
+# reverse.
+#
+# THE DESC MAY NOT NAME A HOUSE, A SIGIL OR A LORD, may not stage a council,
+# may not have anybody thank or congratulate anybody, and may not have him take
+# credit for it. See the loc header.
+# ---------------------------------------------------------------------------
+bc_every_banner_did_its_part = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_host_is_many_banners_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding four lords to one plan is not a martial skill.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = gregarious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arbitrary
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_every_banner_did_its_part"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_every_banner_did_its_part_toast
+			desc = bc_every_banner_did_its_part_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

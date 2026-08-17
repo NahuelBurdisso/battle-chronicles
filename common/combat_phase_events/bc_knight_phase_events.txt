@@ -5837,3 +5837,96 @@ bc_knight_there_is_no_seam_in_a_shieldwall = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# One banner on the whole field, and it is going badly.
+#
+# `entrenched`/`down` AND bc_shieldwall. There is exactly one host here and he
+# is standing in it, which means the reserve is not late and is not lost - it
+# does not exist, and neither does the second lord who might have been sent for
+# yesterday. He has worked that out, and the working-out does not produce a
+# decision so much as it removes every alternative to the one he is already
+# doing. So the shape gets tighter rather than looser as the day goes wrong,
+# which is what the pair means and what the verb is for.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the banner count
+# and the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_side_is_outnumbered, which is a ratio. A single banner can
+# outnumber the men opposite comfortably and still be the only thing on this
+# field that is ever going to arrive.
+#
+# THIS IS NOT bc_knight_no_house_behind_him EITHER, which reads `is_lowborn` -
+# a fact about his birth. This is a fact about the afternoon, and the
+# best-connected knight in Westeros answers yes to it if his lord came alone.
+#
+# THE DESC MAY NOT NAME A HOUSE OR A LORD, may not have anybody look for help
+# or send for it, may not have a rider arrive or fail to arrive - a rider that
+# does not come is still a rider, and there is no one to send - may not kill
+# anybody, and may not let him hope. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_there_is_no_second_host = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_host_is_one_banner_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Tightening a shape while it goes backwards is work before it is
+		# temperament.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_there_is_no_second_host"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_there_is_no_second_host_toast
+				desc = bc_knight_there_is_no_second_host_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

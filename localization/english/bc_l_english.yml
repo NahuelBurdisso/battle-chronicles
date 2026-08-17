@@ -3066,3 +3066,52 @@
 
  bc_knight_there_is_no_seam_in_a_shieldwall_toast:0 "There Was Nothing To Find"
  bc_knight_there_is_no_seam_in_a_shieldwall_toast_desc:0 "For the first hour he was doing what he has always done, which is look: for the loose fastening, the tired one, the one whose falling rearranges everything behind him. He is good at that. There was nothing to find. A line is only a line, and it does not have a weak place so much as it has a near end and a far end, and the work is the same at both. So he put it down somewhere around noon and has been fighting like the man beside him ever since, one step and then the next one, and the far side has been giving ground since he did.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-TWO. How many banners are standing on this side.
+#
+# NEITHER DESC MAY NAME A HOUSE, A SIGIL, A LORD OR A PLACE. The gate is a
+# count and the count is all either toast is entitled to. No colours, no
+# devices, no "the men of somewhere". Both descs have to read the same for a
+# Northern host, a Reach host and a company of sellswords.
+#
+# NEITHER MAY PUT A NUMBER ON THE BANNERS. The first knows it is three or more
+# and may not say four, five or any other figure; the second knows it is one
+# and may not announce that either, because a man does not think in counts
+# about a thing he can see the whole of.
+#
+# THE FIRST MAY NOT STAGE A COUNCIL. No tent, no argument the night before, no
+# lord being talked round, no plan being agreed - all of that happened
+# somewhere the toast does not go. It may not have anybody thank or
+# congratulate anybody, may not have him take the credit, may not name what any
+# banner was supposed to do, and may not have one of them do it late and be
+# forgiven. The moment is that the arrangement held, which is rare, and that
+# nobody on the field has time to notice how rare it is.
+#
+# THE SECOND MAY NOT HAVE ANYBODY LOOK FOR HELP. No horizon watched, no rider
+# sent, no rider failing to arrive - a rider who does not come is still a
+# rider, and the whole content of the moment is that there is nobody to send
+# one to. It may not name what is not coming. It may not have him despair, may
+# not have him resolve anything, may not kill anybody, and may not let the line
+# be saved. What happens is smaller than any of that: the shape gets tighter.
+#
+# NEITHER MAY USE THE WORD "alone". It is the word the second toast is about
+# and using it would let the toast say the thing instead of showing it.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find".
+ bc_every_banner_did_its_part_toast:0 "It Held, Which It Almost Never Does"
+ bc_every_banner_did_its_part_toast_desc:0 "The wing that was supposed to come round came round, at something close to the hour it was meant to, and did not stop halfway to see what the rest of the field was doing first. The centre stayed where it was told without needing to be told twice. Nobody sat still waiting to see who was going to lose before committing. He has spent his life watching arrangements like this one come apart before noon over precedence, or grazing, or a grandfather, and this one simply did not, and there is no time today to stand still and be amazed by it. The far side is running and there is an intact line to run after them with.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_there_is_no_second_host_toast:0 "Everything There Is Is Already Here"
+ bc_knight_there_is_no_second_host_toast_desc:0 "He does not look at the ridge line, because there is no reason to. Whatever is going to stand on this ground today is standing on it, and has been since the light came up, and the men to his left are the only men who are ever going to be to his left. That is not a thought he has to have twice. It removes things rather than adding them, and what is left when it has finished removing is very simple and very small: shoulder into the man beside him, shield an inch higher, feet closer together, and let the next hour be as expensive as it wants to be.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

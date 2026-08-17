@@ -1687,3 +1687,44 @@ bc_he_was_raised_for_books_trigger = {
 bc_he_was_raised_for_the_dark_trigger = {
 	has_education_intrigue_trigger = yes
 }
+
+
+# --- how many banners are standing on this side ------------------------------
+#
+# THE MOD HAS NEVER ASKED HOW MANY LORDS ARE ON ITS OWN SIDE. Every side-level
+# question it has - bc_side_is_winning_trigger, bc_side_is_outnumbered_trigger,
+# bc_host_is_vast_trigger, bc_field_is_bloody_trigger - treats the side as one
+# undifferentiated quantity of men with one man at the top of it. A host in
+# this setting is a stack of banners, and the man the battle is named after is
+# not the only man on the field giving orders.
+#
+# `any_side_commander` IS THE ENGINE'S OWN LIST AND ITS DOCUMENTATION IS THE
+# WHOLE REASON THESE EXIST: "the commanders of every army on the side, not just
+# the one leading the battle". That is a count of independent hosts, which is
+# to say a count of lords who each brought men and each expect to be consulted.
+# Nothing in this mod had ever read it.
+#
+# BOTH ARE WRITTEN ON `scope:combat_side` AND ARE THEREFORE ROOT-INDEPENDENT,
+# the same shape as bc_side_has_kin_knight_trigger and bc_host_is_vast_trigger.
+# They ask about the side and not about the man asking, so a commander and a
+# knight standing on the same side get the same answer, which is correct - the
+# number of banners is a fact about the afternoon rather than about either of
+# them. `scope:combat_side` needs no `exists` guard; it is the scope the phase
+# event is handed.
+#
+# THREE AND ONE, WITH THE GAP LEFT DELIBERATELY EMPTY. Two banners is the
+# ordinary case - a lord and one of his vassals - and neither moment is about
+# the ordinary case. Three is a council; one is a man with nobody to send to.
+# The two gates are disjoint by construction rather than by side row, which is
+# the opposite arrangement from batch seventy-nine.
+bc_the_host_is_many_banners_trigger = {
+	scope:combat_side = {
+		any_side_commander = { count >= 3 }
+	}
+}
+
+bc_the_host_is_one_banner_trigger = {
+	scope:combat_side = {
+		any_side_commander = { count = 1 }
+	}
+}
