@@ -389,11 +389,78 @@ bc_banner_falls_ground = {
 # THE STRING IS EMPTY because a path that left the variable unwritten could not
 # name a foe, and every sentence in this class presumes one. Silence is the only
 # honest output.
+# THREE STRINGS PER VALUE INSTEAD OF ONE, 2026-08-17, AND `random_valid = yes`.
+#
+# WHY. This clause renders after EVERY moment toast, and the 2026-08-15 sweep
+# counted 233 firings in 44 battles against five bond strings, of which two -
+# stranger 134, countryman 126 - carried the bulk. A player fighting one war
+# read the same sentence dozens of times. The keyed values are unchanged and
+# the ladder is untouched; only the number of ways each value can be said has
+# gone from one to three.
+#
+# `random_valid = yes` IS VANILLA, not an invention: 00_animal_custom_loc.txt's
+# RandomElephantName and SmallAnimal both use it, and both are read from event
+# descs that sit on screen, so re-evaluation on redraw is a shipped behaviour
+# and not a hazard this mod discovered.
+#
+# THE FALLBACK NOW CARRIES AN EXPLICIT TRIGGER AND THAT IS NOT OPTIONAL.
+# Without `random_valid` the arms were first-valid, so a trigger-less last arm
+# could only be reached by falling through the five. WITH it the engine picks
+# uniformly among ALL valid arms, and a trigger-less arm is valid always - so
+# the empty string would have won roughly one render in four and silently
+# deleted a clause that was available. `NOT = { exists = var:bc_battle_bond }`
+# is exactly the condition the header above already states the empty string
+# stands for, so this makes the arm say what it always meant.
+#
+# THE FIVE GROUPS REMAIN MUTUALLY EXCLUSIVE, which is what makes the random
+# safe: var:bc_battle_bond holds exactly one flag, so the valid set is always
+# the three variants of one value, never a mix of two.
+#
+# EVERY VARIANT OF A VALUE MUST MAKE THE SAME CLAIM. They are three ways of
+# saying one fact the ladder already decided, not three degrees of it. This is
+# the bond's version of the monotonicity rule the scale clause's header states,
+# and it is the one thing a new variant can get wrong without anything
+# catching it.
+#
+# EVERY VARIANT NAMES ITS SUBJECT. The toast carries the COMMANDER's portrait
+# but three of the thirteen moment literals are about a KNIGHT, so a clause
+# saying a bare `he` would attach to the wrong man on those three. `The man
+# commanding here` is the shared frame and it is deliberate repetition.
+#
+# THE SCALE CLAUSE DELIBERATELY DID NOT GET THE SAME TREATMENT. Its header
+# closes two axes outright and requires the three strings to grade monotonically
+# along a third, and the loc file requires all three to carry `not yet in the
+# fighting` VERBATIM so the grading is legible in one reading. Variants bound by
+# all of that would differ by a few words and buy almost nothing. If someone
+# later disagrees, the four-row test in that header is what a variant has to
+# pass, not this paragraph.
 bc_bond_clause = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_bond_nemesis
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:nemesis
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_nemesis_b
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:nemesis
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_nemesis_c
 		trigger = {
 			exists = var:bc_battle_bond
 			trigger_if = {
@@ -413,7 +480,47 @@ bc_bond_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_bond_kin_b
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:kin
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_kin_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:kin
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_bond_countryman
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:countryman
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_countryman_b
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:countryman
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_countryman_c
 		trigger = {
 			exists = var:bc_battle_bond
 			trigger_if = {
@@ -433,6 +540,26 @@ bc_bond_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_bond_heathen_b
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:heathen
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_heathen_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:heathen
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_bond_stranger
 		trigger = {
 			exists = var:bc_battle_bond
@@ -443,7 +570,51 @@ bc_bond_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_bond_stranger_b
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:stranger
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bond_stranger_c
+		trigger = {
+			exists = var:bc_battle_bond
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				var:bc_battle_bond = flag:stranger
+			}
+		}
+	}
+	# THE COMPLEMENT OF THE FIFTEEN ABOVE, WRITTEN AS A BARE `trigger_if`.
+	#
+	# A `trigger_if` with no `trigger_else` is TRUE when its limit is false, so
+	# this arm is valid on exactly two paths and no others: the variable is
+	# absent, or the variable holds a sixth value none of the five arms claims.
+	# Both are the "nothing to say" case and both render the empty string.
+	#
+	# `NOT = { exists = var:bc_battle_bond }` ALONE WAS WRONG and was the first
+	# thing written here. It covers the absent case and not the unknown-value
+	# case, so a sixth flag - which is what a future ladder arm added without a
+	# matching clause arm looks like - would leave the pool EMPTY. An empty pool
+	# renders nothing, which is what this arm exists to prevent.
+	text = {
 		localization_key = bc_frag_bond_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_bond }
+				NOR = {
+					var:bc_battle_bond = flag:nemesis
+					var:bc_battle_bond = flag:kin
+					var:bc_battle_bond = flag:countryman
+					var:bc_battle_bond = flag:heathen
+					var:bc_battle_bond = flag:stranger
+				}
+			}
+		}
 	}
 }
 
