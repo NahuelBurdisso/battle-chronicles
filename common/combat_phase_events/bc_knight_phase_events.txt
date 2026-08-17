@@ -4260,3 +4260,206 @@ bc_knight_nothing_is_coming_from_behind = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# WHAT THE MAN IN THE LINE THINKS OF THE MAN ON THE HORSE, 2026-08-17.
+#
+# THE MOD HAS NEVER READ AN OPINION VALUE. It reads relations - friend, rival,
+# kin, liege - which are the categorical version of the same thing, and the
+# engine's `opinion` trigger, sitting there since the base game, has not been
+# touched in sixty-three batches. Relations are rare and legible; opinion is
+# universal and quiet, and every knight on every field has one.
+#
+# BOTH TEMPLATES TAKE THE NEGATIVE HALF, AND THAT IS DELIBERATE RATHER THAN
+# SOUR. The positive half is already occupied in feel by bc_knight_for_a_friend,
+# which gates on `has_relation_friend` toward the same man and has NO side row
+# at all - a high-opinion template would be the same afternoon written twice.
+# A knight who cannot stand the man he is fighting for is not written anywhere
+# in this mod and is the commoner case by a very long way.
+#
+# `opinion = { target = X value <= -25 }` IS READ ON THE KNIGHT, NOT ON THE
+# COMMANDER. The trigger asks the SCOPED character's opinion of the target, so
+# root is correct here and no scope change is needed - unlike the wound and
+# faltering reads, which had to enter the commander's scope.
+#
+# -25 IS THE THRESHOLD BECAUSE IT IS THE POINT WHERE IT IS NO LONGER JUST
+# COLDNESS. A single bad trait pairing or a stale grievance will put two men
+# at -10 without either of them thinking about it; -25 takes a reason, and the
+# templates below are written as though the knight could name his if asked.
+#
+# THE IDENTITY TEST IS REQUIRED. bc_knight_for_a_friend carries
+# `NOT = { this = scope:combat_side.side_commander }` for exactly this reason -
+# the same character can be both, and a man's opinion of himself is not what
+# either of these is about.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# THE WINNING HALF. He has done his part of it properly, because doing it badly
+# would cost him and not the man he dislikes, and the afternoon is going to be
+# written down under a name that is not his.
+#
+# `measured`/`up`, WHICH HANDS OUT NOTHING. The army is not being changed by
+# this - it is being served exactly as well as it would have been by a man who
+# loved his commander. That is the point, and an army modifier would turn a
+# private grievance into a battlefield effect it is not.
+#
+# THE MOMENTUM RUNG IS STILL GRANTED, GUARDED, INSIDE THE COMMANDER BLOCK. The
+# rung is a fact about the side and not a compliment to anybody; the side is
+# winning and a knight has just done his job well, which is all it means.
+# The guard is inside the block because bc_has_momentum_trigger reads its own
+# root and this is_valid is rooted on the knight - bc_knight_for_a_friend's
+# comment makes the same point.
+#
+# THE DESC MAY NOT SAY WHY HE DISLIKES HIM. The gate is a number and knows no
+# reason. It may not have him sabotage anything, refuse an order, or be seen
+# resenting it out loud, because all three would be a different template.
+# ---------------------------------------------------------------------------
+bc_knight_it_will_be_his_name = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { this = scope:combat_side.side_commander }
+			opinion = { target = scope:combat_side.side_commander value <= -25 }
+		}
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_it_will_be_his_name"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_it_will_be_his_name_toast
+				desc = bc_knight_it_will_be_his_name_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# THE LOSING HALF, AND THE DIFFERENCE BETWEEN THEM IS INITIATIVE. On a winning
+# field the grievance costs the army nothing; on a losing one it costs it the
+# thing a bad hour actually runs on, which is men doing slightly more than they
+# were told to without being asked.
+#
+# `measured`/`down`, ALSO HANDING OUT NOTHING, AND FOR THE OPPOSITE REASON. He
+# is not failing. Every order he was given has been carried out to the letter
+# and that is precisely the complaint - there is no army modifier for the
+# absence of a thing nobody is owed, and inventing one would make this a
+# template about a knight sabotaging a battle, which it is not.
+#
+# THE FALTERING RUNG IS GRANTED, GUARDED. The side is losing and this is one of
+# the ways a losing side gets worse; the guard is inside the commander block
+# for the same rooting reason as the winning half.
+#
+# NOT A SUBSET OF bc_knight_for_a_friend IN EITHER DIRECTION - that gate is a
+# relation and has no side row, this is a number and has one - and not a subset
+# of bc_knight_nothing_is_coming_from_behind, which asks about the commander's
+# faltering modifier and can be true of a man everybody adores.
+#
+# THE DESC MAY NOT HAVE HIM DISOBEY, RUN, OR SAY ANY OF THIS ALOUD. He is a
+# professional having a bad afternoon in the service of a man he does not like,
+# and the only thing missing is the part nobody can order.
+# ---------------------------------------------------------------------------
+bc_knight_exactly_what_was_asked = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { this = scope:combat_side.side_commander }
+			opinion = { target = scope:combat_side.side_commander value <= -25 }
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_exactly_what_was_asked"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_exactly_what_was_asked_toast
+				desc = bc_knight_exactly_what_was_asked_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

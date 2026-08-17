@@ -2345,3 +2345,33 @@
 
  bc_knight_nothing_is_coming_from_behind_toast:0 "The Riders Stopped Arriving A While Ago"
  bc_knight_nothing_is_coming_from_behind_toast_desc:0 "Twice an hour, all morning, somebody came up from the rear with a word about what the rest of the field was doing, and at some point that stopped and nobody can say exactly when. So the line has done the only thing a line can do without being told: it has closed up, shortened its front, and settled into holding a piece of ground nobody has yet explained the value of, on the assumption that this is what would have been asked for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-NINE. Two afternoons in the service of a man he does not like.
+#
+# NEITHER DESC MAY SAY WHY. The gate is an opinion number and knows no reason
+# for itself - no insult remembered, no land taken, no woman, no slight named.
+# If a desc supplies a cause it is inventing a fact the mod did not check.
+#
+# NEITHER MAY HAVE HIM DISOBEY, SABOTAGE, RUN, OR SAY ANY OF IT ALOUD. Both are
+# about a professional doing the work; the moment either of them becomes
+# insubordination it is a different template and a different mod.
+#
+# THE FIRST MAY NOT BE BITTER IN THE NARRATOR'S VOICE. He has done his part
+# well and the record will belong to somebody else, which is a fact rather than
+# a complaint, and the toast reports it as one.
+#
+# THE SECOND MAY NOT MAKE HIM THE REASON THE SIDE IS LOSING. He is one man in a
+# line. What is missing is the unasked-for extra that a bad hour runs on, and
+# it is missing quietly.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped".
+ bc_knight_it_will_be_his_name_toast:0 "It Will Be Written Down As His"
+ bc_knight_it_will_be_his_name_toast_desc:0 "He took the ground he was sent for and held the corner of it that mattered, and did both about as well as they can be done, because the alternative would have cost him and not the man who sent him. Somewhere behind him that man is being handed the afternoon. In a year this will be one line in somebody's account of the war and it will have one name in it, and he has known which name since he was told where to stand.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_exactly_what_was_asked_toast:0 "To The Letter, And Not A Step Past It"
+ bc_knight_exactly_what_was_asked_toast_desc:0 "Every order that reached him has been carried out exactly, which is the whole of it. Twice this hour there has been a half-chance on his right that a man might have gone for without being told, and both times he has looked at it and stayed where he was put, and both times he has been entirely within his instructions. A bad afternoon runs on the things nobody thinks to ask for. This one is not getting any.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
