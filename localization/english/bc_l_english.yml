@@ -2261,3 +2261,30 @@
 
  bc_knight_nothing_to_say_over_him_toast:0 "There Are No Words For This Part"
  bc_knight_nothing_to_say_over_him_toast_desc:0 "The man on his left went down twenty minutes ago and there was nothing to be said over him, so nothing was. Down the line somebody southron is being given the whole of it, the seven of them named one after another by a voice getting steadily higher, and it is carrying rather better than the fighting is. He has been listening to it and doing his work and has not yet decided which of the two of them is worse off.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-SIX. The war behind the afternoon, read for the first time.
+#
+# NEITHER DESC MAY NAME THE WAR, THE ENEMY, A HOUSE, A KING OR A CLAIM. The
+# gates know one bit each - that the quarrel is internal, that the quarrel is
+# his - and nothing whatever about who is in it or what it is for.
+#
+# THE FIRST MAY NOT SAY BROTHER, COUSIN OR KIN LITERALLY. `is_civil_war` is
+# not a relation check; no relative has been tested and none may appear. It
+# may not be a scene of recognition either - nobody spots a face he knows.
+#
+# THE SECOND MAY NOT HAVE HIM DECIDE ANYTHING, SURRENDER, SEND FOR TERMS OR
+# CONTEMPLATE EITHER. He is a war leader losing an hour, not a war; the
+# aftermath owns endings and this does not touch them.
+#
+# NEITHER MAY REVERSE THE HOUR OR PROMISE THE LINE HOLDS - both are losing
+# templates and the mod does not undo a side's state in a moment toast.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it".
+ bc_the_other_half_of_the_realm_toast:0 "The Same Drill, Learned In The Same Yard"
+ bc_the_other_half_of_the_realm_toast_desc:0 "Everything the other host has done this afternoon has been done the way he would have done it, and each time it works there is a half-second in which he approves of it before he remembers who it is happening to. Neither side has given a foot cheaply. Neither side is going to be the one that turns first while the other is still watching, and so the hour is costing both of them roughly twice what an hour against strangers would.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_his_own_war_toast:0 "There Is No One To Send To"
+ bc_his_own_war_toast_desc:0 "Twice in the last hour he has turned in the saddle to send word to somebody, and twice there has been nobody at the end of it, because the name at the top of this quarrel is his own and has been since the first day of it. So the reserve went in. Then the escort went in. He is aware, in the flat and unhurried way a man is aware of weather, that there is nothing left behind him now and no one who will be asked about it afterward except him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

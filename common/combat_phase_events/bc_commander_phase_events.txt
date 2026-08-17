@@ -5818,3 +5818,182 @@ bc_the_fire_is_ahead_of_him = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE WAR THIS BATTLE BELONGS TO, 2026-08-17.
+#
+# In the whole mod the war scope has been read ONCE. bc_war_is_long_trigger
+# walks `scope:combat_side.combat.combat_war`, asks `war_days >= 730`, and
+# that is the entire extent of the mod's interest in the quarrel the battle is
+# an afternoon of. The 1.19.0.6 dump offers `is_civil_war`, `is_war_leader`,
+# `attacker_war_score`, `defender_war_score` and `days_since_max_war_score` on
+# the same scope, all of them free, all of them reachable since plan 1.
+#
+# TWO OF THOSE ARE WORTH A MOMENT AND THREE ARE NOT. The war scores need to
+# know which side of the war this combat side is on before they mean anything,
+# and the mod has no clean way to ask that; they are left alone deliberately
+# rather than guessed at. `is_civil_war` and `is_war_leader` need nothing but
+# the war and the man, and both of them change what a losing hour MEANS rather
+# than how bad it is, which is the only kind of context this mod is for.
+#
+# BOTH TEMPLATES ARE LOSING-SIDE. Winning does not ask a commander who these
+# people are or whose name is on the quarrel. Losing does both.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# A CIVIL WAR IS THE ONE KIND OF BATTLE WHERE BOTH HOSTS CAME OUT OF THE SAME
+# REALM, and the engine will tell us so for nothing. bc_war_is_a_rebellion_trigger
+# is `is_civil_war` on the war behind this combat, guarded the way every war
+# read in this mod is guarded.
+#
+# THIS IS NOT bc_the_same_tongue. That one gates on
+# bc_foe_is_countryman_trigger - the two commanders share a culture - and a
+# civil war implies nothing of the kind: the Reach and the Iron Islands can
+# rebel against the same king in the same war without sharing a word of
+# anything. Neither gate is a subset of the other in either direction.
+#
+# `bloodied`/`down` AND THEREFORE bc_bloodied. The verb table sends bloodied
+# both ways to the same modifier and that is the point being made: this hour
+# costs what it costs, and the reason it costs more than an ordinary bad hour
+# is that the men in front of him are not strangers and neither host is
+# willing to be the one that breaks first in front of the other.
+#
+# THE DESC MAY NOT NAME A HOUSE, A KING OR A CLAIM. The gate knows the war is
+# internal and knows nothing else - not who rose, not against whom, not what
+# for. It may not say "brother" or "cousin" literally either; the mod has not
+# checked a single relation here.
+# ---------------------------------------------------------------------------
+bc_the_other_half_of_the_realm = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_war_is_a_rebellion_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_war_is_long_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_half_of_the_realm"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_other_half_of_the_realm_toast
+			desc = bc_the_other_half_of_the_realm_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# `is_war_leader` IS READ ON THE WAR AND TAKES THE CHARACTER AS ITS TARGET -
+# "is the target character leading one of the sides in the scope war". So
+# bc_the_war_is_his_trigger walks out to the war and compares back against
+# `root`, which in a commander phase event's is_valid is the commander; this
+# file already reads root that way in bc_foe_is_countryman_trigger and
+# bc_foe_is_heathen_trigger.
+#
+# THE TRIGGER IS FOR THE COMMANDER POOL ONLY. From a knight template `root` is
+# the knight, who is essentially never a war leader, and the answer would be a
+# uselessly rare no. It is not used there and should not be.
+#
+# IT DOES NOT MEAN HE IS THE GREAT MAN. A war leader can be a rebel with one
+# county or a claimant with none. What it means is that the quarrel is HIS:
+# there is nobody further up the chain to carry the blame for this afternoon,
+# nobody to appeal to, and whatever gets signed at the end of it will be
+# signed by him. That is a different bad hour from losing somebody else's
+# battle, and it is the only thing this template is about.
+#
+# `wild`/`down` AND bc_spent_horse. A man with nobody above him and a battle
+# going the wrong way commits everything he has, because holding something in
+# reserve is only worth doing if there is a later that somebody else is
+# responsible for.
+#
+# THE DESC MAY NOT NAME THE WAR, THE ENEMY OR THE TERMS, and may not have him
+# decide anything - he is not surrendering in this toast, he is discovering
+# that there is no one to ask.
+# ---------------------------------------------------------------------------
+bc_his_own_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_war_is_his_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_his_own_war"
+
+		add_stress = 15
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_his_own_war_toast
+			desc = bc_his_own_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

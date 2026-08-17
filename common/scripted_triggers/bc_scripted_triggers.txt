@@ -921,3 +921,58 @@ bc_same_ground_again_trigger = {
 		var:bc_terrain_streak >= 3
 	}
 }
+
+
+# --- what kind of war is this battle part of --------------------------------
+#
+# THE WAR SCOPE HAS BEEN REACHABLE SINCE PLAN 1 AND THE MOD READS ONE THING
+# OFF IT. bc_war_is_long_trigger walks `scope:combat_side.combat.combat_war`
+# and asks `war_days >= 730`; nothing else in the mod has ever looked at the
+# war at all. The 1.19.0.6 dump lists `is_civil_war`, `is_war_leader`,
+# `attacker_war_score`, `defender_war_score` and `days_since_max_war_score` on
+# that scope, and a battle is never only a battle - it is an afternoon inside
+# a quarrel that has a shape of its own.
+#
+# THE WALK IS bc_war_is_long_trigger'S, EXACTLY. `exists` on the chained scope
+# as a sibling, the read nested in a trigger_if. A combat can exist without a
+# war behind it - the engine's own scope is optional - so neither of these may
+# read the war bare.
+#
+# `is_civil_war` IS AN ENGINE TRIGGER ON THE WAR, "Check if the scope war is a
+# civil war or not", and AGOT overrides nothing about it. It is TRUE of a
+# rebellion inside a realm and false of two realms at war, which is the
+# distinction the templates below are built on.
+bc_war_is_a_rebellion_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = { is_civil_war = yes }
+	}
+}
+
+# --- is this his own quarrel or somebody else's -----------------------------
+#
+# `is_war_leader` TAKES A CHARACTER TARGET AND IS READ ON THE WAR, not on the
+# character - "is the target character leading one of the sides in the scope
+# war?" in the dump. So the shape is a walk to the war and a comparison back
+# against the man, not a test on him.
+#
+# `root` IS THE COMMANDER HERE, and that is safe rather than lucky: a combat
+# phase event's is_valid roots on the character the template is about, and this
+# file already reads `root.culture` and `root.faith` the same way inside
+# bc_foe_is_countryman_trigger and bc_foe_is_heathen_trigger. Called from a
+# knight template it would answer about the KNIGHT, which is nearly always no
+# and is not what any knight template would mean - so this one is for the
+# commander pool.
+#
+# IT IS NOT "IS HE THE TOP MAN". A war leader may be a rebel, a claimant or a
+# minor lord with one county; what the trigger says is that the quarrel is
+# HIS - that he is the man who will sign whatever gets signed - and that there
+# is nobody further up to carry the blame for the afternoon.
+bc_the_war_is_his_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = { is_war_leader = root }
+	}
+}
