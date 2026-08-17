@@ -3215,3 +3215,47 @@
 
  bc_knight_a_shoulder_to_line_up_on_toast:0 "A Shoulder To Line Up On"
  bc_knight_a_shoulder_to_line_up_on_toast_desc:0 "He has spent most of his life being the reason a conversation goes quiet, and a rank in the fourth hour of a battle has nothing spare in it for that. The men to either side have looked straight at him several hundred times since the light came up and taken exactly one thing from it, which is where he is standing, which is all they need. So he stands there. The shape holds along this stretch of the line, and it holds partly because the fixed point in it does not move, and for a few hours he is a place rather than a thing to look at.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-FIVE. Whose name this is.
+#
+# NEITHER DESC MAY NAME A HOUSE, quote a word, describe a sigil, or name a
+# seat. Both gates read a link and both toasts have to be true of a Frey, a
+# Reed and a hedge knight's grandson equally.
+#
+# THE FIRST MAY NOT HAVE HIM PLEASED WITH HIMSELF. It is not a man enjoying
+# his own name; it is a man noticing, on an afternoon that is going well, that
+# the afternoon is going to be filed under one word and that he is currently
+# what the word means. It may not have him think about an ancestor, may not
+# have anybody address him by the name on the page, may not mention a maester
+# or a book or a singer, and may not promise him anything after the battle.
+#
+# THE SECOND MAY NOT PUT THE TWO MEN IN THE SAME SENTENCE LOOKING AT EACH
+# OTHER. No glance down the line, no order given on the page, no recognition.
+# It may not make him resentful and may not make him devoted - both are the
+# easy version - and may not have him think about inheriting anything or about
+# what he would do differently. He is going backwards in good order at the
+# pace the rank is going, and that is the entire moment.
+#
+# NEITHER MAY USE THE WORDS "blood", "legacy" or "duty". They are the three
+# this pair would reach for and all three would write the moment for it.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions".
+ bc_the_word_they_will_write_it_under_toast:0 "It Will Be Filed Under One Word"
+ bc_the_word_they_will_write_it_under_toast_desc:0 "Whatever this afternoon turns out to have been, it will be written down in six different rooms by men who were not here, and every one of them will use a single word for it, and at present he is what that word means. Not the men holding the centre, who will not be named. Not the wing that came round on time. One word, doing the work of nine thousand people, and it happens to be attached to him this year. He has no time to decide whether that is fair and it would not help if he did. What it does is settle a question he did not know was open: there is nothing to be careful of here except the outcome, because the outcome is the only part that survives.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_man_who_is_the_name_toast:0 "He Goes Back At The Pace The Rank Goes"
+ bc_knight_the_man_who_is_the_name_toast_desc:0 "The ground behind him is where the line will be in an hour, and it is being given up a step at a time and not a step faster, which is the hardest thing this rank knows how to do and the thing it has practised most. He does it the way he does everything, which is well and without being asked twice. Somewhere behind the standards the arrangements for the rest of the day are being made by a voice he has known since he was eight, and he has never once been in the room where that happens. The step comes. He takes it. The shape holds.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -6112,3 +6112,93 @@ bc_knight_a_shoulder_to_line_up_on = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He carries the name, the man who is the name is here, and the side is losing.
+#
+# `ordered`/`down` AND NO MODIFIER, which is the pair the ledger keeps for a
+# line that goes backwards without coming apart. The head of his house is
+# somewhere on this field giving orders, and he is in a rank, and both of those
+# have been true for as long as he can remember. Today the rank is moving the
+# wrong way in good order and he is moving with it at the pace it is going,
+# which is the whole of what is being asked of him. An army is not braced or
+# bled by a man doing exactly what he has always done, so the verb table hands
+# out nothing.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the house link and
+# the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_no_house_behind_him, which is a man with no name at
+# all. This one has the name and does not have the thing the name means, and
+# has spent his life inside the difference.
+#
+# THE DESC MAY NOT NAME THE HOUSE OR THE MAN, may not have the two of them
+# look at each other, may not have anybody give him an order on the page, may
+# not make him resentful and may not make him devoted, and may not have him
+# think about inheriting anything. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_man_who_is_the_name = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_serves_his_own_name_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Going backwards in good order is a thing a good man in a rank is
+		# better at than a bad one.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = humble
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_man_who_is_the_name"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_man_who_is_the_name_toast
+				desc = bc_knight_the_man_who_is_the_name_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

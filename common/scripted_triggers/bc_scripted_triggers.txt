@@ -1814,3 +1814,68 @@ bc_he_lost_an_eye_trigger = {
 bc_his_face_was_taken_trigger = {
 	has_trait = disfigured
 }
+
+
+# --- whose name this is ------------------------------------------------------
+#
+# THIS MOD HAS ASKED ABOUT HOUSES EXACTLY ONCE AND ONLY ACROSS THE LINE.
+# bc_foe_is_house_trigger compares his house to the enemy commander's, which is
+# a question about the man opposite. Nothing in eighty-four batches has ever
+# asked where he stands INSIDE the name he carries, which in this setting is
+# the question that organises most of a man's life. A Frey is not a fact about
+# a man; being the Frey, or being one of the ninety who are not, is.
+#
+# `is_house_head` DOES NOT APPEAR IN THE 1.19.0.6 SCRIPT DUMP even though
+# vanilla script uses it (00_available_for_events_triggers.txt:884), so this
+# file will not spend the mod's zero-error baseline on it. Both triggers below
+# use the target form instead - `this = house.house_head` - which is the idiom
+# vanilla itself reaches for at 00_activity_triggers.txt:643 and which the
+# dump does document, house_head being a listed event target out of
+# dynasty_house. Same answer, and it is an answer the validator can check.
+#
+# BOTH HOUSE LINKS ARE LEAD-LINED for the reason recorded on
+# bc_foe_is_house_trigger: a lowborn character has no house at all, CK3 does
+# not short-circuit, and the second trigger walks two links deep. `exists`
+# sits as a sibling; every READ is nested in a trigger_if whose limit repeats
+# the exists.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION AND NOT BY LUCK. The second contains an
+# explicit NOT on the first, so a house head can never answer yes to it, and
+# they never both fire on the same man.
+bc_the_name_is_his_trigger = {
+	exists = house
+	trigger_if = {
+		limit = { exists = house }
+		exists = house.house_head
+		trigger_if = {
+			limit = { exists = house.house_head }
+			this = house.house_head
+		}
+	}
+}
+
+# He carries the name and the man who IS the name is standing on this field.
+#
+# `any_side_commander` ON HIS OWN SIDE, not enemy_side: this is about serving
+# under him, not facing him. The iteration is the same one batch eighty-two
+# used to count banners, asked a different question - not how many lords are
+# here, but whether one particular lord is.
+#
+# `root`, NOT `prev`, inside the entered scope, for the reason recorded on
+# bc_foe_is_countryman_trigger.
+bc_he_serves_his_own_name_trigger = {
+	exists = house
+	trigger_if = {
+		limit = { exists = house }
+		exists = house.house_head
+		trigger_if = {
+			limit = { exists = house.house_head }
+			NOT = { this = house.house_head }
+			scope:combat_side = {
+				any_side_commander = {
+					this = root.house.house_head
+				}
+			}
+		}
+	}
+}

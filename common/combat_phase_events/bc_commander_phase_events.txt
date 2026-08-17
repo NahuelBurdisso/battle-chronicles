@@ -8569,3 +8569,102 @@ bc_the_fractions_are_adding_up = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-FIVE. Whose name this is.
+#
+# THE MOD HAS ASKED ABOUT HOUSES ONCE AND ONLY ACROSS THE LINE. Every house
+# question in eighty-four batches is bc_foe_is_house_trigger, which is about
+# the man opposite. Where he stands INSIDE the name he carries has never been
+# read, and in this setting that is the fact that organises most of a man's
+# life: a Frey is not a fact about a man, but being the Frey, or being one of
+# the ninety who are not, is.
+#
+# TWO TEMPLATES AND THEY CANNOT BOTH BE TRUE. The second gate carries an
+# explicit NOT on the first, so the head of a house never answers yes to it.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The name is his, and the name is winning.
+#
+# `measured`/`up` - the smallest cell in the whole census. Every account of
+# this afternoon that gets written down anywhere will be written under one
+# word, and the word is his. Not his family's, not his father's: the ledgers
+# in six castles will say the house did this, and he is the man the word
+# currently means. That is not courage and it is not a manoeuvre - it is a
+# reading of what an afternoon is FOR, arriving on a day when the reading is
+# a good one, and the verb table hands out nothing, which is right.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the house link and
+# the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_the_field_keeps_no_accounts, which is a man deciding the
+# afternoon will not be written down accurately by anybody. This one is about
+# the fact that it will be written down under a particular word.
+#
+# THE DESC MAY NOT NAME THE HOUSE, may not quote a word or a sigil or a seat,
+# may not have him think about an ancestor, may not have anybody address him
+# by the name on the page, and may not let him be pleased with himself. See
+# the loc header.
+# ---------------------------------------------------------------------------
+bc_the_word_they_will_write_it_under = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_name_is_his_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who reads a field well is a man who is already thinking past
+		# the end of it.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_word_they_will_write_it_under"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_word_they_will_write_it_under_toast
+			desc = bc_the_word_they_will_write_it_under_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
