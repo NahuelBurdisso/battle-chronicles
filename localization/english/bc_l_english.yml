@@ -1087,6 +1087,11 @@
 # grants is the same one option a grants - what differs is the coin it is paid
 # for, and the text names the coin.
  bc_chronicles.0011.h:0 "Have it preached before they form up. Their gods are not ours."
+# i, added 2026-08-17, is the winter band and the only option in the mod that
+# costs coin. It names the price in the text for the same reason f does: the
+# choice is taken before anything is known, and coin is the one thing the
+# player can be left measurably poorer in.
+ bc_chronicles.0011.i:0 "Buy them a warm hour out of the war chest. Fires, wine, whatever is still in the wagons."
 
 # --- the flesh --------------------------------------------------------------
 

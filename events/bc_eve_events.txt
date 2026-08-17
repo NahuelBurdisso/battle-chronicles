@@ -604,4 +604,47 @@ bc_chronicles.0011 = {
 		add_piety = 50
 		debug_log = "BC: eve option heathen"
 	}
+
+	# THE WINTER BAND, WHICH WAS THE LAST OF THE SIX WITH NO OPTION OF ITS OWN.
+	# d takes rough, forest and jungle; f takes open and desert; winter fell
+	# between them and f's header says why - its paragraph is about what the day
+	# is doing to the men, which is neither a thing to hold nor a road to ride
+	# down. So this option is not about the ground at all. It is about the men
+	# standing on it before anything has started.
+	#
+	# THE ONLY OPTION IN THE MOD THAT COSTS GOLD, AND THE ONLY ONE WITH A
+	# RESOURCE GATE. Every other eve option is paid for in stress, prestige or
+	# piety, all of which a landless knight has as much of as a king. Coin is
+	# the one currency that can be absent, so the trigger asks for it - an
+	# option that offers a purchase the player cannot afford is worse than one
+	# that is not shown, which is the same argument the file header makes about
+	# greying out d on a plain.
+	#
+	# `remove_short_term_gold`, NOT `add_gold = -100`. The negative form throws
+	# a script error; the mod's other paid option, bc_chronicles.0001.e, uses
+	# the same call for the same reason.
+	#
+	# IT GRANTS bc_bloodied, WHICH a AND h ALSO GRANT, and that is the pattern
+	# those two established: the modifier is not what separates eve options, the
+	# coin is. a pays 10 stress, h pays 50 piety, this pays 100 gold. What is
+	# bought is the same posture - men who have been given fires and the last of
+	# the wine before dawn hit harder and hold worse, which is precisely
+	# bc_bloodied's trade.
+	#
+	# NESTED, NOT SIBLING, on the ground read, the same idiom as d, f and g. The
+	# gold test is a plain root read and needs no wrapper.
+	option = {
+		name = bc_chronicles.0011.i
+		trigger = {
+			gold >= 100
+			exists = scope:bc_eve_ground
+			trigger_if = {
+				limit = { exists = scope:bc_eve_ground }
+				scope:bc_eve_ground = { bc_ground_is_winter_trigger = yes }
+			}
+		}
+		remove_short_term_gold = 100
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		debug_log = "BC: eve option winter"
+	}
 }
