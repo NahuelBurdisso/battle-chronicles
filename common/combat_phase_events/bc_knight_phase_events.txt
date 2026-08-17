@@ -731,3 +731,215 @@ bc_knight_meets_his_cousin = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE THIRD - three knight cases about the battle around him.
+#
+# The nine above read the knight (prowess, age, kin, craven) and the side he is
+# on (winning, losing, outnumbering). None of them reads the BATTLE ITSELF -
+# how bloody it has got, how long the war behind it has run, how many men are
+# on the field. All three of those triggers were written for commander cases
+# and have never been asked from a knight's root. They are all rooted on a
+# character but read only scope:combat_side, which a knight event has, so they
+# work here unchanged - the same argument bc_knight_meets_his_cousin makes
+# about bc_foe_is_kin_trigger.
+#
+# SAME base = 80, same momentum guard inside the side_commander block, for the
+# same reasons as the two batches above.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate. bc_knight_in_the_press
+# shares prowess >= 12 with bc_knight_unhorses_a_lord but not its winning row,
+# and a losing side can have killed two fifths of the enemy. bc_knight_the_long
+# _war shares prowess <= 8 with bc_knight_shames_himself's OR but not its losing
+# row. bc_knight_among_thousands has no row any other knight case has.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# In the press. bc_field_is_bloody_trigger, which two commander cases read and
+# no knight case ever has.
+#
+# THE COMMANDER SEES A TALLY, THE KNIGHT SEES THE GROUND. Same trigger, and
+# that is the point: bc_the_killing_is_general says two fifths of them are down
+# and the line is going forward, this one says a man cannot put his feet
+# anywhere clean. Both can be true of the same five days.
+# ---------------------------------------------------------------------------
+bc_knight_in_the_press = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 12
+		bc_field_is_bloody_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who does not mind the work does more of it.
+		modifier = {
+			add = 40
+			has_trait = sadistic
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_in_the_press"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_in_the_press_toast
+				desc = bc_knight_in_the_press_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Two years of this. bc_war_is_long_trigger, asked about a man who was never
+# much good at it.
+#
+# THE PROWESS ROW IS THE CASE, not decoration. The long war on its own is
+# bc_the_long_war's ground on the commander side; what makes this its own story
+# is that it happens to the worst man in the line rather than to the army. A
+# good knight two years into a war is bc_knight_the_old_sword's territory.
+# ---------------------------------------------------------------------------
+bc_knight_the_long_war = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess <= 8
+		bc_war_is_long_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			has_trait = craven
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_long_war"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_long_war_toast
+				desc = bc_knight_the_long_war_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Among thousands. Fifteen thousand men on the field, read from inside the
+# ranks - the knight-side answer to bc_too_wide_to_see.
+#
+# NO SECOND ROW AND NO RUNG. The commander's version of this grants faltering
+# because a host he cannot see is a host he cannot steer; a knight in the same
+# host is not steering anything, so nothing about the battle changes and the
+# record is all that is written. That also makes this the cheapest knight case
+# in the file, which is what a gate with a single row should be.
+# ---------------------------------------------------------------------------
+bc_knight_among_thousands = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_host_is_vast_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who wanted to be seen minds it more.
+		modifier = {
+			add = 40
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_among_thousands"
+
+		add_stress = 5
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_knight_among_thousands_toast
+				desc = bc_knight_among_thousands_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

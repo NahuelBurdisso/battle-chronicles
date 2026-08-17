@@ -588,6 +588,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | eve | two contextual options: horse country (`f`, the only option applying two modifiers and the only one applying a negative) and kin (`g`) | 7 options total |
 | prose pools | bond clause 5→15 arms; eve foe 3 lines per value; eve ground 2 per band; memories 3 per perspective; nicknames re-cut into six style ladders over 35 keys | — |
 | commander, the last two bands | rough (paired with losing, so it answers `bc_banner_falls` instead of nesting inside `bc_too_wide_to_see`) and jungle (the band alone), plus the two missing combat-side band wrappers | 2 templates, base 30 and 40 |
+| knight, the fourth three | the battle itself, read from inside the ranks — casualties, war length, host size. All three triggers were written for commander cases and had never been asked from a knight's root | 3 templates, base 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -595,8 +596,9 @@ something needed them; `bc_the_broken_ground_holds` and `bc_the_green_closes_in`
 are that something, and the wrapper set now matches `bc_ground_triggers.txt` one
 for one.
 
-**Template totals are now commander 25, knight 9.** Weight against vanilla's
-`commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70.
+**Template totals are now commander 25, knight 12.** Weight against vanilla's
+`commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70;
+on the knight side, twelve templates at 80 against `knight_none`'s 2000.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 

@@ -227,6 +227,33 @@
  bc_knight_meets_his_cousin_toast:0 "His Own Name, Opposite"
  bc_knight_meets_his_cousin_toast_desc:0 "The device coming at him is his own name, worn by somebody who used to eat at the same table. Neither of them says anything anybody else can hear.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the fourth three (2026-08-17) ------------------------
+#
+# These three read the BATTLE from inside the ranks - how bloody it is, how long
+# the war has run, how many men are on the field - so they are the first knight
+# literals that can be about something other than the knight's own arms. Same
+# subject warning as the two blocks above: `he` is the knight, the bond clause
+# is about the commander.
+#
+# THE SPENT PHRASES ACROSS ALL TWELVE KNIGHT DESCS, which none of these three
+# may reuse: "the line", "one man", "every man", "the press" as a noun (the
+# title below uses it and the desc therefore does not), "flat country", "a step
+# of it", "the same table". The three below reach instead for footing, for the
+# count of days, and for the size of the field.
+#
+# bc_knight_among_thousands SAYS NOTHING ABOUT WHAT HE DID, deliberately - it is
+# the only knight literal with no deed in it, because the case grants no rung
+# and a deed would promise a consequence the effect does not deliver.
+
+ bc_knight_in_the_press_toast:0 "In the Press"
+ bc_knight_in_the_press_toast_desc:0 "Two in five of them are down and there is nowhere left to put a foot that is not somebody. He has stopped stepping over them and is simply going forward.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_long_war_toast:0 "Two Years of This"
+ bc_knight_the_long_war_toast_desc:0 "Seven hundred days since the first muster and he was never any good at it on the first one. What is left of him goes where it is pushed and no further.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_among_thousands_toast:0 "Among Thousands"
+ bc_knight_among_thousands_toast_desc:0 "There are fifteen thousand men on this field and not one of them will remember which was him. He can see two banners from where he is standing and neither is close enough to shout at.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
 # Six templates gated on WHO THE MAN IS rather than on how the battle is going.
