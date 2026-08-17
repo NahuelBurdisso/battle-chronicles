@@ -3304,3 +3304,50 @@
 
  bc_knight_the_sums_were_finished_years_ago_toast:0 "Nothing Here Is Bigger Than It"
  bc_knight_the_sums_were_finished_years_ago_toast_desc:0 "Every other man along this stretch is doing arithmetic about tonight, in the back of his head, whether he knows it or not - what he might lose, what it would cost, what would be left. That arithmetic finished for him some years ago and the answer has not moved since and never will. So there is nothing in front of him this afternoon that is a larger number than the one already behind him, which is not courage and is not despair and does not feel like either. It feels like work arriving at a rate, and being met at that rate, hour after hour, while the far side gives ground.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-SEVEN. The crown that is not on him yet.
+#
+# NEITHER DESC MAY NAME A CROWN, A SEPT, A SEPTON OR A THRONE. The whole point
+# of both moments is that the ceremony has not happened and may never happen,
+# and putting the furniture of it on the page would hand the reader the ending.
+#
+# NEITHER MAY NAME A RIVAL CLAIMANT or reference another king by any
+# description. The gate reads one man's own state and says nothing at all about
+# who else is calling himself what.
+#
+# THE FIRST MAY NOT HAVE HIM DOUBT HIS RIGHT. He is not wondering whether he
+# ought to be king; he is watching the only mechanism that could ever make him
+# one run backwards for an afternoon. It may not have him imagine the ceremony,
+# may not have anybody address him as king or pointedly fail to, may not have
+# him think about a father or a line, and may not let him decide anything.
+#
+# THE SECOND MAY NOT HAVE HIM SEE THE COMMANDER or be seen by him - no glance,
+# no standard picked out of the field, no voice. It may not have anybody cheer
+# or swear anything, may not have him imagine a reward or a holding or a
+# knighting, and may not make him a believer. What he has worked out is
+# mechanical rather than devotional and the toast has to stay on that side of
+# the line.
+#
+# NEITHER MAY USE THE WORDS "king", "claim", "crowned" or "anointed".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate".
+ bc_the_argument_that_he_has_one_toast:0 "He Is Being Beaten Out Of An Argument"
+ bc_the_argument_that_he_has_one_toast_desc:0 "What he is standing on this afternoon is a sentence. Men say it, and other men repeat it, and the only thing that has ever turned a sentence like that into a fact in this country is a long enough run of days that went the right way. Today is not one of those days. He is not losing ground he holds, which he could bear and has borne; he is losing the argument that there is any ground he holds, and every quarter hour that the far side keeps pushing is a piece of it going. He can feel exactly how thin the thing under his feet is, and he has known how thin it was since long before this morning, and knowing has never once made it thicker.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_what_a_run_of_afternoons_gets_called_toast:0 "He Is One Of Several Thousand Men Making It"
+ bc_knight_what_a_run_of_afternoons_gets_called_toast_desc:0 "He came for the ordinary reasons, which is to say his lord came and there was no version of the summer in which he stayed home. Somewhere in the last few hours the thing they are all doing quietly stopped being an opinion that people hold and started being a thing that is true. Nobody announced it. It is simply visible in which direction the ground is moving. What he understands now, without ever putting it into words, is that a thing like this is not handed to anybody in a room - it is what a long enough run of days like this one gets called afterwards, and he is inside one, and his part of it is about eight feet wide. So he works it faster.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -6294,3 +6294,95 @@ bc_knight_the_sums_were_finished_years_ago = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is in a rank for a man nobody has crowned, and the side is winning.
+#
+# `adapted`/`up`. The men around him joined for the usual reasons - their lord
+# came, or their fathers did, or there was no version of staying home - and
+# somewhere in the last few hours the thing they are doing stopped being an
+# opinion. He has worked out, without putting it in words, that a crown in this
+# country is not given to a man, it is what a run of afternoons like this one
+# gets called afterwards, and that he is currently one of the several thousand
+# men making one. It changes nothing about what his arms are doing. It changes
+# what the work is, and he is doing it faster.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the side commander
+# and the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_the_man_who_is_the_name, which is a man in a rank under
+# the head of his own house. That one is about a relationship he was born into
+# and has never been outside of. This one is about a man he may have no
+# connection to at all, and about a thing that is being made this afternoon
+# rather than a thing that has always been there.
+#
+# THE DESC MAY NOT NAME A CROWN, A SEPT OR A THRONE, may not have him see the
+# commander or be seen, may not have anybody cheer or swear anything, may not
+# have him imagine a reward, and may not make him a believer. See the loc
+# header.
+# ---------------------------------------------------------------------------
+bc_knight_what_a_run_of_afternoons_gets_called = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_stands_for_an_uncrowned_man_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Working out what an afternoon is actually for, while it is still
+		# going on, is not a thing every man in a rank manages.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_what_a_run_of_afternoons_gets_called"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_what_a_run_of_afternoons_gets_called_toast
+				desc = bc_knight_what_a_run_of_afternoons_gets_called_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

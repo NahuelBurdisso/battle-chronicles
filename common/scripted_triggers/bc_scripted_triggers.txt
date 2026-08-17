@@ -1933,3 +1933,49 @@ bc_he_killed_his_own_blood_trigger = {
 		has_trait = kinslayer_3
 	}
 }
+
+
+# --- the crown that is not on him yet ----------------------------------------
+#
+# AGOT SHIPS A WHOLE CORONATION SYSTEM AND THIS MOD HAS NEVER LOOKED AT IT.
+# `agot_is_uncoronated_trigger` (00_agot_coronation_triggers.txt:25) and its
+# opposite at :8 are the state of a king who has been proclaimed and not yet
+# crowned - the gap between the shouting and the septon, which in this setting
+# is measured in years and wars rather than in weeks. Eighty-six batches have
+# read who a man is, what he believes, who he is related to and what he has
+# taken, and not one has read whether the thing he is calling himself has been
+# made official by anybody.
+#
+# BOTH GATES CARRY `agot_ruler_requires_coronation` AND THAT IS NOT DECORATION.
+# Read the AGOT trigger: when the coronation system is off it falls through to
+# `trigger_else = { has_realm_law = uncrowned }`, and asking a landed knight or
+# a count about a kingdom-tier realm law is a question with no meaningful
+# answer. The requirement trigger (:1) is kingdom tier or higher, independent,
+# landed and feudal, so pairing them means the gate only ever fires on the men
+# the system is actually about.
+bc_the_crown_is_not_on_him_yet_trigger = {
+	agot_ruler_requires_coronation = yes
+	agot_is_uncoronated_trigger = yes
+}
+
+# He is in a rank, and the man this side belongs to has not been crowned.
+#
+# THE SAME QUESTION ASKED FROM THE OTHER END OF THE ARMY. `side_commander` is
+# an optional link and is guarded the way every optional link in this file is
+# guarded - `exists` as a sibling, the read nested in a trigger_if whose limit
+# repeats it.
+#
+# `side_commander` AND NOT `enemy_side.side_commander`: this is about the man
+# he is standing FOR. The mod has eight triggers that reach across the line and
+# this is the second that reaches up his own side, after
+# bc_he_serves_his_own_name_trigger.
+bc_he_stands_for_an_uncrowned_man_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			agot_ruler_requires_coronation = yes
+			agot_is_uncoronated_trigger = yes
+		}
+	}
+}
