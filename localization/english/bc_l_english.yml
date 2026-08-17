@@ -204,6 +204,38 @@
  bc_knight_is_ridden_down_toast:0 "Ridden Down"
  bc_knight_is_ridden_down_toast_desc:0 "Flat country, and nothing on it to put your back against. He is still turning when the horses reach him.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- commander chronicles, the character batch (2026-08-17) ------------------
+#
+# Six templates gated on WHO THE MAN IS rather than on how the battle is going.
+# The prose therefore has to do something the other twenty descs do not: say
+# something about a person while the two appended clauses are also saying
+# something about a person. All five bond variants of a value name their subject
+# as `the man commanding here`, so these six say `he` and never `the man` - two
+# sentences apart, `the man` twice would read as two different people.
+#
+# Same collision list as the second ten: `field`, `the men`, `a fight`,
+# `the fighting`, `dawn`, plus the knight block's `the line`, `one man` /
+# `every man` and `the press`. None of the six below spends any of them, which
+# is why bc_he_looks_for_the_road says `everyone near enough to see him` where
+# the obvious phrasing was `every man who sees him`.
+ bc_the_wrath_takes_him_toast:0 "The Wrath Takes Him"
+ bc_the_wrath_takes_him_toast_desc:0 "Something in him goes, and what is left is not taking counsel from anybody. He is forward of his own standard before his guards have understood what happened.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_patient_hand_toast:0 "The Patient Hand"
+ bc_the_patient_hand_toast_desc:0 "They have the numbers and they are in a hurry to spend them. He is in no hurry whatsoever, and it costs them more with every hour he waits.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_wine_at_noon_toast:0 "The Wine at Noon"
+ bc_the_wine_at_noon_toast_desc:0 "What was in the skin was not water, and it was not the first skin of the day either. His orders keep arriving a little later than the trouble they were meant for.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_zealot_will_not_stop_toast:0 "No Quarter Asked"
+ bc_the_zealot_will_not_stop_toast_desc:0 "Two in five of them are down already and he calls that a judgement rather than a tally. Nothing he has said since morning suggests he intends to stop at five.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_looks_for_the_road_toast:0 "He Looks for the Road"
+ bc_he_looks_for_the_road_toast_desc:0 "His eyes keep going back to the way they came in this morning. Everyone near enough to see him do it draws the obvious conclusion.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_practised_eye_toast:0 "The Practised Eye"
+ bc_the_practised_eye_toast_desc:0 "A host this size does not fit in one head unless somebody taught you how to hold it there. Somebody did, and he is putting the far wing where it needs to be while it is still forming up.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
 # THREE VARIANTS PER VALUE SINCE 2026-08-17, picked by `random_valid = yes` in

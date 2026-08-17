@@ -1039,3 +1039,387 @@ bc_his_lords_war = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE THIRD BATCH: WHO THE COMMANDER IS (2026-08-17)
+#
+# Six templates on the ONE AXIS THE OTHER TWENTY DO NOT GATE ON - the man's
+# character. Every shipped template asks about the battle: the ground, the odds,
+# the dead, the war, his age, whose quarrel it is. `has_trait` appears in this
+# file eleven times and every one of them is a `chance` modifier, never a row in
+# an is_valid. So two commanders in the same battle have always been able to
+# produce only the same set of moments, which is the wrong answer for a mod
+# whose whole output is character.
+#
+# EVERY GATE HERE IS A TRAIT PLUS A SITUATION, never a trait alone. A bare
+# `has_trait = wrathful` is valid in EVERY battle that man ever fights, which
+# makes the template a property of the commander instead of a moment in a fight
+# - and it would crowd out the calibrated seven for exactly the characters most
+# likely to be somebody's player. The second row also gives the prose something
+# to describe. bc_the_wine_at_noon is the single exception and says why at its
+# own comment.
+#
+# ALL SIX AT base = 30, the second batch's default, for the second batch's
+# reason. The running total is the thing to watch and it is written down here so
+# the next reader does not have to add it up: seven calibrated templates at
+# 40-100 (~400), ten at 30 (300), six more at 30 (180), against vanilla's
+# commander_none at base = 1000. If a sweep shows the original seven crowded
+# out, THIS BATCH IS THE FIRST TO CUT - it is the newest and the least measured.
+#
+# ALL SIX TRAIT KEYS ARE AGOT KEYS, checked in AGOT's own common/traits/00_traits.txt
+# and not in vanilla's: wrathful :2821, patient :3074, drunkard :5437,
+# zealous :4423, craven :3668, strategist :1543. AGOT overrides that file
+# wholesale, so a key that exists only in vanilla is not a key at all here.
+#
+# NO TRAIT IS AWARDED OR REMOVED BY ANY OF THEM. These READ character; the
+# reputation chain in bc_reputation_effects.txt is the only thing in the mod
+# that writes it, and it does so off the style streak. A template that both
+# gated on a trait and granted one would be a feedback loop.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The wrath takes him. Wrathful, and the day is going badly.
+#
+# THE SECOND ROW IS `losing`, NOT `winning`, and the pairing is the case. Anger
+# in a won battle is just a man enjoying himself; anger in a lost one is the
+# thing that either saves it or finishes it. This mod grants it momentum, which
+# is the generous reading, and the swing is `up` for that reason.
+# ---------------------------------------------------------------------------
+bc_the_wrath_takes_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		has_trait = wrathful
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Anger and courage compound; anger and fear do not.
+		modifier = {
+			add = 20
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_wrath_takes_him"
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_wrath_takes_him_toast
+			desc = bc_the_wrath_takes_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The patient hand. Patient, and outnumbered.
+#
+# SHARES THE `outnumbered` ROW WITH bc_the_woods_hide_us AND IS NOT A SUBSET OF
+# IT - that one also requires the forest band, this one requires a trait
+# instead. Neither gate contains the other, which is the distinctness rule the
+# design asks of every template.
+# ---------------------------------------------------------------------------
+bc_the_patient_hand = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		has_trait = patient
+		bc_side_is_outnumbered_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Waiting is easier for a man who was taught to.
+		modifier = {
+			add = 20
+			has_trait = education_martial_4
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_patient_hand"
+
+		bc_momentum_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_patient_hand_toast
+			desc = bc_the_patient_hand_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The wine at noon. Drunkard.
+#
+# THE ONE TEMPLATE IN THIS BATCH WITH NO SITUATIONAL SECOND ROW, because the
+# trait already is the situation: a drunk is a drunk in a battle he is winning
+# too, and any row added here would say the drink only matters when something
+# else has gone wrong. It is also the narrowest gate of the six - drunkard is a
+# rare trait, and rarer still on a man trusted with a host - so the widest gate
+# argument does not apply to it either.
+# ---------------------------------------------------------------------------
+bc_the_wine_at_noon = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		has_trait = drunkard
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_wine_at_noon"
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_the_wine_at_noon_toast
+			desc = bc_the_wine_at_noon_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The zealot will not stop. Zealous, with two fifths of the enemy already down.
+#
+# SHARES bc_field_is_bloody_trigger WITH bc_the_killing_is_general, which grants
+# MAJOR momentum off the same row. This one is minor and gates on the trait
+# instead of on the momentum-free state alone, so on a battle where both are
+# valid the bigger event is also the better-weighted one and this reads as the
+# consolation. That ordering is intended.
+# ---------------------------------------------------------------------------
+bc_the_zealot_will_not_stop = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		has_trait = zealous
+		bc_field_is_bloody_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_zealot_will_not_stop"
+
+		bc_momentum_minor_effect = yes
+		add_piety = 50
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_zealot_will_not_stop_toast
+			desc = bc_the_zealot_will_not_stop_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He looks for the road. Craven, and the side is losing.
+#
+# THE ONLY COMMANDER TEMPLATE THAT GATES ON craven. bc_knight_shames_himself
+# reads the same trait but is `type = knight`, roots on a knight, and competes
+# in a different pool against knight_none - so the two never contend and the
+# commander half of this idea was simply missing.
+#
+# KIND = measured, WHICH IS NOT AN ACCIDENT AND IS NOT FLATTERY. The style
+# streak turns three of these into cautious_leader, and a man who keeps looking
+# for the road is a cautious commander whatever the reason. The mod does not
+# have a cowardice trait to award and inventing one to be unkind with is not
+# worth a new trait file.
+# ---------------------------------------------------------------------------
+bc_he_looks_for_the_road = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_is_faltering_trigger = yes }
+		has_trait = craven
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being badly outnumbered on top of it settles the argument.
+		modifier = {
+			add = 20
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_looks_for_the_road"
+
+		bc_faltering_minor_effect = yes
+		add_stress = 10
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_he_looks_for_the_road_toast
+			desc = bc_he_looks_for_the_road_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The practised eye. A strategist on a host too big to see the end of.
+#
+# strategist IS A LIFESTYLE TRAIT AND THAT IS WHY IT IS HERE. The other five
+# gates in this batch read personality, which a man is born with; this one reads
+# something he went and learned. It also pairs with bc_too_wide_to_see off the
+# same bc_host_is_vast_trigger and answers it: the same battle that loses an
+# ordinary commander is the one a trained one is for.
+# ---------------------------------------------------------------------------
+bc_the_practised_eye = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOT = { bc_has_momentum_trigger = yes }
+		has_trait = strategist
+		bc_host_is_vast_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 16
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_practised_eye"
+
+		bc_momentum_minor_effect = yes
+		add_prestige = 25
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_practised_eye_toast
+			desc = bc_the_practised_eye_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
