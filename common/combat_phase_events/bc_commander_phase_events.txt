@@ -8466,3 +8466,106 @@ bc_the_bright_thing_on_the_far_side = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-FOUR. What has already been taken off him.
+#
+# THE MOD READS TWO KINDS OF BODY AND NEITHER IS THIS ONE. bc_he_is_unwell
+# reads the illness flag - a thing that arrived and may leave. Batch
+# seventy-nine reads the count of bad genetic traits - a thing that was there
+# before he was. Between them sits the largest category of damaged men in this
+# setting by a very long way: the ones who walked onto a field whole and did
+# not walk off it that way, which in a mod entirely about fields is a strange
+# thing to have missed for eighty-three batches.
+#
+# BOTH GATES READ THE TRAIT AND NOT AGOT'S APPEARANCE WRAPPERS. Those wrappers
+# are questions about how a man is DRAWN - which patch his portrait wears -
+# and a one-eyed lord whose portrait never got a patch flag is still a one-eyed
+# lord. Neither trait carries the illness flag and neither is genetic, so these
+# two are disjoint from the mod's existing body gates by construction.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He has half the field he used to have, and he is losing.
+#
+# `adapted`/`down`. Everything about how he reads a battle was rebuilt some
+# years ago around a side he has to turn his whole head to look at, and the
+# rebuild works - he has fought and won since. What it costs is a fraction of a
+# second per look, and today is one of the afternoons where the fractions are
+# adding up faster than he can spend them. That is a reading of the situation
+# and a losing one; the verb table hands out nothing, which is right, because
+# an army is not braced or bled by how quickly its commander's head turns.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads one trait and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_he_is_unwell OR bc_the_story_is_already_written. The first is
+# a fever, the second is a thing he was born with. This one has a date, and he
+# knows what it is.
+#
+# THE DESC MAY NOT SAY HOW HE LOST IT, may not name the battle or the man, may
+# not have him remember it, may not put a patch or a scar on the page, may not
+# have anybody notice or accommodate him, and may not let the moment be about
+# courage. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_fractions_are_adding_up = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_lost_an_eye_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The better he reads a field, the more of the afternoon is running
+		# through the part of it that costs him time.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_fractions_are_adding_up"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_fractions_are_adding_up_toast
+			desc = bc_the_fractions_are_adding_up_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -6023,3 +6023,92 @@ bc_knight_the_wedge_behind_one_man = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The men beside him stopped seeing it hours ago, and the side is winning.
+#
+# `entrenched`/`up` AND bc_shieldwall. He has spent years being the reason
+# conversations stop, and a rank on the fourth hour of a battle is the one
+# gathering of people in the world with nothing left over to spend on that. The
+# men to either side of him have looked straight at him a hundred times since
+# dawn and seen a shoulder to line up on, which is all they need him to be. The
+# shape holds where he is standing, and it holds partly because he does not
+# move.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads one trait and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_nobody_has_looked_at_him_since_dawn, which reads the
+# count of bad genetic traits - a body he was given and a verdict that came
+# with it. This is a thing that was done to him at a known hour on a known day,
+# and the two templates are about different silences.
+#
+# THE DESC MAY NOT DESCRIBE HIS FACE. No scar, no burn, no missing anything, no
+# side that is worse than the other. It may not say what did it, may not have
+# him remember it, may not have anybody flinch or fail to flinch on the page,
+# and may not kill anybody. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_a_shoulder_to_line_up_on = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_face_was_taken_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being the fixed point in a rank for a whole afternoon is work.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = shy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_shoulder_to_line_up_on"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_a_shoulder_to_line_up_on_toast
+				desc = bc_knight_a_shoulder_to_line_up_on_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

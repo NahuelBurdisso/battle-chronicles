@@ -1777,3 +1777,40 @@ bc_the_foe_carries_valyrian_steel_trigger = {
 		}
 	}
 }
+
+
+# --- what has already been taken off him -------------------------------------
+#
+# THE MOD READS TWO KINDS OF BODY AND NEITHER OF THEM IS THIS ONE.
+# bc_he_is_unwell_trigger reads `has_trait_with_flag = illness` - a fever, a
+# thing that arrived and may leave. bc_his_body_was_dealt_to_him_trigger reads
+# `num_of_bad_genetic_traits` - a thing that was there before he was. Between
+# those two sits the largest category of damaged men in this setting by a very
+# long way: the ones who walked onto a field whole and did not walk off it that
+# way. Nothing in this chronicle had ever asked.
+#
+# BOTH READ THE TRAIT DIRECTLY AND NOT AGOT'S APPEARANCE WRAPPERS, and that is
+# a deliberate departure from the rest of this file. `agot_has_any_eye_patch_
+# trigger` (00_agot_appearance_triggers.txt:404) is `has_trait = one_eyed` AND
+# one of a dozen cosmetic flags naming which patch the portrait wears;
+# `agot_has_visible_disfigurement_trigger` (:358) is a set of inactive
+# portrait traits. Both are questions about how a man is DRAWN. A one-eyed
+# lord whose portrait was never assigned a patch flag answers no to AGOT's
+# wrapper and is still a one-eyed lord, and it is the eye and not the patch
+# that these two moments are about.
+#
+# NEITHER TRAIT CARRIES THE illness FLAG AND NEITHER IS GENETIC - both are
+# `category = health` and nothing else (00_traits.txt:6472 and :6551) - so
+# these gates are disjoint from both of the mod's existing body triggers by
+# construction rather than by intent.
+#
+# TWO TRIGGERS AND NEITHER CONTAINS THE OTHER. They are separate traits: a man
+# can lose an eye cleanly and keep his face, or keep both eyes and lose most of
+# the rest of it, or have both, and the engine tracks all three.
+bc_he_lost_an_eye_trigger = {
+	has_trait = one_eyed
+}
+
+bc_his_face_was_taken_trigger = {
+	has_trait = disfigured
+}

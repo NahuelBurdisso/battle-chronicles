@@ -3165,3 +3165,53 @@
 
  bc_knight_the_wedge_behind_one_man_toast:0 "The Line Stopped Being A Line An Hour Ago"
  bc_knight_the_wedge_behind_one_man_toast_desc:0 "Whatever was meant to happen here, what is happening is that he goes forward and a rough triangle of shouting men goes forward behind him because there is nowhere else for them to be. Nobody ordered it. It is simply where the ground opened. He has been going at the pace of a thing that does not have to stop and the animals underneath all of it have been going at that pace too, and they were not built for four hours of it. Somebody will count the lamed ones tonight and the number will be ugly, and it will still have been the hour that broke the far side.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-FOUR. What has already been taken off him.
+#
+# NEITHER DESC MAY SAY HOW IT HAPPENED. No battle named, no man named, no year,
+# no siege, no accident, no tourney. Both gates read a trait that the engine
+# hands out for a dozen different reasons and the toast has to be true under
+# every one of them.
+#
+# NEITHER MAY HAVE HIM REMEMBER IT. A man who has had a thing for years does
+# not spend the fourth hour of a battle thinking about the afternoon he got it,
+# and a flashback would turn a working moment into a wound.
+#
+# THE FIRST MAY NOT PUT A PATCH OR A SCAR ON THE PAGE, may not have anybody
+# notice him or accommodate him or ride up on the correct side, and may not let
+# the moment be about courage. What it is about is arithmetic: a fraction of a
+# second per look, spent several hundred times an afternoon, on a day where he
+# does not have the fractions to spend. It may not have him fail to see the
+# thing that loses him the battle, because that makes the eye the villain and
+# the eye is nine years old and has been fine.
+#
+# THE SECOND MAY NOT DESCRIBE HIS FACE. No scar, no burn, no missing anything,
+# no side that is worse than the other, no mask, nothing. It may not say what
+# did it, may not have anybody flinch or fail to flinch on the page, and may
+# not kill anybody. The moment is that a rank in the fourth hour is the one
+# gathering of people in the world with nothing spare to spend on looking at
+# him, and that this is a rest rather than an ache.
+#
+# NEITHER MAY USE THE WORDS "half a face", "ruin", "monster" or "spoiled". They
+# are the four this pair would reach for and every one of them is a verdict the
+# mod has no business issuing.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be".
+ bc_the_fractions_are_adding_up_toast:0 "He Turns His Whole Head To Look"
+ bc_the_fractions_are_adding_up_toast_desc:0 "Everything about the way he reads a field was rebuilt some years ago and the rebuild works. He has fought since, and won since, and does not think about it from one month to the next. What it costs is a fraction of a second each time the world on one side of him has to be checked, and today the checking is constant and the fractions are coming due faster than he has them to pay. He is not behind because of it. He is behind, and it is one of the things that is making catching up expensive, and there is no order he can give that buys any of it back.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_a_shoulder_to_line_up_on_toast:0 "A Shoulder To Line Up On"
+ bc_knight_a_shoulder_to_line_up_on_toast_desc:0 "He has spent most of his life being the reason a conversation goes quiet, and a rank in the fourth hour of a battle has nothing spare in it for that. The men to either side have looked straight at him several hundred times since the light came up and taken exactly one thing from it, which is where he is standing, which is all they need. So he stands there. The shape holds along this stretch of the line, and it holds partly because the fixed point in it does not move, and for a few hours he is a place rather than a thing to look at.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
