@@ -1027,6 +1027,35 @@
  bc_chronicles.0004.c:0 "Everything still mounted, into the gap, with me at the front of it."
  bc_chronicles.0004.d:0 "Bring the second line round to face it. Slowly, and in order."
 
+# --- the fifth pop-up, and the first one asked of a knight (2026-08-17) ------
+#
+# THIS ONE MAY NAME THE OTHER MAN. Every note in this file about pop-ups says
+# they cannot reach across the field, and that remains true of the four
+# commander ones - a character_event cannot see scope:combat_side. This event is
+# different because the man it is about is on the player's OWN side and was
+# saved as a scope before the raise, so [bc_chronicle_subject.GetName] resolves.
+#
+# THE DESC MUST NOT SAY HE IS DYING. The phase event applies nothing to the
+# commander's health on any path, and a desc that promised a death the script
+# never writes would be caught by the player the first time the man walked away
+# from it. He is down and he is not getting up on his own; that is all of it.
+#
+# OPTION b IS NOT THE COWARD'S ANSWER and is written so that it cannot be read
+# as one. It names what staying is for - the hole he would leave - and the men
+# either side of him are in the sentence.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "carry it myself" and "no man steps
+# back" (0001), "keep the line whole" (0003.b), "where they can see me"
+# (0002.a), "with a man on his shoulder" (bc_knight_pulls_him_out_toast_desc,
+# which is the toast for the same moment and which a player on this path will
+# never see - but an AI knight in the same battle can produce it).
+ bc_chronicles.0005.t:0 "He Is Down"
+ bc_chronicles.0005.desc:0 "[bc_chronicle_subject.GetName] is somewhere in that, and he is not coming out of it upright without help.\n\nThe press closed over the place where he went down and it has not opened since. It is perhaps thirty feet. Thirty feet is nothing at a walk and it is a very long way through this.\n\nThe men either side of you have not moved. They are waiting to see what you do, which means that whatever you do, they will do."
+ bc_chronicles.0005.a:0 "Thirty feet. I have been further into worse."
+ bc_chronicles.0005.b:0 "If I go, this part of the line goes with me. I stay where I was put."
+ bc_chronicles.0005.c:0 "On me — everyone on this side of the banner. We are going through it together."
+ bc_chronicles.0005.d:0 "You three. Wide, from the left, and take him under the arms. I will hold what opens."
+
 # --- nickname tooltips ------------------------------------------------------
 #
 # The ONE place this mod writes a key it did not invent. CK3 builds the nickname

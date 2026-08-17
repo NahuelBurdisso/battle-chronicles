@@ -1770,35 +1770,65 @@ bc_knight_pulls_him_out = {
 		bc_mark_chronicle_effect = yes
 		debug_log = "BC: fired bc_knight_pulls_him_out"
 
-		add_prestige = 100
-
+		# THE FIFTH POP-UP BRANCH, 2026-08-17, AND THE FIRST ON THIS SIDE OF
+		# THE MOD. Four pop-ups have shipped and all four ask a COMMANDER
+		# something; a player who is somebody's sworn sword has never once been
+		# asked anything by this mod, which in AGOT is not an edge case.
+		#
+		# bc_battle_open_effect IS HOISTED OUT OF THE BRANCH AND RUN BEFORE THE
+		# RAISE. It is the only way the commander crosses the trigger_event
+		# boundary: scope:combat_side does not, but a scope SAVED before the
+		# raise does, and this effect's first line saves the commander as
+		# scope:bc_chronicle_subject. That is also the scope the pop-up's three
+		# Custom clauses hang off, so hoisting buys the ground clause too.
+		# bc_eve_offer_effect writes scope:bc_eve_foe one line before its own
+		# raise for exactly this reason; this is the same trick.
+		#
+		# IT IS STILL CALLED EXACTLY ONCE PER EXECUTION, which the effect's own
+		# header requires - both arms of the branch are downstream of it and
+		# neither calls it again.
+		#
+		# THE `else` ARM IS THE UNCHANGED ORIGINAL, down to the prestige. Every
+		# AI knight and every player inside the 60-day pop-up cooldown gets the
+		# memory, the opinion and the toast this template has always given.
 		scope:combat_side.side_commander ?= {
 			bc_battle_open_effect = yes
+		}
 
-			add_opinion = {
-				target = scope:bc_knight
-				modifier = bc_lifesaver_opinion
-				opinion = 40
-			}
+		if = {
+			limit = { bc_can_interrupt_player_trigger = yes }
+			bc_start_popup_cooldown_effect = yes
+			trigger_event = bc_chronicles.0005
+		}
+		else = {
+			add_prestige = 100
 
-			# The tag `lifesaver` must match the participants list in
-			# bc_memories.txt; it is what the loc reads back with
-			# [lifesaver.GetFullName].
-			create_character_memory = {
-				type = bc_lifesaver_memory
-				participants = {
-					lifesaver = scope:bc_knight
+			scope:combat_side.side_commander ?= {
+				add_opinion = {
+					target = scope:bc_knight
+					modifier = bc_lifesaver_opinion
+					opinion = 40
 				}
-			}
-			debug_log = "BC: lifesaver memory"
 
-			bc_record_moment_effect = { TIER = major KIND = adapted SWING = up }
+				# The tag `lifesaver` must match the participants list in
+				# bc_memories.txt; it is what the loc reads back with
+				# [lifesaver.GetFullName].
+				create_character_memory = {
+					type = bc_lifesaver_memory
+					participants = {
+						lifesaver = scope:bc_knight
+					}
+				}
+				debug_log = "BC: lifesaver memory"
 
-			send_interface_toast = {
-				type = event_toast_effect_good
-				title = bc_knight_pulls_him_out_toast
-				desc = bc_knight_pulls_him_out_toast_desc
-				left_icon = scope:bc_knight
+				bc_record_moment_effect = { TIER = major KIND = adapted SWING = up }
+
+				send_interface_toast = {
+					type = event_toast_effect_good
+					title = bc_knight_pulls_him_out_toast
+					desc = bc_knight_pulls_him_out_toast_desc
+					left_icon = scope:bc_knight
+				}
 			}
 		}
 	}

@@ -3,14 +3,20 @@
 # Battle Chronicles - the player-facing moments.
 #
 # THIS FILE HOLDS POP-UPS ONLY. The hidden combat-end graders live next door in
-# bc_aftermath_events.txt. Keeping the three player-facing events in a file of
-# their own is what makes it obvious at a glance which of the mod's events the
-# player can actually see and click.
+# bc_aftermath_events.txt. Keeping the player-facing events in a file of their
+# own is what makes it obvious at a glance which of the mod's events the player
+# can actually see and click.
 #
-# Only three of the ten chronicles ever become a pop-up, and only when the player
-# is personally leading the side and is not inside the 60-day pop-up cooldown.
-# Everything else is a toast, because that is what vanilla and AGOT do and the mod
-# should read as native.
+# Five templates out of the fifty-nine ever become a pop-up, and only when the
+# player is personally in the moment and is not inside the 60-day pop-up
+# cooldown. Everything else is a toast, because that is what vanilla and AGOT do
+# and the mod should read as native.
+#
+# FOUR OF THE FIVE ROOT ON A COMMANDER. bc_chronicles.0005 is the exception and
+# roots on a KNIGHT, which changes what its options are allowed to do: a knight
+# carries none of the army modifiers, so every rung and every ledger write in
+# that event is wrapped in `scope:bc_chronicle_subject = { }` - the commander,
+# saved before the raise. See its own header.
 #
 # Nothing in here touches combat scopes. A triggered event runs on the character,
 # and momentum is a character modifier, so the outcomes work without carrying
@@ -359,5 +365,162 @@ bc_chronicles.0004 = {
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 		add_prestige = 25
 		debug_log = "BC: popup 0004 option refuse"
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The commander is down in the press, and the player is one of his knights.
+#
+# THE FIRST POP-UP IN THE MOD THAT DOES NOT ROOT ON A COMMANDER. Four pop-ups
+# shipped over two content programmes and every one of them assumes the player
+# is the man giving orders. In AGOT a player is very often somebody's sworn
+# sword instead, and this mod has never once asked him anything.
+#
+# ROOT IS THE KNIGHT AND scope:bc_chronicle_subject IS THE COMMANDER. The
+# second is saved by bc_battle_open_effect, which bc_knight_pulls_him_out now
+# calls BEFORE the raise for exactly this purpose - a scope saved before
+# trigger_event crosses the boundary where scope:combat_side does not.
+#
+# EVERY RUNG AND EVERY LEDGER WRITE IS WRAPPED IN THAT SCOPE. bc_momentum_*,
+# bc_faltering_* and bc_record_moment_effect all act on the character they are
+# called on, and on this side of the mod that character is the commander, never
+# the knight - which is why the four commander pop-ups can write them bare and
+# this one cannot. Getting this wrong would not error; it would hang the army
+# modifier on a knight, where nothing reads it.
+#
+# THE MEMORY USES `root`, NOT scope:bc_knight. Both name the same man and the
+# phase event saves the scope, but root cannot fail and needs no argument about
+# what survives the raise.
+#
+# NO OPTION IS FREE AND NO OPTION IS SAFE. He is being asked whether to leave
+# his place in a line that is already losing, so the two that go in cost stress
+# and the one that stays costs him the man.
+# ---------------------------------------------------------------------------
+bc_chronicles.0005 = {
+	type = character_event
+	title = bc_chronicles.0005.t
+	desc = bc_chronicles.0005.desc
+	theme = martial
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	# THE FIRST right_portrait IN THE MOD, and the reason is the same as the
+	# reason this event exists: it is the only pop-up about two men. `fear` is a
+	# vanilla animation - vanilla writes it at events/activities/
+	# coronation_activity/coronation_events.txt:3745 and AGOT at
+	# agot_coronation_events.txt:3850.
+	right_portrait = {
+		character = scope:bc_chronicle_subject
+		animation = fear
+	}
+
+	immediate = {
+		debug_log = "BC: popup 0005 pulls him out"
+	}
+
+	# He goes. This is the phase event's `else` arm made into a choice, and it
+	# is priced: the AI knight who never sees this pop-up pays nothing for it
+	# because nobody asked him.
+	option = {
+		name = bc_chronicles.0005.a
+
+		add_prestige = 100
+		add_stress = 10
+
+		scope:bc_chronicle_subject ?= {
+			add_opinion = {
+				target = root
+				modifier = bc_lifesaver_opinion
+				opinion = 40
+			}
+
+			create_character_memory = {
+				type = bc_lifesaver_memory
+				participants = {
+					lifesaver = root
+				}
+			}
+
+			bc_record_moment_effect = { TIER = major KIND = adapted SWING = up }
+		}
+		debug_log = "BC: popup 0005 option goes"
+	}
+
+	# He stays. THIS IS NOT THE COWARD'S ANSWER and the loc must not write it as
+	# one - a knight who leaves his place in a losing line to go after one man
+	# is making a hole, and the men either side of him know it.
+	#
+	# It is the only option that leaves no memory and no opinion, because
+	# nothing happened between the two of them. The side gets bc_shieldwall out
+	# of it, guarded like every other momentum grant.
+	option = {
+		name = bc_chronicles.0005.b
+
+		scope:bc_chronicle_subject ?= {
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+		}
+		debug_log = "BC: popup 0005 option holds"
+	}
+
+	# The expensive one. He does not go alone - he takes the men either side of
+	# him with him, which gets the commander out and blows the whole wedge open
+	# doing it. `wild`/`up` is bc_spent_horse: the tide moves and the animals
+	# pay for the moving.
+	#
+	# prowess >= 14 IS HIGHER THAN THE PHASE EVENT'S OWN GATE of 12. The option
+	# is not "can he fight", it is "can he fight well enough that other men will
+	# follow him into it".
+	option = {
+		name = bc_chronicles.0005.c
+		trigger = { prowess >= 14 }
+
+		add_prestige = 150
+		add_stress = 20
+
+		scope:bc_chronicle_subject ?= {
+			add_opinion = {
+				target = root
+				modifier = bc_lifesaver_opinion
+				opinion = 40
+			}
+
+			create_character_memory = {
+				type = bc_lifesaver_memory
+				participants = {
+					lifesaver = root
+				}
+			}
+
+			bc_record_moment_effect = { TIER = major KIND = wild SWING = up }
+		}
+		debug_log = "BC: popup 0005 option wedge"
+	}
+
+	# The trained answer, gated on martial for the reason bc_chronicles.0003.d
+	# and .0004.d are: a man can have no relevant trait and middling prowess and
+	# still have been taught how to get somebody out of a press without walking
+	# into it himself.
+	#
+	# NO MEMORY AND NO OPINION. Somebody else's hands did the pulling, and the
+	# memory belongs to the day one man went in after another. He is paid in
+	# prestige, which is what organising it in front of witnesses is worth.
+	option = {
+		name = bc_chronicles.0005.d
+		trigger = { martial >= 12 }
+
+		add_prestige = 25
+
+		scope:bc_chronicle_subject ?= {
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+		}
+		debug_log = "BC: popup 0005 option sends"
 	}
 }
