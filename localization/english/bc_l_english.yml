@@ -1640,3 +1640,30 @@
 
  bc_knight_the_horses_went_past_toast:0 "They Have Already Been Here"
  bc_knight_the_horses_went_past_toast_desc:0 "The riders went by him a long while back, close enough that he had to step aside for them, and nobody has come the other way since. Now he is walking forward over ground that has been ridden across twice and churned into something that pulls at his feet, past things he does not look down at. Whatever is at the far end of this, the horses got there first and are still there.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the ledger as a gate (2026-08-17) --------------------------------------
+#
+# BOTH DESCS ARE ABOUT TIME AND NEITHER MAY NAME AN HOUR. The gate counts
+# moments, not minutes, and a battle that produced three of them could have
+# taken half a morning or most of a day. "Since midday" and "for two hours"
+# are claims the code cannot make. What it can say is that a great deal has
+# already happened.
+#
+# THE FIRST HAS NO SIDE ROW AND THE PROSE MAY NOT LEAN EITHER WAY. It renders
+# on a field being won and a field being lost, so every sentence in it has to
+# be true of both. That is unusual in this file and it is the hardest
+# constraint in the block.
+#
+# THE SECOND IS THE ONE PLACE THE MOD IS ALLOWED TO BE TIRED. Every other
+# knight desc is written at the pitch of the thing happening; this one is
+# written at the pitch of the fourth time it has happened. It should read
+# slower than anything else here.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "it has turned over"
+# (bc_they_were_chasing_an_hour_ago), "nobody wants to be in the front of the
+# next one" (bc_knight_something_is_always_there), "the whole of the world".
+ bc_this_has_been_a_long_afternoon_toast:0 "This Is Not Going to Be Quick"
+ bc_this_has_been_a_long_afternoon_toast_desc:0 "Enough has happened here now that nobody is trying anything elegant any more. The lines have closed up and gone heavy, the reserves have been in and come out and gone in again, and whatever either side arrived intending to do has been used up. He has stopped thinking about how to win this and started thinking about who will still be standing in order when it stops, which is a different question and the only one left.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_has_lost_count_toast:0 "He Has Stopped Counting"
+ bc_knight_he_has_lost_count_toast_desc:0 "He could tell you what happened the first time and most of the second. After that it is one thing. His shield arm has gone somewhere he cannot feel and he is not sure when he last saw the man who was on his left, and none of it has decided anything, and it is still going. Somewhere behind him a horn is saying something he used to know the meaning of.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -3804,3 +3804,103 @@ bc_they_were_chasing_an_hour_ago = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE LEDGER AS A GATE, 2026-08-17.
+#
+# THE MOD HAS COUNTED ITS OWN MOMENTS SINCE PLAN 1 AND HAS NEVER ASKED THE
+# COUNT A QUESTION. `var:bc_battle_moments` is incremented by
+# bc_record_moment_effect at every call site, and it is read in exactly three
+# places: the tier ladder inside the ledger, the first-moment `exists` test
+# that opens a battle, and the eve's guard. Not one template anywhere in the
+# mod gates on how much has already happened on this field.
+#
+# THIS IS THE SECOND HALF OF THE VERB-MODIFIER BATCH AND A BIGGER ONE. A live
+# verb says something specific happened; the ledger count says the afternoon
+# has length. Together they are the whole of what the mod remembers about a
+# battle in progress, and until today it remembered both and used neither.
+#
+# THE THRESHOLD IS 3, AND IT IS NOT ARBITRARY. The ledger's own tier ladder
+# treats 3 as the major rung and 4 as decisive, so 3 is the first count the
+# mod already considers meaningful. The measured rate is roughly 4.2 moments
+# per battle, which means this gate opens on a clear majority of battles but
+# only in their second half - which is exactly the shape wanted.
+#
+# NO SIDE ROW. Length is not a side. A battle that has produced three moments
+# is long whether it is being won or lost, and adding a side row would halve
+# the reach of a gate whose entire content is duration.
+#
+# THE COUNT LIVES ON THE COMMANDER, so a bare `var:bc_battle_moments` is
+# correct in this file and would be silently always-false in the knight file -
+# bc_scripted_triggers.txt records that trap in full on
+# bc_chronicle_ready_trigger, and the knight template in this batch reaches
+# through scope:combat_side.side_commander for that reason.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# It is not going to be over quickly, and everybody on the field has worked
+# that out at about the same time.
+#
+# `entrenched`/`up`: bc_shieldwall AND a momentum rung. A fight that has gone
+# on this long is a fight where both lines have stopped trying to be clever;
+# the shieldwall is literal and the rung is the fact that his host is still a
+# host after three of these. It is not a claim that he is winning - there is
+# no side row - it is a claim that what is left of the afternoon will be
+# decided by whoever is still standing in order.
+#
+# IT CANNOT RUN AWAY WITH ITSELF. The gate gets easier as a battle goes on,
+# which would be a problem if the pool were unlimited; it is not.
+# bc_chronicle_ready_commander_trigger fails while bc_chronicle_recent is
+# live, so this competes for the same rate-limited slot as everything else and
+# a long battle simply makes it likelier to own one of them - which is the
+# intent.
+# ---------------------------------------------------------------------------
+bc_this_has_been_a_long_afternoon = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		var:bc_battle_moments >= 3
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			var:bc_battle_moments >= 5
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_has_been_a_long_afternoon"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = bc_this_has_been_a_long_afternoon_toast
+			desc = bc_this_has_been_a_long_afternoon_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

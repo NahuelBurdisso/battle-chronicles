@@ -2858,3 +2858,94 @@ bc_knight_the_horses_went_past = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE KNIGHT HALF OF THE LEDGER-AS-A-GATE BATCH, 2026-08-17.
+#
+# THE ARGUMENT IS IN THE COMMANDER FILE'S BATCH HEADER: the mod has counted
+# its own moments since plan 1 and has never asked the count a question.
+#
+# `scope:combat_side.side_commander = { var:bc_battle_moments >= 4 }`, AND THE
+# REACH-THROUGH IS MANDATORY. Every ledger variable is written on the side
+# commander. A bare `var:bc_battle_moments` in this file would be read on the
+# knight, where the variable has never existed and never will, so the gate
+# would be silently always-false and the template would never fire once -
+# bc_scripted_triggers.txt records exactly this trap on the shape of
+# bc_chronicle_ready_trigger, where the same read is ALWAYS TRUE on a knight
+# for the same reason.
+#
+# FOUR RATHER THAN THE COMMANDER'S THREE, and the extra rung is the point. A
+# commander notices length at three because he is counting; a man in the ranks
+# does not notice length, he notices that it has stopped being possible to
+# tell how long it has been. Four is the ledger's own decisive threshold, and
+# it makes this the rarer of the two.
+#
+# LOSING, WHICH THE COMMANDER'S VERSION DELIBERATELY IS NOT. Duration alone is
+# not a side and the commander's template says so; but from inside the ranks
+# duration and defeat are not separable - a long fight you are winning is a
+# fight you are winning, and a long fight you are losing is the whole of the
+# world.
+#
+# `bloodied`/`down`: bc_bloodied and the faltering rung. Nothing has been
+# decided, and the price of nothing being decided is being paid by the men.
+# ---------------------------------------------------------------------------
+bc_knight_he_has_lost_count = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_losing_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { var:bc_battle_moments >= 4 }
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess <= 8
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_lost_count"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_has_lost_count_toast
+				desc = bc_knight_he_has_lost_count_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
