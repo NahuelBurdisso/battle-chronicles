@@ -1406,3 +1406,266 @@ bc_knight_in_the_green = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE SEVENTH ON THIS SIDE: THE BODY HE BROUGHT
+#
+# TWENTY-ONE TEMPLATES AND NOT ONE ASKS WHAT SHAPE THE MAN IS IN. The knight
+# side reads prowess eleven times, age twice and temperament three times, and
+# prowess is a number about how well he fights, not about what he is fighting
+# with. A knight who rode in already carrying last summer's wound is the same
+# 12 prowess he was before it.
+#
+# THE HEALTH TRAITS ARE THE ONE AXIS THE WHOLE MOD HAS NEVER READ - not here,
+# not on the commander side, not in the eve. `wounded_1/2/3`, `maimed`,
+# `one_legged`, `one_eyed` and `disfigured` were each confirmed present in
+# AGOT's own common/traits/00_traits.txt, which OVERRIDES vanilla's wholesale,
+# so a key that exists in the base game is not evidence on its own.
+#
+# THEY ARE COMMONER ON A BATTLEFIELD THAN ANYWHERE ELSE IN THE GAME, and that
+# is what makes this worth three templates rather than a `chance` row: vanilla
+# hands out `wounded_*` and `maimed` from combat itself, so the population this
+# batch reads is the population that has already been in one of these battles.
+# The mod's own moments are part of what puts them there.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate, and the argument is short
+# for once: no shipped `is_valid` on either side contains a health trait at
+# all, so no health gate can be a subset of one. The side rows are what have
+# to be checked, and they are: wounded + losing sits beside holds_the_breach
+# (prowess >= 10), shames_himself (craven or prowess <= 8), walks_them_back
+# (patient) and is_ridden_down (open ground), and a wounded knight of prowess
+# 9 who is neither craven nor patient on rough ground matches none of them.
+# The maimed case takes no side row at all, and the disfigured case pairs with
+# winning, where the shipped gates are prowess >= 12, prowess >= 8 plus
+# outnumbering, greedy, and forest.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The old wound. He has been fighting on it since the lines closed and it has
+# stopped holding.
+#
+# THE GATE IS THE THREE `wounded_*` TRAITS AS ONE, not the worst of them. They
+# are vanilla's severity ladder and a man is only ever on one rung of it, so
+# an OR is the whole population; the rung is a `chance` row instead, which is
+# where a difference of degree belongs.
+#
+# LOSING IS THE SECOND ROW AND IT IS ALSO THE CASE. A wound that opens while
+# the side is winning is a detail. The same wound while the line is going
+# backwards is the reason a piece of it goes backwards faster.
+#
+# `bloodied`/`down` AND A GUARDED FALTERING RUNG. bc_knight_in_the_green
+# reaches the same cell from a different gate, which is the point of having a
+# table: two unrelated moments that mean the same thing about the battle get
+# the same consequence without either of them naming a modifier.
+# ---------------------------------------------------------------------------
+bc_knight_the_old_wound = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		OR = {
+			has_trait = wounded_1
+			has_trait = wounded_2
+			has_trait = wounded_3
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The top rung of the ladder the gate flattened.
+		modifier = {
+			add = 40
+			has_trait = wounded_3
+		}
+		# A good enough man works around it for longer than this.
+		modifier = {
+			factor = 0.5
+			prowess >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_old_wound"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_old_wound_toast
+				desc = bc_knight_the_old_wound_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man who cannot be carried off. `maimed` or `one_legged`: he has already
+# paid a piece of himself for one of these days and he is standing in another.
+#
+# NO SIDE ROW, DELIBERATELY. Every other template in this batch takes one, and
+# this is the case that would be spoiled by it: a man who is not going
+# anywhere is the same man whether the line is going forward or back. Putting
+# `losing` on it would turn it into a second bc_knight_the_old_wound.
+#
+# `entrenched`/`up` AND NO RUNG. bc_shieldwall on the side is the right
+# consequence - a piece of the line that has stopped trying to manoeuvre is
+# harder to move and slower to do anything - and a rung would say one man's
+# footing decided the battle, which is the same call bc_knight_on_the_broken_
+# ground made from the other direction.
+# ---------------------------------------------------------------------------
+bc_knight_will_not_be_carried = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		OR = {
+			has_trait = maimed
+			has_trait = one_legged
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# He was refusing to be moved before he had a reason.
+		modifier = {
+			add = 40
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_will_not_be_carried"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_will_not_be_carried_toast
+				desc = bc_knight_will_not_be_carried_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The face. `one_eyed` or `disfigured`, and the side is already winning.
+#
+# THE MOMENT IS NOT ABOUT HIS FIGHTING, which is what separates it from every
+# prowess-gated case on this side. The men in front of him have decided
+# something about him before he reaches them, and what he does with that is
+# arrive somewhere they are not.
+#
+# WINNING IS THE ROW BECAUSE THE MOMENT NEEDS SOMEBODY ALREADY GIVING WAY. Men
+# do not decline a fight they are winning; the same face on a losing field
+# frightens nobody, and there is a shipped template about what a losing field
+# does to a man's reputation.
+#
+# `ordered`/`up` AND A GUARDED MOMENTUM RUNG. The table maps the pair to
+# bc_pursuit, which is exactly what a foot rank that would rather be elsewhere
+# hands the side. The guard sits INSIDE the commander block because
+# bc_has_momentum_trigger reads its own root and this is a knight event.
+# ---------------------------------------------------------------------------
+bc_knight_the_face_they_run_from = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		OR = {
+			has_trait = one_eyed
+			has_trait = disfigured
+		}
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The face is only half of it. The other half is what he has done with
+		# the years since he got it.
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_face_they_run_from"
+
+		add_prestige = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_face_they_run_from_toast
+				desc = bc_knight_the_face_they_run_from_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

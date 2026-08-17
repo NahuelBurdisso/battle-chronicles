@@ -570,11 +570,12 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". FIFTEEN of the
-# forty-eight call sites are adapted or measured - the five plan 1 shipped
+# sixty-two call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
 # .0002b and .0003b) plus ten from later content batches - and every one of them
-# is supposed to fall through. A future `else` arm would silently start handing
-# an army modifier to fifteen sites that were written to get none.
+# is supposed to fall through. Two more, both `ordered`/`down`, fall through the
+# `ordered` row's else, so SEVENTEEN sites in total get no modifier by design. A
+# future `else` arm would silently start handing an army modifier to all of them.
 #
 # THE COMPARISON IS `flag:$KIND$ = flag:bloodied`, NOT `$KIND$ = bloodied`. A bare
 # `$KIND$ = bloodied` substitutes textually to `bloodied = bloodied`, an unknown
@@ -589,31 +590,47 @@ bc_add_verb_effect = {
 # THE PAIR CENSUS, RE-COUNTED 2026-08-17 AND NO LONGER WHAT PLAN 1 WROTE. Plan 1
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
-# TWO OF THOSE THREE ARE NOW REACHED by content batches written after it:
-# `entrenched`/`down` by one call site and `wild`/`up` by two. **Only
-# `ordered`/`down` is still unreached**, and it is the only pair this ladder
-# would treat differently, so the table's behaviour has not changed - but the old
-# claim that a SWING test on entrenched or wild would be always-true or
-# always-false is now simply false, and a reader who trusted it would "fix" this
-# ladder on a premise the data stopped supporting.
+# **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
+# at sixty-two call sites:
 #
-# THE TWO NEW PAIRS ARE DELIBERATE AND THE CONSEQUENCE IS INTENDED. `wild`/`up`
-# is a moment that grants momentum and blows the horses in the same breath -
+#   wild/down 10   entrenched/up 10   ordered/up 8   measured/down 8
+#   bloodied/up 8  wild/up 4          bloodied/down 4  measured/up 3
+#   ordered/down 2 adapted/up 2       adapted/down 2   entrenched/down 1
+#
+# The table's BEHAVIOUR has not changed as those cells filled - it never asked
+# about any pair but `ordered`'s. What changed is that plan 1's claim that a
+# SWING test on entrenched or wild would be always-true or always-false is now
+# simply false, and a reader who trusted it would "fix" this ladder on a premise
+# the data stopped supporting.
+#
+# THE THREE LATE PAIRS ARE DELIBERATE AND THE CONSEQUENCE IS INTENDED. `wild`/
+# `up` is a moment that grants momentum and blows the horses in the same breath -
 # bc_the_wrath_takes_him and bc_the_old_grudge both hand the commander a rung and
 # bc_spent_horse together, which is the whole point of calling them wild rather
 # than bloodied. `entrenched`/`down` is a line that braces while it is losing and
-# gets bc_shieldwall for it. Neither wants a SWING test here.
+# gets bc_shieldwall for it. `ordered`/`down` is a formation that keeps its shape
+# while going backwards, or a pursuit that walks into trees and stops being one,
+# and the right consequence for both is that bc_pursuit is simply not handed out.
+# None of the three wants a SWING test here.
 #
-# `ordered` remains the one KIND where the design wants the pair, and
-# `ordered`/`up` is reachable - six call sites use it.
+# `ordered` remains the one KIND where the design wants the pair, and both halves
+# are reachable - eight call sites use `up`, two use `down`.
+#
+# THE COUNTS IN THIS COMMENT GO STALE EVERY TIME A CONTENT BATCH LANDS. The
+# command that produced them, run from the mod root:
+#   grep -rho 'KIND = [a-z]* SWING = [a-z]*' --include=*.txt . | sort | uniq -c
+# Two of the matches are this file's own definition and its usage comment, and
+# neither carries a KIND, so the pair total is the call-site total.
 #
 # SWING IS STILL A PARAMETER OF THE SEAM, NOT OF THIS TABLE. Plan 6's wound gate
 # reads it on every KIND, including the three this ladder ignores. Dropping it
 # from the seam because this table barely uses it would break that plan.
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
-# a gap in the call sites. Re-counted 2026-08-17 across the whole mod: bc_bloodied
-# from 9 sites, bc_shieldwall from 8, bc_spent_horse from 10, bc_pursuit from 6.
+# a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
+# pair census above: bc_bloodied from 12 sites, bc_shieldwall from 11,
+# bc_spent_horse from 14, bc_pursuit from 8, and 17 falling through. Those five
+# sum to the sixty-two, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

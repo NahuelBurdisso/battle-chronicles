@@ -427,6 +427,32 @@
  bc_knight_in_the_green_toast:0 "Boiled in His Own Harness"
  bc_knight_in_the_green_toast_desc:0 "He has been standing in mail in this since first light and the air has not moved once. Whatever is wrong with him now, nobody on the other side did it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the body batch (2026-08-17) --------------------------
+#
+# Three templates gated on what the man is carrying rather than on what he can
+# do with it. THESE THREE DO CALL bc_ground_clause, unlike the ground batch
+# above: none of them is gated on a band, so nothing in the literal has already
+# named the field.
+#
+# THE PROSE MUST NOT NAME THE TRAIT. The gate is `wounded_*`, `maimed` /
+# `one_legged` and `one_eyed` / `disfigured`, and each of those is an OR over a
+# population - a desc that says "his missing leg" is a lie about half the men
+# who read it, and one that says "his eye" is a lie about the disfigured. Each
+# line describes what the other men can see happening, which is true of the
+# whole gate.
+#
+# THE THIRD SAYS NOTHING ABOUT WHAT HE LOOKS LIKE, on purpose. The moment is
+# the decision the rank in front of him takes, not his face, and the toast is
+# raised on a man the player may have grown fond of.
+ bc_knight_the_old_wound_toast:0 "It Opens Again"
+ bc_knight_the_old_wound_toast_desc:0 "He came into this carrying something that had not finished healing, and it has stopped holding. He is still on his feet and he is doing it wrong now, favouring one side of himself, and the men beside him have started covering the gap he leaves.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_will_not_be_carried_toast:0 "He Will Not Be Carried Off"
+ bc_knight_will_not_be_carried_toast_desc:0 "He has already paid for one of these days and here he is standing in another. Twice somebody has come to take him out of the line and twice he has sent them back, and the piece of the line he is in has not gone anywhere since.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_face_they_run_from_toast:0 "They Will Not Come At Him"
+ bc_knight_the_face_they_run_from_toast_desc:0 "The rank in front of him has decided something about him and it decided it early. Where he walks they are somewhere else by the time he arrives, and the hole that opens ahead of him keeps opening.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
 # Six templates gated on WHO THE MAN IS rather than on how the battle is going.
