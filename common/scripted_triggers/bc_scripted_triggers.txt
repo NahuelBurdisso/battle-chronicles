@@ -1039,3 +1039,45 @@ bc_sworn_to_the_wall_trigger = {
 bc_he_is_free_folk_trigger = {
 	culture = { agot_is_wildling_culture = yes }
 }
+
+
+# --- whose ground this is, legally -------------------------------------------
+#
+# THE MOD KNOWS FIVE THINGS ABOUT THE GROUND AND NOTHING ABOUT THE OWNER. Every
+# bc_field_* trigger walks `scope:combat_side.combat.location` and asks the
+# province what it is made of - forest, winter, rough, jungle, open, bloody -
+# and not one of them has ever asked whose county it is. A battle in Westeros
+# is always in somebody's county and half the time it is in one of the two
+# commanders'.
+#
+# THE WALK IS location -> county -> holder, AND BOTH LINKS ARE GUARDED. The
+# `location` guard is the standing one every field trigger already carries. The
+# holder guard is not decoration: AGOT has real unheld land - beyond the Wall
+# and in the ruins - and an unheld county returns nothing at all here, so the
+# read has to be nested under its own `exists` the same way.
+#
+# `this = root` OR `target_is_liege_or_above = root`, WHICH IS THE REALM TEST
+# AND NOT THE TITLE TEST. A commander whose own vassal holds the county is
+# fighting on his own land in every sense a battle cares about, and the version
+# that only matched a personally-held county would be true almost nowhere -
+# most great lords hold six counties and campaign across four hundred.
+#
+# `root` IS THE COMMANDER, as in bc_foe_is_countryman_trigger and
+# bc_the_war_is_his_trigger. From a knight template this would answer about the
+# knight and mean something much narrower, so it is commander-pool only.
+bc_the_ground_is_his_own_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		exists = scope:combat_side.combat.location.county.holder
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location.county.holder }
+			scope:combat_side.combat.location.county.holder = {
+				OR = {
+					this = root
+					target_is_liege_or_above = root
+				}
+			}
+		}
+	}
+}

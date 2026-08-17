@@ -2404,3 +2404,33 @@
 
  bc_knight_nobody_here_is_sworn_toast:0 "He Picked This Man In A Different Month"
  bc_knight_nobody_here_is_sworn_toast_desc:0 "Nobody in this host swore anything to anybody. He came because the man leading it had been right three times running, and standing here in the fourth hour of being wrong he can feel exactly how much of an army is a stack of private opinions that have not yet been revised. He is still working. The man on his left is still working. Neither of them has said the obvious thing, and both of them know the sum and how easy it would be to do.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SIXTY-ONE. The county the battle is standing in belongs to him.
+#
+# NEITHER DESC MAY NAME A HOLDING, A VILLAGE, A RIVER OR A ROAD. The gate knows
+# the county is inside his realm and knows nothing else - not its name, not
+# what stands on it, not whether he has ever set foot here before today.
+#
+# NEITHER MAY MOVE ANYTHING ON THE MAP. No village burns, no crop is counted,
+# no holding changes hands; the mod does not touch the map and a toast may not
+# imply that it did.
+#
+# THE FIRST MAY NOT MAKE THE SMALLFOLK CHEER, MAY NOT PRODUCE A LEVY FROM
+# NOWHERE AND MAY NOT WIN THE BATTLE. It is an advantage made entirely of
+# knowing things, and it stays that size.
+#
+# THE SECOND MAY NOT PUT A NUMBER ON THE DAMAGE AND MAY NOT HAVE HIM REGRET
+# GIVING BATTLE HERE. He chose this field this morning. The toast is about what
+# choosing it is turning out to mean.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working".
+ bc_every_ditch_here_has_a_name_toast:0 "Half The Line Grew Up Inside Thirty Miles"
+ bc_every_ditch_here_has_a_name_toast_desc:0 "The ground rolls in a way that looks like nothing from the far side and is not nothing, and this side has spent the afternoon being told about it by men who cut hay on it. Where the wet part starts. Which hedge has a gap and which has a ditch behind it. Nothing about this is martial and all of it has arrived a quarter of an hour before it was needed, which is the difference between the two hosts today.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_it_is_his_own_country_underfoot_toast:0 "Whatever This Costs, He Is Paying It Twice"
+ bc_it_is_his_own_country_underfoot_toast_desc:0 "Everything being ruined here this afternoon was already his before either host arrived, and it is being ruined at the rate a losing fight ruins things. He keeps feeding men into it well past the point the odds would justify, and the reason is not stubbornness: giving way here does not end the afternoon, it moves the identical afternoon eight miles further in, onto ground that is also his and has more on it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

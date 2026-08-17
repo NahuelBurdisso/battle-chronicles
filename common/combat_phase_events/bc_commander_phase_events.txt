@@ -6402,3 +6402,180 @@ bc_there_is_nowhere_to_desert_to = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# WHOSE GROUND THIS IS, LEGALLY, 2026-08-17.
+#
+# Five triggers ask what the battlefield is MADE OF and none has ever asked
+# who it BELONGS TO. That is a strange gap for a mod set in a civil war -
+# `bc_war_is_a_rebellion_trigger` landed five batches ago and the whole point
+# of a rebellion is that both hosts are standing on somebody's land who is
+# present and can see it.
+#
+# THE TWO HALVES ARE NOT THE SAME MOMENT WITH THE SIDE ROW FLIPPED. Winning on
+# your own ground is an advantage made of knowledge - who knows the ditches,
+# who can be asked, where the roads actually go. Losing on it is a bill, and
+# the bill arrives whichever way the afternoon ends. Those are different facts
+# about the same county and they are written as different templates rather
+# than one template with two toasts.
+#
+# NEITHER MAY BURN A VILLAGE ON THE PLAYER'S BEHALF or move a single number in
+# a county. The mod does not touch the map and these do not start.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# THE WINNING HALF, WHICH IS ABOUT KNOWING THINGS. Everybody on this side who
+# grew up within thirty miles of here is worth a scout today, and a good many
+# of them are standing in the line.
+#
+# NOT bc_the_same_country_again. That one reads `bc_terrain_streak` - the
+# campaign has kept him in the same KIND of country for three notable battles -
+# and it is true of a man four hundred miles from anything he owns. This one is
+# about the deed. Neither implies the other and the descs are pointed in
+# different directions on purpose: the terrain-streak toast is about a habit,
+# this one is about a place.
+#
+# `adapted`/`up`, WHICH FALLS THROUGH THE VERB TABLE AND HANDS OUT NOTHING.
+# That is the correct answer twice over. There is no army modifier meaning "the
+# men know the country", and inventing one would make local knowledge into
+# combat strength, which is exactly the mistake the modifier set was built to
+# avoid - bc_pursuit would say they are chasing and bc_shieldwall would say
+# they have braced, and neither has happened.
+#
+# THE MOMENTUM RUNG IS THE WHOLE REWARD, guarded as always, plus the file's
+# standard 50 prestige.
+#
+# THE DESC MAY NOT NAME A HOLDING, A VILLAGE OR A RIVER. The gate knows the
+# county is inside his realm and nothing else about it - not its name, not what
+# is on it, not whether he has ever been here before.
+# ---------------------------------------------------------------------------
+bc_every_ditch_here_has_a_name = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_ground_is_his_own_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_every_ditch_here_has_a_name"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_every_ditch_here_has_a_name_toast
+			desc = bc_every_ditch_here_has_a_name_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# THE LOSING HALF, WHICH IS A BILL. Whatever this field is worth, it was worth
+# it to him this morning, and it is being spent either way.
+#
+# `bloodied`/`down` AND bc_bloodied. Casualties are the honest verb: a man
+# losing on ground he owns keeps feeding the fight for longer than the odds
+# justify, because the alternative is not a shorter battle but the same battle
+# happening eight miles further into his own country.
+#
+# THE FALTERING RUNG IS GRANTED, GUARDED. Nothing here reverses anything.
+#
+# NOT A SUBSET OF bc_the_other_half_of_the_realm - a civil war is not implied
+# by owning the county and owning the county is not implied by a civil war -
+# and not a subset of the terrain templates, which cannot see a deed.
+#
+# THE DESC MAY NOT PUT A NUMBER ON WHAT IT COSTS, may not name a holding, and
+# may not have him regret giving battle. He chose this field; the toast is
+# about what choosing it is turning out to mean, not about him wishing he had
+# not.
+# ---------------------------------------------------------------------------
+bc_it_is_his_own_country_underfoot = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_ground_is_his_own_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = just
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_it_is_his_own_country_underfoot"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_it_is_his_own_country_underfoot_toast
+			desc = bc_it_is_his_own_country_underfoot_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
