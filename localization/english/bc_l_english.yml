@@ -86,8 +86,8 @@
 # from THIS repo's root, the plans living in the tooling repo two levels above
 # this one - because a fragment APPENDED to a desc that keeps its literal
 # sentence fails to "no improvement" rather than to an empty toast. It stopped
-# being the ONLY per-moment set on 2026-08-17, when the van, flank and rally
-# moments got sets on the same argument; four descs carry a ground call now. Each
+# being the ONLY per-moment set on 2026-08-17, when the other nine moments got
+# sets on the same argument; all ten descs carry a ground call now. Each
 # fragment BEGINS WITH A SPACE because
 # it is appended to a finished sentence - bc_banner_falls_toast_desc deliberately
 # has no space before the tag, so the empty fallback leaves no trailing space.
@@ -118,7 +118,18 @@
  bc_frag_rally_any:0 ""
 
  bc_horse_killed_toast:0 "Unhorsed"
- bc_horse_killed_toast_desc:0 "The horse goes down screaming. He comes up out of the mud on foot, and is seen to come up.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_horse_killed_toast_desc:0 "The horse goes down screaming. He comes up out of the mud on foot, and is seen to come up.[bc_chronicle_subject.Custom('bc_horse_killed_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE FIFTH PER-MOMENT GROUND SET. The literal spends "mud", so no arm here may;
+# it also already says he got up, so these say what he got up out of instead of
+# saying it twice.
+ bc_frag_horse_killed_desert:0 " The horse takes the whole weight of him into the dry stones, and he rises off them anyway."
+ bc_frag_horse_killed_open:0 " Everybody within a bowshot watches the horse go down and watches him stand."
+ bc_frag_horse_killed_forest:0 " There was a root in it somewhere, and the horse found it before the enemy did."
+ bc_frag_horse_killed_rough:0 " He lands where the country is all knuckles and edges, with nothing soft anywhere in it."
+ bc_frag_horse_killed_jungle:0 " He hauls himself up out of the wet growth with half of it still hanging off him."
+ bc_frag_horse_killed_winter:0 " The horse's blood steams where it spreads, and he steps out of the steam."
+ bc_frag_horse_killed_any:0 ""
 
  bc_flank_collapses_toast:0 "The Flank Collapses"
  bc_flank_collapses_toast_desc:0 "The outnumbered wing bends, and then it does not stop bending.[bc_chronicle_subject.Custom('bc_flank_collapses_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
@@ -157,10 +168,36 @@
  bc_frag_van_breaks_any:0 ""
 
  bc_ground_favours_us_toast:0 "The Ground Favours Us"
- bc_ground_favours_us_toast_desc:0 "The slope, the trees, the narrow way in. They have to come to us across all of it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_ground_favours_us_toast_desc:0 "The slope, the trees, the narrow way in. They have to come to us across all of it.[bc_chronicle_subject.Custom('bc_ground_favours_us_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE SEVENTH PER-MOMENT GROUND SET, and the one whose literal already talks
+# about ground. The literal names a shape - slope, trees, a narrow way - because
+# the trigger behind the moment is a list of terrain keys rather than a band;
+# these arms name the band that was recorded. The two are allowed to describe
+# different things about the same place, which is why no arm below repeats the
+# literal's three nouns.
+ bc_frag_favours_desert:0 " Their whole approach is over bare pan under a white sun."
+ bc_frag_favours_open:0 " Even out here the land has one fold in it, and it is ours."
+ bc_frag_favours_rough:0 " They must come up at us, and the gully lets them come up a few at a time."
+ bc_frag_favours_forest:0 " Every man of theirs who gets through arrives alone and arrives late."
+ bc_frag_favours_jungle:0 " They have to cut their way to us, and the cutting is loud enough to count them by."
+ bc_frag_favours_winter:0 " The drifts choose the road for them, and the road ends where we are."
+ bc_frag_favours_any:0 ""
 
  bc_lines_bogged_down_toast:0 "The Lines Bog Down"
- bc_lines_bogged_down_toast_desc:0 "Neither host can move. The battle becomes a matter of who tires of the mud last.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_lines_bogged_down_toast_desc:0 "Neither host can move. The battle becomes a matter of who tires of the mud last.[bc_chronicle_subject.Custom('bc_lines_bogged_down_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE SIXTH PER-MOMENT GROUND SET. Like the unhorsing above it, the literal has
+# already spent "mud"; unlike it, the literal is about both hosts, so these arms
+# are the only ground fragments in the file that describe a stalemate rather
+# than something one side is doing to the other.
+ bc_frag_bogged_desert:0 " Nobody can charge in this and nobody can leave it either, and the sun does not move."
+ bc_frag_bogged_open:0 " Two hosts stand a bowshot apart on country made for horses, and neither will spend one."
+ bc_frag_bogged_rough:0 " Every yard forward is uphill for somebody, so nobody buys one."
+ bc_frag_bogged_forest:0 " There is no room in here for a push, only for men to lean on one another."
+ bc_frag_bogged_jungle:0 " Both hosts are drowning slowly in the same wet air."
+ bc_frag_bogged_winter:0 " Boots freeze into the ruts they made this morning, and the ruts are the day's whole progress."
+ bc_frag_bogged_any:0 ""
 
 # --- commander chronicles, the second ten (2026-08-17) -----------------------
 #
@@ -215,13 +252,48 @@
 # --- knight chronicles ------------------------------------------------------
 
  bc_knight_holds_the_breach_toast:0 "He Holds the Breach"
- bc_knight_holds_the_breach_toast_desc:0 "One man in the gap where the line failed, and the line has time to be made again behind him.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_holds_the_breach_toast_desc:0 "One man in the gap where the line failed, and the line has time to be made again behind him.[bc_chronicle_subject.Custom('bc_knight_holds_the_breach_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE EIGHTH PER-MOMENT GROUND SET, and the first on a knight moment. The
+# subject of the literal is the KNIGHT while the toast is raised on the
+# commander, so these arms describe the place and not the man - a "he" here
+# would be read as the wrong person the moment the bond clause follows it.
+ bc_frag_breach_desert:0 " The gap is a dry watercourse, and everything that comes at it has to come down into it first."
+ bc_frag_breach_open:0 " Nothing at all shelters the spot. It is held because somebody chose to hold it."
+ bc_frag_breach_rough:0 " Two boulders pinch the path there, which is the only reason one man is enough."
+ bc_frag_breach_forest:0 " The trees narrow it to the width of a cart, and that width is the whole battle for a while."
+ bc_frag_breach_jungle:0 " The gap is a hacked-out tunnel of green with no way round it at all."
+ bc_frag_breach_winter:0 " The snow there is trodden black and it stays trodden, because nothing gets past to churn it."
+ bc_frag_breach_any:0 ""
 
  bc_knight_shames_himself_toast:0 "He Breaks and Runs"
- bc_knight_shames_himself_toast_desc:0 "He throws down the shield and goes back through his own ranks. Every man he passes remembers it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_shames_himself_toast_desc:0 "He throws down the shield and goes back through his own ranks. Every man he passes remembers it.[bc_chronicle_subject.Custom('bc_knight_shames_himself_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE NINTH. Same subject warning as the breach set above. The literal has
+# already spent the shield and the ranks he pushes through, so each arm below
+# says only where the running goes.
+ bc_frag_shames_desert:0 " There is a horizon in every direction and he picks one."
+ bc_frag_shames_open:0 " He is visible for as long as anyone cares to watch, which is a long time."
+ bc_frag_shames_rough:0 " The easy way is downhill and away, and that is the way taken."
+ bc_frag_shames_forest:0 " Three trees in, the running man is nobody's business but his own."
+ bc_frag_shames_jungle:0 " The green takes him in one stride and the sound of him lasts longer than the sight."
+ bc_frag_shames_winter:0 " The tracks going back are deep and singular, and they are still there at dusk."
+ bc_frag_shames_any:0 ""
 
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
- bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_shieldbrother_forged_toast_desc:0 "They came through the same press back to back. Neither will speak of it well, and neither will forget it.[bc_chronicle_subject.Custom('bc_shieldbrother_forged_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE TENTH AND LAST. Every moment the mod shipped with now names its ground.
+# This one has TWO subjects rather than one, so its arms are the only ground
+# fragments written in the plural, and they say what the place did to the pair
+# of them rather than what either of them did.
+ bc_frag_shieldbrother_desert:0 " They shared the last of one waterskin afterwards and neither mentioned whose it had been."
+ bc_frag_shieldbrother_open:0 " There was nowhere to put a back except against another back."
+ bc_frag_shieldbrother_rough:0 " They found the same hollow to stand in and were still standing in it at the end."
+ bc_frag_shieldbrother_forest:0 " Neither could see more than the other one and so each watched the half the other could not."
+ bc_frag_shieldbrother_jungle:0 " In heat like that a man fights until somebody holds him up, and somebody did."
+ bc_frag_shieldbrother_winter:0 " They spent the night after it under one cloak and have never agreed whose cloak."
+ bc_frag_shieldbrother_any:0 ""
 
 # --- knight chronicles, the second three (2026-08-17) ------------------------
 #

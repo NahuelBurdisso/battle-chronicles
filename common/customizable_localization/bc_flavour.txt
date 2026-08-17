@@ -228,7 +228,7 @@
 # what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
 # so the bare `exists` beside it is the row that actually rejects.
 
-# --- SPIKE. The first per-moment set wired; three more follow it below. ------
+# --- SPIKE. The first per-moment set wired; nine more follow it below. -------
 #
 # It was written to prove the shape renders before the rest of the fragment keys
 # were, and that run has not happened. bc_bond_clause and bc_scale_clause below
@@ -238,11 +238,14 @@
 # levels above this one. The AMENDMENT split the gate: a clause APPENDED to a desc
 # that keeps its literal sentence fails to "no improvement", so it needs no run,
 # while a clause that REPLACES the literal fails to an empty toast and still
-# does. SIX fragment sets are named by a call site today: this one, from
-# bc_banner_falls_toast_desc alone; the three added 2026-08-17 on the same
-# appended-clause argument - van, flank, rally - and the two shared clauses,
-# called from all ten. Six of the ten moments still carry no ground set, which
-# is Plan B tasks 6-14 less the three now done. Each of those tasks ALSO writes a core set, and it is the CORE set
+# does. TWELVE fragment sets are named by a call site today: this one, from
+# bc_banner_falls_toast_desc alone; the nine added 2026-08-17 on the same
+# appended-clause argument - van, flank, rally, unhorsed, bogged, favours,
+# breach, shames, shieldbrother - and the two shared clauses, called from all
+# ten. EVERY ONE OF THE TEN MOMENTS NOW NAMES ITS GROUND, so the ground half of
+# Plan B tasks 6-14 is done. The CORE sets those tasks also call for - the ones
+# that REPLACE a literal instead of following it - are untouched and still wait
+# on the run, for the reason this header gives. Each of those tasks ALSO writes a core set, and it is the CORE set
 # that REPLACES the moment's literal rather than being appended to it - so every
 # one of them still waits on the run, and so does task 5, which writes a core set
 # for this moment and no ground set.
@@ -557,6 +560,456 @@ bc_rally_the_line_ground = {
 	}
 	text = {
 		localization_key = bc_frag_rally_any
+	}
+}
+
+# --- the fifth, sixth and seventh per-moment ground sets, 2026-08-17 ---------
+#
+# THE THREE THAT ARE NOT HALF OF A PAIR. The four above are two mirrored pairs
+# and were written as pairs; these three have no opposite among the ten, so each
+# is written against the ground alone.
+#
+# bc_ground_favours_us_ground IS THE ONE THAT LOOKS REDUNDANT AND IS NOT. That
+# moment's literal already names a slope, trees and a narrow way in - it says
+# THAT the ground helps without saying WHICH ground, because the trigger behind
+# it (bc_terrain_favours_us_trigger) is a list of vanilla terrain keys and not a
+# band. The clause names the band that was actually recorded, so the two halves
+# can disagree in an interesting way rather than a wrong one: the literal is
+# about the shape of the position, the clause about the country it sits in.
+#
+# bc_lines_bogged_down AND bc_horse_killed BOTH SPEND `mud` IN THEIR LITERALS,
+# which is why no arm in either set below says it. That is the tightest word
+# constraint any of these sets has had.
+#
+# SEVEN SETS NOW DESCRIBE THE SAME SIX BANDS. The rule from the pair above holds
+# and gets harder each time: read all of them before writing an eighth. Rough
+# has spent the slope (banner), the standing stone (van), the rocks (collapse),
+# the high ground (rally), knuckles and edges (unhorsed), uphill (bogged) and
+# the gully (favours).
+bc_horse_killed_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_horse_killed_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_horse_killed_any
+	}
+}
+
+bc_lines_bogged_down_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_bogged_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_bogged_any
+	}
+}
+
+bc_ground_favours_us_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_favours_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_favours_any
+	}
+}
+
+# --- the last three per-moment ground sets, 2026-08-17 ----------------------
+#
+# THE KNIGHT THREE, AND THE END OF THE SET. Seven of the ten moments got a
+# ground clause above; these are the other three, and with them every moment the
+# mod shipped with names the ground it happened on. Plan B tasks 6-14's ground
+# half is finished - what those tasks ALSO called for, a CORE set per moment
+# that REPLACES the literal rather than being appended to it, is untouched and
+# still waits on the run, for the reason the spike header gives.
+#
+# THE SUBJECT IS THE KNIGHT AND THE TOAST IS RAISED ON THE COMMANDER, which is
+# the one thing these three have to watch that the seven above did not. Every
+# arm below is written so it can follow a sentence about a man who is not the
+# reader's own character: none of them says "he" where the ground would do.
+#
+# ROUGH HAD SPENT SEVEN PHRASINGS BEFORE THESE THREE - the slope, the standing
+# stone, the rocks, the high ground, knuckles and edges, uphill and the gully.
+# The three below take the pinch between two boulders, the easy way down and a
+# hollow. That leaves rough the most worked-over band in the file, which is
+# right: it is the commonest ground in the game as played.
+bc_knight_holds_the_breach_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_breach_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_any
+	}
+}
+
+bc_knight_shames_himself_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_shames_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_any
+	}
+}
+
+bc_shieldbrother_forged_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_shieldbrother_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_any
 	}
 }
 
