@@ -1255,14 +1255,14 @@
  bc_reason_battle_rival:0 "has beaten him twice on the field"
  bc_reason_battle_nemesis:0 "has broken him three times on the field"
  bc_rivalry_toast:0 "The Man Across the Field"
- bc_rivalry_grudge_desc:0 "[bc_rivalry_foe.GetName] took the field from [bc_rivalry_subject.GetName] today. That is all it is so far — a name, and a face to put to it."
- bc_rivalry_rival_desc:0 "Twice now. [bc_rivalry_subject.GetName] has lost to [bc_rivalry_foe.GetName] twice, and the second time it stopped being bad luck."
- bc_rivalry_nemesis_desc:0 "Three fields, three defeats, one man. [bc_rivalry_subject.GetName] has stopped thinking about the war and started thinking about [bc_rivalry_foe.GetName]."
+ bc_rivalry_grudge_desc:0 "[bc_rivalry_foe.GetName] took the field from [bc_rivalry_subject.GetName] today. That is all it is so far — a name, and a face to put to it.[bc_rivalry_subject.Custom('bc_grudge_clause')]"
+ bc_rivalry_rival_desc:0 "Twice now. [bc_rivalry_subject.GetName] has lost to [bc_rivalry_foe.GetName] twice, and the second time it stopped being bad luck.[bc_rivalry_subject.Custom('bc_rival_clause')]"
+ bc_rivalry_nemesis_desc:0 "Three fields, three defeats, one man. [bc_rivalry_subject.GetName] has stopped thinking about the war and started thinking about [bc_rivalry_foe.GetName].[bc_rivalry_subject.Custom('bc_nemesis_clause')]"
 
 # --- the dead ---------------------------------------------------------------
 
  bc_dead_knights_toast:0 "They Did Not All Come Back"
- bc_dead_knights_toast_desc:0 "Some of the men who rode out under [bc_bereaved_commander.GetName]'s banner are still on that field. The heralds will have their names by morning."
+ bc_dead_knights_toast_desc:0 "Some of the men who rode out under [bc_bereaved_commander.GetName]'s banner are still on that field. The heralds will have their names by morning.[bc_bereaved_commander.Custom('bc_dead_knights_clause')]"
 
 # --- the opening ------------------------------------------------------------
 
@@ -1472,7 +1472,29 @@
  bc_lifesaver_memory_desc_c_third_perspective:0 "[owner.GetName] owes [lifesaver.GetFullName] a day he would otherwise not have had"
 
  bc_wounded_toast:0 "Carried From the Field"
- bc_wounded_toast_desc:0 "[bc_wounded_commander.GetName] was brought down in the thick of it and carried out. He will live. He will not sit a horse at the head of an army until he mends."
+ bc_wounded_toast_desc:0 "[bc_wounded_commander.GetName] was brought down in the thick of it and carried out. He will live. He will not sit a horse at the head of an army until he mends.[bc_wounded_commander.Custom('bc_wounded_clause')]"
+
+# --- the aftermath clauses (2026-08-17) --------------------------------------
+#
+# NO FRAGMENT HERE MAY NAME A CHARACTER, A HOUSE, A PLACE OR THE GROUND. The
+# desc that calls it has already printed the names; these say what the fact
+# means and have to be true of any battle in the game. Each is one sentence and
+# each opens with a space, because it is appended to a finished sentence.
+ bc_frag_grudge_a:0 " He has not said the name out loud yet. He will."
+ bc_frag_grudge_b:0 " It is the kind of thing a man tells himself he has put down and then carries for years."
+ bc_frag_grudge_c:0 " Nothing follows from it today. Something usually does."
+ bc_frag_rival_a:0 " Twice is a pattern, and a pattern is a thing other people notice as well."
+ bc_frag_rival_b:0 " There is now a version of this war that is only about the two of them, and it has started."
+ bc_frag_rival_c:0 " He has begun rereading the first one, which is not a useful thing to be doing."
+ bc_frag_nemesis_a:0 " He has worked out that there is no third answer to this that involves both of them living long lives."
+ bc_frag_nemesis_b:0 " Whatever the war was about, it is not what he is going to be thinking about at night."
+ bc_frag_nemesis_c:0 " Men have been known to lose everything else while settling one thing like this."
+ bc_frag_dead_knights_a:0 " Somebody will have to write to the houses, and it will not be done well."
+ bc_frag_dead_knights_b:0 " There are horses standing about out there with nobody looking for them."
+ bc_frag_dead_knights_c:0 " The ones who came back are being very quiet about which of them was where."
+ bc_frag_wounded_a:0 " The men who carried him out have already told the story twice and it has grown once."
+ bc_frag_wounded_b:0 " Somebody else gives the orders until then, and everybody knows who."
+ bc_frag_wounded_c:0 " He is furious about it, which the physician says is a good sign."
 
 # --- where he learned it, and the man with no house (2026-08-17) ------------
 #

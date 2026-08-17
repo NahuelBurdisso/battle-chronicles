@@ -210,10 +210,16 @@
 #
 # THE FALLBACK ARM IS LAST AND CARRIES A COMPLEMENT TRIGGER. It did not always:
 # under first-match a trigger-less last arm is unreachable while a band matches,
-# and every definition in this file used to end in one. **NO TRIGGER-LESS ARM
-# REMAINS ANYWHERE IN THIS FILE as of 2026-08-17** - all thirteen definitions
-# take `random_valid = yes`, and under `random_valid` a trigger-less arm is
-# valid on EVERY render and takes a share of every toast to print nothing.
+# and every definition in this file used to end in one. **NO BANDED DEFINITION
+# HAS A TRIGGER-LESS ARM as of 2026-08-17** - all thirteen banded definitions
+# take `random_valid = yes`, and under `random_valid` a trigger-less arm is valid on
+# EVERY render and takes a share of every toast to print nothing.
+#
+# THE RULE IS ABOUT MIXING, NOT ABOUT BARE ARMS. The five aftermath clauses at
+# the end of this file are pure pools - every arm trigger-less, no fact being
+# selected, only a wording - and that is correct and not an exception. What is
+# forbidden is a bare arm sitting among banded ones, because it competes with
+# all of them on every render. Their header carries the same argument.
 #
 # THE FIRST-MATCH RULE IS STILL WORTH KNOWING because it explains the shape of
 # what is here: CK3 takes the first matching arm in order, so under first-match
@@ -446,8 +452,10 @@ bc_banner_falls_ground = {
 # reached while a band matches; under `random_valid` it is valid on EVERY
 # render and would take a share of every toast to print an empty string. All
 # ten now carry the NOR complement. If a bare trigger-less arm ever reappears
-# in a set that also carries `random_valid`, that is the bug, and it presents
-# as toasts that sometimes end without a ground sentence at all.
+# in a BANDED set, that is the bug, and it presents as toasts that sometimes
+# end without a ground sentence at all. A definition whose arms are ALL bare is
+# a different thing and is fine - see the aftermath clauses at the end of the
+# file.
 #
 # THE FALLBACK IS LOAD-BEARING FROM ANY CALL SITE, the same as the spike's, and
 # for the same reason: bc_write_ground_effect removes the variable first and has
@@ -2841,5 +2849,114 @@ bc_ground_clause = {
 				}
 			}
 		}
+	}
+}
+
+# ===========================================================================
+# THE AFTERMATH CLAUSES, 2026-08-17.
+#
+# EVERY MOMENT TOAST IN THE MOD ENDS IN THREE POOLED CLAUSES AND NOT ONE
+# AFTERMATH TOAST DID. bc_rivalry_*_desc, bc_dead_knights_toast_desc and
+# bc_wounded_toast_desc are the prose a player reads at the END of a battle -
+# the part that is supposed to be memorable - and each of them was a single
+# fixed sentence pair that never varied over a whole campaign.
+#
+# A POOL OF TRIGGER-LESS ARMS IS THE CORRECT SHAPE HERE, and it is the shape
+# this file spent a whole batch REMOVING from the ground sets. The rule is not
+# "no trigger-less arm"; it is that a trigger-less arm must not sit in a
+# definition whose other arms are banded, because under `random_valid = yes`
+# it is valid on every render and takes a share of every toast. Where EVERY
+# arm is trigger-less the definition is a pure pool and that is exactly what
+# is wanted: no fact is being selected, only a wording.
+#
+# NO ARM MAY NAME A CHARACTER, A HOUSE, A PLACE OR THE GROUND. The descs that
+# call these already print the names from saved scopes, and a fragment that
+# tried to would be reaching for a scope this file has never touched. Every
+# arm below is one sentence that is true of any battle in the game.
+#
+# THE CLAUSE IS APPENDED, NOT SUBSTITUTED. The fixed sentence keeps saying the
+# fact - who lost to whom, how many times, who is on the field - and the
+# clause only says what it means. Same division of labour as the moment
+# toasts, where the desc carries the moment and the three clauses carry the
+# ground, the bond and the scale.
+# ===========================================================================
+
+bc_grudge_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_grudge_a
+	}
+	text = {
+		localization_key = bc_frag_grudge_b
+	}
+	text = {
+		localization_key = bc_frag_grudge_c
+	}
+}
+
+bc_rival_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_rival_a
+	}
+	text = {
+		localization_key = bc_frag_rival_b
+	}
+	text = {
+		localization_key = bc_frag_rival_c
+	}
+}
+
+bc_nemesis_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_nemesis_a
+	}
+	text = {
+		localization_key = bc_frag_nemesis_b
+	}
+	text = {
+		localization_key = bc_frag_nemesis_c
+	}
+}
+
+bc_dead_knights_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_dead_knights_a
+	}
+	text = {
+		localization_key = bc_frag_dead_knights_b
+	}
+	text = {
+		localization_key = bc_frag_dead_knights_c
+	}
+}
+
+bc_wounded_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_wounded_a
+	}
+	text = {
+		localization_key = bc_frag_wounded_b
+	}
+	text = {
+		localization_key = bc_frag_wounded_c
 	}
 }
