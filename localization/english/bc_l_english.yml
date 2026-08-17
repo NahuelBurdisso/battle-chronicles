@@ -2646,3 +2646,52 @@
 
  bc_knight_nothing_has_changed_for_him_toast:0 "The One Account Not Running Out"
  bc_knight_nothing_has_changed_for_him_toast_desc:0 "A line does not run out of men before it runs out of each man's willingness to be the one still there when his neighbour is not, and along this stretch that has been going for some time. He is drawing on none of it. He is doing at this hour precisely what he was doing at the last one, no better and no faster, and the two men either side of him have arrived at the unspoken and unwelcome conclusion that where he is standing is the easiest place left to stand.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-THREE. What the ground underfoot is worth.
+#
+# NEITHER DESC MAY NAME A HOLDING, A VILLAGE, A TOWN, A ROAD OR A RIVER, and
+# neither may give the county a name. The gate knows one number about this
+# place and knows nothing else - not what stands on it, not whose it is, not
+# whether either man has ever been here before this morning.
+#
+# NEITHER MAY MOVE ANYTHING ON THE MAP. Nothing burns, nothing is sacked,
+# nothing is counted, nothing changes hands and nobody is turned out of
+# anywhere. The mod does not touch the map, and a toast that implies it did is
+# a lie about what the save now contains. Both descs may NOTICE what is around
+# these men and neither may alter it.
+#
+# NEITHER MAY PUT A NUMBER ON ANYTHING. No hides, no acres, no hearths, no
+# marks of silver. The one number in this axis lives in the gate and stays
+# there.
+#
+# THE FIRST MAY NOT SAY THE PEOPLE HERE ARE WORTHLESS. He is reading a position
+# and finding no use in it - no wall, no store, no junction - and that is a
+# statement about ground and not about anybody living on it. It may not have
+# him say any of this out loud, may not give him a speech to his captains, and
+# may not win the battle: he is already winning, and all he does here is
+# decline to stop.
+#
+# THE SECOND MAY NOT MAKE HIM SENTIMENTAL AND MAY NOT MAKE HIM A LOOTER. He is
+# not grieving for a place he has never seen and he is not pricing it either.
+# What he has is a working problem - this is not the fight he has been having
+# all afternoon - and the noticing is what comes with solving it. It may not
+# have him address anybody, may not have anybody thank or blame him, and may
+# not kill anybody.
+#
+# NEITHER MAY USE THE WORDS "rich" OR "poor" OF THE COUNTY. Both toasts are
+# written from what a man standing in it can see, and no man standing in a
+# field has ever seen a development level.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour".
+ bc_the_thin_country_toast:0 "There Is Nothing Here To Stand On"
+ bc_the_thin_country_toast_desc:0 "The scouts came back an hour ago with the shape of the country ahead and it is the same country as the country behind: a track, a ford somebody's grandfather cut, sheep on a slope, and no stone anywhere that was put on top of another stone by anybody who meant it to stay. A host that wins here has won the use of a track. He has the field and he is going to keep having it, and he has decided that keeping it is not the same as sitting on it, so the column is already forming to go on while the far side is still working out that it has lost.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_ground_here_was_worth_something_toast:0 "This Was A Place Before This Morning"
+ bc_knight_the_ground_here_was_worth_something_toast_desc:0 "He has been giving ground since the second hour and the ground has been changing under him while he did it - out of the open, through a hedge that took some planting, into lanes with walls on both sides that are the wrong width for a horse and exactly the right width for the two men he can hear behind him. Everything he learned about fighting in a line stops applying at about the depth of a doorway. He is working it out at the speed the situation allows, which is roughly one corner at a time, and somewhere under that he is aware of how long all this took to build and how briefly the argument over it is going to last.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

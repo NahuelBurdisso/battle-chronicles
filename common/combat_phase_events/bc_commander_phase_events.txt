@@ -7268,3 +7268,124 @@ bc_the_order_nobody_can_explain = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-THREE. What the ground underfoot is worth.
+#
+# THE MOD HAS EIGHT QUESTIONS ABOUT THE FIELD AND ALL EIGHT ARE ABOUT ITS
+# SHAPE. Six terrain bands, a river and a coast: what the place does to a line
+# of men, where a horse can go, what hides an ambush. Not one of them asks what
+# the place IS. A fat county with a market cross in it and a thin one with
+# four cottages and a sheep track present identically to every gate in the
+# mod, and the chronicle has therefore never once noticed the difference
+# between fighting somewhere that matters and fighting somewhere that does not.
+#
+# BOTH MOMENTS ARE `adapted` OR `measured`, WHICH IS THE POINT AND NOT AN
+# ACCIDENT. The ledger's own note on the verb table says those two KINDs are
+# "how the commander READ the battle rather than what the battle DID to the
+# army", and this whole axis is a reading. Nothing about a county's development
+# level bleeds anybody, breaks anybody's horses or forms anybody's line, so
+# neither moment hands out an army modifier and both fall through the table by
+# design. They are also the two rarest pairs in the ledger - `measured`/`up` at
+# seven sites and `adapted`/`down` at six - which is a second, smaller reason
+# to be glad they fit.
+#
+# THE TWO GATES ARE DISJOINT BY CONSTRUCTION. At or below five, and at or above
+# twenty; nothing is both, and the nine hundred and thirty-six counties in the
+# middle get neither, so this axis stays quiet on most of the map instead of
+# firing everywhere the way a single median split would.
+#
+# THE SIDE ROWS ARE THE UNOBVIOUS WAY ROUND, DELIBERATELY. The poor county goes
+# to the man who is WINNING and the rich one to the knight who is LOSING. The
+# obvious pairing - rich country you are winning, poor country you are losing -
+# is two moments in which the ground agrees with the scoreboard and therefore
+# says nothing the scoreboard was not already saying. Crossed, each one is a
+# fact working against the other: a victory being won on ground that cannot be
+# kept, and a defeat being given away across ground that was worth keeping.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The thin country. The county is poor, and the side is winning.
+#
+# `measured`/`up`, AND THE FALL-THROUGH IS THE CORRECT CONSEQUENCE. He is
+# winning and he is going to keep winning, and the reading he has just done is
+# that there is no reason to stop here - no walls to put men behind, no
+# granary to sit on, no road junction that owning changes anything about. That
+# is a judgement, not an event, and the verb table has nothing that means "he
+# judged it well", which is exactly why `measured` exists.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the county, the
+# opener and the side row, and never asks about a rung, so the grant is live.
+#
+# FIFTY PRESTIGE. Not for the win - the win is elsewhere - but for the host
+# still moving at the end of an afternoon it could have spent standing on
+# something.
+#
+# THIS IS NOT bc_the_short_war AND NOT bc_the_chest_is_empty. Those two read
+# `gold < 0`: they are about HIS purse and what being broke does to a man's
+# choices. This one never looks at his purse and would fire identically for a
+# man with a full treasury. The poverty is the ground's.
+#
+# THE DESC MAY NOT NAME A HOLDING OR A VILLAGE, may not burn or take anything,
+# and may not have him say the smallfolk here are worthless. He is assessing a
+# position, not a people. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_thin_country = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_field_is_poor_country_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# With the numbers on his side as well, the decision to keep moving
+		# costs him nothing and he makes it faster.
+		modifier = {
+			add = 30
+			bc_side_is_outnumbering_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = impatient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = greedy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_thin_country"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_thin_country_toast
+			desc = bc_the_thin_country_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

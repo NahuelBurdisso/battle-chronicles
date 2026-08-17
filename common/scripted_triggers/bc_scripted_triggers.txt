@@ -1288,3 +1288,74 @@ bc_his_mind_is_not_his_own_trigger = {
 		has_trait = possessed_genetic
 	}
 }
+
+
+# --- what the ground underfoot is worth --------------------------------------
+#
+# THE MOD HAS ASKED SIX QUESTIONS ABOUT THE FIELD AND NOT ONE OF THEM ABOUT ITS
+# WORTH. bc_ground_triggers.txt sorts the field into six terrain bands - winter,
+# desert, forest, jungle, rough, open - and bc_scripted_triggers.txt adds a
+# river and a coast. Every one of those is a question about the SHAPE of the
+# place: what it does to a line of men, where a horse can go, what hides an
+# ambush. None of them asks what the place is, who lives on it, or what it was
+# worth before two armies walked onto it. A rich county and a poor one look
+# identical to all eight.
+#
+# THE ANSWER IS ALREADY IN THE SAVE AND IS FREE. `development_level` is a
+# landed_title trigger - "does the county title have the required county
+# development level" - and every county in the game carries one. AGOT sets them
+# in history: of the twelve hundred and seventy-six counties it writes a level
+# for, a hundred and forty sit at five or below and two hundred at twenty or
+# above, with the great mass between. Those two bands are the two ends of a
+# distribution that already exists, not thresholds invented here, and each is
+# common enough to be met and rare enough to be worth a toast.
+#
+# RAW NUMBERS AND NOT THE NAMED VALUES, DELIBERATELY. Vanilla defines
+# terrible/bad/medium/good/great_development_level at 10/20/40/60/80
+# (00_basic_values.txt:1406-1410) and AGOT's own scripts use them. Those numbers
+# are tuned for a vanilla game that runs to 1453 and develops for eight hundred
+# years. AGOT starts in 300 AC with almost nothing above thirty, so
+# `medium_development_level` would gate on a condition that essentially never
+# holds and `great_development_level` on one that never holds at all. Twenty and
+# five are read off AGOT's actual history files. If AGOT ever reflows its
+# development history these two numbers are the thing to re-check.
+#
+# TWO BANDS AND A GAP, WHICH IS THE POINT. The two triggers are disjoint by
+# construction - nothing is both at or below five and at or above twenty - so a
+# template on one can never be a subset of a template on the other, and the
+# nine hundred and thirty-six counties in between get neither, which is what
+# keeps this from firing on every battle in Westeros.
+#
+# TWO OPTIONAL LINKS AND SO TWO GUARDS, NESTED. `combat.location` is the
+# standing one this file already guards eight times over. `county` is the second
+# and is genuinely optional: AGOT's own hunt.txt writes `exists = county` before
+# `county.development_level` at activity_types/hunt.txt:1928, which is the
+# engine telling us a province need not resolve to a county title. Each `exists`
+# sits as a sibling and each READ is nested in a trigger_if that repeats it.
+bc_field_is_rich_country_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			exists = county
+			trigger_if = {
+				limit = { exists = county }
+				county = { development_level >= 20 }
+			}
+		}
+	}
+}
+
+bc_field_is_poor_country_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			exists = county
+			trigger_if = {
+				limit = { exists = county }
+				county = { development_level <= 5 }
+			}
+		}
+	}
+}

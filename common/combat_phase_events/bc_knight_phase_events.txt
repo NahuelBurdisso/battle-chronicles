@@ -5008,3 +5008,97 @@ bc_knight_nothing_has_changed_for_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The ground here was worth something. The county is rich, the side is losing.
+#
+# `adapted`/`down`, THE RAREST PAIR IN THE LEDGER. `adapted` is the mod's word
+# for reading the field and changing what you are doing about it, and this is
+# the smallest and most literal version of that: a man who has been fighting
+# an open-field fight all afternoon works out, somewhere in the fourth hour of
+# going backwards, that he is no longer in an open field. Rich country in this
+# setting means built country, and built country has to be fought through
+# differently. The verb table hands out nothing for it, which is right - the
+# army is not braced, not bled and not chasing, it is just somewhere else.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the county, the
+# opener and the side row and never asks about a rung, so the grant is live.
+#
+# TEN STRESS. He is giving away the best ground anyone here has stood on, and
+# the mod has one currency for that.
+#
+# THIS IS NOT bc_it_is_his_own_country_underfoot. That template asks whether
+# the county is inside HIS realm - a question about title and obligation, which
+# fires the same on a barren holdfast as on the richest county in the Reach.
+# This one never asks who owns anything and would fire identically on a county
+# belonging to the man across the field. Ownership and worth are different
+# questions and the mod has now asked both.
+#
+# THE DESC MAY NOT NAME A HOLDING OR A VILLAGE, may not burn, sack or count
+# anything, may not put a number on the damage and may not move a single thing
+# on the map. The mod does not touch the map. It may notice what is around him
+# and it may not change it. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_ground_here_was_worth_something = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_field_is_rich_country_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who is still winning his own small part of it has the room to
+		# look up and notice where he is standing.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_ground_here_was_worth_something"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_ground_here_was_worth_something_toast
+				desc = bc_knight_the_ground_here_was_worth_something_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
