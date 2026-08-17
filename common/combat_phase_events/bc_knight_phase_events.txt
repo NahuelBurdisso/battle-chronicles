@@ -2440,3 +2440,154 @@ bc_knight_the_ransom_he_needs = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHAT THE KNIGHT SEES ACROSS THE FIELD, BEYOND THE NAME, 2026-08-17.
+#
+# THE TWO FOE TRIGGERS HAD NEVER BEEN ASKED FROM A KNIGHT'S ROOT.
+# bc_foe_is_heathen_trigger and bc_foe_is_countryman_trigger were written for
+# the commander batch that read who is across the field, and both are rooted
+# on the reader rather than on the side - they compare `root.faith` and
+# `root.culture` against the enemy commander's, and root inside a
+# `type = knight` phase event is the knight. So a knight asking them gets an
+# answer about HIS faith and HIS culture, which is a different question from
+# the one his commander would get, and in AGOT it very often has a different
+# answer: a Reachman knight in a Northern host is not looking at the same men
+# his lord is looking at.
+#
+# THE ENEMY COMMANDER STANDS IN FOR THE HOST, which is the same approximation
+# the commander batch made and recorded. Nothing in the API gives a phase
+# event the composition of the other side; the man leading it is the only
+# handle there is, and both descs are written so that they are about what the
+# man opposite MEANS rather than about a census of his army.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The one fight out here he has been told his whole life is worth having.
+#
+# `bloodied`/`up` AND NO RUNG, the rule bc_knight_knows_that_man records. He
+# fights harder and it costs the usual thing; one knight does not turn a side.
+#
+# THE PIETY IS SMALL ON PURPOSE. 25 against the commander's 50 in
+# bc_the_gods_are_watching, because a knight's conviction is between him and
+# his gods and a commander's is a thing an army watches him do.
+# ---------------------------------------------------------------------------
+bc_knight_against_unbelievers = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_heathen_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = zealous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_against_unbelievers"
+
+		add_piety = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_against_unbelievers_toast
+				desc = bc_knight_against_unbelievers_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The opposite reading of the same look across the field: they sound like
+# home.
+#
+# NOT MUTUALLY EXCLUSIVE WITH THE ONE ABOVE, and the trigger file says why -
+# the two foe triggers each test one property, so a man of the same culture
+# and a different faith answers yes to both. That is correct for gates: a
+# phase event asks one question, and if both are true the roll picks one.
+#
+# `measured`/`down`, WHICH GRANTS NOTHING. He is not faltering and he is not
+# refusing - he is doing the work with the volume turned down, and there is no
+# army modifier for a man being careful. bc_knight_walks_them_back is the
+# patient man who keeps his shape while going backwards; this is a man whose
+# problem is who he is hitting rather than how it is going.
+#
+# NO SIDE ROW, because it is true whichever way the day is running, and the
+# stress is the whole cost.
+# ---------------------------------------------------------------------------
+bc_knight_they_sound_like_home = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_countryman_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = sadistic
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_they_sound_like_home"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_knight_they_sound_like_home_toast
+				desc = bc_knight_they_sound_like_home_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

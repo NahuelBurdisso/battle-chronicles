@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 40 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 29 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 41 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 31 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -567,7 +567,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Twenty-eight batches, one per row of the table below, none of which needed a
+Twenty-nine batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -605,6 +605,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | the first knight pop-up | **four pop-ups shipped and all four assume the player is the man giving orders** — in AGOT he is very often somebody's sworn sword instead, and the mod had never asked him anything. `bc_knight_pulls_him_out` grows a branch on the `bc_flank_collapses` pattern, `else` arm unchanged. Two things are new: `bc_battle_open_effect` is **hoisted before the raise** so `scope:bc_chronicle_subject` carries the commander across the `trigger_event` boundary (`scope:combat_side` does not), and **every rung and ledger write in the event is wrapped in that scope** — a knight carries none of the army modifiers, and writing them bare would hang them where nothing reads them | 1 event, 4 options |
 | knight, the two men who matter | **`has_relation_*` appeared in no gate anywhere in the mod** — the rivalry ladder *writes* relations and nothing has ever read one. Friend of his own commander (no side row), rival of his own commander (`ordered`/`down`, the cell that hands out nothing by design, and it must not read as cowardice — `bc_knight_shames_himself` owns that ground), and rival of the commander **opposite** while winning. The third is the first time a knight is allowed to notice who is in command on the other side; every shipped use of `enemy_side.side_commander` was rooted on a commander | 3 templates, base 80 |
 | commander, what the men think of him | **`dread` appeared nowhere in the mod** — not a gate, not a `chance` row, not a trigger. It is the one number that is *about* the relation between a commander and his own ranks, and temperament does not stand in for it: a mild man who hanged a town has dread, a loud one who never did anything does not. `>= medium_dread` while losing (the line holds), `<= low_dread` while losing (it comes apart in pieces), `>= major_dread_value` with no side row at all (he does not have to ask). Thresholds are the vanilla **named** values, checked against AGOT's override of the same file — 20/40/70 both sides | 3 templates, base 40, 30, 30 |
+| the gods, and what a knight hears | `piety_level` appeared nowhere and the two foe triggers **had never been asked from a knight's root**. Piety level is not `zealous`: one is how loudly a man believes, the other is what his faith thinks of him. The commander case is `piety_level >= 3` while losing — he plants himself where the banner is and the line forms on him (`entrenched`/`up`, and unlike `bc_they_fear_me_more` on the same cell it takes **no rung**: refusing to move is not winning anything back). Both foe triggers compare `root.faith` and `root.culture`, so a knight asking them gets an answer about *his* faith and *his* culture — a Reachman knight in a Northern host is not looking at the same men his lord is. Heathen across the field pays 25 piety against the commander's 50; countryman across the field is `measured`/`down`, which grants nothing, because a man being careful has no army modifier. The two are **not mutually exclusive** and the descs are written knowing both can render for the same man | 3 templates, base 40, 80, 80 |
 | the state of the chest | `gold` is read twenty-nine times in the mod and **every one of them is a payment or a gate on a payment** — the eve's purchase, the pop-up options, the two knight rewards. No template had ever asked what state the man's finances are in as a *reason*, and a host is the most expensive thing a lord ever owns. Debt is not greed (a temperament the mod reads twice) and not low birth (where a man started): it is a number that was fine last year. `gold < 0` is the honest test — CK3 lets a character run negative and that is exactly the state; a `gold < 100` threshold would catch every landless knight in Westeros. The commander gets it while **losing**, because unpaid men winning is not a story and it is the arithmetic and not the debt that is the moment (`wild`/`down`: what is being spent is the reason the men are standing there). The knight gets it while **winning**, because a beaten host leaves men who can be picked up and sold back — neither gate contains `bc_knight_takes_a_captive`'s, and a knight matching both is the man they describe | 2 templates, base 30, 80 |
 | the same name on both sides | `is_close_family_of` appears sixteen times and **the house appeared nowhere** — the mod read kin and stopped there, which is the wrong place to stop in a setting whose wars are fought between branches far more often than between brothers. `bc_foe_is_house_trigger` is **disjoint from the kin gate by construction**, not a widening of it: its final `NOT` excludes close family, so the two cases stay two cases. House and not dynasty, because the cadet branches are the story and both comparisons have AGOT precedent. **Both houses are `exists`-guarded** — a lowborn has no house, CK3 does not short-circuit, and `bc_knight_no_house_behind_him` gates on exactly those men existing. Commander: he wins and declines to press, which is `ordered`/`down`, the cell that hands out nothing — the cost of the decision is the `bc_pursuit` he does not get. Knight: the same fact from the branch end, a man who cannot afford to be overlooked, with no side row because the audience is on the other side of the field either way | 1 trigger, 2 templates, base 40, 80 |
 | where he learned it, and the man with no house | the education axis appeared **once in the whole mod, in a comment, and in no gate** — thirty-six commander templates read martial, prowess, temperament, dread, stress, station, age and the health traits, and none asked what the man was *raised* to do. Education is not martial: martial is how good he is now, the education trait is where he started. `education_martial_4` while winning (`ordered`/`up`, the top rung only — half a Westerosi host would clear `_3`), and the `NOR` of all four martial keys while losing (`measured`/`down`, which grants nothing on purpose: he is very often the cleverest man on the field, applying a good mind to a problem it was never shaped for). The keys are **listed, not grouped** — AGOT's override defines them at :480/:524/:561/:599 with `category = education` and no `group` line, so there is no group key to test. On the knight side `is_lowborn` had never been read either: the hedge knight on a winning field, **the largest prestige a knight template hands out (150)** because it is the only currency a man with no house has. Birth is not tenure, so this is not the station axis again | 3 templates, base 30, 30, 80 |
@@ -628,16 +629,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **ninety**, its "3, 3, 4 and 3" are
-20, 14, 21 and 10, and the fall-through set is twenty-five sites rather than five. The
+plan 1's eighteen call sites are now **ninety-three**, its "3, 3, 4 and 3" are
+21, 15, 21 and 10, and the fall-through set is twenty-six sites rather than five. The
 table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 40, knight 29.** Weight against vanilla's
+**Template totals are now commander 41, knight 31.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60; on the knight side, twenty-nine templates against
-`knight_none`'s 2000 — twenty-eight at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60; on the knight side, thirty-one templates against
+`knight_none`'s 2000 — thirty at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

@@ -1436,3 +1436,32 @@
 
  bc_knight_the_ransom_he_needs_toast:0 "Worth More Sitting Up"
  bc_knight_the_ransom_he_needs_toast_desc:0 "He is not killing the ones with good harness. He is putting them on the ground, taking the helm off to be sure of the face, and handing them back to two men he has told to keep them alive and separate, and he has been doing it since the other host started to bend. Somebody is going to be paid for all of this and he knows to the copper what he is owed elsewhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the gods, and what a knight hears across the field (2026-08-17) --------
+#
+# THE COMMANDER'S DESC MAY NOT DECIDE WHETHER IT WORKS. He plants himself and
+# the line forms on him; whether the gods had anything to do with the rest of
+# the afternoon is not the toast's business, and a desc that settles it turns a
+# moment into a verdict. The modifier is the only claim being made.
+#
+# THE TWO KNIGHT DESCS ARE THE TWO HALVES OF ONE LOOK ACROSS THE FIELD and may
+# both render on the same battle for the same man - the foe triggers are not
+# mutually exclusive. So neither may claim to be the whole of what he thinks
+# about the men opposite.
+#
+# bc_knight_they_sound_like_home IS NOT REMORSE AND NOT REFUSAL. He is doing
+# the work; the volume is down. bc_knight_walks_them_back owns keeping shape
+# while going backwards and bc_knight_shames_himself owns coming apart, and
+# this is neither - which is also why it hands out no modifier.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the usual price", "the going rate",
+# "their gods are not ours" (the eve's piety option), "nothing behind him but
+# the shield", "the same name" (the house block above).
+ bc_the_gods_are_watching_toast:0 "He Has Stopped Where the Banner Is"
+ bc_the_gods_are_watching_toast_desc:0 "It has been going the wrong way since the middle of the morning and he has not moved a foot from where the standard is planted. Men who were falling back are forming up on him because he is the only fixed thing in that part of the field, and he is saying something that is not an order. Whatever comes at that spot next will find it occupied.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_against_unbelievers_toast:0 "The Fight He Was Promised"
+ bc_knight_against_unbelievers_toast_desc:0 "Everything he was ever told about what a sword is for was told to him about a day like this one, against men who kneel to something else. He has been in the front of it since it started and he has not needed anybody to explain to him why. Whatever it costs him he has already agreed to pay.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_they_sound_like_home_toast:0 "They Are Shouting in His Own Accent"
+ bc_knight_they_sound_like_home_toast_desc:0 "The men on the other side of his shield are saying the same words for things that he says, in the same order, and one of them called for his mother in a way he recognised. He has not stopped and he has not slowed. He has simply gone quiet, and he is being extremely careful about what he does next, which out here is not the same as being safe.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

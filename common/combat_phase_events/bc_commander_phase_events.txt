@@ -2796,3 +2796,78 @@ bc_the_chest_is_empty = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE GODS, WHICH THE MOD HAD ONLY EVER READ AS A TEMPERAMENT.
+#
+# `zealous` appears as a gate once and as a chance row several times, and
+# `piety_level` appeared nowhere at all. They are not the same question:
+# zealous is how loudly a man believes, and piety level is what his faith
+# thinks of HIM - a septon-approved lord of great standing can be quite cold
+# about it, and a fanatic who married his sister has nothing in that account.
+# In a setting where a war can be preached, standing is the number that says
+# whether the men think the gods are on this side of the field.
+#
+# LOSING, AND HE DOES NOT MOVE. That is the whole template. The day is going
+# against a man whose faith has always told him it would not, and what he does
+# with that is plant himself where the banner is and let the line form on him.
+# The prose must not decide whether it works.
+#
+# `entrenched`/`up` AND NO RUNG. bc_shieldwall is what the seam hands out for
+# entrenched: men who stop giving ground. bc_they_fear_me_more reaches the same
+# cell on a losing field from dread and takes a guarded momentum rung with it;
+# this one deliberately does not, because a host that has decided the gods are
+# watching is not winning anything back yet - it is refusing to move, which is
+# exactly what the modifier says and no more.
+# ---------------------------------------------------------------------------
+bc_the_gods_are_watching = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		piety_level >= 3
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			has_trait = zealous
+		}
+		modifier = {
+			factor = 1.5
+			bc_foe_is_heathen_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_gods_are_watching"
+
+		add_piety = 50
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_gods_are_watching_toast
+			desc = bc_the_gods_are_watching_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
