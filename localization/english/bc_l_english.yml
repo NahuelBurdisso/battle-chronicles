@@ -2318,3 +2318,30 @@
 
  bc_he_does_not_move_from_the_rise_toast:0 "He Has Given Four Orders Since Noon"
  bc_he_does_not_move_from_the_rise_toast_desc:0 "He picked his ground at midday and has not left it since, and in three hours he has sent four riders out, which is fewer than he has sent in any battle of his life. It turns out that most of what he usually does is telling men he is watching them. They knew. The captains have been running their own halves of it all afternoon and running them well, and the only thing on this field that has not moved is the one thing that did not need to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-EIGHT. The mod's own verdict on the afternoon, read back.
+#
+# THE FIRST MAY NOT WIN THE BATTLE, MAY NOT ROUT ANYBODY AND MAY NOT NAME THE
+# ENEMY COMMANDER. Phase events do not end battles and a rout is a word the
+# aftermath owns. It is a host that has been ahead for a while, not a host
+# that has just finished the job.
+#
+# THE FIRST MAY NOT BE A SPEECH OR A CHARGE ORDER either - `bc_rally_the_line`
+# and the charge templates own those, and nothing here is being reversed or
+# begun.
+#
+# THE SECOND MAY NOT NAME OR SHOW THE COMMANDER, MAY NOT SAY WHAT IS WRONG
+# WITH HIM, AND MAY NOT HAVE ANYBODY DECIDE TO RUN. The knight does not know
+# why the orders stopped arriving. He knows they stopped. Nothing in the gate
+# tells him more than that and the desc may not either.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today".
+ bc_they_have_the_shape_of_it_now_toast:0 "The Third Time It Worked, Nobody Waited"
+ bc_they_have_the_shape_of_it_now_toast_desc:0 "It has worked twice already and the second time it worked faster than the first, and when the same opening appeared a third time the captains on both wings went into it without sending back to ask. There is a rhythm to the afternoon now that everybody on this side of the field can hear and nobody has had to describe. He has spent the last quarter of an hour giving permission for things that have already started.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nothing_is_coming_from_behind_toast:0 "The Riders Stopped Arriving A While Ago"
+ bc_knight_nothing_is_coming_from_behind_toast_desc:0 "Twice an hour, all morning, somebody came up from the rear with a word about what the rest of the field was doing, and at some point that stopped and nobody can say exactly when. So the line has done the only thing a line can do without being told: it has closed up, shortened its front, and settled into holding a piece of ground nobody has yet explained the value of, on the assumption that this is what would have been asked for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -6189,3 +6189,109 @@ bc_he_does_not_move_from_the_rise = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE RUNGS, READ BACK AS GATES, 2026-08-17.
+#
+# The momentum and faltering ladders are the mod's own model of how a battle
+# is going, they are written by nearly every template in both files, and in
+# sixty-two batches they have been READ as a gate exactly once -
+# bc_rally_the_line, which asks for faltering because a rally needs a setback
+# to reverse. Momentum has never gated anything at all. The mod has been
+# keeping a running opinion about the afternoon and never once asking itself
+# what it thinks.
+#
+# THE FALTERING HALF IS CLOSED FOR THE COMMANDER POOL AND THIS IS NOT A
+# JUDGEMENT CALL. bc_rally_the_line's is_valid is the ready trigger and
+# `bc_is_faltering_trigger = yes`, nothing else, so ANY commander template
+# gated on faltering plus one more row is a strict subset of it by
+# construction. The faltering read therefore goes in the knight pool, which
+# rolls from a different list and cannot compete with it.
+#
+# NEITHER TEMPLATE MAY GRANT A RUNG, AND THE REASON IS STRUCTURAL RATHER THAN
+# EDITORIAL. Every momentum grant in this mod is wrapped in
+# `NOT = { bc_has_momentum_trigger = yes }` and every faltering grant in
+# `NOT = { bc_is_faltering_trigger = yes }`. A template that GATES on the rung
+# has already made its own guard false, so the grant would be dead code that
+# reads as if it did something. The gate and the guard are exact complements;
+# writing both is a contradiction with a `base` on it.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# THE ARMY ALREADY HAS A RUNG AND THE AFTERNOON IS STILL GOING ITS WAY. That
+# is a different fact from winning, and the difference is time: the side row
+# says how the fighting stands right now, and the modifier says that something
+# earlier today went well enough for the mod to write it down. A host that is
+# ahead is not the same animal as a host that has been ahead for a while.
+#
+# NOT A SUBSET OF ANY SHIPPED TEMPLATE. No commander template in this file is
+# gated on a side row alone - that was checked mechanically over both files
+# before this was written - so `momentum + winning` is not a narrowing of
+# anything that exists.
+#
+# `ordered`/`up` AND bc_pursuit, THE MODIFIER THAT MEANS THEY ARE CHASING.
+# This is the one moment in the mod where that is unambiguously the right verb:
+# the men are not being asked to hold anything or to spend anything, they are
+# being asked to keep doing what has already worked twice, and the only thing
+# an army needs for that is permission to move faster.
+#
+# PRESTIGE INSTEAD OF A RUNG, per the section header - the grant would be dead
+# code. 50, the file's standard, not more: this is the afternoon paying out,
+# not a new achievement.
+#
+# THE DESC MAY NOT WIN THE BATTLE, MAY NOT ROUT ANYBODY AND MAY NOT NAME THE
+# ENEMY COMMANDER. The mod does not end battles in phase events, and a rout is
+# the aftermath's word.
+# ---------------------------------------------------------------------------
+bc_they_have_the_shape_of_it_now = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_has_momentum_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbering_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_have_the_shape_of_it_now"
+
+		add_prestige = 50
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_they_have_the_shape_of_it_now_toast
+			desc = bc_they_have_the_shape_of_it_now_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

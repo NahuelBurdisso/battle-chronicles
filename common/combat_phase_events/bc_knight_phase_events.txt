@@ -4169,3 +4169,94 @@ bc_knight_nothing_to_say_over_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# THE FALTERING HALF, IN THE POOL WHERE IT IS LEGAL. bc_rally_the_line owns
+# `faltering` in the commander pool outright - its is_valid is the ready
+# trigger and that one row - so the read comes here instead, walked out to the
+# man on the horse. The two pools roll from different lists and never compete,
+# and the fact being asked about is not even the same one: the rally is about
+# the commander finding the moment, and this is about what the modifier looks
+# like from forty yards back in the line.
+#
+# THE WALK IS bc_knight_word_came_down_the_line'S EXACTLY - `exists` as a
+# sibling, the read nested in a trigger_if repeating it - because a combat
+# side can exist without a commander. The character modifiers need no variable
+# guard of their own; `has_character_modifier` is safe on any character scope.
+#
+# THIS IS NOT bc_knight_word_came_down_the_line. That one reads
+# `var:bc_battle_wounded` - the commander was cut this afternoon, a fact about
+# his body. This reads the mod's own verdict on how his battle is going, which
+# can be true of a man who has not been touched all day. Neither gate implies
+# the other in either direction.
+#
+# NO RUNG, AND THE GUARD IS WHY. The faltering grant everywhere in this mod is
+# wrapped in `NOT = { bc_is_faltering_trigger = yes }` and this template gates
+# on the commander already carrying it, so the grant would be dead code. The
+# stress on the knight is the whole cost.
+#
+# `entrenched`/`down` AND bc_shieldwall. Nothing is arriving from behind, so
+# the line stops waiting for it and does the only thing a line can do on its
+# own initiative, which is get closer together and stop moving. That is worth
+# a modifier and it is worth exactly that one.
+#
+# THE DESC MAY NOT NAME THE COMMANDER'S CONDITION, may not have him seen at
+# all, and may not have anybody decide to run. The knight does not know why
+# the orders stopped; he knows they stopped.
+# ---------------------------------------------------------------------------
+bc_knight_nothing_is_coming_from_behind = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { bc_is_faltering_trigger = yes }
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_is_coming_from_behind"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nothing_is_coming_from_behind_toast
+				desc = bc_knight_nothing_is_coming_from_behind_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
