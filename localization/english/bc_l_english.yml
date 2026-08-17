@@ -1057,6 +1057,11 @@
 
  bc_chronicles.0001.t:0 "The Banner Falls"
  bc_chronicles.0001.desc:0 "The standard goes down.\n\nIt is not a sound so much as an absence. The men who were dressing on it turn, and find nothing to dress on, and the turn spreads outward faster than any order could.\n\nThe standard-bearer is somewhere under the feet of the melee. The staff is still visible, canted, being trodden lower."
+# THE TWO ADDED 2026-08-17 DESCRIBE THE SAME THIRTY SECONDS AND RESOLVE NONE OF
+# IT. The four options below own the resolution, so neither may have the bearer
+# dead, the staff lifted, or the line already gone.
+ bc_chronicles.0001.desc_b:0 "It goes down in the middle of everything, and for a moment nobody nearby seems to have seen it.\n\nThen the men at the edges of that space stop doing what they were doing. There is a shape to a host that has something to look at, and the shape is coming apart from the inside outward while everyone in it is still facing the right way.\n\nThe staff is down there somewhere among boots and it is not still. It is being moved by the crowd, a little further each time."
+ bc_chronicles.0001.desc_c:0 "Above the heads of ten thousand men there was one thing worth looking at, and there is not now.\n\nIt did not fall cleanly. It went over slowly, the way a thing goes over when several people are trying to hold it up and none of them can get their footing.\n\nWhat is happening in the next few ranks is not panic yet. It is every man in them turning to ask the same question of somebody who has no more idea than he does."
  bc_chronicles.0001.a:0 "Then I will carry it myself."
  bc_chronicles.0001.b:0 "Sound the withdrawal. Reform behind the line."
  bc_chronicles.0001.c:0 "No man steps back from where it fell."
@@ -1238,6 +1243,13 @@
 
  bc_chronicles.0011.t:0 "The Lines Close"
  bc_chronicles.0011.desc_intro:0 "The hosts are in reach of one another and nothing has been settled yet. Whatever is chosen now will have to be lived with all day."
+# THE THREE ADDED 2026-08-17 MAY NOT MENTION THE GROUND, THE OTHER HOST'S NAME,
+# NUMBERS ON EITHER SIDE, OR HOW IT IS GOING - the two paragraphs that follow
+# own the first two subjects and nothing has resolved yet in any case. Each ends
+# on the choice, which is the paragraph's actual job.
+ bc_chronicles.0011.desc_intro_b:0 "It is close enough now to hear them. Nothing has happened that could not still be undone, which will not be true for very much longer, and whatever [ROOT.Char.GetFirstName] says in the next few moments is what the rest of the day gets built on."
+ bc_chronicles.0011.desc_intro_c:0 "The waiting is nearly done and the whole of it is still to come. Every man in reach is looking at somebody who will tell him what to do next, and the one they are all eventually looking at has to decide it now, with none of it in yet."
+ bc_chronicles.0011.desc_intro_d:0 "There is a last quiet before this sort of thing and it is happening now. Nothing is known yet and none of it can be taken back afterwards, and the order that goes out of here in a moment is the one everything else will be answering until dark."
  bc_chronicles.0011.desc_nemesis:0 "And across the field, under the other banner, is [bc_eve_foe.GetName]. [ROOT.Char.GetFirstName] has been here before, against this man, and it did not go well."
  bc_chronicles.0011.desc_stranger:0 "Across the field the other host comes on behind a banner nobody here can name. Nobody over there is anybody [ROOT.Char.GetFirstName] knows."
  bc_chronicles.0011.a:0 "Press them before they are set."

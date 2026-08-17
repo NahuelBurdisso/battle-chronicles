@@ -27,11 +27,30 @@
 
 # ---------------------------------------------------------------------------
 # The banner falls.
+#
+# THREE OPENINGS SINCE 2026-08-17, POOLED. This is the most-seen pop-up in the
+# mod - bc_banner_falls is one of plan 1's calibrated seven and it is the one
+# players report - and it had a single fixed three-paragraph desc. The pool is
+# bare descs inside a `random_valid`, the same structure the eve's foe chain
+# uses and vanilla's chariot_race_ongoing_jp.0400 uses; a `random_valid` with
+# no triggers is always valid, so the desc can never come out empty.
+#
+# ALL THREE DESCRIBE THE SAME THIRTY SECONDS AND MAY NOT RESOLVE ANY OF IT.
+# The four options are the resolution - whether the staff comes back up, who
+# goes for it and what it costs - so a desc that has the bearer dead, or the
+# line already gone, or the standard already lifted, contradicts three of the
+# four before the player has read them.
 # ---------------------------------------------------------------------------
 bc_chronicles.0001 = {
 	type = character_event
 	title = bc_chronicles.0001.t
-	desc = bc_chronicles.0001.desc
+	desc = {
+		random_valid = {
+			desc = bc_chronicles.0001.desc
+			desc = bc_chronicles.0001.desc_b
+			desc = bc_chronicles.0001.desc_c
+		}
+	}
 	theme = martial
 
 	left_portrait = {

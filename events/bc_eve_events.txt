@@ -100,7 +100,32 @@ bc_chronicles.0011 = {
 	# fifteen bond fragments do. They are not three degrees of it: the chain has
 	# already decided the fact and these only decide the wording.
 	desc = {
-		desc = bc_chronicles.0011.desc_intro
+		# THE INTRO WAS THE MOST-READ SENTENCE IN THE MOD AND THE ONLY ONE WITH
+		# NO POOL AT ALL. Every battle that opens a chronicle renders this
+		# paragraph, before the foe chain and the ground chain have said
+		# anything, and until 2026-08-17 it rendered the same twenty-three
+		# words every time - more often than any moment toast, because a
+		# battle has one eve and many moments. Four lines now, pooled the same
+		# way the stranger arm is: bare descs inside a `random_valid`, which is
+		# always valid and therefore still cannot leave the paragraph empty.
+		#
+		# ALL FOUR HAVE TO BE TRUE OF EVERY BATTLE IN THE GAME. Nothing has
+		# resolved when this renders - not the ground, not the foe, not who is
+		# ahead - so a line here may not mention terrain, the other host's
+		# name, numbers on either side, or how it is going. That is what the
+		# two chains below are for, and a line that trespassed on them would
+		# read as a contradiction whenever they disagreed with it.
+		#
+		# ALL FOUR END ON THE CHOICE. The paragraph's job is to hand the player
+		# a decision taken before anything is known, which is the whole point
+		# of the eve, and a line that only described the field would drop that
+		# handoff and leave the options standing on nothing.
+		random_valid = {
+			desc = bc_chronicles.0011.desc_intro
+			desc = bc_chronicles.0011.desc_intro_b
+			desc = bc_chronicles.0011.desc_intro_c
+			desc = bc_chronicles.0011.desc_intro_d
+		}
 		first_valid = {
 			random_valid = {
 				triggered_desc = {
