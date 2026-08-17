@@ -3448,3 +3448,51 @@
 
  bc_knight_the_chain_that_put_him_here_toast:0 "He Has Followed It All The Way Back"
  bc_knight_the_chain_that_put_him_here_toast_desc:0 "There is a lot of standing about in a battle and he has spent this afternoon's share of it working backwards. This hedge because of the ford, the ford because of the muster, the muster because his lord was asked, and his lord was asked because of something agreed in a hall neither of them has ever stood in, years ago, between two men, one of whom is dead. It runs all the way back and every link holds. He has never seen the whole of it before and it turns out to be short, and dry, and to have nothing in it about him at all. It is also winning, which is the only part of the chain that is any of his concern before dark.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY. Owned and held are two different questions.
+#
+# NEITHER DESC MAY NAME THE COUNTY, a village, a river, a keep or a road. Both
+# gates read title links and both toasts have to be true of a marsh in the
+# Neck, a stone valley in the Vale and a beach in Dorne without alteration.
+#
+# THE FIRST MAY NOT HAVE HIM REGRET TAKING THE PLACE and may not have him blame
+# a scout, a guide or a captain. It may not mention a siege, a garrison, a
+# burning or a levy, may not have a local man refuse him anything on the page,
+# and may not let him solve it - the point of the moment is that the missing
+# information cannot be acquired between now and dusk. It may not say how long
+# he has held the county except in the vaguest possible terms, because the
+# engine will not tell it and it may not invent a number it does not have.
+#
+# THE SECOND MAY NOT HAVE HIM HATE THE PEOPLE WHO LIVE HERE and may not put a
+# single one of them on the page - no farmer, no burnt roof, no child watching
+# from a treeline. The country is doing the work in that toast and the country
+# is empty in it. It may not have him decide to die, may not make him noble
+# about staying, and may not have anybody give a speech.
+#
+# NEITHER MAY USE THE WORDS "enemy country", "invader", "occupied" or "home
+# ground". All four are the reader's words rather than his, and all four turn
+# a working observation into a position.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back".
+ bc_eleven_days_of_hearsay_toast:0 "Somebody Here Has Known About The Ford Since He Was Nine"
+ bc_eleven_days_of_hearsay_toast_desc:0 "Everything he knows about this ground he has been told, recently, mostly by people who would be happier if he drowned in the river he was asking about. It has been enough for two weeks of marching and it stops being enough at about the third hour, when the shape of the afternoon starts depending on things nobody thought to mention: which of two identical-looking slopes turns to grease after rain, where the dry crossing is, why the drove road bends. The man on the other side was not told any of it either. He simply grew up with it. There is no order that fixes that and no scout to blame for it, and it is being charged for now, in the ordinary way, a few yards at a time.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_a_man_who_runs_here_runs_into_it_toast:0 "There Is Nowhere To Go That Is Not Also Theirs"
+ bc_knight_a_man_who_runs_here_runs_into_it_toast_desc:0 "It is going badly and there is a thing every man along this stretch has worked out separately and none of them have said: in a country like this one, running is not a direction. Every treeline, every ford, every sunken lane for a day in any direction is known to the men trying to kill him and unknown to him, which means the ground behind the line is not an escape, it is simply more of the same problem with fewer people in it. So the shield stays up and the feet stay planted and the whole miserable business gets done standing, because standing is the only version of this afternoon that has ever worked for anybody in his position, and everyone here can feel that without being told.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

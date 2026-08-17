@@ -9076,3 +9076,107 @@ bc_the_join_is_a_place = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY. Owned and held are two different questions.
+#
+# `county_controller` RETURNED ZERO OVER THE WHOLE MOD.
+# bc_the_ground_is_his_own_trigger walks location -> county -> holder and asks
+# who this county BELONGS to, which is a question about a document in a room
+# somewhere. The engine also tracks who is standing on it with soldiers, which
+# during a war is very often somebody else, and which is the only one of the
+# two questions that affects where a man can get water this afternoon.
+# Eighty-nine batches read the deed and never once read the occupation.
+#
+# THE FIRST GATE IS DISJOINT FROM THE OLDER OWNERSHIP TRIGGER BY CONSTRUCTION.
+# Its holder row is the exact negation of that trigger's holder row, so no man
+# on any field can answer yes to both.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He took this county eleven days ago, and today is going badly.
+#
+# `adapted`/`down` - the smallest cell in the census. Everything he knows about
+# this ground he has learned since the middle of the month, most of it from
+# people who would rather he drowned in the river he is asking about. There is
+# a ford somewhere upstream that would have been worth knowing about this
+# morning and he does not know about it, and the man on the other side has
+# known about it since he was nine. That is not a failure of nerve or of
+# planning; it is a reading of a field built out of eleven days of hearsay,
+# arriving on the afternoon when the difference gets charged for.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads two title links and
+# the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_the_ground_is_his_own OR ANY OF THE bc_field_* TEMPLATES. The
+# first is a man on his own land, and the two gates are exact negations of each
+# other on the holder row. The field templates ask what the ground is MADE of -
+# forest, marsh, snow - which is a question the ground answers the same way for
+# both armies. This one is about who grew up being told where the water is.
+#
+# THE DESC MAY NOT NAME THE COUNTY OR ANY PLACE IN IT, may not have him regret
+# taking it, may not mention a siege or a garrison or a burning, may not have a
+# local man refuse him anything on the page, and may not have him blame a
+# scout. See the loc header.
+# ---------------------------------------------------------------------------
+bc_eleven_days_of_hearsay = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_ground_is_held_not_owned_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The better he is at reading ground, the more precisely he can feel
+		# the part of it he was never told.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_eleven_days_of_hearsay"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_eleven_days_of_hearsay_toast
+			desc = bc_eleven_days_of_hearsay_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

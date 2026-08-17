@@ -2099,3 +2099,88 @@ bc_he_is_here_on_paper_trigger = {
 		}
 	}
 }
+
+
+# --- owned and held are two different questions ------------------------------
+#
+# `county_controller` RETURNED ZERO OVER THE WHOLE MOD. bc_the_ground_is_his_
+# own_trigger walks location -> county -> holder and asks who this county
+# BELONGS to, which is a question about a document in a room somewhere. The
+# engine also tracks who is standing on it with soldiers, which during a war is
+# very often somebody else, and which is the only one of the two questions that
+# has any effect on where a man can get water this afternoon. Eighty-nine
+# batches read the deed and never once read the occupation.
+#
+# THE FIRST GATE IS DISJOINT FROM bc_the_ground_is_his_own_trigger BY
+# CONSTRUCTION rather than by luck. That trigger requires the HOLDER to be him
+# or his liege-or-above; this one requires that the holder is NOT, and that the
+# CONTROLLER is. They cannot both be true of the same man on the same field.
+#
+# THE REALM TEST IN BOTH DIRECTIONS, for the reason recorded on the older
+# trigger: a county held by his own vassal is his in every sense a battle cares
+# about, and a county controlled by his own vassal's garrison is under his
+# hand. `NOR` on the holder side is the exact negation of the older trigger's
+# `OR`, which is what makes the disjointness structural.
+#
+# THREE OPTIONAL LINKS, THREE GUARDS. `location` is the standing one every
+# field trigger carries; the holder guard exists because AGOT has real unheld
+# land beyond the Wall and in the ruins; the controller guard exists because
+# unheld land has nobody standing on it either.
+bc_the_ground_is_held_not_owned_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		exists = scope:combat_side.combat.location.county.holder
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location.county.holder }
+			scope:combat_side.combat.location.county.holder = {
+				NOR = {
+					this = root
+					target_is_liege_or_above = root
+				}
+			}
+		}
+		exists = scope:combat_side.combat.location.county_controller
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location.county_controller }
+			scope:combat_side.combat.location.county_controller = {
+				OR = {
+					this = root
+					target_is_liege_or_above = root
+				}
+			}
+		}
+	}
+}
+
+# This county belongs to the men on the other side.
+#
+# THE ONLY GROUND TRIGGER IN THE MOD THAT DOES NOT READ `root`, which is why it
+# is the only one that can be used from the knight pool. The older ownership
+# trigger asks whether the county is the COMMANDER's and would answer about a
+# knight if it were ever called from a knight template, meaning something much
+# narrower; this one compares the county's holder against the man on the far
+# side and gives the same answer no matter which of his own men is asking.
+#
+# `enemy_side` rather than `var:bc_battle_foe`, because the variable is written
+# inside a moment's effect and does not exist during a battle's first is_valid.
+bc_the_ground_belongs_to_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		exists = scope:combat_side.combat.location
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location }
+			exists = scope:combat_side.combat.location.county.holder
+			trigger_if = {
+				limit = { exists = scope:combat_side.combat.location.county.holder }
+				scope:combat_side.combat.location.county.holder = {
+					OR = {
+						this = scope:combat_side.enemy_side.side_commander
+						target_is_liege_or_above = scope:combat_side.enemy_side.side_commander
+					}
+				}
+			}
+		}
+	}
+}

@@ -6568,3 +6568,93 @@ bc_knight_the_chain_that_put_him_here = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# This county belongs to the men killing him, and the side is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall, and the grant is the argument rather
+# than a flourish. Every hedge, ford, drove road and dry crossing within a
+# day's walk belongs to the people on the other side in the only sense that
+# matters this afternoon, which is that they know where it is. There is
+# therefore nowhere to go. A man who runs in a country that is not his runs
+# into it, not out of it, and every man along this stretch has worked that out
+# without discussing it, which is why the line is still a line at all.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the county holder
+# against the far commander and the side row, and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_there_is_no_second_host. That is a man who has stopped
+# expecting help. This one is a man who has worked out that the map is on the
+# other side, which is a fact about the country rather than about the army.
+#
+# THE DESC MAY NOT NAME THE COUNTY OR ANY PLACE IN IT, may not mention a
+# village or a burning or a levy, may not have him hate the people who live
+# here, may not have anybody local appear on the page at all, and may not have
+# him decide to die. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_a_man_who_runs_here_runs_into_it = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_ground_belongs_to_the_far_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Standing still on a bad afternoon because you have thought it
+		# through is not the same skill as standing still because you were
+		# told to, and it is the rarer one.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_man_who_runs_here_runs_into_it"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_a_man_who_runs_here_runs_into_it_toast
+				desc = bc_knight_a_man_who_runs_here_runs_into_it_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
