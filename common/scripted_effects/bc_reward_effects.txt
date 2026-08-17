@@ -84,12 +84,55 @@ bc_notable_battle_counter_effect = {
 
 # --- aftermath: the name he wins --------------------------------------------
 #
-# The pool is exactly AGOT's heroic list, all 27 entries at weight 1, with NO
-# null entry - the caller's gate has already decided the man deserves a name,
-# so this list only decides which. Copying the whole list rather than a
-# hand-picked subset keeps the mod out of the business of ruling on which of
-# AGOT's names are martial enough, and the keys are REFERENCED, not redefined,
-# so the pool tracks AGOT if AGOT changes it.
+# THE POOL WAS ONE FLAT LIST OF 27 AND IS NOW SEVEN, 2026-08-17. Two separate
+# changes, both about cases:
+#
+# 1. THE POOL WAS TOO NARROW. It took AGOT's first nickname group - the 27
+#    "heroic" entries at 00_agot_generic_nicknames.txt:5-31 - and stopped
+#    there. The file's THIRD group, :44-49, is
+#    `the_anvil / the_tactician / the_trebuchet / the_warlord / the_battlemaster`,
+#    which are more obviously names a man wins by COMMANDING than half of the
+#    first group is. There was no reason to omit them beyond not having looked.
+#    All five are added.
+#
+#    THE SECOND GROUP, :33-42, IS TAKEN ONLY IN PART. Four of its ten carry
+#    `is_bad = yes` and are excluded outright - the caller's gate decided this
+#    man earned something. Of the six that remain, three are prefixes or too
+#    close to the is_bad four to read as a reward in general, and three -
+#    `the_brute`, `the_beast`, `the_slaughterer` - are used ONLY in the
+#    bloodied and wild ladders below. AGOT files them next to its insults, so
+#    they belong where the man's own record already says he fought that way,
+#    not in a pool every winner draws from.
+#
+#    NO `is_prefix = yes` KEY IS TAKEN from any group. `nick_agot_hard` and
+#    `nick_agot_the_stone` render in front of the name rather than after it,
+#    which is a different shape of result, and the mod has never produced one.
+#
+# 2. THE NAME NOW FITS THE MAN. It was a flat random_list, so a commander who
+#    had spent three battles dug in behind a shieldwall was exactly as likely
+#    to be called Fireball as a man who charged. The style ladder that already
+#    exists on this character - var:bc_style_last, written by
+#    bc_style_streak_effect in bc_reputation_effects.txt and never cleared - is
+#    the obvious selector and cost nothing to read.
+#
+#    SIX LADDERS PLUS A FALLBACK, NOT PER-ENTRY WEIGHTS. Both shapes give the
+#    same result; this one is legible and does not need 35 nested trigger_if
+#    guards, one per entry, to read one variable safely.
+#
+#    NAMES REPEAT ACROSS LADDERS ON PURPOSE. `greysteel` fits entrenched,
+#    measured and adapted alike, and each ladder is kept to eight entries or
+#    more so that the style narrows what a man is called without making it
+#    predictable.
+#
+#    THE FALLBACK IS THE FULL 32 AND IT IS REACHABLE. bc_style_last only
+#    exists once the commander has fought a notable battle in which some
+#    moment fired, and notability is independent of whether any moment fired
+#    at all - the same gap bc_chronicles.0091's `BC: award no creed` marker
+#    reports. A man can therefore reach the nickname gate with no style on
+#    record, and he must still get a name.
+#
+# The keys are REFERENCED, not redefined, so the pool tracks AGOT if AGOT
+# changes it.
 #
 # This is the only place mod script names an AGOT key. The dependency is not
 # new - descriptor.mod already declares `dependencies = { "A Game of Thrones" }`.
@@ -111,7 +154,14 @@ bc_notable_battle_counter_effect = {
 # accepts a character, artifact, title, dynasty or house. The caller saves the
 # scope. Same reason the phase events use scope:bc_commander / scope:bc_knight.
 
-bc_aftermath_nickname_effect = {
+# The whole pool, for a commander whose style is not on record. AGOT's first
+# nickname group in full plus the five non-prefix entries of its third, and
+# none of its second - see the header for why the brutal three are ladder-only.
+#
+# TWO CALLERS, both fallback arms of the effect below, which is why it is a
+# separate effect rather than a seventh copy of the list. Inlining it twice is
+# how the two copies drift.
+bc_nickname_general_pool_effect = {
 	random_list = {
 		1 = { give_nickname = nick_agot_the_warrior }
 		1 = { give_nickname = nick_agot_greysteel }
@@ -140,6 +190,128 @@ bc_aftermath_nickname_effect = {
 		1 = { give_nickname = nick_agot_battleborn }
 		1 = { give_nickname = nick_agot_swordbiter }
 		1 = { give_nickname = nick_agot_the_painter }
+		1 = { give_nickname = nick_agot_the_anvil }
+		1 = { give_nickname = nick_agot_the_tactician }
+		1 = { give_nickname = nick_agot_the_trebuchet }
+		1 = { give_nickname = nick_agot_the_warlord }
+		1 = { give_nickname = nick_agot_the_battlemaster }
+	}
+}
+
+bc_aftermath_nickname_effect = {
+	# THE OUTER GUARD IS `exists`, AND EVERY COMPARISON IS NESTED UNDER IT.
+	# `var:bc_style_last = flag:bloodied` sitting beside `exists = var:bc_style_last`
+	# in one limit does not protect the comparison: CK3 does not short-circuit
+	# and guarantees no evaluation order among siblings. else_if arms ARE
+	# ordered with respect to each other, so once the outer `if` has proven the
+	# variable exists, the six arms inside may compare freely. Same three-branch
+	# reasoning as bc_style_streak_effect, and the same reason it is not folded
+	# into one OR.
+	if = {
+		limit = { exists = var:bc_style_last }
+
+		# Traded blood for ground. The three names AGOT files beside its
+		# insults live here and in `wild`, and nowhere else.
+		if = {
+			limit = { var:bc_style_last = flag:bloodied }
+			random_list = {
+				1 = { give_nickname = nick_agot_blacksword }
+				1 = { give_nickname = nick_agot_widowmaker }
+				1 = { give_nickname = nick_agot_the_woe }
+				1 = { give_nickname = nick_agot_swordbiter }
+				1 = { give_nickname = nick_agot_the_painter }
+				1 = { give_nickname = nick_agot_bloodborn }
+				1 = { give_nickname = nick_agot_the_slaughterer }
+				1 = { give_nickname = nick_agot_the_brute }
+				1 = { give_nickname = nick_agot_the_warrior }
+				1 = { give_nickname = nick_agot_shieldbreaker }
+				1 = { give_nickname = nick_agot_thunderbolt }
+			}
+		}
+		# Dug in and would not be moved.
+		else_if = {
+			limit = { var:bc_style_last = flag:entrenched }
+			random_list = {
+				1 = { give_nickname = nick_agot_hardstone }
+				1 = { give_nickname = nick_agot_the_neveryield }
+				1 = { give_nickname = nick_agot_the_steelskin }
+				1 = { give_nickname = nick_agot_oakenshield }
+				1 = { give_nickname = nick_agot_ironheart }
+				1 = { give_nickname = nick_agot_greatheart }
+				1 = { give_nickname = nick_agot_the_anvil }
+				1 = { give_nickname = nick_agot_greysteel }
+			}
+		}
+		# Went in hard and early and did not count the cost.
+		else_if = {
+			limit = { var:bc_style_last = flag:wild }
+			random_list = {
+				1 = { give_nickname = nick_agot_fireball }
+				1 = { give_nickname = nick_agot_starfire }
+				1 = { give_nickname = nick_agot_thunderbolt }
+				1 = { give_nickname = nick_agot_the_morningstar }
+				1 = { give_nickname = nick_agot_battleborn }
+				1 = { give_nickname = nick_agot_bloodborn }
+				1 = { give_nickname = nick_agot_the_beast }
+				1 = { give_nickname = nick_agot_the_brute }
+				1 = { give_nickname = nick_agot_swiftspur }
+			}
+		}
+		# Kept the shape of it. AGOT's third group is mostly this man.
+		else_if = {
+			limit = { var:bc_style_last = flag:ordered }
+			random_list = {
+				1 = { give_nickname = nick_agot_the_tactician }
+				1 = { give_nickname = nick_agot_the_battlemaster }
+				1 = { give_nickname = nick_agot_the_warlord }
+				1 = { give_nickname = nick_agot_the_trebuchet }
+				1 = { give_nickname = nick_agot_longspear }
+				1 = { give_nickname = nick_agot_shieldbreaker }
+				1 = { give_nickname = nick_agot_shieldsmasher }
+				1 = { give_nickname = nick_agot_greycloak }
+				1 = { give_nickname = nick_agot_oakenfist }
+			}
+		}
+		# Read the day and changed with it.
+		else_if = {
+			limit = { var:bc_style_last = flag:adapted }
+			random_list = {
+				1 = { give_nickname = nick_agot_the_windrider }
+				1 = { give_nickname = nick_agot_swiftspur }
+				1 = { give_nickname = nick_agot_oakenfist }
+				1 = { give_nickname = nick_agot_breakspear }
+				1 = { give_nickname = nick_agot_greycloak }
+				1 = { give_nickname = nick_agot_the_warrior }
+				1 = { give_nickname = nick_agot_greysteel }
+				1 = { give_nickname = nick_agot_thunderbolt }
+			}
+		}
+		# Spent nothing he did not have to.
+		else_if = {
+			limit = { var:bc_style_last = flag:measured }
+			random_list = {
+				1 = { give_nickname = nick_agot_greysteel }
+				1 = { give_nickname = nick_agot_ironheart }
+				1 = { give_nickname = nick_agot_greatheart }
+				1 = { give_nickname = nick_agot_the_neveryield }
+				1 = { give_nickname = nick_agot_longspear }
+				1 = { give_nickname = nick_agot_the_anvil }
+				1 = { give_nickname = nick_agot_the_tactician }
+				1 = { give_nickname = nick_agot_oakenshield }
+			}
+		}
+		# REACHABLE AND NOT PADDING, exactly as bc_style_award_effect's `else`
+		# is: it catches a bc_style_last holding a kind outside the six, which
+		# would mean the seam's KIND vocabulary and this ladder have drifted.
+		# It still names the man - a drifted vocabulary must not cost him the
+		# reward his gate already granted.
+		else = {
+			bc_nickname_general_pool_effect = yes
+			debug_log = "BC: nickname style UNMATCHED"
+		}
+	}
+	else = {
+		bc_nickname_general_pool_effect = yes
 	}
 
 	debug_log = "BC: nickname awarded"
