@@ -95,11 +95,17 @@
 # One clause each: the fragment adds a place to a thing that already happened,
 # it does not restate the thing.
  bc_frag_banner_falls_desert:0 " The dust takes it before the sand does."
+ bc_frag_banner_falls_desert_b:0 " Nobody sees where it went, and the wind is already working on the mark."
  bc_frag_banner_falls_open:0 " There is nothing else on that field to look at, and so they all see it go."
+ bc_frag_banner_falls_open_b:0 " It is a long way from here to the next thing worth forming on."
  bc_frag_banner_falls_rough:0 " It goes down the slope with the man who carried it."
+ bc_frag_banner_falls_rough_b:0 " It fell into a fold of the ground and might as well be a mile off."
  bc_frag_banner_falls_forest:0 " The branches have it before the ground does, and it hangs there where no one can reach it."
+ bc_frag_banner_falls_forest_b:0 " Above the fighting there is only leaf now, where a colour used to be."
  bc_frag_banner_falls_jungle:0 " The green closes over it in a moment, as though it had never been raised."
+ bc_frag_banner_falls_jungle_b:0 " A pole and a length of cloth are nothing to find in country like this."
  bc_frag_banner_falls_winter:0 " It lies in the snow, and the snow begins at once to cover it."
+ bc_frag_banner_falls_winter_b:0 " The pole stands a while longer in the drift, and then that goes over too."
  bc_frag_banner_falls_any:0 ""
 
  bc_rally_the_line_toast:0 "The Line Is Rallied"
@@ -111,11 +117,17 @@
 # high ground because the slope belongs to the banner, the standing-stone to the
 # van and the rocks to the collapse.
  bc_frag_rally_desert:0 " They close up around the one man still shouting, half of them blind with grit."
+ bc_frag_rally_desert_b:0 " They re-form in the glare with the ground burning up through their boots."
  bc_frag_rally_open:0 " There is nothing out here to rally on except an order, and today an order is enough."
+ bc_frag_rally_open_b:0 " There is nowhere to put a line out here but where it already was, so that is where it goes."
  bc_frag_rally_rough:0 " The high ground behind them is where they are sent, and they get there in some order."
+ bc_frag_rally_rough_b:0 " Whatever piece of ground has a shape to it, they put their backs against."
  bc_frag_rally_forest:0 " They form on a line of trunks, which is not a line at all, and it serves."
+ bc_frag_rally_forest_b:0 " The order goes from trunk to trunk in pieces and arrives whole enough."
  bc_frag_rally_jungle:0 " Voices do the work eyes cannot, and the ranks find one another by them."
+ bc_frag_rally_jungle_b:0 " Nobody can see far enough to know how bad it was, which turns out to help."
  bc_frag_rally_winter:0 " Men who had begun to drift back stamp themselves warm again in their old places."
+ bc_frag_rally_winter_b:0 " Standing still is worse than closing up out here, and they know it."
  bc_frag_rally_any:0 ""
 
  bc_horse_killed_toast:0 "Unhorsed"
@@ -140,11 +152,17 @@
 # going backwards, which is a different question from what it does to men going
 # forwards - the van set answers that one on the same six bands.
  bc_frag_flank_collapses_desert:0 " The sand keeps no shape, and neither does the wing once it has started to go."
+ bc_frag_flank_collapses_desert_b:0 " There is no water behind them and they are going that way regardless."
  bc_frag_flank_collapses_open:0 " Flat country gives a running man a long way to run and no reason to stop early."
+ bc_frag_flank_collapses_open_b:0 " From the middle of the line the whole of it can be watched going."
  bc_frag_flank_collapses_rough:0 " They come apart among the rocks, each little party climbing away from the next."
+ bc_frag_flank_collapses_rough_b:0 " They go downhill because downhill is easier, and it takes them out of the battle."
  bc_frag_flank_collapses_forest:0 " The wood swallows the first men who turn, and the rest of them learn from it."
+ bc_frag_flank_collapses_forest_b:0 " Once they are in among the trees there is no calling them back out."
  bc_frag_flank_collapses_jungle:0 " Whatever the heat had left of that wing, one push takes."
+ bc_frag_flank_collapses_jungle_b:0 " They go into the undergrowth in twos and threes and it does not give them back."
  bc_frag_flank_collapses_winter:0 " They give way over ground already trodden to grey slush, and they are slow in it."
+ bc_frag_flank_collapses_winter_b:0 " They leave a churned track behind them that says exactly how many went."
  bc_frag_flank_collapses_any:0 ""
 
  bc_van_breaks_through_toast:0 "The Van Breaks Through"
@@ -193,11 +211,17 @@
 # are the only ground fragments in the file that describe a stalemate rather
 # than something one side is doing to the other.
  bc_frag_bogged_desert:0 " Nobody can charge in this and nobody can leave it either, and the sun does not move."
+ bc_frag_bogged_desert_b:0 " The waterskins have been counted twice already and the day is not half done."
  bc_frag_bogged_open:0 " Two hosts stand a bowshot apart on country made for horses, and neither will spend one."
+ bc_frag_bogged_open_b:0 " There is room here for anything either host cares to try, and neither cares to try it."
  bc_frag_bogged_rough:0 " Every yard forward is uphill for somebody, so nobody buys one."
+ bc_frag_bogged_rough_b:0 " Both lines have taken the piece of ground they can hold and neither will leave it."
  bc_frag_bogged_forest:0 " There is no room in here for a push, only for men to lean on one another."
+ bc_frag_bogged_forest_b:0 " The fighting has come down to whatever a man can reach from where he is standing."
  bc_frag_bogged_jungle:0 " Both hosts are drowning slowly in the same wet air."
+ bc_frag_bogged_jungle_b:0 " The heat is taking more men out of this than the fighting is."
  bc_frag_bogged_winter:0 " Boots freeze into the ruts they made this morning, and the ruts are the day's whole progress."
+ bc_frag_bogged_winter_b:0 " Men who stop moving out here begin to stiffen, so nobody stops and nobody advances."
  bc_frag_bogged_any:0 ""
 
 # --- commander chronicles, the second ten (2026-08-17) -----------------------
