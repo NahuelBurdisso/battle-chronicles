@@ -1185,3 +1185,224 @@ bc_knight_strips_the_dead = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE SIXTH ON THIS SIDE: THE GROUND, FROM INSIDE THE RANKS
+#
+# THE KNIGHT SIDE READS TWO OF THE SIX BANDS. bc_knight_is_ridden_down wants
+# open and bc_knight_stands_in_the_snow wants winter, and that is the whole of
+# it, while the commander side now gates on all six. These three add the two
+# commonest bands in the game as played and the rarest that is not dead.
+#
+# THE CENSUS DECIDES WHICH BANDS ARE WORTH A TEMPLATE AND HOW TIGHTLY EACH IS
+# GATED. The DIAG run's Q5 terrain sample, 137 battles: rough 58, forest 32,
+# winter 20, open 19, jungle 8, desert 0. So rough carries a second row because
+# a gate on it alone would fire constantly; jungle carries none because eight in
+# a hundred and thirty-seven is already rare; and DESERT GETS NO KNIGHT CASE AT
+# ALL, because it scored zero and a template nothing can reach is not content.
+# The commander's bc_dust_and_thirst predates that measurement and is left alone.
+#
+# TWO OF THE THREE READ A PURSUIT RATHER THAN A FIGHT, which is what the ground
+# is for on this side: the commander's band cases ask what the terrain does to an
+# army, and a knight can only report what it did to the fifty men he can see.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate: rough + prowess >= 10 shares
+# the prowess floor with holds_the_breach (which wants losing) and
+# stands_in_the_snow (which wants winter); forest + winning shares the side row
+# with unhorses_a_lord (prowess >= 12) and takes_a_captive (prowess >= 8 and
+# outnumbering); jungle has no row any other knight case has.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# On the broken ground. The commonest ground in the game, read from inside the
+# ranks - 58 of 137 in the census, more than forest and winter together.
+#
+# THE PROWESS ROW IS THE SECOND CONDITION rough needs, and it is also the case:
+# nothing mounted works here, so what is left is a man who is worth something on
+# his feet. bc_the_broken_ground_holds is the commander's rough case and pairs
+# the band with losing instead, so the two do not shadow each other.
+#
+# `entrenched` AND NO RUNG. bc_shieldwall lands on the side either way, which is
+# the right consequence - men who have stopped trying to manoeuvre on this
+# ground are harder to move and slower to do anything - but a rung would say one
+# knight's footing decided the battle.
+# ---------------------------------------------------------------------------
+bc_knight_on_the_broken_ground = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 10
+		bc_field_is_rough_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who was never going to give ground is more use where there is
+		# no good ground to give.
+		modifier = {
+			add = 40
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_on_the_broken_ground"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_on_the_broken_ground_toast
+				desc = bc_knight_on_the_broken_ground_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The pursuit dies in the wood. Forest, and the side is winning.
+#
+# THE MOD'S SECOND `ordered`/`down` and the reason the pair is worth having at
+# all: a chase that goes into trees stops being a chase and becomes fifty men
+# walking about separately. The verb table maps the pair to nothing, so this
+# takes bc_pursuit away from nobody - it simply declines to hand it out, which
+# is exactly what the moment is.
+#
+# THE WINNING ROW IS THE CASE. Forest while losing is cover and is
+# bc_the_woods_hide_us's story on the commander side; forest while winning is
+# the trees taking back what the line just won.
+# ---------------------------------------------------------------------------
+bc_knight_the_wood_takes_them = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_field_is_forest_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man in a hurry goes further into it before he notices.
+		modifier = {
+			add = 40
+			has_trait = impatient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_wood_takes_them"
+
+		add_stress = 5
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_knight_the_wood_takes_them_toast
+				desc = bc_knight_the_wood_takes_them_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# In the green. The rarest band that is not dead - 8 of 137 - and therefore the
+# only one of the three that needs no second row.
+#
+# THE HEAT IS THE ENEMY AND THAT IS THE POINT. bc_the_green_closes_in is the
+# commander's jungle case and says the same thing about an army; this says it
+# about one man in mail who has been upright in it since dawn.
+# ---------------------------------------------------------------------------
+bc_knight_in_the_green = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_field_is_jungle_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Weight of harness and weight of years, in the one place where both
+		# are paid for by the hour.
+		modifier = {
+			add = 40
+			age >= 45
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_in_the_green"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_in_the_green_toast
+				desc = bc_knight_in_the_green_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

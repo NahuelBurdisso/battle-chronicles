@@ -404,6 +404,29 @@
  bc_knight_strips_the_dead_toast:0 "His Hands Are Full"
  bc_knight_strips_the_dead_toast_desc:0 "They are winning without him and he has noticed. He is on his knees over somebody's dead brother with a knife working at a strap, and there is a gap where he was standing.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the ground batch (2026-08-17) ------------------------
+#
+# Rough, forest and jungle from inside the ranks. THESE THREE DO NOT CALL
+# bc_ground_clause and must not be given it: they are gated on a band, so the
+# shared clause would say in general terms what the literal has just said in
+# particular ones. Same exclusion the seven commander band toasts carry.
+#
+# THE SPENT BAND PHRASES, which are now numerous and which these three may not
+# reuse: "the spine of rock" and "their backs to a slope" (the commander's rough
+# toast), "the standing stone", "the high ground", "the gully", "two boulders",
+# "a hollow", "knuckles and edges" (the per-moment rough fragments), "the heat
+# and the green" and "ten paces away" (the commander's jungle toast), "the trees
+# begin a hundred paces off" (the eve), "the wood swallows sound" (the shared
+# clause, which these three do not call but whose words are still spent).
+ bc_knight_on_the_broken_ground_toast:0 "No Horse Is Any Use Here"
+ bc_knight_on_the_broken_ground_toast_desc:0 "He came off his horse an hour ago because there was nothing here it could do, and he has been working on foot since, one bad step at a time. Nobody has moved him and he has moved nobody.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_wood_takes_them_toast:0 "The Chase Goes In and Stops"
+ bc_knight_the_wood_takes_them_toast_desc:0 "They were running and he was on them, and then there was bark and shadow and nobody to his left or right. What went in as a pursuit is now forty men shouting for each other.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_in_the_green_toast:0 "Boiled in His Own Harness"
+ bc_knight_in_the_green_toast_desc:0 "He has been standing in mail in this since first light and the air has not moved once. Whatever is wrong with him now, nobody on the other side did it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
 # Six templates gated on WHO THE MAN IS rather than on how the battle is going.

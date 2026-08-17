@@ -592,6 +592,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | knight, the fourth three | the battle itself, read from inside the ranks — casualties, war length, host size. All three triggers were written for commander cases and had never been asked from a knight's root | 3 templates, base 80 |
 | commander, who is across the field | the bond ladder had four answers and only *kin* had ever been a reason for a moment. Nemesis becomes a **gate** for the first time (it was a ×1.5 `chance` row on nineteen templates and a gate on none); heathen and countryman get the two new foe triggers | 3 templates, base 30 |
 | knight, the trait batch | twelve knight cases and not one gated on temperament — traits appeared eleven times as `chance` rows and never as a reason. Arrogant, patient, greedy. **`bc_knight_walks_them_back` is the mod's first `ordered`/`down`**, the last unused cell in the seam | 3 templates, base 80 |
+| knight, the ground batch | the knight side read two of six bands (open, winter) while the commander side reads all six. Rough (+ prowess, because 58 of 137), forest (+ winning, the mod's **second `ordered`/`down`**) and jungle alone. **No desert case**: it scored 0 of 137 and a template nothing reaches is not content | 3 templates, base 80 |
 | shared ground clause | the ten Plan B moments each name their band; the **twenty-six toasts written since then named nothing underfoot**. One pooled set, two strings per band, appended ahead of the bond clause. Not called by the ten (they have per-moment sets) nor by the seven toasts gated on a band (their literal is the ground) | 13 keys, 26 toasts |
 | pop-up contextual options | the three clickable moments had 3, 3 and 2 answers and had not been touched since plan 1. Zealous and purse on the banner, brave on the rally, greedy and `martial >= 14` on the van. **A pop-up can only ask about the man** — it is a `character_event` and `scope:combat_side` does not cross `trigger_event` | 5 options, 8 → 13 |
 
@@ -616,9 +617,9 @@ reached the third. The pair census and the modifier reach counts in
 fifteen sites rather than five. The table's *behaviour* is unchanged; only its
 comments were wrong, and wrong in the direction that invites a bad fix.
 
-**Template totals are now commander 28, knight 15.** Weight against vanilla's
+**Template totals are now commander 28, knight 18.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90; on the knight side, fifteen templates at 80 against `knight_none`'s 2000.
++ 90; on the knight side, eighteen templates at 80 against `knight_none`'s 2000.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 
