@@ -536,6 +536,35 @@
  bc_the_same_tongue_toast:0 "He Can Understand the Screaming"
  bc_the_same_tongue_toast_desc:0 "Everything carried across from the other side arrives in words he has known since he was a boy — orders, oaths, and the noise men make when they are hit. He can do nothing with any of it except hear it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- commander chronicles, what he has to lose (2026-08-17) ------------------
+#
+# Station, which twenty-eight templates had never asked about: a kingdom,
+# nothing at all, or somebody.
+#
+# NONE OF THE THREE NAMES A TITLE, A PLACE OR A HOUSE. The gates are
+# `highest_held_title_tier >= tier_kingdom`, `is_landed = no` and a close-family
+# test, and AGOT is a setting where the reader knows the map far better than
+# this mod does. A desc that said "his kingdom" would be fine; one that said
+# "the Reach" would be a guess. The first line therefore says `crowned`, which
+# every tier at or above kingdom answers to.
+#
+# THE THIRD MUST NOT SAY WHICH RELATION IT IS. `is_close_family_of` covers
+# parents, children, siblings, grandparents and grandchildren, so "his son" is
+# a lie about most of the men it fires for. It says `his own blood` and leaves
+# the reader to know which.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "somebody will have to explain this
+# at a funeral" (bc_kin_across_the_line_toast_desc, the other kin toast, which
+# a player can see in the same battle as the third of these).
+ bc_the_crown_on_the_field_toast:0 "The Tallest Thing Still Standing"
+ bc_the_crown_on_the_field_toast_desc:0 "It is going badly and he is the most valuable man on a field that is losing. Every eye on the other side has worked out where he is, and his own men keep coming off the line to stand between him and the people who want to reach him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_nothing_but_the_horse_toast:0 "Nothing Behind Him"
+ bc_nothing_but_the_horse_toast_desc:0 "He holds no land, so there is no hall waiting for him to lose this carefully and go home to it. He rides at the thing instead of around it, and the horses will be finished by evening.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_his_blood_in_the_ranks_toast:0 "He Knows Where That One Is"
+ bc_his_blood_in_the_ranks_toast_desc:0 "His own blood is out there in the knights and he has not lost sight of him once, which is one more thing than a man commanding can afford to be doing. He works forward to where he can be seen doing it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
 # THREE VARIANTS PER VALUE SINCE 2026-08-17, picked by `random_valid = yes` in

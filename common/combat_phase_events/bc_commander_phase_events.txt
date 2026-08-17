@@ -1774,3 +1774,257 @@ bc_the_same_tongue = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE SIXTH ON THIS SIDE: WHAT HE HAS TO LOSE
+#
+# TWENTY-EIGHT COMMANDER TEMPLATES AND NOT ONE READS HIS STATION. The mod asks
+# what the battle is doing (twelve), where it is happening (six), who is
+# opposite (four), how old he is and what he is like (eight) - and never what
+# he is worth. A king and a landless sworn sword get exactly the same
+# chronicle, and they are not having the same day.
+#
+# THE THREE ARE ONE QUESTION WITH THREE ANSWERS: what does this man stand to
+# lose if the line goes? A kingdom, nothing at all, or somebody. That is the
+# reason they ship together rather than as three unrelated rows.
+#
+# `highest_held_title_tier` AND `is_landed` ARE ENGINE TRIGGERS, both confirmed
+# in ../../docs/api/1.19.0.6/triggers with `Supported Scopes: character`, and
+# `tier_kingdom` is a vanilla script value from
+# common/script_values/00_title_tiers_values.txt:5. Vanilla writes the exact
+# comparison at events/activities/chariot_race_activity/
+# chariot_race_ongoing_events.txt:3083. NONE of these is AGOT-overridden the way
+# the trait file is, so an engine-dump confirmation is sufficient evidence here
+# in a way it is not for a trait key.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate, and the station rows make
+# that easy: no `is_valid` anywhere in the mod reads a title tier, `is_landed`
+# or the side's own knight list, so only the second rows need checking. The
+# crown case pairs with losing, where the shipped gates are bc_banner_falls
+# (momentum-free), bc_rally_the_line, bc_flank_collapses, bc_the_broken_ground_
+# holds (rough) and bc_he_looks_for_the_road (craven); a landed king who is
+# none of those things matches only this one.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The crown on a losing field. He is the highest thing standing on it and
+# everybody on both sides knows exactly where he is.
+#
+# LOSING IS THE SECOND ROW AND IT IS ALSO WHAT MAKES THE MOMENT. A king on a
+# winning field is a man being carried along by his own army. A king on a
+# losing one is a target with a war behind him, and the difference is the
+# whole story.
+#
+# IT ALSO NARROWS A GATE THAT WOULD OTHERWISE FIRE FOR A PLAYER-KING IN EVERY
+# BATTLE HE COMMANDS. The cooldown is the real rate limiter - see this file's
+# header - but a template that matches a particular player on every single roll
+# would still crowd his chronicle with one sentence, which is the problem the
+# whole content programme exists to solve.
+#
+# `bloodied`/`down` AND A GUARDED FALTERING RUNG. The side pays for where he is
+# standing: men come off the line to get between him and it, which is
+# bc_bloodied's trade made by somebody else's decision.
+# ---------------------------------------------------------------------------
+bc_the_crown_on_the_field = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		highest_held_title_tier >= tier_kingdom
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# An emperor is a bigger thing to be standing in a field.
+		modifier = {
+			add = 20
+			highest_held_title_tier >= tier_empire
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_crown_on_the_field"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_crown_on_the_field_toast
+			desc = bc_the_crown_on_the_field_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other end of the same question. `is_landed = no`: he commands and he
+# holds nothing, so a lost battle costs him a horse and a lost war costs him
+# nothing he owns.
+#
+# NO SECOND ROW, DELIBERATELY. The crown case needed one because it would
+# otherwise own a player-king's chronicle; this one does not, because a
+# landless commander is already the minority case - most men trusted with a
+# wing hold something - and because the moment is true whichever way the
+# battle is going. That asymmetry inside one batch is intended.
+#
+# `is_landed = no`, NOT `is_landless_adventurer`. The second is not in the
+# 1.19.0.6 trigger dump at all, so it is either a mod's or does not exist, and
+# a misspelled trigger key is not the kind of thing that fails loudly.
+#
+# `wild`/`up` AND A GUARDED MOMENTUM RUNG - the tide moves and the horses pay
+# for it. A man with nothing behind him rides at the thing rather than round
+# it, which is bc_spent_horse exactly. bc_the_wrath_takes_him and
+# bc_the_old_grudge are the two shipped templates that already mean this, and
+# both reach it from temperament rather than from station.
+#
+# HE IS PAID IN PRESTIGE, which is not decoration. Prestige is the only thing
+# a landless man is actually accumulating out here.
+# ---------------------------------------------------------------------------
+bc_nothing_but_the_horse = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		is_landed = no
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Ambition is the whole engine of this one.
+		modifier = {
+			add = 30
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nothing_but_the_horse"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_nothing_but_the_horse_toast
+			desc = bc_nothing_but_the_horse_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The third answer: somebody. His own close family is in the knight list on his
+# own side, and he has been keeping track of one man in a fight that needs all
+# of him.
+#
+# THE MOD HAS READ HIS OWN SIDE'S KNIGHTS EXACTLY ONCE before this -
+# bc_shieldbrother_forged, which only counts them. bc_side_has_kin_knight_
+# trigger is the first gate that asks WHO they are, and it uses the bond
+# ladder's own `is_close_family_of`, pointed inward instead of across.
+#
+# IT IS NOT bc_kin_across_the_line WITH THE SIGN FLIPPED. That one is about a
+# man he will have to explain at a funeral; this one is about a man he is
+# trying to keep out of one, and the two consequences are opposite. The foe
+# case is `measured`/`down` and grants nothing - recognising the other side
+# does not move a battle. This is `bloodied`/`up` with a rung, because a man
+# fighting where his own blood can see him fights harder and worse.
+#
+# base = 40, between the batch's 30 and bc_kin_across_the_line's 50. Close
+# family among your own knights is commoner than close family commanding the
+# other side and rarer than the plain gates.
+# ---------------------------------------------------------------------------
+bc_his_blood_in_the_ranks = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_side_has_kin_knight_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 25
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_his_blood_in_the_ranks"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_his_blood_in_the_ranks_toast
+			desc = bc_his_blood_in_the_ranks_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
