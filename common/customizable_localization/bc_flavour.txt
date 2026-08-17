@@ -208,9 +208,18 @@
 # scope or ROOT.Char - a variable-held character has zero uses in vanilla or
 # AGOT - so the mod does not use Custom2 at all.
 #
-# THE FALLBACK ARM IS LAST AND HAS NO TRIGGER. CK3 takes the first matching arm
-# in order, so a trigger-less arm anywhere but last would swallow the ones below
-# it. Every definition here ends in one.
+# THE FALLBACK ARM IS LAST AND CARRIES A COMPLEMENT TRIGGER. It did not always:
+# under first-match a trigger-less last arm is unreachable while a band matches,
+# and every definition in this file used to end in one. **NO TRIGGER-LESS ARM
+# REMAINS ANYWHERE IN THIS FILE as of 2026-08-17** - all thirteen definitions
+# take `random_valid = yes`, and under `random_valid` a trigger-less arm is
+# valid on EVERY render and takes a share of every toast to print nothing.
+#
+# THE FIRST-MATCH RULE IS STILL WORTH KNOWING because it explains the shape of
+# what is here: CK3 takes the first matching arm in order, so under first-match
+# a trigger-less arm anywhere but last would swallow the ones below it. Both
+# rules point the same way - the fallback goes last - and they disagree only
+# about whether it may be bare. Under `random_valid` it may not.
 #
 # HOW OFTEN THAT FALLBACK ACTUALLY RENDERS VARIES BY DEFINITION AND BY CALL SITE.
 # The ground case is stated here rather than in bc_banner_falls_ground's header,
@@ -426,17 +435,19 @@ bc_banner_falls_ground = {
 # six bands at once, on the measured number the whole session answers: the ten
 # moments produced 233 firings in 44 battles.
 #
-# SEVEN OF THE TEN ARE POOLED AS OF 2026-08-17. banner, rally, flank, bogged,
-# van, horse and favours each carry TWO strings per band with
-# `random_valid = yes`. The three knight sets - breach, shames, shieldbrother -
-# are still first-match with one.
+# ALL TEN ARE POOLED AS OF 2026-08-17, and the ten sets are now uniform: two
+# strings per band, `random_valid = yes`, twelve band arms and a complement.
+# **THERE IS NO LONGER A FIRST-MATCH GROUND SET IN THIS FILE.** A reader who
+# adds an eleventh moment set should copy the shape from any of the ten rather
+# than from the paragraph above, which describes a design the file has left.
 #
 # THE FALLBACK CONVERSION IS NOT OPTIONAL WHEN POOLING AND IT IS THE PART THAT
 # IS EASY TO FORGET. Under first-match a trigger-less last arm can never be
 # reached while a band matches; under `random_valid` it is valid on EVERY
-# render and would take a share of every toast to print an empty string. Every
-# pooled set carries a NOR complement; the three that remain first-match
-# correctly do not.
+# render and would take a share of every toast to print an empty string. All
+# ten now carry the NOR complement. If a bare trigger-less arm ever reappears
+# in a set that also carries `random_valid`, that is the bug, and it presents
+# as toasts that sometimes end without a ground sentence at all.
 #
 # THE FALLBACK IS LOAD-BEARING FROM ANY CALL SITE, the same as the spike's, and
 # for the same reason: bc_write_ground_effect removes the variable first and has
@@ -1361,8 +1372,20 @@ bc_ground_favours_us_ground = {
 bc_knight_holds_the_breach_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_breach_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1382,7 +1405,27 @@ bc_knight_holds_the_breach_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_breach_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_breach_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1402,7 +1445,27 @@ bc_knight_holds_the_breach_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_breach_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_breach_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_breach_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1422,15 +1485,50 @@ bc_knight_holds_the_breach_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_breach_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_breach_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 
 bc_knight_shames_himself_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_shames_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1450,7 +1548,27 @@ bc_knight_shames_himself_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shames_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shames_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1470,7 +1588,27 @@ bc_knight_shames_himself_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shames_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shames_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shames_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1490,15 +1628,50 @@ bc_knight_shames_himself_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shames_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shames_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 
 bc_shieldbrother_forged_ground = {
 	type = character
 
+	random_valid = yes
+
 	text = {
 		localization_key = bc_frag_shieldbrother_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_desert_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1518,7 +1691,27 @@ bc_shieldbrother_forged_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shieldbrother_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shieldbrother_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_rough_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1538,7 +1731,27 @@ bc_shieldbrother_forged_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shieldbrother_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shieldbrother_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_shieldbrother_jungle_b
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1558,7 +1771,30 @@ bc_shieldbrother_forged_ground = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_shieldbrother_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_shieldbrother_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
 	}
 }
 

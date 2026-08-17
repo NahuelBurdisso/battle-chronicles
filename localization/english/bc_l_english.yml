@@ -310,11 +310,17 @@
 # commander, so these arms describe the place and not the man - a "he" here
 # would be read as the wrong person the moment the bond clause follows it.
  bc_frag_breach_desert:0 " The gap is a dry watercourse, and everything that comes at it has to come down into it first."
+ bc_frag_breach_desert_b:0 " The sand there has gone dark in a circle about six paces across."
  bc_frag_breach_open:0 " Nothing at all shelters the spot. It is held because somebody chose to hold it."
+ bc_frag_breach_open_b:0 " On ground this bare the gap is not a place, it is only where he happens to be."
  bc_frag_breach_rough:0 " Two boulders pinch the path there, which is the only reason one man is enough."
+ bc_frag_breach_rough_b:0 " He has a rock at his shoulder and the rock is doing half the work."
  bc_frag_breach_forest:0 " The trees narrow it to the width of a cart, and that width is the whole battle for a while."
+ bc_frag_breach_forest_b:0 " Fallen timber makes the walls of it, and he is the gate."
  bc_frag_breach_jungle:0 " The gap is a hacked-out tunnel of green with no way round it at all."
+ bc_frag_breach_jungle_b:0 " The cut through the green is barely a shoulder wide and it stays that wide."
  bc_frag_breach_winter:0 " The snow there is trodden black and it stays trodden, because nothing gets past to churn it."
+ bc_frag_breach_winter_b:0 " He is standing in slush to the ankle and it has stopped being cold to him."
  bc_frag_breach_any:0 ""
 
  bc_knight_shames_himself_toast:0 "He Breaks and Runs"
@@ -324,11 +330,17 @@
 # already spent the shield and the ranks he pushes through, so each arm below
 # says only where the running goes.
  bc_frag_shames_desert:0 " There is a horizon in every direction and he picks one."
+ bc_frag_shames_desert_b:0 " He does not get far in that heat, but far enough that nobody goes to bring him in."
  bc_frag_shames_open:0 " He is visible for as long as anyone cares to watch, which is a long time."
+ bc_frag_shames_open_b:0 " There is no version of this that anybody could have missed."
  bc_frag_shames_rough:0 " The easy way is downhill and away, and that is the way taken."
+ bc_frag_shames_rough_b:0 " He goes where the ground drops away and is out of sight in a dozen strides."
  bc_frag_shames_forest:0 " Three trees in, the running man is nobody's business but his own."
+ bc_frag_shames_forest_b:0 " The wood is four paces off, and four paces is the whole of what it takes."
  bc_frag_shames_jungle:0 " The green takes him in one stride and the sound of him lasts longer than the sight."
+ bc_frag_shames_jungle_b:0 " He does not have to choose a direction; there is only in, and in he goes."
  bc_frag_shames_winter:0 " The tracks going back are deep and singular, and they are still there at dusk."
+ bc_frag_shames_winter_b:0 " The shield lies face-up where he dropped it and the snow begins filling it."
  bc_frag_shames_any:0 ""
 
  bc_shieldbrother_forged_toast:0 "Shieldbrothers"
@@ -339,11 +351,17 @@
 # fragments written in the plural, and they say what the place did to the pair
 # of them rather than what either of them did.
  bc_frag_shieldbrother_desert:0 " They shared the last of one waterskin afterwards and neither mentioned whose it had been."
+ bc_frag_shieldbrother_desert_b:0 " Neither has said a word since and both are sitting in the same patch of shade."
  bc_frag_shieldbrother_open:0 " There was nowhere to put a back except against another back."
+ bc_frag_shieldbrother_open_b:0 " Anyone looking that way saw the two of them and nothing else worth seeing."
  bc_frag_shieldbrother_rough:0 " They found the same hollow to stand in and were still standing in it at the end."
+ bc_frag_shieldbrother_rough_b:0 " They walked off the slope together, slowly, and nobody hurried them."
  bc_frag_shieldbrother_forest:0 " Neither could see more than the other one and so each watched the half the other could not."
+ bc_frag_shieldbrother_forest_b:0 " Whatever happened in among those trunks, the two of them are its only witnesses."
  bc_frag_shieldbrother_jungle:0 " In heat like that a man fights until somebody holds him up, and somebody did."
+ bc_frag_shieldbrother_jungle_b:0 " They cut each other free of the growth afterwards without either one asking."
  bc_frag_shieldbrother_winter:0 " They spent the night after it under one cloak and have never agreed whose cloak."
+ bc_frag_shieldbrother_winter_b:0 " Their two sets of tracks leave that place side by side and do not separate."
  bc_frag_shieldbrother_any:0 ""
 
 # --- knight chronicles, the second three (2026-08-17) ------------------------
