@@ -228,7 +228,7 @@
 # what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
 # so the bare `exists` beside it is the row that actually rejects.
 
-# --- SPIKE. The first set wired, and still the only PER-MOMENT one. ----------
+# --- SPIKE. The first per-moment set wired; the van set below is the second. --
 #
 # It was written to prove the shape renders before the rest of the fragment keys
 # were, and that run has not happened. bc_bond_clause and bc_scale_clause below
@@ -238,10 +238,11 @@
 # levels above this one. The AMENDMENT split the gate: a clause APPENDED to a desc
 # that keeps its literal sentence fails to "no improvement", so it needs no run,
 # while a clause that REPLACES the literal fails to an empty toast and still
-# does. THREE fragment sets are named by a call site today: this one, from
-# bc_banner_falls_toast_desc alone, and the two shared clauses, from all ten.
-# The nine remaining per-moment ground sets are Plan B tasks 6-14 and none is
-# written. Each of those tasks ALSO writes a core set, and it is the CORE set
+# does. FOUR fragment sets are named by a call site today: this one, from
+# bc_banner_falls_toast_desc alone; bc_van_breaks_through_ground below it, added
+# 2026-08-17 on the same appended-clause argument; and the two shared clauses,
+# from all ten. Eight moments still carry no ground set - Plan B tasks 6-14 less
+# the one now done, and none of the rest is written. Each of those tasks ALSO writes a core set, and it is the CORE set
 # that REPLACES the moment's literal rather than being appended to it - so every
 # one of them still waits on the run, and so does task 5, which writes a core set
 # for this moment and no ground set.
@@ -310,6 +311,99 @@ bc_banner_falls_ground = {
 	}
 	text = {
 		localization_key = bc_frag_banner_falls_any
+	}
+}
+
+# --- the second per-moment ground set, 2026-08-17 ---------------------------
+#
+# THE MIRROR OF THE SPIKE, DELIBERATELY. bc_van_breaks_through is the moment
+# bc_banner_falls answers - one side's standard going down and the other side's
+# leading ranks going through - so a ground clause on it lets a player who reads
+# both in one battle see the SAME piece of ground described from two directions.
+# No other pairing in the file does that yet.
+#
+# IT NEEDS NO RUN, and that is the whole reason it could be written now while
+# Plan B tasks 6-14 could not. The AMENDMENT quoted in the spike header above
+# splits the gate on whether a clause is APPENDED or REPLACES: an appended
+# clause on a desc that keeps its literal sentence fails to "no improvement",
+# never to an empty toast. This one is appended, exactly as the spike is. The
+# CORE sets those tasks also write are what still wait, and nothing here is one.
+#
+# FIRST-MATCH, NOT POOLED, unlike bc_bond_clause and bc_scale_clause below. One
+# string per band is right here for the same reason it is right on the spike:
+# the six bands already give six different sentences, so the repetition a pool
+# fixes is not the repetition this set has. If a band is later found to be worn
+# out in play, pool that band alone - the fallback would then have to become a
+# complement, as the scale clause's did.
+#
+# THE FALLBACK IS LOAD-BEARING FROM ANY CALL SITE, the same as the spike's, and
+# for the same reason: bc_write_ground_effect removes the variable first and has
+# two exits that never rewrite it. Do not delete it.
+bc_van_breaks_through_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_van_breaks_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_van_breaks_any
 	}
 }
 

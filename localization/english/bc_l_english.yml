@@ -85,9 +85,10 @@
 # ../../docs/plans/2026-08-15-battle-chronicles-depth-plan-b-prose.md - a path
 # from THIS repo's root, the plans living in the tooling repo two levels above
 # this one - because a fragment APPENDED to a desc that keeps its literal
-# sentence fails to "no improvement" rather than to an empty toast. This set is
-# still the only PER-MOMENT one a call site names, and bc_banner_falls_toast_desc
-# is still the only desc carrying a ground call. Each BEGINS WITH A SPACE because
+# sentence fails to "no improvement" rather than to an empty toast. It stopped
+# being the ONLY per-moment set on 2026-08-17, when bc_van_breaks_through got the
+# mirror of it on the same argument; two descs carry a ground call now. Each
+# fragment BEGINS WITH A SPACE because
 # it is appended to a finished sentence - bc_banner_falls_toast_desc deliberately
 # has no space before the tag, so the empty fallback leaves no trailing space.
 # One clause each: the fragment adds a place to a thing that already happened,
@@ -110,7 +111,25 @@
  bc_flank_collapses_toast_desc:0 "The outnumbered wing bends, and then it does not stop bending.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_van_breaks_through_toast:0 "The Van Breaks Through"
- bc_van_breaks_through_toast_desc:0 "The leading ranks find the seam, and open it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_van_breaks_through_toast_desc:0 "The leading ranks find the seam, and open it.[bc_chronicle_subject.Custom('bc_van_breaks_through_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE SECOND PER-MOMENT GROUND SET, AND THE MIRROR OF THE SPIKE. Each string
+# describes the same six bands the banner-falling set does, from the winning
+# side. A player who reads both in one battle should recognise the ground twice
+# and the sentence never, so nothing here reuses a banner-falls word: not
+# "dust", not "the slope", not "the branches", not "the snow begins", and not
+# "the green closes" - that last one also cost the jungle template its title,
+# recorded where that title is set.
+#
+# LEADING SPACE ON EVERY ARM, empty fallback, and no space before the tag in the
+# desc above, exactly as the spike does it.
+ bc_frag_van_breaks_desert:0 " They go through in a wall of sand and are on the far side before it settles."
+ bc_frag_van_breaks_open:0 " There is room out here to run it down, and they take all of it."
+ bc_frag_van_breaks_rough:0 " The gap is where the stone lets men stand, and it is theirs now."
+ bc_frag_van_breaks_forest:0 " The trees make it a hundred small fights, and the leading ranks win each one in turn."
+ bc_frag_van_breaks_jungle:0 " They are through and lost to sight in the same breath."
+ bc_frag_van_breaks_winter:0 " The churned ice takes them forward faster than it took anyone else."
+ bc_frag_van_breaks_any:0 ""
 
  bc_ground_favours_us_toast:0 "The Ground Favours Us"
  bc_ground_favours_us_toast_desc:0 "The slope, the trees, the narrow way in. They have to come to us across all of it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
@@ -302,7 +321,11 @@
  bc_the_broken_ground_holds_toast:0 "The Broken Ground Holds"
  bc_the_broken_ground_holds_toast_desc:0 "The line gives way and then stops giving, because there is a spine of rock behind it that no one has to be told to stand on. What was a rout a moment ago is a hundred men with their backs to a slope.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
- bc_the_green_closes_in_toast:0 "The Green Closes In"
+# THE TITLE IS NOT "The Green Closes In" although the template key is, because
+# bc_frag_banner_falls_jungle already says "The green closes over it". Two
+# jungle strings in one campaign reading as near-copies is the exact fault the
+# pooling work is undoing, and the title is the cheaper of the two to move.
+ bc_the_green_closes_in_toast:0 "The Heat and the Green"
  bc_the_green_closes_in_toast_desc:0 "Nothing here is more than ten paces away and half of it is still moving. Men are going down to the heat who were never touched by anything with an edge.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- shared fragments: the bond ---------------------------------------------
