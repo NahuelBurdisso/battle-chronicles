@@ -7505,3 +7505,116 @@ bc_the_other_mans_trouble = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-FIVE. The men opposite were not trained on the same field.
+#
+# THE SETTING HAS TWO CONTINENTS AND THE MOD HAS NOTICED ONE. Ninety-two
+# commander gates and sixty knight gates, and the only two that have ever asked
+# where a man learned his trade are bc_foe_is_countryman_trigger, which asks
+# whether two culture keys match, and bc_he_is_free_folk_trigger, which asks
+# after one specific culture north of the Wall. Everything else in the mod is
+# written as though every host on the map drills the same way, which is a
+# strange thing to assume in a setting where half the interesting armies are
+# horse archers, unarmoured spearmen or men with a curved sword and no shield
+# at all.
+#
+# THE GATE IS ABOUT DRILL AND NOT ABOUT VIRTUE. Both toasts are written from
+# inside a man who has trained for one kind of fight and is being given
+# another. Neither is allowed to find the men opposite savage, cowardly, less
+# than men, or in any way worse - being unfamiliar is the entire content of the
+# observation, and a chronicle that let it become contempt would be a different
+# and much cheaper mod.
+#
+# BOTH MOMENTS ARE ABOUT THE FIRST HOUR OF LEARNING SOMETHING. The commander
+# does it badly, under pressure, by falling back on the one shape he trusts.
+# The knight does it well, in the space of about four exchanges, because his
+# scale of problem is small enough to solve. That is the same event at two
+# magnifications, and the mod has room for both because the two pools roll
+# separately.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The wrong war entirely. The foe is from across the sea and he is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall, WHICH IS THE HONEST CONSEQUENCE. He
+# does not have an answer to what is being done to him and he is not going to
+# invent one in the next quarter of an hour, so he does the thing every
+# commander of his training does when the field stops making sense: he makes
+# the line thicker and shorter and tells it to stand. That is a real defensive
+# benefit and it is also an admission, which is exactly what `entrenched` on a
+# `down` swing has always meant in this ledger.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the enemy
+# commander's culture and the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_lines_bogged_down OR bc_the_broken_ground_holds. Both of those
+# are the GROUND refusing to cooperate, and both would fire in exactly the same
+# way against an army that drilled the way his does. Here the ground is fine.
+#
+# THE DESC MAY NOT NAME A PLACE, A PEOPLE OR A WEAPON. The gate knows only that
+# the man opposite is outside the descent tree of the continent, which covers
+# everything from a Braavosi captain to a khalasar, and a toast that named any
+# of them would be wrong most of the time it fired. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_wrong_war_entirely = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_from_across_the_sea_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The more of his trade he has, the more of it is currently the wrong
+		# trade, and the further he has to come to admit it.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_wrong_war_entirely"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_wrong_war_entirely_toast
+			desc = bc_the_wrong_war_entirely_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -2738,3 +2738,47 @@
 
  bc_knight_the_orders_have_stopped_arriving_toast:0 "They Are Still Doing The Old Thing"
  bc_knight_the_orders_have_stopped_arriving_toast_desc:0 "The rank in front of him is dressing itself against a flank that is no longer where it was, and has been for long enough that it is now a habit rather than a formation. Nobody has come to tell them. He does not know why nobody has come and it does not occur to him to wonder, because the space this opens is about four yards wide and lasts about as long as it takes to say so. He is into it with the two men who were watching his shoulders, and the shape they were holding goes with them, and behind that the rest of the line finds it has somewhere to go.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-FIVE. The men opposite were not trained on the same field.
+#
+# NEITHER DESC MAY NAME A PLACE, A PEOPLE, A CITY, A TONGUE OR A WEAPON. The
+# gate knows one thing: the man opposite is outside the descent tree AGOT calls
+# Westerosi. That covers a Braavosi captain, a Ghiscari phalanx, a khalasar, a
+# Summer Islander and a dozen things in between, so any noun specific enough to
+# be vivid would be wrong most of the times the toast fired. Both descs work
+# entirely from shape, distance and timing, which are the things that are
+# actually true of all of them.
+#
+# NEITHER MAY BE CONTEMPTUOUS. The men opposite are not savages, not cowards,
+# not treacherous and not less than men; they are competent people doing a
+# competent thing that neither of these two has been drilled against. Contempt
+# would also be false to the mechanics - this is a side that is beating one of
+# these men and losing to the other.
+#
+# NEITHER MAY EXPLAIN THE ENEMY'S METHOD TO THE READER. No toast may set out
+# what the far side is doing as though somebody had worked it out. The whole
+# subject is two men who have not worked it out.
+#
+# THE FIRST MAY NOT HAVE HIM RECOGNISE THE PROBLEM ALOUD, may not have a
+# captain explain it to him, may not name what he ought to have done, and may
+# not turn the battle. What he does is one thing and it is a retreat into
+# training.
+#
+# THE SECOND MAY NOT LET HIM WIN THE EXCHANGE. He ends it even. It may not kill
+# anybody, may not have him teach anybody else the trick, and may not let him
+# say what he changed - he does not know, and that is the point.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell".
+ bc_the_wrong_war_entirely_toast:0 "He Is Fighting The Only Battle He Knows"
+ bc_the_wrong_war_entirely_toast_desc:0 "Everything he was taught assumes the other man wants the same things: the flanks, the high ground, a decision before dark. The host in front of him has spent the afternoon declining to want any of them, and doing so in a way that has cost it very little and cost him a great deal. There is no time left to learn it and no one here to learn it from, so he does what a man of his training does with a field he cannot read - he brings the wings in, thickens what is left, and gives an order that amounts to standing still and being difficult. It is not an answer. It is the last thing he is sure of.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_reach_is_wrong_toast:0 "His Feet Have Sorted It Out"
+ bc_knight_the_reach_is_wrong_toast_desc:0 "The first exchange went wrong for reasons he could not have named, and so did the second: the distance he has been keeping since he was nine years old turns out to be about a hand too short today, and the guard he expects to see is not where it is kept. By the fourth he is standing somewhere slightly different and it has stopped going wrong. He could not explain any of that and will not try. The man opposite is not worse than him and has not been beaten; the two of them have simply arrived at the same problem from opposite ends of the world, and one of them has caught up.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

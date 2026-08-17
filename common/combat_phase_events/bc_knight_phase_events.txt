@@ -5193,3 +5193,93 @@ bc_knight_the_orders_have_stopped_arriving = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The reach is wrong. The foe is from across the sea and the side is winning.
+#
+# `adapted`/`up`. This is the smallest possible unit of the same event the
+# commander half gets wrong: one man, four exchanges, a solvable problem. He
+# has spent his life measuring distance against one length of weapon and one
+# shape of shield, both of them are different today, and the correction is
+# something he makes with his feet before he could say what he corrected. The
+# verb table gives nothing for it, which is right - nobody has been bled,
+# braced or launched. A man has simply got better at this in the last minute.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his own culture, the
+# enemy commander's, and the side row, and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_something_is_always_there OR
+# bc_knight_the_name_across_the_field. The first is about the enemy commander
+# being better than his own and the second about his being famous; both are
+# facts a man could be told in a tent. This one is a fact he can only learn at
+# the length of an arm.
+#
+# THE DESC MAY NOT NAME A PLACE, A PEOPLE OR A WEAPON, may not have him
+# despise anybody, may not kill anybody and may not let him win the fight he is
+# in - it ends with him even, not ahead. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_reach_is_wrong = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_from_across_the_sea_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Solving it inside four exchanges is a thing only a man with the hands
+		# for it gets to do; everybody else solves it afterwards.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_reach_is_wrong"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_reach_is_wrong_toast
+				desc = bc_knight_the_reach_is_wrong_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

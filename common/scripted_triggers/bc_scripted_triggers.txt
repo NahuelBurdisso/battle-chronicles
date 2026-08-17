@@ -1407,3 +1407,54 @@ bc_foe_commander_is_faltering_trigger = {
 		}
 	}
 }
+
+
+# --- the men opposite were not trained on the same field ----------------------
+#
+# THE MOD HAS ONE CULTURE QUESTION AND IT IS A YES-OR-NO ABOUT ONE MAN.
+# bc_foe_is_countryman_trigger asks whether the two commanders share a culture
+# key, which is a question about kinship of speech and nothing else, and
+# bc_he_is_free_folk_trigger asks the one specific `agot_is_wildling_culture`.
+# Beyond those two the mod has never once cared where anybody learned to fight,
+# which in a setting with an entire second continent in it is a large omission.
+#
+# `agot_is_westerosi_culture` IS AGOT'S OWN ANSWER AND IS CULTURE-SCOPED.
+# 00_agot_cultural_triggers.txt:163 defines it as high_valyrian,
+# westerosi_valyrian, salt_dornish or first_man, or any parent culture or above
+# being one of those - which is the whole descent tree of the continent and not
+# a hand-written list of culture keys that would rot the first time AGOT added
+# one. It is called from a CHARACTER scope as `culture = { ... = yes }`; AGOT
+# does exactly that itself at 00_agot_first_ranger_laamp_triggers.txt:159.
+#
+# BOTH HALVES ARE NEEDED. Root must be of the continent and the man opposite
+# must not be. Dropping the root half would fire this on two Braavosi captains
+# fighting each other in the Disputed Lands, where nothing about the other
+# man's drill is unfamiliar to anybody.
+#
+# THIS IS DISJOINT FROM bc_foe_is_countryman_trigger BY CONSTRUCTION, since two
+# men on opposite sides of that descent tree cannot share a culture key, so no
+# template on this can ever be a subset of bc_the_same_tongue or
+# bc_knight_they_sound_like_home. It OVERLAPS bc_foe_is_heathen_trigger without
+# being contained by it in either direction - the Faith and R'hllor cross the
+# narrow sea in both directions - and overlap is not subset.
+#
+# IT ASKS ABOUT THE COMMANDER OPPOSITE AND USES HIM AS A PROXY FOR HIS HOST,
+# which is the same simplification the other nine foe triggers make and is
+# stated here so nobody later mistakes it for an oversight. The mod has no
+# handle on the composition of an enemy army; it has a handle on the man
+# leading it.
+#
+# THE GUARD IS THE STANDING ONE. An enemy side can be leaderless, so the
+# commander is an optional link, the `exists` sits as a sibling and the READ is
+# nested in a trigger_if that repeats it. `enemy_side` and not
+# `var:bc_battle_foe`, for the reason set out above bc_facing_a_crown_trigger.
+bc_foe_is_from_across_the_sea_trigger = {
+	culture = { agot_is_westerosi_culture = yes }
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			NOT = { culture = { agot_is_westerosi_culture = yes } }
+		}
+	}
+}
