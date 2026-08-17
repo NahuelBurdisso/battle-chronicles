@@ -7832,3 +7832,110 @@ bc_the_other_front = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-EIGHT. What is behind each of them if he does not get up.
+#
+# THE MOD WOUNDS MEN AND BURIES THEM AND HAS NEVER ASKED WHAT IT COSTS. Plan
+# 6's gate puts a commander on his back, the aftermath events put him in the
+# ground, and across ninety-five commander gates and sixty-three knight gates
+# nothing has ever looked at who would be standing in his place a month later.
+# Succession is the largest single subject the engine has and the chronicle has
+# been fighting in front of it with its back turned.
+#
+# THE TWO MEN ARE AT OPPOSITE ENDS OF THE SAME FACT AND NEITHER GATE CONTAINS
+# THE OTHER. One has something to hand on and the person it would go to cannot
+# yet hold a sword. The other has nothing yet and is standing in a rank on the
+# strength of what he is owed. A childless lord whose heir is a nephew answers
+# yes to the first and no to the second; an eldest son with no land of his own
+# answers no to the first and yes to the second.
+#
+# NEITHER MOMENT IS ABOUT FEAR OF DYING. The mod has that already, several
+# times, in bc_he_looks_for_the_road and everything gated on craven. These two
+# are about the arithmetic that survives a man - which is a different thing and
+# is available to men who are not frightened at all.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The heir is a child. His successor is not an adult, and he is losing.
+#
+# `adapted`/`down`. Somewhere in the last half hour he has done a sum about
+# what his own body is currently worth to people who are not on this field, and
+# he has changed his conduct on the answer. He is not further back than he was
+# because he is afraid; he is further back because the thing he is carrying is
+# not his to spend. That is a reading of the situation and a change made on it,
+# which is what `adapted` means, and the verb table hands out nothing, which is
+# right - an army is not braced or bled by its commander revising his own
+# price.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads his heir and the
+# side row and never asks about a rung.
+#
+# TEN STRESS. Knowing the sum is correct is not the same as being able to stand
+# in the middle of it.
+#
+# THIS IS NOT bc_the_green_boy, which reads `age <= 21` on him. That is a young
+# man leading. This is a man old enough to have a child heir, and the two could
+# fire on the same battle from opposite ends of it.
+#
+# THE DESC MAY NOT NAME OR AGE THE CHILD, may not show him, and may not have
+# anybody on this field mention him. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_heir_is_a_child = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_heir_is_a_child_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The more there is to hand on, the louder the sum is.
+		modifier = {
+			add = 30
+			highest_held_title_tier >= tier_duchy
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = family_first
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_heir_is_a_child"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_heir_is_a_child_toast
+			desc = bc_the_heir_is_a_child_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

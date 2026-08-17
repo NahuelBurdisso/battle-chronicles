@@ -2870,3 +2870,50 @@
 
  bc_knight_these_are_the_ones_who_stayed_toast:0 "He Has Stopped Waiting For The Old Company"
  bc_knight_these_are_the_ones_who_stayed_toast_desc:0 "The man on his shield side does not step where the last one stepped, and neither does the one behind, and for the first hour that cost him something every time. It has stopped costing him. Somewhere in the middle of the afternoon he quietly put down the version of this rank that lives in his head and started working with the one that is actually standing here, which is slower, greener, and holding. He has not said a word about it to anybody and would find it hard to. The far side is going backwards all the same.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-EIGHT. What is behind each of them if he does not get up.
+#
+# NEITHER DESC MAY MAKE THIS ABOUT BEING AFRAID. The mod already has fear, in
+# bc_he_looks_for_the_road and everything gated on craven, and both of these
+# men can be entirely steady and still be doing the arithmetic. If a reader
+# comes away thinking either one flinched, the toast is wrong.
+#
+# THE FIRST MAY NOT NAME OR AGE THE CHILD. Not a name, not a number of years,
+# not a boy or a girl, not a son or a daughter or a ward. It may not put the
+# child on the page at all - no memory of him, no picture of him, no last time
+# he was seen. It may not have anybody on this field mention him, because the
+# men in front of this commander do not know and would not raise it. It may
+# not name the inheritance either, and may not say what would happen to it.
+#
+# THE FIRST MAY NOT HAVE HIM RETREAT. He is further back than he was and the
+# line is still his; the moment is a price being revised, not a field being
+# left. It may not have a captain notice, may not have him explain, and may
+# not make him ashamed of the sum. It may not turn the battle.
+#
+# THE SECOND MAY NOT NAME THE TITLE OR THE PLACE. No hall, no seat, no county,
+# no house, no number of years until. It may not make him noble about standing
+# there, may not have anybody defer to him or thank him or notice what he is
+# worth, and may not kill anybody.
+#
+# THE SECOND MAY NOT HAVE HIM THINK ABOUT INHERITING. The whole moment is that
+# the thought is available and he is not picking it up - the instant the desc
+# lets him weigh it, the man becomes someone deciding rather than someone
+# already standing. It may not have him compare himself to the men either side
+# and may not have them know what he is.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank".
+ bc_the_heir_is_a_child_toast:0 "He Is Not His Own To Spend"
+ bc_the_heir_is_a_child_toast_desc:0 "Somewhere in the last half hour he did a small sum about what his body is currently worth to people who are nowhere near this ford, and the answer changed how he is standing. Not much. A horse length, a slower ride down the line, a place chosen where the arrows are thinner. He would tell you plainly that he is not frightened and he would be telling the truth. The thing he is carrying is simply not his to lay down out here on an afternoon that is already going badly, and knowing the sum is right turns out to be a wholly separate matter from being able to stand in the middle of it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_a_hall_is_waiting_for_him_toast:0 "He Need Not Be Here At All"
+ bc_knight_a_hall_is_waiting_for_him_toast_desc:0 "Of the men along this stretch he is the only one whose falling would move anything beyond a widow and a shallow trench, and the ones to either side of him are worth exactly what this afternoon is worth and not a copper more. He is standing where they are standing. He has been all day. Nobody put him here and nobody would have questioned it if he had spent the battle somewhere with a better view, and the rank holds the way it is holding partly because of that - men will keep their feet a long time next to someone who could be elsewhere and is not.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

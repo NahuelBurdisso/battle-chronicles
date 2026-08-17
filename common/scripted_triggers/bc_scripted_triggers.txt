@@ -1536,3 +1536,50 @@ bc_season_is_winter_trigger = {
 bc_he_has_another_war_trigger = {
 	any_character_war = { count >= 2 }
 }
+
+
+# --- what is behind each of them if he does not get up -----------------------
+#
+# THE MOD KILLS AND MAIMS PEOPLE AND HAS NEVER ASKED WHAT THAT COSTS ANYBODY.
+# Plan 6's wound gate can put a man on his back and the aftermath events can
+# bury him, and in ninety-five commander gates and sixty-three knight gates
+# nothing has ever once looked at who would be standing in his place a month
+# later. Succession is the engine's largest single subject and the chronicle
+# has been fighting battles in front of it with its back turned.
+#
+# TWO TRIGGERS BECAUSE THE TWO MEN OCCUPY OPPOSITE ENDS OF THE SAME FACT. One
+# asks what happens to what a man already holds. The other asks what a man is
+# waiting to be given. They are not two bands of one scale and neither is a
+# subset of the other - a childless landed lord whose heir is a nephew answers
+# yes to the first and no to the second, and an eldest son with no land of his
+# own answers no to the first and yes to the second.
+#
+# `player_heir` IS AN OPTIONAL LINK AND GETS THE STANDING GUARD. An unlanded
+# commander has none, which makes the gate false for him, which is right: the
+# moment is about a man with something to hand on. `is_adult` is the engine's
+# own line and not an age this mod picks, so it moves if a rule set moves it.
+#
+# THIS IS NOT bc_the_green_boy, WHICH READS `age <= 21` ON THE COMMANDER
+# HIMSELF. That template is about a young man leading. This one is about an old
+# enough man whose replacement is a child, and the two would fire on the same
+# battle from opposite directions without either being the other.
+bc_his_heir_is_a_child_trigger = {
+	exists = player_heir
+	trigger_if = {
+		limit = { exists = player_heir }
+		player_heir = { is_adult = no }
+	}
+}
+
+# `any_heir_title` IS THE ENGINE'S OWN LIST - "all titles the scoped character
+# is heir to" - and a count of one is the whole question. No walk and no guard:
+# an empty list answers no.
+#
+# THIS IS NOT bc_knight_no_house_behind_him, bc_knight_twice_as_good OR
+# bc_knight_the_squires_best_day. Those read `is_lowborn`, the bastard trait
+# and the squire trait: three statements about where a man came FROM. This one
+# is about where he is going, and a legitimate second son with an elder brother
+# alive answers no to all four.
+bc_he_stands_to_inherit_trigger = {
+	any_heir_title = { count >= 1 }
+}

@@ -5470,3 +5470,93 @@ bc_knight_these_are_the_ones_who_stayed = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# A hall is waiting for him. He is heir to a title, and the side is winning.
+#
+# `entrenched`/`up` AND bc_shieldwall. He is the one man along this stretch
+# whose death would move a seal from one hand to another, and the men either
+# side of him are worth exactly what today's fighting is worth and no more. He
+# knows it. He is standing where they are standing anyway, and the shape holds
+# because of and not despite that - a rank that can see one of its own choosing
+# not to be somewhere safer is a rank that stays put.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his heir titles and
+# the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT THE THREE ORIGIN TEMPLATES. bc_knight_no_house_behind_him reads
+# `is_lowborn`, bc_knight_twice_as_good the bastard trait,
+# bc_knight_the_squires_best_day the squire trait - three statements about
+# where a man came from. This is about where he is going, and a legitimate
+# second son with an elder brother alive answers no to all four.
+#
+# THE DESC MAY NOT NAME THE TITLE OR THE PLACE, may not make him noble about
+# it, may not have anybody defer to him, may not kill anybody and may not have
+# him think about inheriting - the moment is that the thought is available and
+# he is not taking it. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_a_hall_is_waiting_for_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_stands_to_inherit_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being in the front rank at all, when he of all people need not be,
+		# takes a man who can hold it.
+		modifier = {
+			add = 30
+			prowess >= 10
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_hall_is_waiting_for_him"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_a_hall_is_waiting_for_him_toast
+				desc = bc_knight_a_hall_is_waiting_for_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
