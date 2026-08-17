@@ -571,4 +571,37 @@ bc_chronicles.0011 = {
 		add_stress = 10
 		debug_log = "BC: eve option kin"
 	}
+
+	# The heathen case, the last of the four bond values the desc chain names
+	# and the option set did not. e covers nemesis, g covers kin, and a
+	# countryman is not a reason to do anything differently - which leaves this
+	# one.
+	#
+	# IT IS THE ONLY OPTION IN THE MOD THAT PAYS IN PIETY, and that is what
+	# makes it a choice rather than a reskin of a. Both apply bc_bloodied; a
+	# costs 10 stress for it and this pays 50 piety instead, because a war
+	# preached is a war the man commanding does not lie awake over. A zealot
+	# takes this and a cynic takes a, and the modifier they get is the same.
+	#
+	# THE FAITH COMPARISON IS COPIED FROM bc_write_bond_effect'S `heathen` ARM
+	# so the eve and the bond clause cannot disagree about who is a heathen:
+	# `scope:X = { NOT = { faith = <subject>.faith } }`, the foe's scope
+	# entered and the subject's faith read from outside it. Written the other
+	# way round it would still compile and would still be right, but the two
+	# places would have to be re-read together to see that.
+	#
+	# NESTED, NOT SIBLING, on the scope read, the same idiom as g above.
+	option = {
+		name = bc_chronicles.0011.h
+		trigger = {
+			exists = scope:bc_eve_foe
+			trigger_if = {
+				limit = { exists = scope:bc_eve_foe }
+				scope:bc_eve_foe = { NOT = { faith = root.faith } }
+			}
+		}
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		add_piety = 50
+		debug_log = "BC: eve option heathen"
+	}
 }

@@ -907,6 +907,11 @@
 # anything - an unpriced gamble presented as a free one would be a cheat.
  bc_chronicles.0011.f:0 "Loose the horse early. Spend them."
  bc_chronicles.0011.g:0 "Hold. Nobody over there dies who does not have to."
+# h, added 2026-08-17, is the heathen case and the last bond value to get an
+# option. It says nothing about mercy or the lack of it because the modifier it
+# grants is the same one option a grants - what differs is the coin it is paid
+# for, and the text names the coin.
+ bc_chronicles.0011.h:0 "Have it preached before they form up. Their gods are not ours."
 
 # --- the flesh --------------------------------------------------------------
 
