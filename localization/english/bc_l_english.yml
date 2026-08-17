@@ -2462,3 +2462,34 @@
 
  bc_they_came_to_him_toast:0 "He Has Not Done Anything All Day"
  bc_they_came_to_him_toast_desc:0 "He picked this place two days ago, put the host on it, and has done nothing since except decline to leave. Everything clever that has happened this afternoon was thought of by the man opposite, and all of it has arrived here in pieces, at the pace the ground allows, into a line that has not had to change its mind about anything. There will be no story in this for him. There is a good deal of story in it for the other one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SIXTY-THREE. There is a river in this province.
+#
+# NEITHER DESC MAY NAME THE RIVER OR THE FORD. The gate is a flag on a province
+# and knows nothing else - not the name, not the width, not the season it was
+# last in flood.
+#
+# NEITHER MAY DROWN ANYBODY, and neither may put a bridge on the field. The mod
+# does not kill in a phase event, and a bridge is a structure the gate did not
+# check for.
+#
+# THE FIRST MAY NOT HAVE HIM SHIFT THE BATTLE ELSEWHERE OR FIND A SECOND FORD.
+# A funnelled battle cannot be un-funnelled by the man losing it, which is the
+# whole moment.
+#
+# THE SECOND MAY NOT HAVE HIM CROSS, MAY NOT WIN THE BATTLE AND MAY NOT MAKE
+# THE WATER A METAPHOR. He is in it, the fighting is in it, and he is still
+# standing in it when the toast ends.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything".
+ bc_it_all_comes_down_to_the_crossings_toast:0 "Three Places, And He Needs All Three"
+ bc_it_all_comes_down_to_the_crossings_toast_desc:0 "There are three places on this front where men can actually reach each other and both hosts had them marked before noon, which was an advantage this morning and is arithmetic now. The same numbers are trying to fight along a third of the frontage. Nothing can be pulled back from a crossing without the crossing going with it, so nothing is pulled back, and the rate at which this is costing him has very little to do with how well anyone is fighting.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_water_is_over_his_boots_toast:0 "Nobody Fights Well On Stones He Cannot See"
+ bc_knight_the_water_is_over_his_boots_toast_desc:0 "He has been standing in it long enough to stop noticing the cold and not long enough to trust his footing, and every man he has put down in the last half hour went down inside the length of his own arm, because there is no other range available here. The side is winning. This particular twenty yards of it is being bought at a price that will not appear in anybody's account of the day.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

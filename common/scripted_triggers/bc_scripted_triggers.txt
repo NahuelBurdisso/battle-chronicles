@@ -1108,3 +1108,33 @@ bc_his_side_attacked_trigger = {
 bc_his_side_was_attacked_trigger = {
 	scope:combat_side = { is_combat_side_attacker = no }
 }
+
+
+# --- water on the field ------------------------------------------------------
+#
+# THE SIX GROUND BANDS PARTITION THE TERRAIN AND SAY NOTHING ABOUT WATER. That
+# is not an oversight in bc_ground_triggers.txt - the partition is over AGOT's
+# 23 terrain helpers and is checked exhaustively by the validator, and a river
+# is not a terrain type in CK3, it is a flag on the province. `floodplains` and
+# `wetlands` are the closest the bands come and both of them mean soft ground
+# rather than a bank with a crossing on it.
+#
+# THIS TRIGGER DOES NOT GO IN bc_ground_triggers.txt AND MUST NOT. That file
+# holds the six bands and nothing else, and the validator counts every
+# `agot_is_*_terrain` mention in it against the 23 helpers; anything added
+# there breaks the partition check. The field-level wrapper belongs here with
+# the other bc_field_* triggers, which is also where it is used from.
+#
+# `is_riverside_province` IS AN ENGINE TRIGGER ON THE PROVINCE - "is the
+# province riverside" - and is a different question from `is_river_province`,
+# which asks whether the province IS a river and is true only of the map's
+# navigable river tiles, where no battle is ever fought.
+#
+# THE GUARD IS THE STANDING ONE, copied from bc_field_is_forest_trigger.
+bc_field_is_riverside_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { is_riverside_province = yes }
+	}
+}

@@ -6757,3 +6757,108 @@ bc_they_came_to_him = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# WATER ON THE FIELD, 2026-08-17.
+#
+# The mod has six terrain bands, a winter gate and a corpse gate, and in
+# sixty-seven batches nothing has ever noticed a river. That is a peculiar
+# omission for Westeros in particular, where the wars are fought in the
+# Riverlands as a matter of geography and the battles are named after fords.
+#
+# A RIVER IS NOT TERRAIN AND COULD NOT HAVE BEEN CAUGHT BY THE BANDS. CK3
+# carries it as a flag on the province, the six bands partition AGOT's terrain
+# helpers exhaustively, and `floodplains` and `wetlands` - the nearest things
+# in the partition - both mean soft going rather than a bank with two crossings
+# on it. The gate had to be a new one and it is in bc_scripted_triggers.txt
+# rather than the ground file for the reason set out there.
+#
+# ONE TEMPLATE IN EACH POOL, AND THE SPLIT IS THE USUAL ONE. From the saddle a
+# river is a constraint on where the battle can be; from the line it is
+# something a man is standing in.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# THE COMMANDER'S HALF, LOSING. A riverside field has two or three places where
+# anything can happen and both hosts worked out which ones before noon. That is
+# an advantage while it is working and a trap the moment it is not, because a
+# battle that has been funnelled cannot be un-funnelled by the man who is
+# losing it.
+#
+# `bloodied`/`down` AND bc_bloodied. The verb is casualties and the reason is
+# geometry rather than courage: the same number of men are trying to fight
+# along a third of the frontage, nobody can be withdrawn from a crossing
+# without the crossing being lost, and a compressed fight kills at a rate an
+# open one does not.
+#
+# NOT THE ENTRENCHED ARGUMENT, DELIBERATELY. bc_there_is_nowhere_to_desert_to
+# is a line that cannot leave and gets bc_shieldwall for it; that is a fact
+# about the men. This is a fact about the ground, the men can leave perfectly
+# well, and what is happening to them is arithmetic.
+#
+# NOT A SUBSET OF THE TERRAIN TEMPLATES. The six bands are about what the
+# ground is made of and this is about what is running through it - a riverside
+# field can be open, rough, forest or winter, and the gates do not overlap in
+# either direction.
+#
+# THE DESC MAY NOT NAME THE RIVER, may not have anybody drown, and may not put
+# a bridge on the field. The gate says the province has a river in it and says
+# nothing about how anyone gets across.
+# ---------------------------------------------------------------------------
+bc_it_all_comes_down_to_the_crossings = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_field_is_riverside_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_host_is_vast_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = impatient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_it_all_comes_down_to_the_crossings"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_it_all_comes_down_to_the_crossings_toast
+			desc = bc_it_all_comes_down_to_the_crossings_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

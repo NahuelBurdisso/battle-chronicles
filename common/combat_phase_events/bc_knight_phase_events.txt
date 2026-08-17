@@ -4559,3 +4559,84 @@ bc_knight_nobody_here_is_sworn = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# THE KNIGHT'S HALF, WINNING, AND IT IS ABOUT BEING WET. The commander's
+# riverside template is geometry; this one is what the geometry feels like to
+# the man it funnels. Winning at a crossing is done standing in the thing,
+# on stones nobody can see, in armour that has stopped being an advantage.
+#
+# `bloodied`/`up` AND bc_bloodied, ON A WINNING SIDE. The mod's bloodied row
+# goes to the same modifier in both directions and that is exactly right here:
+# the side is ahead and the price is being paid at this one spot, by these men,
+# at close range, because there is nowhere on a ford to fight at any other
+# range.
+#
+# THE MOMENTUM RUNG IS GRANTED, GUARDED, INSIDE THE COMMANDER BLOCK - the rung
+# is a fact about the side and this is a knight-rooted is_valid, the same
+# rooting point bc_knight_for_a_friend's comment makes.
+#
+# NOT A SUBSET OF bc_knight_the_wood_takes_them OR ANY OTHER GROUND TEMPLATE.
+# Those read the six bands; a riverside province can sit in any of them.
+#
+# THE DESC MAY NOT DROWN ANYBODY, may not name the river, and may not have him
+# cross it. He is in it, the fighting is in it, and the toast ends with him
+# still there.
+# ---------------------------------------------------------------------------
+bc_knight_the_water_is_over_his_boots = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_field_is_riverside_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_water_is_over_his_boots"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_water_is_over_his_boots_toast
+				desc = bc_knight_the_water_is_over_his_boots_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
