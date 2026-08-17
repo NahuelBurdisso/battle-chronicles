@@ -2045,3 +2045,244 @@ bc_his_blood_in_the_ranks = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE SEVENTH ON THIS SIDE: WHAT THE MEN THINK OF HIM
+#
+# `dread` APPEARS NOWHERE IN THE MOD. Not in a gate, not in a `chance` row, not
+# in a scripted trigger - `grep -c dread` over both phase event files returned
+# zero before this batch. It is the largest single character axis the mod had
+# never read, and it is the one that is *about* the relationship between a
+# commander and the men in front of him, which is the only relationship a
+# battle actually consists of.
+#
+# TEMPERAMENT IS NOT DREAD AND THE EIGHT TRAIT TEMPLATES DO NOT COVER THIS.
+# `has_trait = arrogant` is what he is like. Dread is what has been done to
+# people, accumulated over a reign, and a mild man who hanged a town has it
+# while a loud one who never did anything does not. The mod has asked what he
+# is like eight times and never once what he is *feared* to be.
+#
+# THE THRESHOLDS ARE VANILLA NAMED VALUES, NOT LITERALS. `low_dread` (20),
+# `medium_dread` (40) and `major_dread_value` (70) are defined in vanilla's
+# common/script_values/00_basic_values.txt:993, :994 and :739. AGOT OVERRIDES
+# THAT FILE and redefines all three, so this was checked rather than assumed:
+# AGOT's 00_basic_values.txt:1005, :1006 and :751 carry 20, 40 and 70 - the
+# same numbers. Using the names rather than the numbers means the gates follow
+# whichever file wins the load order.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate, and no shipped `is_valid`
+# reads dread at all, so only the second rows need the argument. Two of them
+# pair with losing - where the shipped gates are bc_banner_falls,
+# bc_rally_the_line, bc_flank_collapses, bc_the_broken_ground_holds (rough),
+# bc_he_looks_for_the_road (craven) and bc_the_crown_on_the_field (a crown) -
+# and a feared or unfeared commander who is none of those things matches only
+# these. THE TWO LOSING CASES ARE DISJOINT FROM EACH OTHER: `>= medium_dread`
+# is 40 and up, `<= low_dread` is 20 and down, and no character is both.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The line holds because going backwards means answering to him afterwards.
+#
+# THIS IS THE ONE THING DREAD IS ACTUALLY FOR. Vanilla spends it on vassals
+# not revolting; here it is spent on the same men not running, which is the
+# same fact standing in a field.
+#
+# LOSING IS THE SECOND ROW AND IT IS WHAT MAKES THE MOMENT. A feared commander
+# on a winning field is a man whose army was going to hold anyway. The fear
+# only shows up when there is a reason to run and nobody takes it.
+#
+# `entrenched`/`up` AND A GUARDED MOMENTUM RUNG. A losing side that does not
+# come apart when it should have is a real turn, and bc_shieldwall - feet set,
+# nothing getting through and nothing getting done - is exactly what this looks
+# like from outside. The rung is guarded because a side already carrying
+# momentum does not get a second helping; same rule as every other grant.
+# ---------------------------------------------------------------------------
+bc_they_fear_me_more = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		dread >= medium_dread
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Past the point where it is a reputation and into where it is a fact.
+		modifier = {
+			add = 25
+			dread >= major_dread_value
+		}
+		modifier = {
+			factor = 1.5
+			bc_facing_nemesis_trigger = yes
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_fear_me_more"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_they_fear_me_more_toast
+			desc = bc_they_fear_me_more_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other end of the same measure. Nothing is keeping them but their own
+# reading of the day, and their own reading of the day is that it is lost.
+#
+# `<= low_dread` IS NOT "HE IS KIND". A character who has simply never done
+# anything sits here alongside one who is loved, and the template says nothing
+# about which - it says only that there is no fear in the ranks to spend.
+#
+# `wild`/`down` AND A GUARDED FALTERING RUNG. What goes wrong here is not the
+# line bracing badly, it is the line coming apart in pieces, each piece
+# deciding for itself - which is bc_spent_horse's disorder rather than
+# bc_bloodied's price. The mod's other reading of the same shape is
+# bc_flank_collapses, and that one is decisive where this is minor.
+# ---------------------------------------------------------------------------
+bc_no_fear_in_them = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		dread <= low_dread
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A commander with nothing to hold them and no name to hold them with.
+		modifier = {
+			add = 20
+			has_trait = craven
+		}
+		modifier = {
+			factor = 0.5
+			martial >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_no_fear_in_them"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_no_fear_in_them_toast
+			desc = bc_no_fear_in_them_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The third answer, and the only one that is not about whether the line holds.
+# At `>= major_dread_value` he does not have to argue with anyone. He sends
+# them where they will not come back from and they go, and the battle gets the
+# ground he wanted at the price he was always going to pay.
+#
+# NO SIDE ROW, DELIBERATELY. The other two are about a side that is losing;
+# this one is about how the orders are given, and they are given the same way
+# on a good day. bc_nothing_but_the_horse is the shipped precedent for a
+# commander gate with no second row.
+#
+# NO RUNG AT ALL. Both rungs are about the side's standing, and this template
+# does not claim the day moved - it claims the day cost. bc_knight_will_not_be_
+# carried is the shipped precedent for a template that records a moment and
+# grants nothing.
+#
+# HE IS PAID IN PRESTIGE AND HE PAYS IN STRESS, because both are true at once:
+# the field respects it and he watched it.
+#
+# `bloodied`/`up` IS THE POINT OF THE WHOLE TEMPLATE - ground bought with men,
+# and bought on purpose.
+# ---------------------------------------------------------------------------
+bc_the_hard_hand = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		dread >= major_dread_value
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_hard_hand"
+
+		add_prestige = 50
+		add_stress = 10
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_hard_hand_toast
+			desc = bc_the_hard_hand_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

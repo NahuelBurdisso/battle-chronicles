@@ -570,7 +570,7 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". SEVENTEEN of the
-# seventy call sites are adapted or measured - the five plan 1 shipped
+# seventy-three call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
 # .0002b and .0003b) plus twelve from later content batches - and every one of
 # them is supposed to fall through. Three more, all `ordered`/`down`, fall
@@ -592,9 +592,9 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at seventy call sites:
+# at seventy-three call sites:
 #
-#   wild/down 11   entrenched/up 10   measured/down 9  bloodied/up 9
+#   wild/down 12   entrenched/up 11   bloodied/up 10   measured/down 9
 #   ordered/up 8   wild/up 5          bloodied/down 5  ordered/down 3
 #   measured/up 3  adapted/up 3       entrenched/down 2  adapted/down 2
 #
@@ -629,9 +629,9 @@ bc_add_verb_effect = {
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
-# pair census above: bc_bloodied from 14 sites, bc_shieldwall from 12,
-# bc_spent_horse from 16, bc_pursuit from 8, and 20 falling through. Those five
-# sum to the seventy, which is the check.
+# pair census above: bc_bloodied from 15 sites, bc_shieldwall from 13,
+# bc_spent_horse from 17, bc_pursuit from 8, and 20 falling through. Those five
+# sum to the seventy-three, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

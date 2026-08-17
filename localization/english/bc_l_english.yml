@@ -566,6 +566,32 @@
  bc_his_blood_in_the_ranks_toast:0 "He Knows Where That One Is"
  bc_his_blood_in_the_ranks_toast_desc:0 "His own blood is out there in the knights and he has not lost sight of him once, which is one more thing than a man commanding can afford to be doing. He works forward to where he can be seen doing it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- what the men think of him (2026-08-17) ---------------------------------
+#
+# The three dread templates. NONE OF THE THREE SAYS WHAT HE DID TO EARN IT.
+# Dread is an accumulated number with no history attached - the same 60 comes
+# off a hanged town, a blinded brother or twenty years of quiet reputation -
+# so a desc naming the deed would be inventing one. All three write what the
+# ranks are doing about it now, which is the only thing the number licences.
+#
+# NOR DOES ANY OF THEM CALL HIM CRUEL. `dread <= low_dread` is not kindness
+# either; it is the absence of a reason to be afraid, and a man who has simply
+# never done anything sits there beside a beloved one.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "feet set" and "nothing getting
+# through" (bc_shieldwall_desc, the modifier the first of these grants, which
+# the player reads in the same tooltip), "thinking about breaking"
+# (bc_chronicles.0002.desc), "measuring the distance" (same), "paid for every
+# step" (bc_bloodied_desc).
+ bc_they_fear_me_more_toast:0 "They Are More Afraid of Him"
+ bc_they_fear_me_more_toast_desc:0 "It is going badly enough that the men at the back have started doing the arithmetic, and the arithmetic keeps arriving at the same place: whatever is in front of them, he is behind them. Nobody has moved. Nobody is going to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_no_fear_in_them_toast:0 "Nothing Holding Them"
+ bc_no_fear_in_them_toast_desc:0 "There is nothing in his name that weighs against what is coming at them, and so each man is left to decide the question for himself. They are not deciding it together. It comes apart in pieces, and every piece goes its own way.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_hard_hand_toast:0 "He Does Not Have to Ask"
+ bc_the_hard_hand_toast_desc:0 "He sends them at a place no reasonable man would go and they go, without the pause that would tell him what they think of it. The ground is his by the afternoon. He has watched what it took to buy it and he will be able to name most of them.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- shared fragments: the bond ---------------------------------------------
 
 # THREE VARIANTS PER VALUE SINCE 2026-08-17, picked by `random_valid = yes` in
