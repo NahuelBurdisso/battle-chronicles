@@ -599,15 +599,16 @@
 # every one of 233 moments, and two values - stranger 134, countryman 126 -
 # carried most of them.
 #
-# THE THREE VARIANTS OF A VALUE SAY THE SAME THING THREE WAYS. They are not
-# three degrees of it. The ladder in bc_write_bond_effect already decided the
+# THE FOUR VARIANTS OF A VALUE SAY THE SAME THING FOUR WAYS. They are not
+# four degrees of it. The ladder in bc_write_bond_effect already decided the
 # fact; these only decide the wording, and a variant that says something
 # slightly different makes the clause report a fact the ladder never wrote.
 #
-# ALL FIFTEEN NAME THEIR SUBJECT, all but two as `the man commanding here`. That
-# repetition is deliberate: the toast carries the COMMANDER's portrait, but
-# three of the thirteen moment literals are about a KNIGHT, so a clause saying
-# a bare `he` would attach to the wrong man on those three.
+# ALL TWENTY NAME THEIR SUBJECT, all but two as `the man commanding here`. That
+# repetition is deliberate: the toast carries the COMMANDER's portrait, but a
+# large minority of the moment literals are about a KNIGHT - thirty-one of the
+# mod's seventy-four templates are `type = knight` - so a clause saying a bare
+# `he` would attach to the wrong man on every one of those.
 #
 # `dawn` and `field` ARE SPENT AND ARE NOT SPENT AGAIN. Both are on the curated
 # shortlist further down; the shipped nemesis, kin and heathen strings already
@@ -773,7 +774,7 @@
 # (in bc_ledger_effects.txt: the UNCONDITIONAL, NOT WRITE-IF-UNSET paragraph for
 # the overwrite semantics, the size ladder itself, and THE ANCHOR comment on
 # `save_scope_as = bc_chronicle_subject` for why "upstream of every read" is the
-# right phrase and "at the top of every event" is not - the three knight events
+# right phrase and "at the top of every event" is not - the knight events
 # call it nested rather than at the top). So the band is re-derived from a live
 # num_total_troops comparison at every later moment. Whether that number can FALL
 # during a combat is NOT established anywhere in this repo. If it can, a battle

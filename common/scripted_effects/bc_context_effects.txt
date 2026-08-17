@@ -22,7 +22,7 @@
 #
 # CALLED FROM bc_battle_open_effect, on the commander, UPSTREAM OF EVERY READ in
 # every phase event - not literally at the top of every `effect` block, since the
-# three knight events call it nested. In bc_ledger_effects.txt, that effect's
+# knight events call it nested. In bc_ledger_effects.txt, that effect's
 # `UNCONDITIONAL, NOT WRITE-IF-UNSET` paragraph says why the call is
 # unconditional, and its `THE ANCHOR` comment covers the nesting.
 

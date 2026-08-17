@@ -6,8 +6,12 @@
 # enforced, the only place the variable leak surface has to be audited, and the
 # only place a future system has to hook.
 #
-# ALL WRITES LAND ON THE SIDE COMMANDER. The three `type = knight` events root on
+# ALL WRITES LAND ON THE SIDE COMMANDER. Every `type = knight` event roots on
 # the knight, so they call in from inside scope:combat_side.side_commander ?= .
+# THE COUNT IN THIS PARAGRAPH USED TO BE THREE and is now thirty-one; it is
+# written without a number on purpose, because the rule is the type and not the
+# tally. `grep -c '^bc_.* = {' common/combat_phase_events/bc_knight_phase_events.txt`
+# is the count if one is wanted.
 # NOTHING IN THIS MOD EVER WRITES A bc_ VARIABLE ONTO A KNIGHT. Per-character
 # state on every participant has to be cleared on both sides or it leaks forever,
 # and there are far more knights than commanders.
@@ -28,11 +32,11 @@
 
 # --- opening the battle -----------------------------------------------------
 #
-# Called UPSTREAM OF EVERY READ in all ten commander and knight phase events -
+# Called UPSTREAM OF EVERY READ in every commander and knight phase event -
 # before bc_mark_chronicle_effect and before any trigger_event, where
 # scope:combat_side always exists. Not literally at the top of every `effect`
 # block; see the THE ANCHOR comment on save_scope_as = bc_chronicle_subject below
-# for the three knight events, which call it nested.
+# for the knight events, all of which call it nested.
 #
 # UNCONDITIONAL, NOT WRITE-IF-UNSET. An earlier design skipped when the variables
 # were already set. That was wrong for a reason outside this effect: scratch is
@@ -61,7 +65,7 @@ bc_battle_open_effect = {
 	# meaning" rule in the spec, and a stale one is harmless because it is
 	# rewritten in every phase event, before anything reads it. NOT literally at
 	# the top of every effect block: the seven commander events call this effect
-	# at the top, but the three knight events call it nested inside their
+	# at the top, but the knight events call it nested inside their
 	# `scope:combat_side.side_commander ?=` block (bc_knight_phase_events.txt:101,
 	# :169, :232). Upstream of every read is what matters, not the line number.
 	save_scope_as = bc_chronicle_subject

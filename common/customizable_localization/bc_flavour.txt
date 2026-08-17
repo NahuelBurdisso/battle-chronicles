@@ -190,10 +190,18 @@
 # ONE EXEMPTION, and it is not a loophole: a citation recording where a marker
 # WAS in a build that has since moved on. The README section headed
 # `Family 3 is shipped but unmeasured` does this - it quotes a log line against
-# `bc_ledger_effects.txt:258` and labels it a previous build. A paragraph name
-# cannot express a pointer into a superseded file, and the number is not a claim
-# about the current one. Anything that IS a claim about the current file follows
-# the rule.
+# line 258 of a superseded bc_ledger_effects.txt and labels it a previous build.
+# A paragraph name cannot express a pointer into a superseded file, and the
+# number is not a claim about the current one. Anything that IS a claim about
+# the current file follows the rule.
+#
+# THAT EXEMPTION IS WRITTEN WITHOUT THE `file:line` PUNCTUATION, and 2026-08-17
+# is why. `validate` machine-checks every citation in that shape against the
+# CURRENT file, so a historical pointer written in it is a time bomb: the line
+# happened to be non-empty for months and a comment edit in the ledger shifted
+# the file five lines and turned both copies of this note into hard errors.
+# Prose the checker cannot parse is the correct form for a claim about a build
+# that no longer exists.
 #
 # type = character ON EVERY DEFINITION, and invoked on a SAVED SCOPE, never on a
 # variable-held character. Vanilla's Custom2 second argument is always a saved
@@ -210,8 +218,8 @@
 # added from bc_bond_clause onward states its own. On the ground clauses the
 # fallback is load-bearing from anywhere, because bc_write_ground_effect removes
 # the variable first and has two exits that never rewrite it. On bc_bond_clause
-# it never renders from the ten moment toasts, because bc_write_bond_effect
-# writes on every path and runs upstream of all ten - but it would render from a
+# it never renders from a moment toast at all, because bc_write_bond_effect
+# writes on every path and runs upstream of every one of them - but it would render from a
 # pop-up option's toast whose option is ANSWERED after the combat ended, because
 # that is the case in which bc_clear_scratch_effect has already run - see the
 # `KNOWN LEAK` paragraph above that effect in bc_ledger_effects.txt. Note the
@@ -1123,8 +1131,9 @@ bc_shieldbrother_forged_ground = {
 # catching it.
 #
 # EVERY VARIANT NAMES ITS SUBJECT. The toast carries the COMMANDER's portrait
-# but three of the thirteen moment literals are about a KNIGHT, so a clause
-# saying a bare `he` would attach to the wrong man on those three. `The man
+# but a large minority of the moment literals are about a KNIGHT - the knight
+# file holds thirty-one of the mod's seventy-four templates today - so a clause
+# saying a bare `he` would attach to the wrong man on every one of them. `The man
 # commanding here` is the shared frame and it is deliberate repetition.
 #
 # THE SCALE CLAUSE DID GET THE SAME TREATMENT IN THE END, AND THIS PARAGRAPH
