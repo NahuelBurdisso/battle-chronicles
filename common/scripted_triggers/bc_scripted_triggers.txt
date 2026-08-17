@@ -1081,3 +1081,30 @@ bc_the_ground_is_his_own_trigger = {
 		}
 	}
 }
+
+
+# --- who walked onto whom ----------------------------------------------------
+#
+# THE MOD HAS READ THE TWO SIDES' STRENGTHS SINCE PLAN 1 AND HAS NEVER ASKED
+# WHICH OF THEM CHOSE TO FIGHT. `is_combat_side_attacker` sits on the combat
+# side scope the mod already touches in every one of these triggers, and in
+# sixty-six batches nothing has looked at it.
+#
+# THIS IS NOT THE WAR'S ATTACKER. The war scope has `attacker_war_score` and a
+# war attacker of its own, and they are a different fact entirely: a man
+# defending against an invasion who marches his host onto a besieging army is
+# the ATTACKER of that combat and the DEFENDER of the war. The combat-level
+# question is only ever "who walked onto whom this morning", which is the one
+# these two templates are about.
+#
+# NO GUARD, AND THE PRECEDENT IS THE OLDEST TRIGGER IN THE FILE.
+# bc_side_is_losing_trigger reads `scope:combat_side.side_strength` bare, and
+# has since plan 1 - the combat side scope is supplied by the event itself and
+# is not an optional link like the war or the commander.
+bc_his_side_attacked_trigger = {
+	scope:combat_side = { is_combat_side_attacker = yes }
+}
+
+bc_his_side_was_attacked_trigger = {
+	scope:combat_side = { is_combat_side_attacker = no }
+}

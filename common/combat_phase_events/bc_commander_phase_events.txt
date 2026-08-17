@@ -6579,3 +6579,181 @@ bc_it_is_his_own_country_underfoot = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# WHO WALKED ONTO WHOM, 2026-08-17.
+#
+# The oldest triggers in the mod compare the two sides' strengths, and every
+# batch since has layered facts on top of that comparison - terrain, war,
+# faith, deed, opinion. None of them has ever asked the first question anybody
+# standing on a battlefield would ask, which is whether this side came here or
+# was found here.
+#
+# THE TWO TEMPLATES ARE THE TWO HALVES WHERE IT MATTERS MOST. An attack that
+# is failing and a defence that is holding are the two states in which the
+# choice made this morning is still visibly running the afternoon; an attack
+# that is working and a defence that is failing are both just the battle going
+# the way the numbers said, and neither would say anything the side row does
+# not already say.
+#
+# NEITHER MAY DISENGAGE, WITHDRAW OR CALL ANYTHING OFF. The mod does not end
+# battles in a phase event, and "he broke off the attack" is exactly that.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# HE CAME HERE, AND IT IS NOT WORKING. The distinctive thing about a failing
+# attack is not that it is going badly - the side row covers that - it is that
+# every part of the plan was his, so there is nobody to blame for the ground,
+# the hour or the shape of it, and the men know that too.
+#
+# `wild`/`down` AND bc_spent_horse. An attack that stops working does not turn
+# into a defence; it turns into the same attack made again, and then again,
+# because stopping is an admission and each repetition is cheaper to order than
+# it is to make. That is precisely what the wild row means - a host spending
+# itself - and the modifier lands on the right side of the field.
+#
+# NOT A SUBSET OF bc_the_gamble_that_does_not_pay, which is `reckless` and a
+# fact about the man; a cautious commander attacks too, and a reckless one gets
+# attacked. Neither gate implies the other.
+#
+# THE DESC MAY NOT HAVE HIM ORDER A WITHDRAWAL, may not name the objective, and
+# may not put a number on the attempts. The gate knows he came here and that it
+# is going badly, and nothing at all about what he came for.
+# ---------------------------------------------------------------------------
+bc_he_chose_the_hour = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_side_attacked_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_chose_the_hour"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_chose_the_hour_toast
+			desc = bc_he_chose_the_hour_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# THEY CAME TO HIM AND IT IS GOING BADLY FOR THEM. The mirror image, and the
+# quietest good hour in the mod: he has not done anything today. He picked a
+# place, he stood on it, and the other man's plan has been arriving in pieces
+# ever since.
+#
+# `entrenched`/`up` AND bc_shieldwall, WHICH IS THE ONE MOMENT THAT MODIFIER
+# WAS ALWAYS FOR. A side that is being attacked and winning is doing exactly
+# one thing - not moving - and that is the whole of what bc_shieldwall means.
+#
+# THE MOMENTUM RUNG IS GRANTED, GUARDED, AND THE PRESTIGE IS THE FILE'S
+# STANDARD 50. Not more: a defence that works is worth less in reputation than
+# an attack that works, which is unfair and is also how it has always been
+# recorded.
+#
+# NOT A SUBSET OF THE TERRAIN TEMPLATES. bc_terrain_favours_us_trigger is about
+# what the ground is; this is about who moved. A man can be attacked on bad
+# ground and choose good ground to attack across.
+#
+# THE DESC MAY NOT COUNTERATTACK, may not have the enemy break, and may not
+# make him clever. The whole moment is that the interesting decisions today
+# were all made by somebody else and none of them worked.
+# ---------------------------------------------------------------------------
+bc_they_came_to_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_side_was_attacked_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_terrain_favours_us_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_came_to_him"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_they_came_to_him_toast
+			desc = bc_they_came_to_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

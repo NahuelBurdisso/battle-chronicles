@@ -2434,3 +2434,31 @@
 
  bc_it_is_his_own_country_underfoot_toast:0 "Whatever This Costs, He Is Paying It Twice"
  bc_it_is_his_own_country_underfoot_toast_desc:0 "Everything being ruined here this afternoon was already his before either host arrived, and it is being ruined at the rate a losing fight ruins things. He keeps feeding men into it well past the point the odds would justify, and the reason is not stubbornness: giving way here does not end the afternoon, it moves the identical afternoon eight miles further in, onto ground that is also his and has more on it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SIXTY-TWO. Which of the two hosts chose this.
+#
+# NEITHER DESC MAY DISENGAGE, WITHDRAW OR CALL ANYTHING OFF. Phase events do
+# not end battles and "he broke off the attack" is ending one.
+#
+# THE FIRST MAY NOT NAME THE OBJECTIVE, MAY NOT PUT A NUMBER ON THE ATTEMPTS
+# AND MAY NOT HAVE HIM REGRET COMING. The gate knows he walked onto them and
+# that it is going badly, and knows nothing about what he came for.
+#
+# THE SECOND MAY NOT COUNTERATTACK, MAY NOT BREAK THE ENEMY AND MAY NOT MAKE
+# HIM CLEVER. Every interesting decision today was made by the other man and
+# none of them worked; the toast may not steal any of them back.
+#
+# NEITHER MAY USE THE WORD FOR THE WAR'S ATTACKER. This is a combat-level fact
+# about who walked onto whom this morning, not about who declared anything.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line".
+ bc_he_chose_the_hour_toast:0 "Nobody Made Him Come Up This Slope"
+ bc_he_chose_the_hour_toast_desc:0 "The ground was his choice and so was the morning and so was the shape of the thing, and none of it is doing what it was picked to do. What happens now is that the same push gets made again, because ordering it costs a sentence and admitting it does not work costs the rest of the campaign, and the second push is going in over the ground the first one paid for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_they_came_to_him_toast:0 "He Has Not Done Anything All Day"
+ bc_they_came_to_him_toast_desc:0 "He picked this place two days ago, put the host on it, and has done nothing since except decline to leave. Everything clever that has happened this afternoon was thought of by the man opposite, and all of it has arrived here in pieces, at the pace the ground allows, into a line that has not had to change its mind about anything. There will be no story in this for him. There is a good deal of story in it for the other one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
