@@ -5269,3 +5269,192 @@ bc_the_gamble_that_does_not_pay = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE COUNTS THE MOD KEEPS AND NEVER PUTS ON THE FIELD, 2026-08-17.
+#
+# The previous batch let the commander's STYLE onto the field. Two counters
+# were still writing themselves into a save and being read by nothing but the
+# chain that writes them: `bc_notable_battles`, his tally of victories, and
+# `bc_nemesis_losses`, the depth of the one running grudge the mod tracks.
+# The rivalry feature is the larger scandal of the two - it has a variable, a
+# relation ladder, a game rule, an eve paragraph and five aftermath toasts, and
+# in sixty-nine commander templates `bc_facing_nemesis_trigger` appears ONLY as
+# a `factor = 1.5` chance modifier. Not one moment in the mod has ever been
+# ABOUT the man across the field. Both templates below are losing-side, which
+# is not a coincidence: a tally of wins and a tally of losses owed are both
+# most legible on the afternoon they are contradicted.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Five fields won, and this one going the other way.
+#
+# THE COUNTER MEANS VICTORIES, NOT AFTERNOONS. bc_notable_battle_counter_effect
+# is called from the winner's arm of the aftermath chain and nowhere else, so
+# the number is a record of wins and the desc may not put a defeat in his past
+# on the strength of it. What it may say is that everyone present knows the
+# record, which is the actual mechanism here: a host that has been told about
+# a man for years is a host that spends the bad hour looking at him.
+#
+# `ordered`/`down`, WHICH HANDS OUT NOTHING, and that is the template. The
+# orders are going out and they are the right orders; they are arriving into a
+# field that has stopped answering them. There is no army modifier for a plan
+# that is correct and late, and inventing one would say the opposite of what
+# the moment says.
+#
+# LOSING, BECAUSE WINNING IS bc_the_thing_he_always_does. That template reads a
+# style streak and is about a habit that is working; this reads a victory tally
+# and is about a reputation that is not helping. Neither gate contains the
+# other - a man can have won five battles in five different ways, and a
+# two-battle streak is not five wins.
+#
+# STRESS AND A GUARDED FALTERING RUNG, NO PRESTIGE LOSS. The record is intact;
+# that is exactly why the afternoon is worse for him than for anybody else on
+# the field.
+#
+# THE DESC MAY NOT NAME A NUMBER OF BATTLES AND MAY NOT NAME ONE OF THEM. The
+# mod holds a count and nothing else - no place, no year, no enemy - and a
+# toast that supplies any of that invents a fact no other file agrees with.
+# ---------------------------------------------------------------------------
+bc_the_record_does_not_help_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_won_many_before_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_record_does_not_help_him"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_record_does_not_help_him_toast
+			desc = bc_the_record_does_not_help_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man who has done this to him before, doing it again.
+#
+# THE FIRST MOMENT IN THE MOD THAT IS ABOUT THE MAN ACROSS THE FIELD.
+# bc_facing_nemesis_trigger has existed since plan 4 and has been used as a
+# `factor = 1.5` on every commander template and as an `is_valid` row on none.
+# The rivalry feature could raise a grudge to nemesis over a decade without a
+# single moment ever mentioning that the two of them had met before.
+#
+# BOTH ROWS ARE REQUIRED AND NEITHER IS REDUNDANT. bc_nemesis_debt_deep_trigger
+# alone says he is carrying a deep grudge against SOMEBODY; the nemesis test
+# alone says the man opposite is the one he carries it against, at any depth,
+# including a single loss. Together they say the only thing worth a moment.
+#
+# LOSING, WHICH IS WHERE THE COUNTER CAME FROM. Every point in
+# bc_nemesis_losses was paid for by an afternoon like this one, and if this one
+# ends the same way the aftermath chain adds another and may set the relation
+# itself. The template is the middle of that arithmetic, not its result, and
+# the desc may not announce the result.
+#
+# `entrenched`/`down` AND bc_shieldwall. Not `bloodied` and not `wild`: what a
+# man does in front of the one enemy who has beaten him twice is refuse to be
+# moved, and the line where he is standing gets harder for the rest of the
+# afternoon. The modifier is the whole consequence and it is the right one -
+# holding is not winning, and this template must not look like winning.
+#
+# FIFTEEN STRESS, THE HIGHER OF THE TWO STEPS THE MOD USES, because it is the
+# one losing template in the file where the loss is personal.
+#
+# THE DESC MAY NOT KILL EITHER OF THEM, MAY NOT PUT THEM WITHIN REACH OF EACH
+# OTHER, AND MAY NOT SETTLE IT. bc_chronicles.0005 owns the thirty feet between
+# a commander and a man he wants, the rivalry chain owns the escalation, and
+# the battle is not over. It also may not count the previous meetings aloud -
+# the mod holds a number, not a history.
+# ---------------------------------------------------------------------------
+bc_the_man_who_has_done_this_before = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_facing_nemesis_trigger = yes
+		bc_nemesis_debt_deep_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			bc_foe_leader_commands_in_person_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_man_who_has_done_this_before"
+
+		add_stress = 15
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_man_who_has_done_this_before_toast
+			desc = bc_the_man_who_has_done_this_before_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

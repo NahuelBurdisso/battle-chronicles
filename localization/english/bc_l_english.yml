@@ -2139,3 +2139,33 @@
 
  bc_the_gamble_that_does_not_pay_toast:0 "The Same Throw, A Worse Field"
  bc_the_gamble_that_does_not_pay_toast_desc:0 "He asked for the whole of it at once, the way he asks for it, and the ground gave him back about a third and kept the rest. The horses that went furthest are the ones not coming back, and the men behind them are looking at the gap where those horses were and doing the arithmetic on it out loud. He is watching the same gap. Nothing he is thinking about it has reached his face.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-TWO. The two counters, on the afternoon that contradicts them.
+#
+# NEITHER DESC MAY NAME A NUMBER. The mod holds `bc_notable_battles` and
+# `bc_nemesis_losses` as integers and holds nothing else - no place, no year,
+# no name of a previous field - so "the fourth time" and "since the Trident"
+# are both inventions that no other file in the mod agrees with.
+#
+# THE FIRST MAY NOT PUT A DEFEAT IN HIS PAST. The counter is incremented only
+# in the winner's arm of the aftermath chain; it is a tally of victories, and a
+# sentence about all the fields he has seen is reading a number that does not
+# say that.
+#
+# THE SECOND MAY NOT KILL EITHER MAN, MAY NOT PUT THEM WITHIN REACH OF EACH
+# OTHER AND MAY NOT SETTLE IT. `bc_chronicles.0005` owns the thirty feet, the
+# rivalry chain owns the escalation, and the battle is still going.
+#
+# NEITHER MAY BE ABOUT SURPRISE. Both men know exactly what is happening to
+# them; that is the whole difference between these two and the ordinary
+# losing-side templates.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "he has done
+# this before", "nobody has said anything to him about it".
+ bc_the_record_does_not_help_him_toast:0 "They Are Waiting For Something He Has Not Got"
+ bc_the_record_does_not_help_him_toast_desc:0 "Everything he has sent out this hour has been the right thing sent to the right man at the right moment, and every one of them has arrived into a field that has stopped answering. The captains keep looking back up the slope at him between orders, waiting for the one they have all heard about, and he can see them doing it. There is no such order. There was never going to be one today, and he worked that out some time before they will.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_man_who_has_done_this_before_toast:0 "He Knows That Banner Too Well"
+ bc_the_man_who_has_done_this_before_toast_desc:0 "The shape of it came apart in the same direction it came apart last time and he recognised the direction before the messengers did. Everything is going the way it went before, and he is doing the only thing left that he can still choose to do, which is stand exactly where he is standing and make the men either side of him do the same. The banner opposite has not moved either. Neither of them is going anywhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

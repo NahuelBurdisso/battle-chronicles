@@ -814,3 +814,74 @@ bc_fights_the_same_way_trigger = {
 		var:bc_style_streak >= 2
 	}
 }
+
+
+# --- has he won a great many of these ---------------------------------------
+#
+# `bc_notable_battles` IS A TALLY OF VICTORIES, NOT OF EXPERIENCE, and getting
+# that wrong is the only way to misuse this trigger. bc_notable_battle_counter_effect
+# lives in bc_reward_effects.txt and is called from ONE site - the winner's arm
+# of the aftermath chain in bc_aftermath_events.txt:199. A man who has lost nine
+# notable battles has no variable at all. So this asks "has he won five", never
+# "has he fought five", and no template gated on it may put a defeat in his
+# past on the strength of the number.
+#
+# THE COUNTER IS CUMULATIVE AND IS NEVER CLEARED, which is what separates it
+# from vanilla's combat_event_0001_tracker - that one counts CONSECUTIVE wins
+# and resets to 0 on any defeat. A defeat does not reduce this one, it simply
+# fails to grow it, so the number is a career and not a run of form.
+#
+# FIVE, WHICH IS ABOVE EVERY OTHER THRESHOLD THE MOD READS OFF THIS VARIABLE.
+# The nickname gate in bc_reputation_effects.txt uses `>= 3`; a trigger at
+# three would be true of every commander the mod has already named, and the
+# point of a gate is to select a smaller set than the one already spoken for.
+#
+# IT LIVES ON THE COMMANDER, written inside the aftermath's side_commander
+# scope, so this trigger is only meaningful when read there.
+#
+# `exists` AS A SIBLING, THE COMPARISON NESTED - the standing rule. Most
+# characters in the world have never commanded a notable battle and have no
+# variable, so a sibling comparison would log a missing-variable read on nearly
+# every phase of nearly every battle.
+bc_won_many_before_trigger = {
+	exists = var:bc_notable_battles
+	trigger_if = {
+		limit = { exists = var:bc_notable_battles }
+		var:bc_notable_battles >= 5
+	}
+}
+
+# --- how deep is the debt to the man across the field -----------------------
+#
+# READ THIS WITH bc_facing_nemesis_trigger, NEVER ALONE. `bc_nemesis_losses`
+# counts the losses owed to whoever `bc_nemesis` names, and that man is not
+# necessarily the man on the other side of this battle. Alone this trigger says
+# only "he is carrying a deep grudge against somebody"; with the nemesis test
+# beside it, it says the thing worth a moment.
+#
+# TWO, BECAUSE THREE IS WHERE THE RIVALRY LADDER ITSELF SPEAKS.
+# bc_rivalry_set_relation_effect sets the `nemesis` relation at `>= 3` under
+# bc_rivalry_nemesis and `rival` at `>= 2`, so a gate at three would be
+# describing a man the relation ladder is already describing. Two is the first
+# number at which "he has done this to me before" is more than once.
+#
+# THE COUNTER SKIPS VALUES. Section 5's wipe rule increments by 2, so a
+# commander can go from 1 to 3 without ever holding 2 - which is exactly why
+# this is a threshold and not an exact match, the same reasoning the rivalry
+# ladder's own descending arms are built on.
+#
+# IT IS NOT SCRATCH. bc_nemesis and bc_nemesis_losses are the rivalry feature
+# and bc_clear_scratch_effect must never learn about either, so unlike
+# bc_battle_foe they are safe to read at any point in a battle.
+#
+# `exists` AS A SIBLING, THE COMPARISON NESTED. The invariant that lets
+# bc_rivalry_set_relation_effect read this variable bare - its caller wrote it
+# one line earlier - does not exist here, and a phase template runs on
+# commanders who have never had a nemesis at all.
+bc_nemesis_debt_deep_trigger = {
+	exists = var:bc_nemesis_losses
+	trigger_if = {
+		limit = { exists = var:bc_nemesis_losses }
+		var:bc_nemesis_losses >= 2
+	}
+}
