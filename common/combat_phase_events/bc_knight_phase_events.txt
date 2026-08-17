@@ -5102,3 +5102,94 @@ bc_knight_the_ground_here_was_worth_something = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The orders have stopped arriving. Enemy commander faltering, side winning.
+#
+# `ordered`/`up` AND bc_pursuit, WHICH IS THE POINT. This is the one place in
+# the mod where a knight's moment is caused by something happening a quarter of
+# a mile away to a man he has never met. He cannot see the enemy commander and
+# would not know him if he could; what he can see is the rank in front of him
+# still doing a thing that stopped making sense some minutes ago, because
+# nobody has come to tell it otherwise. A formation that presses into that is
+# a formation pursuing, and bc_pursuit is exactly the right consequence.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the enemy
+# commander's rung and the side row and never asks about his own side's.
+#
+# FIFTY PRESTIGE. For being the man who moved on it first, which on a field is
+# the whole of the difference between noticing and gaining.
+#
+# THIS IS NOT bc_knight_the_banner_answerable AND NOT
+# bc_knight_the_name_across_the_field. Both of those ask WHO the enemy
+# commander is - whether he turned up, whether men know his name. This asks how
+# his day is going, and the knight in this template never learns the answer to
+# either of theirs.
+#
+# THE DESC MAY NOT LET HIM WORK OUT THE CAUSE, may not name or see the enemy
+# commander, may not break the enemy line and may not kill anybody. What he has
+# is a gap of a few yards and a few seconds. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_orders_have_stopped_arriving = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_commander_is_faltering_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Seeing the gap and being able to be in it are two different
+		# qualifications, and this moment needs the second one.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_orders_have_stopped_arriving"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_orders_have_stopped_arriving_toast
+				desc = bc_knight_the_orders_have_stopped_arriving_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

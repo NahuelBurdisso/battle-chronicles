@@ -7389,3 +7389,119 @@ bc_the_thin_country = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-FOUR. How the other man's afternoon is going.
+#
+# THE MOD ASKS NINE QUESTIONS ABOUT THE MAN ACROSS THE FIELD AND EVERY ONE OF
+# THEM WOULD HAVE THE SAME ANSWER AT DAWN. Who he is - kin, countryman,
+# heathen, of the house, a nemesis. What he is - a king, a better soldier, a
+# worse one, present or absent. All of it was already true when the two hosts
+# were still forming up. The chronicle has never once asked the only question
+# about him that this particular afternoon can answer, which is whether it is
+# going badly for him too.
+#
+# IT HAS KNOWN THE ANSWER THE WHOLE TIME. The rungs are character modifiers and
+# these templates run for both sides of a combat, so the man opposite has been
+# accumulating the mod's own marks all day. Reading them across the field is
+# the chronicle looking at its own handwriting from the wrong end, and it is
+# the first time anything in the mod has done that.
+#
+# BOTH MOMENTS TAKE THE OTHER MAN'S TROUBLE AS A FACT AND DIFFER ON WHAT IT IS
+# WORTH. To the commander who is losing anyway it is worth nothing, and that is
+# the more interesting half: it removes the last comfortable explanation for
+# the state of his own line. To the knight in the front rank of a winning side
+# it is worth a great deal, because it arrives as a change in what the men in
+# front of him are doing, and he is close enough to use it before anybody with
+# a horse and a view has finished writing it down.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The other man's trouble. The enemy commander is faltering and he is losing.
+#
+# `adapted`/`down`. He has spent some part of the last hour explaining the day
+# to himself in terms of the man opposite - that it is going this way because
+# that one is doing something well - and the news from the far bank is that the
+# other one is not doing anything well either. So the explanation goes, and
+# something has to be done on the basis of a field that is worse than he
+# thought rather than a rival who is better than he thought. That is a reading
+# and a change made on it, which is what `adapted` means, and it happens while
+# the numbers go the wrong way. The verb table gives nothing for it: no army is
+# bled, braced or launched by a man revising his opinion.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the ENEMY
+# commander's rung and the side row and never asks about his own, so the grant
+# is live and there is no self-reference here to worry about.
+#
+# TEN STRESS. Losing is one weight. Losing to a man who is also losing is
+# another, and the mod has one currency for both.
+#
+# THIS IS NOT bc_the_other_man_is_better. That template reads a martial score -
+# a fact about the enemy that was true this morning and will be true at his
+# next battle. This one is true only today. The two can both be valid on the
+# same roll and they are saying opposite things when they are, which is
+# correct: a better commander can still be having a worse afternoon.
+#
+# THE DESC MAY NOT TELL HIM WHAT WENT WRONG OVER THERE and may not turn the
+# battle round. He is looking at a banner and a pattern of runners, not at a
+# report. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_other_mans_trouble = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_commander_is_faltering_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who reads a field well for a living is the man most likely to
+		# have been reading this one wrong all afternoon.
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_mans_trouble"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_other_mans_trouble_toast
+			desc = bc_the_other_mans_trouble_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

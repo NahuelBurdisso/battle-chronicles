@@ -1359,3 +1359,51 @@ bc_field_is_poor_country_trigger = {
 		}
 	}
 }
+
+
+# --- the chronicle looking across the field at its own handwriting ------------
+#
+# NINE QUESTIONS ABOUT THE MAN ACROSS THE FIELD AND ALL NINE ARE ABOUT WHO HE
+# IS OR WHAT HE IS. bc_foe_is_kin_trigger, bc_foe_is_countryman_trigger,
+# bc_foe_is_heathen_trigger and bc_foe_is_house_trigger ask his identity.
+# bc_foe_is_formidable_trigger and bc_foe_is_outmatched_trigger ask his skill,
+# which is a number he had before breakfast and will still have tomorrow.
+# bc_foe_leader_commands_in_person_trigger asks whether he turned up.
+# bc_facing_a_crown_trigger asks his station. bc_facing_nemesis_trigger asks
+# the ledger what the two of them have done to each other in the past. Not one
+# of the nine asks HOW HIS AFTERNOON IS GOING.
+#
+# THE MOD ALREADY KNOWS THE ANSWER AND HAS NEVER ONCE LOOKED IT UP. The rungs
+# are character modifiers - bc_faltering_minor, _major, _decisive - and the
+# commander templates run for BOTH sides of a combat, so an enemy commander who
+# has had a bad hour is carrying the mod's own marks for it at the moment this
+# gate is evaluated. This is the chronicle reading its own handwriting from the
+# other end of the field, which nothing in the mod has done before.
+#
+# THIS IS NOT bc_foe_is_outmatched_trigger AND THE DIFFERENCE IS THE WHOLE
+# POINT. That one compares martial scores: a permanent fact about a man, true
+# in the same way at every battle he will ever fight, and true of him this
+# morning before either host formed up. This one is true only today and only
+# since some particular thing went wrong. A brilliant commander having a
+# catastrophic afternoon answers no to that trigger and yes to this one, and
+# that man is the interesting one.
+#
+# ONLY THE FALTERING SIDE, DELIBERATELY. A matching momentum trigger would be
+# trivial to write and there is nothing yet for it to gate, and a trigger with
+# no caller is a thing a later reader has to work out the intent of. If a
+# momentum-side moment is ever written, its trigger goes here next to this one.
+#
+# THE GUARD IS THE STANDING ONE. An enemy side can be leaderless - the bond
+# ladder has an entire `nofoe` arm for it - so the commander is an optional
+# link, the `exists` sits as a sibling and the READ is nested in a trigger_if
+# that repeats it. `enemy_side` and not `var:bc_battle_foe`, for the reason set
+# out above bc_facing_a_crown_trigger.
+bc_foe_commander_is_faltering_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			bc_is_faltering_trigger = yes
+		}
+	}
+}

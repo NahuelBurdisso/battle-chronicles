@@ -2695,3 +2695,46 @@
 
  bc_knight_the_ground_here_was_worth_something_toast:0 "This Was A Place Before This Morning"
  bc_knight_the_ground_here_was_worth_something_toast_desc:0 "He has been giving ground since the second hour and the ground has been changing under him while he did it - out of the open, through a hedge that took some planting, into lanes with walls on both sides that are the wrong width for a horse and exactly the right width for the two men he can hear behind him. Everything he learned about fighting in a line stops applying at about the depth of a doorway. He is working it out at the speed the situation allows, which is roughly one corner at a time, and somewhere under that he is aware of how long all this took to build and how briefly the argument over it is going to last.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-FOUR. How the other man's afternoon is going.
+#
+# NEITHER DESC MAY EXPLAIN WHAT WENT WRONG OVER THERE. The gate knows that the
+# man opposite is carrying a faltering rung and knows nothing whatever about
+# how he came by it. Neither toast may invent a cause, a casualty, a collapsed
+# flank or a piece of news, and neither may have anybody on this side of the
+# field be told one.
+#
+# NEITHER MAY SHOW THE ENEMY COMMANDER. He is not on screen, not named, not
+# described and not looked at. Everything either man knows about him is
+# inferred from the behaviour of the troops between them, at the range at which
+# that behaviour is visible.
+#
+# NEITHER MAY TURN THE BATTLE. The first is losing at the end of it and the
+# second is winning at the end of it, exactly as at the start; the mod does not
+# decide combats and a toast may not imply it did.
+#
+# THE FIRST MAY NOT MAKE HIM GLOAT AND MAY NOT MAKE HIM DESPAIR. What he has
+# lost here is an explanation, not a hope. It may not have him say any of it
+# aloud, may not have a captain deliver the observation to him as a report, and
+# may not have him blame anybody by name.
+#
+# THE SECOND MAY NOT LET HIM UNDERSTAND IT. He has no idea there is a commander
+# involved and the desc may not hint that he suspects one. It may not break the
+# enemy line, may not kill anybody, may not have him shout an order to anyone
+# who is not within arm's reach, and may not last longer than the few seconds
+# such a gap actually lasts.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time".
+ bc_the_other_mans_trouble_toast:0 "The Explanation Has Stopped Working"
+ bc_the_other_mans_trouble_toast_desc:0 "For most of the afternoon there has been a tidy account of why this is going the way it is going, and the account has a man in it, on a horse, on the far rise, doing everything correctly. Watching the far bank for a while has taken that away. The runners over there are going out and coming back to the same place twice; a wing has been asked for and then not used; the whole apparatus opposite has the particular slackness of an argument nobody is winning. Which means the day is not being lost to a better man. It is being lost to the field, and the field is his to have read.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_orders_have_stopped_arriving_toast:0 "They Are Still Doing The Old Thing"
+ bc_knight_the_orders_have_stopped_arriving_toast_desc:0 "The rank in front of him is dressing itself against a flank that is no longer where it was, and has been for long enough that it is now a habit rather than a formation. Nobody has come to tell them. He does not know why nobody has come and it does not occur to him to wonder, because the space this opens is about four yards wide and lasts about as long as it takes to say so. He is into it with the two men who were watching his shoulders, and the shape they were holding goes with them, and behind that the rest of the line finds it has somewhere to go.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
