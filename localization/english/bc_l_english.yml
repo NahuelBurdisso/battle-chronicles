@@ -86,8 +86,8 @@
 # from THIS repo's root, the plans living in the tooling repo two levels above
 # this one - because a fragment APPENDED to a desc that keeps its literal
 # sentence fails to "no improvement" rather than to an empty toast. It stopped
-# being the ONLY per-moment set on 2026-08-17, when bc_van_breaks_through got the
-# mirror of it on the same argument; two descs carry a ground call now. Each
+# being the ONLY per-moment set on 2026-08-17, when the van, flank and rally
+# moments got sets on the same argument; four descs carry a ground call now. Each
 # fragment BEGINS WITH A SPACE because
 # it is appended to a finished sentence - bc_banner_falls_toast_desc deliberately
 # has no space before the tag, so the empty fallback leaves no trailing space.
@@ -102,13 +102,38 @@
  bc_frag_banner_falls_any:0 ""
 
  bc_rally_the_line_toast:0 "The Line Is Rallied"
- bc_rally_the_line_toast_desc:0 "A shouted order carries where it should not have, and the ranks close again.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_rally_the_line_toast_desc:0 "A shouted order carries where it should not have, and the ranks close again.[bc_chronicle_subject.Custom('bc_rally_the_line_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE FOURTH PER-MOMENT GROUND SET, paired with the flank-collapse set below on
+# the same six bands: a line coming apart and a line being put back together.
+# Nothing here reuses a word from the other three sets - the rough arm takes the
+# high ground because the slope belongs to the banner, the standing-stone to the
+# van and the rocks to the collapse.
+ bc_frag_rally_desert:0 " They close up around the one man still shouting, half of them blind with grit."
+ bc_frag_rally_open:0 " There is nothing out here to rally on except an order, and today an order is enough."
+ bc_frag_rally_rough:0 " The high ground behind them is where they are sent, and they get there in some order."
+ bc_frag_rally_forest:0 " They form on a line of trunks, which is not a line at all, and it serves."
+ bc_frag_rally_jungle:0 " Voices do the work eyes cannot, and the ranks find one another by them."
+ bc_frag_rally_winter:0 " Men who had begun to drift back stamp themselves warm again in their old places."
+ bc_frag_rally_any:0 ""
 
  bc_horse_killed_toast:0 "Unhorsed"
  bc_horse_killed_toast_desc:0 "The horse goes down screaming. He comes up out of the mud on foot, and is seen to come up.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_flank_collapses_toast:0 "The Flank Collapses"
- bc_flank_collapses_toast_desc:0 "The outnumbered wing bends, and then it does not stop bending.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_flank_collapses_toast_desc:0 "The outnumbered wing bends, and then it does not stop bending.[bc_chronicle_subject.Custom('bc_flank_collapses_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE THIRD PER-MOMENT GROUND SET, and the bad half of the pair the rally set
+# above completes. Each arm says what the ground does to men who have started
+# going backwards, which is a different question from what it does to men going
+# forwards - the van set answers that one on the same six bands.
+ bc_frag_flank_collapses_desert:0 " The sand keeps no shape, and neither does the wing once it has started to go."
+ bc_frag_flank_collapses_open:0 " Flat country gives a running man a long way to run and no reason to stop early."
+ bc_frag_flank_collapses_rough:0 " They come apart among the rocks, each little party climbing away from the next."
+ bc_frag_flank_collapses_forest:0 " The wood swallows the first men who turn, and the rest of them learn from it."
+ bc_frag_flank_collapses_jungle:0 " Whatever the heat had left of that wing, one push takes."
+ bc_frag_flank_collapses_winter:0 " They give way over ground already trodden to grey slush, and they are slow in it."
+ bc_frag_flank_collapses_any:0 ""
 
  bc_van_breaks_through_toast:0 "The Van Breaks Through"
  bc_van_breaks_through_toast_desc:0 "The leading ranks find the seam, and open it.[bc_chronicle_subject.Custom('bc_van_breaks_through_ground')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

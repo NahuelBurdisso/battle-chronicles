@@ -228,7 +228,7 @@
 # what the trigger_if does. A `trigger_if` whose `limit` fails evaluates TRUE,
 # so the bare `exists` beside it is the row that actually rejects.
 
-# --- SPIKE. The first per-moment set wired; the van set below is the second. --
+# --- SPIKE. The first per-moment set wired; three more follow it below. ------
 #
 # It was written to prove the shape renders before the rest of the fragment keys
 # were, and that run has not happened. bc_bond_clause and bc_scale_clause below
@@ -238,11 +238,11 @@
 # levels above this one. The AMENDMENT split the gate: a clause APPENDED to a desc
 # that keeps its literal sentence fails to "no improvement", so it needs no run,
 # while a clause that REPLACES the literal fails to an empty toast and still
-# does. FOUR fragment sets are named by a call site today: this one, from
-# bc_banner_falls_toast_desc alone; bc_van_breaks_through_ground below it, added
-# 2026-08-17 on the same appended-clause argument; and the two shared clauses,
-# from all ten. Eight moments still carry no ground set - Plan B tasks 6-14 less
-# the one now done, and none of the rest is written. Each of those tasks ALSO writes a core set, and it is the CORE set
+# does. SIX fragment sets are named by a call site today: this one, from
+# bc_banner_falls_toast_desc alone; the three added 2026-08-17 on the same
+# appended-clause argument - van, flank, rally - and the two shared clauses,
+# called from all ten. Six of the ten moments still carry no ground set, which
+# is Plan B tasks 6-14 less the three now done. Each of those tasks ALSO writes a core set, and it is the CORE set
 # that REPLACES the moment's literal rather than being appended to it - so every
 # one of them still waits on the run, and so does task 5, which writes a core set
 # for this moment and no ground set.
@@ -404,6 +404,159 @@ bc_van_breaks_through_ground = {
 	}
 	text = {
 		localization_key = bc_frag_van_breaks_any
+	}
+}
+
+# --- the third and fourth per-moment ground sets, 2026-08-17 -----------------
+#
+# THE SECOND MIRRORED PAIR. The first pair is the two above - a standard going
+# down and a van going through, the same seam from both sides. This pair is the
+# other thing that happens to a line: it comes apart, or it is put back
+# together. bc_flank_collapses and bc_rally_the_line are already written as
+# opposites in their literals, so giving them the same six bands makes the
+# ground the third thing they share and the sentence the only thing they do not.
+#
+# BOTH ARE APPENDED CLAUSES AND NEITHER NEEDS A RUN, on the argument the spike
+# header states and the van set repeats. Neither literal changes.
+#
+# THE TWO SETS ARE WRITTEN AGAINST EACH OTHER AS WELL AS AGAINST THE FIRST PAIR.
+# Four sets now describe six bands each, and the whole point is lost if band
+# `rough` reads the same in all four - so the rocks belong to the collapse, the
+# high ground to the rally, the slope to the banner and the standing-stone to
+# the van. Anyone adding a fifth set reads all four first.
+bc_flank_collapses_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_flank_collapses_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_flank_collapses_any
+	}
+}
+
+bc_rally_the_line_ground = {
+	type = character
+
+	text = {
+		localization_key = bc_frag_rally_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_rally_any
 	}
 }
 
