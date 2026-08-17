@@ -2949,3 +2949,93 @@ bc_knight_he_has_lost_count = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE BOTTOM OF THE SAME LADDER, 2026-08-17, AND IT IS IN THIS FILE FOR A
+# REASON.
+#
+# THE FALTERING HALF CANNOT BE A COMMANDER TEMPLATE. bc_rally_the_line's gate
+# is `bc_chronicle_ready_commander_trigger` plus `bc_is_faltering_trigger`
+# and nothing else, so any commander template gated on bc_faltering_decisive
+# would be a STRICT SUBSET of a shipped one - every battle that could reach it
+# can already reach rally, and the mod's distinctness rule exists to stop
+# exactly that. Adding a side row would not help: the subset relation survives
+# any row added on top.
+#
+# ON THIS SIDE THERE IS NO SUCH TEMPLATE. Not one knight `is_valid` in the
+# file reads the rungs at all - every appearance of bc_is_faltering_trigger
+# here is a `NOT` guard inside an effect - so the gate is free, and commander
+# and knight pools roll separately in any case.
+#
+# THE READ IS THROUGH scope:combat_side.side_commander AND IT MUST BE, for the
+# third time in three batches: the rung modifiers live on the commander and
+# `is_valid` here is rooted on the knight. A bare
+# `has_character_modifier = bc_faltering_decisive` would ask whether this
+# particular knight is personally carrying an army rung, which he never is,
+# and the template would never fire once.
+#
+# `wild`/`down`, AND NO RUNG GRANT AT ALL. The gate IS bc_faltering_decisive,
+# so the usual `NOT = { bc_is_faltering_trigger = yes }` guard could never
+# pass here - writing the `if` would be dead code that reads like a live
+# effect, which is worse than writing nothing. The host is already at the
+# bottom of the ladder and there is no lower rung to hand it. bc_spent_horse
+# is the whole mechanical content, and it is the right one: this is the state
+# where things that were supposed to be somewhere else are running.
+#
+# FIFTEEN STRESS. The file's usual is ten; this is the mod's worst state and
+# he is standing in it.
+# ---------------------------------------------------------------------------
+bc_knight_the_bottom_of_it = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { has_character_modifier = bc_faltering_decisive }
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_bottom_of_it"
+
+		add_stress = 15
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_bottom_of_it_toast
+				desc = bc_knight_the_bottom_of_it_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

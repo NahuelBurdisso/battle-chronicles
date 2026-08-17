@@ -1667,3 +1667,30 @@
 
  bc_knight_he_has_lost_count_toast:0 "He Has Stopped Counting"
  bc_knight_he_has_lost_count_toast_desc:0 "He could tell you what happened the first time and most of the second. After that it is one thing. His shield arm has gone somewhere he cannot feel and he is not sure when he last saw the man who was on his left, and none of it has decided anything, and it is still going. Somewhere behind him a horn is saying something he used to know the meaning of.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the top of the ladder (2026-08-17) -------------------------------------
+#
+# THESE TWO ARE THE LOUDEST STATES THE MOD PRODUCES AND THE PROSE HAS TO EARN
+# THAT. Both gates take a chain of moments to reach, which means a player who
+# sees either toast has already read three or four others in the same battle.
+# Anything merely energetic will land as one more of those. These have to
+# read like the afternoon has decided.
+#
+# THE FIRST MAY NOT PROMISE A VICTORY. The rung is not the end of the battle
+# and the mod has no idea how this finishes; what it knows is that right now
+# nothing on the other side is answering. A desc that says they have won is
+# writing a cheque the aftermath may not honour.
+#
+# THE SECOND MAY NOT KILL ANYBODY AND MAY NOT ROUT THE HOST. The standing
+# rule holds - the mod does not narrate deaths it has not caused - and a rout
+# is the aftermath's to declare. This is the moment before all of that, which
+# is worse to stand in than either.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "coming apart in pieces", "he has
+# stopped counting" (bc_knight_he_has_lost_count), "nothing left to chase
+# with" (bc_the_horses_are_already_gone), "it has turned over".
+ bc_nothing_is_stopping_this_toast:0 "Nothing Is Answering"
+ bc_nothing_is_stopping_this_toast_desc:0 "Every order he has given for some time now has been carried out roughly as he imagined it, which has never once happened to him before. The far end of the line moved when he asked it to. The reserve went in where he pointed. Whatever is being done on the other side to stop this is not arriving, and the men have noticed, and they are asking him for things instead of waiting to be told.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_bottom_of_it_toast:0 "The Ground Behind Him Is Empty"
+ bc_knight_the_bottom_of_it_toast_desc:0 "He turns around for the first time in a long while and there is a great deal more space back there than there ought to be. Not a rout, not yet, not quite: men are still facing the right way, and there are simply fewer of them doing it, and the ones at the edges keep glancing at the treeline. A riderless horse goes past at a flat gallop with nobody trying to catch it. Whatever this becomes, it has already stopped being a battle in the sense he came here for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

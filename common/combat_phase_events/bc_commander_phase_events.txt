@@ -3904,3 +3904,96 @@ bc_this_has_been_a_long_afternoon = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE TOP OF THE LADDER, 2026-08-17.
+#
+# THE RUNG MODIFIERS ARE READ IN EXACTLY ONE WAY AND IT IS NOT A QUESTION.
+# bc_has_momentum_trigger and bc_is_faltering_trigger are `OR` arms over the
+# three tiers, and every single use of them in the mod is a `NOT` inside a
+# grant - a guard that stops a second rung landing on a commander who already
+# has one. The mod therefore knows the difference between minor, major and
+# decisive momentum, writes it on the commander, and has never once asked
+# WHICH rung a host is on.
+#
+# THE DECISIVE RUNG IS THE RAREST STATE THE MOD PRODUCES. It takes a chain of
+# moments to reach, it is the loudest thing on the commander's modifier list,
+# and nothing has ever been written about being there. That is the gap this
+# batch fills, and it is deliberately only the top tier: a template gated on
+# minor momentum would fire in most battles the mod touches and would say
+# nothing, because minor momentum is the mod's ordinary weather.
+#
+# NEITHER TEMPLATE GRANTS A RUNG, AND NOT BECAUSE OF THE GUARD. The guard
+# would block it anyway - that is what the guard is for - but writing the
+# `if` and letting it fail silently would be a lie in the source. A host at
+# the top of the ladder has nowhere to be moved to, and the template says so
+# by not trying.
+#
+# THE COMMANDER'S GATE IS A BARE has_character_modifier AND THE KNIGHT'S IS
+# NOT. Same reason as the verb batch above and the ledger batch above that:
+# the rung families live on the side commander, and this file is rooted on
+# him.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The host is at the top of the ladder and everybody in it can feel the
+# floor.
+#
+# NO SIDE ROW, BECAUSE THE RUNG IS THE SIDE ROW. A commander does not carry
+# bc_momentum_decisive on a field that is going badly - it takes a chain of
+# won moments to get there - so asking bc_side_is_winning_trigger as well
+# would be asking the same question twice and narrowing the gate for nothing.
+#
+# `ordered`/`up`: bc_pursuit, and it is the one modifier that means anything
+# to a host in this state. It has already been given every other advantage
+# the seam hands out at some point on the way up the ladder; what it does not
+# have is permission to keep going, and that is exactly what this hands it.
+#
+# NO STRESS EITHER WAY. Nothing is being paid for here. The template exists to
+# name a state the mod produces and has never described, and a resource line
+# would turn it into a transaction.
+# ---------------------------------------------------------------------------
+bc_nothing_is_stopping_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_character_modifier = bc_momentum_decisive
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nothing_is_stopping_this"
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_nothing_is_stopping_this_toast
+			desc = bc_nothing_is_stopping_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
