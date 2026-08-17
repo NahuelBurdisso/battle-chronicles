@@ -630,6 +630,46 @@
  bc_chronicles.0011.desc_ground_winter:0 "The cold has been in the men since before dawn. It will be in them all day."
  bc_chronicles.0011.desc_ground_desert:0 "There is no water between here and the horizon, and both armies know it."
  bc_chronicles.0011.desc_ground_open:0 "The field is what it is. Nothing on it will decide anything for you."
+# --- eve variants (2026-08-17) ----------------------------------------------
+#
+# The eve prints one foe paragraph and one ground paragraph every time it is
+# answered, and it has one of each per value. Both chains now pool their lines
+# through `random_valid` in bc_eve_events.txt - the structure is vanilla's, and
+# the event file's own comment carries the proof.
+#
+# THREE PER FOE VALUE, TWO PER GROUND BAND. The asymmetry is argued at the
+# ground chain: a band's sentence has to stay true of every terrain in that
+# band, and the bands were partitioned for prose rather than for tactics, so
+# mountains, wetlands and bog all have to survive the same rough line.
+#
+# EVERY VARIANT OF A VALUE MAKES THE SAME CLAIM, because the chain has already
+# decided which value speaks and a variant that added a fact would be reporting
+# something nothing tested. The nemesis lines all say the two have met; the kin
+# lines all say the blood is shared; the heathen lines all say the prayers
+# differ; the countryman lines all say the tongue is shared; the stranger lines
+# all say there is nothing between these two men but the war.
+#
+# THESE ARE THE EVE'S, NOT THE TOASTS'. bc_frag_bond_* is a clause appended to a
+# battle toast and says `the man commanding here`; these are full paragraphs in
+# a pop-up that already shows the player his own portrait, so they say `he` and
+# use [ROOT.Char.GetFirstName] where a name helps. No line below is a rewording
+# of a bond fragment - the two sets are read minutes apart in the same battle.
+ bc_chronicles.0011.desc_nemesis_b:0 "[bc_eve_foe.GetName] is over there, under the other banner, where he has been before. [ROOT.Char.GetFirstName] has not forgotten how that ended."
+ bc_chronicles.0011.desc_nemesis_c:0 "The scouts came back with one name and it was [bc_eve_foe.GetName]'s. Everything after that has been arranged around it."
+ bc_chronicles.0011.desc_kin_b:0 "There are two banners here and one family under them. Whatever the heralds say, that is what this is."
+ bc_chronicles.0011.desc_kin_c:0 "He knows the arms coming towards him the way he knows his own hands. He has eaten under them."
+ bc_chronicles.0011.desc_heathen_b:0 "Two sets of prayers are going up on this ground this morning and they are not going to the same place."
+ bc_chronicles.0011.desc_heathen_c:0 "Whatever they hold sacred over there, none of it is anything to him, and his is nothing to them."
+ bc_chronicles.0011.desc_countryman_b:0 "Both hosts were raised in one country. Both will curse in the same words when it starts."
+ bc_chronicles.0011.desc_countryman_c:0 "He will hear his own tongue shouted back at him all day, and it will be shouted at him."
+ bc_chronicles.0011.desc_stranger_b:0 "The other host has come a long way to be here and he could not say from where. There is nothing between him and them that the war did not put there."
+ bc_chronicles.0011.desc_stranger_c:0 "He looks for a face he knows over there and finds none. Whatever is settled today will be settled between strangers."
+ bc_chronicles.0011.desc_ground_rough_b:0 "Nothing between the two hosts is level. Whoever moves first will spend the crossing getting untidy."
+ bc_chronicles.0011.desc_ground_forest_b:0 "There is more wood than sky in that direction. Anything that goes in comes out somewhere else, and later."
+ bc_chronicles.0011.desc_ground_jungle_b:0 "The green wall starts close and goes on further than the scouts got. It swallowed two of them yesterday."
+ bc_chronicles.0011.desc_ground_winter_b:0 "Nobody slept warm and nobody is going to. The day will take a share of both hosts before either touches the other."
+ bc_chronicles.0011.desc_ground_desert_b:0 "The heat is already standing off the ground in sheets. Whatever water is left is what there is."
+ bc_chronicles.0011.desc_ground_open_b:0 "Flat, dry, and open from here to the treeline. Nothing here will help either of them."
  bc_chronicles.0011.d:0 "Let the ground fight for us."
  bc_chronicles.0011.e:0 "This time he does not ride away."
 # The two contextual options added 2026-08-17. f is horse country, g is kin.

@@ -76,44 +76,151 @@ bc_chronicles.0011 = {
 	# STRANGERS. Its text says "a banner nobody here can name", which is a lie
 	# about a countryman. That is why the countryman arm is here and not dropped:
 	# without it the largest match-up class on the map falls through to it.
+	# THREE LINES PER VALUE SINCE 2026-08-17, AND THE STRUCTURE IS VANILLA'S.
+	# Each arm of the chain below is a `random_valid` holding three
+	# triggered_desc entries that REPEAT THE SAME TRIGGER, so the arm as a whole
+	# is valid exactly when that value holds and then pools its three lines. The
+	# outer first_valid still decides WHICH value speaks, in the order argued
+	# above; random_valid only decides which of that value's three sentences
+	# gets used.
+	#
+	# A random_valid WHOSE ARMS ALL FAIL IS NOT VALID AND first_valid MOVES ON.
+	# That is what makes this safe to nest, and it is vanilla's own pattern -
+	# birth.9002 (vanilla events/birth_events.txt:3515-3614) is a first_valid
+	# holding one random_valid and then a bare fallback desc, which only works
+	# if an empty pool falls through. The bare `desc = key` entries in the
+	# stranger arm are vanilla too: chariot_race_ongoing_jp.0400.
+	#
+	# THE TRIGGERS ARE DUPLICATED VERBATIM AND MUST STAY THAT WAY. Three copies
+	# of one guarded read is ugly and is the price of the structure - CK3 gives
+	# no way to attach a pool to one trigger. If a value's test is ever changed,
+	# ALL THREE COPIES CHANGE, or the arm silently starts pooling a subset.
+	#
+	# THE THREE LINES OF A VALUE SAY THE SAME THING THREE WAYS, exactly as the
+	# fifteen bond fragments do. They are not three degrees of it: the chain has
+	# already decided the fact and these only decide the wording.
 	desc = {
 		desc = bc_chronicles.0011.desc_intro
 		first_valid = {
-			triggered_desc = {
-				trigger = { bc_eve_facing_nemesis_trigger = yes }
-				desc = bc_chronicles.0011.desc_nemesis
-			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_foe
-					trigger_if = {
-						limit = { exists = scope:bc_eve_foe }
-						scope:bc_eve_foe = { is_close_family_of = root }
-					}
+			random_valid = {
+				triggered_desc = {
+					trigger = { bc_eve_facing_nemesis_trigger = yes }
+					desc = bc_chronicles.0011.desc_nemesis
 				}
-				desc = bc_chronicles.0011.desc_kin
-			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_foe
-					trigger_if = {
-						limit = { exists = scope:bc_eve_foe }
-						NOT = { scope:bc_eve_foe = { faith = root.faith } }
-					}
+				triggered_desc = {
+					trigger = { bc_eve_facing_nemesis_trigger = yes }
+					desc = bc_chronicles.0011.desc_nemesis_b
 				}
-				desc = bc_chronicles.0011.desc_heathen
-			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_foe
-					trigger_if = {
-						limit = { exists = scope:bc_eve_foe }
-						scope:bc_eve_foe = { culture = root.culture }
-					}
+				triggered_desc = {
+					trigger = { bc_eve_facing_nemesis_trigger = yes }
+					desc = bc_chronicles.0011.desc_nemesis_c
 				}
-				desc = bc_chronicles.0011.desc_countryman
 			}
-			desc = bc_chronicles.0011.desc_stranger
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { is_close_family_of = root }
+						}
+					}
+					desc = bc_chronicles.0011.desc_kin
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { is_close_family_of = root }
+						}
+					}
+					desc = bc_chronicles.0011.desc_kin_b
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { is_close_family_of = root }
+						}
+					}
+					desc = bc_chronicles.0011.desc_kin_c
+				}
+			}
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							NOT = { scope:bc_eve_foe = { faith = root.faith } }
+						}
+					}
+					desc = bc_chronicles.0011.desc_heathen
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							NOT = { scope:bc_eve_foe = { faith = root.faith } }
+						}
+					}
+					desc = bc_chronicles.0011.desc_heathen_b
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							NOT = { scope:bc_eve_foe = { faith = root.faith } }
+						}
+					}
+					desc = bc_chronicles.0011.desc_heathen_c
+				}
+			}
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { culture = root.culture }
+						}
+					}
+					desc = bc_chronicles.0011.desc_countryman
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { culture = root.culture }
+						}
+					}
+					desc = bc_chronicles.0011.desc_countryman_b
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_foe
+						trigger_if = {
+							limit = { exists = scope:bc_eve_foe }
+							scope:bc_eve_foe = { culture = root.culture }
+						}
+					}
+					desc = bc_chronicles.0011.desc_countryman_c
+				}
+			}
+			# THE FALLBACK ARM, AND IT IS STILL A FALLBACK. Three bare descs in
+			# a pool with no triggers at all, so the pool is always valid and
+			# first_valid can never run off the end - which is the property the
+			# single `desc = bc_chronicles.0011.desc_stranger` line had before.
+			random_valid = {
+				desc = bc_chronicles.0011.desc_stranger
+				desc = bc_chronicles.0011.desc_stranger_b
+				desc = bc_chronicles.0011.desc_stranger_c
+			}
 		}
 		# THE GROUND CHAIN HAS FIVE NAMED BANDS PLUS A FALLBACK. The fallback
 		# text ("The field is what it is. Nothing on it will decide anything for
@@ -125,58 +232,132 @@ bc_chronicles.0011 = {
 		# `stranger` arm's text is false about a countryman, and a band measured
 		# at 8/137 earns a bespoke line. Desert's zero is a sample result, not
 		# a map truth — Dorne and Essos exist — so its arm stays.
+		#
+		# TWO LINES PER BAND SINCE 2026-08-17, pooled the same way the foe chain
+		# above is, and for the same reason. TWO here and THREE there because
+		# the ground paragraph is the more constrained of the pair: each band's
+		# sentence has to remain true of every terrain in that band, and the
+		# bands are prose partitions with mixed membership - see option d's
+		# header on why. A third line per band would have to be true of
+		# mountains, wetlands and bog at once, and two already is the harder
+		# half of the writing.
 		first_valid = {
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_ground
-					trigger_if = {
-						limit = { exists = scope:bc_eve_ground }
-						scope:bc_eve_ground = { bc_ground_is_rough_trigger = yes }
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_rough_trigger = yes }
+						}
 					}
+					desc = bc_chronicles.0011.desc_ground_rough
 				}
-				desc = bc_chronicles.0011.desc_ground_rough
-			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_ground
-					trigger_if = {
-						limit = { exists = scope:bc_eve_ground }
-						scope:bc_eve_ground = { bc_ground_is_forest_trigger = yes }
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_rough_trigger = yes }
+						}
 					}
+					desc = bc_chronicles.0011.desc_ground_rough_b
 				}
-				desc = bc_chronicles.0011.desc_ground_forest
 			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_ground
-					trigger_if = {
-						limit = { exists = scope:bc_eve_ground }
-						scope:bc_eve_ground = { bc_ground_is_jungle_trigger = yes }
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_forest_trigger = yes }
+						}
 					}
+					desc = bc_chronicles.0011.desc_ground_forest
 				}
-				desc = bc_chronicles.0011.desc_ground_jungle
-			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_ground
-					trigger_if = {
-						limit = { exists = scope:bc_eve_ground }
-						scope:bc_eve_ground = { bc_ground_is_winter_trigger = yes }
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_forest_trigger = yes }
+						}
 					}
+					desc = bc_chronicles.0011.desc_ground_forest_b
 				}
-				desc = bc_chronicles.0011.desc_ground_winter
 			}
-			triggered_desc = {
-				trigger = {
-					exists = scope:bc_eve_ground
-					trigger_if = {
-						limit = { exists = scope:bc_eve_ground }
-						scope:bc_eve_ground = { bc_ground_is_desert_trigger = yes }
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_jungle_trigger = yes }
+						}
 					}
+					desc = bc_chronicles.0011.desc_ground_jungle
 				}
-				desc = bc_chronicles.0011.desc_ground_desert
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_jungle_trigger = yes }
+						}
+					}
+					desc = bc_chronicles.0011.desc_ground_jungle_b
+				}
 			}
-			desc = bc_chronicles.0011.desc_ground_open
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_winter_trigger = yes }
+						}
+					}
+					desc = bc_chronicles.0011.desc_ground_winter
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_winter_trigger = yes }
+						}
+					}
+					desc = bc_chronicles.0011.desc_ground_winter_b
+				}
+			}
+			random_valid = {
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_desert_trigger = yes }
+						}
+					}
+					desc = bc_chronicles.0011.desc_ground_desert
+				}
+				triggered_desc = {
+					trigger = {
+						exists = scope:bc_eve_ground
+						trigger_if = {
+							limit = { exists = scope:bc_eve_ground }
+							scope:bc_eve_ground = { bc_ground_is_desert_trigger = yes }
+						}
+					}
+					desc = bc_chronicles.0011.desc_ground_desert_b
+				}
+			}
+			# The open band AND the unresolved-province case, exactly as before.
+			# Untriggered descs in a pool, so this can never be invalid.
+			random_valid = {
+				desc = bc_chronicles.0011.desc_ground_open
+				desc = bc_chronicles.0011.desc_ground_open_b
+			}
 		}
 	}
 
