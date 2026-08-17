@@ -85,6 +85,118 @@ bc_terrain_bogs_us_down_trigger = {
 	}
 }
 
+# --- the field, by band -----------------------------------------------------
+#
+# COMBAT-SIDE WRAPPERS around the six band triggers in bc_ground_triggers.txt.
+# They exist because a band trigger is PROVINCE-scoped - bc_write_ground_effect
+# calls them from inside `scope:combat_side.combat.location = { }` - while an
+# is_valid block is rooted on the commander and has to walk there itself.
+#
+# THESE ARE NOT A SECOND TERRAIN LADDER. They define no membership; each one
+# delegates to the band trigger of the same name. That distinction is what keeps
+# tools/ck3.py validate's partition check meaningful: it reads
+# bc_ground_triggers.txt only, so a wrapper that inlined its own `agot_is_*`
+# list here would drift from AGOT uncaught. If a band's membership is ever
+# wrong, it is wrong in one file for prose, gates and streaks alike.
+#
+# EXISTS-GUARDED AND NESTED, because combat.location does not always resolve -
+# bc_write_ground_effect carries a `BC: ground missing` marker for exactly that
+# case - and CK3 does not short-circuit among siblings.
+#
+# Only three of the six bands are wrapped: those are the three a phase event
+# gates on today. Add the others when something needs them, not before.
+
+bc_field_is_winter_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_winter_trigger = yes }
+	}
+}
+
+bc_field_is_desert_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_desert_trigger = yes }
+	}
+}
+
+bc_field_is_forest_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = { bc_ground_is_forest_trigger = yes }
+	}
+}
+
+# --- the shape of the battle ------------------------------------------------
+#
+# Read live off the combat, NOT off a bc_ scratch variable. Every bc_battle_*
+# variable is written in the EFFECT of a phase event and weights are evaluated
+# BEFORE the effect, so a variable read in an is_valid block would be absent on
+# the first roll of every battle and stale-or-absent thereafter. The combat
+# itself is always current.
+
+# Fifteen thousand men on one field. num_total_troops counts BOTH sides, which
+# is what makes this a statement about the battle rather than about our host -
+# the same reason bc_battle_is_notable_trigger uses it.
+bc_host_is_vast_trigger = {
+	scope:combat_side.combat = { num_total_troops >= 15000 }
+}
+
+# Two fifths of the enemy already dead. The notability trigger's blood row sits
+# at 50 and is measured against COMPLETED battles; this one is asked mid-fight,
+# when the number is still climbing, so it is set below that bar on purpose.
+bc_field_is_bloody_trigger = {
+	scope:combat_side = { percent_enemies_killed >= 40 }
+}
+
+# Two years of war. combat_war is a combat -> war link and a combat does not
+# always have one, so it is guarded exactly like the location walks above.
+bc_war_is_long_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = { war_days >= 730 }
+	}
+}
+
+# --- the man across the field, and the man behind us ------------------------
+
+# Close family: parents, children, siblings, grandparents, grandchildren.
+#
+# THE SAME TEST THE BOND LADDER USES, deliberately - bc_write_bond_effect's
+# `kin` arm is `is_close_family_of` too. If these two ever disagree, a battle
+# would be gated as a kinslaying and then have its toast call the man a
+# stranger. Widening one means widening both.
+#
+# CALLED ON ROOT WITH THE FOE AS THE TARGET, rather than entering the foe's
+# scope. `is_close_family_of` is mutual, so the direction does not matter, and
+# staying out of the foe's scope keeps ROOT unambiguous for any caller.
+bc_foe_is_kin_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		is_close_family_of = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+# He is not the man whose war this is.
+#
+# side_primary_participant is the WAR LEADER of this side, and this trigger
+# makes NO claim that he is standing on the field - a war leader can be a
+# kingdom away. It says only that the commander is fighting someone else's
+# quarrel, which is what the prose it gates is about. Do not rewrite the prose
+# to put the liege at the battle; nothing here can support that.
+bc_fighting_his_lords_war_trigger = {
+	exists = scope:combat_side.side_primary_participant
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_primary_participant }
+		NOT = { this = scope:combat_side.side_primary_participant }
+	}
+}
+
 # --- momentum state ---------------------------------------------------------
 # Used both to gate rallies and to stop a commander stacking the same setback
 # every five days.
