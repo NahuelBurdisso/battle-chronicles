@@ -1770,12 +1770,23 @@ bc_scale_clause = {
 # battle going one way or the other. Rare toasts can share a sentence; common
 # ones cannot.
 #
-# TWO PER BAND AND NOT THREE, which is the eve ground chain's number and its
-# argument: a band's sentence has to stay true of every terrain the band
-# collects, and the bands were partitioned for prose rather than for tactics, so
-# `rough` has to survive hills, mountains, wetlands and bog at once. The bond and
-# scale clauses got three variants each because their values have no such
-# constraint - a nemesis is a nemesis.
+# FOUR PER BAND, RAISED FROM TWO, AND THE REASON IS THE CALL COUNT AND NOTHING
+# ELSE. When the set was written it was called by twenty-six toasts and two
+# arms was a defensible ration; it is now called by SEVENTY-FIVE, and a player
+# whose war is being fought on rough ground reads one of two sentences on every
+# moment toast for the length of it. The command that produced that number, run
+# from the mod root:
+#   grep -o "Custom('bc_ground_clause')" localization/english/bc_l_english.yml | wc -l
+#
+# THE OLD HEADER GAVE A DIFFERENT REASON FOR TWO AND THE REASON WAS SOUND -
+# a band's sentence has to stay true of every terrain the band collects, and the
+# bands were partitioned for prose rather than for tactics, so `rough` has to
+# survive hills, mountains, wetlands and bog at once, where the bond and scale
+# clauses have no such constraint because a nemesis is a nemesis. That argument
+# caps what a string may SAY. It never capped how many of them there could be;
+# it only made each one harder to write, and the twelve added here are held to
+# it exactly as the first twelve were. Anything a reader can picture on a
+# mountain and not in a bog does not belong in `rough`.
 #
 # WHAT THIS SET MAY NOT SAY. It renders after a literal that already described a
 # man doing something and before a clause about the foe, so every string here is
@@ -1819,6 +1830,26 @@ bc_ground_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_where_desert_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_desert_d
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_where_open
 		trigger = {
 			exists = var:bc_battle_ground
@@ -1830,6 +1861,26 @@ bc_ground_clause = {
 	}
 	text = {
 		localization_key = bc_frag_where_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_open_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_open_d
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1859,6 +1910,26 @@ bc_ground_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_where_rough_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_rough_d
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_where_forest
 		trigger = {
 			exists = var:bc_battle_ground
@@ -1870,6 +1941,26 @@ bc_ground_clause = {
 	}
 	text = {
 		localization_key = bc_frag_where_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_forest_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_forest_d
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
@@ -1899,6 +1990,26 @@ bc_ground_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_where_jungle_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_jungle_d
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_where_winter
 		trigger = {
 			exists = var:bc_battle_ground
@@ -1910,6 +2021,26 @@ bc_ground_clause = {
 	}
 	text = {
 		localization_key = bc_frag_where_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_winter_c
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_winter_d
 		trigger = {
 			exists = var:bc_battle_ground
 			trigger_if = {
