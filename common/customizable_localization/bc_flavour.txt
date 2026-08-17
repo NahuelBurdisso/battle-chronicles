@@ -1480,7 +1480,8 @@ bc_bond_clause = {
 # that carries it, and after the bond clause. Last because it is the widest: the
 # literal is one man's moment, the bond is one man's foe, and this is the whole
 # field. Nothing else calls it.
-# POOLED SINCE 2026-08-17, THREE VARIANTS PER BAND. This clause renders on the
+# POOLED SINCE 2026-08-17, FIVE VARIANTS PER BAND (three at first, widened the
+# same day). This clause renders on the
 # END of every moment toast in the mod, which makes it the single most repeated
 # sentence a player reads - the 2026-08-15 run recorded 131 size-3 moments, so
 # one string for band 3 was one string read 131 times in 44 battles. The bond
@@ -1490,8 +1491,25 @@ bc_bond_clause = {
 # THE EQUALITY ARMS AND THE BUCKETS ARE UNCHANGED. Pooling adds arms that match
 # the SAME value, it does not touch which value matches, so every warning in the
 # header above - `flag:huge` would be a silent no-match, a fourth band breaks
-# equality and `>=` differently - applies to the twelve arms exactly as it
+# equality and `>=` differently - applies to the sixteen arms exactly as it
 # applied to the three.
+#
+# WIDENED FROM THREE TO FIVE PER BAND, AND THIS IS THE ONE POOL WHERE THAT IS
+# WORTH THE KEYS. The arithmetic is on the 2026-08-15 run: 233 moments in 44
+# battles, every one of them ending on this clause, and 131 of them in band 3
+# alone. At three arms a player fighting one war read the same size-3 sentence
+# roughly forty-four times; at five, twenty-six. No other pool in the mod is
+# read on every toast - bc_bond_clause is skipped whenever the foe is absent and
+# the ground clauses are one band each - which is why this one is widened alone
+# rather than all of them together.
+#
+# FIVE IS THE CEILING WITHOUT A NEW AXIS, and the reason is the same one
+# bc_ground_clause's header gives for stopping at two: every arm in a band has
+# to be true of every battle the band collects. Band 3 is `whatever the mod
+# calls huge`, and there is a limit to how many DIFFERENT true sentences exist
+# about a number that vague before they start contradicting each other about
+# what the field looks like. A sixth would have to be bought by splitting the
+# band, which breaks equality - the warning above.
 #
 # THE FALLBACK IS A COMPLEMENT, NOT A BARE ARM, which is the one structural
 # change. Under `random_valid` an untriggered arm is valid on EVERY render, so
@@ -1537,6 +1555,26 @@ bc_scale_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_scale_huge_d
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 3
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_huge_e
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 3
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_scale_large
 		trigger = {
 			exists = var:bc_battle_size
@@ -1567,6 +1605,26 @@ bc_scale_clause = {
 		}
 	}
 	text = {
+		localization_key = bc_frag_scale_large_d
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 2
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_large_e
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 2
+			}
+		}
+	}
+	text = {
 		localization_key = bc_frag_scale_small
 		trigger = {
 			exists = var:bc_battle_size
@@ -1588,6 +1646,26 @@ bc_scale_clause = {
 	}
 	text = {
 		localization_key = bc_frag_scale_small_c
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 1
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_small_d
+		trigger = {
+			exists = var:bc_battle_size
+			trigger_if = {
+				limit = { exists = var:bc_battle_size }
+				var:bc_battle_size = 1
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_scale_small_e
 		trigger = {
 			exists = var:bc_battle_size
 			trigger_if = {

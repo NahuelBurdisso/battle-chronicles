@@ -811,6 +811,12 @@
  bc_frag_scale_small:0 " In a fight this small, the men not yet in the fighting are few."
  bc_frag_scale_small_b:0 " Everybody who came is in it, or will be inside the hour."
  bc_frag_scale_small_c:0 " It is a small enough thing that one company could tip it either way."
+ bc_frag_scale_huge_d:0 " The far end of it is too distant to make out and nobody there knows how this end is going."
+ bc_frag_scale_huge_e:0 " Two men could fight all day in this and never come within a quarter mile of each other."
+ bc_frag_scale_large_d:0 " There is enough of it that word from one wing reaches the other late and wrong."
+ bc_frag_scale_large_e:0 " A host this size takes an hour to do anything it is told, and it has been told several things."
+ bc_frag_scale_small_d:0 " Both sides can see the whole of it, which means both sides can see how it is going."
+ bc_frag_scale_small_e:0 " There is nobody left over. What is here is what there is."
  bc_frag_scale_any:0 ""
 
 # --- shared fragments: the ground (2026-08-17) ------------------------------
