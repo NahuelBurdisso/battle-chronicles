@@ -5078,3 +5078,194 @@ bc_the_small_man = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE MOD'S OWN VERDICT, READ BACK ONTO THE FIELD, 2026-08-17.
+#
+# BATTLE CHRONICLES HAS BEEN KEEPING A RECORD OF HOW EVERY COMMANDER FIGHTS
+# SINCE PLAN 4 AND HAS NEVER LET HIM CARRY IT INTO A BATTLE. `bc_style_last`
+# and `bc_style_streak` are written on the commander at the end of every
+# notable battle by bc_style_streak_effect and never cleared; at three in a row
+# the reward chain hands him one of AGOT's twelve commander traits. Both the
+# variables and the traits were read ONLY by the post-battle chain that writes
+# them. Sixty-seven commander templates asked about his martial, his purse, his
+# body, his kin, his ground and his enemy, and not one of them asked the thing
+# the mod itself had already decided about him.
+#
+# THIS IS NOT bc_the_long_war OR THE MOMENT-COUNT TEMPLATES. Those ask how long
+# THIS war or THIS battle has run. A streak is a fact about the man that was
+# true before he mounted this morning and will still be true if he loses today.
+#
+# THE TWO TEMPLATES BELOW ARE THE TWO HONEST READINGS OF A HABIT and they are
+# deliberately not a diagonal of one gate: one reads the streak while it is
+# working, the other reads the TRAIT the streak already paid out while it is
+# not. `reckless` (00_traits.txt:15518, category commander, opposites
+# cautious_leader, min_combat_roll -2 max_combat_roll +3) is the trait AGOT
+# gives the max_combat_roll gamble, and it is what a `wild` streak of three
+# earns from this mod's own reward chain. A man can hold it without ever having
+# had a streak - AGOT hands it out at character creation too - so the two gates
+# overlap without either containing the other.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The thing he does, working again.
+#
+# WINNING, BECAUSE A HABIT THAT IS FAILING IS THE OTHER TEMPLATE. What makes
+# this worth a moment is not that he has a style; it is that the host has
+# learned it. Men who have followed a commander through two battles of the same
+# shape start moving before the order arrives, and that is the only thing on
+# this field that no amount of martial buys in an afternoon.
+#
+# `ordered`/`up` AND bc_pursuit. Not `adapted` - he has adapted to nothing,
+# that is the point of him. The army modifier is right for the same reason the
+# prose is: the gap between the order and the movement has closed, and an army
+# that moves the moment it is told is an army that catches people.
+#
+# THE STREAK IS READ AS OF THIS MORNING. bc_style_streak_effect runs at combat
+# end, so nothing this battle has done is in the number yet, and the template
+# is about what he walked in with.
+#
+# NO STYLE ROW. The template deliberately does not care WHICH way he always
+# fights - `bc_style_last` would name it, and naming it would force six
+# variants of one paragraph and a desc that contradicts five of them. The
+# clause pools already vary the wording; the fact here is repetition itself.
+#
+# THE DESC MAY NOT NAME THE STYLE, MAY NOT NAME A PREVIOUS BATTLE and may not
+# promise a trait - the reward chain decides that at three, out of this
+# template's sight, and a toast that hinted at it would be writing a promise
+# the budget gate can refuse.
+# ---------------------------------------------------------------------------
+bc_the_thing_he_always_does = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_fights_the_same_way_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_thing_he_always_does"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_thing_he_always_does_toast
+			desc = bc_the_thing_he_always_does_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The day the habit does not pay.
+#
+# `reckless` AND LOSING, WHICH IS THE TRAIT'S OWN ARITHMETIC COMING DUE.
+# AGOT gives it min_combat_roll -2 and max_combat_roll +3: it does not make a
+# man better, it widens what can happen to him, and a losing field is the low
+# end of that spread arriving. The mod awards this trait itself for three
+# `wild` battles running, so on a good number of characters this template is
+# the mod reading its own handwriting back.
+#
+# NO STREAK ROW, DELIBERATELY. The trait outlives the streak that earned it and
+# is also handed out by AGOT at character creation, so gating on both would
+# throw away every commander who came by it honestly and would make this a
+# strict subset of the template above's gate, which the mod does not allow.
+#
+# `wild`/`down` AND bc_spent_horse. The verb table sends `wild` either way to
+# the same modifier, and it is the right one: what a gamble costs when it fails
+# is the horses and the men who went with it, not the line's shape.
+#
+# THE FALTERING RUNG IS GUARDED, the standing shape. Stress rather than a
+# prestige loss, because prestige is not what this costs him - the trait's
+# reputation is intact and that is precisely the problem.
+#
+# THE DESC MAY NOT KILL HIM AND MAY NOT LOSE THE BATTLE. `bc_side_is_losing`
+# is a state, not an outcome, and four other chains own the ending. It also may
+# not have him change his mind: `cautious_leader` is this trait's `opposites`
+# and the reward chain is the only thing in the mod permitted to make that
+# swap, after three battles, not in one afternoon.
+# ---------------------------------------------------------------------------
+bc_the_gamble_that_does_not_pay = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_trait = reckless
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_gamble_that_does_not_pay"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_gamble_that_does_not_pay_toast
+			desc = bc_the_gamble_that_does_not_pay_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

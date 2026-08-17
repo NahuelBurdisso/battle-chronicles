@@ -2109,3 +2109,33 @@
 # "the men have noticed", "nobody has told him to slow down".
  bc_knight_the_spurs_they_took_toast:0 "He Stands Where They Put Him"
  bc_knight_the_spurs_they_took_toast_desc:0 "Whatever it was, it was some years ago and in front of enough people that the story travels ahead of him. He was given the worst piece of the line this morning by a captain who did not trouble to look at him while saying it, and he has been standing in it since, without a device on him and without anyone to hold it if he goes down. The line is falling back everywhere else. It is not falling back here, and the four men nearest him have stopped asking themselves why they are still level with him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-ONE. The mod reading its own record back to the player.
+#
+# NEITHER DESC MAY NAME THE STYLE. The gate on the first is a count, not a
+# kind: the same paragraph is rendered for a man who has won twice by holding
+# and a man who has won twice by charging, and any sentence that pictures one
+# of them is wrong for the other. The word to reach for is "again", never
+# "always in the same way".
+#
+# NEITHER MAY NAME A PREVIOUS BATTLE. The mod knows the count and nothing else
+# - not where, not against whom, not what it was called - and a toast that
+# invents a name puts a fact in the player's world that no other file agrees
+# with.
+#
+# THE FIRST MAY NOT PROMISE A TRAIT. Three battles and a budget gate decide
+# that, out of the template's sight and possibly against it.
+#
+# THE SECOND MAY NOT KILL HIM, MAY NOT LOSE THE BATTLE AND MAY NOT HAVE HIM
+# CHANGE HIS MIND. `reckless` and `cautious_leader` are opposites and only the
+# reward chain may make that swap.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "he has done
+# this before", "it has worked every other time".
+ bc_the_thing_he_always_does_toast:0 "They Move Before He Says It"
+ bc_the_thing_he_always_does_toast_desc:0 "The rider he sent out is still forty yards short of the captain he was sent to and the captain has already turned his men into it. Nobody has drilled this. It is only that they have stood in this shape beside this man often enough to know what the second half of the order is going to be, and this afternoon the half-second they save on every one of them has begun adding up in a direction the other host can see from where it stands.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_gamble_that_does_not_pay_toast:0 "The Same Throw, A Worse Field"
+ bc_the_gamble_that_does_not_pay_toast_desc:0 "He asked for the whole of it at once, the way he asks for it, and the ground gave him back about a third and kept the rest. The horses that went furthest are the ones not coming back, and the men behind them are looking at the gap where those horses were and doing the arithmetic on it out loud. He is watching the same gap. Nothing he is thinking about it has reached his face.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

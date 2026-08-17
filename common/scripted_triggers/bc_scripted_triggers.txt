@@ -774,3 +774,43 @@ bc_is_kingsguard_trigger = {
 		has_council_position = kingsguard_6
 	}
 }
+
+# --- has he been fighting the same battle over and over ---------------------
+#
+# THE MOD'S OWN MEMORY, READ BACK ONTO THE FIELD FOR THE FIRST TIME.
+# `bc_style_streak` is written by bc_style_streak_effect in
+# bc_reputation_effects.txt at the END of every notable battle, holds the number
+# of consecutive notable battles this commander has finished in the same style,
+# and is never cleared. Until this trigger, nothing in the mod ever read it
+# except bc_reputation_effects.txt itself, which uses it to decide whether to
+# award a commander trait at three. The mod has been keeping a record of how a
+# man fights for the whole of a campaign and has never once let the record
+# affect anything a player sees during a battle.
+#
+# `>= 2`, NOT `>= 3`. Three is the reward threshold, and a trigger that fired at
+# three would be describing a man who is about to be handed a trait for it - the
+# reward chain already speaks at that point. Two is the first number at which
+# "again" is true, which is the whole of what this asks.
+#
+# THE VALUE CANNOT INCLUDE THE BATTLE BEING FOUGHT. bc_style_streak_effect runs
+# from the combat-end chain, so mid-battle the variable holds the count as of the
+# LAST finished battle. That is the correct reading for a template about a habit:
+# the habit is what he brought with him this morning.
+#
+# `exists` AS A SIBLING, THE COMPARISON NESTED - the standing rule of this file
+# and of every variable guard in the mod. `exists` is safe on a missing variable;
+# a READ is not, and CK3 guarantees no evaluation order among siblings. Nearly
+# every commander in the world has fought no notable battle at all, so the naive
+# `AND = { exists = var:bc_style_streak  var:bc_style_streak >= 2 }` would log a
+# missing-variable read for almost every commander on almost every phase.
+#
+# READ ON THE COMMANDER. bc_style_streak lives on the character the seam calls
+# `side_commander`; a knight template that wants it must walk there first, the
+# way bc_knight_he_has_lost_count walks to var:bc_battle_moments.
+bc_fights_the_same_way_trigger = {
+	exists = var:bc_style_streak
+	trigger_if = {
+		limit = { exists = var:bc_style_streak }
+		var:bc_style_streak >= 2
+	}
+}
