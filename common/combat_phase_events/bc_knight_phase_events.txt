@@ -2677,3 +2677,92 @@ bc_knight_something_is_always_there = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE NAME ON THE OTHER BANNER, 2026-08-17.
+#
+# THE KNIGHT HALF OF THE NICKNAME BATCH, AND IT LOOKS THE OTHER WAY. The
+# commander file asks whether OUR man has a name; from inside the ranks the
+# interesting one is whose banner is over there, because a knight has spent
+# his whole career hearing about men he has never seen and one of them is now
+# four hundred yards away and losing.
+#
+# THE GATE IS INLINE, NOT A SHARED TRIGGER. `has_any_nickname` on the enemy
+# commander is used once, and bc_scripted_triggers.txt is for gates that are
+# shared or that need an argument recorded - a one-line read behind its own
+# `exists` does not earn a name. The guard is written the same way
+# bc_knight_knows_that_man writes its `has_relation_rival` read, for the same
+# reason: CK3 does not short-circuit, so the `exists` and the read are
+# separated by a `trigger_if` on that `exists`.
+#
+# WINNING IS THE WHOLE TEMPLATE. Losing to a famous man is the least
+# surprising thing that can happen to a knight and there is no moment in it.
+# Pushing him back is a thing he will be telling people about for thirty
+# years, which is why the prestige is 100 - second only to the hedge knight's
+# 150, and above every other knight award in the file.
+#
+# `bloodied`/`up`: bc_bloodied AND a momentum rung. The advantage is real and
+# it is being bought at the front of a push against the best men the other
+# side has, because a man with a name keeps good company. Nothing here is
+# cheap.
+# ---------------------------------------------------------------------------
+bc_knight_the_name_across_the_field = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_winning_trigger = yes
+		exists = scope:combat_side.enemy_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.enemy_side.side_commander }
+			scope:combat_side.enemy_side.side_commander = { has_any_nickname = yes }
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_name_across_the_field"
+
+		add_prestige = 100
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_name_across_the_field_toast
+				desc = bc_knight_the_name_across_the_field_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

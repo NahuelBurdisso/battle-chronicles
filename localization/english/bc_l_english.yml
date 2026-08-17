@@ -1573,3 +1573,37 @@
 
  bc_knight_something_is_always_there_toast:0 "There Is Always Something Waiting"
  bc_knight_something_is_always_there_toast_desc:0 "Four times now they have gone forward into a place that looked empty and four times there have been spears in it. He does not know why and he has no way of finding out from where he is standing, behind a shield, in the fifth rank of a push that has stopped again. He only knows that it keeps happening, that the men on either side of him have gone quiet about it, and that nobody wants to be in the front of the next one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the name he already has (2026-08-17) -----------------------------------
+#
+# NONE OF THE THREE MAY QUOTE THE NICKNAME. The gate is `has_any_nickname`,
+# which means the name could be any of thirty-five AGOT keys or something out
+# of a save this mod has never seen, and a desc that puts words in the men's
+# mouths will be wrong most of the time. All three are written around the
+# name without ever saying it, which is also how it actually sounds from
+# fifty yards away.
+#
+# THE FIRST IS NOT A COMPLIMENT TO HIM. The host is going forward on
+# something that has nothing to do with the orders he is giving, and it is
+# spending horses doing it. He is not entirely in charge of this.
+#
+# THE SECOND MAY NOT BE SELF-PITY AND MAY NOT BE HUMILIATION. It is the exact
+# moment a man notices that the people around him expected somebody else, and
+# it costs fifteen stress rather than the file's usual ten for that reason.
+#
+# THE THIRD IS TOLD FROM FOUR HUNDRED YARDS. The knight has never met the man
+# on the other banner and never will; what he has is a lifetime of hearing
+# about him, and the sight of that banner going backwards.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the man in the songs"
+# (bc_he_holds_one_place says "the way it is done in the songs"), "they have
+# stopped having opinions", "whoever is holding the other standard"
+# (bc_the_other_man_is_better).
+ bc_they_are_shouting_his_name_toast:0 "They Are Not Waiting to Be Told"
+ bc_they_are_shouting_his_name_toast_desc:0 "Somewhere in the middle ranks a man started shouting what people have called him since before this war, and it has gone along the line the way fire goes along a hedge. They are going forward. They are going forward faster than anybody ordered and the riders on the flank have been at a canter for a quarter of an hour with nothing in front of them yet. It is working, and he did not do it, and he cannot stop it either.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_name_is_a_weight_toast:0 "They Came Expecting Somebody Else"
+ bc_the_name_is_a_weight_toast_desc:0 "Every man in this host walked here knowing what he is supposed to be, and it is going badly, and he can see them working out what that means. Nobody has said anything. A captain took an order from him just now and repeated it back, which is a thing that is done for a stranger. Whatever happens to the rest of the afternoon, the name is going to be attached to it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_name_across_the_field_toast:0 "That Banner Is Going Backwards"
+ bc_knight_the_name_across_the_field_toast_desc:0 "He has been hearing about the man under that standard since he was old enough to hold a shield, from people who had never been within a hundred leagues of him. He is within four hundred yards of him now, and the standard has moved twice, and both times it moved the wrong way. Getting this far has cost the front of the push almost everything it had. He is going to be telling people about this for thirty years.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

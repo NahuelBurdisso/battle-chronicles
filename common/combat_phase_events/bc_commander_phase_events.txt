@@ -3460,3 +3460,169 @@ bc_the_gap_he_left = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE NAME HE ALREADY HAS, 2026-08-17.
+#
+# THE MOD HANDS OUT NICKNAMES AND HAS NEVER ONCE READ ONE BACK. bc_reward_
+# effects.txt carries three pools and thirty-five keys of them; the aftermath
+# awards one at bc_reputation_effects.txt phase 2c; and the only place in the
+# entire mod that asks whether a character has a nickname is the guard on that
+# award, `has_any_nickname = no`, which exists purely to avoid overwriting one.
+# The mod is therefore a machine that produces reputation and cannot see it.
+#
+# THAT IS THE SAME SHAPE AS THE STRESS BATCH AND THE RELATION BATCH, and it is
+# the most productive question this session has found: what does this mod
+# write that it never reads? A nickname is the loudest of them, because unlike
+# stress or a relation it is a thing OTHER PEOPLE say out loud, which is
+# exactly what a battlefield is full of.
+#
+# `has_any_nickname`, NOT `has_nickname = nick_x`. The gate must not care WHICH
+# name. A test against a specific key would tie the templates to AGOT's
+# nickname list, and half the men who walk onto a field in Westeros with a name
+# on them got it somewhere this mod has never heard of.
+#
+# IT IS NOT THE DREAD AXIS AND IT IS NOT THE PIETY AXIS. Dread is what his own
+# men are afraid of. A nickname is what everybody who has never met him
+# expects, which is a fact about the world and not about the host - and both
+# templates below are written from that difference.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The name is doing some of the work.
+#
+# `wild`/`up`, WHICH IS bc_spent_horse AND A MOMENTUM RUNG IN THE SAME BREATH,
+# and it is the correct pair rather than a compromise. A host going forward
+# behind a name it is shouting is not a host being handled well; it is a host
+# that has stopped waiting to be told. It gains the rung because it is
+# genuinely winning ground, and it blows the horses because nobody in it is
+# pacing anything. bc_the_wrath_takes_him and bc_the_old_grudge reach the same
+# cell out of the commander's temper; this reaches it out of his reputation,
+# which he may not even want.
+#
+# WINNING IS PART OF THE CLAIM. The name only carries a host that is already
+# going forward - the losing half of the axis is the template below, and it is
+# a completely different sentence.
+# ---------------------------------------------------------------------------
+bc_they_are_shouting_his_name = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_any_nickname = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			prestige_level >= 3
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_are_shouting_his_name"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_they_are_shouting_his_name_toast
+			desc = bc_they_are_shouting_his_name_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other end of the same fact. Everyone on this field turned up expecting
+# the man in the song, including the men standing behind him.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING, AND THAT IS THE POINT. There is
+# no army modifier for a reputation failing to hold, because nothing about the
+# army has changed - the men are where they were put and they are doing what
+# they were told. What has changed is what they thought this was going to be.
+#
+# FIFTEEN STRESS, WHICH IS MORE THAN THE FILE'S USUAL TEN, and the extra five
+# is the whole argument of the template. Every other losing case costs him ten
+# because losing costs ten. This one costs more because he is losing in front
+# of a name, and the name will still be attached to him next year.
+#
+# NO `prestige_level` FLOOR ON THE GATE. A minor lord who got a name once for
+# something small is exactly as exposed as a famous one, arguably more, and a
+# floor here would quietly make the template about greatness instead of about
+# expectation.
+# ---------------------------------------------------------------------------
+bc_the_name_is_a_weight = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_any_nickname = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			prestige_level >= 3
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_name_is_a_weight"
+
+		add_stress = 15
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_name_is_a_weight_toast
+			desc = bc_the_name_is_a_weight_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
