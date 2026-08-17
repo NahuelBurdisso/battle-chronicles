@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 63 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 41 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 64 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 42 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Forty-eight batches, one per row of the table below, none of which needed a
+Forty-nine batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -633,6 +633,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | why he is here | **`has_hook` appeared nowhere in the mod** — not a gate, not a `chance` row. Fifty-eight commander templates asked what a man can do, owns, believes and fears, and whose war it is, and none asked the only question the game can answer about *why he came*. This is the station axis' third visit and a different question each time: `bc_nothing_but_the_horse` asks what he owns, `bc_the_war_has_his_name_on_it` asks whose quarrel it is, this asks what it cost him to be asked — a landed man with his name on the war can still be here on a leash. Two triggers, the same two characters pointed opposite ways, and they take opposite side rows for it: held on a losing field (`measured`/`down`, no modifier — the men do not know any of this) and holding on a winning one (`adapted`/`up`, 50 prestige — nothing on the field looks different, only the size of the account). The knight takes the held half and `entrenched`/`down` with `bc_shieldwall`, because he could have gone at any hour and has not, and **a line does not know why a man is still in it, only that he is**. No desc may name the hook: the mod does not know what it is and a save file will contradict an invented one | 3 templates, base 30, 30, 80 |
 | the office he holds at home | **`has_council_position` appeared nowhere in the mod** — a strange gap in a game where the council seat is very often *why* this man is the one holding the host. Two seats and not eight: a steward or a chaplain in command is a man doing something other than his job and the mod already has a template for being out of one's depth, while the marshal and the castellan make **opposite claims about how he ought to command**. Marshal winning is `ordered`/`up` and `bc_pursuit`, written at the distance of the drill rather than the afternoon — two years of winters on a wet field, coming back. Castellan losing is `entrenched`/`down` and `bc_shieldwall`, **and the modifier is the joke**: he reaches for walls and patience because those have always worked, and out here that is how a host is surrounded. It may not sneer — he is good at a job that is not this one. The batch also fills the **last unread skill**, `stewardship`, as the castellan's `chance` row. Third template: `bc_is_kingsguard_trigger`, seven rows because **AGOT models the Kingsguard as seven separate council positions** and there is no single key, on a knight with **no side row at all** — the order's whole claim about itself is that the answer changes nothing, and a side row would be the template quietly disagreeing | 3 templates, base 30, 30, 80 |
 | the Wall and the boy | The first two **AGOT-native statuses** the mod has ever asked about. `agot_is_member_of_nights_watch` is AGOT's own trigger and the mod calls it rather than inlining its three traits, for the same reason it calls AGOT's terrain helpers: a fourth way to be in the Watch would go quietly wrong in an inlined `OR`. The Watch commander only gets the **losing row**, because its arithmetic — fewer than there were, and nobody sending more — is a sentence about a bad afternoon and reads as self-pity on a good one; `bloodied`/`down` and `bc_bloodied`, men fighting harder and worse because there is nowhere behind them to be sent to. The other half: **`squire` appeared zero times in thirty-nine knight templates**, which all ask how well he fights and none ask whether the man in the knight list has been a man for very long. The **trait**, not `is_agot_knight_trigger`, which counts a squire with 100 track experience as a knight already — right for a knighting ceremony, wrong for today. Two templates on one gate and opposite side rows, and the pair is the point: the same boy has the best day of his life or finds out what he agreed to, and **nothing about him decides which**. Winning is `wild`/`up` with `bc_spent_horse` and the file's **smallest award, 25 prestige** — he is not being knighted this afternoon and the mod may not imply it. Losing is `measured`/`down`, which hands out nothing, and **15 stress, the file's high number**, because nothing about it is going to stop happening for several hours. No commander half: a squire does not hold a host | 3 templates, base 30, 80, 80 |
+| the other diagonal of the empty purse | `gold < 0` was already in the mod twice and **both times on the same diagonal**: `bc_the_chest_is_empty` is a commander who is broke and losing, `bc_knight_the_ransom_he_needs` a knight who is broke and winning. The other two cells were never written, and neither is its neighbour with the sign flipped. The **broke commander who is winning** cannot afford the better version of this battle — the one where he holds what he has taken and waits a month — so he buys an ending with horses, `wild`/`up` and `bc_spent_horse`, **the same KIND the losing half took**, because an empty chest makes a man reckless in both directions and the mod should use the same word for it. No prestige: he is not doing something admirable, he is doing something a number made him do. `bc_war_is_long_trigger` **raises** this one where instinct says lower — the longer the war has run, the less of it he can pay for. The **broke knight who is losing** is the mod's one place where `gold` is about the man rather than his purse: the men coming at him read harness too, there is nothing on him worth sending for, and a man who cannot put his hands up fights in a particular way. `bloodied`/`down` and `bc_bloodied`, which here is **literally** what is happening rather than a metaphor for it. `craven` lowers it, because a craven man in that position already has a template and it is the one about running | 2 templates, base 30, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -651,16 +652,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **a hundred and twenty-five**, its "3, 3, 4 and 3"
-are 26, 20, 26 and 14, and the fall-through set is thirty-nine sites rather than
+plan 1's eighteen call sites are now **a hundred and twenty-seven**, its "3, 3, 4 and 3"
+are 27, 20, 27 and 14, and the fall-through set is thirty-nine sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 63, knight 41.** Weight against vanilla's
+**Template totals are now commander 64, knight 42.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60; on the knight side, forty-one templates against
-`knight_none`'s 2000 — forty at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60; on the knight side, forty-two templates against
+`knight_none`'s 2000 — forty-one at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

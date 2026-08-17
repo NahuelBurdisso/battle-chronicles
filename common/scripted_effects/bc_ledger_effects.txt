@@ -574,7 +574,7 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". THIRTY-THREE of the
-# hundred and twenty-five call sites are adapted or measured - the five plan 1 shipped
+# hundred and twenty-seven call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
 # .0002b and .0003b) plus twenty-eight from later content batches - and every one of
 # them is supposed to fall through. Six more, all `ordered`/`down`, fall
@@ -596,10 +596,10 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at a hundred and twenty-five call sites:
+# at a hundred and twenty-seven call sites:
 #
 #   measured/down 18  bloodied/up 18   wild/down 15     entrenched/up 15
-#   ordered/up 14     wild/up 11       adapted/up 8     bloodied/down 8
+#   ordered/up 14     wild/up 12       bloodied/down 9  adapted/up 8
 #   ordered/down 6    entrenched/down 5  measured/up 4  adapted/down 3
 #
 # The table's BEHAVIOUR has not changed as those cells filled - it never asked
@@ -633,9 +633,9 @@ bc_add_verb_effect = {
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
-# pair census above: bc_bloodied from 26 sites, bc_shieldwall from 20,
-# bc_spent_horse from 26, bc_pursuit from 14, and 39 falling through. Those five
-# sum to the hundred and twenty-five, which is the check.
+# pair census above: bc_bloodied from 27 sites, bc_shieldwall from 20,
+# bc_spent_horse from 27, bc_pursuit from 14, and 39 falling through. Those five
+# sum to the hundred and twenty-seven, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

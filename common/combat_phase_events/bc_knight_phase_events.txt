@@ -3441,3 +3441,85 @@ bc_knight_what_he_agreed_to = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# There is nothing in him worth taking alive.
+#
+# THE LOSING HALF OF bc_knight_the_ransom_he_needs, AND THE MOD'S ONE PLACE
+# WHERE `gold` IS ABOUT THE MAN AND NOT ABOUT HIS PURSE. On a winning field a
+# broke knight looks at the other host and sees money. On a losing field the
+# other host looks at him and sees none, and a man nobody will be paid for is
+# a man there is no reason to take gently.
+#
+# `bloodied`/`down` AND bc_bloodied, WHICH IS THE RARE CASE WHERE THAT
+# MODIFIER IS LITERALLY WHAT IS HAPPENING. bc_bloodied is men fighting harder
+# and worse; this is a man who has understood that surrendering is not one of
+# the things available to him this afternoon, which produces exactly that.
+#
+# THE DESC MAY NOT KILL HIM OR WOUND HIM - the standing rule - AND MAY NOT
+# SEND HIM RUNNING, which bc_knight_shames_himself owns. What it may say is
+# what he has worked out and what he is doing about it.
+#
+# `craven` LOWERS IT RATHER THAN RAISING IT. A craven man in this position has
+# a template of his own and it is the one about running.
+# ---------------------------------------------------------------------------
+bc_knight_nobody_pays_for_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		gold < 0
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			gold < -100
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nobody_pays_for_him"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nobody_pays_for_him_toast
+				desc = bc_knight_nobody_pays_for_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

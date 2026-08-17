@@ -4726,3 +4726,95 @@ bc_the_watch_has_no_reserve = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE TWO CELLS THE EMPTY PURSE NEVER FILLED, 2026-08-17.
+#
+# `gold < 0` IS ALREADY IN THE MOD TWICE AND BOTH TIMES ON THE SAME DIAGONAL.
+# bc_the_chest_is_empty is a commander who is broke and losing;
+# bc_knight_the_ransom_he_needs is a knight who is broke and winning. The
+# other diagonal - broke and winning on the commander side, broke and losing
+# on the knight side - was never written, and it is not the same moment with
+# the sign flipped. Money does something different to a man who is ahead than
+# to a man who is behind, and it does something different again to a man whose
+# own body is the collateral.
+#
+# NOT A SUBSET OF EITHER SHIPPED TEMPLATE. Same character gate, opposite side
+# row, and the side rows are mutually exclusive, so neither pair can compete.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He is winning and he cannot afford to be here tomorrow.
+#
+# THE WINNING HALF OF bc_the_chest_is_empty AND NOT ITS MIRROR. That template
+# is about men who have started weighing their loyalty; this one is about a
+# commander who has done the sum himself and found that the only affordable
+# battle is a short one. The men in this one are not owed an explanation and
+# are not asking for one.
+#
+# `wild`/`up` AND bc_spent_horse, WHERE THE LOSING HALF TOOK `wild`/`down`.
+# Same KIND on purpose: an empty chest makes a man reckless in both directions
+# and the mod should say so with the same word. Upward it means he spends the
+# horses to end it this afternoon, which is exactly what the modifier costs.
+#
+# NO PRESTIGE. He is not doing something admirable. He is doing something he
+# has been made to do by a number, and the mod does not reward arithmetic.
+#
+# bc_war_is_long_trigger RAISES IT RATHER THAN LOWERING IT, WHICH IS THE
+# OPPOSITE OF NOTHING - the longer the war has run the less of it he can pay
+# for, so the pressure to end it today is greater and not smaller.
+# ---------------------------------------------------------------------------
+bc_the_short_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		gold < 0
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			gold < -100
+		}
+		modifier = {
+			factor = 1.5
+			bc_war_is_long_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_short_war"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_short_war_toast
+			desc = bc_the_short_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -1944,3 +1944,27 @@
 
  bc_knight_what_he_agreed_to_toast:0 "This Is What It Is"
  bc_knight_what_he_agreed_to_toast_desc:0 "He had a picture of this. He has had it for years, and it was quite detailed, and it is being taken away from him a piece at a time by the actual noise and the actual smell and the way the man beside him keeps saying the same short word over and over. Nothing has happened to him. It is only that he now knows what he agreed to, and there are hours of it left.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the other diagonal of the empty purse (2026-08-17) ----------------------
+#
+# NEITHER DESC MAY USE "THE ARITHMETIC" OR ANY FORM OF IT. It is the title of
+# bc_the_chest_is_empty_toast and it appears again in the Watch block, and a
+# third use in the mod's other money template would turn a phrase into a tic.
+#
+# THE FIRST MAY NOT HAVE THE MEN DOUBTING HIM. That is bc_the_chest_is_empty
+# and it is the losing half of this same gate; here nobody in the ranks knows
+# there is a number, and the pressure is entirely inside the man giving the
+# orders.
+#
+# THE SECOND MAY NOT NAME A PRICE OR COUNT COPPERS - bc_knight_the_ransom_he_
+# needs owns the man who knows what he is owed to the copper. This one is
+# about being worth nothing to the people deciding, which is a different
+# sentence and must not borrow that one's vocabulary.
+#
+# SPENT PHRASES THESE MAY NOT REUSE: "the men have noticed", "he has stopped
+# counting", "worth more sitting up", "nothing has been refused".
+ bc_the_short_war_toast:0 "It Has to Be Today"
+ bc_the_short_war_toast_desc:0 "There is a version of this where he holds what he has taken, sits down in front of them and waits a month, and it is the better version and he cannot have it. He has known since before the horns that whatever he does not finish this afternoon he will not be able to feed. So the horses go forward again when they should be walked, and the wing that was holding is sent, and he is buying an ending with the only thing he still has to spend.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nobody_pays_for_him_toast:0 "No Reason to Take Him Gently"
+ bc_knight_nobody_pays_for_him_toast_desc:0 "The men coming at him can read harness as well as he can, and there is nothing on him that says somebody would send for him. He worked that out an hour ago. It means the door the others still have is not there for him, and a man who cannot put his hands up fights in a particular way - forward, and without much left over for the fellow beside him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
