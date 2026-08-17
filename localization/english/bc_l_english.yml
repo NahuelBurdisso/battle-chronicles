@@ -215,9 +215,17 @@
 # bc_kin_across_the_field in the first draft.
 #
 # NO PER-MOMENT GROUND FRAGMENTS HERE. Those are Plan B tasks 5-14 and remain
-# gated on a run. Appending the two shared clauses is the SAFE half of that gate:
+# gated on a run. Appending the shared clauses is the SAFE half of that gate:
 # each literal below stands as a finished sentence, so if Custom() turns out not
 # to compose, these toasts read exactly as they would have anyway.
+#
+# THREE CLAUSES SINCE 2026-08-17, NOT TWO. bc_ground_clause was added and now
+# renders FIRST of the three on twenty-six toasts, in the same position the
+# per-moment sets hold on the ten: ground, then foe, then field. The seven
+# toasts in this file that are GATED on a band do not call it - their literal is
+# already about the ground - and neither do the ten moments, which have their own
+# per-moment sets above. So the collision list below gains one more entry: no
+# literal that calls the shared clause may spend `the ground` on its own.
 
  bc_winter_bites_toast:0 "Winter Bites"
  bc_winter_bites_toast_desc:0 "The cold does what the enemy could not. Fingers stop closing on spear-shafts, and the ranks shuffle in place to keep the blood moving.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
@@ -229,25 +237,25 @@
  bc_the_woods_hide_us_toast_desc:0 "Numbers count for less among trees. Arrows come from cover, and the cover is empty by the time anyone reaches it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_long_war_toast:0 "The Long War"
- bc_the_long_war_toast_desc:0 "Two years of this now. The veterans have stopped flinching, and stopped hurrying along with it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_long_war_toast_desc:0 "Two years of this now. The veterans have stopped flinching, and stopped hurrying along with it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_too_wide_to_see_toast:0 "Too Wide to See"
- bc_too_wide_to_see_toast_desc:0 "The line runs past what one pair of eyes can hold. An order sent to the far wing will arrive at a battle that has already changed.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_too_wide_to_see_toast_desc:0 "The line runs past what one pair of eyes can hold. An order sent to the far wing will arrive at a battle that has already changed.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_killing_is_general_toast:0 "The Killing Is General"
- bc_the_killing_is_general_toast_desc:0 "The dying has stopped being something that happens here and there. One host is coming apart, and it is not this one.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_killing_is_general_toast_desc:0 "The dying has stopped being something that happens here and there. One host is coming apart, and it is not this one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_kin_across_the_line_toast:0 "Kin Across the Line"
- bc_kin_across_the_line_toast_desc:0 "He knows the device on the other side better than he knows his own. Somebody will have to explain this at a funeral.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_kin_across_the_line_toast_desc:0 "He knows the device on the other side better than he knows his own. Somebody will have to explain this at a funeral.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_old_wolf_toast:0 "The Old Wolf"
- bc_the_old_wolf_toast_desc:0 "He has stood in this exact noise before, more times than the boys around him have years. He does not shout. He points.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_old_wolf_toast_desc:0 "He has stood in this exact noise before, more times than the boys around him have years. He does not shout. He points.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_green_boy_toast:0 "The Green Boy"
- bc_the_green_boy_toast_desc:0 "He has read about this. The reading covered none of the noise, and none of how long it goes on.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_green_boy_toast_desc:0 "He has read about this. The reading covered none of the noise, and none of how long it goes on.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_his_lords_war_toast:0 "His Lord's War"
- bc_his_lords_war_toast_desc:0 "It is not his quarrel and never was. He serves it well regardless, which is what the oath was for.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_his_lords_war_toast_desc:0 "It is not his quarrel and never was. He serves it well regardless, which is what the oath was for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- knight chronicles ------------------------------------------------------
 
@@ -312,10 +320,10 @@
 # else, and that reads correctly only because the clauses name their subject
 # every time. Do not write a clause that says a bare `he`.
  bc_knight_unhorses_a_lord_toast:0 "A Lord Goes Down"
- bc_knight_unhorses_a_lord_toast_desc:0 "The spear takes the horse first and the rider after it. Whoever that was in the good armour is on his back in the churn now, and shouting for help.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_unhorses_a_lord_toast_desc:0 "The spear takes the horse first and the rider after it. Whoever that was in the good armour is on his back in the churn now, and shouting for help.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_takes_a_captive_toast:0 "Yielded"
- bc_knight_takes_a_captive_toast_desc:0 "Sword reversed, gauntlet off, a name given quickly and clearly. Both of them know what the name is worth by the hour.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_takes_a_captive_toast_desc:0 "Sword reversed, gauntlet off, a name given quickly and clearly. Both of them know what the name is worth by the hour.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_is_ridden_down_toast:0 "Ridden Down"
  bc_knight_is_ridden_down_toast_desc:0 "Flat country, and nothing on it to put your back against. He is still turning when the horses reach him.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
@@ -338,10 +346,10 @@
  bc_knight_stands_in_the_snow_toast_desc:0 "Everything is white and grey and slow, and he has not given up a step of it. Ice has frozen the mail to his surcoat where the blood ran down.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_the_old_sword_toast:0 "The Old Sword"
- bc_knight_the_old_sword_toast_desc:0 "He is too old for this and has been for a decade, and he is still upright when younger backs have bent. Nothing he does today is quick and nothing he does today is wasted.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_the_old_sword_toast_desc:0 "He is too old for this and has been for a decade, and he is still upright when younger backs have bent. Nothing he does today is quick and nothing he does today is wasted.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_meets_his_cousin_toast:0 "His Own Name, Opposite"
- bc_knight_meets_his_cousin_toast_desc:0 "The device coming at him is his own name, worn by somebody who used to eat at the same table. Neither of them says anything anybody else can hear.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_meets_his_cousin_toast_desc:0 "The device coming at him is his own name, worn by somebody who used to eat at the same table. Neither of them says anything anybody else can hear.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- knight chronicles, the fourth three (2026-08-17) ------------------------
 #
@@ -362,13 +370,13 @@
 # and a deed would promise a consequence the effect does not deliver.
 
  bc_knight_in_the_press_toast:0 "In the Press"
- bc_knight_in_the_press_toast_desc:0 "Two in five of them are down and there is nowhere left to put a foot that is not somebody. He has stopped stepping over them and is simply going forward.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_in_the_press_toast_desc:0 "Two in five of them are down and there is nowhere left to put a foot that is not somebody. He has stopped stepping over them and is simply going forward.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_the_long_war_toast:0 "Two Years of This"
- bc_knight_the_long_war_toast_desc:0 "Seven hundred days since the first muster and he was never any good at it on the first one. What is left of him goes where it is pushed and no further.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_the_long_war_toast_desc:0 "Seven hundred days since the first muster and he was never any good at it on the first one. What is left of him goes where it is pushed and no further.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_among_thousands_toast:0 "Among Thousands"
- bc_knight_among_thousands_toast_desc:0 "There are fifteen thousand men on this field and not one of them will remember which was him. He can see two banners from where he is standing and neither is close enough to shout at.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_among_thousands_toast_desc:0 "There are fifteen thousand men on this field and not one of them will remember which was him. He can see two banners from where he is standing and neither is close enough to shout at.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- knight chronicles, the trait batch (2026-08-17) -------------------------
 #
@@ -388,13 +396,13 @@
 # of a walk, and for what a man's hands are doing.
 
  bc_knight_the_glory_hound_toast:0 "Somebody Is Watching"
- bc_knight_the_glory_hound_toast_desc:0 "He is out past the standards where the whole field can see him, and he has been careful about which way he is facing while he does it. The horses that went with him will not be good for anything else today.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_the_glory_hound_toast_desc:0 "He is out past the standards where the whole field can see him, and he has been careful about which way he is facing while he does it. The horses that went with him will not be good for anything else today.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_walks_them_back_toast:0 "He Walks Them Back"
- bc_knight_walks_them_back_toast_desc:0 "It is going badly and he will not let it go badly at a run. He puts the shaken ones in front of him where he can see them and sets the pace himself, and what comes off that ground is still an army.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_walks_them_back_toast_desc:0 "It is going badly and he will not let it go badly at a run. He puts the shaken ones in front of him where he can see them and sets the pace himself, and what walks away from this is still an army.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_knight_strips_the_dead_toast:0 "His Hands Are Full"
- bc_knight_strips_the_dead_toast_desc:0 "They are winning without him and he has noticed. He is on his knees over somebody's dead brother with a knife working at a strap, and there is a gap where he was standing.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_knight_strips_the_dead_toast_desc:0 "They are winning without him and he has noticed. He is on his knees over somebody's dead brother with a knife working at a strap, and there is a gap where he was standing.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
@@ -411,22 +419,22 @@
 # is why bc_he_looks_for_the_road says `everyone near enough to see him` where
 # the obvious phrasing was `every man who sees him`.
  bc_the_wrath_takes_him_toast:0 "The Wrath Takes Him"
- bc_the_wrath_takes_him_toast_desc:0 "Something in him goes, and what is left is not taking counsel from anybody. He is forward of his own standard before his guards have understood what happened.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_wrath_takes_him_toast_desc:0 "Something in him goes, and what is left is not taking counsel from anybody. He is forward of his own standard before his guards have understood what happened.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_patient_hand_toast:0 "The Patient Hand"
- bc_the_patient_hand_toast_desc:0 "They have the numbers and they are in a hurry to spend them. He is in no hurry whatsoever, and it costs them more with every hour he waits.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_patient_hand_toast_desc:0 "They have the numbers and they are in a hurry to spend them. He is in no hurry whatsoever, and it costs them more with every hour he waits.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_wine_at_noon_toast:0 "The Wine at Noon"
- bc_the_wine_at_noon_toast_desc:0 "What was in the skin was not water, and it was not the first skin of the day either. His orders keep arriving a little later than the trouble they were meant for.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_wine_at_noon_toast_desc:0 "What was in the skin was not water, and it was not the first skin of the day either. His orders keep arriving a little later than the trouble they were meant for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_zealot_will_not_stop_toast:0 "No Quarter Asked"
- bc_the_zealot_will_not_stop_toast_desc:0 "Two in five of them are down already and he calls that a judgement rather than a tally. Nothing he has said since morning suggests he intends to stop at five.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_zealot_will_not_stop_toast_desc:0 "Two in five of them are down already and he calls that a judgement rather than a tally. Nothing he has said since morning suggests he intends to stop at five.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_he_looks_for_the_road_toast:0 "He Looks for the Road"
- bc_he_looks_for_the_road_toast_desc:0 "His eyes keep going back to the way they came in this morning. Everyone near enough to see him do it draws the obvious conclusion.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_he_looks_for_the_road_toast_desc:0 "His eyes keep going back to the way they came in this morning. Everyone near enough to see him do it draws the obvious conclusion.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_practised_eye_toast:0 "The Practised Eye"
- bc_the_practised_eye_toast_desc:0 "A host this size does not fit in one head unless somebody taught you how to hold it there. Somebody did, and he is putting the far wing where it needs to be while it is still forming up.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_practised_eye_toast_desc:0 "A host this size does not fit in one head unless somebody taught you how to hold it there. Somebody did, and he is putting the far wing where it needs to be while it is still forming up.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- the last two ground bands, 2026-08-17 ----------------------------------
 #
@@ -471,13 +479,13 @@
 # device on the other side" (bc_kin_across_the_line_toast_desc).
 
  bc_the_old_grudge_toast:0 "He Puts Himself Opposite"
- bc_the_old_grudge_toast_desc:0 "He moves his standard down the line until it is square on to the one he came here for, and the men around him understand that they are now standing where the day will be decided.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_old_grudge_toast_desc:0 "He moves his standard down the line until it is square on to the one he came here for, and the men around him understand that they are now standing where the day will be decided.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_gods_on_both_sides_toast:0 "Gods on Both Sides"
- bc_gods_on_both_sides_toast_desc:0 "The holy men are sent out along the front rank instead of being kept safe behind it, and they are still working when the lines touch. Men who could barely stand an hour ago are shouting themselves hoarse.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_gods_on_both_sides_toast_desc:0 "The holy men are sent out along the front rank instead of being kept safe behind it, and they are still working when the lines touch. Men who could barely stand an hour ago are shouting themselves hoarse.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
  bc_the_same_tongue_toast:0 "He Can Understand the Screaming"
- bc_the_same_tongue_toast_desc:0 "Everything carried across from the other side arrives in words he has known since he was a boy — orders, oaths, and the noise men make when they are hit. He can do nothing with any of it except hear it.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+ bc_the_same_tongue_toast_desc:0 "Everything carried across from the other side arrives in words he has known since he was a boy — orders, oaths, and the noise men make when they are hit. He can do nothing with any of it except hear it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
 # --- shared fragments: the bond ---------------------------------------------
 
@@ -699,6 +707,45 @@
  bc_frag_scale_small_b:0 " Everybody who came is in it, or will be inside the hour."
  bc_frag_scale_small_c:0 " It is a small enough thing that one company could tip it either way."
  bc_frag_scale_any:0 ""
+
+# --- shared fragments: the ground (2026-08-17) ------------------------------
+#
+# The clause the twenty-six toasts written AFTER Plan B now carry, so that a
+# trait case or a foe case says what is underfoot the way the ten moments have
+# since Plan B task 6. Two per band, `random_valid`; the argument for two rather
+# than three, and for one shared set rather than twenty-six per-moment ones, is
+# in bc_flavour.txt at the definition.
+#
+# EVERY ONE OF THESE HAS TO BE TRUE OF EVERY TERRAIN ITS BAND COLLECTS. `rough`
+# is hills, mountains, wetlands and bog together, so a rough line may not say
+# slope; `forest` and `jungle` are separate bands and neither may borrow the
+# other's word.
+#
+# NONE OF THEM NAMES A CONSEQUENCE, unlike the per-moment sets. Those know what
+# the moment was and can say the slope broke the charge; this one is appended to
+# twenty-six different literals and knows nothing about any of them.
+#
+# THE SPENT GROUND PHRASES ACROSS THE MOD, which these twelve may not reuse:
+# "the trees" and "arrows come from cover" (bc_the_woods_hide_us and the forest
+# per-moment fragments), "the green closes over it" (banner falls, jungle), "the
+# cold has been in the men" (the eve), "there is no water between here and the
+# horizon" (the eve, desert), "the high ground", "the slope", "the gully", "a
+# hollow", "two boulders", "the standing stone" (the nine per-moment rough
+# fragments). These reach instead for what the ground does to a man's footing,
+# his sight and his patience.
+ bc_frag_where_desert:0 " The heat here comes up off the ground as hard as it comes down out of the sky."
+ bc_frag_where_desert_b:0 " There is dust in the water, in the mail and in every mouth on this field."
+ bc_frag_where_open:0 " The field is flat enough that a man can see the whole of it from where he stands."
+ bc_frag_where_open_b:0 " There is nothing on this ground that either host can make use of."
+ bc_frag_where_rough:0 " Nothing about this ground is easy to stand on and none of it is level."
+ bc_frag_where_rough_b:0 " The footing here has been arguing with both hosts since first light."
+ bc_frag_where_forest:0 " Half of what is happening on this ground is happening out of sight."
+ bc_frag_where_forest_b:0 " The wood swallows sound, so orders arrive late here or not at all."
+ bc_frag_where_jungle:0 " The green is thick enough here that a man can lose the sky in it."
+ bc_frag_where_jungle_b:0 " Nothing dries out in this country and nothing in it is more than a few paces off."
+ bc_frag_where_winter:0 " Snow lies over the whole of this ground and more of it is still coming."
+ bc_frag_where_winter_b:0 " The cold on this field is doing its own work and taking its time about it."
+ bc_frag_where_any:0 ""
 
 # --- aftermath --------------------------------------------------------------
 

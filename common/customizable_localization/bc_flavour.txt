@@ -1610,3 +1610,187 @@ bc_scale_clause = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE SHARED GROUND CLAUSE, 2026-08-17.
+#
+# THE TEN ORIGINAL MOMENTS EACH NAME THEIR OWN BAND AND THE OTHER TWENTY-SIX
+# TOASTS NAME NOTHING. Plan B gave every one of the ten a per-moment ground set
+# - bc_banner_falls_ground and the nine like it above - because those ten fire
+# constantly and a shared sentence would have been read hundreds of times. The
+# templates written since then got bond and scale and no ground at all, so a
+# player reading bc_the_old_wolf or bc_knight_the_glory_hound is told who the
+# foe is and how big the field is and never once told what is underfoot.
+#
+# ONE SHARED SET FOR ALL OF THEM, AND THAT IS THE RIGHT TRADE HERE. A per-moment
+# set for twenty-six more toasts would be a hundred and fifty-six strings, and
+# each of those toasts fires far less often than any of the ten - they are gated
+# on a trait, an age, a foe or a battle condition, where the ten are gated on the
+# battle going one way or the other. Rare toasts can share a sentence; common
+# ones cannot.
+#
+# TWO PER BAND AND NOT THREE, which is the eve ground chain's number and its
+# argument: a band's sentence has to stay true of every terrain the band
+# collects, and the bands were partitioned for prose rather than for tactics, so
+# `rough` has to survive hills, mountains, wetlands and bog at once. The bond and
+# scale clauses got three variants each because their values have no such
+# constraint - a nemesis is a nemesis.
+#
+# WHAT THIS SET MAY NOT SAY. It renders after a literal that already described a
+# man doing something and before a clause about the foe, so every string here is
+# about the GROUND and never about the men on it, and none of them may claim a
+# consequence. The per-moment sets can say the slope broke the charge because
+# they know what the charge was; this one does not know what happened.
+#
+# IT IS NOT CALLED BY ANY OF THE TEN. Doubling a ground clause onto a desc that
+# already has one would print two sentences about the same field, and the
+# per-moment string is the better of the two every time. Nor is it called by the
+# seven toasts that are GATED on a band - bc_winter_bites and the six like it
+# already spend their whole literal on the ground.
+#
+# THE FALLBACK IS A COMPLEMENT, for the reason bc_scale_clause's header gives at
+# length: under `random_valid` an untriggered arm is valid on every render and
+# would take a share of every toast to print an empty string.
+# ===========================================================================
+bc_ground_clause = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		localization_key = bc_frag_where_desert
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_desert_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:desert
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_open
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_open_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:open
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_rough
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_rough_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:rough
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_forest
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_forest_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:forest
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_jungle
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_jungle_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:jungle
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_winter
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_winter_b
+		trigger = {
+			exists = var:bc_battle_ground
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				var:bc_battle_ground = flag:winter
+			}
+		}
+	}
+	text = {
+		localization_key = bc_frag_where_any
+		trigger = {
+			trigger_if = {
+				limit = { exists = var:bc_battle_ground }
+				NOR = {
+					var:bc_battle_ground = flag:desert
+					var:bc_battle_ground = flag:open
+					var:bc_battle_ground = flag:rough
+					var:bc_battle_ground = flag:forest
+					var:bc_battle_ground = flag:jungle
+					var:bc_battle_ground = flag:winter
+				}
+			}
+		}
+	}
+}
