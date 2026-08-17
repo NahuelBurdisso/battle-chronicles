@@ -7071,17 +7071,17 @@ bc_they_are_not_his_smallfolk = {
 # ===========================================================================
 # WHAT THE MAN ACROSS THE FIELD IS WORTH, 2026-08-17.
 #
-# SEVENTY BATCHES AND NOT ONE GATE HAS EVER MENTIONED THE ENEMY. The mod knows
-# who he is on every battle and prints a sentence about him under every moment
-# it writes; what it has never done is let him CAUSE one. See the trigger
-# header for why the answer is `enemy_side` read fresh rather than the variable
-# the rest of the mod uses.
+# THE MOD ASKS SEVEN QUESTIONS ABOUT THE ENEMY COMMANDER AND ALL SEVEN ARE
+# ABOUT WHO HE IS OR HOW GOOD HE IS. Kin, house, culture, faith, martial,
+# outmatched, present in person - his blood, his tongue, his god and his skill.
+# Not one of them asks what he is WORTH, and the bond ladder cannot answer it
+# either: a king and a hedge knight sort into the same bucket on all five of
+# its arms. Whether there is a crown on the other side of the field is the
+# largest single fact about an afternoon in Westeros and the chronicle has been
+# silent on it.
 #
-# RANK IS THE FIRST QUESTION TO ASK ABOUT HIM because it is the one the bond
-# ladder cannot answer. Kin, countryman, heathen, nemesis, stranger - a king
-# and a hedge knight sort into the same bucket on all five. Whether there is a
-# crown on the other side of the field is the largest single fact about an
-# afternoon in Westeros and the chronicle has been silent on it.
+# SEE THE TRIGGER HEADER for why the answer is `enemy_side` read fresh rather
+# than var:bc_battle_foe, which is the rule the other seven follow too.
 #
 # THE COMMANDER TAKES THE WINNING HALF AND THE KNIGHT THE LOSING ONE, which is
 # the reverse of bc_the_crown_on_the_field two thousand lines above - that is a

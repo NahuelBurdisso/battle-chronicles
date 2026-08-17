@@ -1208,32 +1208,31 @@ bc_he_leads_a_free_company_trigger = {
 
 # --- what the man across the field is worth ----------------------------------
 #
-# THE MOD HAS NEVER GATED A TEMPLATE ON THE ENEMY COMMANDER. It knows perfectly
-# well who he is - bc_battle_open_effect saves him into var:bc_battle_foe on
-# every battle, bc_write_bond_effect sorts him into nemesis / kin / countryman /
-# heathen / stranger, and every moment toast in the mod ends with the sentence
-# that comes out of it. But that is a CLAUSE APPENDED TO A MOMENT. No `is_valid`
-# in either phase-event file has ever asked a single question about him, so no
-# moment has ever been ABOUT him. bc_commander_phase_events.txt:5585 says so in
-# as many words.
+# THE MOD READS THE ENEMY COMMANDER IN SEVEN PLACES ALREADY AND NONE OF THEM
+# ASKS THIS. bc_foe_is_kin_trigger, bc_foe_is_countryman_trigger,
+# bc_foe_is_heathen_trigger and bc_foe_is_house_trigger read his IDENTITY;
+# bc_foe_is_formidable_trigger and bc_foe_is_outmatched_trigger read his SKILL;
+# bc_foe_leader_commands_in_person_trigger reads whether he turned up at all.
+# All seven are above in this file and all seven make the same `enemy_side`
+# walk this one makes. What none of them reads is his STATION, which is a
+# different question from all three of those and, in this setting, the loudest.
 #
-# THIS DOES NOT READ var:bc_battle_foe AND MUST NOT. The variable is written by
+# `enemy_side` AND NOT var:bc_battle_foe, WHICH IS THE RULE THE SEVEN ABOVE
+# ALREADY FOLLOW AND THE REASON THEY DO. The variable is written by
 # bc_battle_open_effect, which runs inside a moment's `effect` block - so during
 # the FIRST `is_valid` of a battle it does not exist yet, and during later ones
-# it exists only because some earlier moment happened to fire. A gate that reads
+# it exists only because some earlier moment happened to fire. A gate that read
 # it would be silently conditional on the chronicle having already said
-# something, which is not a fact about the battle.
+# something, which is not a fact about the battle. `enemy_side` is the engine's
+# own answer and needs no bookkeeping: "get enemy (opposite) combat side of
+# scoped side", combat_side to combat_side.
 #
-# `enemy_side` IS THE ENGINE'S OWN ANSWER and needs no bookkeeping: "get enemy
-# (opposite) combat side of scoped side", combat_side to combat_side, and
-# bc_battle_open_effect already walks exactly this path to find the foe in the
-# first place. Reading it fresh in a gate is the same walk one step earlier.
-#
-# THE QUESTION IS RANK, WHICH THE BOND LADDER DOES NOT ASK. bc_write_bond_effect
-# sorts the foe five ways and none of the five is "what is he worth" - a king
-# and a landless sworn sword both come out `stranger` if they are of another
-# culture and the same faith. That is why this gate is not redundant with the
-# bond clause the same toast will print underneath it.
+# THE BOND LADDER DOES NOT ASK IT EITHER. bc_write_bond_effect sorts the foe
+# five ways - nemesis, kin, countryman, heathen, stranger - and none of the
+# five is "what is he worth": a king and a landless sworn sword both come out
+# `stranger` if they are of another culture and the same faith. That is why
+# this gate is not redundant with the bond clause the same toast will print
+# underneath it, and not redundant with the four identity triggers above.
 #
 # `highest_held_title_tier` AND `tier_kingdom` ARE ALREADY IN THE MOD, on the
 # commander himself, at bc_commander_phase_events.txt:1850. That template's
