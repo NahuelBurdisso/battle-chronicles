@@ -1409,3 +1409,30 @@
 
  bc_knight_the_other_branch_toast:0 "The Same Name, and the Lesser Half of It"
  bc_knight_the_other_branch_toast_desc:0 "The man commanding the other host carries the name he carries and got the better share of it two generations before either of them was born. He has been in front of the line since the second charge, where every man on both sides can see whose arms those are, and he has not once looked for a place to stand that is safer than the one he is in.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the state of the chest (2026-08-17) ------------------------------------
+#
+# TWO MEN IN DEBT ON THE SAME AXIS AND THEY MUST NOT SOUND ALIKE. The commander
+# is watching a bill arrive that he has been outrunning since the spring; the
+# knight is looking at the one afternoon of the year when the bill can be
+# answered. One desc is about arithmetic catching up and the other is about
+# work.
+#
+# THE KNIGHT IS NOT A LOOTER AND THE DESC MAY NOT WRITE HIM AS ONE.
+# bc_knight_strips_the_dead owns robbery and shames him for it. This man is
+# taking prisoners, which is a trade with rules, and the only thing unusual
+# about him is how much he needs it to go well.
+#
+# THE COMMANDER'S DESC MAY NOT NAME MUTINY. Nothing has broken and nobody has
+# refused anything - the men are simply, visibly, doing the sum. The mod has
+# bc_no_fear_in_them for a host that has stopped and bc_the_hands_are_not_steady
+# for a man coming apart, and this is neither of those yet.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the usual price", "the going rate",
+# "buy them a warm hour" and "still in the wagons" (the eve's coin option),
+# "one more, and then one more" (bc_he_cannot_stop).
+ bc_the_chest_is_empty_toast:0 "They Have Started Doing the Arithmetic"
+ bc_the_chest_is_empty_toast_desc:0 "It has been three months since anything came out of the chest, and until this afternoon nobody was counting out loud. The line is going backwards at the far end and the men in the middle of it have begun asking each other a question that has an obvious answer. Nothing has been refused. Everything is being weighed.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_ransom_he_needs_toast:0 "Worth More Sitting Up"
+ bc_knight_the_ransom_he_needs_toast_desc:0 "He is not killing the ones with good harness. He is putting them on the ground, taking the helm off to be sure of the face, and handing them back to two men he has told to keep them alive and separate, and he has been doing it since the other host started to bend. Somebody is going to be paid for all of this and he knows to the copper what he is owed elsewhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

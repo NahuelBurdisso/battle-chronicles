@@ -2360,3 +2360,83 @@ bc_knight_the_other_branch = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The man out here with a reason to want the day to end a particular way, and
+# the reason is written down somewhere with his name on it.
+#
+# THE SAME `gold < 0` AS bc_the_chest_is_empty AND THE OPPOSITE SIDE ROW. A
+# commander in debt on a losing field is watching the arithmetic arrive; a
+# knight in debt on a WINNING field is looking at the only opportunity of its
+# kind he is likely to get, because a beaten host leaves men on the ground who
+# can be picked up and sold back to their families. The debt is the same fact
+# and the day makes it two different templates.
+#
+# NOT bc_knight_takes_a_captive. That one takes `prowess >= 8`, winning AND
+# outnumbering, and is about a host with the leisure to take prisoners. This
+# takes neither prowess nor the numbers and asks a question about the man's
+# ledger instead, so neither gate contains the other - both can match, and a
+# knight who matches both is exactly the man the two are describing.
+#
+# NOT `greedy` EITHER. bc_knight_strips_the_dead is the temperament version
+# and it robs the dead, which costs nothing and shames him. This man is not
+# robbing anybody; he is working, and the mod's twenty-five gold rewards
+# elsewhere are the precedent for what that pays.
+#
+# `bloodied`/`up` AND NO RUNG, the rule bc_knight_knows_that_man records.
+# ---------------------------------------------------------------------------
+bc_knight_the_ransom_he_needs = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		gold < 0
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			gold < -100
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = greedy
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = generous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_ransom_he_needs"
+
+		add_gold = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_ransom_he_needs_toast
+				desc = bc_knight_the_ransom_he_needs_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

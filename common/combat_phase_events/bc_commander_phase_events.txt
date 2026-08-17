@@ -2703,3 +2703,96 @@ bc_he_will_not_chase_them = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE STATE OF THE CHEST, 2026-08-17.
+#
+# `gold` IS READ TWENTY-NINE TIMES IN THIS MOD AND EVERY ONE OF THEM IS A
+# PAYMENT OR A GATE ON A PAYMENT - the eve's `gold >= 100`, the pop-up
+# purchases, the two knight rewards. Not one template has ever asked what
+# state the man's finances are in as a REASON for anything, and a host is the
+# most expensive thing a lord ever owns. Wages, carts, fodder and the smith
+# are all on the same ledger as the war.
+#
+# DEBT IS NOT GREED AND NOT POVERTY OF BIRTH. `greedy` is a temperament the
+# mod already reads twice, `is_lowborn` is where a man started, and this is a
+# number that was fine last year. The three are independent: a greedy highborn
+# lord can be four hundred in the hole and a content hedge knight can be
+# solvent.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The men have not been paid, and today is the day it starts to matter.
+#
+# `gold < 0` IS THE HONEST TEST FOR THIS. CK3 lets a character run negative
+# and that is precisely the state being written: not a poor man, a man whose
+# obligations have already outrun what he has. A threshold like `gold < 100`
+# would catch every landless knight in Westeros and say nothing.
+#
+# LOSING, BECAUSE UNPAID MEN WINNING IS NOT A STORY. A host that is carrying
+# the day does not stop to count what it is owed; a host going backwards for a
+# man who has not paid it since the spring does that arithmetic immediately,
+# and it is the arithmetic and not the debt that is the moment.
+#
+# `wild`/`down` AND A GUARDED FALTERING RUNG. bc_spent_horse is what the seam
+# hands out for wild: things are being spent that will not come back. What is
+# being spent here is not the horses' wind but the reason the men are standing
+# there at all, and the modifier is the same shape - a cost taken now that is
+# felt afterwards.
+# ---------------------------------------------------------------------------
+bc_the_chest_is_empty = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		gold < 0
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			gold < -100
+		}
+		modifier = {
+			factor = 1.5
+			bc_war_is_long_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			dread >= major_dread_value
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_chest_is_empty"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_chest_is_empty_toast
+			desc = bc_the_chest_is_empty_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
