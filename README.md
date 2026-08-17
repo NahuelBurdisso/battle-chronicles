@@ -27,7 +27,7 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 54 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 56 commander moments (7 shipped by plan 1, the rest from the content sessions) |
 | `common/combat_phase_events/bc_knight_phase_events.txt` | 36 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Thirty-nine batches, one per row of the table below, none of which needed a
+Forty batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -624,6 +624,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | the ledger as a gate | the mod has **counted its own moments since plan 1 and never asked the count a question**. `var:bc_battle_moments` is incremented at every call site and read in exactly three places — the tier ladder, the first-moment `exists` test, the eve's guard — and no template anywhere gates on how much has already happened on this field. This is the second half of the verb-modifier batch and the bigger one: a live verb says something specific happened, the count says the afternoon has *length*, and together they are the whole of what the mod remembers about a battle in progress. Commander at **3**, which is the ledger's own major rung and the first count the mod already treats as meaningful, with **no side row at all** — length is not a side, and every sentence in the desc has to be true of a field being won and one being lost, which is the hardest prose constraint in the session. `entrenched`/`up`: both lines have stopped trying to be clever. Knight at **4**, the decisive rung, and **losing**, because duration and defeat are separable for a man who is counting and not for a man in the ranks. It cannot run away with itself — the gate gets easier as a battle goes on, but `bc_chronicle_recent` means it competes for the same rate-limited slot as everything else | 2 templates, base 40, 80 |
 | the top of the ladder | the rung modifiers are read in exactly one way and it is not a question: every use of `bc_has_momentum_trigger` and `bc_is_faltering_trigger` in the mod is a `NOT` inside a grant, a guard stopping a second rung landing. The mod knows the difference between minor, major and decisive, writes it on the commander, and has **never asked which rung a host is on**. Only the top tier is gated, on purpose — minor momentum is the mod's ordinary weather and a template gated on it would fire everywhere and say nothing. `bc_momentum_decisive` takes **no side row**, because the rung *is* the side row: nobody carries it on a field that is going badly. It grants `bc_pursuit` and no rung, since a host at the top of the ladder has nowhere to be moved to. **The faltering half cannot be a commander template at all**: `bc_rally_the_line`'s gate is ready + faltering and nothing else, so any commander gate on `bc_faltering_decisive` is a strict subset of a shipped one and no added row can fix that. On the knight side no `is_valid` reads the rungs, so the gate is free — and it too writes no rung, because the guard could never pass and dead code that reads like a live effect is worse than nothing | 2 templates, base 40, 80 |
 | the counts that had gone stale | no new content — a sweep of **comments that stated a number and were passed by the code**. "The three `type = knight` events" was written when there were three and there are thirty-one; "five templates out of the sixty-two"; "three of the thirteen moment literals"; "ALL FIFTEEN NAME THEIR SUBJECT". A comment that is wrong is worse than no comment, because the next reader trusts it. Where a count is not load-bearing the number is now **written out of the sentence** ("every `type = knight` event") rather than corrected, since correcting it only resets the clock; where it is load-bearing the paragraph carries the `grep` that regenerates it. The batch also disarms a **latent trap in the checker**: `validate` verifies every `file.txt:NNN` citation inside a comment against the *current* file, so the two deliberately *historical* citations (to line 258 of a superseded build) turned into hard errors the moment a comment above them grew five lines. Both are reworded out of `file:line` punctuation, and a header paragraph now records that prose is the correct form for a claim about a build that no longer exists | 6 files, 0 templates |
+| what the host had opinions about this morning | **`is_female` appears zero times anywhere in the mod** and `is_lowborn` only inside a comment, while fifty-four commander templates ask what a man is good at, what he was raised to, what he owns, what he believes, what he fears and what shape his body is in. Those are the two facts Westeros argues about *before* it argues about tactics, and the mod read neither. **Both take the winning row, and that is the whole design.** On a losing field either fact becomes the host's explanation for the defeat — a sentence about prejudice being confirmed — which is a claim about what men think that the code cannot support; winning, the same fact is a thing that has visibly stopped mattering over the course of one morning, and the side row is the evidence. Neither is the station axis again: `bc_nothing_but_the_horse` gates on `is_landed = no` and birth is not tenure. `ordered`/`up` for the first (the gap between an order leaving her and a line moving has closed to nothing) and `adapted`/`up` plus **75 prestige** for the second — above the file's usual 50 and below the hedge knight's 150, because a lowborn commander has already been given the thing a hedge knight never gets | 2 templates, base 30, 30 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -642,13 +643,13 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **a hundred and eleven**, its "3, 3, 4 and 3"
-are 24, 17, 24 and 12, and the fall-through set is thirty-four sites rather than
+plan 1's eighteen call sites are now **a hundred and thirteen**, its "3, 3, 4 and 3"
+are 24, 17, 24 and 13, and the fall-through set is thirty-five sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 54, knight 36.** Weight against vanilla's
+**Template totals are now commander 56, knight 36.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
 + 90 + 110 + 100 + 70 + 60; on the knight side, thirty-six templates against
 `knight_none`'s 2000 — thirty-five at 80 and `bc_knight_pulls_him_out` at 60,

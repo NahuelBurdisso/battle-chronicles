@@ -1694,3 +1694,37 @@
 
  bc_knight_the_bottom_of_it_toast:0 "The Ground Behind Him Is Empty"
  bc_knight_the_bottom_of_it_toast_desc:0 "He turns around for the first time in a long while and there is a great deal more space back there than there ought to be. Not a rout, not yet, not quite: men are still facing the right way, and there are simply fewer of them doing it, and the ones at the edges keep glancing at the treeline. A riderless horse goes past at a flat gallop with nobody trying to catch it. Whatever this becomes, it has already stopped being a battle in the sense he came here for.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- what the host had opinions about this morning (2026-08-17) -------------
+#
+# THE WHOLE OF BOTH DESCS IS THAT THE ARGUMENT HAS STOPPED, AND NEITHER MAY
+# STAGE THE ARGUMENT IN ORDER TO WIN IT. No sceptic gets a line of dialogue
+# and then gets corrected. Nobody thinks better of anything. The moment being
+# written is later than that: a host that has other things to attend to and
+# has quietly reallocated the attention. A desc that puts the doubt on the
+# page has made the doubt the subject, and the doubt is not the subject.
+#
+# NEITHER MAY SAY "FOR A WOMAN" OR "FOR A LOWBORN" IN ANY CONSTRUCTION,
+# including one an admirer would say. Praise on that axis is the argument
+# again with better manners, and the templates gate on a field that is being
+# won, where the question has stopped being asked at all.
+#
+# THE FIRST IS ABOUT LATENCY AND SHOULD READ LIKE A MEASUREMENT. What has
+# changed over the morning is the gap between an order leaving her and a line
+# moving, and that is a thing a commander can actually feel closing. Keep it
+# concrete - the runner who no longer waits to be sure, the serjeant who has
+# already started.
+#
+# THE SECOND MAY NOT NAME A FUTURE. He is not being knighted at the end of
+# this and the mod does not know whether he lives to supper. What he has is
+# the thing itself, happening, with witnesses - which is what the prestige is
+# for and is enough.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "asking him for things instead of
+# waiting to be told" (bc_nothing_is_stopping_this), "carried out roughly as
+# he imagined it", "it has turned over", "he has stopped counting".
+ bc_the_orders_are_taken_toast:0 "The Orders Are Simply Taken Now"
+ bc_the_orders_are_taken_toast_desc:0 "At dawn there was a beat between her saying a thing and the thing beginning - short, but there, the length of a man deciding to move. It has gone. The runner leaves before she has finished the sentence because he already knows the end of it. The serjeant on the right has the wing turning while the order is still crossing the field to him. Nobody has announced this and nobody will mention it afterwards, and it is the reason the line is where it is.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_no_name_at_all_toast:0 "No Name At All"
+ bc_no_name_at_all_toast_desc:0 "There is no house behind him, no seat, nothing that would get him a bed in a keep on a wet night, and the men who have been doing what he says since morning are winning with it. They are shouting to each other about the ford and the flank and about him, using the only thing they have to call him by, which is not much of a thing but is being used a great deal. Whatever else comes of today, a few hundred men now know exactly whose afternoon this was.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

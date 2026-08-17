@@ -3997,3 +3997,172 @@ bc_nothing_is_stopping_this = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHAT THE HOST HAD OPINIONS ABOUT THIS MORNING, 2026-08-17.
+#
+# TWO FACTS ABOUT A COMMANDER THAT WESTEROS ARGUES ABOUT BEFORE IT ARGUES
+# ABOUT TACTICS, AND THE MOD READS NEITHER. `is_female` appears ZERO times
+# anywhere in the mod. `is_lowborn` appears three times in the knight file and
+# once in this one, in a comment. Fifty-three commander templates ask what he
+# is good at, what he was raised to, what he owns, what he believes, what he
+# is afraid of and what shape his body is in, and not one of them asks the two
+# questions a Westerosi host asks about a new commander before it has seen him
+# do anything.
+#
+# BOTH TAKE THE WINNING ROW AND THAT IS NOT A COINCIDENCE. On a losing field
+# either fact turns into the host's explanation for the defeat, which is a
+# sentence about prejudice being confirmed, and this mod does not write it -
+# not because it is uncomfortable but because it is a claim about what men
+# think that the code cannot support. Winning, the same fact is a thing that
+# has visibly stopped mattering in the last hour, which the code CAN support:
+# the side row is the evidence.
+#
+# NEITHER IS THE STATION AXIS AGAIN. bc_nothing_but_the_horse gates on
+# `is_landed = no` and is about what a man owns. Birth is not tenure - a
+# hedge knight of a great house is landless and not lowborn, and the two
+# templates are about different arguments. This is the same distinction
+# bc_knight_no_house_behind_him records on the knight side.
+#
+# THE FEMALE CASE IS NOT RARE IN AGOT AND THE TEMPLATE IS NOT A NOVELTY. The
+# North, the Iron Islands and Dorne all put women in command in the source
+# material, and CK3's own succession laws produce them everywhere else. The
+# desc is written about a host that has stopped discussing it, not about the
+# discussion.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The orders are simply being taken now.
+#
+# `ordered`/`up`: bc_pursuit and a guarded momentum rung. This is the cell for
+# a host doing the correct thing at the correct moment, and that is exactly
+# the content - not that she is clever, but that the gap between an order
+# leaving her and a line moving has closed to nothing over the course of one
+# morning.
+#
+# THE `chance` ROWS ARE ABOUT COMPETENCE AND NOTHING ELSE. martial and
+# strategist, the same two rows half this file carries. Weighting this by a
+# temperament trait would be the template having a theory about what kind of
+# woman commands well, and it does not have one.
+# ---------------------------------------------------------------------------
+bc_the_orders_are_taken = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		is_female = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_orders_are_taken"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_orders_are_taken_toast
+			desc = bc_the_orders_are_taken_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The man with no name at all is winning somebody else's battle for them.
+#
+# SEVENTY-FIVE PRESTIGE, WHICH IS ABOVE THIS FILE'S USUAL FIFTY, and the
+# reason is the same one bc_knight_no_house_behind_him gives for its 150:
+# prestige is the only currency a man without a name can be paid in. It is
+# not the knight's number, because a commander who is lowborn has already
+# been given something a hedge knight never gets - the command - and the
+# award should not pretend otherwise.
+#
+# `adapted`/`up`, WHICH HANDS OUT NOTHING. There is no army modifier for this.
+# The men are doing what they were doing an hour ago; what has changed is who
+# they will say did it. The rung is the whole mechanical content and the
+# prestige is the whole personal content, and that split is the template.
+#
+# NO STRESS ROW EITHER DIRECTION. Relief would make it a template about him
+# being validated, which is smaller than what is happening.
+# ---------------------------------------------------------------------------
+bc_no_name_at_all = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		is_lowborn = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_no_name_at_all"
+
+		add_prestige = 75
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_no_name_at_all_toast
+			desc = bc_no_name_at_all_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
