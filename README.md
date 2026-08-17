@@ -565,6 +565,53 @@ battle, so this widens the sample without widening the outcome. A
 nested `var:bc_battle_size >= 3` read, which are the two candidates with
 different fixes.
 
+## Content session, 2026-08-17 (no run — static verification only)
+
+Six batches, none of which needed a runtime answer. The measured problem they
+answer is one number: **ten moment templates produced 233 firings in 44
+battles**, so a player who fights one war reads the same ten sentences over and
+over. Design: `../../docs/specs/2026-08-17-battle-chronicles-cases-design.md`.
+
+**The rate limiter is the cooldown, not the weights.**
+`bc_chronicle_ready_commander_trigger` fails while `bc_chronicle_recent` is
+live, so a blocked roll is not a Battle Chronicles roll at all — it goes to
+vanilla's `commander_none`. A template that fires in a slot an old one already
+owned therefore buys variety at no rate cost. The honest half: an even battle on
+open ground with an unremarkable commander used to match nothing, and now does.
+
+| batch | what | count |
+|---|---|---|
+| commander, the second ten | ground bands, war length, host size, casualties, kin, age, the liege | 10 templates, base 30 |
+| commander, character | wrathful, patient, drunkard, zealous, craven, strategist — the `has_trait` axis, which every earlier template used only as a `chance` modifier | 6 templates, base 30 |
+| knight, the second three | the WINNING side (every shipped knight case gated on losing), outnumbering, ground | 3 templates, base 80 |
+| knight, the third three | winter ground, age, kin — asked about the knight | 3 templates, base 80 |
+| eve | two contextual options: horse country (`f`, the only option applying two modifiers and the only one applying a negative) and kin (`g`) | 7 options total |
+| prose pools | bond clause 5→15 arms; eve foe 3 lines per value; eve ground 2 per band; memories 3 per perspective; nicknames re-cut into six style ladders over 35 keys | — |
+
+**Template totals are now commander 23, knight 9.** Weight against vanilla's
+`commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180. If a
+sweep shows the original seven crowded out, **the character batch is the first
+to cut** — it is the newest and the least measured.
+
+**Pooling is `random_valid`, and it is vanilla in three separate shapes.**
+`00_animal_custom_loc.txt` for a customizable_localization; `birth.9002`
+(`events/birth_events.txt:3515-3614`) for a `random_valid` nested inside a
+`first_valid` with a bare fallback below it, which is the pattern the eve now
+uses and which only works because an empty pool is *not valid* and `first_valid`
+moves past it; `chariot_race_ongoing_jp.0400` for bare untriggered `desc` lines
+inside a pool. The memory types were already built this way and simply had
+one-line pools.
+
+**`validate` was wrong about pools and was fixed in the same session.** Its
+arm-shape check demanded an unguarded `text` arm from every
+customizable_localization definition including `random_valid` ones — but under
+pooling an unguarded arm is valid on *every* render, so it competes with the
+real prose and takes its share, and for `bc_bond_clause`'s empty-string fallback
+that means deleting a clause that was available. The rule mandated a defect. It
+is now suspended for pooled definitions, and the obligation moves to the mod,
+which writes its fallback arm as a bare `trigger_if` — true when its limit is
+false, so it is valid on exactly the absent and unknown-value paths.
+
 ## Not yet verified in game
 
 - The shieldbrother memory rendering, and that `[shieldbrother.GetFullName]`
@@ -640,6 +687,36 @@ different fixes.
   run must show it appear when option d is taken and be **gone** by the next
   battle of the same war. If it is still there, `bc_cleanup_effect` did not run
   or did not reach the new line.
+- **The sixteen new templates, one marker each.** Every one writes
+  `BC: fired <key>`, so `probe 'BC: fired'` is a census of which gates are
+  reachable. A template at **zero** is a gate that never opens, and the three
+  worth suspecting first are `bc_dust_and_thirst` (the desert band scored 0/137
+  and 0/360 in two censuses — a statement about where these campaigns were
+  fought, not about the map), `bc_the_wine_at_noon` (drunkard is rare on a man
+  trusted with a host) and `bc_the_practised_eye` (`strategist` **and** a
+  15,000-man host at once). A template that **dominates** is the other failure:
+  the six character-batch gates are the widest in the mod and the batch header
+  names them as the first weights to cut.
+- **That the new knight cases are seen at all.** The file header records
+  `base = 40` behind narrow gates producing **zero** fires across a session
+  against `knight_none` at 2000. All six shipped knight additions sit at 80. If
+  the second and third batches are at zero while the shipped three fire, the
+  base is the reason and not the gates.
+- **That a pooled `random_valid` inside the eve's `first_valid` falls through
+  when empty.** This is the one structural claim of the prose work, and vanilla
+  `birth.9002` is the whole of the evidence. The test is cheap: fight on winter
+  ground and read the third paragraph. **Winter or desert text = the nesting
+  works.** "The field is what it is" on a battle whose markers say winter means
+  the empty-pool fallthrough does *not* work the way `birth.9002` implies, and
+  every pooled arm has to go back to a flat `triggered_desc` chain.
+- **That the pools actually vary.** Three eves in one game should not print the
+  same foe paragraph three times, and a knight with several battle memories
+  should not have them all read identically. Uniform output with the structure
+  in place means `random_valid` is being read as `first_valid`.
+- **The style-branched nickname ladder.** `BC: nickname style UNMATCHED` is a
+  permanent marker and **must stay at zero** — it counts a `var:bc_style_last`
+  holding a value none of the six ladders claims, which is the seam's KIND
+  vocabulary and the ladder having drifted apart.
 - **The foe-relative award.** `probe 'BC: award'` reports which of the two
   currencies paid. The three markers `piety` / `prestige` / `no creed` partition
   the notable wins that reached the award; `nemesis` is a subset of the first
