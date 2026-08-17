@@ -943,3 +943,245 @@ bc_knight_among_thousands = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE FIFTH ON THIS SIDE: WHAT KIND OF MAN HE IS
+#
+# THE KNIGHT SIDE HAS NEVER GATED ON A TRAIT. Twelve shipped knight cases and
+# every one of them is gated on prowess, on age, on the ground, on the battle or
+# on the man opposite; the only `has_trait` in a knight `is_valid` at all is the
+# `craven` half of bc_knight_shames_himself's OR, where it is an alternative to a
+# prowess floor rather than a case of its own. Traits appear ELEVEN times in the
+# file as `chance` rows and never once as a reason. The commander side got its
+# character batch weeks ago - this is the knight-side copy of it.
+#
+# PROWESS SAYS WHAT HE CAN DO AND A TRAIT SAYS WHAT HE WILL DO, which is why
+# none of the three below carries a prowess row. A prowess floor would say "and
+# he is also good", turning a story about temperament into a second story about
+# skill, and the file already has six of those.
+#
+# NONE OF THE THREE IS A SUBSET of a shipped gate:
+#   - the glory hound has no second row at all, and no other knight case is
+#     gated on a trait alone
+#   - walking them back shares `bc_side_is_losing_trigger` with three cases and
+#     none of their other rows: holds_the_breach wants prowess >= 10, shames
+#     himself wants craven or prowess <= 8, is_ridden_down wants open ground
+#   - stripping the dead shares `bc_side_is_winning_trigger` with two, and both
+#     of those want prowess (>= 12, and >= 8 with outnumbering)
+#
+# ONE OF THEM FILLS THE LAST EMPTY CELL IN THE SEAM. bc_knight_walks_them_back
+# is the mod's first `ordered`/`down`, the one (KIND, SWING) pair that no call
+# site had ever used - see the re-counted census in bc_ledger_effects.txt. The
+# verb ladder deliberately maps it to nothing, so this template hands out no
+# army modifier and no rung; it writes a record and pays a little prestige. That
+# is the whole design of the pair: a line that keeps its shape while it loses is
+# worth remembering and is not worth a bonus.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The glory hound. Gated on `arrogant` and nothing else, the first knight case
+# in the file whose only row is a trait.
+#
+# HE IS PAID AND THE ARMY IS CHARGED. The prestige is his, the momentum is real,
+# and `wild` hands the side bc_spent_horse for it - a man who goes early and
+# alone is worth watching and costs the line its horses. Two commander cases do
+# the same trade (bc_the_wrath_takes_him, bc_the_old_grudge) and this is the
+# knight-side third.
+# ---------------------------------------------------------------------------
+bc_knight_the_glory_hound = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = arrogant
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Wanting to be seen and wanting to rise are different appetites that
+		# feed each other.
+		modifier = {
+			add = 40
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = humble
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_glory_hound"
+
+		add_prestige = 75
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_glory_hound_toast
+				desc = bc_knight_the_glory_hound_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He walks them back. A patient man on a side that is losing, keeping the
+# withdrawal from becoming a rout.
+#
+# THE MOD'S FIRST `ordered`/`down`. It grants no rung in either direction, and
+# that is the case rather than an omission: momentum would say the retreat was
+# secretly a victory, and faltering would say a man who held the line together
+# made things worse. The prestige is small because nobody sings about this.
+#
+# THIS IS NOT bc_knight_shames_himself INVERTED. That one is a bad man on a
+# losing side and the side loses harder for it; this one is a steady man on a
+# losing side and the side loses no worse. Both can fire in the same battle to
+# two different knights, and a player reading them together is reading the
+# argument the pair exists to make.
+# ---------------------------------------------------------------------------
+bc_knight_walks_them_back = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = patient
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who thinks the rest of them are owed something does this more
+		# readily; a man in a hurry does it less.
+		modifier = {
+			add = 40
+			has_trait = just
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_walks_them_back"
+
+		add_prestige = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_knight_walks_them_back_toast
+				desc = bc_knight_walks_them_back_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# He stops to strip the dead. A greedy man on a side that is already winning,
+# who decides the winning can proceed without him.
+#
+# THE ONLY KNIGHT CASE THAT PAYS IN GOLD AND COSTS THE SIDE SOMETHING, which is
+# the point: he is better off and the line is thinner. bc_knight_takes_a_captive
+# is the honest version of the same appetite - it pays gold too, but it is gated
+# on prowess and on outnumbering, and the man is still in the fight.
+#
+# THE WINNING ROW IS LOAD-BEARING. A man who wanders off to loot while his side
+# is losing is bc_knight_shames_himself's story and is already told; what is new
+# here is that the side can afford him, and pays anyway.
+# ---------------------------------------------------------------------------
+bc_knight_strips_the_dead = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		has_trait = greedy
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Appetite and idleness compound; a man who gives it away has less
+		# reason to stoop for it.
+		modifier = {
+			add = 40
+			has_trait = lazy
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = generous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_strips_the_dead"
+
+		add_gold = 25
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_strips_the_dead_toast
+				desc = bc_knight_strips_the_dead_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

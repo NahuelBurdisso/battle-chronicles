@@ -370,6 +370,32 @@
  bc_knight_among_thousands_toast:0 "Among Thousands"
  bc_knight_among_thousands_toast_desc:0 "There are fifteen thousand men on this field and not one of them will remember which was him. He can see two banners from where he is standing and neither is close enough to shout at.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
 
+# --- knight chronicles, the trait batch (2026-08-17) -------------------------
+#
+# The first three knight literals whose GATE is temperament rather than prowess,
+# ground, age or the battle. Same subject warning as the four blocks above: `he`
+# is the knight and the appended bond clause is about the commander.
+#
+# EACH DESC SHOWS THE TRAIT WORKING AND NEVER NAMES IT. The gate already knows he
+# is arrogant, patient or greedy; a literal that said so would be reading the
+# character sheet aloud, and the character batch on the commander side settled
+# this question the same way six descs ago.
+#
+# THE SPENT PHRASES ACROSS ALL FIFTEEN KNIGHT DESCS, which none of these three
+# may reuse: "the line", "one man", "every man", "flat country", "a step of it",
+# "the same table", "nowhere to put a foot", "what is left of him", "not one of
+# them will remember". These three reach instead for being watched, for the pace
+# of a walk, and for what a man's hands are doing.
+
+ bc_knight_the_glory_hound_toast:0 "Somebody Is Watching"
+ bc_knight_the_glory_hound_toast_desc:0 "He is out past the standards where the whole field can see him, and he has been careful about which way he is facing while he does it. The horses that went with him will not be good for anything else today.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_walks_them_back_toast:0 "He Walks Them Back"
+ bc_knight_walks_them_back_toast_desc:0 "It is going badly and he will not let it go badly at a run. He puts the shaken ones in front of him where he can see them and sets the pace himself, and what comes off that ground is still an army.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_strips_the_dead_toast:0 "His Hands Are Full"
+ bc_knight_strips_the_dead_toast_desc:0 "They are winning without him and he has noticed. He is on his knees over somebody's dead brother with a knife working at a strap, and there is a gap where he was standing.[bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
 # --- commander chronicles, the character batch (2026-08-17) ------------------
 #
 # Six templates gated on WHO THE MAN IS rather than on how the battle is going.

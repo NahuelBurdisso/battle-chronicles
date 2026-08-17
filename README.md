@@ -591,6 +591,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | commander, the last two bands | rough (paired with losing, so it answers `bc_banner_falls` instead of nesting inside `bc_too_wide_to_see`) and jungle (the band alone), plus the two missing combat-side band wrappers | 2 templates, base 30 and 40 |
 | knight, the fourth three | the battle itself, read from inside the ranks — casualties, war length, host size. All three triggers were written for commander cases and had never been asked from a knight's root | 3 templates, base 80 |
 | commander, who is across the field | the bond ladder had four answers and only *kin* had ever been a reason for a moment. Nemesis becomes a **gate** for the first time (it was a ×1.5 `chance` row on nineteen templates and a gate on none); heathen and countryman get the two new foe triggers | 3 templates, base 30 |
+| knight, the trait batch | twelve knight cases and not one gated on temperament — traits appeared eleven times as `chance` rows and never as a reason. Arrogant, patient, greedy. **`bc_knight_walks_them_back` is the mod's first `ordered`/`down`**, the last unused cell in the seam | 3 templates, base 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -604,9 +605,18 @@ unlike the arms of `bc_write_bond_effect` they are not mutually exclusive — a
 foe can be both, and both templates can be valid on the same roll. The bond
 *clause* still picks one, because that is a ladder; the *gates* are not.
 
-**Template totals are now commander 28, knight 12.** Weight against vanilla's
+**Every (KIND, SWING) pair the seam defines is now reached.** Plan 1 recorded
+`entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable; later
+content batches reached the first two, and this session's knight trait batch
+reached the third. The pair census and the modifier reach counts in
+`bc_ledger_effects.txt` were re-counted against the whole mod in the same commit
+— plan 1's "3, 3, 4 and 3" are now 9, 8, 10 and 6, and the fall-through set is
+fifteen sites rather than five. The table's *behaviour* is unchanged; only its
+comments were wrong, and wrong in the direction that invites a bad fix.
+
+**Template totals are now commander 28, knight 15.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90; on the knight side, twelve templates at 80 against `knight_none`'s 2000.
++ 90; on the knight side, fifteen templates at 80 against `knight_none`'s 2000.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 
