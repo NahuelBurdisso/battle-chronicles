@@ -2566,3 +2566,44 @@
 
  bc_knight_where_the_wages_are_toast:0 "The Contract Never Mentioned This Part"
  bc_knight_where_the_wages_are_toast_desc:0 "The men in front of him stopped being an enemy some minutes ago and became a crowd going the same direction, and behind the crowd, at the pace of an ox, is everything the crowd owns. He is not the first rider to work this out and he will not be the last one down that road today. The horse under him has one such afternoon in it and is spending the whole of it now, which he knows, and which is not going to stop him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# --- what the man across the field is worth ----------------------------------
+#
+# TWO MOMENTS ABOUT A CROWN ON THE OTHER SIDE. The first is a commander whose
+# army has just been given one thing to look for; the second is a knight
+# meeting the men that crown pays for.
+#
+# NEITHER MAY NAME THE KING, HIS KINGDOM, HIS HOUSE OR HIS SIGIL. The gate
+# asked one question - is the highest title the man opposite holds a kingdom or
+# better - and knows nothing else about him. The bond clause printed underneath
+# will say whether he is kin, a countryman, a heathen or a stranger, and that
+# is the only other thing either desc is entitled to imply.
+#
+# NEITHER MAY NAME A GUARD OR AN ORDER. No Kingsguard, no Golden Company, no
+# household with a name. The mod has one Kingsguard template already and it is
+# gated on the council positions; inventing an order here would collide with a
+# gate that actually checks.
+#
+# NEITHER MAY KILL, CAPTURE OR END ANYTHING. A phase event does not take a
+# prisoner and does not finish a battle.
+#
+# THE FIRST MAY NOT PUT THE KING IN REACH and may not say he is running. His
+# host is going; what he is personally doing is not visible from here and the
+# desc may not guess.
+#
+# THE SECOND MAY NOT MAKE HIM COWARDLY AND MAY NOT MAKE HIM HEROIC. He is being
+# outspent, which is a thing that happens to good men at a steady rate all
+# afternoon, and the toast is about the rate.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here".
+ bc_the_other_banner_is_a_kings_toast:0 "One Thing Worth Chasing"
+ bc_the_other_banner_is_a_kings_toast_desc:0 "An ordinary host coming apart sends a thousand men after a thousand different things and the chase is worth nothing by dusk. This host is coming apart around a banner that everybody on this field, on both sides, has been keeping track of since the lines closed. He does not have to give an order about it. He has an army that all wants the same thing at the same moment, which is a condition he may not see twice.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_men_a_king_can_afford_toast:0 "They Do Nothing Else All Year"
+ bc_knight_the_men_a_king_can_afford_toast_desc:0 "The third one he has faced in this stretch of line has plate where the last two had mail and has been drilled by somebody who was paid well to do it, and none of them have been hungry this season. He is not being outfought by a scheme or worn down by the ground. He is meeting men whose kit was bought by somebody who never had to ask what it cost, one after another, and the difference is coming off this side at a rate anyone standing here could measure.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

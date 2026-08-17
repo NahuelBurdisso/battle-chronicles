@@ -4827,3 +4827,94 @@ bc_knight_where_the_wages_are = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# The men a king can afford. Facing a crown, and the side is losing.
+#
+# THE OTHER HALF OF THE RANK QUESTION, AND IT IS NOT A MIRROR. The commander's
+# version is about a banner everybody is chasing. This one is about what is
+# standing in front of a single man when the host with the crown behind it is
+# the one going forward: household troops, which are the only soldiers in
+# Westeros who do nothing else all year and whose kit was bought by somebody
+# who never had to ask the price.
+#
+# `bloodied`/`down` AND bc_bloodied. He is not outfought by a scheme or worn
+# down by ground - he is meeting better-equipped men one at a time and the
+# arithmetic of that shows up on the side as casualties, which is exactly what
+# bc_bloodied means.
+#
+# THIS IS NOT bc_the_crown_on_the_field, which reads THIS commander's own title
+# tier while losing and is a moment about being a target. It is not that man's
+# knight either: this gate reads the enemy, and the two would only ever coincide
+# for a king fighting a king, where they are still two different sentences about
+# two different sides of the field.
+#
+# TEN STRESS, NO PRESTIGE, AND A GUARDED FALTERING RUNG. There is nothing
+# creditable in being outspent, and the gate does not check for the rung, so
+# the grant is live.
+#
+# THE DESC MAY NOT NAME A GUARD, an order or a company, may not put the king in
+# it, and may not kill anybody. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_men_a_king_can_afford = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_facing_a_crown_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being outnumbered on top of it is how a man ends up meeting them
+		# without anyone beside him.
+		modifier = {
+			add = 30
+			bc_side_is_outnumbered_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_men_a_king_can_afford"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_men_a_king_can_afford_toast
+				desc = bc_knight_the_men_a_king_can_afford_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -7067,3 +7067,105 @@ bc_they_are_not_his_smallfolk = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHAT THE MAN ACROSS THE FIELD IS WORTH, 2026-08-17.
+#
+# SEVENTY BATCHES AND NOT ONE GATE HAS EVER MENTIONED THE ENEMY. The mod knows
+# who he is on every battle and prints a sentence about him under every moment
+# it writes; what it has never done is let him CAUSE one. See the trigger
+# header for why the answer is `enemy_side` read fresh rather than the variable
+# the rest of the mod uses.
+#
+# RANK IS THE FIRST QUESTION TO ASK ABOUT HIM because it is the one the bond
+# ladder cannot answer. Kin, countryman, heathen, nemesis, stranger - a king
+# and a hedge knight sort into the same bucket on all five. Whether there is a
+# crown on the other side of the field is the largest single fact about an
+# afternoon in Westeros and the chronicle has been silent on it.
+#
+# THE COMMANDER TAKES THE WINNING HALF AND THE KNIGHT THE LOSING ONE, which is
+# the reverse of bc_the_crown_on_the_field two thousand lines above - that is a
+# man losing with his OWN crown on. The two never compete: they read different
+# characters, they take opposite side rows, and they roll from separate pools.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The other banner is a king's. Facing a crown, and the side is winning.
+#
+# `ordered`/`up` AND bc_pursuit, WHICH IS THE ONE MOMENT THAT MODIFIER IS MOST
+# OBVIOUSLY FOR. When an ordinary host breaks, a pursuit is a thousand men
+# looking for a thousand different things. When a king's host breaks, every man
+# on this side is looking for exactly one banner, and an army that all wants
+# the same thing at the same time is the definition of a pursuit that works.
+#
+# IT MAY NOT CATCH HIM AND THE TEMPLATE DOES NOT PRETEND OTHERWISE. A phase
+# event does not end a battle, take a prisoner or kill anybody; what the side
+# gets is the modifier and the rung, and what happens to the king happens in
+# the aftermath system or not at all.
+#
+# FIFTY PRESTIGE AND A GUARDED MOMENTUM RUNG. The gate reads the enemy's rank
+# and the side row, and nothing about this commander's own rungs, so the grant
+# is live.
+#
+# THE DESC MAY NOT NAME A KINGDOM, may not put the king in reach, and may not
+# say he is fleeing - the host is going, which is not the same claim. See the
+# loc header.
+# ---------------------------------------------------------------------------
+bc_the_other_banner_is_a_kings = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_facing_a_crown_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who is nobody in particular has more to gain from the hour than
+		# a man who already outranks half the field.
+		modifier = {
+			add = 30
+			highest_held_title_tier <= tier_county
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_banner_is_a_kings"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_other_banner_is_a_kings_toast
+			desc = bc_the_other_banner_is_a_kings_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

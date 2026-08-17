@@ -1204,3 +1204,53 @@ bc_field_is_coastal_trigger = {
 bc_he_leads_a_free_company_trigger = {
 	government_has_flag = government_is_mercenary
 }
+
+
+# --- what the man across the field is worth ----------------------------------
+#
+# THE MOD HAS NEVER GATED A TEMPLATE ON THE ENEMY COMMANDER. It knows perfectly
+# well who he is - bc_battle_open_effect saves him into var:bc_battle_foe on
+# every battle, bc_write_bond_effect sorts him into nemesis / kin / countryman /
+# heathen / stranger, and every moment toast in the mod ends with the sentence
+# that comes out of it. But that is a CLAUSE APPENDED TO A MOMENT. No `is_valid`
+# in either phase-event file has ever asked a single question about him, so no
+# moment has ever been ABOUT him. bc_commander_phase_events.txt:5585 says so in
+# as many words.
+#
+# THIS DOES NOT READ var:bc_battle_foe AND MUST NOT. The variable is written by
+# bc_battle_open_effect, which runs inside a moment's `effect` block - so during
+# the FIRST `is_valid` of a battle it does not exist yet, and during later ones
+# it exists only because some earlier moment happened to fire. A gate that reads
+# it would be silently conditional on the chronicle having already said
+# something, which is not a fact about the battle.
+#
+# `enemy_side` IS THE ENGINE'S OWN ANSWER and needs no bookkeeping: "get enemy
+# (opposite) combat side of scoped side", combat_side to combat_side, and
+# bc_battle_open_effect already walks exactly this path to find the foe in the
+# first place. Reading it fresh in a gate is the same walk one step earlier.
+#
+# THE QUESTION IS RANK, WHICH THE BOND LADDER DOES NOT ASK. bc_write_bond_effect
+# sorts the foe five ways and none of the five is "what is he worth" - a king
+# and a landless sworn sword both come out `stranger` if they are of another
+# culture and the same faith. That is why this gate is not redundant with the
+# bond clause the same toast will print underneath it.
+#
+# `highest_held_title_tier` AND `tier_kingdom` ARE ALREADY IN THE MOD, on the
+# commander himself, at bc_commander_phase_events.txt:1850. That template's
+# header claims "no `is_valid` anywhere in the mod reads a title tier", which
+# was true when it was written and stops being true here; the claim is load-
+# bearing for ITS distinctness argument only, and this trigger asks about a
+# different man, so nothing there needs revising.
+#
+# THE GUARD IS THE STANDING ONE. An enemy side can be leaderless - the bond
+# ladder has an entire `nofoe` arm for it - so the commander is an optional link
+# and the READ is nested in a trigger_if that repeats the `exists`.
+bc_facing_a_crown_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			highest_held_title_tier >= tier_kingdom
+		}
+	}
+}
