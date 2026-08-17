@@ -1382,7 +1382,7 @@ bc_bond_clause = {
 # his men would therefore report something the variable never measured, and would
 # collide with the moments' own gates: bc_flank_collapses fires only when he is
 # outnumbered (bc_commander_phase_events.txt:221) and bc_van_breaks_through only
-# when he is outnumbering (:273).
+# when he is outnumbering (:290).
 #
 # THE VERB HAS TO BE AGENTLESS AS WELL AS THE SUBJECT SHARED. Two drafts shipped
 # and were pulled for this, and they are QUOTED rather than described, because

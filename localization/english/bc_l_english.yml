@@ -652,7 +652,7 @@
 # measured. It would also collide with the moments' own gates: a toast carries
 # the commander's portrait, and bc_flank_collapses fires only when he is
 # outnumbered (bc_commander_phase_events.txt:221) while bc_van_breaks_through
-# fires only when he is outnumbering (:273). TWO drafts shipped and were pulled
+# fires only when he is outnumbering (:290). TWO drafts shipped and were pulled
 # for this, and they are different drafts - quoted rather than paraphrased,
 # because paraphrasing them is how they got merged into one in an earlier note:
 #   b3e7c32  " Whole companies will be kept out of the fighting and never put in
@@ -979,6 +979,26 @@
  bc_chronicles.0002.d:0 "Everything still horsed, at the men doing the pushing. The horses will not be good for anything after."
  bc_chronicles.0003.c:0 "Let them have the baggage train. The wagons are worth more than the pursuit."
  bc_chronicles.0003.d:0 "Wheel the wedge onto their flank and roll it up."
+
+# --- the fourth pop-up (2026-08-17) -----------------------------------------
+#
+# bc_flank_collapses grows a pop-up branch, the first template to do so since
+# plan 1. EVERY ANSWER HERE IS A BAD ANSWER, which no other pop-up in the mod
+# can say - the flank is already gone when the player is asked - so the four
+# option strings must not read like victories. What they differ in is what the
+# man pays to make it cheaper.
+#
+# SPENT PHRASES THESE FOUR MAY NOT REUSE, on top of the list above: "reform
+# behind the line" (0001.b), "hold them" (0003.b), "press it" (0003.a), and
+# "wheel" in the sense 0003.d uses it - the wedge is wheeled onto a flank
+# there, and d here turns a second line round to face one, which is a
+# different manoeuvre and must not borrow the same verb.
+ bc_chronicles.0004.t:0 "The Left Is Gone"
+ bc_chronicles.0004.desc:0 "The flank does not break so much as dissolve. One moment there are ranks there and the next there are men running between them, and the enemy is already pouring into the space where an army used to be.\n\nWhatever is decided now, it is decided about a battle that has just become smaller. The only question left is how much smaller."
+ bc_chronicles.0004.a:0 "Bend the line back and brace it. They can have the ground."
+ bc_chronicles.0004.b:0 "Nothing. Let it go and save what is still standing."
+ bc_chronicles.0004.c:0 "Everything still mounted, into the gap, with me at the front of it."
+ bc_chronicles.0004.d:0 "Bring the second line round to face it. Slowly, and in order."
 
 # --- nickname tooltips ------------------------------------------------------
 #

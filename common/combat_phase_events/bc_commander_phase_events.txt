@@ -246,14 +246,31 @@ bc_flank_collapses = {
 		bc_mark_chronicle_commander_effect = yes
 		debug_log = "BC: fired bc_flank_collapses"
 
-		bc_faltering_major_effect = yes
-		bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
+		# THE FOURTH POP-UP BRANCH, 2026-08-17, and the first template to grow
+		# one since plan 1. Shape copied verbatim from bc_banner_falls above:
+		# no rung is applied before the raise, because the option is the
+		# outcome, and the cooldown is started at the call site rather than
+		# inside the event.
+		#
+		# THE `else` ARM IS THE UNCHANGED ORIGINAL. Every AI commander and
+		# every player inside the 60-day pop-up cooldown still gets exactly the
+		# decisive setback and the toast this template has always given, which
+		# is what keeps the change additive rather than a retune.
+		if = {
+			limit = { bc_can_interrupt_player_trigger = yes }
+			bc_start_popup_cooldown_effect = yes
+			trigger_event = bc_chronicles.0004
+		}
+		else = {
+			bc_faltering_major_effect = yes
+			bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_flank_collapses_toast
-			desc = bc_flank_collapses_toast_desc
-			left_icon = scope:bc_commander
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_flank_collapses_toast
+				desc = bc_flank_collapses_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }

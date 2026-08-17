@@ -260,3 +260,104 @@ bc_chronicles.0003 = {
 		debug_log = "BC: popup 0003 option wheel"
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE FOURTH POP-UP, 2026-08-17. The flank goes.
+#
+# THREE OF THE MOD'S THIRTY-ONE COMMANDER TEMPLATES HAVE EVER ASKED THE PLAYER
+# ANYTHING, and they have been the same three since plan 1: the banner, the
+# rally and the van. bc_flank_collapses is the fourth-oldest template in the
+# file and the best remaining candidate - it is a decisive setback with several
+# real answers, and unlike bc_kin_across_the_line it needs to name nobody.
+#
+# THAT IS WHY IT IS THIS TEMPLATE AND NOT THE KIN ONE. A pop-up cannot see
+# scope:combat_side, so it cannot reach the man across the field, and a kin
+# pop-up whose text could not say who the kinsman was would be worse than the
+# toast it replaced. The flank is a thing, not a person.
+#
+# THE PHASE EVENT APPLIES NO RUNG BEFORE RAISING THIS, exactly as the other
+# three do. The option is the outcome; see this file's header. Its `else` arm
+# still applies bc_faltering_major_effect, which is what the AI and any player
+# inside the pop-up cooldown continue to get.
+#
+# ALL FOUR OPTIONS APPLY A FALTERING RUNG, AND THEY DIFFER IN WHICH ONE. This
+# is the only pop-up in the mod where every answer is a bad answer - the flank
+# has already gone by the time the player is asked - so the choice is between
+# `minor` bought with something and `major` bought with nothing. There is no
+# option here that comes out ahead, and inventing one would make the collapse
+# free.
+#
+# a IS THE MOD'S SECOND `entrenched`/`down` CALL SITE. The pair census in
+# bc_ledger_effects.txt had it at one, which is the thinnest cell that is not
+# empty, and a line bending back onto itself and bracing is exactly what the
+# pair was written to mean.
+# ---------------------------------------------------------------------------
+bc_chronicles.0004 = {
+	type = character_event
+	title = bc_chronicles.0004.t
+	desc = bc_chronicles.0004.desc
+	theme = martial
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	immediate = {
+		debug_log = "BC: popup 0004 flank collapses"
+	}
+
+	# The controlled answer. It costs him the day and buys the cheaper rung.
+	option = {
+		name = bc_chronicles.0004.a
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+		add_stress = 10
+	}
+
+	# The cheap answer, and the honest one: he pays nothing and the side does.
+	# This is what the `else` arm of the phase event does for everybody who
+	# never sees this pop-up, which is the right default to leave in the list.
+	option = {
+		name = bc_chronicles.0004.b
+
+		bc_faltering_major_effect = yes
+		bc_record_moment_effect = { TIER = major KIND = measured SWING = down }
+	}
+
+	# He goes himself. `wild`/`down` puts bc_spent_horse on the side, which is
+	# the price of throwing everything still mounted at a hole, and the tier is
+	# major because it is a decision the whole army sees him make.
+	#
+	# IT IS THE BEST OUTCOME AND THE MOST EXPENSIVE. Fifteen stress and a
+	# blown mounted reserve against option b's nothing.
+	option = {
+		name = bc_chronicles.0004.c
+		trigger = { prowess >= 10 }
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = major KIND = wild SWING = down }
+		add_prestige = 100
+		add_stress = 15
+		debug_log = "BC: popup 0004 option rides"
+	}
+
+	# The trained answer, gated on martial for the reason bc_chronicles.0003.d
+	# is: a commander can have no relevant trait and no prowess and still have
+	# been taught this.
+	#
+	# `ordered`/`down` GRANTS NOTHING, and here that is the whole point - the
+	# second line comes round to face the gap and no modifier lands on either
+	# army. It is the only answer in this pop-up that costs him neither stress
+	# nor horses.
+	option = {
+		name = bc_chronicles.0004.d
+		trigger = { martial >= 14 }
+
+		bc_faltering_minor_effect = yes
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+		add_prestige = 25
+		debug_log = "BC: popup 0004 option refuse"
+	}
+}
