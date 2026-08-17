@@ -5742,3 +5742,98 @@ bc_knight_it_was_never_a_bargain = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He was raised for the dark, and the side is winning.
+#
+# `adapted`/`up`. He spent the first hour of this doing what he has done in
+# every room he has ever been in - looking for the angle, the seam, the one man
+# whose removal changes the shape of the problem - and somewhere in the second
+# hour he stopped, because a shieldwall does not have a seam and there is no
+# room, only a line and the next step. What he is doing now is the plainest
+# work there is, done properly. That is a reading and a change made on it,
+# which is what the KIND means, and the verb table hands out nothing, which is
+# right: an army is not braced or bled by one man putting down his habits.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his education and
+# the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT ANY OF THE ORIGIN TEMPLATES. bc_knight_no_house_behind_him reads
+# `is_lowborn`, bc_knight_twice_as_good the bastard trait,
+# bc_knight_the_squires_best_day the squire trait, and
+# bc_knight_a_hall_is_waiting_for_him his heir titles. All four are about where
+# a man stands in his family. This is about what somebody trained him to do,
+# and a trueborn second son taught by a poisoner answers no to the first three
+# and yes to both the fourth and this one.
+#
+# THE DESC MAY NOT NAME A POISON, A KNIFE IN THE DARK, A SPY OR A ROOM, may not
+# have him remember a previous piece of work, may not have him consider or
+# reject a treachery today, may not have anybody suspect him, and may not kill
+# anybody. The moment is a habit being set down, not a habit being resisted.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_there_is_no_seam_in_a_shieldwall = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_was_raised_for_the_dark_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Doing the plain work properly, for a whole afternoon, is a thing that
+		# takes a body as well as a decision.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = deceitful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = honest
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_there_is_no_seam_in_a_shieldwall"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_there_is_no_seam_in_a_shieldwall_toast
+				desc = bc_knight_there_is_no_seam_in_a_shieldwall_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

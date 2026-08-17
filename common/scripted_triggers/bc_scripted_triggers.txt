@@ -1652,3 +1652,38 @@ bc_his_own_faith_counts_against_him_trigger = {
 bc_his_own_faith_counts_for_him_trigger = {
 	num_virtuous_traits >= 2
 }
+
+
+# --- what he was raised to be ------------------------------------------------
+#
+# `has_education_*` APPEARS ZERO TIMES IN THIS MOD. Ninety-eight commander
+# gates and sixty-six knight gates read what a man can do - prowess, martial,
+# learning, the trait list, the illness flag, the count of bad genetic traits -
+# and not one of them has ever read what somebody spent his childhood trying to
+# make him into. Education is the single largest statement the engine makes
+# about a character's intended shape and the chronicle has never opened it.
+#
+# BOTH WRAP AGOT'S OWN TRIGGERS RATHER THAN LISTING TRAITS, for exactly the
+# reason bc_sworn_to_the_wall_trigger wraps agot_is_member_of_nights_watch:
+# AGOT overrides 00_scripted_triggers.txt and adds a FIFTH tier to every
+# education line (00_scripted_triggers.txt:65 and :85 are five-arm ORs, not the
+# vanilla four). A hand-written `OR` over education_learning_1 through _4 here
+# would silently miss every maester-taught lord in the game with the top rank.
+#
+# TWO TRIGGERS AND THEY ARE MUTUALLY EXCLUSIVE BY CONSTRUCTION, which is the
+# opposite situation from batch eighty's two counts. A character has exactly
+# one education trait, so no man ever answers yes to both of these, and the two
+# templates can never both be live for the same person - though they roll in
+# different pools anyway, so it would not have mattered if they could.
+#
+# NEITHER IS A NEGATIVE GATE. "Not raised for war" would have been the obvious
+# way to write the first one and would have been wrong: it fires for most of
+# the peerage, and a gate that fires for nearly everybody is not a gate. Naming
+# the education he did get is both narrower and more specific about the man.
+bc_he_was_raised_for_books_trigger = {
+	has_education_learning_trigger = yes
+}
+
+bc_he_was_raised_for_the_dark_trigger = {
+	has_education_intrigue_trigger = yes
+}

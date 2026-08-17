@@ -3016,3 +3016,53 @@
 
  bc_knight_it_was_never_a_bargain_toast:0 "He Is Doing It The Way He Has Always Done It"
  bc_knight_it_was_never_a_bargain_toast_desc:0 "Shield up, feet where they belong, the man on his left covered before himself, no step taken that the rank behind him cannot take too. He has done it in that order since he was young enough to be corrected for getting it wrong, and he is doing it in that order now, and the ground he is standing on is further back than the ground he started on and will be further back again within the hour. Nothing about the way he is fighting suggests he expects that to change. He was never told it would work. He was only ever told to do it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-ONE. What he was raised to be.
+#
+# NEITHER DESC MAY NAME THE EDUCATION. The first may not name a book, a
+# maester, a chain, a library, a tutor or a lesson, and may not have him quote
+# or recall anything he ever read. The second may not name a poison, a knife in
+# the dark, a spy, a room, a debt or a piece of previous work. Both gates read
+# an education trait and both toasts have to be about the man the education
+# produced, not the education.
+#
+# NEITHER MAY MAKE THE OTHER MEN CONTEMPTUOUS. No captain rolling his eyes, no
+# sergeant humouring anybody, no knight who knows better. Both moments are
+# private and neither is being watched.
+#
+# THE FIRST MAY NOT BLAME HIM AND MAY NOT LET HIM BLAME HIMSELF. He is doing
+# the only thing anybody ever taught him to do with a hard problem, and doing
+# it properly; the problem is simply faster than the method. It may not have a
+# captain overrule him, rescue the situation, or suggest anything. It may not
+# have him panic, freeze or despair - all three are easier moments and none of
+# them is this one. It may not name what he should have done instead, because
+# the toast does not know either.
+#
+# THE SECOND IS A HABIT BEING SET DOWN, NOT A HABIT BEING RESISTED. It may not
+# have him consider a treachery today and decline it, may not have anybody
+# suspect or watch him, may not have him enjoy the plainness, may not make him
+# newly honest, and may not kill anybody. He looked for the angle for an hour
+# because that is what he does, found that there was not one, and got on with
+# the work. That is the whole event.
+#
+# NEITHER MAY USE THE WORD "should". Both moments are about method and neither
+# is about regret, and "should" is regret's first word.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught".
+ bc_the_wrong_instrument_beautifully_toast:0 "He Is Solving It Correctly And Too Slowly"
+ bc_the_wrong_instrument_beautifully_toast_desc:0 "He takes the afternoon apart the way he takes everything apart: the near wing first, then the ford, then the slope, each one settled before he lets himself move to the next, nothing assumed that has not been checked. It is good work. It is the only kind of work anybody ever showed him how to do. And it runs at the speed of a careful man, while the thing in front of him runs at the speed of eight thousand frightened people, and the gap between those two speeds is being paid out steadily along the line in ones and twos by men who will never know what it was spent on.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_there_is_no_seam_in_a_shieldwall_toast:0 "There Was Nothing To Find"
+ bc_knight_there_is_no_seam_in_a_shieldwall_toast_desc:0 "For the first hour he was doing what he has always done, which is look: for the loose fastening, the tired one, the one whose falling rearranges everything behind him. He is good at that. There was nothing to find. A line is only a line, and it does not have a weak place so much as it has a near end and a far end, and the work is the same at both. So he put it down somewhere around noon and has been fighting like the man beside him ever since, one step and then the next one, and the far side has been giving ground since he did.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
