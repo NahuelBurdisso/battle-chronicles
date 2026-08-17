@@ -2607,3 +2607,42 @@
 
  bc_knight_the_men_a_king_can_afford_toast:0 "They Do Nothing Else All Year"
  bc_knight_the_men_a_king_can_afford_toast_desc:0 "The third one he has faced in this stretch of line has plate where the last two had mail and has been drilled by somebody who was paid well to do it, and none of them have been hungry this season. He is not being outfought by a scheme or worn down by the ground. He is meeting men whose kit was bought by somebody who never had to ask what it cost, one after another, and the difference is coming off this side at a rate anyone standing here could measure.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# --- the man who is not entirely here ----------------------------------------
+#
+# TWO MOMENTS ABOUT A MIND THE MOD HAS NEVER READ. The first is an order that
+# does not follow from anything; the second is a man in a line that is coming
+# apart around him, who is not coming apart.
+#
+# NEITHER MAY NAME THE CONDITION. No madness, no lunacy, no possession, no
+# devils, no gods talking, no voices, no fits, no fever. The gate matched one
+# of four trait keys and none of the four tells the mod what it looks like from
+# the outside. The descs work entirely from behaviour that the men around him
+# can see.
+#
+# NEITHER MAY BE COMIC AND NEITHER MAY BE PITYING. Both men are competent
+# enough to be where they are, and the other men on this field are afraid of
+# the situation rather than of him.
+#
+# THE FIRST MAY NOT STATE THE ORDER, may not have anybody question or refuse
+# it, and may not say afterwards whether it was right. Nobody in the toast
+# knows that. It may not have him explain himself either.
+#
+# THE SECOND MAY NOT GIVE HIM A SPEECH, may not have anybody praise him, may
+# not say what he is thinking, and may not make him invulnerable - he is not
+# doing better than the men beside him, he is doing the same thing for longer.
+#
+# NEITHER MAY KILL ANYBODY.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth".
+ bc_the_order_nobody_can_explain_toast:0 "It Went Down The Line Anyway"
+ bc_the_order_nobody_can_explain_toast_desc:0 "Something has been moved that was not in any plan discussed this morning, on a reading of the field that begins and ends inside one man, and the runners took it because runners take what they are given. The captains it reached have carried it out at the speed of people who intend to be able to say they carried it out. Wherever it turns out to have been going, the numbers have not improved since, and there is nobody in this host who could describe the reasoning if the day were lost on it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nothing_has_changed_for_him_toast:0 "The One Account Not Running Out"
+ bc_knight_nothing_has_changed_for_him_toast_desc:0 "A line does not run out of men before it runs out of each man's willingness to be the one still there when his neighbour is not, and along this stretch that has been going for some time. He is drawing on none of it. He is doing at this hour precisely what he was doing at the last one, no better and no faster, and the two men either side of him have arrived at the unspoken and unwelcome conclusion that where he is standing is the easiest place left to stand.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

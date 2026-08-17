@@ -1253,3 +1253,38 @@ bc_facing_a_crown_trigger = {
 		}
 	}
 }
+
+
+# --- the man who is not entirely here ----------------------------------------
+#
+# THE MOD READS A GREAT DEAL OF THE BODY AND NONE OF THE MIND. It knows about
+# wounds, maiming, one eye, greyscale, a bad physique, a good one, illness, age
+# and stress - and stress is the closest it has ever come to this, which is not
+# close at all. Stress is a thing an afternoon does to a man. This is a thing
+# that was true of him at breakfast.
+#
+# FOUR TRAITS AND ALL FOUR ARE NEEDED. AGOT keeps vanilla's shape here:
+# `lunatic_1` and `lunatic_genetic` (00_traits.txt:5981 and :6012) and
+# `possessed_1` and `possessed_genetic` (:6048 and :6080). The `_1` and the
+# `_genetic` of each pair are SEPARATE TRAIT KEYS sharing a
+# `group_equivalence`, not two levels of one key, so an OR of four rows is the
+# whole of the available answer and dropping either genetic row silently loses
+# every man who was born to it - which in this setting is most of the
+# interesting ones.
+#
+# THIS IS NOT bc_he_is_unwell_trigger. That one is `has_trait_with_flag =
+# illness` and none of these four carries that flag; they carry
+# `category = health`, which is a UI grouping and not a flag. The two gates are
+# disjoint on the trait list, so a template on either can never be a subset of
+# a template on the other.
+#
+# NO SCOPE WALK AND NO GUARD. `has_trait` answers no for a character who does
+# not have the trait, so this is one of the plain character triggers.
+bc_his_mind_is_not_his_own_trigger = {
+	OR = {
+		has_trait = lunatic_1
+		has_trait = lunatic_genetic
+		has_trait = possessed_1
+		has_trait = possessed_genetic
+	}
+}

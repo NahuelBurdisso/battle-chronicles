@@ -4918,3 +4918,93 @@ bc_knight_the_men_a_king_can_afford = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# Nothing has changed for him. His mind is not his own, and the side is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall, AND THE ARGUMENT IS ABOUT WHAT IS
+# RUNNING OUT AROUND HIM. A line coming apart is not running out of men first,
+# it is running out of the willingness of each man to be the one who stays
+# while his neighbour goes. He is not drawing on that supply, because he never
+# had the ordinary account. The men either side of him work out - without
+# saying it and without liking it - that standing where he is standing is
+# easier than standing anywhere else, and a line that stops moving backwards is
+# precisely what bc_shieldwall is.
+#
+# THIS IS NOT bc_knight_holds_the_breach, WHICH IS prowess >= 10 AND LOSING.
+# That man is buying time with skill. This one is not better at anything; the
+# thing that ruins the rest of his life is, for about a quarter of an hour,
+# not a disadvantage.
+#
+# IT IS ALSO NOT A HERO MOMENT AND MUST NOT READ AS ONE. No prestige. Ten
+# stress, because whatever this is costs him afterwards, and a guarded
+# faltering rung, because the side is still losing and the chronicle should
+# say so. The gate reads a trait and the side row, never a rung, so the grant
+# is live.
+#
+# THE DESC MAY NOT GIVE HIM A SPEECH, may not have anybody admire him, and may
+# not say what he is thinking - the whole point is that nobody on this field
+# can. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_nothing_has_changed_for_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_mind_is_not_his_own_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# It reads as steadiness rather than as an absence when the man can
+		# also fight.
+		modifier = {
+			add = 30
+			prowess >= 10
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_has_changed_for_him"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nothing_has_changed_for_him_toast
+				desc = bc_knight_nothing_has_changed_for_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

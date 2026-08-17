@@ -7169,3 +7169,102 @@ bc_the_other_banner_is_a_kings = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE MAN WHO IS NOT ENTIRELY HERE, 2026-08-17.
+#
+# THE CHRONICLE HAS READ THE WHOLE BODY AND NEVER THE MIND. Wounds, maiming,
+# one eye, greyscale, physique good and bad, illness, age, and stress - and
+# stress is not this. Stress is what the afternoon does to him; this was true
+# before anybody drew a sword. In a setting whose central house is defined by
+# the question, that is a strange gap.
+#
+# BOTH MOMENTS TAKE THE LOSING ROW AND THE REASON IS THAT THE OTHER HALF IS
+# ALREADY WRITTEN. bc_the_wrath_takes_him and bc_knight_the_glory_hound are
+# both `wild`/`up` and both are already the moment where a man who should not
+# be trusted with a decision makes one and it works. Writing madness as useful
+# would be those two templates a third and fourth time under a different gate.
+# What is unwritten is madness as a thing the afternoon has to work AROUND -
+# an order that does not follow from anything, and a man in the line for whom
+# the ordinary supply of fear is simply not on issue.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The order nobody can explain. His mind is not his own, and the side is losing.
+#
+# `adapted`/`down`, THE RAREST PAIR IN THE LEDGER AND EXACTLY THIS. `adapted`
+# is the mod's word for a commander who READ the field and changed what he was
+# doing about it - and the whole of this moment is that he has changed
+# something, on the basis of a reading nobody else in the host can reconstruct,
+# while the numbers go the wrong way. The verb table hands out nothing for it
+# in either direction, which is the right consequence: this is not an army
+# being hurt or bracing or chasing, it is an army being sent somewhere.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a trait and the
+# side row and never asks about a rung, so the grant is live.
+#
+# TEN STRESS. Being obeyed while not being understood is its own weight, and
+# the mod has one currency for weight.
+#
+# THE DESC MAY NOT STATE THE ORDER, may not have anybody refuse it, and may not
+# say whether it was right. Nobody in this toast knows that, including him. See
+# the loc header.
+# ---------------------------------------------------------------------------
+bc_the_order_nobody_can_explain = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_mind_is_not_his_own_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man already at the second breaking point has less of himself left
+		# to hold the rest of it down with.
+		modifier = {
+			add = 30
+			stress_level >= 2
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arbitrary
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_order_nobody_can_explain"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_order_nobody_can_explain_toast
+			desc = bc_the_order_nobody_can_explain_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
