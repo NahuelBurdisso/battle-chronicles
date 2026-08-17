@@ -2442,3 +2442,176 @@ bc_he_cannot_stop = {
 		}
 	}
 }
+
+# ===========================================================================
+# WHERE HE LEARNED IT, 2026-08-17.
+#
+# THE EDUCATION AXIS APPEARED ONCE IN THE WHOLE MOD, in a comment, and never
+# in a gate. Thirty-four commander templates read martial, prowess, twelve
+# temperament traits, dread, stress, station, age and the health traits, and
+# not one of them asked what the man was RAISED to do. In Westeros that is not
+# a footnote: a second son sent to the yard and a second son sent to the
+# Citadel both end up commanding when the war reaches them.
+#
+# EDUCATION IS NOT MARTIAL AND THE TWO MUST NOT BE COLLAPSED. martial is how
+# good he is at it now, and a lifetime of lifestyle xp, a genius trait or a
+# congenital roll can carry a man to 16 who was never taught a thing. The
+# education trait is where he STARTED, which is a different sentence and the
+# one nothing here has ever said.
+#
+# THE TRAIT KEYS ARE LISTED, NOT GROUPED. `has_trait = education_martial`
+# would be shorter and it is not written that way on purpose: AGOT's override
+# of common/traits/00_traits.txt defines education_martial_1 at :480, _2 at
+# :524, _3 at :561 and _4 at :599 with `category = education` and no `group`
+# line, so there is no group key to test. Listing the four is the only form
+# that is certain to hold in both files.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The man who was put in a yard at seven and is now doing the thing he was put
+# there for.
+#
+# `education_martial_4` IS THE TOP RUNG AND IS DELIBERATELY NOT WIDENED to
+# include _3. The case is not "had some training" - roughly half the lords in
+# a Westerosi host would clear that - it is the man for whom this day is the
+# purpose of his entire upbringing. One rung keeps it rare enough to mean
+# something when the toast appears.
+#
+# WINNING, BECAUSE THE POINT IS THAT IT SHOWS. A losing field would make this
+# a sentence about how the training was not enough, which is a different
+# template and a worse one - bc_never_learned_the_trade below is the one that
+# owns being out of your depth.
+#
+# `ordered`/`up` AND A GUARDED MOMENTUM RUNG. bc_pursuit is what the seam
+# hands out for ordered/up: a host doing the correct thing at the correct
+# moment gets to keep going. The shipped templates on that cell reach it from
+# discipline in the moment; this one reaches it from twenty years earlier.
+# ---------------------------------------------------------------------------
+bc_taught_to_do_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		has_trait = education_martial_4
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_taught_to_do_this"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_taught_to_do_this_toast
+			desc = bc_taught_to_do_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other end of the same axis: the man who was raised to do something else
+# entirely and is holding a host because the war reached his gate.
+#
+# `NOR` OVER THE FOUR MARTIAL KEYS, NOT `education_martial_1`. Level 1 is a
+# bad soldier; this is a man who is not a soldier at all - the Citadel-taught
+# heir, the diplomat, the schemer. That is the AGOT case worth writing and it
+# is much commoner than a martial_1, which the education system hands out
+# rarely.
+#
+# IT CANNOT COLLIDE WITH bc_taught_to_do_this. The two gates are complements
+# on the same four keys and additionally take opposite side rows, so no
+# battle state can satisfy both.
+#
+# `measured`/`down`, WHICH GRANTS NOTHING. The man is not doing anything
+# wrong; he is doing the careful, sensible, wrong-shaped thing a clever man
+# does when the problem is not the kind of problem he knows. Handing him a
+# modifier would be the template arguing that being out of your depth has a
+# mechanical texture, and it does not - the faltering rung is the whole cost.
+# ---------------------------------------------------------------------------
+bc_never_learned_the_trade = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		NOR = {
+			has_trait = education_martial_1
+			has_trait = education_martial_2
+			has_trait = education_martial_3
+			has_trait = education_martial_4
+		}
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial <= 8
+		}
+		modifier = {
+			factor = 0.5
+			martial >= 14
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_never_learned_the_trade"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_never_learned_the_trade_toast
+			desc = bc_never_learned_the_trade_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

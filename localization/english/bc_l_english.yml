@@ -1349,3 +1349,36 @@
 
  bc_wounded_toast:0 "Carried From the Field"
  bc_wounded_toast_desc:0 "[bc_wounded_commander.GetName] was brought down in the thick of it and carried out. He will live. He will not sit a horse at the head of an army until he mends."
+
+# --- where he learned it, and the man with no house (2026-08-17) ------------
+#
+# THE FIRST TWO ARE THE TWO ENDS OF ONE AXIS and must not sound like the same
+# sentence twice. bc_taught_to_do_this is a man doing the thing he was made
+# for, and bc_never_learned_the_trade is a man doing a thing nobody ever showed
+# him. Neither is about how GOOD he is - the mod has martial for that and eight
+# toasts already say it - so neither desc may reach for skill or the lack of
+# it. One is about recognition and the other is about unfamiliarity.
+#
+# bc_never_learned_the_trade MAY NOT READ AS STUPIDITY OR COWARDICE. The man is
+# very often the cleverest person on the field; he is applying a good mind to a
+# problem that does not answer to the kind of thinking he was taught. The mod
+# already has bc_the_hands_are_not_steady for a man coming apart and
+# bc_no_fear_in_them for men who have stopped, and this is neither.
+#
+# bc_knight_no_house_behind_him IS NOT A COMPLAINT ABOUT HIS BIRTH. He is not
+# resentful and the desc may not make him so - he is simply the only man in
+# that part of the line for whom the day is an opportunity rather than a duty,
+# and that shows in how he is fighting.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the usual price" and "the going
+# rate" (bc_knight_the_quiet_place_toast_desc, bc_knight_for_a_friend_toast_desc),
+# "past the point where anybody would have called it enough" (bc_he_cannot_stop
+# block), "he is still on his feet" (bc_knight_the_old_wound_toast_desc).
+ bc_taught_to_do_this_toast:0 "This Is What the Yard Was For"
+ bc_taught_to_do_this_toast_desc:0 "He is not thinking about any of it. The line wants shortening and it shortens, the reserve wants moving and it moves, and every one of those decisions was drilled into him in a courtyard before he was tall enough to hold the shield he was given. Twenty years of somebody else's patience are being spent here in the space of an afternoon.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_never_learned_the_trade_toast:0 "Nobody Ever Showed Him This"
+ bc_never_learned_the_trade_toast_desc:0 "He was raised for the other rooms - the ledger, the audience, the long careful conversation - and the day has asked him a question none of that answers. What he is doing is reasonable. It is also half a step behind what is happening, and the gap has been widening since noon.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_no_house_behind_him_toast:0 "Nothing Behind Him but the Shield"
+ bc_knight_no_house_behind_him_toast_desc:0 "The device on that shield is one he chose himself and nobody has been obliged to remember it before today. He is further into this than the men either side of him, and staying there, because the whole of what he might yet be is standing in the ten feet in front of him and the host is winning enough for it to be seen.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

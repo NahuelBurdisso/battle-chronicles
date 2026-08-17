@@ -2187,3 +2187,94 @@ bc_knight_the_quiet_place = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE HEDGE KNIGHT, 2026-08-17.
+#
+# `is_lowborn` APPEARED NOWHERE IN THE MOD. Twenty-five knight templates read
+# prowess, temperament, the health traits, relations, stress, age, kin, the
+# ground and the state of the battle, and not one of them asked whether the
+# man in the knight list has a name behind him. In Westeros that is the single
+# most legible thing about a man on a field: whether the device on his shield
+# is his house's or one he painted himself.
+#
+# THE TRIGGER IS ENGINE, NOT AGOT. `is_lowborn` is documented in the 1.19.0.6
+# dump as "Is the character a lowborn?", character scope, and AGOT overrides no
+# such thing - it is a dynasty test, and AGOT's dynasties are dynasties.
+#
+# THIS IS NOT THE STATION AXIS AGAIN. bc_the_crown_on_the_field and
+# bc_nothing_but_the_horse read `highest_held_title_tier` and `is_landed` on a
+# COMMANDER - what he stands to lose. Birth is not tenure: a landless third son
+# of a great house is highborn with nothing, and a hedge knight who won a keep
+# is landed and still lowborn. Different question, different root.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The man with no house behind him, on the day the field is turning his way.
+#
+# WINNING, BECAUSE THIS IS THE ONE DAY IT COUNTS FOR HIM. A highborn knight
+# who does well is a lord's son doing what lord's sons do and nothing about the
+# ledger changes; a hedge knight who does well in front of a winning host is
+# the entire mechanism by which such a man ever becomes anything. The side row
+# is what makes the template about a career instead of about a birth.
+#
+# THE PRESTIGE IS THE POINT AND IT IS THE LARGEST A KNIGHT TEMPLATE HANDS OUT.
+# 150 against the 50 and 100 elsewhere in this file, for the reason above: it
+# is the only currency a man with no house has, and this is the only place he
+# can be paid in it.
+#
+# `bloodied`/`up` AND NO RUNG. He fights the way a man fights when there is no
+# name to fall back on. One knight does not move the side's standing - the rule
+# bc_knight_knows_that_man records - so minor, and the tide stays where it is.
+# ---------------------------------------------------------------------------
+bc_knight_no_house_behind_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		is_lowborn = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			prowess >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_no_house_behind_him"
+
+		add_prestige = 150
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_no_house_behind_him_toast
+				desc = bc_knight_no_house_behind_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
