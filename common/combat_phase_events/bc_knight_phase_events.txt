@@ -5930,3 +5930,96 @@ bc_knight_there_is_no_second_host = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is carrying one, and the side is winning.
+#
+# `wild`/`up` AND bc_spent_horse. This is the pair the ledger describes as
+# granting a rung and blowing the horses in the same breath, and that is
+# precisely what happens: the blade goes forward faster than a line can be
+# kept, so the line stops being a line and becomes a wedge behind one man, and
+# the animals underneath it pay for the afternoon. It is a good hour and an
+# expensive one, and the mod has always insisted that those are the same hour.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads what he has equipped
+# and the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_twice_as_good OR bc_knight_no_house_behind_him. Those
+# read the bastard trait and `is_lowborn` - what a man was born as. This reads
+# what he was handed, and a bastard given his father's sword answers yes to
+# both without either moment being the other.
+#
+# THIS IS NOT A TEMPLATE ABOUT PROWESS. The chance row weights it, because a
+# man who cannot fight does not get an hour like this one out of any sword, but
+# the gate is the object and not the arm - which is the whole reason the mod
+# had to go and look at equipment at all.
+#
+# THE DESC MAY NOT NAME THE SWORD OR THE HOUSE, may not describe the blade -
+# no ripples, no smoke, no colour, no edge that never dulls - may not have
+# anybody recognise it, may not have him think about who held it before him,
+# and may not name a man he kills. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_wedge_behind_one_man = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_carries_valyrian_steel_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who cannot fight gets nothing out of any sword.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = reckless
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_wedge_behind_one_man"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_wedge_behind_one_man_toast
+				desc = bc_knight_the_wedge_behind_one_man_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

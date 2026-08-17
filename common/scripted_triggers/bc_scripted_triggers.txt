@@ -1728,3 +1728,52 @@ bc_the_host_is_one_banner_trigger = {
 		any_side_commander = { count = 1 }
 	}
 }
+
+
+# --- the sword itself --------------------------------------------------------
+#
+# ARTIFACTS APPEAR NOWHERE IN THIS MOD. A hundred commander gates and
+# sixty-eight knight gates read men, ground, weather, numbers, wars, faiths and
+# births, and not one of them has ever asked what is in anybody's hand. In this
+# setting there are a few hundred swords that are worth more than the men
+# carrying them and each one has a name, and the chronicle has fought two
+# hundred moments without noticing a single one of them.
+#
+# `agot_is_valyrian_steel_artifact` IS AGOT'S OWN TEST AND IT IS READ ON AN
+# ARTIFACT, NOT ON A CHARACTER (00_agot_artifact_triggers.txt:44 - it is
+# `has_variable = valyrian_steel`, a variable AGOT maintains on the item). Both
+# wrappers below therefore spell an artifact iteration around it, the same way
+# bc_he_is_free_folk_trigger spells `culture = { ... }` around a culture test.
+#
+# `any_equipped_character_artifact`, NOT `any_character_artifact`. The engine
+# offers both and the difference is the whole point: a named sword in a vault
+# at home is not on this field. The equipped list is what a man actually has
+# with him.
+#
+# TWO TRIGGERS, ONE ROOT-RELATIVE AND ONE A GUARDED WALK, and they are the same
+# fact from the two ends of it. The first is used bare and reads whichever man
+# the template is about; the second reaches across to the man opposite and
+# takes the standing guard on `enemy_side.side_commander`, which is an optional
+# link. Neither contains the other and both can be true at once, which is a
+# perfectly ordinary afternoon in this setting.
+#
+# THE SECOND USES `enemy_side` AND NOT `var:bc_battle_foe`, for the reason the
+# rest of the file uses it: the variable is written by bc_battle_open_effect
+# inside a moment's effect and does not exist during a battle's first is_valid.
+bc_he_carries_valyrian_steel_trigger = {
+	any_equipped_character_artifact = {
+		agot_is_valyrian_steel_artifact = yes
+	}
+}
+
+bc_the_foe_carries_valyrian_steel_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_equipped_character_artifact = {
+				agot_is_valyrian_steel_artifact = yes
+			}
+		}
+	}
+}

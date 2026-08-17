@@ -3115,3 +3115,53 @@
 
  bc_knight_there_is_no_second_host_toast:0 "Everything There Is Is Already Here"
  bc_knight_there_is_no_second_host_toast_desc:0 "He does not look at the ridge line, because there is no reason to. Whatever is going to stand on this ground today is standing on it, and has been since the light came up, and the men to his left are the only men who are ever going to be to his left. That is not a thought he has to have twice. It removes things rather than adding them, and what is left when it has finished removing is very simple and very small: shoulder into the man beside him, shield an inch higher, feet closer together, and let the next hour be as expensive as it wants to be.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-THREE. The sword itself.
+#
+# NEITHER DESC MAY NAME THE SWORD OR THE HOUSE THAT OWNS IT. The gate is a
+# variable on an item and both toasts have to be true of every one of them, so
+# no name, no lineage, no "since the Conquest". Neither may say the words
+# Valyrian or Valyria either: the toast is written from inside the afternoon
+# and nobody in it is delivering a history lesson.
+#
+# NEITHER MAY DESCRIBE THE BLADE. No ripples, no dark smoke in the metal, no
+# colour, no edge that never dulls, no weight that is wrong for its size. Every
+# desc in this mod refuses to describe things that a man in the middle of a
+# battle would not be looking at, and a sword he has carried for years is the
+# clearest case of that rule there is.
+#
+# THE FIRST MAY NOT HAVE ANYBODY IDENTIFY IT ALOUD. No captain naming it, no
+# shout down the line, no man who has seen it before. What he has is a place on
+# the field where his arrangements keep failing and a good idea of why. It may
+# not have him send men to take it, may not have him despair, may not kill him,
+# and may not let him solve it - the arithmetic not closing is the moment.
+#
+# THE SECOND MAY NOT HAVE ANYBODY RECOGNISE IT and may not have him think about
+# who held it before him - an inheritance is a different moment and this one is
+# a working afternoon. It may not name a man he kills, may not count what he
+# has killed, may not have anybody cheer, and may not make him magnificent. It
+# is going well and it is costing the horses, and both halves of that have to
+# be in the toast.
+#
+# NEITHER MAY USE THE WORD "steel". It is the word both of these would reach
+# for first and it would drag the description of the blade in behind it.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here".
+ bc_the_bright_thing_on_the_far_side_toast:0 "His Arrangements Keep Failing In One Place"
+ bc_the_bright_thing_on_the_far_side_toast_desc:0 "There is a stretch of the far side about forty yards wide where nothing he sets down stays set. He moves men into it and the shape of them is gone within a quarter hour; he thickens it and the thickening disappears; he leaves it thin on purpose to see what happens and what happens is worse. He knows perfectly well what is standing in that forty yards and he has known since mid-morning, and knowing has not helped once, because a commander cannot order a field to contain one fewer man. So the afternoon gets built around a gap that will not close, and the sum at the end of it comes out the way sums do when one of the numbers is wrong and cannot be changed.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_wedge_behind_one_man_toast:0 "The Line Stopped Being A Line An Hour Ago"
+ bc_knight_the_wedge_behind_one_man_toast_desc:0 "Whatever was meant to happen here, what is happening is that he goes forward and a rough triangle of shouting men goes forward behind him because there is nowhere else for them to be. Nobody ordered it. It is simply where the ground opened. He has been going at the pace of a thing that does not have to stop and the animals underneath all of it have been going at that pace too, and they were not built for four hours of it. Somebody will count the lamed ones tonight and the number will be ugly, and it will still have been the hour that broke the far side.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
