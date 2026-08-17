@@ -1669,3 +1669,137 @@ bc_knight_the_face_they_run_from = {
 		}
 	}
 }
+
+# ===========================================================================
+# BATCH 2026-08-17, THE EIGHTH ON THIS SIDE: ONE TEMPLATE, AND IT LEAVES
+# SOMETHING BEHIND.
+#
+# TWENTY-FOUR KNIGHT AND COMMANDER TEMPLATES HAVE SHIPPED SINCE PLAN 1 AND NOT
+# ONE OF THEM LEAVES ANYTHING PERMANENT. bc_shieldbrother_forged is still the
+# only phase event in the mod that writes a memory and an opinion, and the only
+# other permanent thing anywhere is bc_nemesis_memory, which is written from the
+# aftermath rather than from a moment. Content batches are cheap; this is the
+# expensive kind and it is worth one template rather than three.
+#
+# IT RUNS BETWEEN A KNIGHT AND HIS COMMANDER, which is the relation the mod has
+# never touched. bc_shieldbrother_forged pairs two knights and the rivalry
+# ladder pairs two commanders. The vertical one - the man in the ranks and the
+# man whose day it is - had a toast at most.
+#
+# IT IS NOT A SUBSET OF bc_knight_holds_the_breach, which is the nearest gate
+# (prowess >= 10, losing). This wants prowess >= 12, losing, AND a living
+# commander who is not the knight himself, so it is strictly narrower - and that
+# is the right direction: a narrower gate cannot steal a roll from the wider one
+# it sits under any more often than it fires, and what it does with a roll is
+# permanent.
+#
+# base = 60, NOT 80. It is the rarest thing on this side and the only one that
+# writes a memory, and bc_shieldbrother_forged - the other template that leaves
+# something behind - sits at exactly 60 too.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The knight who goes in after his lord.
+#
+# THE COMMANDER MUST EXIST AND MUST NOT BE THE KNIGHT. Both halves are load
+# bearing. `?=` handles the leaderless side everywhere else in this file, but
+# here the commander is not just the recipient of a toast - he is the man the
+# memory is about, so a missing one makes the whole moment meaningless rather
+# than merely unaddressed. And nothing in the API settles whether
+# every_side_knight can return the side commander, so the identity test is the
+# same guard bc_chronicles.0091 puts on its memory handout.
+#
+# THE GUARD IS WRITTEN IN is_valid AND NOT IN THE EFFECT, unlike the momentum
+# guards this file's earlier batches carry. Those have to be in the effect
+# because they read the COMMANDER's modifiers and is_valid is rooted on the
+# knight; this one reads a link off scope:combat_side, which is available in
+# both places, and a gate that decides whether the moment happens at all
+# belongs in is_valid.
+#
+# NO RUNG, DELIBERATELY, AND THE MOMENT IS STILL `major`. The tier is what the
+# ledger records about the day; the rung is what the army feels for the next
+# twenty days. A commander being dragged out of a press does not make his line
+# fight better - it is a thing that happened to him - and `adapted`/`up` maps
+# to no modifier at all, which is the honest answer.
+#
+# THE OPINION RUNS FROM THE COMMANDER TOWARD THE KNIGHT, so it is written with
+# add_opinion from inside the commander's scope rather than reverse_add_opinion
+# from the knight's. bc_knight_shames_himself writes the mirror image of this
+# and does it the other way round, from the knight's scope, because there the
+# knight is root; both are correct and neither is a template for the other.
+# ---------------------------------------------------------------------------
+bc_knight_pulls_him_out = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		prowess >= 12
+		bc_side_is_losing_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { this = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { is_alive = yes }
+		}
+	}
+
+	chance = {
+		base = 60
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who was already going to do something stupid.
+		modifier = {
+			add = 40
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_pulls_him_out"
+
+		add_prestige = 100
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			add_opinion = {
+				target = scope:bc_knight
+				modifier = bc_lifesaver_opinion
+				opinion = 40
+			}
+
+			# The tag `lifesaver` must match the participants list in
+			# bc_memories.txt; it is what the loc reads back with
+			# [lifesaver.GetFullName].
+			create_character_memory = {
+				type = bc_lifesaver_memory
+				participants = {
+					lifesaver = scope:bc_knight
+				}
+			}
+			debug_log = "BC: lifesaver memory"
+
+			bc_record_moment_effect = { TIER = major KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_pulls_him_out_toast
+				desc = bc_knight_pulls_him_out_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

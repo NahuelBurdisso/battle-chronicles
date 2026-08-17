@@ -44,6 +44,7 @@
  bc_valiant_in_battle_opinion:0 "Stood Fast in Battle"
  bc_craven_in_battle_opinion:0 "Shamed Himself in Battle"
  bc_shieldbrother_opinion:0 "Shieldbrother"
+ bc_lifesaver_opinion:0 "Pulled Me Out"
 
 # --- game rules -------------------------------------------------------------
 
@@ -1169,6 +1170,50 @@
  bc_chronicles.0011.i:0 "Buy them a warm hour out of the war chest. Fires, wine, whatever is still in the wagons."
 
 # --- the flesh --------------------------------------------------------------
+
+# --- the lifesaver (2026-08-17) ---------------------------------------------
+#
+# THE ONLY TOAST IN THE MOD THAT NAMES TWO MEN. Every other knight toast says
+# "he" and lets left_icon say which he - there is only ever one man in them.
+# This one is about a thing that happened BETWEEN two, so both are named:
+# [bc_knight.GetName] is the knight (the toast's left_icon) and
+# [bc_chronicle_subject.GetName] is the commander he went in after, which is
+# the same scope the three Custom clauses hang off.
+#
+# THE COMMANDER IS NOT CALLED HIS LORD. A knight in a side's knight list is
+# not necessarily the commander's vassal, and the mod has no trigger asserting
+# he is. Naming him is both shorter and true.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "come to take him out of the line"
+# and "carried off" (bc_knight_will_not_be_carried), "still on his feet"
+# (bc_knight_the_old_wound). "Pulled Me Out" is the opinion modifier's name and
+# is deliberately NOT repeated in the toast - the opinion is the rescued man's
+# word for it afterwards, the toast is what the field saw at the time.
+ bc_knight_pulls_him_out_toast:0 "He Went In After Him"
+ bc_knight_pulls_him_out_toast_desc:0 "[bc_chronicle_subject.GetName] went down with the press closing over him and it was [bc_knight.GetName] who turned back into it. He came out of that with a man on his shoulder and the men who watched it have not stopped talking about it since.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# THE NINE MEMORY LINES. The RESCUED man carries this memory, so all nine are
+# written from his side and `lifesaver` is the tag naming the knight - the
+# mirror of the nemesis set, where the loser carries it and the tag names the
+# winner.
+#
+# ALL NINE ARE PAST TENSE AND LOWER CASE with no full stop, and THE THREE POOLS
+# STAY IN ORDER, for the reason the shieldbrother header gives: the engine picks
+# a line per perspective block, so a reader comparing two of them expects to see
+# the same variant.
+#
+# NONE OF THEM SAYS WHAT THE WOUND WAS or how close it came. The template fires
+# on a losing side and applies nothing to the rescued man's health, so a line
+# claiming he was dying would be reporting something no script wrote.
+ bc_lifesaver_memory_desc:0 "[lifesaver.GetFullName] came back into that for me when nobody was going to make him"
+ bc_lifesaver_memory_desc_second_perspective:0 "[lifesaver.GetFullName] came back into that for you when nobody was going to make him"
+ bc_lifesaver_memory_desc_third_perspective:0 "[lifesaver.GetFullName] came back into that for [owner.GetName] when nobody was going to make him"
+ bc_lifesaver_memory_desc_b:0 "I was under it and going nowhere, and [lifesaver.GetFullName] got me out"
+ bc_lifesaver_memory_desc_b_second_perspective:0 "you were under it and going nowhere, and [lifesaver.GetFullName] got you out"
+ bc_lifesaver_memory_desc_b_third_perspective:0 "[owner.GetName] was under it and going nowhere, and [lifesaver.GetFullName] got him out"
+ bc_lifesaver_memory_desc_c:0 "I owe [lifesaver.GetFullName] a day I would otherwise not have had"
+ bc_lifesaver_memory_desc_c_second_perspective:0 "you owe [lifesaver.GetFullName] a day you would otherwise not have had"
+ bc_lifesaver_memory_desc_c_third_perspective:0 "[owner.GetName] owes [lifesaver.GetFullName] a day he would otherwise not have had"
 
  bc_wounded_toast:0 "Carried From the Field"
  bc_wounded_toast_desc:0 "[bc_wounded_commander.GetName] was brought down in the thick of it and carried out. He will live. He will not sit a horse at the head of an army until he mends."

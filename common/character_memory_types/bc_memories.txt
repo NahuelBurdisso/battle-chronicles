@@ -173,6 +173,64 @@ bc_nemesis_memory = {
 	}
 }
 
+# --- the man who came and got him -------------------------------------------
+#
+# THE SECOND PERMANENT THING A BATTLE CAN LEAVE BEHIND, and the first one that
+# runs between a knight and the man commanding him. bc_shieldbrother_memory
+# pairs two knights and bc_nemesis_memory pairs two commanders; the vertical
+# relation - the man in the ranks and the man whose day it was - had nothing.
+#
+# THE RESCUED MAN CARRIES IT AND THE KNIGHT DOES NOT, which is the same split
+# bc_nemesis_memory makes and for a related reason. Being pulled out of a press
+# is one moment and it happens to one man. Doing the pulling is a thing a good
+# knight does more than once, and giving him his own copy every time would fill
+# a career soldier's memory list with the same sentence. The `participants` tag
+# names him, so he is in the sentence either way.
+#
+# THE OPINION IS THE KNIGHT'S SIDE OF IT. bc_lifesaver_opinion runs from the
+# rescued man toward the knight at 0.02 a month, which is slower than anything
+# else in that file; between them the memory and the opinion say the same thing
+# from the two ends.
+#
+# `friend.dds` IS A VANILLA ICON - it is in the set used by vanilla's own
+# character_memory_types - and the category set is the shieldbrother's with
+# `martial` in place of nothing: this is a debt, not a friendship, but the UI
+# has no token for that.
+bc_lifesaver_memory = {
+	categories = { positive war martial relationships friend }
+	icon = "friend.dds"
+
+	description = {
+		random_valid = {
+			desc = bc_lifesaver_memory_desc
+			desc = bc_lifesaver_memory_desc_b
+			desc = bc_lifesaver_memory_desc_c
+		}
+	}
+
+	second_perspective_description = {
+		random_valid = {
+			desc = bc_lifesaver_memory_desc_second_perspective
+			desc = bc_lifesaver_memory_desc_b_second_perspective
+			desc = bc_lifesaver_memory_desc_c_second_perspective
+		}
+	}
+
+	third_perspective_description = {
+		random_valid = {
+			desc = bc_lifesaver_memory_desc_third_perspective
+			desc = bc_lifesaver_memory_desc_b_third_perspective
+			desc = bc_lifesaver_memory_desc_c_third_perspective
+		}
+	}
+
+	participants = { lifesaver }
+
+	duration = {
+		years = 40
+	}
+}
+
 bc_battle_memory_lost = {
 	categories = { negative martial war battle }
 	icon = "battle.dds"

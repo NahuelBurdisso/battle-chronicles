@@ -600,6 +600,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | commander, what he has to lose | twenty-eight commander templates and **not one read his station** — a king and a landless sworn sword got the same chronicle. One question, three answers: a crown on a *losing* field (narrowed so it does not own a player-king's chronicle), `is_landed = no`, and close family among his **own** knights. The third is the first gate in the mod to ask *who* the side's knights are; `bc_shieldbrother_forged` only ever counted them | 3 templates, base 40, 30, 40 |
 | knight, the body batch | twenty-one templates read prowess eleven times and **never once asked what shape the man is in** — prowess is a number about how well he fights, not what he is fighting with. The `wounded_*` ladder while losing, `maimed`/`one_legged` with no side row at all, `one_eyed`/`disfigured` while winning. The health traits are the one axis the whole mod had never read, and a battlefield is where vanilla hands them out | 3 templates, base 80 |
 | the eve's winter option | `d` took rough/forest/jungle and `f` took open/desert; **winter was the one band with no option of its own**, and deliberately so — its paragraph is neither a thing to hold nor a road to ride down. So `i` is not about the ground. It is **the only option in the mod that costs gold and the only one with a resource gate**: stress, prestige and piety are as available to a landless knight as to a king, and coin is not | 1 option, 8 → 9 |
+| the lifesaver | twenty-four templates shipped since plan 1 and **only the nemesis memory left anything permanent** — and that one runs commander-to-commander. This is the first thing the mod writes between a knight and the man commanding him: a memory the *rescued* man carries, plus `bc_lifesaver_opinion` at `0.02` a month, the slowest decay in the file. The knight gets prestige and the `participants` tag; he does not get his own copy, because doing the pulling is a career and being pulled out is one day | 1 template, 1 type, 1 modifier |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -618,16 +619,17 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **sixty-nine**, its "3, 3, 4 and 3" are 14,
-12, 16 and 8, and the fall-through set is nineteen sites rather than five. The
+plan 1's eighteen call sites are now **seventy**, its "3, 3, 4 and 3" are 14,
+12, 16 and 8, and the fall-through set is twenty sites rather than five. The
 table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 31, knight 21.** Weight against vanilla's
+**Template totals are now commander 31, knight 22.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110; on the knight side, twenty-one templates at 80 against
-`knight_none`'s 2000.
++ 90 + 110; on the knight side, twenty-two templates against `knight_none`'s
+2000 — twenty-one at 80 and `bc_knight_pulls_him_out` at 60, held below the
+rest because it is the one knight moment that writes something permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
 first to cut** — it is the newest and the least measured.
 
