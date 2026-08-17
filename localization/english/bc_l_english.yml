@@ -1223,6 +1223,22 @@
 # choice is taken before anything is known, and coin is the one thing the
 # player can be left measurably poorer in.
  bc_chronicles.0011.i:0 "Buy them a warm hour out of the war chest. Fires, wine, whatever is still in the wagons."
+# j and k, added 2026-08-17, are the two options that read the man instead of
+# the field - dread and stress. Neither names its price in the text, and that
+# is the settled rule rather than an omission: f and i name theirs because one
+# applies a negative modifier and the other spends coin, both of which the
+# player would otherwise discover after the fact. Stress and prestige show in
+# the option's own tooltip, so naming them again would be twice.
+#
+# SPENT PHRASES THESE MAY NOT REUSE. The nine options above already hold
+# "press them", "hold the ground", "let them come", "wait", "see how the first
+# ranks fare", "let the ground fight for us", "ride away", "loose the horse",
+# "spend them", "nobody over there dies", "have it preached", "their gods are
+# not ours", "buy them a warm hour" and "still in the wagons". j is the only
+# option in the set that says out loud what the men think of him, and k is the
+# only one where he stops.
+ bc_chronicles.0011.j:0 "They are more frightened of me than of anything across that field. Send them forward."
+ bc_chronicles.0011.k:0 "Let the captains set the watch. He is no use to anyone at dawn like this."
 
 # --- the flesh --------------------------------------------------------------
 

@@ -647,4 +647,70 @@ bc_chronicles.0011 = {
 		bc_add_verb_effect = { MODIFIER = bc_bloodied }
 		debug_log = "BC: eve option winter"
 	}
+
+	# =======================================================================
+	# TWO OPTIONS THAT READ THE MAN AND NOT THE FIELD, 2026-08-17.
+	#
+	# Every contextual option above this line gates on something outside the
+	# commander: d, f and i on the ground, e, g and h on who is across from
+	# him. These two gate on him - on `dread`, which is what his own men think
+	# of him, and on `stress_level`, which is what the war has already cost
+	# him. Both were opened as axes by the commander batches committed today
+	# (bc_they_fear_me_more, bc_the_hands_are_not_steady) and neither had ever
+	# been read on the eve.
+	#
+	# THEY NEED NO SCOPE WRAPPER. Both are plain root reads on a
+	# character_event whose root is the commander - the same class of read as
+	# option i's `gold >= 100`, and unlike d, f, g and h they touch no saved
+	# scope, so the file header's warning about a late-answered eve does not
+	# apply. dread and stress_level travel with the man.
+	# =======================================================================
+
+	# THE FIRST EVE OPTION GRANTING bc_pursuit ON ITS OWN. Option f grants it
+	# too, but paired with bc_spent_horse and gated on open or desert ground.
+	# This is the other half of that trade: not a road to ride down, but men
+	# who go forward because the man behind them is worse than what is in
+	# front. Same modifier, different reason, different price - f spends the
+	# horses and this spends him.
+	#
+	# `medium_dread` IS THE NAMED VANILLA VALUE, not a literal. AGOT overrides
+	# common/script_values/00_basic_values.txt wholesale and its copy carries
+	# the same 20/40/70 ladder at :1005, :1006 and :751, so the threshold means
+	# the same thing in both. bc_they_fear_me_more uses the identical gate.
+	#
+	# NOT A SUBSET OF f. f asks about the ground and this asks about the man;
+	# a dreaded commander on rough ground reaches this and not f, and a mild
+	# one on a plain reaches f and not this. Neither implies the other.
+	option = {
+		name = bc_chronicles.0011.j
+		trigger = { dread >= medium_dread }
+		bc_add_verb_effect = { MODIFIER = bc_pursuit }
+		add_stress = 10
+		debug_log = "BC: eve option dread"
+	}
+
+	# THE ONLY EVE OPTION THAT BUYS RELIEF INSTEAD OF A POSTURE. It grants no
+	# modifier at all, which makes it the second option after c to change
+	# nothing about the battle - and that is the point. The mod writes stress
+	# from 34 places and had read it from none until today; a man at
+	# stress_level 2 walking his lines all night is how commanders break, and
+	# the eve is the one place he can refuse to.
+	#
+	# `add_stress = -15` IS LEGAL, unlike `add_gold = -N`. The API entry for
+	# add_stress reads "increases (or decreases)" and vanilla uses the negative
+	# form at events/dlc/fp1/fp1_major_decision_events.txt:1404. Option i's
+	# header records the gold case, which is the one that throws.
+	#
+	# IT PAYS 50 PRESTIGE, TWICE WHAT c PAYS, SO IT DOES NOT DOMINATE c.
+	# c costs 25 prestige for nothing; if this cost the same it would be
+	# strictly better than c for every man who could see it, and an option
+	# that is never wrong is not a choice. At 50 the trade is real: half again
+	# the price of hesitating, in exchange for the day not compounding.
+	option = {
+		name = bc_chronicles.0011.k
+		trigger = { stress_level >= 2 }
+		add_prestige = -50
+		add_stress = -15
+		debug_log = "BC: eve option worn"
+	}
 }

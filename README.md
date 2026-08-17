@@ -567,7 +567,8 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-Six batches, none of which needed a runtime answer. The measured problem they
+Twenty-five batches, one per row of the table below, none of which needed a
+runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
 over. Design: `../../docs/specs/2026-08-17-battle-chronicles-cases-design.md`.
@@ -604,6 +605,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | the first knight pop-up | **four pop-ups shipped and all four assume the player is the man giving orders** — in AGOT he is very often somebody's sworn sword instead, and the mod had never asked him anything. `bc_knight_pulls_him_out` grows a branch on the `bc_flank_collapses` pattern, `else` arm unchanged. Two things are new: `bc_battle_open_effect` is **hoisted before the raise** so `scope:bc_chronicle_subject` carries the commander across the `trigger_event` boundary (`scope:combat_side` does not), and **every rung and ledger write in the event is wrapped in that scope** — a knight carries none of the army modifiers, and writing them bare would hang them where nothing reads them | 1 event, 4 options |
 | knight, the two men who matter | **`has_relation_*` appeared in no gate anywhere in the mod** — the rivalry ladder *writes* relations and nothing has ever read one. Friend of his own commander (no side row), rival of his own commander (`ordered`/`down`, the cell that hands out nothing by design, and it must not read as cowardice — `bc_knight_shames_himself` owns that ground), and rival of the commander **opposite** while winning. The third is the first time a knight is allowed to notice who is in command on the other side; every shipped use of `enemy_side.side_commander` was rooted on a commander | 3 templates, base 80 |
 | commander, what the men think of him | **`dread` appeared nowhere in the mod** — not a gate, not a `chance` row, not a trigger. It is the one number that is *about* the relation between a commander and his own ranks, and temperament does not stand in for it: a mild man who hanged a town has dread, a loud one who never did anything does not. `>= medium_dread` while losing (the line holds), `<= low_dread` while losing (it comes apart in pieces), `>= major_dread_value` with no side row at all (he does not have to ask). Thresholds are the vanilla **named** values, checked against AGOT's override of the same file — 20/40/70 both sides | 3 templates, base 40, 30, 30 |
+| the eve reads the man | nine eve options and **every contextual one gated on something outside him** — three on the ground, three on who is across the field. `j` asks what his own men think of him (`dread >= medium_dread`) and grants `bc_pursuit` alone, which only `f` had ever granted and only paired with `bc_spent_horse` behind a ground gate: same modifier, different reason, and `f` spends the horses while this spends him. `k` asks what the war has already cost him (`stress_level >= 2`) and is **the only option in the mod that buys relief instead of a posture** — no modifier at all, `add_stress = -15` for 50 prestige, twice what `c` pays for nothing so that it does not strictly dominate `c`. Neither touches a saved scope, so neither can go stale on a late-answered eve | 2 options, 9 → 11 |
 | the lifesaver | twenty-four templates shipped since plan 1 and **only the nemesis memory left anything permanent** — and that one runs commander-to-commander. This is the first thing the mod writes between a knight and the man commanding him: a memory the *rescued* man carries, plus `bc_lifesaver_opinion` at `0.02` a month, the slowest decay in the file. The knight gets prestige and the `participants` tag; he does not get his own copy, because doing the pulling is a career and being pulled out is one day | 1 template, 1 type, 1 modifier |
 
 **All six ground bands are now gated on as well as narrated.**
@@ -716,8 +718,9 @@ false, so it is valid on exactly the absent and unknown-value paths.
   | a band | ground clause present, wrong band | the arms read the variable off the wrong character — the anchor resolves but not to the commander who holds the scratch. |
   | `BC: ground missing` | no ground clause | not a spike failure — `combat.location` did not resolve at a phase event. Fix the read site in `bc_write_ground_effect` and run again. |
 - **The widened eve.** `bc_chronicles.0011` now assembles three paragraphs and
-  can offer five options. Nothing static proves a `first_valid` picks the arm
-  intended, or that an `option` `trigger` hides rather than greys.
+  can offer eleven options — three unconditional and eight gated. Nothing static
+  proves a `first_valid` picks the arm intended, or that an `option` `trigger`
+  hides rather than greys.
 
   | markers | screen | verdict |
   |---|---|---|
