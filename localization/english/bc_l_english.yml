@@ -2827,3 +2827,46 @@
 
  bc_knight_the_light_is_going_toast:0 "There Is Not Much Afternoon Left"
  bc_knight_the_light_is_going_toast_desc:0 "Nobody along this stretch is talking about winning any more. What is being worked out, silently and by every man in the rank at about the same speed, is how far off the dark is and whether the shape they are standing in can last that long, because a line still in one piece when the light goes gets to walk away from this and a line that comes apart before then does not get to do anything at all. So it goes backwards at the pace of men who have all done the same sum and none of them have said it. It is not courage. It is a clock made out of daylight, and everybody here can read it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH SEVENTY-SEVEN. This is not the only war he is in.
+#
+# NEITHER DESC MAY NAME THE OTHER WAR. Not its enemy, not its front, not where
+# it is, not how it is going, not what it is about. The gate knows a count and
+# the count is all either toast is entitled to. No messenger arrives from it,
+# no report is read, and nobody mentions it by name.
+#
+# NEITHER MAY PUT A NUMBER ON WHAT IS COMMITTED ELSEWHERE. No hundreds, no
+# thousands, no proportion of the levy. The first man knows the figure exactly
+# and the toast may not print it; the second does not know it exists.
+#
+# THE FIRST MAY NOT NAME THE MOVE HE IS DECLINING TO MAKE, may not have anybody
+# urge it on him, and may not have him explain himself to a captain. It may not
+# turn the battle and may not make him a fool - he is right, and being right is
+# the expensive part. It may not have him resent anybody.
+#
+# THE SECOND MAY NOT LET HIM WORK IT OUT. There is no second war in his world
+# and the desc may not hint that he suspects one. It may not sneer at the men
+# beside him, who are doing the job; it may not have him instruct, correct or
+# rescue anybody by name; it may not kill anybody; and it may not make him the
+# reason the side is winning. What he has done is stop measuring the men here
+# against men who are not.
+#
+# NEITHER MAY USE THE WORD "reserve". It is the exact right word for the first
+# toast, which is why it is the first thing a reader would notice being used
+# twice.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight".
+ bc_the_other_front_toast:0 "He Will Not Spend What Would Win This"
+ bc_the_other_front_toast_desc:0 "There is a way to have this afternoon back and he has been looking straight at it for some minutes now. It costs one thing, and that thing is already owed against a promise made in a different month to a problem that will still be a problem in spring, whatever happens on this ford. So the order does not go. The line stays as it is and gets worse at the rate a line gets worse when nothing arrives to help it, and the man who could have stopped that stands where he can see it happening and keeps his hands still. He is not being cautious. He is being correct, which today is more expensive.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_these_are_the_ones_who_stayed_toast:0 "He Has Stopped Waiting For The Old Company"
+ bc_knight_these_are_the_ones_who_stayed_toast_desc:0 "The man on his shield side does not step where the last one stepped, and neither does the one behind, and for the first hour that cost him something every time. It has stopped costing him. Somewhere in the middle of the afternoon he quietly put down the version of this rank that lives in his head and started working with the one that is actually standing here, which is slower, greener, and holding. He has not said a word about it to anybody and would find it hard to. The far side is going backwards all the same.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

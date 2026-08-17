@@ -7725,3 +7725,110 @@ bc_the_winter_outlasts_the_war = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH SEVENTY-SEVEN. This is not the only war he is in.
+#
+# FIVE WAR QUESTIONS AND ALL FIVE ARE ABOUT THIS ONE. How long it has run, what
+# kind it is, whose it is, whose it is not. Every one of them assumes a war,
+# singular, with this man inside it and nothing else. The setting's defining
+# conflict is named for having five of them going at once.
+#
+# THE TWO MOMENTS ARE THE SAME FACT SEEN FROM TWO HEIGHTS AND THEY DISAGREE
+# ABOUT IT, WHICH IS THE POINT. The commander knows exactly how many men are
+# committed elsewhere, because he committed them, and the knowledge is what
+# stops him spending what would win this. The knight cannot see the other war
+# at all and never will; what reaches him is only that the man on his left is
+# not the man who was on his left last year, and that this one is managing.
+#
+# THE KNIGHT HALF WALKS TO HIS LORD, which is the only way a knight is ever in
+# this moment - `any_character_war` lists a man's own wars and a sworn sword
+# has none. The walk is the same one bc_knight_where_the_wages_are makes, with
+# the same standing guard.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The other front. He has more than one war, and this one is going badly.
+#
+# `measured`/`down`. There is a decision available that would probably retrieve
+# this afternoon and he is not going to take it, because the thing it would
+# spend is already promised somewhere he cannot see from here. That is a
+# judgement made against his own immediate interest, which is what `measured`
+# has always been for, and it goes on the `down` swing because the afternoon is
+# what it costs. The verb table gives nothing: no army is bled or braced by a
+# man declining to commit it.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads his war list and
+# the side row and never asks about a rung.
+#
+# TEN STRESS. Being right about this is worse than being wrong would have been,
+# and the mod has one currency for that.
+#
+# THIS IS NOT bc_the_other_half_of_the_realm OR bc_his_own_war. The first is
+# gated on the war being a rebellion and is about which half of a realm he is
+# standing in. The second asks whether this war is his. Both are about THIS
+# war's nature. This one is about there being a second one, and it would fire
+# identically on two ordinary border squabbles.
+#
+# THE DESC MAY NOT NAME THE OTHER WAR, its enemy, its front or its distance.
+# The gate knows a count and nothing else. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_other_front = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_another_war_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The better he is at this, the more clearly he can see the move he is
+		# refusing to make.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_front"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_other_front_toast
+			desc = bc_the_other_front_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

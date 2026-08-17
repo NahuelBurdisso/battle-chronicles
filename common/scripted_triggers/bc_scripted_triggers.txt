@@ -1502,3 +1502,37 @@ bc_season_is_winter_trigger = {
 		scope:combat_side.combat.location = { has_winter_combat_trigger = yes }
 	}
 }
+
+
+# --- this is not the only war he is in ---------------------------------------
+#
+# THE MOD ASKS FIVE QUESTIONS ABOUT THE WAR AND ALL FIVE ARE ABOUT THIS ONE.
+# bc_war_is_long_trigger asks how long it has run, bc_war_is_a_rebellion_trigger
+# what kind it is, bc_the_war_is_his_trigger and bc_this_is_his_own_war_trigger
+# whose it is, bc_fighting_his_lords_war_trigger whose it is not. Every one of
+# them takes for granted that there is a war, singular, and that the man on
+# this field is inside it and nothing else. In a setting whose defining
+# conflict is called the War of the Five Kings, that is a peculiar assumption.
+#
+# `any_character_war = { count >= 2 }` IS THE WHOLE TRIGGER. The engine's own
+# list - "Wars of the scoped character" - and a count. No walk, no guard, no
+# bookkeeping.
+#
+# IT IS ROOT-RELATIVE ON PURPOSE, LIKE bc_side_has_kin_knight_trigger. Called
+# bare it asks about the commander. Called inside a `scope:combat_side.
+# side_commander = { }` walk it asks the same question about a knight's lord,
+# which is the only way a knight ever gets to be in this moment.
+#
+# A LANDLESS MAN AND A HEDGE KNIGHT BOTH ANSWER NO, AND THAT IS CORRECT RATHER
+# THAN A LIMITATION. `any_character_war` lists wars the character is a
+# PARTICIPANT in - attacker or defender - and a vassal sending levies to his
+# liege's war is not one. The subject of this axis is a man who OWNS more than
+# one war and has to divide himself between them, which is a thing only that
+# man can do.
+#
+# THIS IS NOT bc_side_is_outnumbered_trigger. That is a ratio on this field
+# today and says nothing about why. This is a fact about the man's whole
+# situation that would be equally true if he had brought twice as many.
+bc_he_has_another_war_trigger = {
+	any_character_war = { count >= 2 }
+}

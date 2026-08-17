@@ -5373,3 +5373,100 @@ bc_knight_the_light_is_going = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# These are the ones who stayed. His lord has another war, and they are winning.
+#
+# `adapted`/`up`. He is standing in a rank made of whoever was left after the
+# other war took its pick, and it is working - not because these men are as
+# good, but because he has spent the afternoon quietly revising what he expects
+# from each of them and covering the difference. That revision is the moment.
+# The verb table hands out nothing for it, which is right: nobody has been
+# bled, braced or launched, a man has simply stopped waiting for the army he
+# used to have.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads his lord's war list
+# and the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THE WALK IS THE STANDING ONE AND IS UNAVOIDABLE HERE. `any_character_war`
+# lists a man's OWN wars and a sworn sword has none, so the question has to be
+# asked of his lord. The `exists` sits as a sibling and the READ is nested in a
+# trigger_if that repeats it, exactly as in bc_knight_where_the_wages_are.
+#
+# THIS IS NOT bc_shieldbrother_forged, which counts knights on the side and is
+# about a bond being made. Nothing is made here. He is adjusting an estimate.
+#
+# THE DESC MAY NOT LET HIM KNOW WHY. He has no idea there is a second war and
+# the toast may not tell him. It may not name the other war, may not disparage
+# the men beside him, may not kill anybody and may not make him the reason the
+# side is winning. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_these_are_the_ones_who_stayed = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_side_is_winning_trigger = yes
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			scope:combat_side.side_commander = { bc_he_has_another_war_trigger = yes }
+		}
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Carrying the difference for the men either side of him is work, and
+		# it is work of a kind that has to be done with the hands.
+		modifier = {
+			add = 30
+			prowess >= 10
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_these_are_the_ones_who_stayed"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_these_are_the_ones_who_stayed_toast
+				desc = bc_knight_these_are_the_ones_who_stayed_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
