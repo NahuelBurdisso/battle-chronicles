@@ -8975,3 +8975,104 @@ bc_a_room_somewhere_in_tonight = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-NINE. The paper that put them here.
+#
+# `is_allied_to` AND `is_allied_in_war` BOTH RETURNED ZERO OVER THE WHOLE MOD.
+# Eighty-eight batches read blood, house, faith, tongue, education, body,
+# crime, crown and marriage - every way one man can be bound to another except
+# the one that is written down and signed. Half the hosts in this setting are
+# two or three realms standing next to each other because of a document, and
+# nothing here had ever asked whether the man forty yards away is here for the
+# same reason.
+#
+# ONE GATE READS THE ARRANGEMENT FROM THE TOP AND ONE FROM THE BOTTOM. They can
+# both be true on the same field at the same time on different men, which is
+# the correct behaviour: an alliance looks like a colleague from one end and
+# like a stranger's document from the other.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The seam between two hosts, and this is going badly.
+#
+# `bloodied`/`down` AND bc_bloodied, and the modifier is doing real work rather
+# than decorating a mood. Two armies standing beside each other are two armies
+# with a join in them, and a join is a place. It is not that the allied men are
+# bad or unwilling; it is that no amount of willingness makes one line out of
+# two, and on a bad afternoon the far side finds the place where the orders
+# stop coming from the same mouth and puts everything it has into it. That is
+# where the cost is being paid this hour, and the army wears it.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a side iteration
+# and the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_every_banner_did_its_part, which is many banners doing the
+# thing they were asked to do on a good day. Every banner here is doing exactly
+# what it was asked. The problem is not obedience and never was.
+#
+# THE DESC MAY NOT NAME THE ALLY OR HIS REALM, may not blame him, may not have
+# him fail at anything, may not have anybody argue about precedence or orders,
+# and may not have the alliance break on the page. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_join_is_a_place = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_an_ally_stands_on_this_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Seeing where a two-headed line is going to open, and seeing it in
+		# time, is the whole of what being good at this means.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_join_is_a_place"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_join_is_a_place_toast
+			desc = bc_the_join_is_a_place_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

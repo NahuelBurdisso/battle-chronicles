@@ -6475,3 +6475,96 @@ bc_knight_a_half_step_more_careful = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is here because of a document, and the side is winning.
+#
+# `measured`/`up` - the smallest cell in the census. He has worked out, over
+# the course of an afternoon in which there was nothing else to think about
+# between charges, the exact chain that put him in this county: his lord's name
+# is beside another name on something neither of them wrote, and everything
+# from the muster to the ford to this hedge follows from that. It does not
+# offend him. It is simply the first time he has seen the whole shape of it,
+# and the shape is winning today, which is the only part of it that is any of
+# his business.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads two links and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_the_man_who_is_the_name or
+# bc_knight_what_a_run_of_afternoons_gets_called. The first is a man under the
+# head of his own house, which is blood. The second is a man who has worked out
+# what the afternoon is making, which is a future. This one is a man who has
+# worked out what put him on the field in the first place, which is a past, and
+# a very short and very dry one.
+#
+# THE DESC MAY NOT NAME EITHER LORD OR EITHER REALM, may not have him resent
+# it, may not have him approve of it, may not mention a wedding or a hostage or
+# a sum of money, and may not have him think about going home. See the loc
+# header.
+# ---------------------------------------------------------------------------
+bc_knight_the_chain_that_put_him_here = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_here_on_paper_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Following a chain of reasoning that far back while a battle is going
+		# on is not a common talent.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = zealous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_chain_that_put_him_here"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_chain_that_put_him_here_toast
+				desc = bc_knight_the_chain_that_put_him_here_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

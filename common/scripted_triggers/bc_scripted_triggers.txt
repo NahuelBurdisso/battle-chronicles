@@ -2037,3 +2037,65 @@ bc_a_child_of_his_is_on_the_way_trigger = {
 		any_spouse = { is_pregnant = yes }
 	}
 }
+
+
+# --- the paper that put them here --------------------------------------------
+#
+# `is_allied_to` AND `is_allied_in_war` BOTH RETURNED ZERO OVER THE WHOLE MOD.
+# Eighty-eight batches have read blood, house, faith, tongue, education, body,
+# crime, crown and marriage - every way one man can be bound to another except
+# the one that is written down and signed. Half the hosts in this setting are
+# two or three realms standing next to each other because of a document, and
+# the chronicle has never once asked whether the man forty yards away is here
+# for the same reason he is.
+#
+# `is_allied_to` RATHER THAN `is_allied_in_war`. The narrower trigger asks
+# whether two men are on the same side of a specific war, which every commander
+# on a combat side already is by definition - it would be a gate that fires for
+# everybody. The broader one asks whether there is a standing arrangement
+# between them, which is the question worth asking: not are you here with me,
+# but is there a reason you would be here with me tomorrow.
+#
+# THE `NOT` IS LOAD-BEARING. Without it, a side with exactly one commander on
+# it would test the man against himself, and this mod does not gamble on what
+# the engine thinks a man's alliance with himself is.
+#
+# `root`, NOT `prev`, inside the entered scope, for the reason recorded on
+# bc_foe_is_countryman_trigger.
+bc_an_ally_stands_on_this_side_trigger = {
+	scope:combat_side = {
+		any_side_commander = {
+			NOT = { this = root }
+			is_allied_to = root
+		}
+	}
+}
+
+# He is in a rank because of a sentence in a document he has never seen.
+#
+# THE SAME ARRANGEMENT READ FROM THE BOTTOM. His own lord is not the man this
+# host belongs to, and his own lord and that man have paper between them, which
+# is the entire explanation for why he is standing in this county at all.
+#
+# BOTH LINKS ARE GUARDED and the guard has to hold twice, because `liege` is
+# optional - an independent lord has none - and `side_commander` is optional
+# for the reason recorded throughout this file.
+#
+# `liege` APPEARS TWICE AND MEANS TWO DIFFERENT THINGS, which is worth writing
+# down before somebody tidies it. The first is a comparison - is my lord that
+# man - and the second enters his scope to ask a question about him. CK3 reads
+# `= <target>` and `= { ... }` differently and both are correct here.
+bc_he_is_here_on_paper_trigger = {
+	exists = liege
+	trigger_if = {
+		limit = { exists = liege }
+		exists = scope:combat_side.side_commander
+		trigger_if = {
+			limit = { exists = scope:combat_side.side_commander }
+			NOT = { liege = scope:combat_side.side_commander }
+			liege = {
+				is_allied_to = scope:combat_side.side_commander
+			}
+		}
+	}
+}

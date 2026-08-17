@@ -3400,3 +3400,51 @@
 
  bc_knight_a_half_step_more_careful_toast:0 "The Shield Is Where It Ought To Be, Not Where It Is Comfortable"
  bc_knight_a_half_step_more_careful_toast_desc:0 "Something changed a few weeks ago that has nothing to do with this field, and the result of it on this field is very small and completely constant: every single thing done since dawn has been done a half step more carefully than it would have been last summer. No stepping out after a man who is probably beatable. No taking the opening that is probably an opening. Four hours of holding a heavy thing exactly where it is supposed to be rather than where the arm wants it, which nobody has noticed and nobody will thank him for, and which has quietly kept two other people upright all afternoon. The far side is going backwards. He is not going after them any faster than the line is.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-NINE. The paper that put them here.
+#
+# NEITHER DESC MAY NAME A LORD, A REALM, A HOUSE OR A DOCUMENT. Both gates read
+# an arrangement between two men and both toasts have to be true of every
+# arrangement the engine can produce, including several the reader will never
+# have heard of.
+#
+# THE FIRST MAY NOT BLAME THE ALLY. He may not be slow, may not be unwilling,
+# may not have failed at anything, may not argue about precedence, may not send
+# a messenger, and may not be described at all beyond being there. The toast is
+# about a geometrical fact - two hosts have a join in them and a join is a
+# place - and the moment it becomes about somebody's character it is a
+# different and much cheaper moment. The alliance may not break on the page.
+#
+# THE SECOND MAY NOT HAVE HIM RESENT IT AND MAY NOT HAVE HIM APPROVE OF IT.
+# Both are opinions and he is not having one; he is seeing a shape for the
+# first time, the way a man sees a road he has walked for years from the top of
+# a hill. It may not mention a wedding, a hostage or a sum of money, may not
+# have him think about going home, and may not have him decide anything about
+# any of it.
+#
+# NEITHER MAY USE THE WORDS "alliance", "ally", "treaty", "oath" or "signed".
+# Every one of them would put the document on the page, and the document is the
+# thing both toasts are walking around.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable".
+ bc_the_join_is_a_place_toast:0 "Two Hosts Have A Join In Them"
+ bc_the_join_is_a_place_toast_desc:0 "Nobody over there is doing anything wrong. They came when they said they would, they are where they were asked to be, and they have not given a foot more than his own men have. It does not matter. Two hosts standing beside each other are two hosts with a seam down the middle of them, and a seam is a location, and some time before noon the far side found it the way water finds a crack. It is not a question of willingness and never has been. It is that orders on one side of forty yards come out of a different mouth, arrive a beat later, and mean very slightly different things, and that is where the afternoon is being spent.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_chain_that_put_him_here_toast:0 "He Has Followed It All The Way Back"
+ bc_knight_the_chain_that_put_him_here_toast_desc:0 "There is a lot of standing about in a battle and he has spent this afternoon's share of it working backwards. This hedge because of the ford, the ford because of the muster, the muster because his lord was asked, and his lord was asked because of something agreed in a hall neither of them has ever stood in, years ago, between two men, one of whom is dead. It runs all the way back and every link holds. He has never seen the whole of it before and it turns out to be short, and dry, and to have nothing in it about him at all. It is also winning, which is the only part of the chain that is any of his concern before dark.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
