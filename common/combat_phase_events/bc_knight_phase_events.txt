@@ -2591,3 +2591,89 @@ bc_knight_they_sound_like_home = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# THE SAME FACT FROM INSIDE THE RANKS, 2026-08-17.
+#
+# A KNIGHT CANNOT SEE A PLAN. He can see forty feet of shields and he can hear
+# the horns, and that is the entire evidence available to him - which is why
+# this is a separate template and not the commander's with a different icon.
+# What reaches a man in the second rank about a good enemy commander is not
+# "he has outthought us", it is that every single time the push goes in there
+# is already something waiting there.
+#
+# THE GATE IS bc_foe_is_formidable_trigger, ASKED FROM A KNIGHT'S ROOT FOR THE
+# FIRST TIME. Unlike the two foe triggers the knight file already borrows, this
+# one reads nothing off `root` at all - it is entirely a statement about the
+# other side - so its meaning is identical from either root. That is worth
+# recording precisely because bc_foe_is_countryman_trigger and
+# bc_foe_is_heathen_trigger are NOT like that, and a reader who has just come
+# from those will assume this one shifts too.
+#
+# `measured`/`down`, WHICH HANDS OUT NOTHING. The commander's version of this
+# takes `adapted`/`down` because he is the one doing the reading; a knight is
+# not adapting anything, he is being careful in a situation that keeps turning
+# out to have been arranged. Neither cell grants a modifier, and there is
+# nothing to grant: the men are doing what they were told and it keeps not
+# working.
+#
+# THE TWO CANNOT COMPETE. Commander and knight templates are rolled from
+# separate pools against separate `_none` weights, so a battle satisfying both
+# gates gets at most one of each and never a contest between them.
+# ---------------------------------------------------------------------------
+bc_knight_something_is_always_there = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_foe_is_formidable_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 40
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_something_is_always_there"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_something_is_always_there_toast
+				desc = bc_knight_something_is_always_there_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

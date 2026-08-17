@@ -298,6 +298,49 @@ bc_foe_is_house_trigger = {
 	}
 }
 
+# How good the man on the other side is at this.
+#
+# THE MOD HAS NEVER ASKED. Every foe trigger above reads the enemy commander's
+# IDENTITY - his blood, his house, his faith, his tongue - and the battle
+# triggers read the two hosts as numbers. Nothing anywhere has ever asked
+# whether the man giving the other side's orders is any good, which means
+# seventy-plus templates are written as though a commander only ever plays
+# against the ground and the odds.
+#
+# `martial`, NOT `prowess`, AND THE CHOICE IS THE WHOLE POINT. Prowess is how
+# well he personally fights, and what he personally does with a sword has no
+# bearing on whether our orders are being answered before they arrive. martial
+# is the number about command, and command is what is being felt from over
+# here.
+#
+# NO `exists = house`-STYLE INNER GUARD IS NEEDED. Unlike house and dynasty, a
+# skill is not a link - every character has a martial value - so the single
+# `exists` on the commander is the whole guard.
+#
+# 16 AND 8 ARE THE SAME BARS THE COMMANDER FILE ALREADY USES on its own
+# `martial` rows, so the two triggers are calibrated against a scale this mod
+# has been reading since plan 1 rather than a new one invented here.
+#
+# THE TWO ARE MUTUALLY EXCLUSIVE and there is a wide band between them that
+# matches neither. That gap is deliberate: an ordinary competent opponent is
+# not a moment, and widening either bar towards the middle would make one of
+# them fire in most battles in Westeros.
+bc_foe_is_formidable_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = { martial >= 16 }
+	}
+}
+
+bc_foe_is_outmatched_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = { martial <= 8 }
+	}
+}
+
 # He is not the man whose war this is.
 #
 # side_primary_participant is the WAR LEADER of this side, and this trigger

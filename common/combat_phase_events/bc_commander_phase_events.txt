@@ -3292,3 +3292,171 @@ bc_they_came_for_him = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE MAN ON THE OTHER SIDE IS ALSO COMMANDING, 2026-08-17.
+#
+# FORTY-SIX COMMANDER TEMPLATES AND EVERY SINGLE ONE OF THEM IS ABOUT THIS
+# SIDE OF THE FIELD. The three foe gates the mod shipped read the enemy
+# commander's blood, his house, his faith and his tongue - who he is - and
+# not one thing about what he is doing. The odds triggers read the other host
+# as a number. The result is that every chronicle in the mod is written as
+# though a commander were playing against the ground and the arithmetic, and
+# the other man were a fact about the terrain.
+#
+# THE TWO GATES ARE bc_foe_is_formidable_trigger AND bc_foe_is_outmatched_
+# trigger, both new in bc_scripted_triggers.txt and both reading `martial` on
+# scope:combat_side.enemy_side.side_commander. The reasoning for martial over
+# prowess, and for the 16/8 bars, is recorded there and is not repeated here.
+#
+# NEITHER TEMPLATE MAY BE WRITTEN AS A JUDGEMENT ON THE OTHER MAN'S
+# CHARACTER. The mod does not know whether he is brave or a coward and has no
+# business guessing; it knows one number about his ability to run a field.
+# Every sentence in the loc for these has to be about what is arriving over
+# here, because that is genuinely all our commander can see.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Nothing he tries is landing, and it is not the ground and it is not the
+# numbers.
+#
+# LOSING IS PART OF THE CLAIM. On a winning field the same fact is just a
+# compliment paid to a man who is about to be beaten anyway, and there is no
+# moment in it.
+#
+# `adapted`/`down`, THE SECOND-RAREST CELL IN THE SEAM, AND THE ONLY ONE THAT
+# SAYS THIS. `adapted` is the KIND for a commander reading the battle, and it
+# hands out no modifier by design. Paired with `down` it says the thing this
+# template exists to say: he is reading it, he is reading it correctly, he has
+# changed the plan twice, and each change has been answered before it
+# finished. bc_never_learned_the_trade is a man out of his depth; this is a
+# man at exactly his depth against somebody deeper, which is a different
+# afternoon.
+#
+# THE STRESS IS THE COST AND THERE IS NO OTHER. There is no army modifier for
+# being outthought - the men are doing what they were told - so the faltering
+# rung and ten stress are the whole of it.
+# ---------------------------------------------------------------------------
+bc_the_other_man_is_better = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_formidable_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_man_is_better"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_other_man_is_better_toast
+			desc = bc_the_other_man_is_better_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other side has just done something nobody who had been taught would do.
+#
+# NO SIDE ROW AT ALL, AND THAT IS THE INTERESTING HALF. A mistake across the
+# field is worth exactly the same whether we are ahead or behind - arguably
+# more when we are behind, because it is the only thing on offer - and gating
+# this on winning would turn it into a victory lap. It is one of the few
+# templates in the file that can fire on a field that is going badly and still
+# hand out a momentum rung, which is precisely the shape of the moment.
+#
+# `ordered`/`up`, WHICH IS bc_pursuit. This is the one place in the batch a
+# modifier is correct: something has opened over there and the answer is men
+# going through it at speed. The seam already hands bc_pursuit out for doing
+# the right thing at the right moment; here the right moment was made by
+# somebody else.
+#
+# IT IS NOT A TEMPLATE ABOUT OUR COMMANDER BEING CLEVER. The `martial` chance
+# rows below weight it, because a better soldier notices sooner, but the gate
+# is only about the other man. A commander of 6 whose enemy is a 4 gets this
+# too, and should.
+# ---------------------------------------------------------------------------
+bc_the_gap_he_left = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_foe_is_outmatched_trigger = yes
+	}
+
+	chance = {
+		base = 30
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 20
+			martial >= 14
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_gap_he_left"
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_gap_he_left_toast
+			desc = bc_the_gap_he_left_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

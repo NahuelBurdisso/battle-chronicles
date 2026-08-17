@@ -1540,3 +1540,36 @@
 
  bc_they_came_for_him_toast:0 "Nobody Has Gone Home"
  bc_they_came_for_him_toast_desc:0 "They are being pushed back and they are being pushed back in one piece. Two of the lords holding that end of the line came to this war on nothing but their own word, with somewhere better to be this afternoon and every reason to remember it, and neither of them has so much as glanced behind him. None of that was arranged out here. It was arranged at a long table, over a great many years, by a man who was good at tables.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- the man on the other side is also commanding (2026-08-17) --------------
+#
+# NONE OF THE THREE MAY DESCRIBE THE ENEMY COMMANDER AS A PERSON. The mod
+# knows one number about him. It does not know whether he is old, calm, cruel
+# or lucky, and a desc that says any of those is inventing a character the
+# save may flatly contradict - the man across the field is somebody's
+# playable lord. Everything here has to be written from what arrives on THIS
+# side of the field.
+#
+# THE FIRST MAY NOT MAKE OUR COMMANDER LOOK FOOLISH. That is the entire
+# difference between it and bc_never_learned_the_trade. His decisions are
+# good ones. They are being answered.
+#
+# THE SECOND MAY NOT EXPLAIN THE MISTAKE IN TACTICAL TERMS. A desc that names
+# the manoeuvre turns it into a lecture; what the toast wants is the moment
+# somebody on this side realises what they are looking at.
+#
+# THE THIRD IS FORTY FEET OF SHIELDS AND NOTHING ELSE. The instant it tells
+# the reader what the enemy commander intended, it has given a knight a view
+# of the field he does not have.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he knows what comes next"
+# (bc_he_has_read_about_this), "the field opened" (bc_the_trick_they_did_not_
+# see), "doing the right thing at the right moment" (used in three headers).
+ bc_the_other_man_is_better_toast:0 "Everything Is Being Answered"
+ bc_the_other_man_is_better_toast_desc:0 "He has changed the shape of this twice since midday and both times the change was correct and both times something was already standing where he sent it. Nobody on this side has done anything wrong. The orders went out clearly, the men carried them out, and it has not mattered once, and he is beginning to understand that whoever is holding the other standard has been a full step in front of him since before the first horn.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_the_gap_he_left_toast:0 "Somebody Over There Has Blundered"
+ bc_the_gap_he_left_toast_desc:0 "It takes him a moment to believe what he is seeing, because no one who had ever been made to stand in a yard and be shouted at would have done it. Then he stops trying to believe it and starts shouting, and the riders are moving before he has finished the sentence. Whatever else this afternoon turns out to be, that was a present.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_something_is_always_there_toast:0 "There Is Always Something Waiting"
+ bc_knight_something_is_always_there_toast_desc:0 "Four times now they have gone forward into a place that looked empty and four times there have been spears in it. He does not know why and he has no way of finding out from where he is standing, behind a shield, in the fifth rank of a push that has stopped again. He only knows that it keeps happening, that the men on either side of him have gone quiet about it, and that nobody wants to be in the front of the next one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
