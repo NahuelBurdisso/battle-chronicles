@@ -5458,3 +5458,182 @@ bc_the_man_who_has_done_this_before = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# THE COUNTRY THE WAR KEPT HIM IN, 2026-08-17.
+#
+# THE LAST OF THE FOUR LEDGER COUNTERS. Batch fifty-one put the style streak on
+# the field, fifty-two the victory tally and the grudge, and `bc_terrain_streak`
+# was the one left - written at the end of every notable battle since plan 4,
+# read by nothing but the chain that writes it. Between them the four counters
+# were the whole of what the mod remembered about a commander, and until these
+# three batches a player could fight a twenty-year war without one of them ever
+# being mentioned during a battle.
+#
+# BOTH TEMPLATES BELOW READ THE SAME NUMBER AND ARE ABOUT DIFFERENT PEOPLE.
+# The winning one is about him and the ground; the losing one is about the man
+# opposite, who has been in the same country for the same three battles and has
+# had exactly as long to learn it. That asymmetry is the reason the pair is not
+# a plain diagonal: the second is not "familiarity failed", it is "familiarity
+# was never his alone".
+#
+# NEITHER MAY NAME A TERRAIN. bc_terrain_last holds one of six BUCKETS and the
+# streak effect's header says so in the imperative. The mod does not know
+# whether the last three fields were hills or mountains, only that they were
+# the same kind of country.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The third field in the same country, and he has stopped having to look.
+#
+# WINNING, AND THE MECHANISM IS THE STAFF RATHER THAN THE MAN. What three
+# battles in one kind of country buy is not a better commander; it is a set of
+# captains and scouts and outriders who have all learned the same lessons at
+# the same time and no longer have to be told them. That is why the moment is
+# `adapted`/`up`: the field is being READ correctly and quickly, which is the
+# one thing that KIND means, and there is no army modifier for it because
+# reading is not a thing an army does to the other army.
+#
+# NOT bc_the_thing_he_always_does. That reads a STYLE streak and is about how
+# he fights; this reads a TERRAIN streak and is about where. A man can have
+# fought three battles in the same country in three different ways, and a
+# two-battle style streak says nothing about the ground. Neither gate contains
+# the other.
+#
+# FIFTY PRESTIGE AND A GUARDED MOMENTUM RUNG, the standard winning shape.
+#
+# THE DESC MAY NOT NAME THE COUNTRY, MAY NOT SAY HE CHOSE IT and may not have
+# him give a speech about it. The counter says the war kept him here; it does
+# not say he wanted to be.
+# ---------------------------------------------------------------------------
+bc_the_same_country_again = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_same_ground_again_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = strategist
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_same_country_again"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_same_country_again_toast
+			desc = bc_the_same_country_again_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# The other man has been here just as long.
+#
+# THE SAME COUNTER, AND NOT THE SAME TEMPLATE INVERTED. The obvious losing
+# version of the one above is "his familiarity did not save him", which is
+# bc_the_record_does_not_help_him wearing different clothes. This one is about
+# the fact the winning template quietly assumes and never checks: a war that
+# has kept him in one kind of country for three battles has kept the man
+# opposite in it too, and the ground teaches both sides at the same rate. The
+# subject is the enemy, which no other template gated on a ledger counter has
+# been.
+#
+# `adapted`/`down`, THE THINNEST CELL IN THE PAIR CENSUS AND THE EXACT ONE.
+# `adapted` is the KIND that means the field was READ, and this is a moment
+# about being out-read on ground he thought he owned. It hands out nothing,
+# correctly - being anticipated is not a casualty modifier and not a break in
+# the line, it is a plan arriving where somebody is already standing.
+#
+# A GUARDED FALTERING RUNG AND TEN STRESS, no prestige loss. Nothing has gone
+# wrong with his army; something has gone right with the other one.
+#
+# THE DESC MAY NOT NAME THE COUNTRY OR THE ENEMY. The bucket is not a terrain
+# and `bc_battle_foe` is not read here - the man opposite may be a stranger,
+# and bc_the_man_who_has_done_this_before owns the case where he is not.
+# ---------------------------------------------------------------------------
+bc_he_learned_it_too = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_same_ground_again_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 40
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			bc_foe_is_formidable_trigger = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_learned_it_too"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_learned_it_too_toast
+			desc = bc_he_learned_it_too_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

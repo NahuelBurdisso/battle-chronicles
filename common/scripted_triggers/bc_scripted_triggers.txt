@@ -885,3 +885,39 @@ bc_nemesis_debt_deep_trigger = {
 		var:bc_nemesis_losses >= 2
 	}
 }
+
+
+# --- has the war kept him in the same country -------------------------------
+#
+# THE LAST OF THE FOUR COUNTERS TO REACH THE FIELD. `bc_terrain_streak` is
+# written by bc_terrain_streak_effect in bc_reputation_effects.txt at the end of
+# every notable battle and counts consecutive notable battles fought in the same
+# TERRAIN BUCKET - not the same province and not the same terrain key.
+# bc_terrain_last holds the bucket, and the effect's own header is explicit that
+# it is a bucket "never the terrain key", which is why nothing gated on this may
+# name a terrain in prose. Six buckets cover the whole map; a streak means the
+# war has kept him in one kind of country, not on one hill.
+#
+# THREE, WHERE THE REPUTATION LADDER USES TWO. bc_terrain_streak_effect's own
+# comment gives the reason for its threshold - "fighting the same ground twice
+# is a weaker claim than fighting the same WAY three times, and terrain is not
+# chosen" - and awards a terrain trait at two. A gate at two would therefore be
+# true of every commander the mod has already paid for it. Three is the first
+# number the reward chain has nothing to say about.
+#
+# TERRAIN IS NOT CHOSEN. A commander goes where the war goes, and no template
+# gated on this may suggest he picked the ground or sought it out. What the
+# number supports is familiarity, and nothing else.
+#
+# THE VALUE IS AS OF THE LAST FINISHED BATTLE, like every other counter in this
+# family: the streak effect runs from the combat-end chain, so the battle being
+# fought is not in it yet.
+#
+# `exists` AS A SIBLING, THE COMPARISON NESTED - the standing rule.
+bc_same_ground_again_trigger = {
+	exists = var:bc_terrain_streak
+	trigger_if = {
+		limit = { exists = var:bc_terrain_streak }
+		var:bc_terrain_streak >= 3
+	}
+}

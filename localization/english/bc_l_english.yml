@@ -2197,3 +2197,32 @@
 
  bc_knight_word_came_down_the_line_toast:0 "By the Fifth Rank It Is a Worse Story"
  bc_knight_word_came_down_the_line_toast_desc:0 "What happened is that he was hit and stayed up. What arrives here, four mouths later and travelling against the direction of the fighting, is a good deal shorter than that and stops after the first half. The orders keep coming and they are the same orders they have been all day, and the men taking them have started asking the rider who sent them, which is a question nobody asked at noon and which nothing in the answer can now settle.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH FIFTY-FOUR. The country the war kept him in.
+#
+# NEITHER DESC MAY NAME A TERRAIN. `bc_terrain_last` holds one of six BUCKETS,
+# never a terrain key, so the mod does not know whether the last three fields
+# were hills or mountains, bog or floodplain - only that they were the same
+# kind of country. No river, no ridge, no wood may be named as though the
+# player's map would agree with it.
+#
+# NEITHER MAY SAY HE CHOSE THE GROUND. The streak effect's own header settles
+# this: terrain is not chosen, a commander goes where the war goes.
+#
+# THE SECOND MAY NOT NAME THE ENEMY OR MAKE HIM AN OLD OPPONENT. It reads a
+# terrain counter, not `bc_battle_foe`; the man opposite may be a complete
+# stranger who has simply been campaigning in the same country, and
+# `bc_the_man_who_has_done_this_before` owns the case where he is not.
+#
+# NEITHER MAY COUNT THE BATTLES ALOUD - the standing rule for every counter in
+# this family.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "he has done this before", "the men
+# have noticed", "he worked it out before they did".
+ bc_the_same_country_again_toast:0 "Nobody Has to Be Told Twice Here"
+ bc_the_same_country_again_toast_desc:0 "The outriders came back with less than they used to and it was worth more, because everybody receiving it already knew which half mattered. Nothing has been explained on this field since dawn. The scouts went where they were going to go, the captains put their flanks where this sort of country always wants them, and the whole apparatus has been running a quarter of an hour ahead of the other host all afternoon without anyone raising his voice about it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_he_learned_it_too_toast:0 "He Was Already Standing There"
+ bc_he_learned_it_too_toast_desc:0 "Every move he has made this afternoon has been the correct move for this kind of country, and every one of them has arrived at a place where somebody was already waiting. It is not that he has been outfought. It is that he has spent long enough here to stop noticing that the campaign has been teaching the other side the same lessons at the same speed, and this is the hour in which that arithmetic finishes.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
