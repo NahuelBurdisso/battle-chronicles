@@ -1879,3 +1879,57 @@ bc_he_serves_his_own_name_trigger = {
 		}
 	}
 }
+
+
+# --- what his own world has already convicted him of -------------------------
+#
+# THE MOD READS WHAT MEN THINK OF HIM AND HAS NEVER READ WHAT HE DID. `dread`
+# appears twenty-two times in this file and its neighbours, and dread is a
+# feeling in other people that decays if he stops feeding it. Nothing here has
+# ever asked what is actually written against his name. In a setting where the
+# guest right is the single most load-bearing custom in the whole world, that
+# is a strange gap.
+#
+# `tyranny` IS NOT `dread` AND THE DIFFERENCE IS THE ENTIRE POINT. Dread is how
+# frightened of him his vassals are; tyranny is the sum of what he has taken
+# without a right to it - imprisonments without cause, revocations, executions
+# that no court would have handed down. A beloved lord can be dreaded by
+# accident of reputation, and a man can be at ease in every hall in his realm
+# with a tyranny score that would cost him half his vassals if it were ever
+# read aloud. The trigger is documented on character with the full comparison
+# set. TWENTY-FIVE, not one: a lord who has revoked a single county in a
+# lifetime is every lord, and a gate that fires for nearly everybody is not a
+# gate.
+bc_his_own_people_have_a_ledger_trigger = {
+	tyranny >= 25
+}
+
+# The oldest crime this setting has.
+#
+# THE OR IS SPELLED OUT AND THAT IS DELIBERATE. `kinslayer` is a trait GROUP
+# with three members (00_traits.txt:12151, :12210, :12276) and both vanilla and
+# AGOT write `has_trait = kinslayer` against the group name in places
+# (00_dynast_interactions.txt:333, 00_agot_order_interactions.txt:521). It
+# works. It is also a name that is not a trait, and this mod does not spend its
+# zero-error baseline on keywords that resolve by convention; the accolade
+# files in both games spell the three out (04_ep2_eminent_attributes.txt:570)
+# and so does this.
+#
+# NO LEVEL TEST. The engine grades this crime and the grading is about who was
+# killed, not how many; a man who killed one brother and a man who killed a
+# father and two sons are both standing in a rank today having done the thing
+# nobody in this world comes back from, and the moment is about the floor and
+# not the depth.
+#
+# THIS IS NOT bc_his_own_faith_counts_against_him_trigger, which counts sins
+# against a doctrine and changes its mind when he changes faith. This one is
+# not a religious verdict at all - the Seven, the old gods and the drowned god
+# agree about it, and so does every hedge knight who has never thought about a
+# god in his life.
+bc_he_killed_his_own_blood_trigger = {
+	OR = {
+		has_trait = kinslayer_1
+		has_trait = kinslayer_2
+		has_trait = kinslayer_3
+	}
+}

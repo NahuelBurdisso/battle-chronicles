@@ -3259,3 +3259,48 @@
 
  bc_knight_the_man_who_is_the_name_toast:0 "He Goes Back At The Pace The Rank Goes"
  bc_knight_the_man_who_is_the_name_toast_desc:0 "The ground behind him is where the line will be in an hour, and it is being given up a step at a time and not a step faster, which is the hardest thing this rank knows how to do and the thing it has practised most. He does it the way he does everything, which is well and without being asked twice. Somewhere behind the standards the arrangements for the rest of the day are being made by a voice he has known since he was eight, and he has never once been in the room where that happens. The step comes. He takes it. The shape holds.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH EIGHTY-SIX. What his own world has already convicted him of.
+#
+# NEITHER DESC MAY NAME A CRIME OR A VICTIM. Both gates catch a wide field of
+# men - one a running total, one a trait the engine hands out for several
+# different killings - and both toasts have to be true of every one of them.
+#
+# THE FIRST MAY NOT HAVE ANYBODY OBEY HIM OUT OF FEAR ON THE PAGE. No shrinking
+# captain, no man who does not meet his eye, no order given twice. It may not
+# have him justify anything, may not have him be sorry, and may not tell the
+# reader which of the two reasons is the better one. It knows perfectly well
+# which reason is holding this line and it will not say the word.
+#
+# THE SECOND MAY NOT SAY WHO DIED OR WHAT THEY WERE TO HIM - no brother, no
+# father, no son, no name, no room, no year. It may not have him remember it,
+# may not have anybody on the field know about it, may not make him monstrous
+# and may not make him tragic, and may not let anything forgive him, including
+# the battle. What it may have is a man working at exactly the rate the work
+# arrives, on an afternoon that is going well, because the worst number in his
+# life was settled some years ago and nothing here is bigger than it.
+#
+# NEITHER MAY USE THE WORDS "fear", "love", "blood" or "sin". The first two are
+# the pair the first desc is built to walk around without naming, and the other
+# two would turn the second into a sermon.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank".
+ bc_the_other_reason_men_stand_toast:0 "The Line Holds For The Reason He Built It To"
+ bc_the_other_reason_men_stand_toast_desc:0 "There are two things that keep men standing in a rank that is going backwards, and he chose between them a long time ago, in a series of rooms, on days he could mostly justify at the time. The choice is working. The line is bending and it is not breaking, and the men in it are staying where they are put for exactly the reason he arranged for them to stay where they are put. Nobody will write that down. He would rather it were the other thing holding them and there is no version of this afternoon, or of the eleven years behind it, in which it could have been.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_sums_were_finished_years_ago_toast:0 "Nothing Here Is Bigger Than It"
+ bc_knight_the_sums_were_finished_years_ago_toast_desc:0 "Every other man along this stretch is doing arithmetic about tonight, in the back of his head, whether he knows it or not - what he might lose, what it would cost, what would be left. That arithmetic finished for him some years ago and the answer has not moved since and never will. So there is nothing in front of him this afternoon that is a larger number than the one already behind him, which is not courage and is not despair and does not feel like either. It feels like work arriving at a rate, and being met at that rate, hour after hour, while the far side gives ground.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

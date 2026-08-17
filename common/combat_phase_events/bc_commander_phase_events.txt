@@ -8668,3 +8668,103 @@ bc_the_word_they_will_write_it_under = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH EIGHTY-SIX. What his own world has already convicted him of.
+#
+# THE MOD READS WHAT MEN THINK OF HIM AND HAS NEVER READ WHAT HE DID. Dread
+# is a feeling in other people that decays if he stops feeding it, and it is
+# the only thing of its kind this chronicle has ever asked about. Tyranny is
+# the sum of what he has taken without a right to it, and the kinslayer traits
+# are the one crime this entire setting agrees about across every faith in it.
+# Neither had ever been read.
+#
+# THE TWO GATES ARE NOT DISJOINT AND DO NOT NEED TO BE. They measure different
+# things - a running total against a lord, and a fact about a man - and they
+# sit in different pools, which roll separately.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# What is holding this army together is not affection, and the side is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall. There are two things that keep men
+# standing in a line that is going backwards and he made his choice between
+# them a long time ago and has been paying for it ever since in coin he does
+# not think of as coin. The line holds. It holds for the reason he built it to
+# hold, which is not a reason anybody will put in a song, and he would rather
+# it were the other one and it is far too late in the afternoon and in his life
+# for that.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a running total and
+# the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_they_fear_me_more, which reads `dread >= medium_dread`.
+# Dread is what his men feel; this is what he has actually done, and the two
+# come apart constantly - a mild lord can be dreaded by rumour and a monster
+# can be perfectly comfortable in every hall he owns.
+#
+# THE DESC MAY NOT NAME A CRIME, may not name a victim, may not have him
+# justify anything, may not have anybody obey him on the page out of fear, and
+# may not have him be sorry. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_other_reason_men_stand = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_own_people_have_a_ledger_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who is good at this has been good at it for years, and the
+		# ledger is what years of it look like.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_reason_men_stand"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_other_reason_men_stand_toast
+			desc = bc_the_other_reason_men_stand_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

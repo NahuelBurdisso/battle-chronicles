@@ -6202,3 +6202,95 @@ bc_knight_the_man_who_is_the_name = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He has already done the thing this world does not forgive, and the side is
+# winning.
+#
+# `measured`/`up` - the smallest cell in the census. Every other man in this
+# rank is doing sums about tonight, and he finished his sums years ago and the
+# answer has not moved since. There is no worst outcome left in front of him;
+# the worst outcome is behind him and has his name on it, and everything a
+# battle can do to a man is a smaller number than that. What that leaves is not
+# courage and is not despair. It is a very steady man doing the work at the
+# rate the work is arriving, on an afternoon when the work is going well.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads three traits and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT THE FAITH PAIR FROM BATCH EIGHTY. bc_the_field_keeps_no_accounts
+# and bc_knight_it_was_never_a_bargain read a doctrine adding up sins and
+# virtues, and a doctrine changes its mind when a man changes faith. This is a
+# thing the Seven, the old gods, the drowned god and every hedge knight who has
+# never thought about a god agree about, and no conversion touches it.
+#
+# THE DESC MAY NOT NAME THE DEAD MAN OR SAY WHAT THEY WERE TO HIM, may not say
+# how or when or why, may not have him remember it, may not have anybody on the
+# field know, may not make him monstrous and may not make him tragic, and may
+# not let him be forgiven by anything. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_sums_were_finished_years_ago = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_killed_his_own_blood_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Working at the rate the work arrives is a skill, and he has had
+		# nothing to spend on anything else for some years.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = wrathful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_sums_were_finished_years_ago"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_sums_were_finished_years_ago_toast
+				desc = bc_knight_the_sums_were_finished_years_ago_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
