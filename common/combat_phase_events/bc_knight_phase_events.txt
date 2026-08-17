@@ -4918,3 +4918,91 @@ bc_knight_the_men_a_king_can_afford = {
 		}
 	}
 }
+
+# ---------------------------------------------------------------------------
+# He stops at the shield. His own house opposite, and the side is winning.
+#
+# THE GATE READS THE KNIGHT'S OWN HOUSE, NOT THE COMMANDER'S. Unlike
+# bc_knight_where_the_wages_are, which had to walk to the captain because a
+# rider may carry no government of his own, a knight has his own name and it is
+# the whole point: he may be the only man on this side of the field who is
+# related to the men on that one.
+#
+# `measured`/`up`, AND IT IS THE RARE PAIR FOR THE RIGHT REASON. The side is
+# winning, the men in front of him are coming apart, and he is the one rider in
+# the line who is not going to convert that into as much as it is worth. The
+# ledger's word for a man who declines to spend what is available is `measured`,
+# and the verb table hands out nothing for it, which is exactly right: this is a
+# moment in which an army gets LESS than the afternoon offered.
+#
+# THE MOMENTUM RUNG IS STILL GRANTED. The side is winning and the chronicle
+# should say so; his restraint is a fact about him, not a reverse for the host.
+# The gate does not check for the rung, so the guarded grant is live.
+#
+# FIFTY PRESTIGE, WHICH IS NOT A REWARD FOR MERCY. It is the ordinary rate for
+# a knight who is visibly in the front of a winning line, and the mod does not
+# have a currency for the other thing.
+#
+# THE DESC MAY NOT KILL, MAY NOT SPARE ANYBODY BY NAME, AND MAY NOT MAKE IT A
+# RECONCILIATION. Nobody speaks. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_stops_at_the_shield = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_facing_his_own_house_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		modifier = {
+			add = 30
+			has_trait = family_first
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = vengeful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_stops_at_the_shield"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_stops_at_the_shield_toast
+				desc = bc_knight_he_stops_at_the_shield_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

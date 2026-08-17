@@ -2607,3 +2607,45 @@
 
  bc_knight_the_men_a_king_can_afford_toast:0 "They Do Nothing Else All Year"
  bc_knight_the_men_a_king_can_afford_toast_desc:0 "The third one he has faced in this stretch of line has plate where the last two had mail and has been drilled by somebody who was paid well to do it, and none of them have been hungry this season. He is not being outfought by a scheme or worn down by the ground. He is meeting men whose kit was bought by somebody who never had to ask what it cost, one after another, and the difference is coming off this side at a rate anyone standing here could measure.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# --- the same arms on both sides ---------------------------------------------
+#
+# TWO MOMENTS IN A WAR INSIDE A HOUSE. The first is a commander with the only
+# useful order of the afternoon available to him and nobody he can give it
+# about; the second is a knight in a winning line who takes less than the hour
+# is offering.
+#
+# NEITHER MAY NAME THE HOUSE, DESCRIBE THE ARMS OR NAME A COLOUR. The gate
+# asked whether two men share a house key and knows nothing whatever about what
+# is painted on the shields. A named sigil here would be wrong in the great
+# majority of the cases that match.
+#
+# NEITHER MAY NAME A RELATIVE OR STATE A RELATION. The gate deliberately
+# EXCLUDES close family - see the trigger header - so there is no father, no
+# brother, no son and no cousin in either desc, because the mod does not know
+# which of those, if any, is true. "His own name" and "the same arms" are the
+# whole of what may be said.
+#
+# NEITHER MAY KILL ANYBODY AND NOBODY MAY SPEAK. No parley, no recognition
+# across the line, no words exchanged.
+#
+# THE FIRST MAY NOT ORDER THE COUNTERATTACK, may not have him consider and
+# reject it out loud, and may not have anybody advise him. The men around him
+# are waiting for an order; that is all they do in this toast.
+#
+# THE SECOND MAY NOT SPARE A NAMED MAN, may not be a reconciliation, and may
+# not have anybody thank him or notice. It is also not remorse - he is not sad,
+# he is calculating, and the calculation comes out short.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth".
+ bc_he_will_not_order_the_counter_toast:0 "The Order He Has And Cannot Give"
+ bc_he_will_not_order_the_counter_toast_desc:0 "There is a reserve behind the centre and a place in the line that has been bending for a quarter of an hour, and any captain in Westeros could put the one into the other and buy back the afternoon. He is not going to. Whatever is bought that way gets paid for out of the same name that is losing here, twice over and for the next fifty years, so the reserve stands where it is and the line holds what it has, and the men waiting on him have worked out that the waiting is the order.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_stops_at_the_shield_toast:0 "Worth Less Than It Was Worth"
+ bc_knight_he_stops_at_the_shield_toast_desc:0 "The rank in front of him has stopped being a rank and the riders either side of him are already through it and going, which is the moment the whole day has been building towards and the moment he lets go of. He takes the ground and does not take what is standing on it, at a walk, alone, while an afternoon that could have been worth a great deal turns into an afternoon that is merely won.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

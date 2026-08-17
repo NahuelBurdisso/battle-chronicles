@@ -1254,3 +1254,61 @@ bc_facing_a_crown_trigger = {
 		}
 	}
 }
+
+
+# --- the same arms on both sides ---------------------------------------------
+#
+# THE SECOND QUESTION ABOUT THE MAN OPPOSITE, AND THE ONE THE BOND LADDER GETS
+# HALF OF. bc_write_bond_effect's `kin` arm uses `is_close_family_of`, which the
+# 1.19.0.6 dump defines exactly: "parents, children, siblings, grandparents,
+# grandchildren". That is a father, a son, a brother - and nobody else. An
+# uncle, a nephew, a cousin, a great-uncle's grandson carrying the same arms on
+# the same field all come out of that ladder as `countryman` or `stranger`,
+# which in Westeros is the wrong answer to a very loud question.
+#
+# THE `NOT` ROW IS THE DIVISION OF LABOUR AND IS NOT AN OVERSIGHT. Close family
+# is deliberately EXCLUDED here, because the bond clause printed under every
+# toast already says `kin` for exactly those men and says it well. This trigger
+# is the rest of the house: the war inside a name, which is most of the wars in
+# this setting and none of the mod's gates.
+#
+# `house`, NOT `dynasty`. AGOT is a game about houses - a dynasty can hold
+# several, and two men of the same dynasty and different houses are precisely
+# the men who fight each other. Vanilla writes the comparison this way at
+# common/scripted_triggers/03_bp1_scripted_triggers.txt:46 (`NOT = { house =
+# $TARGET$.house }`) and mpo_scripted_triggers.txt:1139-1141.
+#
+# `enemy_side` AGAIN, FRESH, AND NOT var:bc_battle_foe. Same reasoning as
+# bc_facing_a_crown_trigger above - the variable is written inside a moment's
+# effect and is not available to the first `is_valid` of a battle.
+#
+# THE DOUBLE GUARD IS THE ONE bc_the_ground_is_his_own_trigger ESTABLISHED.
+# There are two optional links on the path and each one gets its own `exists`
+# sibling and its own trigger_if repeating it: the enemy side can be leaderless,
+# and a man - either man - can have no house at all, which is common for the
+# hedge knights and freeriders this mod puts in front of the player constantly.
+#
+# `root` IS THE KNIGHT OR THE COMMANDER, whichever pool called this, and it is
+# already the mod's idiom inside a nested scope - bc_the_ground_is_his_own_
+# trigger compares `this = root` and `target_is_liege_or_above = root` from
+# inside a county holder block in this same file.
+bc_facing_his_own_house_trigger = {
+	exists = house
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = house
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		exists = scope:combat_side.enemy_side.side_commander.house
+		trigger_if = {
+			limit = { exists = scope:combat_side.enemy_side.side_commander.house }
+			house = scope:combat_side.enemy_side.side_commander.house
+			NOT = {
+				scope:combat_side.enemy_side.side_commander = {
+					is_close_family_of = root
+				}
+			}
+		}
+	}
+}

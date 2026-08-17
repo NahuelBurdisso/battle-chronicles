@@ -7169,3 +7169,101 @@ bc_the_other_banner_is_a_kings = {
 		}
 	}
 }
+
+# ===========================================================================
+# THE SAME ARMS ON BOTH SIDES, 2026-08-17.
+#
+# THE PREVIOUS BATCH OPENED THE ENEMY COMMANDER AS A GATE AND ASKED WHAT HE IS
+# WORTH. This one asks what he is called, which in this setting is the larger
+# question. Westeros does not mostly go to war house against house; it goes to
+# war down the middle of a house, and the mod's bond clause has been quietly
+# calling those men `countryman` for seventy-one batches because
+# `is_close_family_of` stops at brothers. See the trigger header.
+#
+# TWO MOMENTS AND THEY TAKE OPPOSITE SIDE ROWS, which is what keeps them from
+# being the same sentence twice. Losing to your own name and beating your own
+# name are not two intensities of one feeling; they are two different problems,
+# and only one of them is about restraint.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He will not order the counter. His own house opposite, and the side is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall, AND THE ARGUMENT IS A DECISION HE IS
+# NOT MAKING. Every other losing commander in this file has one obvious move
+# available - throw the reserve at the point that is bending and buy the
+# afternoon back with it. He has it too. What he does not have is anybody he
+# can spend it on: the men it would go into are carrying his arms, and a charge
+# ordered into them is a thing his house will still be arguing about in fifty
+# years. So the line holds where it is and keeps holding, which is precisely
+# what bc_shieldwall is: an army that is not going anywhere, on purpose,
+# including forwards.
+#
+# THIS IS NOT bc_rally_the_line, WHOSE GATE IS FALTERING AND NOTHING ELSE, and
+# it is not a subset of it: this one never asks about the rung, and a commander
+# with no rung at all matches here and not there.
+#
+# TEN STRESS, NO PRESTIGE, AND A GUARDED FALTERING RUNG. Holding is not
+# winning, and there is no prestige in a battle whose whole cost lands on your
+# own name whichever way it goes.
+#
+# THE DESC MAY NOT NAME THE HOUSE OR DESCRIBE THE ARMS. See the loc header.
+# ---------------------------------------------------------------------------
+bc_he_will_not_order_the_counter = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_facing_his_own_house_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has spent his life putting the house first is the man least
+		# able to spend it on this.
+		modifier = {
+			add = 30
+			has_trait = family_first
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = sadistic
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_will_not_order_the_counter"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_will_not_order_the_counter_toast
+			desc = bc_he_will_not_order_the_counter_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
