@@ -6242,3 +6242,52 @@ bc_he_outranks_the_man_across_the_field_twice_over_trigger = {
 		}
 	}
 }
+
+# BATCH 157 - HOW MUCH OF HIMSELF EACH MAN ACTUALLY BRINGS TO A DAY.
+#
+# Batch 131 opened the AI-personality surface on `ai_boldness`, batch 140 spent
+# `ai_zeal` and `ai_compassion`, and batch 152 spent `ai_greed` and `ai_honor`.
+# `ai_energy`, `ai_rationality`, `ai_sociability` and `ai_vengefulness` were all
+# still at zero reads over the whole mod. The three prose mentions of
+# `ai_energy` that a census turns up are in those three headers listing what was
+# left; none of them is a call site.
+#
+# THE FORM AND THE CONSTANTS ARE SHIPPED AND UNAMBIGUOUS. Vanilla reads this
+# attribute against the named ladder in its own scripted triggers -
+# `ai_energy >= low_positive_ai_value` at
+# `common/scripted_triggers/00_childhood_triggers.txt:174` and
+# `ai_energy <= low_negative_ai_value` ten lines below it at `:184`, which is the
+# same signed pair this batch writes one rung further out. The upper tail is
+# shipped at `common/decisions/dlc_decisions/mpo/mpo_decisions.txt:4113` as
+# `ai_energy >= high_positive_ai_value` and the lower at `:4187` as
+# `ai_energy <= medium_negative_ai_value`. The 1.19.0.6 dump lists the full set
+# of operators for the key and confines it to the character scope.
+#
+# BOTH GATES ARE BARE SELF-READS. The attribute is read off the scoped man about
+# himself, so there is no optional link anywhere in either row and neither takes
+# a guard. That is the same shape as batch 152's first gate and batch 140's pair.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Opposite tails of one signed ladder on
+# one man. Nothing needs to be negated because the arithmetic already forbids it.
+#
+# THIS IS NOT ANY OF THE FOUR AI ROWS ALREADY SHIPPED. Boldness is how much risk
+# he will accept, zeal is what he thinks the day is for, compassion is what he
+# will spend other people on, greed is what he expects to be handed at the end.
+# Energy is none of those. It is how much of himself he puts into anything at
+# all, and a man can be bold and idle, or tireless and entirely uninterested in
+# what the war is nominally about. Nor is it the trait rows: no shipped gate in
+# the mod reads `lazy` or `diligent`, which appear only as `chance` weights, and
+# the weights gate nothing. A man sits in one of these tails or he does not,
+# whatever traits he is carrying.
+#
+# RARITY. The ladder is signed and the bulk of the population sits near the
+# middle of it. Each gate asks for the second rung from the end on a scale of
+# six, in one direction only, which is a genuinely small slice of the men who
+# turn up to command or to fight.
+bc_he_has_not_wanted_to_be_anywhere_for_a_long_time_trigger = {
+	ai_energy <= high_negative_ai_value
+}
+
+bc_he_has_never_been_able_to_sit_still_trigger = {
+	ai_energy >= high_positive_ai_value
+}
