@@ -5114,3 +5114,75 @@ bc_the_man_opposite_is_his_own_man_trigger = {
 		is_liege_or_above_of = scope:combat_side.enemy_side.side_commander
 	}
 }
+
+# BATCH 142 - THE ROSTER, AND WHO IS ACTUALLY ON IT.
+#
+# `is_knight`, `is_knight_of`, `any_knight`, `num_of_knights`,
+# `any_acclaimed_knight` and `any_courtier_or_guest` all returned zero across
+# the whole mod. This is a submod about knights. It has one hundred and
+# twenty-seven templates in a file called `bc_knight_phase_events.txt` and it
+# has never once asked the engine whose knight anybody is. The word has been
+# used as a synonym for "man on a horse" since plan 1; it is a specific
+# employment with a specific employer and the engine tracks both.
+#
+# BOTH ARE LIVE IN SHIPPED FILES. Vanilla writes `is_knight_of = scope:host` at
+# `common/activities/activity_types/inspection.txt:647`, `:1074` and `:1081`,
+# `is_knight_of = scope:owner` at `monument_expedition.txt:596` and
+# `tournament.txt:1437`, and `is_knight_of = root` at `tournament.txt:3711`.
+# AGOT ships its own copies at `inspection.txt:647`, `:1088` and `:1095`, at
+# `monument_expedition.txt:602`, at `tournament.txt:1765` and at
+# `common/activities/activity_types/agot_coronation.txt:1709`.
+#
+# THE FIRST IS NOT "IS HE A KNIGHT", WHICH WOULD FIRE FOR THE WHOLE POOL. Every
+# man the knight templates ever scope is a knight of somebody by definition, so
+# a bare `is_knight = yes` would be a gate that passes everybody and gates
+# nothing. What is asked instead is whether the man giving the orders on this
+# side is the same man who pays him. A side aggregates every army standing on
+# it, and its knights come from all of those armies and all of their owners,
+# while the commander is one specific man - very often not the owner of the
+# force the scoped knight belongs to, and in a realm army with vassal levies
+# usually not. So this is a real minority of any given field.
+#
+# THE SECOND ASKS ABOUT A ROSTER AND NOT ABOUT A REPUTATION. `any_knight`
+# iterates the knights a character employs. A commander is frequently a landless
+# courtier or a household man himself, and those have no roster at all, so the
+# gate first requires him to be a ruler and then requires him to be a ruler
+# large enough to keep eight. Vanilla scales the slots with realm size, which
+# means eight is a duke's household rather than a count's.
+#
+# ONE GUARD, ONE BARE READ. Naming a link as the TARGET of a trigger is a read,
+# so the first carries `exists` as a sibling and repeats it inside the
+# `trigger_if` limit before `is_knight_of` is asked, and it names the man
+# through `scope:combat_side` rather than `root` for batch 127's reason. The
+# second is an iterator over the scoped character's own roster; an empty roster
+# is a clean no and takes no guard.
+#
+# THIS IS NOT BATCH 141'S HOMAGE ROWS. Vassalage is land held of a man and it
+# outlives everybody's feelings about it; knighthood in this engine is
+# employment, it can be ended in an afternoon, and it does not move an acre.
+# A knight of a man is very often not his vassal, and a vassal is very often not
+# on anybody's roster. Neither gate here reads `is_vassal_of` and neither of
+# batch 141's reads a roster.
+#
+# TWO FACTS, TWO MEN, SO NO NEGATION, for the same reason as batches 110, 113,
+# 118, 120 and 123-141. The first is a fact about who employs the scoped man.
+# The second is a fact about how many men the scoped man employs. Neither
+# implies the other in either direction.
+#
+# RARITY. The first needs the commander of the side to be the scoped knight's
+# own employer rather than somebody else's. The second needs a ruler with a
+# household of eight sworn swords, which most men who are handed an army are
+# not.
+bc_he_is_sworn_to_the_man_leading_this_side_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		is_knight_of = scope:combat_side.side_commander
+	}
+}
+
+bc_he_keeps_a_household_of_sworn_swords_trigger = {
+	any_knight = {
+		count >= 8
+	}
+}
