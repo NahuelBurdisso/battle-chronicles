@@ -16665,3 +16665,63 @@ bc_the_far_side_is_commanded_by_his_blood_brother = {
 		}
 	}
 }
+
+
+bc_this_whole_war_is_on_his_own_ledger = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_this_whole_war_is_on_his_own_ledger_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has paid for a war out of his own stores knows to the
+		# cartload what today is costing him and cannot stop counting it.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_whole_war_is_on_his_own_ledger"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_this_whole_war_is_on_his_own_ledger_toast
+			desc = bc_this_whole_war_is_on_his_own_ledger_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -9202,3 +9202,111 @@ bc_he_swore_blood_with_the_man_giving_the_orders_trigger = {
 		has_relation_blood_brother = scope:combat_side.side_commander
 	}
 }
+
+
+# BATCH 202 - THE WAR THAT IS ALL ON ONE MAN'S LEDGER.
+#
+# CENSUS. `war_contribution` returns zero across the whole mod. The word
+# "contribution" appears exactly once and it is prose, in the toast desc of
+# `bc_what_the_paid_man_left_in_their_hands`, so nothing anywhere reads how
+# much of a war a given man has actually paid for. The mod asks plenty about
+# the war behind the combat already: how long it has run (`war_days >= 730` at
+# :201), whether it is a civil war (:968), who leads it (`is_war_leader = root`
+# at :995), which side of it this man is on (:2569 and :2577) and whether he
+# has a second war at home (:8484). None of those read the war's own ledger of
+# who has done the work.
+#
+# PRECEDENT. `war_contribution` is a war-scope trigger taking a target and a
+# value: triggers.log gives the form as `war_contribution = { target = some
+# character value > 5 }` with Supported Scopes: war. AGOT uses it in a file of
+# its own authorship - `common/on_action/agot_on_actions/agot_war_on_actions
+# .txt` at :700, :721 and :744 - to pick out the three attackers with the most
+# invested in a war that is about to be settled over their heads, and its bar
+# for "this man has actually put something in" is `value >= 10`. Vanilla uses
+# the same trigger at `common/scripted_effects/00_war_effects.txt:2532` with
+# `value > 0`, at `common/scripted_effects/03_dlc_fp2_scripted_effects.txt
+# :1259` against a stored debt, and at `common/scripted_effects/
+# 07_dlc_ep3_scripted_effects.txt:11358`. Both gates below use `value >= 100`,
+# which is ten times AGOT's own bar for a man who has put something in.
+#
+# THE WALK IS THE MOD'S ESTABLISHED ONE. `scope:combat_side.combat.combat_war`
+# is how every war-scope gate in this file reaches the war, first at :198 and
+# most recently at :8485, and `combat_war` is documented as Input Scopes:
+# combat, Output Scopes: war.
+#
+# DISTINCTNESS. Nothing on this axis is shipped, so the only question is
+# between the two gates. They are DISJOINT BY CONSTRUCTION, which is the
+# fostering pair's arrangement at :2490-2510: the first asks that root has
+# carried this war and the far commander has not, the second asks that the far
+# commander has carried it and root has not. No war can satisfy both. The
+# subjects also differ, so this is batch 149's two-different-men arrangement as
+# well, and the pools roll separately in any case.
+#
+# THE SECOND GATE IS WRITTEN FOR THE KNIGHT POOL and its own-man clause is
+# nearly always true there, because a knight is not usually the man a war's
+# ledger is written against. That clause is carried for disjointness rather
+# than for rarity and it costs nothing to keep.
+#
+# GUARDS. `combat_war` is optional and so is `enemy_side.side_commander`, and
+# naming a man as the TARGET of the contribution test is a read of him, so both
+# gates carry `exists` for the war, for `enemy_side` and for
+# `enemy_side.side_commander` as siblings and repeat all three in the
+# `trigger_if` limit. A missing scope then fails the gate instead of passing it
+# vacuously.
+#
+# RARITY. War contribution accrues to the men who win the battles and take the
+# holdings, and in most wars that is one or two people out of a dozen
+# participants. A hundred of it is a man who has fought the war more or less by
+# himself. The first wants that man to be losing a battle, which is the shape
+# of a war turning over on the one person holding it up; the second wants it
+# true of the far commander while this side is winning, which is the same
+# picture seen from the good end of the field.
+bc_this_whole_war_is_on_his_own_ledger_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.combat.combat_war
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.combat.combat_war = {
+			war_contribution = {
+				target = root
+				value >= 100
+			}
+			NOT = {
+				war_contribution = {
+					target = scope:combat_side.enemy_side.side_commander
+					value >= 100
+				}
+			}
+		}
+	}
+}
+
+bc_the_far_lord_has_carried_this_whole_war_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.combat.combat_war
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.combat.combat_war = {
+			war_contribution = {
+				target = scope:combat_side.enemy_side.side_commander
+				value >= 100
+			}
+			NOT = {
+				war_contribution = {
+					target = root
+					value >= 100
+				}
+			}
+		}
+	}
+}
