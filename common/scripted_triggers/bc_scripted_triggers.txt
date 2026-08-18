@@ -743,28 +743,47 @@ bc_eve_facing_nemesis_trigger = {
 
 # He wears a white cloak.
 #
-# SEVEN ROWS BECAUSE AGOT MODELS THE KINGSGUARD AS SEVEN SEPARATE COUNCIL
-# POSITIONS, not as one with seven holders: `kingsguard_lord_commander` plus
-# `kingsguard_1` through `kingsguard_6`, all defined in
-# common/council_positions/00_agot_council_kingsguard.txt. There is no single
-# key that means "is in the Kingsguard", so the OR is the whole of the
-# available answer and dropping any row silently loses a seventh of the order.
+# SEVEN POSITION ROWS BECAUSE AGOT MODELS THE COUNCIL SIDE OF THE KINGSGUARD AS
+# SEVEN SEPARATE POSITIONS, not as one with seven holders:
+# `kingsguard_lord_commander` plus `kingsguard_1` through `kingsguard_6`, all
+# defined in common/council_positions/00_agot_council_kingsguard.txt. Dropping
+# any one of those rows silently loses a seventh of the seated order.
 #
-# NOT A TRAIT AND NOT A TITLE. The temptation is to look for a `kingsguard`
-# trait; there is none. The temptation after that is to test for a knighthood
-# or a vow trait, which would collect a great many men who are not in the
+# THERE IS A `kingsguard` TRAIT AND THIS COMMENT USED TO DENY IT. That was
+# wrong, and the trait row was added on 2026-08-17 to fix an under-catch. AGOT
+# defines it at `common/traits/00_agot_traits.txt:362`, adds it in
+# `agot_join_kingsguard_effect` at
+# `common/scripted_effects/00_agot_kingsguard_effects.txt:5` and again at game
+# start in `common/on_action/agot_on_actions/agot_game_start.txt:360`, removes
+# it on dismissal at `00_agot_kingsguard_effects.txt:322`, sets it directly on
+# several hundred history characters, and gates on it itself in
+# `events/war_events/combat_events.txt:989` and `:1090` - which are combat
+# events, the same subject matter as this file.
+#
+# THE SEVEN POSITION ROWS STAY AND THE TRAIT ROW IS ADDED ON TOP. The two
+# mechanisms are not the same set. The council positions exist on the Iron
+# Throne's council, so a sworn sword of some other king, or a brother the
+# engine has not seated in one of the seven slots, holds the trait and no
+# position; the position rows alone were silently losing all of them. Keeping
+# both makes the gate a superset of what it caught before, so nothing that used
+# to fire has stopped.
+#
+# NOT A KNIGHTHOOD AND NOT A VOW. The temptation after the trait is to test for
+# one of those instead, which would collect a great many men who are not in the
 # order at all.
 #
-# NO SCOPE WALK AND NO GUARD. `has_council_position` reads off the character
-# in scope and answers no for a character who holds none, so this is one of the
-# few triggers in this file that needs no `exists` and no trigger_if. It is
-# safe from any character scope, including one entered from another.
+# NO SCOPE WALK AND NO GUARD. `has_trait` and `has_council_position` both read
+# off the character in scope and both answer no for a character who has neither,
+# so this is one of the few triggers in this file that needs no `exists` and no
+# trigger_if. It is safe from any character scope, including one entered from
+# another.
 #
 # THE LORD COMMANDER IS NOT SEPARATED OUT HERE. If a template ever wants him
 # alone, gate on `kingsguard_lord_commander` directly rather than adding a
 # second trigger - one row is not worth a name.
 bc_is_kingsguard_trigger = {
 	OR = {
+		has_trait = kingsguard
 		has_council_position = kingsguard_lord_commander
 		has_council_position = kingsguard_1
 		has_council_position = kingsguard_2
@@ -2990,9 +3009,9 @@ bc_a_man_he_made_is_in_this_line_trigger = {
 # --- the cloak and the body it is over ---------------------------------------
 #
 # THE MOD KNOWS WHO WEARS THE WHITE AND HAS NEVER ASKED WHOSE BODY IT IS OVER.
-# bc_is_kingsguard_trigger is a list of seven council positions and gates
-# bc_knight_the_white_cloak; it establishes that a man took the vow and nothing
-# else. AGOT keeps the rest of it in a scripted relation, `bodyguard` /
+# bc_is_kingsguard_trigger is the `kingsguard` trait or one of seven council
+# positions, and gates bc_knight_the_white_cloak; it establishes that a man took
+# the vow and nothing else. AGOT keeps the rest of it in a scripted relation, `bodyguard` /
 # `bodyguard_target`, set in agot_start_bodyguarding in
 # 00_agot_kingsguard_effects.txt when a sworn sword is actually assigned to a
 # particular person. It was at zero occurrences here.
