@@ -2436,3 +2436,54 @@ bc_he_can_hear_what_they_are_saying_trigger = {
 		}
 	}
 }
+
+
+# --- the fostering -----------------------------------------------------------
+#
+# `has_relation_guardian` AND `has_relation_ward` RETURNED ZERO OVER THE WHOLE
+# MOD. Ninety-five batches read blood, house, oath, wages, tongue, land and
+# paper, and never once read the arrangement Westeros actually runs on. A
+# fostering is not kinship and it is not vassalage: it is a boy sent to another
+# man's hall for ten years to be made into something, and the engine keeps both
+# ends of it as a named relation for exactly as long as both men live.
+#
+# THE DIRECTION IS EVERYTHING AND IS THE WHOLE REASON THERE ARE TWO. Vanilla
+# stores the pair as inverses - `has_relation_ward = X` means X was raised by
+# the scoped man, `has_relation_guardian = X` means the scoped man was raised
+# by X - so the two gates below are the same fact read from opposite ends, and
+# the moments built on them have nothing in common except a hall thirty years
+# ago.
+#
+# EACH CARRIES THE NEGATION OF THE OTHER, so they are disjoint by construction
+# rather than by argument. Ordinary play cannot make two men each other's ward,
+# but the engine would answer both if some future content ever set both
+# relations, and a gate that can be true beside its own opposite is not a gate.
+#
+# THE STANDARD GUARD ON BOTH. `enemy_side.side_commander` is an optional link,
+# and `enemy_side` rather than `var:bc_battle_foe` for the reason recorded on
+# every other far-side gate: the variable does not exist during a battle's
+# first is_valid.
+#
+# NEITHER READS `root`, so either is usable from either pool. The two templates
+# this batch ships put them in opposite files on purpose.
+bc_the_boy_he_raised_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_relation_ward = scope:combat_side.enemy_side.side_commander
+		NOT = {
+			has_relation_guardian = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
+
+bc_the_man_who_raised_him_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_relation_guardian = scope:combat_side.enemy_side.side_commander
+		NOT = {
+			has_relation_ward = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}

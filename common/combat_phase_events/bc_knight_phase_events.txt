@@ -7175,3 +7175,109 @@ bc_knight_he_understands_the_far_rank = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man on the far side taught him how to stand, and he is standing.
+#
+# `entrenched`/`down`. Ten years of his life were spent in that hall being made
+# into this, and the single most repeated thing in all of it - the thing that
+# got him hit with a stick at nine and that he has never once thought about
+# since - was where the feet go and what the shield does when the day turns.
+# The day has turned. Everything else he might do this afternoon is beyond him
+# now, but that one piece of it is not, because it was put in below the level
+# where fear reaches. So he braces, and the men on either side of him brace
+# because he did, and the line holds a while longer than it had any business
+# holding. bc_shieldwall comes from the verb table and it is the whole argument
+# of the moment: the lesson is doing the work, in front of the man who gave it.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a relation and the
+# side row and never asks about a rung.
+#
+# TEN STRESS. It is going badly and he is not being paid in anything but the
+# knowledge that he did the one part correctly.
+#
+# THIS IS NOT bc_knight_there_is_no_seam_in_a_shieldwall OR ANY OTHER SHIELDWALL
+# MOMENT. Those are about what a formation is. This is about where a particular
+# man's version of it came from and who is watching it.
+#
+# THIS IS NOT bc_knight_the_squires_best_day. A squire is an apprenticeship in
+# arms and a fostering is a childhood; the squire trait says who trained his
+# hands and this relation says who raised him, and a boy fostered at eight and
+# squired to somebody else at fourteen answers yes to both about two different
+# men.
+#
+# THE OPPOSITE END OF bc_he_taught_that_retreat AND DELIBERATELY NOT ITS
+# MIRROR. That moment is the teacher using the lesson against the pupil and
+# earning a pursuit for it. This one is the pupil using the lesson correctly
+# while losing anyway. The gates are disjoint by construction and the pools
+# roll separately, so no field can produce both.
+#
+# THE DESC MAY NOT NAME THE GUARDIAN, may not stage the childhood as a scene,
+# may not have him remember being struck, may not have the two of them see each
+# other, may not have him want to be seen, may not have him hate the man, and
+# may not have him forgive him either. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_lesson_holds_the_line = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_who_raised_him_commands_the_far_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A lesson that survives a bad afternoon is a lesson that went in
+		# deep, and the men it went deepest into are the ones who were
+		# good at it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_lesson_holds_the_line"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_lesson_holds_the_line_toast
+				desc = bc_knight_the_lesson_holds_the_line_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -9761,3 +9761,113 @@ bc_it_arrives_as_weather = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-SIX. The fostering.
+#
+# `has_relation_guardian` and `has_relation_ward` returned zero over the whole
+# mod. Ninety-five batches read blood, house, oath, wages, tongue, land and
+# paper, and never once read the arrangement Westeros actually runs on: a boy
+# sent to another man's hall for ten years to be made into something, kept by
+# the engine as a named relation for as long as both men live.
+#
+# THE DIRECTION IS THE WHOLE REASON THERE ARE TWO GATES. They are the same fact
+# from opposite ends, they are disjoint by construction because each carries
+# the negation of the other, and the moments built on them have nothing in
+# common except a hall thirty years ago.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He is beating a man he taught, and he knows the next thing that man will do.
+#
+# `ordered`/`up`. This is the only moment in the mod where the pursuit modifier
+# is not a compliment. He is winning, the far side has started to give ground,
+# and he knows precisely how it will be given, because the drill it is being
+# given by is his - taught in a yard, over a winter, to a boy who was bad at it
+# for the first two years. There is nothing to guess. He calls the follow-up
+# before the movement finishes, twice, and both times the ground is where he
+# said it would be. That is why the KIND is `ordered` and why the SWING earns
+# bc_pursuit from the verb table: a chase run by a man who knows the quarry's
+# footwork is the cleanest and worst thing on a field.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads a relation and the
+# side row and never asks about a rung.
+#
+# FIFTY PRESTIGE, AND THE PRESTIGE IS NOT AN OPINION. The field pays for a
+# pursuit that works. Nothing in this template says the afternoon was good.
+#
+# THIS IS NOT bc_foe_is_kin_trigger's MOMENTS. A fostering is the arrangement
+# that exists precisely where blood does not - the whole point of sending a boy
+# away is that the hall he goes to is not his family's - and a man who fostered
+# his own nephew answers yes to both gates for two different reasons.
+#
+# THIS IS NOT bc_the_old_grudge OR bc_knight_he_has_read_these_terms_before.
+# Neither of those men taught the other anything. The knowledge in this moment
+# is not a memory of having fought him; it is a memory of having MADE him, and
+# it arrives as a prediction rather than as a warning.
+#
+# THE DESC MAY NOT NAME THE WARD, may not say how long ago the fostering was,
+# may not put the yard or the winter on the page as a scene, may not have him
+# feel proud, may not have him spare anybody, and may not have the two of them
+# see each other. See the loc header.
+# ---------------------------------------------------------------------------
+bc_he_taught_that_retreat = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_boy_he_raised_commands_the_far_side_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The man who was worth fostering a boy with is the man who is good
+		# at this, and being good at this is what turns the knowledge into
+		# a pursuit rather than a feeling.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_taught_that_retreat"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_taught_that_retreat_toast
+			desc = bc_he_taught_that_retreat_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -3769,3 +3769,60 @@
 
  bc_knight_he_understands_the_far_rank_toast:0 "Nobody Beside Him Knows What He Just Heard"
  bc_knight_he_understands_the_far_rank_toast_desc:0 "They are from somewhere else entirely and he follows them as easily as he follows his own rank, which he never earned and never had a use for before this afternoon. For most of the day it was only odd. Then it turns his side's way and the oddness quietly becomes something else: an instruction given a second time, which means the first one went nowhere. A name called in a register nobody uses for an order. A stretch of them stopping speaking outward and beginning to speak to each other. The rank in front of him is still perfectly upright and admits nothing, and he moves half a pace anyway, and he is right, and he is right again eleven minutes later. He does not say a word about it to the men on either side of him, and there would be no time and no way to explain it if he tried.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-SIX. The fostering.
+#
+# NEITHER DESC MAY NAME THE OTHER MAN, give his house, his seat or his age, or
+# say how many years ago the fostering was. The engine holds a relation and
+# nothing else, and a number would be invented.
+#
+# NEITHER MAY STAGE THE CHILDHOOD AS A SCENE. No hall, no hearth, no first
+# morning, no goodbye at a gate. Both toasts may refer to what was learned,
+# because that is present on the field this afternoon, and neither may go and
+# stand in the past to look at it.
+#
+# NEITHER MAY HAVE THE TWO OF THEM SEE EACH OTHER, be pointed out to each
+# other, send anything, or be reported to each other by a rider. The distance
+# is the point.
+#
+# NEITHER MAY USE THE WORDS "father", "son", "betrayal" or "family". A
+# fostering is precisely the bond that is none of those, which is why it is
+# worth a batch, and the first of those words collapses it into batch
+# eighty-five's territory.
+#
+# THE FIRST MAY NOT HAVE HIM FEEL PROUD, may not have him spare anybody or
+# consider it, may not have him give an order a reader could copy, may not have
+# him remember teaching a specific thing on a specific day, and may not soften
+# the ending. It is a pursuit and it is working.
+#
+# THE SECOND MAY NOT HAVE HIM WANT TO BE SEEN DOING IT, may not have him hate
+# the man, may not have him forgive him, may not have him remember being
+# struck, may not have anybody praise him for holding, and may not let the
+# holding save the afternoon. It does not.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace".
+ bc_he_taught_that_retreat_toast:0 "There Is Nothing About It He Has To Guess"
+ bc_he_taught_that_retreat_toast_desc:0 "The far side has begun to give ground and it is being given in a pattern, and he owns the pattern. Which foot goes first. How many paces before the second rank is called through. The one thing that always gets done a beat late by a man doing it under pressure, because it was always done a beat late in a cold yard by a boy who was bad at it for two years and then very good. So he does not wait to see where the movement ends. He calls it, and it is there, and eleven minutes later he calls it again and it is there again, and the horse comes round the shoulder of it exactly where he said. Nobody watching him would say he looks pleased. He looks like a man doing arithmetic he did once before with the answer in front of him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_lesson_holds_the_line_toast:0 "The One Part He Can Still Do Correctly"
+ bc_knight_the_lesson_holds_the_line_toast_desc:0 "Everything clever has gone out of him. It is that hour. What is left is the piece that was put in before any of the clever parts existed, low down, under where the fear reaches: where the left foot goes, what the shield does when the weight comes on, that the man beside you is the point of the entire exercise. He is not deciding to do it. It is simply what his body does when the day turns, and the two men on either side of him set themselves because he did, and the stretch stands for a good while longer than it has any business standing. It changes nothing about how this ends. He is aware of that. He is also aware, in a distant and unhelpful way, that the one thing he is still doing properly out here is somebody else's, and that the somebody else is four hundred yards away winning.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
