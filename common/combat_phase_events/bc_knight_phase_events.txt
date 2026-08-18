@@ -11314,3 +11314,66 @@ bc_knight_the_ground_under_him_belongs_to_the_faith = {
 		}
 	}
 }
+
+bc_knight_the_men_opposite_are_dying_by_the_rules = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_across_the_field_will_not_stoop_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Beating men who are being held to a standard, which costs them
+		# something every hour and costs him nothing at all.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_men_opposite_are_dying_by_the_rules"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_men_opposite_are_dying_by_the_rules_toast
+				desc = bc_knight_the_men_opposite_are_dying_by_the_rules_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

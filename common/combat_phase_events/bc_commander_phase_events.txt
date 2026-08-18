@@ -13710,3 +13710,62 @@ bc_the_line_has_gone_into_the_streets = {
 		}
 	}
 }
+
+bc_the_day_has_stopped_being_worth_what_he_came_for = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_came_here_expecting_to_be_paid_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being good enough with a ledger to have priced the day before he
+		# rode out, and good enough to know what it is worth now.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_day_has_stopped_being_worth_what_he_came_for"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_day_has_stopped_being_worth_what_he_came_for_toast
+			desc = bc_the_day_has_stopped_being_worth_what_he_came_for_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

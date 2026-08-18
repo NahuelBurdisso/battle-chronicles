@@ -5866,3 +5866,73 @@ bc_this_field_belongs_to_the_faith_trigger = {
 		}
 	}
 }
+
+# BATCH 152 - WHAT HE CAME FOR, AND WHAT THE MAN ACROSS THE FIELD WILL NOT DO.
+#
+# Batch 131 opened the AI-personality surface on `ai_boldness` and batch 140
+# spent two more of the nine on `ai_zeal` and `ai_compassion`. `ai_greed`,
+# `ai_honor`, `ai_energy`, `ai_rationality`, `ai_vengefulness` and
+# `ai_sociability` still return zero over the whole mod apart from the two header
+# lines that list them. Six of the nine numbers the engine keeps about what a man
+# wants are still unread; this batch spends two.
+#
+# THE CONSTANTS ARE VANILLA'S LADDER, CITED IN FULL IN BATCH 140'S HEADER ABOVE.
+# `common/script_values/00_ai_values.txt:22-34`. Both gates are written against
+# the constants rather than raw numbers, for the reason given there.
+#
+# BOTH ATTRIBUTES ARE LIVE IN SHIPPED FILES AND BOTH ARE READ AT THESE HEIGHTS.
+# Vanilla gates a tour's demands on `ai_greed >= 75` at
+# `common/activities/activity_types/tour.txt:160` and again at `:947` - seventy-
+# five is the raw value of `very_high_positive_ai_value`, which is the constant
+# the first gate below uses - and mirrors it at `:164` and `:974`. AGOT reads
+# `ai_greed >= 50` at `common/council_tasks/00_spymaster_tasks.txt:189` and
+# `ai_greed > 0` at `common/council_tasks/00_steward_tasks.txt:87`. For honour,
+# vanilla and AGOT ship the same line at
+# `common/activities/intents/shared_intents.txt:81`, which is
+# `ai_honor >= high_positive_ai_value` - the exact form and the exact constant
+# the second gate below uses.
+#
+# ONE BARE READ AND ONE GUARDED WALK, THE USUAL DIFFERENCE. The first asks the
+# scoped character about himself and needs nothing. The second walks
+# `enemy_side` and then that side's `side_commander`, two genuinely optional
+# links, so both `exists` rows sit as siblings and both are repeated inside the
+# `trigger_if` limit before the number is read. The second is named through
+# `scope:combat_side` rather than `root` for batch 127's reason.
+#
+# TWO FACTS, TWO MEN, AND NO NEGATION FOR THE SAME REASON AS BATCHES 131 AND 140.
+# The first is what the scoped man is here to get. The second is a fact about
+# somebody on the other side of the field entirely. Neither implies the other,
+# neither is a threshold on the other's number, and a man can be as grasping as
+# he likes without it saying anything about who he happens to be facing.
+#
+# THIS IS NOT THE OTHER THREE AI ROWS AND IT IS NOT THE TRAIT ROWS. Boldness is
+# how much risk he will accept, zeal is what he thinks the day is for, and
+# compassion is what he will spend other people on. Greed is what he expects to
+# be handed at the end of it, which none of the three touches. Honour is what the
+# far man will refuse to do to win, which is not the same question as whether he
+# is cruel. And no shipped gate anywhere in the mod reads `greedy`, `generous`,
+# `just` or `arbitrary` - those appear only as `chance` weights, which gate
+# nothing, and a man can sit in either tail with none of the four traits on him.
+#
+# RARITY. The ladder is signed and most of the population sits near the middle,
+# so both tails are thin by construction. The first asks for the top rung of six.
+# The second asks for the fourth rung of six on a man who has to exist at all -
+# the far side has to be led, which is the same requirement the far-commander
+# rows have always carried.
+bc_he_came_here_expecting_to_be_paid_trigger = {
+	ai_greed >= very_high_positive_ai_value
+}
+
+bc_the_man_across_the_field_will_not_stoop_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			ai_honor >= high_positive_ai_value
+		}
+	}
+}
