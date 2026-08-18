@@ -2725,3 +2725,49 @@ bc_the_one_he_loves_is_in_this_line_trigger = {
 	}
 	NOT = { bc_the_one_he_loves_commands_the_far_side_trigger = yes }
 }
+
+
+# --- the quarrel that is waiting at home -------------------------------------
+#
+# THE MOD HAS NEVER ONCE ASKED WHAT IS HAPPENING BEHIND THE MAN. A hundred
+# batches of gates read this field, this war, this line, this body, this bond
+# and this ledger. They read who he is standing beside and who he is looking
+# at across the grass. `is_a_faction_member` and `has_targeting_faction` are
+# both at zero occurrences across the whole mod, and between them they are the
+# only two questions the engine will answer about a quarrel that is not on
+# this field at all and does not care what happens here.
+#
+# THE TWO ARE OPPOSITE ENDS OF ONE ROPE. The first man has a faction pointed
+# at him - somebody at home has written his name at the top of a page and gone
+# round collecting signatures under it. The second man has put his own name on
+# somebody else's page. Neither fact is visible from ten feet away on a
+# battlefield, and both of them are the reason a particular afternoon has to
+# end a particular way for a particular man.
+#
+# THE FIRST GATE CARRIES THE SECOND AS AN EXPLICIT NEGATION, rather than the
+# two being left to overlap. A man can perfectly well be both at once -
+# signing against his liege while his own vassals sign against him is not a
+# rare arrangement in this setting - and the two templates below are about
+# opposite pressures, so the pair is written so that the man being conspired
+# against is never also the man conspiring. `is_a_faction_member` wins that tie
+# because a signature he put there with his own hand is the nearer fact.
+#
+# NEITHER TAKES A GUARD. Both are plain reads on `root`, which is the character
+# the template is already rooted on, and there is no optional link in either.
+#
+# NEITHER IS bc_his_lord_holds_a_hook_trigger, WHICH IS THE NEAR MISS WORTH
+# NAMING. A hook is one man's private leverage over another and it is used or
+# it is not; a faction is a list of names with a stated demand attached, and
+# it exists whether or not anybody ever acts on it.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. Factions are a minority state in any
+# given realm at any given moment, and the first gate additionally requires
+# that somebody has gone to the trouble of aiming one at this specific man.
+bc_there_is_a_faction_pointed_at_him_trigger = {
+	has_targeting_faction = yes
+	NOT = { is_a_faction_member = yes }
+}
+
+bc_he_is_sworn_against_somebody_trigger = {
+	is_a_faction_member = yes
+}

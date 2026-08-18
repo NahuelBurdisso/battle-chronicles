@@ -10318,3 +10318,72 @@ bc_no_version_of_this_that_is_not_also_theirs = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# A faction is pointed at him at home. Winning is therefore not the thing he
+# is doing out here - a win of the ordinary size gets read back at him as an
+# afternoon that cost money, and he needs one large enough that reading it any
+# other way makes the reader look foolish. So he spends the horses. That is
+# what `wild` and `up` are for: a rung gained and the mounts finished in the
+# same breath, because the size of the result is the only part of it that will
+# survive the ride home.
+bc_nothing_smaller_than_this_will_carry = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_a_faction_pointed_at_him_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing exactly which men at home will be satisfied by exactly
+		# which result, and how large that result has to be, is a court
+		# skill rather than a field one.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nothing_smaller_than_this_will_carry"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_nothing_smaller_than_this_will_carry_toast
+			desc = bc_nothing_smaller_than_this_will_carry_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

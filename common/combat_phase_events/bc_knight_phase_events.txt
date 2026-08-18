@@ -7709,3 +7709,76 @@ bc_knight_one_distance_instead_of_a_battle = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He has signed against the man whose banner is over him, and that man's army
+# is losing. There is no version of the next hour in which he is allowed to
+# look like a man watching something he wanted arrive. So he holds his exact
+# place, at his exact pace, doing nothing that could be described afterwards
+# by anybody standing near him - which is what `ordered` and `down` are: shape
+# kept all the way through a thing going backwards, and deliberately no
+# modifier, because nothing about it changes how the line performs.
+bc_knight_he_cannot_be_seen_to_want_this = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_sworn_against_somebody_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Managing what a whole rank of men would say about you later,
+		# while the rank is coming apart, is not a thing a straightforward
+		# man is any good at.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_cannot_be_seen_to_want_this"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_cannot_be_seen_to_want_this_toast
+				desc = bc_knight_he_cannot_be_seen_to_want_this_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

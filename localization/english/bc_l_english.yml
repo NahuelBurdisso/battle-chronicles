@@ -4064,3 +4064,65 @@
 
  bc_knight_one_distance_instead_of_a_battle_toast:0 "He Has Stopped Fighting A Battle And Started Working On A Gap"
  bc_knight_one_distance_instead_of_a_battle_toast_desc:0 "Somewhere off to his left, he thinks, and it has been thinking for a while now rather than knowing, there is a part of this line that matters more to him than the rest of it does. He could not point at it. He has an idea, and an idea is the whole of what any man in a rank ever has about anything further off than his own arm, and the day is taking that idea apart at the same rate it is taking everything else apart. So he stops working on the battle. He is not much use to it any more and it is not much use to him. What he works on instead is a distance — closing it, in the pauses, three or four paces at a time, through men who are moving the other way and have every right to be, taking whatever comes at him from the side because turning to answer it properly costs ground he cannot buy back. He does not get there. That is not the point and he has stopped expecting it. The point is that the number is smaller than it was an hour ago, and he intends to spend whatever is left of this afternoon making it smaller again.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 101 - the quarrel that is waiting at home -------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE FACTION, name its demand, name anybody who
+# signed it, or say the word "faction" on the page. The engine knows there is a
+# list of names somewhere. The man knows it too. Nothing on this field says so
+# out loud and nobody here is going to.
+#
+# NEITHER MAY PUT A NUMBER ON IT. Not how many signed, not how many men each
+# one brings, not how many months it has been sitting there, and not what it
+# will cost. The whole point of the thing is that it has no size a man in
+# armour can hold in his head while he is working.
+#
+# NEITHER MAY HAVE A RIDER ARRIVE, a letter arrive, or news of any kind arrive
+# from home during the afternoon. The pressure is entirely a thing he brought
+# with him this morning and will take away again at dusk.
+#
+# THE FIRST MAY NOT DOUBT THAT HE IS WINNING and may not be shown as having
+# misjudged the field. He is doing this well and the cost of doing it this way
+# is not a mistake, it is a price he decided to pay before the first charge. It
+# may not use the horses as a symbol of anything; they are simply used up. It
+# may not have him address anybody, and it may not have him look back.
+#
+# THE SECOND MAY NOT ACT ON WHAT HE WANTS. He does not slow, hesitate, mislead
+# anybody, hold back a step, or arrange for one thing to go wrong. That would
+# be a different template. What he does is exactly his job at exactly the
+# ordinary speed, which is the hardest available thing. It may not have anybody
+# suspect him, it may not have him nearly say something, and it may not decide
+# whether he is glad.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller".
+ bc_nothing_smaller_than_this_will_carry_toast:0 "A Sufficient Victory And A Merely Adequate One Are Different Trades"
+ bc_nothing_smaller_than_this_will_carry_toast_desc:0 "He could stop this at the good part. Most men would, and most men would be right to, and the field would go into the record as a tidy piece of work by a careful man. That is precisely the shape of the afternoon he cannot use. Something at home has been assembled slowly and patiently out of exactly that kind of tidy adequate work, item by item, each one perfectly defensible and none of them enough, and a careful win today becomes the newest item on it before the horses are even cool. So he does not stop at the good part. He sends the riders out past where riders are usually sent, and then out past that, and keeps them out through the part of the day when a sensible captain calls them in, and what comes back at dusk comes back walking, blown and shaking and finished for the season, having turned a result that could be argued with into one that cannot. The mounts are the price. He worked it out this morning, before any of it, and he has not revisited the arithmetic since.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_cannot_be_seen_to_want_this_toast:0 "The Line Is Failing At Precisely The Rate He Once Hoped It Would"
+ bc_knight_he_cannot_be_seen_to_want_this_toast_desc:0 "The rank gives another few feet and he goes back with it, no faster and no slower, and puts his shield where the sergeant expects a shield to be. He is very good at this today. He is being watched by nobody in particular and by every man within reach at the same time, which is the ordinary condition of standing in a line, and it has never once mattered before what his face was doing. It matters now. Everything happening in front of him is the thing he put his name to at a table in a cold room two winters ago, arriving on its own, without him, at no cost to him whatever, and if one man beside him ever comes to think that this occurred to him at any point in the afternoon then the table and the cold room and every name on the page go into the fire together. So he works. He takes his turn forward when it is his turn. He is tired at the correct hour and afraid in the correct places and he does not permit himself a single thought about any of it until well after dark.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
