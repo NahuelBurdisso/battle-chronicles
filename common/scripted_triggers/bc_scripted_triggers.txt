@@ -10491,3 +10491,74 @@ bc_five_great_men_stand_under_the_man_he_follows_trigger = {
 		}
 	}
 }
+
+
+# BATCH 217 - HOW MANY ROOFS HE PERSONALLY KEEPS.
+#
+# CENSUS. `domain_size` appears nowhere in this mod - zero hits across every
+# file. So do its neighbours: `domain_fertility` zero, `completely_controls`
+# zero, `any_realm_county` zero. The one adjacent thing the mod does own is
+# `domain_limit_available < 0`, which is a different question and is dealt
+# with below.
+#
+# PRECEDENT. `domain_size` is a plain scalar read off a character and it is
+# live in both trees - eighty-five uncommented uses in vanilla, eighty-six in
+# AGOT. The two thresholds used here are both taken from shipped script rather
+# than invented. `>= 6` is vanilla's own bar for a personal domain that has
+# got large, at common/decisions/dlc_decisions/mpo/mpo_decisions.txt:1545 and
+# again at events/dlc/mpo/mpo_nomad_events_1.txt:2825 and :2950, all three
+# carried into AGOT at mpo_decisions.txt:1555 and mpo_nomad_events_1.txt:2826
+# and :2951. `= 1` is vanilla's bar for a man whose whole holding is the one
+# he is standing in, at
+# events/activities/hold_court_activity/hold_court_events_joe.txt:317 and in
+# AGOT at :321 - and, better than that, AGOT writes the same test itself in
+# its own on-action file at
+# common/on_action/agot_on_actions/agot_title_on_actions.txt:1186. That last
+# one is AGOT-original, not an inherited copy, which is the citation that
+# matters most here.
+#
+# WHAT THE TWO GATES ARE ASKING. The first is a man who runs six or more
+# holdings out of one chair and has brought that whole ledger to a field he is
+# losing. The second is a man who owns exactly one roof and is therefore
+# carrying nothing behind him at all while his side wins.
+#
+# THEY ARE DISJOINT BY CONSTRUCTION. Six is not one. No character can answer
+# yes to both, in either pool, on any day, so no tie-break row is needed and
+# neither gate has to name the other.
+#
+# IT IS NOT THE HELD-TITLES GATE. The mod already asks whether a man holds two
+# or more titles of any kind. That counts titles - titular ones, duchies he
+# holds with nothing under them, claims made real on paper - and it counts
+# them at every tier. This counts holdings sitting in the personal domain,
+# which is a different list with a different length. A landed baron with one
+# holding can hold four titles; a duke with eight holdings can hold two.
+#
+# IT IS NOT THE DOMAIN-LIMIT GATE EITHER, and it is neither a subset nor a
+# superset of it. That gate asks whether a man is carrying more than he is
+# allowed to carry, which a weak steward can manage at three holdings, and
+# which a strong one can avoid entirely at ten. Being over the limit and
+# holding six things are independent facts, and this mod is deliberately
+# asking the second one on its own.
+#
+# GUARDS. Both gates read a number off root. Root is the scoped character in
+# both pools and is always there, so neither gate takes a guard, and neither
+# walks a link.
+#
+# THE TWO POOLS ROLL SEPARATELY, batch 149's construction, so a knight who is
+# himself a landed duke never denies the commander gate and a commander with
+# one holding never denies the knight gate. Each gate is only ever asked of
+# its own man.
+#
+# RARITY. The first wants six or more holdings personally held, which sits
+# above what most counts and a great many dukes ever run, and then it wants
+# that man commanding and losing. The second wants exactly one - not zero,
+# which is where most knights in a rank sit, and not two - and then it wants
+# him in the rank on a side that is winning. Both are narrow at the number
+# before the day is even consulted.
+bc_six_roofs_answer_to_him_directly_trigger = {
+	domain_size >= 6
+}
+
+bc_everything_he_holds_is_one_roof_trigger = {
+	domain_size = 1
+}
