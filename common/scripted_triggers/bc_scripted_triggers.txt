@@ -10628,3 +10628,90 @@ bc_a_great_deal_arrives_every_month_trigger = {
 bc_almost_nothing_arrives_for_him_trigger = {
 	monthly_character_income < 0.3
 }
+
+
+# BATCH 219 - HOW WIDE THE FAMILY IS SIDEWAYS OF HIM.
+#
+# CENSUS. `any_extended_family_member` returned zero across the whole mod, and
+# so did `is_extended_family_of`, `is_cousin_of`, `is_nibling_of`,
+# `any_close_or_extended_family_member`, `any_grandparent` and
+# `any_great_grandparent`. The word "cousin" occurs seventeen times and every
+# one of them is prose inside a header. Two hundred and eighteen batches have
+# read a man's parents, his children, his siblings, his wife, his heir and his
+# house, and not one of them has ever counted the people standing beside him in
+# the family rather than above or below him.
+#
+# WHAT THE ENGINE MEANS BY IT. The dump is explicit: "Iterate through all the
+# extended family [uncles/aunts, nephew/niece, cousins]". That is a list the
+# engine keeps DISJOINT from the close family, which is father, mother,
+# siblings, children and grandparents. The two never overlap by construction,
+# which matters below.
+#
+# PRECEDENT, AND AN UNUSUALLY CLEAN ONE. Vanilla runs the iterator at
+# events/dlc/fp2/fp2_el_cid_events.txt:76 and twice in tests/character_basics
+# .txt at :163 and :167, the second nested inside the first with `count = all`.
+# AGOT runs it seven times and EVERY ONE OF THE SEVEN IS AGOT'S OWN FILE -
+# common/casus_belli_types/00_agot_rv_rescue_wars.txt:47 and
+# 00_agot_rv_revenge_wars.txt:106, common/scripted_triggers/
+# 00_agot_lmf_family_triggers.txt:22 and :57, 99_agot_rv_triggers.txt:32,
+# common/script_values/00_agot_lmf_script_values.txt:80, and
+# events/agot_events/agot_scenario_roberts_rebellion_toj_events.txt:3531 - the
+# last of those asking for grown men of his own name. There is no inherited
+# copy anywhere in the submod's tree. AGOT built its rescue wars, its revenge
+# wars and its family relations on this iterator itself.
+#
+# WHAT THE TWO GATES ARE ASKING. The first is a man with ten or more living
+# uncles, aunts, nephews, nieces and cousins - a house that has spread sideways
+# for two or three generations and produced a crowd - who is losing anyway. The
+# second is a man with exactly one such person left in the world, standing in
+# the rank of a side that is winning.
+#
+# THEY ARE DISJOINT BY CONSTRUCTION. Ten is not one. No character answers yes
+# to both, in either pool, on any day, so neither gate names the other and no
+# tie-break row is needed.
+#
+# THIS IS NOT THE CLOSE-FAMILY ROWS AND CANNOT BE. The mod reads
+# `is_close_family_of` against the far commander, and batch 129 reads
+# `any_close_family_member` for a man in a cell. Both walk a list the engine
+# defines as the OPPOSITE of this one - parents, children, siblings,
+# grandparents - so no character on this list is on that one. Neither gate here
+# is a subset or a superset of anything the close-family rows can produce.
+#
+# IT IS NOT THE HOUSE ROW EITHER. `bc_foe_is_house_trigger` asks whether the
+# man across the field carries the same name. This asks nothing about the far
+# side at all and nothing about names: it counts living relatives, including
+# the ones who came through a mother and carry somebody else's name entirely,
+# and it counts them whether or not any of them is within a hundred leagues of
+# this field.
+#
+# IT IS NOT BATCH 180'S CHILDREN EITHER. That counts the people who exist
+# because of him. This counts the people who exist beside him, and the two come
+# apart in both directions constantly - a childless man can have nine cousins,
+# and a man with six children can be the last of a line that produced nobody
+# sideways at all.
+#
+# NEITHER TAKES A GUARD. Both are iterators, and an iterator over an empty list
+# is a clean no. Iterators are not links, and there is no dotted step anywhere
+# in this block.
+#
+# THE TWO POOLS ROLL SEPARATELY, batch 149's construction, so a knight from a
+# vast house never denies the commander gate and a commander who is the last of
+# his never denies the knight gate.
+#
+# RARITY. Ten living extended relatives at once wants a house that has been
+# fertile for two generations running and has not lost them to a war, a winter
+# or a fever, which is a real state and far from the ordinary one. Exactly one
+# is narrower still - it excludes the many men who have none at all as firmly
+# as it excludes the great houses - and then each gate wants its own man on the
+# right side of the day.
+bc_his_sideways_kin_are_a_crowd_trigger = {
+	any_extended_family_member = {
+		count >= 10
+	}
+}
+
+bc_only_one_man_stands_sideways_of_him_trigger = {
+	any_extended_family_member = {
+		count = 1
+	}
+}
