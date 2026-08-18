@@ -17025,3 +17025,63 @@ bc_the_far_people_make_war_the_way_his_do = {
 		}
 	}
 }
+
+
+bc_this_column_is_all_horse_and_no_bow = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_this_column_is_all_horse_and_no_bow_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing to the penny what the horse cost is the sort of thing
+		# the man who signed for them cannot stop thinking about.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_column_is_all_horse_and_no_bow"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_this_column_is_all_horse_and_no_bow_toast
+			desc = bc_this_column_is_all_horse_and_no_bow_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

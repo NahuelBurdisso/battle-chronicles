@@ -9777,3 +9777,87 @@ bc_the_far_people_make_war_nothing_like_his_trigger = {
 		}
 	}
 }
+
+
+# BATCH 208 - WHAT ARM THE COLUMN UNDER HIM IS MADE OF.
+#
+# CENSUS. `army_number_maa_regiments` returns zero across the whole mod, and so
+# do `base_type`, `is_unit_type`, `heavy_cavalry`, `crossbow` and `bowmen`.
+# `archers` returns exactly one hit, and it is the ordinary English word inside
+# a comment in this mod's commander phase-events file, about horse archers and
+# curved swords. Two hundred and seven batches have counted the men in this
+# host, its regiments, its rank, its ground, its weather, its stores and its
+# errand, and not one of them has ever asked what ARM is standing in the
+# column - whether the thing behind him can charge, or shoot, or neither.
+#
+# THE LIVE USE OF THIS KEY IS AS A VALUE, AND THIS HEADER WILL NOT PRETEND
+# OTHERWISE. Vanilla and AGOT both ship it in a file of exactly this kind:
+# `common/combat_phase_events/00_knight_phase_events.txt` writes
+# `knight_army.army_number_maa_regiments_of_base_type:skirmishers` at `:1532`,
+# `:archers` at `:1564`, `:pikemen` at `:1628`, `:heavy_infantry` at `:1654`,
+# `:light_cavalry` at `:1680` and `:heavy_cavalry` at `:1706`. Every one of
+# those sits inside a `factor =` or a `value =` and is read as a number to
+# weight a roll with, not as a question with a yes in it, and two greps for a
+# comparator standing after the key came back empty in both trees. What
+# licenses the comparator here is the 1.19.0.6 dump, which lists the key under
+# triggers with `Traits: <, <=, =, !=, >, >=` and `Supported Scopes: army` -
+# the same six comparators and the same scope it gives `army_supply`, which
+# batch 190 reads off this identical walk.
+#
+# THIS IS NOT BATCH 129, 188 OR 190. Batch 129 counted `maa_regiments_count`
+# on a MAN, which is a fact about his own books and reads the same in his own
+# hall with no war on at all. Batch 188 at :8273 and :8283 asked what TYPES
+# are present anywhere on the whole side, and named only the three engines and
+# the house guard, none of which is `archers` or `heavy_cavalry`. Batch 190 at
+# :8409 and :8421 walks to this same army and reads its larder and its errand,
+# neither of which says anything about what the column is made of. The size
+# rows at :185 and :615 count MEN. A number of paid companies of one arm is
+# inside none of the four.
+#
+# DISJOINT BY CONSTRUCTION. The first wants two or more heavy horse and no
+# archers at all; the second wants two or more archers and no heavy horse at
+# all. Each denies exactly what the other demands, so no army alive can answer
+# yes to both, and neither gate is a subset of the other.
+#
+# GUARDS. Batch 190's construction, unchanged, because this is the same
+# two-step walk that can end nowhere twice over: `side_commander` is optional
+# and a commander need not be leading an army at all. Both gates carry
+# `exists = scope:combat_side.side_commander.commanding_army` as a sibling and
+# repeat it inside the `trigger_if` limit before either count is read.
+#
+# RARITY. AGOT ships twenty-nine men-at-arms types on the `archers` base and
+# twenty on `heavy_cavalry`, so both arms are buyable by anybody; what is rare
+# is a column carrying two paid companies of the one and none whatever of the
+# other. A lord who has bought his second troop of heavy horse is a rich lord,
+# and a rich lord almost always has bowmen somewhere in the line as well - the
+# men who genuinely have none are the ones whose whole idea of war is the
+# charge. The far side of it, two companies of bow and not one horseman, is a
+# foot host that came to hold a line, which is common enough on a field and
+# uncommon in the books of a man who can afford four companies at all. Then
+# the first still wants that man leading and losing, and the second wants his
+# side winning, which halves each of them again.
+bc_this_column_is_all_horse_and_no_bow_trigger = {
+	exists = scope:combat_side.side_commander.commanding_army
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander.commanding_army
+		}
+		scope:combat_side.side_commander.commanding_army = {
+			army_number_maa_regiments_of_base_type:heavy_cavalry >= 2
+			army_number_maa_regiments_of_base_type:archers = 0
+		}
+	}
+}
+
+bc_this_column_is_all_bow_and_no_horse_trigger = {
+	exists = scope:combat_side.side_commander.commanding_army
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander.commanding_army
+		}
+		scope:combat_side.side_commander.commanding_army = {
+			army_number_maa_regiments_of_base_type:archers >= 2
+			army_number_maa_regiments_of_base_type:heavy_cavalry = 0
+		}
+	}
+}
