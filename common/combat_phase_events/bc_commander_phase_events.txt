@@ -13296,3 +13296,62 @@ bc_the_heavier_of_the_two_names_is_the_other_one = {
 		}
 	}
 }
+
+bc_most_of_what_answers_to_him_is_not_his = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_ground_that_answers_to_him_is_not_the_ground_he_owns_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Governing entirely through other men's hands, and knowing to the acre
+		# how little of the map underneath him he has ever collected from.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_most_of_what_answers_to_him_is_not_his"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_most_of_what_answers_to_him_is_not_his_toast
+			desc = bc_most_of_what_answers_to_him_is_not_his_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

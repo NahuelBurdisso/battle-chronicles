@@ -5344,3 +5344,74 @@ bc_the_name_opposite_outweighs_the_name_here_trigger = {
 		}
 	}
 }
+
+# BATCH 145 - THE GROUND THAT ANSWERS TO HIM AND THE GROUND HE ACTUALLY OWNS,
+# WHICH ARE TWO NUMBERS AND NOT ONE.
+#
+# `any_realm_province`, `any_directly_owned_province` and `has_building_or_higher`
+# all returned zero across the whole mod. The mod has read RANK eight times -
+# `highest_held_title_tier` and `is_landed` carry the whole station batch - and
+# batch 143 read how MANY seats a man holds. It has never once read how much
+# GROUND there is, and it has never read the only comparison that makes the
+# question interesting, which is the gap between the ground that answers to a
+# man and the ground his own hands are on.
+#
+# BOTH ITERATORS AND BOTH FORMS ARE VANILLA'S. `common/decisions/
+# 10_ach_oath_decisions.txt:1523-1526` writes `any_directly_owned_province = {
+# count >= 3  has_building_or_higher = ... }` and repeats it at `:1585` and
+# `:1647`; `common/achievements/standard_achievements.txt:769` uses the same
+# iterator without a count. `events/lifestyles/intrigue_lifestyle/
+# intrigue_scheming_events.txt:8324-8325` writes `any_realm_province = { count
+# >= 2 ... }`. The `count <=` form on the first gate is vanilla's too:
+# `common/character_interactions/00_diarch_interactions.txt:693` writes
+# `any_held_county = { count <= 3 }`.
+#
+# NO GUARDS. Both are iterators, and an iterator over an empty list is a clean
+# no, not a read of a missing link. This is the same reasoning the concubine
+# batch used.
+#
+# THE FIRST IS A CONJUNCTION AND IT HAS TO BE. `any_realm_province = { count >=
+# 20 }` on its own is every great lord on the map and would not be a gate. What
+# is being asked is not that his realm is wide - it is that his realm is wide
+# AND almost none of it is in his own hands, which is a particular kind of man:
+# one who governs entirely through other men and whose army this afternoon was
+# raised off ground he has never collected a rent from.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION AND NOT BY ARGUMENT. The first requires
+# `any_directly_owned_province = { count <= 3 }` and the second requires
+# `count >= 4` of the same iterator. No man can pass both, in any realm, ever.
+#
+# THIS IS NOT THE STATION ROWS AND IT IS NOT THE SEAT-COUNT ROWS. Rank is what
+# a man is CALLED and the station batch reads it; batch 143 reads how many
+# seats he was given. Neither of those tells you whether the ground under those
+# seats is worked by him or by somebody else, and the whole point of this pair
+# is the difference. A king with three demesne counties and a landed knight
+# with five are the same man on this axis, in opposite directions, and the mod
+# could not previously say either of them.
+#
+# THE SECOND IS A SUBSET OF `is_landed = yes` AND THAT IS NOT A COLLISION.
+# `is_landed` is read in the commander pool only - the knight file mentions it
+# twice and both are header prose about a commander - and the two pools roll
+# separately, so no knight template has ever tested it. The fact read is
+# quantity in any case, not existence.
+#
+# RARITY. The first needs a realm of twenty provinces, which on any map is the
+# top handful of lords, AND a personal demesne of three or fewer, which most
+# lords that size exceed - the engine's own demesne limits push the other way.
+# The second needs four counties held personally by a man who is riding as
+# somebody's knight rather than commanding, which is a landed vassal who came
+# out under a banner that is not his own.
+bc_the_ground_that_answers_to_him_is_not_the_ground_he_owns_trigger = {
+	any_realm_province = {
+		count >= 20
+	}
+	any_directly_owned_province = {
+		count <= 3
+	}
+}
+
+bc_the_ground_he_owns_is_in_his_own_two_hands_trigger = {
+	any_directly_owned_province = {
+		count >= 4
+	}
+}
