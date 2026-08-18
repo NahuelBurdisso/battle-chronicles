@@ -14418,3 +14418,62 @@ bc_the_part_he_is_good_at_finished_a_fortnight_ago = {
 		}
 	}
 }
+
+bc_he_still_does_everything_correctly_and_it_is_still_going_backwards = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_they_took_the_white_cloak_back_off_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The training does not leave when the appointment does, and on a bad
+		# day that is exactly the problem with it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_still_does_everything_correctly_and_it_is_still_going_backwards"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast
+			desc = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

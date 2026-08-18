@@ -6658,3 +6658,61 @@ bc_his_whole_craft_was_used_up_before_the_first_horn_trigger = {
 bc_he_learned_this_work_taking_things_off_people_trigger = {
 	has_trait = reaver
 }
+
+# BATCH 164 - TWO MARKS ANOTHER SCRIPT PUT ON A MAN AND THIS MOD NEVER READ.
+#
+# EVERY `has_character_modifier` IN THIS MOD READS ONE OF THIS MOD'S OWN
+# MODIFIERS. Sixteen call sites across the two phase-events files, the trigger
+# file and bc_scripted_effects, and all sixteen name a `bc_` rung - momentum,
+# faltering, pursuit, spent_horse. The mod has never once read a modifier that
+# somebody else's script wrote onto a character. `agot_former_kingsguard`
+# censused at zero over the whole mod, README included, and so did `berserker`.
+#
+# THE MODIFIER, NOT THE TRAIT, AND GETTING THIS WRONG WOULD HAVE SHIPPED A DEAD
+# TEMPLATE. AGOT defines a `former_kingsguard` TRAIT at
+# `common/traits/00_agot_traits.txt:392` and it is the obvious thing to reach
+# for. It is also useless here: the only place AGOT ever adds it is
+# `common/on_action/death.txt:2369`, inside the death handling, so no living
+# character carries it. The living mark is the character modifier, added in the
+# dismissal block at `common/scripted_effects/00_agot_kingsguard_effects.txt:323`
+# in the same four lines that fire `remove_trait = kingsguard`. A commander gate
+# written on the trait would have validated cleanly and never fired once.
+#
+# THIS IS THE EXACT COMPLEMENT OF bc_is_kingsguard_trigger AND THE ENGINE
+# GUARANTEES IT. That gate was widened on 2026-08-17 to read the `kingsguard`
+# trait as well as the seven council positions; AGOT's dismissal effect removes
+# that trait and adds this modifier in one block, so a man cannot satisfy both.
+# The disjointness here is not a convention this file is observing, it is
+# somebody else's code enforcing it.
+#
+# `berserker` IS WRITTEN BY THIS EXACT FILE FAMILY AND HAS NEVER BEEN READ BY
+# IT. AGOT's own `common/combat_phase_events/00_knight_phase_events.txt` hands
+# it out at `:373` and `:395`, off its berserker-rage phase event, on a knight
+# who went past the point of stopping. It is a battlefield fact, written in the
+# same folder these templates live in, and this mod has a hundred and forty-nine
+# knight templates and asked about it in none of them.
+#
+# NOT A SUBSET OF THE PROWESS ROWS AND THE DIFFERENCE MATTERS. Prowess says how
+# good he is. This says something came apart in him once, in a fight, badly
+# enough that the game wrote it down - and a man of prowess four can hold it
+# while a man of prowess sixteen may never have lost hold of himself in his
+# life. Neither implies the other in either direction.
+#
+# NOTHING FORBIDS ONE MAN FROM HOLDING BOTH AND NO NEGATION IS WRITTEN. A
+# dismissed white cloak may very well be a berserker; that is arguably how he
+# came to be dismissed. The two rows are asked about two different men on two
+# different sides and the pools roll separately, so no single battle can claim
+# both things about one person.
+#
+# RARITY. The modifier requires a man to have been sworn to a lifetime
+# appointment and then thrown out of it, which is a small number of people in
+# any run and most of them are somebody's household knight rather than a wing
+# commander. The trait requires having lost control of yourself in a fight that
+# the engine was watching.
+bc_they_took_the_white_cloak_back_off_him_trigger = {
+	has_character_modifier = agot_former_kingsguard
+}
+
+bc_something_in_him_has_come_off_its_hinges_before_trigger = {
+	has_trait = berserker
+}
