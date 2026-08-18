@@ -7697,3 +7697,55 @@ bc_his_hall_outshines_his_rank_trigger = {
 	court_grandeur_current_level >= 1
 	court_grandeur_current_level > court_grandeur_minimum_expected_level
 }
+
+# BATCH 180 - HOW MANY OF HIS OWN ARE WAITING AT HOME.
+#
+# THE MOD HAS NEVER COUNTED A MAN'S CHILDREN. `any_child` returned a single
+# hit over the whole tree and that hit is the substring sitting inside
+# `any_child_of_concubine` in a header at line 4939; `num_of_children` is not
+# in the 1.19.0.6 dump at all; `has_children` and `is_parent_of` returned
+# zero. A hundred and seventy-nine batches have read who a man is sworn to,
+# who he made, who he owes and who he married, and not one of them has read
+# who is at home waiting for him to come back.
+#
+# THIS IS NOT THE SPOUSE QUESTION AND NOT THE HEIR QUESTION. `is_married` is
+# read fifteen times and reads a living arrangement. `any_heir_title` carries
+# the inheritance pair and reads what a man stands to receive. Neither counts
+# the people who exist because of him, and that count comes apart from both
+# constantly: a childless man can be married and stand to inherit a kingdom,
+# and a man with six children can have neither.
+#
+# THE LOW GATE IS `count < 1` BECAUSE THAT IS HOW VANILLA WRITES IT.
+# 00_adoption.txt:30 asks `any_child = { count < 1 }` for exactly this
+# condition, and `count < 2` sits beside it at 00_adoption.txt:271.
+#
+# THE LOW GATE ALSO CARRIES `age >= 45` AND THAT IS NOT DECORATION. A man of
+# twenty with no children has a life in front of him and the absence says
+# nothing about him at all. At forty-five it has stopped being a delay and
+# become the shape of the life, and that is the only version of the fact
+# worth writing a moment about.
+#
+# THIS IS NOT bc_knight_the_old_sword, which gates `prowess >= 8` with
+# `age >= 55` and is about a body that has been doing this too long. That
+# gate sits ten years further on, and the argument here is a count of
+# children rather than a count of years.
+#
+# DISJOINT BY CONSTRUCTION. Six or more and fewer than one cannot both be
+# true of the same man. No negation is needed and none is written.
+#
+# RARITY. Six living children is a full nursery that came through, which is
+# not the common outcome, and a man who has reached forty-five with nobody is
+# rarer still. Most men are somewhere between the two, and the between passes
+# neither gate.
+#
+# NEITHER TAKES A GUARD. `any_child` is a character-scope list read on a man
+# the caller has already entered, and an empty list is a valid answer to it
+# rather than an error.
+bc_there_are_six_of_them_at_home_trigger = {
+	any_child = { count >= 6 }
+}
+
+bc_there_is_nobody_of_his_at_home_trigger = {
+	age >= 45
+	any_child = { count < 1 }
+}

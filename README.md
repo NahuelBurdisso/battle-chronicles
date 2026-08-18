@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 197 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 165 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 198 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 166 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and seventy-nine batches, one per row of the table below, none of which needed a
+One hundred and eighty batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -764,6 +764,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | whether the man opposite is the same kind of man | The mod has compared the two commanders on blood, house, tongue, faith, martial, renown and shared memory, and has never once compared their character. `number_of_traits_in_common`, `number_of_personality_traits_in_common`, `number_of_opposing_traits`, `number_of_opposing_personality_traits`, `number_of_virtue_traits_in_common` and `trait_compatibility` all returned zero. The personality variants are the ones used, because `number_of_traits_in_common` counts education and congenital traits too and would call two men alike on facts that predict nothing about what either will do this afternoon. Three is deliberately above vanilla's own bars - it asks for two in common at `councillor_spouse_diplomacy_events.txt:1344` and one opposing at `yearly_events_4.txt:154`, and treats both as opinion nudges rather than gates. The pair is disjoint by construction and the construction is batch 175's: `personality_trait_limit = 4`, so a man who shares three of his words with the other has at most one left to oppose him with and cannot reach three opposing. | 2 templates, base 50, 80 |
 | the written rule he holds his own men by | The whole realm-law system returned zero over the mod: `has_realm_law`, `has_realm_law_flag`, `has_realm_law_in_group`, `realm_law_group_at_maximum_level` and `realm_law_group_at_minimum_level`. A hundred and seventy-seven batches have read who is sworn to whom and none of them has read the written rule all of that runs under. AGOT ships its own `00_realm_laws.txt` and keeps the vanilla group: `crown_authority` is declared at line 22 with `cumulative = yes` and `default = crown_authority_1`, and the four levels sit at lines 29, 56, 144 and 238. The levels are named rather than asked for as a group maximum, because the dump says nothing about what `realm_law_group_at_maximum_level` returns for a character who holds no law in that group at all - a tribal ruler runs `tribal_authority` and a landless man runs nothing - while `has_realm_law` is simply false when the man does not hold that law. The group is cumulative and a ruler holds one level of it, so the top and the bottom cannot both pass, and the two levels between them are what most of Westeros is sitting on. | 2 templates, base 50, 80 |
 | the hall he keeps and what his rank expects | Court grandeur returned zero over the mod: `court_grandeur_current`, `court_grandeur_current_level`, `court_grandeur_base` and `court_grandeur_minimum_expected_level` are all unread by a hundred and seventy-eight batches, which have asked what a man owns, what he is owed and what he owes, but never what the place he lives in looks like against what his rank is assumed to require. The engine keeps both numbers, and the gap between them is the reading. Both gates open with `court_grandeur_current_level >= 1`, because the engine hands back level 0 for anybody with no court at all and a bare zero would otherwise read as a very poor hall rather than as the absence of one - AGOT guards the same read the same way in `09_mpo_interactions.txt` before it compares the two levels itself. One gate is `<` and the other is `>` on the same pair of values, so no man passes both, and the ordinary case of a hall sitting exactly at the expected level passes neither. | 2 templates, base 50, 80 |
+| how many of his own are waiting at home | The mod has never counted a man's children. `any_child` returned a single hit over the whole tree and that hit is the substring inside `any_child_of_concubine` in a header; `num_of_children` is not in the 1.19.0.6 dump at all; `has_children` and `is_parent_of` returned zero. A hundred and seventy-nine batches have read who a man is sworn to, who he made, who he owes and who he married, and none has read who is at home waiting for him. This is not the spouse question - `is_married` is read fifteen times and reads a living arrangement - and not the heir question, which `any_heir_title` carries and which reads what a man stands to receive. The low gate is `count < 1` because that is how vanilla writes it at `00_adoption.txt:30`, and it carries `age >= 45` as well, because a man of twenty with no children has a life in front of him and the absence says nothing, while at forty-five it has become the shape of the life. Six or more and fewer than one cannot both hold, so no negation is written. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -782,16 +783,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and eighty-three**, its "3, 3, 4 and 3"
-are 64, 63, 64 and 32, and the fall-through set is one hundred and sixty sites rather than
+plan 1's eighteen call sites are now **three hundred and eighty-five**, its "3, 3, 4 and 3"
+are 65, 64, 64 and 32, and the fall-through set is one hundred and sixty sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 197, knight 165.** Weight against vanilla's
+**Template totals are now commander 198, knight 166.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-five templates against
-`knight_none`'s 2000 — one hundred and sixty-four at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-six templates against
+`knight_none`'s 2000 — one hundred and sixty-five at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
