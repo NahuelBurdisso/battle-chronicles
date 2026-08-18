@@ -8867,3 +8867,68 @@ bc_the_same_word_speaks_well_of_them_both_trigger = {
 		has_same_virtue_trait = scope:combat_side.side_commander
 	}
 }
+
+# BATCH 197 - THE LIST OF MEN HE HAS ALREADY PUT IN THE GROUND.
+#
+# `any_killed_character` RETURNED ZERO ACROSS THE WHOLE MOD. Two gates here
+# are about killing and both of them read a trait rather than a list:
+# `bc_he_killed_his_own_blood_trigger` at `:1950` is the three `kinslayer`
+# rungs, and `bc_it_is_common_knowledge_that_he_killed_somebody_trigger` at
+# `:6937` is `has_trait = murderer`. Neither is a count. A trait is what the
+# world decided to call a man afterwards; this key is the list itself, which
+# the game keeps whether or not anybody ever named him for it.
+#
+# NEITHER SHIPPED GATE NESTS WITH THESE IN EITHER DIRECTION. `murderer` is
+# one secret that came out, so a man may carry it with a single name on his
+# list and fail a count of five; a lord who has held five executions has five
+# names and no `murderer` trait at all, because an execution is not a murder.
+# `kinslayer` is narrower again - it asks who the dead man was and never how
+# many there were.
+#
+# LIVE IN BOTH TREES, AND AGOT PICKS THE THRESHOLD ITSELF. Vanilla writes the
+# bare count form at `common/modifiers/00_yearly_event_modifiers.txt:275`, and
+# AGOT ships its own copy of that file with three bands - `count >= 15` at
+# `:279`, `count >= 10` at `:285` and `count >= 5` at `:291` - so five is
+# AGOT's own lowest rung and not a figure invented here. AGOT writes the
+# iterator with an inner test in files of its own making as well: three times
+# in `common/casus_belli_types/00_agot_rv_rescue_wars.txt` from `:648`, once
+# at `00_agot_rv_revenge_wars.txt:362`, once at
+# `zz_agot_rv_war_interactions.txt:300` and once at
+# `common/scripted_effects/00_nickname_effects.txt:401`.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. The first needs five names on the
+# scoped man. The second needs none at all on him and puts the five on the man
+# giving him orders instead. The `NOT` in the second gate is load-bearing and
+# is doing the whole work of keeping the pair apart, in the way batch 195's
+# `NOT = { has_bad_nickname = yes }` does.
+#
+# TWO DIFFERENT FACTS ABOUT TWO DIFFERENT MEN, as in batch 191. The second
+# gate is a knight-side row by nature: batch 141's lesson is that a gate
+# comparing the scoped man to his own side's commander can never fire in the
+# commander pool, because there the scoped man IS that commander. It is
+# written into the knight file only.
+#
+# GUARDS. Naming the own-side commander as the subject of a block is a read,
+# so the second gate carries one `exists` as a sibling and repeats it inside
+# the `trigger_if` limit. The count on the scoped man himself is a bare
+# character-scope read and takes no guard, and `scope:combat_side` never takes
+# one.
+#
+# RARITY. Five dead men is a career rather than an incident. Most lords on
+# most fields have killed nobody the game is counting, which is exactly why
+# the second gate's `NOT` costs almost nothing while the half above it costs
+# a great deal.
+bc_there_are_five_names_on_him_already_trigger = {
+	any_killed_character = { count >= 5 }
+}
+
+bc_he_follows_a_man_with_five_names_on_him_trigger = {
+	exists = scope:combat_side.side_commander
+	NOT = { any_killed_character = { count >= 1 } }
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			any_killed_character = { count >= 5 }
+		}
+	}
+}
