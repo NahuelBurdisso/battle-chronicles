@@ -7749,3 +7749,68 @@ bc_there_is_nobody_of_his_at_home_trigger = {
 	age >= 45
 	any_child = { count < 1 }
 }
+
+# BATCH 181 - WHETHER THE OTHER MAN'S LAND TOUCHES HIS.
+#
+# THE MOD HAS NEVER ASKED WHO BORDERS WHOM. `character_is_realm_neighbor` and
+# `character_is_land_realm_neighbor` both returned zero over the whole tree,
+# and the eight hits on the word "neighbour" are every one of them header
+# prose. A hundred and eighty batches have read what two men are to each
+# other - sworn, kin, married, owed, hated, knighted by the same hand - and
+# not one of them has read the plainest thing two lords in Westeros can be to
+# each other, which is next to each other.
+#
+# THE ENGINE'S DEFINITION IS NARROWER THAN THE ENGLISH WORD. The dump gives
+# it as "is the scoped character a realm neighbor of the target? Meaning
+# they're independent or has the same liege, and border you". Two vassals of
+# two different kings do not qualify however close their fields lie. What
+# does qualify is two independent houses whose lands meet, or two men who
+# kneel to the same crown and are fighting anyway. Both of those are the
+# ordinary shape of a Westerosi war and neither of them is the ordinary shape
+# of a Westerosi battle, most of which are fought by somebody's vassal
+# against somebody else's.
+#
+# VANILLA WRITES IT EXACTLY THIS WAY. `character_is_land_realm_neighbor =
+# scope:attacker` at `03_fp2_wars.txt:40` and `07_ep3_wars.txt:4199`, and
+# negated at `01_fp1_wars.txt:108` and `06_ce1_wars.txt:365`. The land
+# variant is used in both gates below rather than the plain one, because a
+# border that exists only across water is not a thing a man rides over.
+#
+# TWO DIFFERENT FACTS ABOUT TWO DIFFERENT MEN, SO NO NEGATION IS WRITTEN. The
+# first asks whether the man commanding the far side is the lord whose fields
+# meet his. The second asks whether the man he is fighting under is. A knight
+# can pass the second while his own commander passes the first, and that is
+# not a collision - the two pools roll separately and the two gates name
+# different targets. This is the standing exception, precedent at batches
+# 110, 113, 118, 120, 123 and after.
+#
+# THIS IS NOT bc_he_is_sworn_to_the_man_leading_this_side_trigger. That reads
+# a relation between two men and this reads the map. A hedge knight sworn to
+# a lord he has served for twenty years holds no land at all and fails the
+# second gate; a lord who has never sworn anything to the man beside him and
+# simply came when the call went out passes it.
+#
+# BOTH TAKE THE STANDING GUARD. Naming a side commander as the TARGET of a
+# trigger is a read, so each gate carries `exists` as a sibling and repeats
+# it inside a `trigger_if` before the read, in the shape
+# bc_foe_is_formidable_trigger uses.
+#
+# RARITY. A landless man borders nobody and fails both. Of the landed, the
+# engine's independent-or-same-liege requirement cuts out every battle
+# between two crowns' vassals, which is most of them. What is left is the
+# war next door, which is rare on the map and very loud when it happens.
+bc_the_man_opposite_holds_the_next_valley_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		character_is_land_realm_neighbor = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_the_man_he_rode_out_for_holds_the_next_valley_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		character_is_land_realm_neighbor = scope:combat_side.side_commander
+	}
+}

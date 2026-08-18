@@ -15421,3 +15421,62 @@ bc_six_of_them_are_waiting_at_home = {
 		}
 	}
 }
+
+bc_the_war_is_with_the_man_next_door = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_man_opposite_holds_the_next_valley_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Twenty years of border talks are twenty years of learning how the
+		# other man thinks, and the learning does not stop being true today.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = forgiving
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_war_is_with_the_man_next_door"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_war_is_with_the_man_next_door_toast
+			desc = bc_the_war_is_with_the_man_next_door_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
