@@ -10932,3 +10932,70 @@ bc_the_guarantee_has_picked_up_a_sword = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The household opposite has men in it whose names are worth something, and his
+# has not, and the day is going against him. `adapted` is the KIND for a
+# commander READING the battle rather than the battle doing something to the
+# army, and it hands out no modifier at all, which is the argument: the far
+# side's famous men are not why he is losing, and knowing that does not help.
+bc_the_names_are_all_on_the_other_side_of_the_field = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_far_side_keeps_famous_men_and_he_does_not_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Separating what an enemy actually is from what an enemy is
+		# said to be, while both of them are coming at you, is a
+		# scholar's discipline before it is a soldier's.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = paranoid
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_names_are_all_on_the_other_side_of_the_field"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_names_are_all_on_the_other_side_of_the_field_toast
+			desc = bc_the_names_are_all_on_the_other_side_of_the_field_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -3230,3 +3230,62 @@ bc_one_he_was_given_stands_in_this_line_trigger = {
 	}
 	NOT = { bc_the_man_who_gave_him_up_commands_the_far_side_trigger = yes }
 }
+
+
+# --- the reputations that are not his ----------------------------------------
+#
+# THE MOD HAS MENTIONED ACCOLADES ONCE, IN A COMMENT, TO BORROW THEIR SPELLING.
+# The note on bc_his_own_people_have_a_ledger_trigger's neighbour cites
+# 04_ep2_eminent_attributes.txt for writing out the three kinslayer traits
+# longhand. That is the entirety of it. `is_accolade_successor` and
+# `any_acclaimed_knight` were both at zero occurrences, and the accolade files
+# are present under this load order, so neither gate is aimed at an empty table.
+#
+# THESE TWO ARE NOT A PAIR IN THE USUAL SENSE AND ARE NOT WRITTEN AS ONE. Every
+# recent batch has been one arrangement seen from both ends, with the second
+# carrying the first as an explicit negation. These are two different facts
+# about fame that happen to come out of the same system, they are aimed at
+# different pools - the first at knights, the second at commanders - and those
+# pools roll separately, so there is nothing for a negation to protect. Writing
+# one in anyway would have cost the best case each gate has: a man who is next
+# in line for a name is exactly the sort of man a commander with no famous
+# knights of his own would want, and there is no reason both should not be true
+# on the same field.
+#
+# THE FIRST IS A STATE, NOT AN ACHIEVEMENT, AND THAT IS THE WHOLE MOMENT. The
+# engine's successor is not a man who has an accolade. He is a man the engine
+# has written down as the one who gets it when somebody else is finished with
+# it. There is no glory on him today and there may never be.
+#
+# THE SECOND IS A COMPARISON ACROSS THE FIELD and is the only gate in this file
+# that asks the same question of both commanders and keeps the answer only when
+# it comes back lopsided. `any_acclaimed_knight` is an ITERATOR and needs no
+# guard; the link it is run on, `enemy_side.side_commander`, takes the standing
+# guard.
+#
+# THE SECOND IS NOT bc_side_is_outnumbered_trigger, WHICH IS THE NEAR MISS
+# WORTH NAMING. That one compares what the two armies are made of on the day.
+# This one compares what the two households have been able to keep, which is a
+# slower and much more personal number, and it is allowed to be true of an army
+# that is winning every other comparison on the field.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. Accolades are created one at a time by
+# lieges who can afford them, successors are named one at a time inside those,
+# and the second gate additionally requires the lopsidedness to run the wrong
+# way for the man reading it.
+bc_he_is_the_named_successor_to_a_name_trigger = {
+	is_accolade_successor = yes
+}
+
+bc_the_far_side_keeps_famous_men_and_he_does_not_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_acclaimed_knight = { count >= 1 }
+		}
+	}
+	NOT = {
+		any_acclaimed_knight = { count >= 1 }
+	}
+}

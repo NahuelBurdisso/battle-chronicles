@@ -4705,3 +4705,85 @@
 
  bc_knight_he_was_a_clause_in_something_before_he_was_a_man_toast:0 "He Is In This Line Because Of A Conversation He Was Not At"
  bc_knight_he_was_a_clause_in_something_before_he_was_a_man_toast_desc:0 "There is a banner on the far side that he has known the look of since he was small, and it is not a comfort, and it is not an enemy either, and the whole afternoon is being spent in the space between those two things. Everything he has ever been told about who he is came from under that banner. Everything he has actually done since he was old enough to do anything has been done a long way from it, on somebody else's ground, at somebody else's table, in a house that was scrupulously kind to him in the specific way you are kind to something valuable. So the line goes back and he goes back with it, and it goes back again, and he is not fighting well because there is nothing to fight well for: whoever wins this, the thing he is does not change, and he understood that before the first hour was out. What he does instead is refuse to be the reason it goes any faster. He takes what comes at him. He takes more of it than his share, because taking it is the only part of today that is his to decide, and by the time the light is going there is more of his own blood on him than anybody has thought to remark on, and he could not tell anybody what he is proving or to whom.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 110 - the reputations that are not his ----------------------------
+#
+# NEITHER OF THESE TWO MAY NAME ANYBODY, living or dead, and neither may use
+# the words "accolade", "acclaimed", "glory", "renown", "legend" or "famous".
+# Both pages are about reputation and neither is allowed the vocabulary of it.
+#
+# NEITHER MAY QUOTE A SONG, a singer, a herald, a boast or a rumour, and neither
+# may have anybody on the field say anything about anybody's name out loud.
+# Reputation in both pages is a thing that has already been decided somewhere
+# else and arrives here as weather.
+#
+# THE FIRST MAY NOT COUNT THE FAR SIDE'S MEN, may not describe any one of them,
+# may not have any of them do anything, and may not have him lose to one of them
+# in particular. It may not turn the day around, may not have him give an order
+# that is quoted, may not have him wounded, and may not have anybody comfort
+# him. It may not decide that the far side's names are deserved or undeserved -
+# the page is not allowed an opinion, only an observation.
+#
+# THE SECOND MAY NOT SUCCEED. He may not kill anybody of consequence, may not be
+# seen by the person whose opinion he is riding for, may not be praised, may not
+# be stopped, and may not be wounded in a way that ends anything. It may not
+# name what he is inheriting or from whom, may not have him think about the
+# other man's death, and may not have him admit to himself what he is doing. It
+# may not use the words "prove", "worthy" or "deserve".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life", "it comes from meals", "one notch harder than the
+# situation asked for", "in a hall in winter with the fire going", "a step
+# further back than they were", "the sensible, almost administrative urge",
+# "thirty paces along the same rank", "since before he was worth knowing",
+# "the second answer is worse than the first was", "a longer route than the
+# one he learned to trust", "impatience of a very specific and unusual kind",
+# "a hundred paces is not a distance worth counting", "personally offended him
+# by existing", "horses standing with their heads down", "stops being an item
+# and starts being a soldier", "a piece of paper with a life attached", "the
+# specific way you are kind to something valuable", "refuse to be the reason
+# it goes any faster", "a conversation he was not at".
+ bc_the_names_are_all_on_the_other_side_of_the_field_toast:0 "He Is Losing To An Army That Was Better Known Than His Before Either Of Them Arrived"
+ bc_the_names_are_all_on_the_other_side_of_the_field_toast_desc:0 "It occurs to him, somewhere in the wreck of the second attempt at the left, that everything coming at him today has already been talked about somewhere he was not. He does not think this bitterly and he does not think it for long. It is simply a fact about the field, the way the slope is a fact: the men over there have been paid for, in gifts and in patience and in years of somebody keeping them fed and pleased and near at hand, and the men on this side have been paid for too, in coin, at the going rate, and the difference between those two arrangements is standing in front of him doing what it was always going to do. He is not sure the far side is fighting better. That is the strange part, and he goes back to it twice while the line is coming apart. Man for man he can find nothing in it. What he can find is that his own people are waiting, in a way they would not be waiting if the ground were reversed — waiting to be told, waiting to be sure, waiting an extra half-breath for somebody to go first — and there is nobody in his household this year whose going first would settle anything.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_name_is_promised_and_the_day_is_not_toast:0 "There Is A Version Of Him Written Down Somewhere And It Is Not This One"
+ bc_knight_the_name_is_promised_and_the_day_is_not_toast_desc:0 "The day has gone wrong in the ordinary way, without a moment in it anybody will remember, and that is the thing he cannot stand about it. A defeat with nothing in it. He rides at the part of the far line that is furthest from anything useful, because it is the part where a man can be seen, and he does it three times, and each time it costs the horse under him more than it costs anybody in front of him. Nothing comes of it. He does not break anything, he does not reach anybody worth reaching, and by the third pass his horse is doing something with its head that he has felt before and has never once ignored, and he ignores it. What he is riding at is not the enemy. It is a line of writing in a chamber he has never been inside, saying what he will be allowed to be called one day, on the day somebody else has finished being it, and he has begun to understand that it is a description of a man he will have to become in public rather than a promise about who he already is. The line goes back behind him while he is doing this. He knows that too.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
