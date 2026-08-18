@@ -6786,3 +6786,80 @@ bc_the_thing_he_swore_is_on_record_as_broken_trigger = {
 bc_he_belongs_to_an_order_before_he_belongs_to_a_lord_trigger = {
 	has_trait = order_member
 }
+
+# BATCH 166 - THE TWO MEN WHO WERE SHOWN SOMETHING BEFORE IT HAPPENED.
+#
+# THIS MOD HAS NEVER ONCE READ AGOT'S MAGIC. A hundred and sixty-five batches
+# have asked about skill, trait, rank, terrain, weather, blood, oath, wealth,
+# stress, illness and the shape of a man's house, and `greensight` and
+# `dragon_dreams` both census at zero over the whole tree, README included.
+# They are the two traits in this setting that say a man has been given
+# information nobody gave him, and the chronicle has walked past both of them
+# a hundred and sixty-five times.
+#
+# THE TWO DEFINITIONS ARE ALMOST THE SAME OBJECT WITH DIFFERENT ANCESTORS.
+# `dragon_dreams` at `common/traits/00_agot_traits.txt:1974` is
+# `category = fame` with `intrigue = 4`, `general_opinion = -10`,
+# `high_valyrian_opinion = 10`, `stress_gain_mult = 0.25` and an
+# `enemy_hostile_scheme_phase_duration_add`. `greensight` at `:2005` is
+# `category = fame` with `intrigue = 2`, `general_opinion = -5`,
+# `the_pact_religion_opinion = 5`, `monthly_piety_gain_mult = 0.25`, and the
+# same stress line and the same scheme line. Both cost the same hundred in the
+# ruler designer. The engine treats them as one mechanic wearing two different
+# bloodlines.
+#
+# NOTE WHAT BOTH OF THEM DO TO OTHER PEOPLE. `general_opinion` is NEGATIVE on
+# both and the faith or blood bonus is positive. A man who dreams true is worth
+# more to his own kind and less to everybody else, which is the correct reading
+# and is also the reason neither of these templates lets him be believed.
+#
+# NEITHER IS A CULTURE GATE OR A FAITH GATE AND NEITHER IS A SUBSET OF ONE.
+# The mod's culture and faith rows ask what a man was raised inside.
+# `agot_birth_magic_traits_effect`
+# (`common/scripted_effects/00_agot_birth_effects.txt:66`) is a `random_list`
+# run once at birth: `9949` weight for nothing at `:68`, `50` for the dream
+# flag at `:71` behind an `any_ancestor` Targaryen test, and `1` for the green
+# flag at `:96` behind an `any_ancestor` test on a greenseer faith doctrine or
+# crannogman culture. Being of the right blood is a PREREQUISITE and almost
+# never the outcome; the overwhelming majority of every eligible people never
+# gets either flag, so neither gate can stand in for a culture row.
+#
+# AND THE FLAG IS NOT THE TRAIT. This is the part that makes the pair worth
+# shipping. Birth writes a dormant character flag, and the flag only becomes a
+# trait when somebody aims a hostile scheme at the sleeper and he sees it
+# coming: `events/agot_events/agot_greensight_events.txt:134` and
+# `events/agot_events/agot_dragon_dreams_events.txt:148` both sit in a
+# scheme-discovery event, both consume the flag and add the trait in the same
+# three lines, and both hand the man `major_stress_gain` for the privilege.
+# `common/scripted_triggers/00_agot_magic_triggers.txt:12` and `:43` are where
+# the rest of AGOT reads the dormant side. Two other live grants exist -
+# `events/agot_filler/00_agot_dragon_filler_events.txt:8295` and
+# `events/dlc/fp2/fp2_struggle_events.txt:4560`.
+#
+# THESE GATES READ THE TRAIT AND NOT THE FLAG, DELIBERATELY. The flag is a
+# man who might one day dream true. The trait is a man who already has, once,
+# and was proved right by events he could not stop. Only the second one is a
+# fact about the person standing on this field.
+#
+# NOTHING FORBIDS ONE MAN FROM CARRYING BOTH AND NO NEGATION IS WRITTEN. The
+# birth list picks at most one, but a life is long and AGOT grants both traits
+# from other places. The two rows are asked about two different men on two
+# different sides and the pools roll separately, so no single battle can claim
+# both things about one person.
+#
+# RARITY, AND IT IS TWO RARITIES MULTIPLIED. First a one-in-ten-thousand roll,
+# or fifty in ten thousand for the dragon side, and only for a man whose
+# ancestry already qualified. Then a dormant flag that never becomes anything
+# at all unless a hostile scheme is aimed at him and he foresees it. These are
+# the rarest gates in this file by a long way, which is exactly the point of
+# spending two templates on them.
+#
+# BOTH ARE ROOT-RELATIVE, BARE `has_trait`, NO WALK AND NO GUARD. The first is
+# read on the commander and the second on the knight.
+bc_he_was_shown_something_once_and_it_was_real_trigger = {
+	has_trait = greensight
+}
+
+bc_the_fire_in_his_sleep_belongs_to_his_blood_trigger = {
+	has_trait = dragon_dreams
+}

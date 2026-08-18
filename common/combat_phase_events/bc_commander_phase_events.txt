@@ -14536,3 +14536,62 @@ bc_the_oath_he_broke_is_older_than_this_war = {
 		}
 	}
 }
+
+bc_the_dream_keeps_getting_in_front_of_the_field = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_was_shown_something_once_and_it_was_real_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The trait itself hands out intrigue, and a subtle man has more
+		# machinery available for working the wrong problem with.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = craven
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_dream_keeps_getting_in_front_of_the_field"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_dream_keeps_getting_in_front_of_the_field_toast
+			desc = bc_the_dream_keeps_getting_in_front_of_the_field_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
