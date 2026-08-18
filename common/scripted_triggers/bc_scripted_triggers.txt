@@ -10284,3 +10284,72 @@ bc_the_foe_is_fighting_with_a_ruin_trigger = {
 	}
 	NOT = { bc_the_thing_in_his_hand_is_nearly_done_trigger = yes }
 }
+
+
+# BATCH 214 - HOW BIG THE NAME HE WAS GIVEN HAS GOT.
+#
+# CENSUS. `accolade_rank` returns zero across the whole mod, and so do
+# `has_accolade_type`, `accolade_attribute_level`, `has_accolade_category` and
+# `accolade_owner`. The word "accolade" appears thirteen times: nine are file
+# citations inside headers borrowing a spelling or a precedent, and the other
+# four belong to the pair at :3296 and :3304.
+#
+# THIS IS NOT THAT PAIR AND IT IS NOT ABOUT THOSE MEN. `is_accolade_successor`
+# at :3296 is a man the engine has written down as the one who gets a name
+# when somebody else is finished with it - by definition NOT the man who holds
+# it. `any_acclaimed_knight = { count >= 1 }` at :3304 counts how many famous
+# men the far household has managed to keep, and is a fact about a household
+# rather than about any one of them. Neither has ever asked the obvious next
+# question, which is how far along the name on a man's own back has actually
+# got.
+#
+# THE LINK IS THE ENGINE'S OWN AND IT IS EXACTLY THE RIGHT ONE. The dump gives
+# `accolade` as Input Scopes: character, Output Scopes: accolade, described as
+# "Get the Accolade of which this character is the Acclaimed Knight". So these
+# fire only for the man the name is actually on.
+#
+# THE BARS ARE VANILLA'S OWN. `common/scripted_triggers/00_clothing_triggers
+# .txt` writes `accolade = { accolade_rank >= 5 }` at :290-291 and
+# `accolade = { accolade_rank >= 3 }` at :298-299, stepping the bar with the
+# tier of the man's liege, and `common/scripted_triggers/mpo_scripted_triggers
+# .txt:210` uses `accolade_rank >= 5` again. The low end is read the same way:
+# `events/dlc/bp2/bp2_yearly_events_6.txt:13572` asks `accolade_rank >= 1` and
+# the feast events ask `accolade_rank < 6` in four places from
+# `events/activities/feast_activity/main_events/feast_default_events.txt:4964`
+# and `accolade_rank > 3` in four more from `:5140`. Five is the top of the
+# range vanilla treats as remarkable; one is the rung a name starts on.
+#
+# THE GUARD IS THE ENGINE'S OWN SHAPE AS WELL AS THIS FILE'S. `accolade` is an
+# optional link - most men are not acclaimed knights - so it takes the
+# standard sibling `exists` repeated inside a `trigger_if`, which is precisely
+# how vanilla's own `common/scripted_triggers/04_ep2_accolade_triggers.txt`
+# writes it at :230-236 and at eleven more places from :264.
+#
+# DISJOINT BY CONSTRUCTION. Rank five or better against rank one. Three rungs
+# of daylight, and no accolade in any court can answer yes to both.
+#
+# RARITY. A liege has to found an accolade, name a knight to it and then keep
+# feeding it for years before it climbs; most that exist sit low and stay
+# there. The first gate wants the small number that have climbed to the top of
+# the range and puts that man on the losing side of an afternoon. The second
+# wants a name that was handed out once and then never went anywhere, on a man
+# who is winning - which is the only circumstance in which it might.
+bc_the_name_he_carries_is_bigger_than_he_is_trigger = {
+	exists = accolade
+	trigger_if = {
+		limit = { exists = accolade }
+		accolade = {
+			accolade_rank >= 5
+		}
+	}
+}
+
+bc_the_name_they_gave_him_never_grew_trigger = {
+	exists = accolade
+	trigger_if = {
+		limit = { exists = accolade }
+		accolade = {
+			accolade_rank <= 1
+		}
+	}
+}

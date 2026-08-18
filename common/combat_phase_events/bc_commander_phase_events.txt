@@ -17385,3 +17385,63 @@ bc_the_thing_in_his_hand_is_nearly_done = {
 		}
 	}
 }
+
+
+bc_the_name_he_carries_is_bigger_than_he_is = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_name_he_carries_is_bigger_than_he_is_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man with a large name spends part of every battle managing
+		# what people expect of it, and knows the cost to the hour.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = humble
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_name_he_carries_is_bigger_than_he_is"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_name_he_carries_is_bigger_than_he_is_toast
+			desc = bc_the_name_he_carries_is_bigger_than_he_is_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
