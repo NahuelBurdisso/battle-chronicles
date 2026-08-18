@@ -16725,3 +16725,63 @@ bc_this_whole_war_is_on_his_own_ledger = {
 		}
 	}
 }
+
+
+bc_this_war_has_a_crowd_of_names_in_it = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_this_war_has_a_crowd_of_names_in_it_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Keeping the interests of eight separate households in his head
+		# at once is bookwork before it is soldiering.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_war_has_a_crowd_of_names_in_it"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_this_war_has_a_crowd_of_names_in_it_toast
+			desc = bc_this_war_has_a_crowd_of_names_in_it_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

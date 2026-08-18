@@ -9310,3 +9310,79 @@ bc_the_far_lord_has_carried_this_whole_war_trigger = {
 		}
 	}
 }
+
+
+# BATCH 203 - HOW MANY NAMES ARE ACTUALLY IN THIS WAR.
+#
+# CENSUS. `any_war_participant`, `every_war_participant`, `any_war_attacker`
+# and `any_war_defender` all return zero across the whole mod. Batch 202 at
+# :9264 opened the war's ledger of who has done the work; nothing anywhere
+# counts how many people are on it. The war-scope gates this file already has
+# ask how long the war has run (:201), whether it is a civil war (:968), who
+# leads it (:995) and which side of it this man is on (:2569 and :2577), and
+# every one of those is a question about one man or one war-wide flag rather
+# than about the size of the guest list.
+#
+# PRECEDENT. `any_war_participant` is a war-scope list builder and AGOT uses it
+# in files of its own authorship in at least six places, including
+# `common/on_action/agot_on_actions/agot_war_on_actions.txt:345` and `:353`,
+# `common/scripted_effects/00_agot_mega_wars_effects.txt:1304`, and
+# `events/agot_events/agot_scenario_roberts_rebellion_minor_events.txt:1001`.
+# The `count` form is live in vanilla on both the participant list and the
+# attacker list: `events/activities/hold_court_activity/
+# hold_court_events_general.txt:8223` writes `any_war_participant = { count = 0
+# ... }` inside `vassal_war_conflict_trigger`, and
+# `common/scripted_effects/09_dlc_mpo_scripted_effects.txt:4053` writes
+# `any_war_attacker = { count >= 2 ... }`.
+#
+# THIS IS NOT THE BATTLE-SIZE AXIS AND IS NOT A SUBSET OF IT. `:185` asks
+# `num_total_troops >= 15000` on the combat and the size bucket at :615 asks
+# the same trigger at two thresholds; both count MEN STANDING ON THIS FIELD. A
+# war participant is a name with a stake in the war, and the two numbers move
+# independently in both directions: one great lord can put fifteen thousand men
+# on a field by himself with nobody else named in the war at all, and eight
+# petty lords can be named in a war and between them field a fraction of that.
+# Neither gate below can be a subset or a superset of the size gates.
+#
+# DISJOINT BY CONSTRUCTION, which is the fostering pair's arrangement at
+# :2490-2510. The first wants at least eight names in the war and the second
+# wants at most two, so no war can satisfy both. Two is also the floor - a war
+# has an attacker and a defender or it is not a war - so the second gate is
+# exactly the war that nobody else would join.
+#
+# GUARDS. `combat_war` is optional, so both gates carry `exists` as a sibling
+# and repeat it in the `trigger_if` limit, and a missing war fails the gate
+# instead of passing it vacuously. The walk itself is the mod's established
+# `scope:combat_side.combat.combat_war`, first used at :198.
+#
+# RARITY. Most wars are fought by a war leader, the man he is fighting, and the
+# handful of allies and called vassals either of them can raise, which lands
+# well short of eight names. Eight is a war that has stopped being a quarrel
+# and started being everybody's business. At most two is the opposite and is
+# rarer still, because a lord with allies calls them and a lord being attacked
+# calls his: it means one man declared on another and not one other person in
+# the world took a side. The first wants the crowded case while this side is
+# losing, the second wants the empty case while this side is winning.
+bc_this_war_has_a_crowd_of_names_in_it_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			any_war_participant = {
+				count >= 8
+			}
+		}
+	}
+}
+
+bc_this_war_has_only_two_names_in_it_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			any_war_participant = {
+				count <= 2
+			}
+		}
+	}
+}
