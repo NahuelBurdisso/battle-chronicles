@@ -7518,3 +7518,75 @@ bc_this_is_the_eighth_time_for_him_trigger = {
 	is_landed = yes
 	participated_wars >= 8
 }
+
+
+# BATCH 177 - WHETHER THE MAN OPPOSITE IS THE SAME KIND OF MAN.
+#
+# THE MOD HAS COMPARED THE TWO COMMANDERS SEVERAL WAYS AND HAS NEVER COMPARED
+# THEIR CHARACTER. `bc_foe_is_kin`, `bc_foe_is_house`, `bc_foe_is_countryman`
+# and `bc_foe_is_heathen` read the other man's blood, house, tongue and faith;
+# `bc_foe_is_formidable` and `bc_foe_is_outmatched` read his martial at 16 and
+# 8; `bc_the_name_opposite_outweighs_the_name_here` reads his renown; and
+# `bc_he_shares_an_afternoon_with_the_man_opposite` reads whether the two of
+# them stand in the same memory. All of that is identity, ability, standing and
+# history. None of it is what the two men are LIKE. Over the whole mod
+# `number_of_traits_in_common`, `number_of_personality_traits_in_common`,
+# `number_of_opposing_traits`, `number_of_opposing_personality_traits`,
+# `number_of_virtue_traits_in_common` and `trait_compatibility` all returned
+# zero.
+#
+# PERSONALITY TRAITS, NOT ALL TRAITS. `number_of_traits_in_common` counts every
+# trait either man carries, so two commanders who both took a martial education
+# and both walk with a limp come out "alike" on a number that has nothing to do
+# with how either of them will behave this afternoon. The personality variants
+# count only the words the game uses to predict what a man does, and that is
+# the only comparison worth putting in a chronicle about a decision.
+#
+# THREE IS DELIBERATELY ABOVE VANILLA'S OWN BARS. Vanilla asks for two in
+# common at `councillor_spouse_diplomacy_events.txt:1344-1347` and for one
+# opposing at `yearly_events_4.txt:154-157`, and in both places the result is
+# an opinion nudge rather than a gate. Two shared words between two nobles is a
+# coincidence and one opposing word is the ordinary state of two strangers.
+# Three of either is a man looking across a field at somebody assembled from
+# the same short list, or at somebody assembled from its far end.
+#
+# DISJOINT BY CONSTRUCTION, AND THE CONSTRUCTION IS BATCH 175'S. Vanilla sets
+# `personality_trait_limit = 4` at `00_basic_values.txt:1361`, so a man who
+# shares three of his words with the other has at most one word left to oppose
+# him with and cannot reach three opposing. The two gates cannot both pass on a
+# character at or under that limit, which is every character the engine handed
+# his own traits to.
+#
+# BOTH TAKE THE STANDING FAR-SIDE GUARD. Naming
+# `scope:combat_side.enemy_side.side_commander` as a trigger TARGET is a read,
+# so each gate carries `exists` as a sibling and repeats it inside a
+# `trigger_if` before the comparison is asked, exactly as
+# `bc_foe_is_formidable_trigger` and
+# `bc_he_shares_an_afternoon_with_the_man_opposite_trigger` already do.
+#
+# RARITY. Three shared personality traits, drawn from a list of thirty-odd by
+# men who carry three or four each, is uncommon between any two characters, and
+# asking for it between the two specific men giving orders on opposite sides of
+# one field is rarer again. Three opposing is rarer still, because opposition
+# is defined pairwise on a much shorter list than the traits themselves.
+bc_the_man_opposite_is_the_same_kind_of_man_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		number_of_personality_traits_in_common = {
+			target = scope:combat_side.enemy_side.side_commander
+			value >= 3
+		}
+	}
+}
+
+bc_nothing_in_him_agrees_with_the_man_opposite_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		number_of_opposing_personality_traits = {
+			target = scope:combat_side.enemy_side.side_commander
+			value >= 3
+		}
+	}
+}
