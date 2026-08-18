@@ -3837,3 +3837,55 @@ bc_somebody_is_trying_to_have_him_killed_trigger = {
 		scheme_type = murder
 	}
 }
+
+
+# --- the other thing that is killing people this year -------------------------
+#
+# EVERY EPIDEMIC KEYWORD RETURNED ZERO OVER THE WHOLE MOD. The mod reads wars,
+# feuds, factions, plots, oaths and weather, and it has never once read the
+# other mechanism in this game that empties a hall. `any_character_epidemic` is
+# documented in the 1.19.0.6 dump as "Gets epidemics affecting the scoped
+# character", character scope, yielding epidemic scope. AGOT uses the system -
+# common/scripted_triggers/00_agot_epidemics_triggers.txt is nine of its own
+# triggers built on top of it - so this is not a vanilla feature the submod is
+# pretending exists in Westeros.
+#
+# ITERATORS ARE NOT LINKS. The first gate takes no guard; an empty list is a
+# clean no. Vanilla spells the same test as `any_character_epidemic = { }` at
+# events/dlc/ep3/ep3_emperor_yearly_8.txt:119, and this file's own house style
+# is the explicit `count >= 1`, which is what the shipped
+# bc_he_stands_to_inherit_trigger uses on `any_heir_title`.
+#
+# THE SECOND WALKS AN OPTIONAL LINK and takes the standing guard around
+# scope:combat_side.enemy_side.side_commander: `exists` as a sibling, the read
+# nested in a trigger_if that repeats it. The iterator inside the entered scope
+# still needs nothing.
+#
+# THE SECOND IS VISIBLE, WHICH IS WHAT IT IS ALLOWED TO BE WRITTEN ON. Nobody in
+# a line knows the name of a sickness or where it started. What a man can see
+# from fifty paces is a host that moves wrong - slow, short-ranked, sitting down
+# when it should not be - and that is the whole of what the toast on that gate
+# may claim to have noticed.
+#
+# DISJOINT BY CONSTRUCTION, the first winning the tie. During a real outbreak
+# both hosts will often answer yes, and the right precedence is the same as
+# everywhere else in this file: the thing in his own camp is a larger fact about
+# his afternoon than the thing in somebody else's.
+#
+# RARITY. Epidemics are episodic rather than ambient - most years in most realms
+# have none at all - and then it has to be running on the day, and then the man
+# has to be leading or fighting in a battle.
+bc_there_is_sickness_in_his_own_camp_trigger = {
+	any_character_epidemic = { count >= 1 }
+}
+
+bc_the_host_opposite_is_sick_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_character_epidemic = { count >= 1 }
+		}
+	}
+	NOT = { bc_there_is_sickness_in_his_own_camp_trigger = yes }
+}

@@ -9186,3 +9186,86 @@ bc_knight_the_worst_thing_in_his_life_is_elsewhere = {
 		}
 	}
 }
+
+
+# --- they were beaten before he got here --------------------------------------
+#
+# GATE. bc_the_host_opposite_is_sick_trigger, read on the enemy commander and
+# carrying the exact negation of the commander-side gate. The knight is winning.
+#
+# KIND. adapted/up. Nothing is being done to his army; he is revising upward
+# what he thought this afternoon was, which is the read the verb table exists to
+# leave alone. There is no army modifier that means "he worked out why they are
+# slow", and there should not be.
+#
+# WHAT HE MAY NOTICE AND WHAT HE MAY NOT. He may notice a host that moves wrong
+# from fifty paces - slow, short-ranked, sitting down when it should not be. He
+# may not name the sickness, know where it came from, be told anything, catch
+# anything, reach the far commander, kill a named man, or end the day. He may
+# not pity them out loud and he may not gloat to anybody.
+#
+# SKILL. learning, because reading a body of men as ill rather than as merely
+# beaten is a piece of knowledge and not a piece of nerve.
+bc_knight_they_were_beaten_before_he_got_here = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_host_opposite_is_sick_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Most men in a winning line see a beaten enemy. Seeing an ill
+		# one takes having been somewhere with a sickness in it and
+		# having paid attention while you were there.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_they_were_beaten_before_he_got_here"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_they_were_beaten_before_he_got_here_toast
+				desc = bc_knight_they_were_beaten_before_he_got_here_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

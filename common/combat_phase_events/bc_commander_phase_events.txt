@@ -11710,3 +11710,81 @@ bc_today_is_only_the_loud_half = {
 		}
 	}
 }
+
+
+# --- the ranks were shorter before anybody drew a sword -----------------------
+#
+# GATE. bc_there_is_sickness_in_his_own_camp_trigger, read on the commander. He
+# is losing.
+#
+# KIND. bloodied/down, and bc_bloodied is exactly right: the army modifier this
+# hands out is the one for a host that has been reduced, and the point of the
+# moment is that a good part of the reduction happened before the first order of
+# the day was given.
+#
+# WHAT THIS MAY NOT DO. It may not name a sickness, describe a symptom in
+# clinical terms, give a cause, blame anybody for it, produce a remedy, or have
+# anybody die of it on the page. It may not rally, may not turn the day, and may
+# not end it.
+#
+# SKILL. martial, because the question the moment turns on is a soldier's
+# question - what a thinned and feverish rank can still be asked to do, and at
+# what point asking is the same as throwing it away.
+bc_the_ranks_were_shorter_before_anybody_drew = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_sickness_in_his_own_camp_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing the difference between a rank that is tired and a
+		# rank that is finished is the whole of the trade at this hour.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_ranks_were_shorter_before_anybody_drew"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_ranks_were_shorter_before_anybody_drew_toast
+			desc = bc_the_ranks_were_shorter_before_anybody_drew_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
