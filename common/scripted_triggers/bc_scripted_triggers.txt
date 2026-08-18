@@ -5638,3 +5638,74 @@ bc_there_is_nothing_standing_on_this_ground_at_all_trigger = {
 		}
 	}
 }
+
+# BATCH 149 - HOW MANY MEN EACH OF THEM COULD PUT IN A FIELD, WHICH IS NOT HOW
+# MANY ARE IN THIS ONE.
+#
+# `max_military_strength`, `current_military_strength`,
+# `current_raised_military_strength` and `is_commanding_army` all returned zero
+# across the whole mod. This is a battle mod. It has read rank, renown, seats,
+# provinces, contracts and the ground itself, and it had never once read the
+# plainest military number the engine keeps about a man.
+#
+# BOTH FORMS ARE IN THE TREE ALREADY. AGOT writes `current_military_strength >
+# scope:attacker.eighty_percent_of_current_military_strength` at
+# `common/casus_belli_types/09_mpo_wars.txt:571` and again at `:1799`, and
+# `scope:actor.current_military_strength < scope:recipient.
+# military_strength_75_percent_value` at `common/character_interactions/
+# 00_agot_hostile_interactions.txt:195`; the character-to-character comparison
+# used by the second gate is AGOT's at `common/character_interactions/
+# 00_agot_first_ranger_interactions.txt:279` and `:283`. The script value the
+# first gate leans on is defined in AGOT's own file at
+# `common/script_values/00_interaction_values.txt:852` as current strength
+# multiplied by eight tenths, and it evaluates on whatever scope reads it.
+# Vanilla reads `max_military_strength` off another character at
+# `common/character_interactions/00_alliance.txt:2008`.
+#
+# THE FIRST IS ABOUT MOBILISATION AND THE SECOND IS ABOUT CAPACITY, AND THOSE
+# ARE OPPOSITE ENDS OF THE SAME SENTENCE. What a man COULD raise is a fact about
+# his lands. What he HAS raised is a fact about his decisions this season. A
+# great power with a tenth of itself in the field and a small one with all of
+# itself in the field are the two men these gates find, and neither number tells
+# you the other.
+#
+# NO NEGATION, AND THE REASON IS THE USUAL ONE. The two gates read two different
+# facts about two different men - the first reads the side's commander, the
+# second reads the scoped man against that commander - so neither can be a
+# subset of the other, and the pools roll separately in any case.
+#
+# THE SECOND IS KNIGHT-ONLY BY CONSTRUCTION, WHICH IS BATCH 141'S LESSON AGAIN.
+# A commander scoped into his own template IS `scope:combat_side.side_commander`,
+# and no man is larger than himself, so on the commander pool this gate would be
+# a row that never fires. It is given to the knights, where it means something
+# quite sharp: the man taking the orders out here could, if it came to it, put
+# more men on a field than the man giving them.
+#
+# GUARDS. `side_commander` is optional and both gates name it, so both carry the
+# `exists` as a sibling and repeat it inside the `trigger_if` limit. The second
+# gate's read is the RIGHT-HAND SIDE of a comparison, which is still a read.
+#
+# RARITY. The first wants a man who has called out at least four fifths of
+# everything available to him, which is not what most lords do in most wars -
+# levies left unraised, vassals not summoned and garrisons kept back are the
+# normal condition - and then wants him leading and losing. The second wants a
+# knight whose own lands outweigh his commander's, which happens when a great
+# man rides under a marshal, a regent or a kinsman, and is uncommon precisely
+# because men of that size usually insist on the command.
+bc_everything_he_could_raise_is_already_on_this_field_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			current_raised_military_strength >= eighty_percent_of_current_military_strength
+		}
+	}
+}
+
+bc_he_could_put_more_men_in_a_field_than_the_man_commanding_him_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		max_military_strength > scope:combat_side.side_commander.max_military_strength
+	}
+}
