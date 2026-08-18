@@ -10024,3 +10024,85 @@ bc_one_house_against_the_whole_gathering_trigger = {
 		}
 	}
 }
+
+
+# BATCH 211 - HOW MANY WAYS THERE ARE INTO THIS PLACE.
+#
+# CENSUS. `any_neighboring_province` returns zero across the whole mod, and so
+# do "neighboring", "neighbouring", "crossroads" and `border_province`. Two
+# hundred and ten batches have asked what the ground under the battle IS -
+# which of the six terrain bands, whether a river runs across it, whether the
+# sea is at one edge, what is built on it, who holds it, how firmly, whether it
+# has been taken or stripped, what else is standing on it - and not one of them
+# has asked what it is CONNECTED to. Every ground row so far treats the
+# province as an island with properties. None of them has looked at the roads.
+#
+# THE FILTER IS VANILLA'S OWN AND IT IS LOAD-BEARING. Both gates count
+# neighbours that satisfy `exists = county`, which is exactly how vanilla
+# writes this iterator: `any_neighboring_province = { this = root  exists =
+# county }` at `common/activities/activity_types/hike.txt:74`, and
+# `any_neighboring_province = { exists = county }` at
+# `events/activities/pilgrimage_activity/pilgrimage_events_seasia.txt:40`,
+# `:219` and `:460`. AGOT ships the same test at
+# `events/dlc/ep3/ep3_laamps_provisions.txt:1068` and nests it one deeper at
+# `:1072`. The filter is not decoration: it throws away sea and impassable
+# neighbours, which are the two kinds of neighbour whose presence in the list
+# this mod cannot verify without a game running, and leaves a count of SETTLED
+# country next door, which is the fact both moments are actually about.
+#
+# THE `count` FILTER IS THE MOD'S OWN STANDING IDIOM, not something borrowed
+# for this batch: batch 143 writes `any_held_title = { count >= 2 ... }` at
+# :5264 and batch 136 writes `any_war_ally = { count >= 1 }` at :4786. No live
+# script in either tree pairs `count` with THIS iterator; the pairing is
+# generic list-iterator syntax and the header says so rather than implying a
+# precedent that is not there.
+#
+# THIS IS NOT ANY OF THE GROUND ROWS. Terrain sits in the six closed bands in
+# bc_ground_triggers.txt; the river is at :1153 and the coast at :1189; the
+# holding type, the special building and the empty slot are batches 151 and
+# 153; the holder is at :1068 and the controller at :2145; the writ is batch
+# 159 at :6411. Every one of those is a fact about this province alone. A rich
+# well-administered county can sit at the end of a single track and a poor one
+# can have five roads through it, and nothing already shipped can tell the two
+# apart.
+#
+# DISJOINT BY CONSTRUCTION. Five or more settled neighbours against one or
+# fewer. Three counties of daylight between the thresholds and no province on
+# any map can answer yes to both.
+#
+# THE GUARD IS THE STANDING ONE, copied from bc_field_is_riverside_trigger at
+# :1153: the battle's location is optional, so the `exists` sits as a sibling
+# and the province is only entered inside a `trigger_if` that repeats it.
+#
+# RARITY. Both gates want a tail of the distribution. Five settled neighbours
+# is a hub - the sort of place roads were built to meet at, and the sort of
+# place two armies find each other by accident. One or fewer is the far end of
+# a peninsula, an island, or a pocket walled in by mountains and water, and it
+# is a place an army has to have chosen to be. The wide middle of the map,
+# where a province has two, three or four settled neighbours, is the great
+# majority of it and neither gate will look at it.
+bc_this_field_is_a_crossroads_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			any_neighboring_province = {
+				count >= 5
+				exists = county
+			}
+		}
+	}
+}
+
+bc_there_is_one_way_out_of_here_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			any_neighboring_province = {
+				count <= 1
+				exists = county
+			}
+		}
+	}
+}
