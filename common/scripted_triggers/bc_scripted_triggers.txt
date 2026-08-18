@@ -4840,3 +4840,77 @@ bc_he_is_owed_things_nobody_is_fighting_for_trigger = {
 		count >= 3
 	}
 }
+
+# BATCH 138 - WHETHER THIS PARTICULAR FIELD ALREADY BELONGED TO SOMEBODY.
+#
+# `is_holy_site`, `is_holy_site_of` and `has_holy_site_parameter` all returned
+# zero across the whole mod. The ground triggers have asked what the field is
+# made of since plan 1 - hills, bog, forest, the six bands - and never once asked
+# what it MEANS. In this setting that is a real omission: men fight on ground
+# that other men have walked to on purpose, and the difference between a hillside
+# and a hillside somebody's grandmother was buried under is not a terrain type.
+#
+# THE PAIR IS DISJOINT BY CONSTRUCTION AND THE NEGATION IS LOAD-BEARING. Both
+# gates require the field to be a holy site. The first then requires that it is
+# NOT holy to the man leading this side, and the second requires that it is. Read
+# the first one's `NOT` before deleting it: without it the second gate is a
+# strict subset of the first, which is precisely the collision batch 72 shipped
+# by accident and the reason this file checks for it now.
+#
+# THE FAITH IS READ OFF THE SIDE'S COMMANDER, NOT OFF `root`. That is batch 127's
+# lesson and batch 131's preferred fix - `root` is not guaranteed inside a
+# scripted trigger, so the man whose faith matters is named through
+# `scope:combat_side` and the gates work identically whichever file calls them.
+# It also makes the pair mean something slightly better than "his" faith would:
+# what is being asked is whether the army standing on this ground has any
+# business being here, and an army's business is its commander's.
+#
+# `is_holy_site_of` IS A BARONY TRIGGER AND `combat.location` IS A PROVINCE, SO
+# THE `barony` WALK IS REQUIRED. `barony` is documented as province-to-title and
+# every province in the game has one, so it is not an optional link.
+#
+# `combat.location` IS READ WITHOUT A GUARD, WHICH MATCHES EVERY SHIPPED GROUND
+# GATE IN THIS FILE. A combat always has a location; the terrain pair above has
+# read it bare since plan 1 and it was proven live in probe 4. `side_commander`
+# is a different matter - it is genuinely optional and both gates guard it.
+#
+# THIS IS NOT THE TERRAIN ROWS OR THE BANDS. Those are about footing and what it
+# costs to move. Holiness is not a property of the dirt, it is a property of what
+# people have decided about the dirt, and the two are completely uncorrelated - a
+# holy site can sit on any of the six bands, and the overwhelming majority of
+# every band is not one.
+#
+# RARITY. Holy sites are a fixed and small list per faith, placed by hand on a
+# map of thousands of baronies. A battle landing on one is uncommon, and a battle
+# landing on one that belongs to the faith of the man leading the side is rarer
+# still.
+bc_this_ground_is_holy_to_somebody_else_trigger = {
+	exists = scope:combat_side.side_commander
+	scope:combat_side.combat.location = {
+		barony = {
+			is_holy_site = yes
+		}
+	}
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		NOT = {
+			scope:combat_side.combat.location = {
+				barony = {
+					is_holy_site_of = scope:combat_side.side_commander.faith
+				}
+			}
+		}
+	}
+}
+
+bc_this_ground_is_holy_to_his_own_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.combat.location = {
+			barony = {
+				is_holy_site_of = scope:combat_side.side_commander.faith
+			}
+		}
+	}
+}
