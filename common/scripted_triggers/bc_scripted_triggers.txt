@@ -3171,3 +3171,62 @@ bc_one_in_this_line_used_to_arrive_from_above_trigger = {
 	}
 	NOT = { bc_he_used_to_arrive_from_above_trigger = yes }
 }
+
+
+# --- the men who are standing here as terms ----------------------------------
+#
+# THE MOD HAS NEVER READ THE HOSTAGE SYSTEM. `is_hostage`, `is_hostage_of` and
+# `is_hostage_from` were all at zero occurrences here, and AGOT uses the system -
+# it appears in its activities, its interactions and its casus belli files - so
+# these are not gates on an empty table.
+#
+# THE THREE TRIGGERS ARE NOT INTERCHANGEABLE AND THE DUMP IS EXPLICIT ABOUT IT.
+# `is_hostage_of = X` asks whether X is the WARDEN, the man currently holding
+# him. `is_hostage_from = X` asks whether X is the ORIGINAL LIEGE, the man who
+# handed him over. `is_hostage` alone asks neither. The two gates below use one
+# each of the first two and neither uses the third, because a bare `is_hostage`
+# gate would be a superset of both and could not be told apart from them.
+#
+# THE FIRST IS DELIBERATELY THE ORIGINAL LIEGE AND NOT THE WARDEN. A hostage
+# lives in his warden's court, so the army he is standing in is almost always
+# the warden's; a gate asking whether the warden commands the far side would
+# describe a situation the game very rarely produces. Asking whether the man who
+# GAVE HIM UP commands the far side describes the situation it produces all the
+# time, which is the two of them going to war over precisely the thing he was
+# handed across to prevent.
+#
+# THE SECOND IS THE SAME ARRANGEMENT FROM THE OTHER END, and it is the warden's
+# end, so it uses `is_hostage_of`. It asks whether one of the men armed and
+# standing in root's own line is a boy root is holding to somebody else's good
+# behaviour.
+#
+# THE FIRST TAKES THE STANDING GUARD on `enemy_side.side_commander`, which is an
+# optional link. The second is an iteration over `any_side_knight`, which is not
+# a link and needs no guard, and uses `root` inside the entered scope for the
+# reason recorded on bc_side_has_kin_knight_trigger.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction. Both can be true of one man on one field - being held is no
+# bar to holding somebody - and when they are, being the terms yourself is the
+# larger fact and wins the tie.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. Hostages are handed over one at a time and
+# by name, both gates then require that particular man to be armed and on this
+# particular field, and the first additionally requires the other party to the
+# arrangement to be running the army opposite him.
+bc_the_man_who_gave_him_up_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		is_hostage_from = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_one_he_was_given_stands_in_this_line_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			is_hostage_of = root
+		}
+	}
+	NOT = { bc_the_man_who_gave_him_up_commands_the_far_side_trigger = yes }
+}

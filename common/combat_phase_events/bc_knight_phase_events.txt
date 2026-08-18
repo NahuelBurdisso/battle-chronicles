@@ -8289,3 +8289,74 @@ bc_knight_a_horse_is_a_very_slow_way_to_arrive = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is standing in a losing line in a war between the man who handed him over
+# and the man who took him, and the first of those two is running the army in
+# front of him. `bloodied` is the KIND for a moment where the army takes the
+# damage rather than the commander taking a decision, and bc_bloodied is the
+# right consequence: nothing here is clever and nothing here is a rally.
+bc_knight_he_was_a_clause_in_something_before_he_was_a_man = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_who_gave_him_up_commands_the_far_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Going forward into a line you have every reason to walk away
+		# from, because of an argument you are having with somebody who
+		# cannot hear it, is done with the body.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_was_a_clause_in_something_before_he_was_a_man"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_was_a_clause_in_something_before_he_was_a_man_toast
+				desc = bc_knight_he_was_a_clause_in_something_before_he_was_a_man_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
