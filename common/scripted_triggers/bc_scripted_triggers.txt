@@ -10106,3 +10106,101 @@ bc_there_is_one_way_out_of_here_trigger = {
 		}
 	}
 }
+
+
+# BATCH 212 - WHAT THE WAR IS ACTUALLY FOR.
+#
+# CENSUS. `using_cb` returns zero across the whole mod. `casus_belli` appears
+# seventeen times and every one of them is a citation inside a comment
+# pointing at a vanilla or AGOT file, never a read. "slave", "slavery" and
+# "free_slaves" are at zero in script and in the localization both. "pirate"
+# appears three times, all of them in headers explaining which focus and which
+# tier a batch deliberately left alone.
+#
+# THE MOD HAS READ THE WAR SIX WAYS AND NEVER READ ITS SUBJECT. How long it
+# has run (`war_days >= 730` at :201), whether it is a rebellion (:968), who
+# is leading it (:995), which side of it a man stands on (:2569 and :2577),
+# whether he has a second one waiting at home (:8484) and whose ledger has
+# paid for it (:9275). Every one of those is a fact about the war's shape or
+# its arithmetic. None of them asks the first question anybody asks about a
+# war, which is what it is FOR.
+#
+# PRECEDENT. `using_cb` is a war-scope trigger taking a casus belli key -
+# "is the scope war using the specified CB?", Supported Scopes: war. Vanilla
+# stacks five of them inside an `OR` on a war scope at
+# `common/character_interactions/00_alliance.txt:893-899`. AGOT writes the
+# same construction in a file of its own authorship and at greater length: a
+# `NOR` of fourteen on `scope:war` at
+# `common/on_action/agot_on_actions/agot_esr_on_actions.txt:4529-4545`, and
+# two more `OR` blocks at
+# `common/on_action/agot_on_actions/agot_war_on_actions.txt:583-586` and
+# `:603-604`. AGOT also pairs it with an iterator at
+# `events/agot_events/agot_adventurers_events.txt:13`.
+#
+# THE KEYS ARE AGOT'S OWN AND EVERY ONE IS A LIVE DEFINITION.
+# `common/casus_belli_types/00_agot_pirate_wars.txt` defines
+# `destroy_pirates_cb` at :2, `pirate_adventurer_conquest` at :293,
+# `invade_pirate_haven_cb` at :628, `pirate_domination_cb` at :909 and
+# `establish_pirate_haven_cb` at :1126. `00_agot_slavery_wars.txt` in the same
+# folder defines `free_slaves_cb` at :325 and `slavery_revolt` at :604.
+#
+# THE WALK IS THE MOD'S ESTABLISHED ONE. `scope:combat_side.combat.combat_war`
+# is how every war-scope gate in this file reaches the war, first at :198 and
+# most recently at :9265, and `combat_war` is documented as Input Scopes:
+# combat, Output Scopes: war.
+#
+# THIS IS NOT THE REBELLION GATE AT :964, WHICH ASKS `is_civil_war`. That gate
+# asks whether the quarrel is inside one realm; these ask what the quarrel is
+# about, and the two answers are independent. The one place they touch is
+# worth stating plainly: `slavery_revolt` carries `group = civil_war` in its
+# own definition, so a war under that key is a rebellion as well, and the
+# second gate will overlap the shipped one whenever that key is the reason it
+# fired. It is not a subset of it, because `free_slaves_cb` carries
+# `group = slavery` and is declared by an outside ruler - AGOT requires the
+# attacker to hold `slavery_disallowed_law` or be a landless adventurer and
+# the defender to be independent under `slavery_allowed_law` - which is the
+# opposite of a war inside a realm. None of the five pirate keys is in the
+# civil war group either.
+#
+# DISJOINT BY CONSTRUCTION. A war carries exactly one casus belli, and no key
+# appears in both lists, so no battle on any map can answer yes to both.
+#
+# THE GUARD IS THE STANDING ONE, copied from bc_war_is_a_rebellion_trigger at
+# :964: a combat can exist without a war behind it, so the `exists` sits as a
+# sibling and the war is only entered inside a `trigger_if` that repeats it.
+#
+# RARITY. Both gates want a war that most campaigns never declare. The pirate
+# keys need somebody who has made a living off the water to be either the
+# hunted or the hunter, and the slavery keys need a ruler whose own law
+# forbids the trade to go and break somebody else's, or the people at the
+# bottom of that trade to stand up. The overwhelming majority of wars on this
+# map are fought over a seat, a border or a faith, and neither gate will look
+# at any of them.
+bc_this_war_is_over_the_sea_lanes_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			OR = {
+				using_cb = destroy_pirates_cb
+				using_cb = pirate_adventurer_conquest
+				using_cb = invade_pirate_haven_cb
+				using_cb = pirate_domination_cb
+				using_cb = establish_pirate_haven_cb
+			}
+		}
+	}
+}
+
+bc_this_war_is_about_who_owns_whom_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			OR = {
+				using_cb = free_slaves_cb
+				using_cb = slavery_revolt
+			}
+		}
+	}
+}
