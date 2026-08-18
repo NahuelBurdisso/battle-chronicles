@@ -8936,3 +8936,90 @@ bc_knight_their_quarrel_is_with_somebody_else = {
 		}
 	}
 }
+
+
+# --- three lines of a letter, eventually --------------------------------------
+#
+# GATE. bc_there_is_a_chain_and_a_tower_behind_him_trigger, read on the knight
+# himself. He keeps a maester, which means he is a landed man who is out here
+# doing this in person anyway. He is winning.
+#
+# THIS IS NOT THE STATION AXIS. bc_the_crown_on_the_field and
+# bc_nothing_but_the_horse read title tier and `is_landed` on a COMMANDER, and
+# no knight template in the mod has ever read tenure at all. This one does not
+# read it either: it reads a household expense, which happens to imply tenure
+# the way a stable implies a horse.
+#
+# KIND. measured/up. Nothing is being done to his army; he is winning and
+# noticing something about the shape of the record, which is exactly the read
+# the verb table is built to leave alone.
+#
+# WHAT THIS MAY NOT DO. It may not have him kill a named man, may not have him
+# reach any commander, may not put the maester on the field or in his thoughts
+# as a voice, and may not end the day.
+#
+# SKILL. stewardship, because a man who runs a holding and rides in the line is
+# the man who would think about the ledger in the middle of the afternoon.
+bc_knight_three_lines_of_a_letter_eventually = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_there_is_a_chain_and_a_tower_behind_him_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The habit of thinking about how a thing will be written down
+		# afterwards belongs to men who have spent years signing what
+		# somebody else wrote.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_three_lines_of_a_letter_eventually"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_three_lines_of_a_letter_eventually_toast
+				desc = bc_knight_three_lines_of_a_letter_eventually_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

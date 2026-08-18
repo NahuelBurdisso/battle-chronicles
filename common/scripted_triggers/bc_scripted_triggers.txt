@@ -3690,3 +3690,46 @@ bc_the_name_opposite_is_half_of_an_old_argument_trigger = {
 	}
 	NOT = { bc_his_name_is_half_of_an_old_argument_trigger = yes }
 }
+
+
+# --- the men on his payroll who are not here ----------------------------------
+#
+# THE MOD HAS NEVER READ A COURT. It reads what a man holds, who he is related
+# to, what he was taught, what he believes, what he has vowed and what he is
+# owed, and `employs_court_position` was at zero occurrences across the whole
+# mod. It asks something none of those ask: what work he has decided is worth
+# paying somebody else to do all year.
+#
+# BOTH POSITIONS ARE AGOT'S OWN, not vanilla's, and both keys were read out of
+# AGOT's file rather than guessed - `master_at_arms_court_position`
+# (00_agot_court_positions.txt:2965) and `maester_court_position` (:31).
+# The engine trigger takes the position type key directly; AGOT itself spells it
+# `employs_court_position = harbormaster_court_position` at
+# activities/activity_types/agot_sailing.txt:177, and vanilla does the same in
+# hunt.txt and chariot_race.txt.
+#
+# NO GUARD. `employs_court_position` is a character-scoped test in the 1.19.0.6
+# dump - "is the scoped character employing a target court position type?" - and
+# not a link read. There is nothing here to be null.
+#
+# NO NEGATION, AND THAT IS A DECISION. These two are not opposite halves of one
+# question; they are two different facts, and a lord can perfectly well be
+# paying for both. What keeps them apart is the engine: the first is a commander
+# template and the second is a knight template, the side commander is not in the
+# knight list, and the two pools roll separately. A `NOT` between them would
+# guard against a collision the game cannot produce. Batch 113 made the same
+# call for the same reason.
+#
+# RARITY IS DOUBLE ON BOTH. Each requires a landed ruler who has actually filled
+# that seat, and each position carries a cultural innovation on top - AGOT hides
+# the master-at-arms behind `innovation_agot_sword_bound` and the maester behind
+# `innovation_maesters` - and then the man has to be leading or fighting in a
+# battle. The second is the rarer of the two by a distance, because it asks for
+# a man who keeps a maester and is still out here in a melee himself.
+bc_he_keeps_a_man_paid_to_be_better_at_this_trigger = {
+	employs_court_position = master_at_arms_court_position
+}
+
+bc_there_is_a_chain_and_a_tower_behind_him_trigger = {
+	employs_court_position = maester_court_position
+}
