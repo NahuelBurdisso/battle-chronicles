@@ -4325,3 +4325,71 @@
 
  bc_knight_he_was_not_asked_about_any_of_it_toast:0 "He Has Kept Every Promise He Ever Made And This Is Where It Put Him"
  bc_knight_he_was_not_asked_about_any_of_it_toast_desc:0 "Not one of the reasons this field exists is a reason of his. He did not want it, was not consulted about it, does not stand to gain a foot of ground or a copper from it going well, and is going to spend the rest of his life explaining, to men who will not believe him, that he had no view on the matter whatsoever. He is not angry about that. Anger would require somebody to be angry at, and the only candidate is a man he is required to obey and has obeyed correctly every day of his adult life, which is precisely why he is here. So he narrows what he is responsible for until it is a size he can actually be responsible for. There is a man on his right. There is a man on his left. There is a stretch of churned grass in front of the three of them that is going to be given up eventually and is not going to be given up in the next quarter of an hour, and holding that — not the battle, not the war, not whatever is going to be decided about all of this in some hall at the end of it — is a job. He takes it. The three of them do not move, and the rank re-forms on them twice, and neither time does anybody ask him why.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 105 - who made whom -----------------------------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE OTHER MAN, give his age, house, title or
+# nickname, or say how long ago any of it happened. The engine holds one
+# relation between two characters. Everything else about them is the mod
+# inventing a person, and the moment is smaller every time it does.
+#
+# NEITHER MAY USE THE WORDS "squire", "knighted", "dubbed", "master" or
+# "teacher", and neither may stage the day it happened - no yard, no wooden
+# sword, no vigil, no shoulder, no oath spoken at any age. What passed between
+# them is only ever present here as something being performed.
+#
+# NEITHER MAY HAVE THEM SEE EACH OTHER, call out, salute, or be described as
+# aware of each other's exact position. Both moments are about recognising work,
+# which does not require a face.
+#
+# THE FIRST MAY NOT BE PROUD IN WORDS, may not congratulate anybody, may not
+# think about his own reputation, and may not have the man he taught be told
+# about it, then or ever. It may not have him give the order that produces the
+# thing he is watching — the whole weight of it is that he did not.
+#
+# THE SECOND MAY NOT DESPAIR, may not decide anything about the man opposite,
+# may not be angry at him, and may not be shown as outmatched in strength,
+# youth, numbers or luck. He is losing to his own instruction and nothing else.
+# It may not have him invent something new that works, may not have anybody
+# help him, and may not let him stop.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why".
+ bc_something_he_taught_comes_back_to_him_toast:0 "He Recognises The Handwriting Before He Recognises The Man"
+ bc_something_he_taught_comes_back_to_him_toast_desc:0 "A section of his line does a thing he did not ask for. It is nothing much. A push that could have gone in fast and untidy goes in slow instead, and closes up as it goes, and takes ground it can still be standing on in an hour, and the men doing it are dressing off somebody without appearing to look at him. He watches it the way you watch a stranger sign a name you know. There is a way of doing that which is not the way anybody teaches it now, and which nobody would ever call anything, and which is only distinguishable from the ordinary way if you happen to be one of about four people alive who ever thought about it. He does not send anyone. He does not adjust the thing, and he catches himself opening his mouth to and closing it again, because whatever is going on down there is finished and correct and has stopped needing him some considerable time ago. The wing goes forward at the pace he would have chosen. It is the strangest quarter-hour of his afternoon and by far the best one.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_there_is_nothing_he_can_do_that_is_new_toast:0 "Every Answer He Has Was Issued To Him By The Man He Is Trying It On"
+ bc_knight_there_is_nothing_he_can_do_that_is_new_toast_desc:0 "The first time it happens he assumes it is luck. The second time he assumes the far side has good sergeants. By the fourth he has stopped assuming anything, because the pattern is too tidy to be an accident: whatever he sets up gets met, not violently and not cleverly, but early, in the flat unhurried way of somebody who was already standing where the thing was going to arrive. So he goes through what he has. He is not a poor soldier and there is a great deal of it, and he works through it in the order it was given to him, which is a horrible thing to notice while you are doing it. Each one is answered before it is finished. The line behind him gives, and gives again, and the ground he is losing is being taken off him at a rate somebody worked out in advance. He does not stop. There is nowhere in the whole of him where a thing lives that came from anywhere else, and by the time the light starts going he has understood that he is not being beaten by an army at all.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

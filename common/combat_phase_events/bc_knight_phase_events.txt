@@ -7999,3 +7999,76 @@ bc_knight_he_was_not_asked_about_any_of_it = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man commanding the far side is the man who taught him how to do this, and
+# this side is losing. `adapted` is the KIND for reading the field and changing
+# what you are doing about it, and `down` is that the changing is not working:
+# every answer he has was issued to him by the person he is trying it on, so
+# each one gets met before it finishes arriving. The seam hands out nothing for
+# `adapted`, which is right - none of this alters how the line performs, only
+# how much of himself he has left.
+bc_knight_there_is_nothing_he_can_do_that_is_new = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_who_made_him_commands_the_far_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Running through everything you know, in order, while it is all
+		# being answered, requires that there be a good deal of it to run
+		# through in the first place.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_there_is_nothing_he_can_do_that_is_new"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_there_is_nothing_he_can_do_that_is_new_toast
+				desc = bc_knight_there_is_nothing_he_can_do_that_is_new_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -2925,3 +2925,63 @@ bc_the_man_above_him_broke_first_trigger = {
 		liege = { is_at_war_with_liege = yes }
 	}
 }
+
+
+# --- who made whom -----------------------------------------------------------
+#
+# THE MOD READS THE TRAIT AND HAS NEVER READ THE RELATION. `has_trait = squire`
+# gates bc_knight_the_squires_best_day and bc_knight_what_he_agreed_to, and both
+# of them know that a man is somebody's squire without knowing whose. AGOT keeps
+# the answer in its own scripted relation, `agot_squire` / `agot_knight`, set in
+# 00_agot_knighthood_effects.txt and 00_agot_character_history_effects.txt when
+# a boy is placed with a knight, and it was at zero occurrences in this mod. It
+# is the only record in either game of the one relationship in this setting that
+# is entirely a matter of craft: not blood, not law, not affection, just a man
+# who knew how to do this and a man he taught it to.
+#
+# THE DIRECTION IS FIXED BY AGOT AND IS NOT THE OBVIOUS ONE. The squire is the
+# character who takes `set_relation_agot_knight = $KNIGHT$`, so on any root,
+# `has_relation_agot_knight = X` reads "X is the man who made me", and the
+# reverse read is done by pointing that same trigger at root from inside
+# somebody else's scope. Both gates below use it in one of those two ways and
+# neither uses `has_relation_agot_squire`.
+#
+# THE FIRST GATE TAKES THE STANDING GUARD on `enemy_side.side_commander`, which
+# is an optional chained link. The second is an iteration over
+# `any_side_knight`, which is not a link and needs none, and it uses `root`
+# rather than `prev` inside the entered scope for the reason recorded on
+# bc_side_has_kin_knight_trigger.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction. One man can perfectly well have made somebody standing in his
+# own line while the man who made HIM commands the far side - that is a
+# three-generation trade working exactly as it is supposed to - and the first
+# wins that tie because being on the receiving end of it is the larger fact.
+#
+# NEITHER IS bc_the_man_who_raised_him_commands_the_far_side_trigger, WHICH IS
+# THE NEAR MISS WORTH NAMING, and the two do overlap in the world: AGOT sets
+# `set_relation_guardian` alongside this one when the boy is under sixteen. They
+# are still different questions. A guardian is responsible for a child, answers
+# for him, feeds him and is finished when he comes of age. This is a man who
+# taught another man a specific physical trade and can watch him practise it
+# from the far side of a field and know which parts of it are his.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. The relation exists only where AGOT wrote
+# a knighting or a squireship, and both gates then require the other end of it
+# to be standing on this particular field this particular afternoon.
+bc_the_man_who_made_him_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_relation_agot_knight = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_a_man_he_made_is_in_this_line_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			has_relation_agot_knight = root
+		}
+	}
+	NOT = { bc_the_man_who_made_him_commands_the_far_side_trigger = yes }
+}
