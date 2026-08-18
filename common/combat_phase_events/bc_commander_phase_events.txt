@@ -9976,3 +9976,117 @@ bc_the_season_was_his_to_choose = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-EIGHT. What he is carrying that nobody here can see.
+#
+# NINETY-SEVEN BATCHES AND THE MOD HAS NEVER OPENED A SECRET. It reads what a
+# man took openly, what somebody holds over him, what people think of him, what
+# he is related to and married into and was raised by - every one of them a
+# fact somebody else could tell you. The engine keeps a list of the facts
+# nobody can, and `any_secret` had never been read.
+#
+# TWO TEMPLATES, ONE PER POOL, AND THE GATES CARRY EACH OTHER'S NEGATION. One
+# man's secret is out and one man's is not, and the difference between those
+# two afternoons is the batch.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# It goes where he goes. Nobody alive knows it, and the side is losing.
+#
+# `ordered`/`down` AND NOTHING HANDED OUT, which is the cell this mod keeps for
+# a line that holds its shape while going backwards. The shape is real - he is
+# not coming apart, he is withdrawing properly - and the reason it is worth a
+# template is that the thing occupying the back of his head has no tactical
+# content whatsoever. There is nothing for the verb table to say about a man
+# who is thinking about something the field cannot see, and handing him an army
+# modifier for it would be the mod inventing a consequence.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads two iterations and
+# the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THE GATE IS THE ARGUMENT AND IT IS NOT WHAT IT LOOKS LIKE. This is not a man
+# afraid of being found out. Nobody can find him out; the list of people who
+# could say it aloud is empty and the afternoon is doing its best to keep it
+# that way. What is actually in the moment is the arithmetic that arrives with
+# that: if this ends the way it is currently going, the only copy goes into the
+# ground with him, and he cannot decide, while a day like this one is going on
+# around him, whether that is the last piece of luck he owns or the worst
+# thing about it.
+#
+# THIS IS NOT bc_his_lord_holds_a_hook_trigger'S MOMENT. That is a man being
+# leaned on by somebody standing behind him in the same war. Nobody is leaning
+# on this one. A hook is a transaction and this is a condition, and the two
+# templates would be about different things even if the same fact underlay both.
+#
+# THIS IS NOT bc_a_room_somewhere_in_tonight EITHER, which is also `ordered`/
+# `down` and also about what tonight will be. That man is withdrawing carefully
+# because of a person he will have to sit down in front of. This one has
+# nobody to sit down in front of, and that is precisely the problem.
+#
+# THE DESC MAY NOT SAY WHAT THE SECRET IS, may not hint at its kind, may not
+# name or picture anybody connected to it, may not have him nearly say it, may
+# not have anybody ask him anything, and may not resolve it in either
+# direction. See the loc header.
+# ---------------------------------------------------------------------------
+bc_it_goes_where_he_goes = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_nobody_alive_knows_it_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Keeping a thing to yourself for years is a skill, and the men who
+		# have it are the men who never had to be told it was one.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_it_goes_where_he_goes"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_it_goes_where_he_goes_toast
+			desc = bc_it_goes_where_he_goes_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

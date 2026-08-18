@@ -7390,3 +7390,109 @@ bc_knight_he_cannot_be_the_one_who_left = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He would rather not be remembered. Somebody knows, and the side is winning.
+#
+# `measured`/`up` AND NOTHING HANDED OUT. He is doing the work properly and the
+# army is being served exactly as well as it would be by a man with nothing to
+# hide, which is the point: nothing about the line changes. What changes is
+# where the credit lands, and there is no army modifier for that.
+#
+# THE MOMENTUM RUNG IS STILL GRANTED, GUARDED, INSIDE THE COMMANDER BLOCK. The
+# rung is a fact about the side and not a compliment to anybody. The guard sits
+# inside the block because bc_has_momentum_trigger reads its own root and this
+# is_valid is rooted on the knight; bc_knight_for_a_friend's comment makes the
+# same point.
+#
+# FIFTY PRESTIGE, AND THE MOD IS AWARE OF THE JOKE. He is being paid in the one
+# currency he is trying not to accumulate. That is not an error in the seam -
+# prestige is what a good afternoon does to a man whether he wants it or not,
+# and wanting it not to is the entire moment.
+#
+# THE ARGUMENT IS EXACTLY INVERSE TO bc_knight_it_will_be_his_name AND THAT IS
+# DELIBERATE. That knight does the work well while knowing the credit will go
+# to a man he cannot stand, and the moment is the swallowing. This one does the
+# work well and spends a small part of his attention making sure the credit
+# goes anywhere else at all, because a name that gets written down gets read,
+# and somewhere there is a man who knows the other thing about him. Same cell,
+# opposite direction, and the two gates share nothing.
+#
+# THE KNOWER IS NOT ON THIS FIELD AND THE TEMPLATE MAY NOT PUT HIM ON IT. The
+# gate says only that the list of people who could say it is not empty. Every
+# reading in which the knower is standing nearby, or has sent something, or is
+# about to arrive, is content the engine cannot support.
+#
+# THIS IS NOT bc_knight_the_chain_that_put_him_here, which is a man reading the
+# arrangement that got him into the line. This one is entirely about what
+# happens after the line, in rooms, to a name.
+#
+# THE DESC MAY NOT SAY WHAT THE SECRET IS OR WHO KNOWS IT, may not have him
+# picture the knower, may not have anybody notice him being careful, may not
+# have him refuse an order or do the work badly, and may not have the day
+# threaten to expose anything. Nothing is closing in. That is what makes it
+# bearable and it is also what makes it permanent. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_would_rather_not_be_remembered = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_somebody_out_there_knows_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing which parts of an afternoon get written down, and which
+		# do not, is the same skill that let him keep the thing this long.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_would_rather_not_be_remembered"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_would_rather_not_be_remembered_toast
+				desc = bc_knight_he_would_rather_not_be_remembered_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -2558,3 +2558,58 @@ bc_the_war_came_to_him_trigger = {
 		is_defender_in_war = scope:combat_side.combat.combat_war
 	}
 }
+
+
+# --- what he is carrying that nobody here can see ---------------------------
+#
+# NINETY-SEVEN BATCHES AND THE MOD HAS NEVER OPENED A SECRET. It reads what a
+# man has taken openly (tyranny), what somebody has on him (has_hook), what
+# people think of him (opinion), what he is related to and married into and
+# raised by. Every one of those is a fact somebody else could tell you. The
+# engine also keeps a list of the facts nobody can, and `any_secret` and
+# `any_known_secret` have both returned zero over the whole mod.
+#
+# TWO ITERATIONS, NOT A LINK, SO NO GUARD. `any_secret` is a list on the
+# character and `any_secret_knower` is a list on the secret; the mod's variable
+# guard covers optional LINKS - side_commander, combat.location, house, liege -
+# and iterators are not links. bc_side_has_kin_knight_trigger and
+# bc_he_has_another_war_trigger are unguarded for the same reason.
+#
+# THE SECOND GATE CARRIES THE EXACT NEGATION OF THE FIRST, plus the row that
+# says he has something to be silent about at all. So they are disjoint by
+# construction, and a man with two secrets - one out and one not - answers yes
+# to the first and no to the second, which is the correct answer: once anybody
+# knows anything, the afternoon in the second template is not the one he is
+# having.
+#
+# THIS IS NOT THE HOOK AXIS. bc_his_lord_holds_a_hook_trigger and
+# bc_he_holds_his_lords_hook_trigger are about leverage between two men who are
+# both attached to this battle, and a hook is a thing being USED. These two
+# never look at anybody on the field. The knower may be a septon three kingdoms
+# away who has never once thought about doing anything with it, and that is the
+# whole difference: a hook is a transaction and a secret is a condition.
+#
+# THIS IS NOT bc_his_own_people_have_a_ledger_trigger'S TERRITORY EITHER.
+# Tyranny is the sum of what a man did in the open and was not stopped from
+# doing - it is on the record and the record is the point. A secret is the
+# other pile.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. Most characters in the game carry no
+# secret at all; the ones who do are the ones something happened to.
+#
+# ROOT-AGNOSTIC. Nothing here reads a property only a commander has and nothing
+# walks to the side, so either pool may call either gate.
+bc_somebody_out_there_knows_trigger = {
+	any_secret = {
+		any_secret_knower = { count >= 1 }
+	}
+}
+
+bc_nobody_alive_knows_it_trigger = {
+	any_secret = { count >= 1 }
+	NOT = {
+		any_secret = {
+			any_secret_knower = { count >= 1 }
+		}
+	}
+}

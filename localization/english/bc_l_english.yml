@@ -3886,3 +3886,60 @@
 
  bc_knight_he_cannot_be_the_one_who_left_toast:0 "There Is No Version Of This Where He Is Carried Off It"
  bc_knight_he_cannot_be_the_one_who_left_toast_desc:0 "It is going badly, and there is a shape this could take in which a man is allowed to be swept off the end of it. Most of the men beside him have that shape available. They came because somebody they follow came, and a tide that brings a man to a field can take him off it again, and nobody in any hall says his name twice about it afterwards. That is not available to him. His name is in the quarrel itself, put there in a small careful hand by somebody who has never been within sight of a field like this one, and what is being settled out here is not whether a battle is lost. So the fighting quietly turns into something else in his hands, without him announcing it to anybody: he stops trying to win any of this and starts working out what can still be kept from them before dark. This hedge. This next hour. He is aware it is a poor trade and he makes it, and he is not certain, in the part of his head that is still adding, whether the thing he is out here protecting is the land or only the sentence that gets written about him either way.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-EIGHT. What he is carrying that nobody here can see.
+#
+# NEITHER DESC MAY SAY WHAT THE SECRET IS, hint at its kind, or narrow it. The
+# engine holds a list and a count of knowers, and the mod's own gate cannot
+# tell a murder from a parentage from a faith. Every word that narrows it is
+# invented, and the moment stops working the instant a reader can name it.
+#
+# NEITHER MAY PUT ANYBODY CONNECTED TO IT ON THE PAGE. No knower, no accomplice,
+# no witness, nobody who was there. The second toast especially: the man who
+# knows is not at this battle, has not sent anything, and is not on his way.
+#
+# NEITHER MAY THREATEN TO COME OUT. Nothing is closing in on either of these
+# men this afternoon. A desc that lets the day nearly expose something has
+# written a different template, and a better one for a different mod.
+#
+# NEITHER MAY HAVE HIM NEARLY SAY IT, be asked anything, be looked at oddly, or
+# confess to the reader in the last sentence.
+#
+# THE FIRST MAY NOT BE RELIEVED and may not be frightened either. The list of
+# men who could say it is empty and both of the obvious feelings about that are
+# wrong; what is there is arithmetic he cannot finish. It may not have him
+# decide anything about it, and it may not let him die on the page.
+#
+# THE SECOND MAY NOT HAVE ANYBODY NOTICE what he is doing with the credit, may
+# not have him refuse an order, sandbag the work, or be praised out loud, and
+# may not have him enjoy the winning. He is winning. That is the difficulty.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour".
+ bc_it_goes_where_he_goes_toast:0 "The Only Copy Is Walking Backwards With Him"
+ bc_it_goes_where_he_goes_toast_desc:0 "The line is coming back the way it should, in order, at a pace, and he is doing that part of it correctly with about two thirds of himself. The other third has gone somewhere entirely useless. It has worked out — not decided, worked out, the way a man works out how much daylight is left without looking up — that there is exactly one place the thing he has been carrying since a particular year exists at all, and that place is walking backwards across this field at the moment with everything else. If today finishes the way today is currently arranged, it stops existing. No one is left to say it, no one is left to have to be watched, no one is left who would ever look at him differently. He turns that over and cannot get it to come out as either good or bad. It sits there being the only thought of his all afternoon that the field cannot touch and cannot help with, and the line keeps coming back, and he keeps it in order, and it is not a comfort.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_would_rather_not_be_remembered_toast:0 "He Does It Well And He Does It Quietly"
+ bc_knight_he_would_rather_not_be_remembered_toast_desc:0 "It is going their way and the work he has done is a decent part of why, and he is spending a small steady portion of his attention on making sure that fact settles somewhere else. Not by doing less. He would rather be dead than do less, and the men beside him have never had a reason to wonder about him. He simply lets the man on his right be the one standing forward when the thing gives, and lets the shout that goes up go up with somebody else's name in it, and when a rider looks along the line for who did that he is already turned away and moving. It is not modesty and he has never once been tempted to think of it as modesty. A name that gets written down gets read, and read by people who read a great many of them, and there is a man out there in the world with one other thing he could set beside it. So he wins the afternoon and lets it belong to whoever wants it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
