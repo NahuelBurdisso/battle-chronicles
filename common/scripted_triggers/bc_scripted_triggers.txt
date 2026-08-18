@@ -7457,3 +7457,64 @@ bc_there_is_no_room_in_him_for_another_word_trigger = {
 bc_one_word_covers_the_whole_of_him_trigger = {
 	number_of_personality_traits < personality_trait_minimum
 }
+
+
+# BATCH 176 - HOW MANY OF THESE HE HAS BEEN IN.
+#
+# THE MOD HAS READ A MAN'S YEARS AND HAS NEVER READ HIS WARS. `age` is gated at
+# 21, 45, 55 and 65 across the two event files, `years_as_ruler` carries batch
+# one hundred and fifty-eight's pair at under two and thirty or more, and
+# `participated_wars` was at zero over the whole mod. Years are how long the
+# world has had him. Wars are how many times it has asked him this particular
+# question, and the two numbers come apart constantly: a man can hold a quiet
+# seat for twenty years and be standing in his first one this afternoon, and a
+# man can inherit at forty and be in his fourth inside a decade.
+#
+# THIS IS NOT bc_the_green_boy AND IT IS NOT BATCH 158'S PAIR. The green boy
+# reads `age <= 21` and is about a young man leading. The tenure pair reads
+# `years_as_ruler` and is about how long the seat has been his. Neither of them
+# can tell you whether a man has ever done this before, and that is the only
+# thing either gate below asks.
+#
+# THE CURRENT WAR COUNTS, WHICH IS WHY THE LOW GATE IS `<= 1` AND NOT `= 0`.
+# Vanilla's only use of the key in the whole game is
+# 00_reactive_advice.txt:1030, `participated_wars >= 2`, with the comment "you
+# are starting your 2nd war" written beside it, so the war a man is presently
+# in is included in the count. `= 0` would be unreachable for anybody standing
+# in a battle - a gate that can never fire is worse than no gate - and `<= 1`
+# is the honest way to write "this is the first".
+#
+# BOTH CARRY `is_landed = yes` AND THAT IS DELIBERATE RATHER THAN DECORATIVE.
+# The engine counts wars a character has been in as a participant, and a
+# landless man's count is not a record of what he has done with his life; it is
+# a record of what the engine bothered to write down about him. Requiring land
+# makes the number mean the same thing on both sides of the pair, and the man
+# it then describes - a lord with a war record, or a lord without one - is a
+# man the mod can say something true about.
+#
+# THE `is_landed` IMPLICATION IS NOT A COLLISION, for batch 149's reason
+# restated at 158. `is_landed` is read in the commander pool only, the knight
+# file's mentions of it are header prose about a commander, and the two pools
+# roll separately. The fact read here is a count of wars in any case, not the
+# existence of land.
+#
+# DISJOINT BY CONSTRUCTION. One or fewer against eight or more, on one number
+# about one man, with the whole ordinary middle described by neither.
+#
+# RARITY. The first needs a landed man who has reached a battlefield without
+# ever having been in a war before and is losing when he gets there. The second
+# needs eight wars on one living man, which is a career rather than an
+# accident, on somebody who is riding as a knight under another man's banner
+# rather than commanding.
+#
+# NEITHER TAKES A GUARD. Both rows are bare character-scope reads on a man the
+# caller has already entered.
+bc_he_has_never_had_to_do_this_before_trigger = {
+	is_landed = yes
+	participated_wars <= 1
+}
+
+bc_this_is_the_eighth_time_for_him_trigger = {
+	is_landed = yes
+	participated_wars >= 8
+}

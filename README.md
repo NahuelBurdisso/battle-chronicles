@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 193 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 161 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 194 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 162 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and seventy-five batches, one per row of the table below, none of which needed a
+One hundred and seventy-six batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -760,6 +760,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | which of his five is the best one | A hundred-odd weighting rows in this mod measure a man against an absolute bar - `prowess >= 12`, `martial >= 12` - and two gates read the enemy commander's `martial` against 16 and 8. All of those are thresholds, and the mod had never once asked the other question: which of a man's numbers is his largest. A threshold and a ranking are not subsets of each other in either direction, because a man with diplomacy 8 can have diplomacy as his best skill while a man with diplomacy 16 can have martial 18 and fail the same gate. `highest_skill` excludes prowess and `highest_skill_including_prowess` does not, which is the only difference between them and the one that matters here - vanilla's `steal_herd_outcome_events.txt:295` passes `prowess` to the including form, and AGOT branches five ways on the excluding form at `yearly_events_7.txt:3739-3759` and picks a character's idle portrait animation off it at `b_agot_animations.txt:53`. Ties pass, which the dump states in both entries. The pair is disjoint by construction: the commander's gate carries an explicit `NOT = { highest_skill_including_prowess = prowess }`, so the man whose best thing is that people like him and the man whose best thing is his arm cannot be the same man. | 2 templates, base 50, 80 |
 | what was settled before he was born | Since batch seventy-six the mod has read the bad half of a man's inheritance - `bc_his_body_was_dealt_to_him_trigger` is `num_of_bad_genetic_traits >= 1`, a gate about being written off - and it had never read the good half, or the arrangement that produced either. `num_of_good_genetic_traits >= 2` is the same engine count with the sign reversed, and it carries `num_of_bad_genetic_traits = 0` beside it so that it cannot overlap the shipped gate on the man who was handed a strong back and a bad hip in the same hour; the pair makes the statement whole rather than partial. `parent_relatedness` is not a trait read and is not about him at all - it is the engine's arithmetic on the two people who made him, four generations and sixty-two ancestors deep, where 0.0 is unrelated and 1.0 is identical twins. A man can carry `inbred` with parents who were strangers, and a man can be a brother and sister's son and carry nothing. Full siblings sit at 0.5, half-siblings and an uncle with his niece at 0.25, first cousins at 0.125; the gate opens at 0.25 because in this setting a first-cousin marriage is house policy rather than a scandal, and a gate that fires for a large slice of every noble house is not a gate. | 2 templates, base 50, 80 |
 | how many words there are for him | The mod names personality traits on chance blocks all through both event files and had never once counted them. A name and a count do not narrow each other in either direction - a man with four personality traits may or may not be brave, and a brave man may have that as his only word or as one of four - which is the same argument checked at batch 171 for `has_trait_xp` and at 173 for `highest_skill`. Neither threshold is a literal: `00_basic_values.txt:1359-1361` defines `personality_trait_minimum = 2`, `personality_trait_standard = 3` and `personality_trait_limit = 4` in three consecutive lines, and vanilla gates trait gains on `number_of_personality_traits < personality_trait_limit` at `yearly_events_4.txt:1371` and `00_prison_interactions.txt:4864`, so writing 4 and 2 here would quietly drift the day a patch decides a man can hold five words. The pair is disjoint by construction and the gap between them is the entire ordinary population: four or more on one side, fewer than two on the other, and everybody the game handed its standard three to is described by neither. That gap is the point. | 2 templates, base 50, 80 |
+| how many of these he has been in | The mod has read a man's years four ways and has never read his wars. `age` is gated at 21, 45, 55 and 65 across the two event files and `years_as_ruler` carries batch 158's pair, but neither number can tell you whether the man has ever done this before: a quiet seat can be held for twenty years and still hand its holder his first afternoon of this, and a man can inherit at forty and be in his fourth inside a decade. `participated_wars` was at zero over the whole mod. The low gate is `<= 1` rather than `= 0` because the current war is counted - vanilla's only use of the key in the entire game is `00_reactive_advice.txt:1030`, `participated_wars >= 2`, with "you are starting your 2nd war" written beside it - so `= 0` would be a gate that can never fire for anybody standing in a battle. Both sides carry `is_landed = yes`, because a landless man's war count is a record of what the engine bothered to write down about him rather than of what he has done with his life, and the number has to mean the same thing on both sides of a pair. One or fewer against eight or more, on one number about one man. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -778,16 +779,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and seventy-five**, its "3, 3, 4 and 3"
-are 63, 63, 62 and 31, and the fall-through set is one hundred and fifty-six sites rather than
+plan 1's eighteen call sites are now **three hundred and seventy-seven**, its "3, 3, 4 and 3"
+are 64, 63, 62 and 32, and the fall-through set is one hundred and fifty-six sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 193, knight 161.** Weight against vanilla's
+**Template totals are now commander 194, knight 162.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-one templates against
-`knight_none`'s 2000 — one hundred and sixty at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-two templates against
+`knight_none`'s 2000 — one hundred and sixty-one at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

@@ -15126,3 +15126,62 @@ bc_all_four_of_his_qualities_want_something_different = {
 		}
 	}
 }
+
+bc_nobody_told_him_what_the_noise_is_like = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_never_had_to_do_this_before_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has run a seat for years without ever fighting for it is the
+		# one the first war lands hardest on, and that man keeps the accounts.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = content
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nobody_told_him_what_the_noise_is_like"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_nobody_told_him_what_the_noise_is_like_toast
+			desc = bc_nobody_told_him_what_the_noise_is_like_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
