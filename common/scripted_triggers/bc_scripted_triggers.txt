@@ -6169,3 +6169,76 @@ bc_the_far_commander_is_out_of_his_depth_trigger = {
 		}
 	}
 }
+
+# BATCH 156 - HOW MANY STEPS OF RANK THERE ARE BETWEEN THE TWO MEN IN CHARGE.
+#
+# `tier_difference` returned zero across the whole mod. `highest_held_title_tier`
+# is read in fifteen places and every one of them is an absolute band - is he a
+# duke, is he a king. Nothing has ever asked the question a herald would ask
+# first, which is not what either man is but how far apart they are.
+#
+# THE FORM IS SHIPPED AND THE SIGN IS IN THE DUMP'S OWN EXAMPLE. Vanilla writes
+# `tier_difference = { target = scope:recipient value = N }` six times in a row
+# at `common/character_interactions/00_education_interactions.txt:1643`, `:1653`,
+# `:1663`, `:1673`, `:1683` and `:1693`, walking N from 1 to 5 and then to -1.
+# The 1.19.0.6 entry gives the sign explicitly: a baron scoped against a king
+# scores -3. Scoped minus target, and the range is -5 to 5.
+#
+# THE DUMP LISTS THE FULL SET OF OPERATORS for this key, not just equality, so
+# the two bands below are written as inequalities rather than as vanilla's six
+# separate equality rows. That is the same reading of the same `Traits:` line the
+# mod has relied on for every numeric trigger it uses.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Two steps below against two steps above
+# on the same subtraction between the same two men.
+#
+# NAMING THE FAR COMMANDER AS A TARGET IS A READ, so both gates take the full
+# guard, both `exists` rows repeated inside the `trigger_if` limit, and the man
+# is named through `scope:combat_side` rather than `root` for batch 127's reason.
+# Same construction as batch 155's pair, for the same reason.
+#
+# THIS IS NOT BATCH 144'S RENOWN PAIR AND IT IS NOT THE TIER BANDS. Renown is
+# what a family has accumulated and it moves; a tier is what a man holds today
+# and it is a step, not a number. And the absolute bands say what he is - this
+# says what he is NEXT TO, which is the fact that decides how the afternoon gets
+# written down afterwards by people who were not here.
+#
+# THE TWO GATES DO NOT FIRE AT THE SAME RATE IN THE TWO POOLS, AND THAT IS
+# INTENDED RATHER THAN OVERLOOKED. A knight is frequently unlanded, so the first
+# gate is a commoner fact in the knight file than in the commander file, and the
+# second is correspondingly rarer there - a knight two full steps ABOVE the man
+# running the far side is a great lord standing in somebody's line. The templates
+# below are assigned on that basis: the first goes to a commander, the second to
+# a knight, and each lands where it is the unusual one.
+#
+# RARITY. Two steps is not a near miss. It is the distance from a count to a
+# king, and it needs both men to be led and both to be that far apart on the day.
+bc_the_man_across_the_field_outranks_him_twice_over_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		tier_difference = {
+			target = scope:combat_side.enemy_side.side_commander
+			value <= -2
+		}
+	}
+}
+
+bc_he_outranks_the_man_across_the_field_twice_over_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		tier_difference = {
+			target = scope:combat_side.enemy_side.side_commander
+			value >= 2
+		}
+	}
+}

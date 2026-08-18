@@ -13946,3 +13946,62 @@ bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished = {
 		}
 	}
 }
+
+bc_losing_to_that_man_will_be_written_down_differently = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_man_across_the_field_outranks_him_twice_over_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having read enough of what other people wrote about other
+		# afternoons to know exactly how this one will be phrased.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_losing_to_that_man_will_be_written_down_differently"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_losing_to_that_man_will_be_written_down_differently_toast
+			desc = bc_losing_to_that_man_will_be_written_down_differently_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
