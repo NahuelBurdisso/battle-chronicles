@@ -12385,3 +12385,66 @@ bc_knight_he_has_already_been_dead_once_this_life = {
 		}
 	}
 }
+
+bc_knight_three_men_would_come_if_he_went_down = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_at_least_three_men_alive_count_him_a_friend_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Three men willing to come for him is worth nothing at all unless he
+		# is good enough to still be standing when they arrive.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trusting
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = paranoid
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_three_men_would_come_if_he_went_down"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_three_men_would_come_if_he_went_down_toast
+				desc = bc_knight_three_men_would_come_if_he_went_down_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

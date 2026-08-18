@@ -14713,3 +14713,62 @@ bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it = {
 		}
 	}
 }
+
+bc_there_are_three_of_them_who_have_waited_for_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_at_least_three_men_alive_count_him_an_enemy_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Collecting three standing enmities and staying alive to hold them is
+		# a thing a careful man does on purpose rather than by accident.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = forgiving
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_are_three_of_them_who_have_waited_for_this"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_are_three_of_them_who_have_waited_for_this_toast
+			desc = bc_there_are_three_of_them_who_have_waited_for_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

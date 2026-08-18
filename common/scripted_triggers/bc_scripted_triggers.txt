@@ -7020,3 +7020,72 @@ bc_his_body_gave_out_before_the_war_did_trigger = {
 bc_they_held_him_under_until_he_stopped_trigger = {
 	has_trait = drowned_man
 }
+
+
+# BATCH 169 - HOW MANY MEN HATE HIM, AND HOW MANY WOULD COME FOR HIM.
+#
+# THE MOD HAS READ RELATIONS THIRTY TIMES AND HAS NEVER ONCE COUNTED THEM.
+# Every read in this mod is pairwise - has_relation_agot_* nine times,
+# has_relation_bodyguard four, has_relation_guardian four, has_relation_ward
+# four, has_relation_lover three, has_relation_friend once at
+# bc_knight_phase_events.txt:1906, has_relation_rival twice at :1984 and
+# :2071, and the rivalry ladder's three removal tests. All of them ask "is
+# THIS man that to him", aimed at the side commander or the enemy's. The one
+# count anywhere in the file, num_of_relation_favorite_child >= 1 at :2886,
+# is a presence test wearing a count's clothes. Nothing has ever asked how
+# many.
+#
+# BOTH KEYS ARE IN THE 1.19.0.6 DUMP with character scope and the full
+# comparison set, and both are live in AGOT's own script with numeric bands
+# rather than presence tests: num_of_relation_friend at mpo_decisions.txt:1935
+# (< 3) and health_on_actions.txt:206 (>= 1), num_of_relation_rival at
+# agot_lmf_feast_events.txt:538 (>= 1) and :507 (<= 4), and
+# agot_lmf_heir_events.txt:7329 (< 3).
+#
+# THE BAND IS THREE BECAUSE ONE WOULD BE A SUPERSET. num_of_relation_rival
+# >= 1 is true of every man the shipped pairwise gate is true of, which makes
+# it a strict superset of bc_knight_knows_that_man's question and not a new
+# one. At three the two come apart in both directions: a man can hold three
+# standing enmities none of which is the commander opposite him, and he can be
+# the enemy commander's rival with a count of exactly one. The same argument
+# holds on the friend side against bc_knight_for_a_friend.
+#
+# THE ALIASES MEAN THESE COUNT MORE THAN THEIR NAMES SAY, AND THAT IS WANTED.
+# `nemesis` carries relation_aliases = { rival } (00_scripted_relations.txt:81)
+# and both `best_friend` (:34) and `blood_brother` (:323) carry
+# relation_aliases = { friend }, so the first count includes nemeses and the
+# second includes best friends and sworn brothers. Neither desc below asks
+# which rung a bond sits on. The question in both is how many men, and the
+# looser count is the correct one for it.
+#
+# THE FIRST COUNT IS PARTLY THIS MOD'S OWN WORK. bc_rivalry_effects.txt sets
+# grudge, rival and nemesis on commanders who keep beating the same man, and
+# clears them when the counter runs out. A campaign that has been running long
+# enough for this gate to open is one where the chronicle has been writing
+# into the same ledger it is now reading, which is the point of it being a
+# count and not a trait.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads on whichever man
+# the caller has already entered through scope:combat_side, and no optional
+# link is traversed to reach either. The counts themselves cannot fail; a man
+# with no such relation returns zero, which is a clean no.
+#
+# NO NEGATION BETWEEN THEM. The two gates read two different facts about two
+# different men - one about a commander's enemies, one about a knight's
+# friends - and the two pools roll separately, so the usual reason for making
+# a pair disjoint by construction does not apply here.
+#
+# THREE IS RARE ENOUGH TO BE A GATE ON BOTH SIDES, and AGOT's own content says
+# so without being asked: both mpo_decisions.txt:1935 and
+# agot_lmf_heir_events.txt:7329 use `< 3` as the ORDINARY branch, which is the
+# same sentence as saying that three or more is the exception. Standing
+# rivalries expire, friendships are hard to acquire and easy to lose to a
+# death, and most commanders in most years hold none of either. A man carrying
+# three at once has had a career.
+bc_at_least_three_men_alive_count_him_an_enemy_trigger = {
+	num_of_relation_rival >= 3
+}
+
+bc_at_least_three_men_alive_count_him_a_friend_trigger = {
+	num_of_relation_friend >= 3
+}
