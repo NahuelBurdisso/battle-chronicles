@@ -4610,3 +4610,61 @@ bc_he_is_riding_in_another_mans_train_trigger = {
 	is_travel_entourage_character = yes
 	is_travel_leader = no
 }
+
+# BATCH 134 - WHAT THE CROWN ON THIS SIDE IS ACTUALLY WORTH.
+#
+# `legitimacy`, `legitimacy_level`, `has_legitimacy` and `has_legitimacy_flag`
+# all returned zero across the whole mod. AGOT uses the system - two hundred and
+# eighty-three of its files mention it, and it reads `legitimacy_level` against
+# 0, 1 and 2 in its own activity files - and this mod has never once asked the
+# single question the system exists to answer: whether the men around a crowned
+# man think the crown is his by right.
+#
+# `has_legitimacy = yes` IS NOT DECORATION ON THE FIRST GATE, IT IS THE GATE.
+# `legitimacy_level` returns 0 for a character who does not use legitimacy at
+# all, which is nearly everybody in a battle line. Written alone, `<= 1` would
+# be true of every landless knight, every household guard and every hedge
+# swordsman on the field - a gate that fires for nearly everybody is not a gate.
+# The boolean cuts the population down to men the game actually scores, and the
+# threshold then does the work it was written to do. Do not delete it as
+# redundant. It is the reason the row is rare.
+#
+# THE TWO GATES READ TWO DIFFERENT MEN, AND THE NEGATION IS DELIBERATELY
+# OMITTED. The first is the man wearing the thin crown. The second is a man
+# standing in the line who has noticed that the person he is following wears
+# one. Commander and knight roll from separate pools, so neither can suppress
+# the other, and on the afternoon when both are true they are true about
+# different people and describe genuinely different afternoons.
+#
+# THE SECOND IS ROOT-INDEPENDENT ON PURPOSE, for the reason batch 127 recorded:
+# `root` is not guaranteed inside a scripted trigger, so the man being asked
+# about is named through `scope:combat_side` rather than assumed. The knight
+# templates already reach their own commander that way in every effect they run.
+# `side_commander` is an optional link and takes the guard.
+#
+# THIS IS NOT THE DREAD ROWS OR THE OPINION ROWS. Dread is how frightening a man
+# is. Opinion is how a specific person feels about him. Legitimacy is neither -
+# it is whether the office he holds is believed in, which can be catastrophic
+# while he is personally both feared and liked, and can be immaculate on a man
+# nobody can stand. The three move independently and the mod already reads two
+# of them.
+#
+# RARITY. The first requires a legitimacy-using ruler at the bottom two levels
+# of the scale, which is a crown in visible trouble rather than an ordinary one.
+# The second requires that man to be leading the side a knight is standing in.
+# Neither is close to universal.
+bc_the_crown_he_wears_is_thin_trigger = {
+	has_legitimacy = yes
+	legitimacy_level <= 1
+}
+
+bc_the_man_he_follows_wears_a_thin_crown_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			has_legitimacy = yes
+			legitimacy_level <= 1
+		}
+	}
+}

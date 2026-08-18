@@ -573,12 +573,12 @@ bc_add_verb_effect = {
 #
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
-# there is no army modifier that means "he judged it well". NINETY-SEVEN of the
-# two hundred and ninety-one call sites are adapted or measured - the five plan 1 shipped
+# there is no army modifier that means "he judged it well". NINETY-EIGHT of the
+# two hundred and ninety-three call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
-# .0002b and .0003b) plus ninety-two from later content batches - and every one of
+# .0002b and .0003b) plus ninety-three from later content batches - and every one of
 # them is supposed to fall through. Twenty-four more, all `ordered`/`down`, fall
-# through the `ordered` row's else, so ONE HUNDRED AND TWENTY-ONE sites in total get no modifier
+# through the `ordered` row's else, so ONE HUNDRED AND TWENTY-TWO sites in total get no modifier
 # by design. A future `else` arm would silently start handing an army modifier
 # to all of them.
 #
@@ -596,9 +596,9 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at two hundred and ninety-one call sites:
+# at two hundred and ninety-three call sites:
 #
-#   measured/down 24  bloodied/up 24   ordered/up 24     wild/down 24
+#   measured/down 25  bloodied/up 24   ordered/up 25     wild/down 24
 #   entrenched/up 25  bloodied/down 25  wild/up 24       adapted/up 24
 #   entrenched/down 24  ordered/down 24  measured/up 25  adapted/down 24
 #
@@ -619,7 +619,7 @@ bc_add_verb_effect = {
 # None of the three wants a SWING test here.
 #
 # `ordered` remains the one KIND where the design wants the pair, and both halves
-# are reachable - twenty-four call sites use `up`, twenty-four use `down`.
+# are reachable - twenty-five call sites use `up`, twenty-four use `down`.
 #
 # THE COUNTS IN THIS COMMENT GO STALE EVERY TIME A CONTENT BATCH LANDS. The
 # command that produced them, run from the mod root:
@@ -634,8 +634,8 @@ bc_add_verb_effect = {
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
 # pair census above: bc_bloodied from 49 sites, bc_shieldwall from 49,
-# bc_spent_horse from 48, bc_pursuit from 24, and 121 falling through. Those five
-# sum to the two hundred and ninety-one, which is the check.
+# bc_spent_horse from 48, bc_pursuit from 25, and 122 falling through. Those five
+# sum to the two hundred and ninety-three, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution
