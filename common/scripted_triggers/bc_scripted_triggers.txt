@@ -8979,3 +8979,63 @@ bc_there_are_two_boys_of_his_out_here_trigger = {
 bc_he_has_one_boy_of_his_own_trigger = {
 	num_of_relation_agot_squire = 1
 }
+
+# BATCH 199 - THE OTHER WAR HE COULD HAVE HAD WITH THIS MAN.
+#
+# `has_any_cb_on` AND `has_cb_on` RETURNED ZERO ACROSS THE WHOLE MOD. Every
+# mention of a casus belli in this repository is a comment citing some file in
+# `common/casus_belli_types/` for an unrelated reason. The trigger itself has
+# never been read here.
+#
+# THIS IS NOT THE CLAIM ROWS AT `:4849`. Those iterate the scoped man's own
+# list and ask what is written in his name - one pressed, or three unpressed -
+# without reference to anybody else on the field. `has_any_cb_on` is a question
+# about two men: whether this one could walk out tomorrow and lawfully make war
+# on that one. Neither nests inside the other in either direction. A man may
+# hold nine claims, none of them on anything the man opposite holds, and fail
+# these; a man with no claim whatever may still have a de jure or a faith-given
+# cause against him and pass. Nor is it the war rows, which ask about the war
+# he is already standing in - who declared it, how long it has run, whose it
+# is. This asks about a war nobody has declared at all.
+#
+# LIVE IN BOTH TREES AND IN EXACTLY THIS FORM. Vanilla writes
+# `has_any_cb_on = scope:recipient` and `has_any_cb_on = scope:actor` through
+# `common/character_interactions/05_bp2_interactions.txt` from `:1069`, and
+# negated at `common/character_interactions/03_fp2_interactions.txt:2632`, for
+# thirty-five live rows in all. AGOT ships its own copies of both of those
+# files and reads the key in a file of its own making besides, at
+# `common/scripted_triggers/00_agot_esr_threat_triggers.txt`.
+#
+# TWO MEN EACH, AND NOT THE SAME TWO. The first asks it of the man across the
+# field. The second asks it of the man giving the orders on this side, which is
+# the more uncomfortable of the two questions and the reason the pair is worth
+# writing. Both may be true of one afternoon without either implying the other,
+# and the pools roll separately in any case, as in batch 149's arrangement.
+#
+# GUARDS. Naming a link as the TARGET of a trigger is a read, so the first
+# carries both far-side `exists` lines as siblings and repeats them inside the
+# `trigger_if` limit, and the second carries its one.
+#
+# RARITY. A cause against one named man is a narrow thing - it is not enough to
+# be owed something somewhere, the debt has to point at him - and the second
+# gate additionally needs a knight who holds enough for the engine to give him
+# a cause at all, which most men standing in a line do not.
+bc_he_could_have_made_this_war_himself_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		has_any_cb_on = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_he_could_lawfully_fight_his_own_side_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		has_any_cb_on = scope:combat_side.side_commander
+	}
+}
