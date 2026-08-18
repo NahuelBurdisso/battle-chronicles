@@ -7814,3 +7814,64 @@ bc_the_man_he_rode_out_for_holds_the_next_valley_trigger = {
 		character_is_land_realm_neighbor = scope:combat_side.side_commander
 	}
 }
+
+# BATCH 182 - WHETHER EITHER OF THE TWO WHO MADE HIM IS STILL LIVING.
+#
+# THE MOD HAS NEVER LOOKED UPWARD. `has_father` and `has_mother` both
+# returned zero over the whole tree, `is_child_of` returned zero, and the
+# single hit on `is_parent_of` is the word sitting inside batch 180's own
+# header at line 7706. The twenty-three hits on the words "father" and
+# "mother" are every one of them header prose. Batch 180 counted the people
+# who exist because of him. Nothing anywhere has asked after the two people
+# he exists because of.
+#
+# THE DUMP IS UNUSUALLY PLAIN HERE. `has_father` is "does the character have
+# a valid living father?" and `has_mother` is the same for the mother, both
+# character scope, both yes/no. The word carrying the weight is LIVING. These
+# do not ask whether a man is recorded as having had parents, which is true
+# of very nearly everybody; they ask whether either of them is still above
+# ground this afternoon.
+#
+# AGOT WRITES IT THIS WAY ITSELF. `common/scripted_effects/00_war_effects.txt`
+# guards a father scope with `has_father = yes` at :620 and a mother scope
+# with `has_mother = yes` at :635, when a declaration of war has to reach the
+# parents of the man it was declared on. Vanilla has the identical pair at
+# `common/scripted_effects/00_war_effects.txt:482` and `:497`.
+#
+# THIS IS NOT BATCH 180 TURNED AROUND. That batch reads `any_child` and
+# counts the household a man built. This reads the household he came out of,
+# and the two facts come apart constantly: a man of fifty with six children
+# buried both his parents twenty years ago, and a childless man of
+# twenty-five usually still has both of his.
+#
+# THE COMMANDER ROW CARRIES `age >= 40` AND THAT FLOOR IS THE WHOLE POINT OF
+# IT. Every man alive was somebody's son at twenty and the fact says nothing
+# about him. At forty it has turned strange: he has held a seat for years, he
+# has men who call him lord, and there is still somebody breathing who
+# remembers him being carried. The floor is what turns a universal fact into
+# a rare one.
+#
+# THE KNIGHT ROW TAKES NO FLOOR because the pair of answers does that work
+# instead. Father gone and mother still living is an arrangement of a family
+# rather than a stage of a life, and it is not where most men are. The young
+# mostly have both, the old mostly have neither, and a great many of the
+# knights the engine hands this mod are generated men whose parents were
+# never written down at all, who answer no to both rows.
+#
+# DISJOINT BY CONSTRUCTION. The first requires a living father and the second
+# requires that there is none. No man can pass both, and no further negation
+# is needed beyond the one already standing in the second row.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads on a man the
+# caller has already entered, and in every other script that uses them they
+# ARE the guard - they exist so that nothing has to risk stepping into an
+# empty parent scope. Neither of these rows steps anywhere.
+bc_his_father_is_alive_to_hear_of_this_trigger = {
+	age >= 40
+	has_father = yes
+}
+
+bc_his_mother_is_the_last_one_left_trigger = {
+	has_father = no
+	has_mother = yes
+}
