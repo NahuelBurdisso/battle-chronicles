@@ -9861,3 +9861,82 @@ bc_this_column_is_all_bow_and_no_horse_trigger = {
 		}
 	}
 }
+
+
+# BATCH 209 - WHOSE CHAIR IS ACTUALLY ON THE TABLE.
+#
+# CENSUS. `is_contested` returns zero across the whole mod, and so do the word
+# "contested", `target_title` and the phrase "war goal". The mod has read the
+# war behind this combat many times over - whether it is a rising, whether it
+# is holy, who declared it, how long it has run - and it has read what men
+# HOLD, in batch 143's two seat-counting gates at :5263 and :5270. It has
+# never once asked whether any of what they hold is the thing somebody is
+# suing for.
+#
+# WHAT THE KEY ANSWERS, STATED CAREFULLY. `is_contested` is a landed_title
+# trigger - "is the scope landed title contested in any war?" - and the last
+# two words are the whole point of it. It does not ask whether this title is
+# the goal of the war this battle belongs to. It asks whether somewhere on the
+# map, in some war, that chair is what is being sued for. A man can be
+# fighting a border squabble this morning and still have his own seat named in
+# somebody else's declaration.
+#
+# LIVE IN BOTH TREES. Vanilla gates title revocation on it: `is_contested = no`
+# opens `title_revocation_standard_can_pick_title_trigger` at
+# `common/scripted_triggers/00_interaction_triggers.txt:94`. It is read through
+# an iterator at `common/script_values/07_ep3_values.txt:624` and `:626` as
+# `any_held_title = { is_contested = yes }`, and AGOT ships that same file with
+# the same two lines. The key also has a trigger localization entry of its own
+# at `common/trigger_localization/00_landed_title_triggers.txt:6`, which the
+# game only writes for keys meant to be shown to a player inside a tooltip.
+#
+# THE WALK IS `primary_title` AND IT IS OPTIONAL. Vanilla writes
+# `primary_title = { title_held_years >= 10 }` at
+# `common/laws/00_succession_laws.txt:285` and again at `:416`, so entering the
+# link this way is shipped script; but a commander can be a landless household
+# man with no seat at all, so both gates carry the full-chain `exists` as a
+# sibling and repeat it inside the `trigger_if` limit before the title is
+# named. That is batch 190's construction for `commanding_army` and
+# bc_foe_is_kin_trigger's at :217 for the far commander, unchanged.
+#
+# THIS IS NOT BATCH 143 AND IT IS NOT ANY OF THE WAR ROWS. Batch 143 counted
+# how many seats a man holds and how tall they are; a man with nine of them may
+# have none of them contested and a man with one may be about to lose it. The
+# war rows ask what THIS quarrel is - a rising, a holy war, a rescue - and this
+# key is deliberately not about this quarrel at all. Nothing shipped reads a
+# title's standing in anybody's war.
+#
+# DISJOINT BY CONSTRUCTION, AND THE TIE GOES TO THE NEAR MAN. Both seats can
+# be on the table at once, so the second gate denies the first in its own body,
+# exactly as bc_the_man_opposite_has_a_second_host_trigger does at :3963. The
+# near seat wins the tie because the near man is who the moment is about.
+#
+# RARITY. Most wars in this setting are fought for a county or for a claim, and
+# the goal title of a county war is the county - not the duchy or the crown the
+# defender happens to sit on. Asking this of a PRIMARY title therefore wants
+# the narrow case where somebody has gone for the top of the pile: a
+# dethronement, a conquest, a claim pressed on the seat itself. Then the first
+# still wants that man leading and losing, and the second wants the far side to
+# be the one with everything to lose and to be busy losing it.
+bc_the_seat_behind_him_is_on_the_table_trigger = {
+	exists = scope:combat_side.side_commander.primary_title
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander.primary_title }
+		scope:combat_side.side_commander.primary_title = {
+			is_contested = yes
+		}
+	}
+}
+
+bc_the_seat_across_the_field_is_on_the_table_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander.primary_title
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side.side_commander.primary_title
+		}
+		scope:combat_side.enemy_side.side_commander.primary_title = {
+			is_contested = yes
+		}
+	}
+	NOT = { bc_the_seat_behind_him_is_on_the_table_trigger = yes }
+}
