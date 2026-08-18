@@ -9461,3 +9461,83 @@ bc_this_ground_is_being_stripped_while_they_fight_trigger = {
 		}
 	}
 }
+
+
+# BATCH 205 - HOW MUCH OF A PLACE THIS PLACE IS.
+#
+# CENSUS. `is_county_capital`, `num_buildings`, `combined_building_level`,
+# `building_slots`, `free_building_slots` and `has_free_building_slot` all
+# return zero across the whole mod. Batch 204 at :9443 was the first province
+# gate here that was not a terrain question and it asked what has been
+# HAPPENING to the ground - taken, or being stripped. This one asks what is
+# STANDING on it, which is a different fact entirely: a burnt-out county seat
+# has been happening to for months and is still a county seat, and an empty
+# hillside can be perfectly peaceful and still have nothing on it at all.
+#
+# IT DOES NOT BELONG IN bc_ground_triggers.txt for the same reason batch 204
+# does not. That file holds the six terrain bands and nothing else, validate
+# counts its `agot_is_*_terrain` mentions against the 23 base helpers, and
+# neither gate below mentions a terrain.
+#
+# PRECEDENT, BOTH KEYS AGOT-ORIGINAL. `num_buildings` is read in files of
+# AGOT's own making at `common/script_values/00_agot_war_values.txt:94` as
+# `any_county_province = { num_buildings >= 2 }`, at
+# `events/agot_filler/00_agot_dragon_filler_events.txt:7802` and `:7836` as
+# `num_buildings > 1`, and as an `order_by` at
+# `common/casus_belli_types/00_agot_nights_watch_wars.txt:282`. AGOT writes
+# `is_county_capital = yes` throughout `common/buildings/
+# 00_agot_standard_economy_buildings.txt` from `:710`. Vanilla has both as
+# well: `common/buildings/00_standard_economy_buildings.txt:3917` and `:3926`
+# compare `num_buildings < 5` and `num_buildings >= 8`, and the same file reads
+# `is_county_capital` in both directions from `:77`. triggers.log gives
+# num_buildings as a province value and is_county_capital as province yes/no.
+#
+# THE THRESHOLDS COME FROM THOSE FILES. AGOT's own bar for a province anybody
+# has built on is two, and vanilla's own bar for a province that is still thin
+# is `num_buildings < 5`. The first gate asks for five or more, which is
+# vanilla's line read from the other side, and the second asks for none at all,
+# which is the floor and needs no calibrating.
+#
+# DISJOINT BY CONSTRUCTION on both clauses, the fostering pair's arrangement at
+# :2490-2510: five or more buildings against none, and county seat against not.
+# No province can satisfy both halves of either pair.
+#
+# NOT THE BATTLE-SIZE ROWS AND NOT THE OCCUPATION ROWS. `:185` and the size
+# bucket at :615 count men on the field. Batch 204 at :9443 asks whether the
+# ground has been taken or is being stripped, and a county seat can be
+# untouched while an empty hillside is occupied, so neither gate here is a
+# subset or superset of either of those.
+#
+# GUARDS. `combat.location` does not always resolve, so both gates carry
+# `exists = scope:combat_side.combat.location` as a sibling and repeat it in
+# the `trigger_if` limit, exactly as the six band wrappers do from :117 and as
+# batch 204 does.
+#
+# RARITY. A county has one capital and several provinces, so most ground is not
+# the seat before the building count is asked at all, and a seat with five
+# buildings standing is a worked, prosperous one rather than the usual case.
+# Nothing built at all is the other end and is not the usual case either: most
+# provinces a war passes through have at least a holding on them. The first
+# wants the seat while this side is losing; the second wants the empty ground
+# while this side is winning.
+bc_they_are_fighting_on_the_county_seat_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			is_county_capital = yes
+			num_buildings >= 5
+		}
+	}
+}
+
+bc_there_is_nothing_built_on_this_ground_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			is_county_capital = no
+			num_buildings = 0
+		}
+	}
+}
