@@ -9908,3 +9908,72 @@ bc_knight_a_second_cell_in_the_same_family = {
 		}
 	}
 }
+
+# Batch 130, knight half. There is a door at home he does not open, nobody on
+# this field knows it because the relation is hidden by design, and the war
+# going well is therefore not entirely good news. `wild`/`up` and `bc_spent_horse`,
+# which is literal here - he spends the animal to stay out in the one hour where
+# nothing has to be explained. `prowess >= 12`, because staying out past the
+# point the moment requires is paid for in the body.
+bc_knight_no_hurry_for_the_war_to_end = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_does_not_sleep_in_that_room_any_more_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Staying out past the point the moment requires is paid for in
+		# the body, and in the horse.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_no_hurry_for_the_war_to_end"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_no_hurry_for_the_war_to_end_toast
+				desc = bc_knight_no_hurry_for_the_war_to_end_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

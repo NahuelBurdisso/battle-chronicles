@@ -4370,3 +4370,60 @@ bc_somebody_of_his_blood_is_in_a_cell_tonight_trigger = {
 		is_imprisoned = yes
 	}
 }
+
+# BATCH 130 - THE TWO RELATIONS AGOT HIDES ON PURPOSE.
+#
+# The marriage axis opened at batch 88 and has been worked several times since -
+# the pregnancy row, the two burial rows, the married-into-the-other-side row -
+# and every one of them reads the marriage as an ARRANGEMENT: who it joined,
+# what it produced, whether it ended. None of them has ever read what it is
+# like. AGOT keeps two scripted relations for exactly that and the mod had never
+# touched either: `unfruitful_marriage` zero, `kicked_from_marriage_bed` zero,
+# `primary_spouse` zero.
+#
+# BOTH ARE AGOT'S OWN AND BOTH ARE `hidden = yes`. They sit at
+# `common/scripted_relations/00_agot_scripted_relations.txt:15` and `:52`, each
+# reciprocal with itself, and the first carries `fertility = -5`, which is the
+# mod telling us in its own hand what it means by it. Being hidden, neither ever
+# appears in the character interface - they are facts the game keeps and never
+# shows, which is precisely the register this file wants. AGOT sets the first in
+# `common/on_action/marriage_concubinage.txt:189` and reads both live:
+# `common/scripted_triggers/00_agot_lmf_triggers.txt:425` and `:427`, and
+# `events/agot_lmf_events/agot_lmf_spouse_events.txt:5132` reads the second
+# against `primary_spouse`, which is exactly the form used here.
+#
+# BOTH GATES TAKE THE GUARD. `primary_spouse` is an optional link and reading it
+# as a TARGET is a read, so each gate carries `exists = primary_spouse` as a
+# sibling and repeats it in a `trigger_if` limit before the relation is asked.
+#
+# NEITHER IS A SUBSET OF ANY SHIPPED MARRIAGE GATE. Batch 88's header already
+# records why a bare `is_married = yes` is not a gate - it is nearly every
+# landed man in the game - and no such gate was ever shipped. The rows that
+# exist require a pregnancy, or a dead former spouse, or a marriage across the
+# battle line, and none of those is implied by either relation here.
+#
+# TWO FACTS, TWO MEN, AND THEY ARE NOT THE SAME UNHAPPINESS. The first is a
+# marriage that is still a marriage and has produced nothing. The second is a
+# marriage that has stopped being one in the only room where that is measured.
+# A man may have either without the other, so neither carries a negation of the
+# other, and the pools roll separately regardless.
+#
+# RARITY. Both relations are set by specific AGOT events on specific
+# characters - one from a long marriage that has stayed empty, the other from a
+# particular kind of night - and neither is a demographic category. Most married
+# men in Westeros have neither.
+bc_the_marriage_has_produced_nothing_trigger = {
+	exists = primary_spouse
+	trigger_if = {
+		limit = { exists = primary_spouse }
+		has_relation_unfruitful_marriage = primary_spouse
+	}
+}
+
+bc_he_does_not_sleep_in_that_room_any_more_trigger = {
+	exists = primary_spouse
+	trigger_if = {
+		limit = { exists = primary_spouse }
+		has_relation_kicked_from_marriage_bed = primary_spouse
+	}
+}

@@ -12392,3 +12392,69 @@ bc_winning_means_the_cells_fill_again = {
 		}
 	}
 }
+
+# Batch 130, commander half. The marriage has produced nothing, he is losing,
+# and the ordinary consolation of his class - that a bad afternoon is survivable
+# because somebody small will be told about it in twenty years - is simply not
+# available to him. `wild`/`down`, because what he does about it is ask a body
+# of men for more than it has left. `intrigue >= 12`, because a man without an
+# heir knows exactly which of his relations gains by the next hour going badly,
+# and that is not a martial thought.
+bc_there_is_no_son_to_make_this_survivable = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_marriage_has_produced_nothing_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing precisely who gains by your bad hour is a habit of mind
+		# that has nothing to do with soldiering.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_is_no_son_to_make_this_survivable"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_is_no_son_to_make_this_survivable_toast
+			desc = bc_there_is_no_son_to_make_this_survivable_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
