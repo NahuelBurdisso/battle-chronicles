@@ -4072,3 +4072,67 @@ bc_he_shares_an_afternoon_with_the_man_opposite_trigger = {
 		}
 	}
 }
+
+
+# --- what the house bought before he was born ---------------------------------
+#
+# `has_dynasty_perk` RETURNED ZERO OVER THE WHOLE MOD. A hundred and twenty-four
+# batches have read a man's name, his house, his feuds, his marriages and the
+# quarrel his grandfather started, and not one of them has ever read the other
+# thing a dynasty is: A LIST OF PURCHASES. Legacies are renown spent by people
+# who are dead on advantages that arrive, unasked and unearned, in the hands of
+# whoever happens to be standing in a field today.
+#
+# THE 1.19.0.6 DUMP gives `has_dynasty_perk` as "Does the dynasty have this
+# dynasty perk?", and its supported scope is DYNASTY, not character. It must
+# therefore be read inside `dynasty = { }`, which is an optional link, which is
+# why both gates carry the standing guard - the `exists = dynasty` as a sibling
+# and the read nested in a trigger_if that repeats it. AGOT writes exactly this
+# shape at `common/accolade_types/04_ep2_common_attributes.txt:36-42`: an
+# `exists = dynasty` and then `dynasty = { has_dynasty_perk = warfare_legacy_3 }`.
+#
+# THE TWO PERKS ARE REAL AND THEIR MODIFIERS ARE THE POINT.
+# `common/dynasty_perks/00_dynasty_perks.txt:74` gives `warfare_legacy_1`, House
+# of Warriors, `prowess = 2` and `knight_effectiveness_mult = 0.15`; line 94
+# gives `warfare_legacy_2`, Generational Belligerence, `pursue_efficiency = 0.15`
+# and `retreat_losses = -0.15`. Those are not decorations. The first makes the
+# man in the rank measurably better at the thing he is doing this minute, and
+# the second makes a bad afternoon cost fewer men to leave. Both descs are
+# written off the modifier and not off the flavour name.
+#
+# THE TWO GATES READ TWO DIFFERENT PURCHASES ON TWO DIFFERENT MEN, so neither
+# carries a negation, on the same reasoning as the diarchy and memory pairs. The
+# perks sit on the same track and the second implies the first, but that
+# implication is about ONE dynasty, and these two gates are never read on the
+# same character - the side commander is not in the knight list and the pools
+# roll separately.
+#
+# NEITHER IS A COMPETENCE GATE. `prowess` and `martial` are read all over this
+# mod and they say what a man is. This says what was bought for him, which is a
+# different fact with a different flavour of unfairness attached, and the two
+# are independent: a magnificent soldier may be the first of his line to matter,
+# and a poor one may be standing inside four generations of expenditure.
+#
+# RARITY. A legacy rung costs renown that most houses spend elsewhere, and AGOT
+# adds ten regional tracks on top of vanilla's seven, so the warfare track is one
+# option among many rather than the obvious one. Then the man has to be in a
+# battle.
+bc_his_house_paid_for_the_arm_he_is_using_trigger = {
+	exists = dynasty
+	trigger_if = {
+		limit = { exists = dynasty }
+		dynasty = {
+			has_dynasty_perk = warfare_legacy_1
+		}
+	}
+}
+
+bc_his_house_paid_for_getting_home_trigger = {
+	exists = dynasty
+	trigger_if = {
+		limit = { exists = dynasty }
+		dynasty = {
+			has_dynasty_perk = warfare_legacy_2
+		}
+	}
+}

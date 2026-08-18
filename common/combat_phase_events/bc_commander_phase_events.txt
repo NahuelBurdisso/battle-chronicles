@@ -12026,3 +12026,81 @@ bc_the_one_he_already_has = {
 		}
 	}
 }
+
+
+# --- somebody dead already paid for this hour ---------------------------------
+#
+# GATE. bc_his_house_paid_for_getting_home_trigger, read on the commander. He is
+# losing.
+#
+# KIND. adapted/down, and it falls through the verb table, which is right: no
+# army modifier means "he re-read the afternoon", and what has changed is the
+# question he is answering, not the state of the host. He has stopped solving
+# the battle and started solving the leaving of it.
+#
+# WHAT THIS MAY NOT DO. It may not name the ancestor, say when the thing was
+# bought, what it cost, or what the family got out of it before today. It may
+# not withdraw, order a withdrawal, sound anything, name a road, rally, or end
+# the day - the moment is the arithmetic, not the act.
+#
+# SKILL. martial, because the difference between a defeat and a rout is a
+# technical matter with a known answer, and the men who have that answer are the
+# men who were taught it.
+bc_somebody_dead_already_paid_for_this_hour = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_house_paid_for_getting_home_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Leaving cheaply is a craft with a syllabus, and the men who
+		# know it are the men somebody sat down and taught.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_somebody_dead_already_paid_for_this_hour"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_somebody_dead_already_paid_for_this_hour_toast
+			desc = bc_somebody_dead_already_paid_for_this_hour_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

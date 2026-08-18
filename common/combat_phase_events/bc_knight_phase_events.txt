@@ -9521,3 +9521,86 @@ bc_knight_he_has_been_in_a_room_with_that_man = {
 		}
 	}
 }
+
+
+# --- the fifteen percent nobody can see ---------------------------------------
+#
+# GATE. bc_his_house_paid_for_the_arm_he_is_using_trigger, read on the knight.
+# He is winning.
+#
+# KIND. adapted/up, falling through the verb table, and that is exact. There is
+# no army modifier that means "he worked out where the advantage is coming
+# from", and there should not be - the advantage is already being applied by
+# `knight_effectiveness_mult`, and this moment is only him noticing it.
+#
+# WHAT THIS MAY NOT DO. It may not name the ancestor, name the legacy, say when
+# it was bought or what it cost, or produce anybody who could explain it to him.
+# It may not reach the far commander, kill a named man, be told anything by
+# anybody, say the number out loud, or end the day.
+#
+# SKILL. prowess, and for once the skill and the modifier are the same claim
+# from two directions - `warfare_legacy_1` hands out `prowess = 2` along with
+# the knight effectiveness, so the men most likely to be standing inside this
+# moment are the men it has already made better.
+bc_knight_the_fifteen_percent_nobody_can_see = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_house_paid_for_the_arm_he_is_using_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The perk hands out prowess as well as effectiveness, so the
+		# men inside this moment are the men it has already improved.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_fifteen_percent_nobody_can_see"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_fifteen_percent_nobody_can_see_toast
+				desc = bc_knight_the_fifteen_percent_nobody_can_see_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
