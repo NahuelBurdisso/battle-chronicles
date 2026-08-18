@@ -4393,3 +4393,75 @@
 
  bc_knight_there_is_nothing_he_can_do_that_is_new_toast:0 "Every Answer He Has Was Issued To Him By The Man He Is Trying It On"
  bc_knight_there_is_nothing_he_can_do_that_is_new_toast_desc:0 "The first time it happens he assumes it is luck. The second time he assumes the far side has good sergeants. By the fourth he has stopped assuming anything, because the pattern is too tidy to be an accident: whatever he sets up gets met, not violently and not cleverly, but early, in the flat unhurried way of somebody who was already standing where the thing was going to arrive. So he goes through what he has. He is not a poor soldier and there is a great deal of it, and he works through it in the order it was given to him, which is a horrible thing to notice while you are doing it. Each one is answered before it is finished. The line behind him gives, and gives again, and the ground he is losing is being taken off him at a rate somebody worked out in advance. He does not stop. There is nowhere in the whole of him where a thing lives that came from anywhere else, and by the time the light starts going he has understood that he is not being beaten by an army at all.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 106 - the cloak and the body it is over ---------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE OTHER MAN or give his age, house, title,
+# nickname or sex, and neither may use the words "Kingsguard", "white cloak",
+# "sworn sword", "bodyguard" or "vow". The engine holds one relation. Both pages
+# hold a distance, and a distance does not need a name to be the most exactly
+# maintained thing on a battlefield.
+#
+# NEITHER MAY HAVE THEM SPEAK to each other, look at each other, acknowledge
+# each other or be acknowledged by anybody else. Nothing about this arrangement
+# has ever been discussed by the two people inside it.
+#
+# NEITHER MAY STAGE AN ATTACK ON THE GUARDED MAN, a rescue, a near miss, an
+# arrow, a rider getting through, or any moment where the arrangement is tested.
+# Both moments are about a condition that holds all afternoon precisely because
+# nothing comes of it.
+#
+# THE FIRST MAY NOT GIVE THE ORDER that produces what he is noticing, may not
+# thank anybody, may not send the man away, and may not be comforted by him. It
+# may not have him fear for himself, may not have him consider his own death,
+# and may not turn the loss around. He is losing and the page does not fix that.
+#
+# THE SECOND MAY NOT COMPLAIN, may not be tempted in words, may not disobey by
+# so much as a step, and may not be given anything to do. It may not have him
+# resent the man he stands over, may not have anybody notice him, may not have
+# him take a wound, and may not have the day end. It may not use the words
+# "duty" or "honour".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all".
+ bc_the_distance_beside_him_never_changes_toast:0 "One Thing Out Here Has Not Moved All Day And It Is Not The Line"
+ bc_the_distance_beside_him_never_changes_toast_desc:0 "The whole afternoon has been a slow argument he is losing about where things ought to be. The centre is not where he put it. The reserve went in somewhere approximately correct and is now approximately somewhere else. He has been shouting corrections into a shape that stopped being the shape he drew before the sun was properly up, and every one of those corrections has been an estimate, and he has known it. Then he turns his horse for the fourth or fifth time in an hour to look for something behind him, and finds, without having gone looking for it, that there is one exact measurement left on this field. It is behind his shoulder. It has been behind his shoulder through the collapse of the left, through the reserve, through the two withdrawals he has ordered and the third he has not admitted to ordering, and it is not a pace further off or a pace nearer than it was at dawn. He turns back. He does not say anything about it and there is nothing to say about it. It is simply the only thing today that has been done properly, and it is being done by a man who has not struck a single blow.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_best_afternoon_he_will_never_have_toast:0 "The Whole Of It Is Happening Just Over There And None Of It Is His"
+ bc_knight_the_best_afternoon_he_will_never_have_toast_desc:0 "It is going beautifully and he can see all of it. That is the difficulty. Down in the line, where a man's world is two arms wide and full of noise, nobody knows this is a great day yet; up here it is perfectly obvious, and he has the best view on the field of the sort of afternoon that gets talked about in halls for thirty years by men who were in it. He can name the gap. He knows precisely where he would go, at what moment, and what would happen after — and there is a long stretch of the day where the knowing is worse than the not going, because the knowing keeps arriving in fresh detail and there is nothing at all to do with it. So he does the work. The work is being in one place. He shifts his weight when the ground under him gets soft and he moves when the man he is standing over moves and he does not move otherwise, not when the far banner goes down, not when the cheering starts on the right, not once. At dusk he will have taken nothing, done nothing anyone can name, and stood, correctly, through the finest hour of somebody else's life.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

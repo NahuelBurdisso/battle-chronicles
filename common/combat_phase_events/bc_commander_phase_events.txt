@@ -10660,3 +10660,71 @@ bc_something_he_taught_comes_back_to_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# There is a man in his own line whose entire assignment is the distance
+# between the two of them, and the field is going against him. `ordered` is the
+# KIND that means shape, and `ordered`/`down` is a formation that keeps its
+# shape while it goes backwards - which is the one thing still true out here,
+# and it is true of exactly one man. The pair deliberately hands out nothing:
+# bc_pursuit is for going forward and nobody is going forward.
+bc_the_distance_beside_him_never_changes = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_a_man_in_this_line_is_sworn_to_his_body_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Noticing, in the middle of losing a battle, exactly where one
+		# particular man has been all afternoon is a habit of attention
+		# rather than of command.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_distance_beside_him_never_changes"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_distance_beside_him_never_changes_toast
+			desc = bc_the_distance_beside_him_never_changes_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

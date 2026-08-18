@@ -2985,3 +2985,61 @@ bc_a_man_he_made_is_in_this_line_trigger = {
 	}
 	NOT = { bc_the_man_who_made_him_commands_the_far_side_trigger = yes }
 }
+
+
+# --- the cloak and the body it is over ---------------------------------------
+#
+# THE MOD KNOWS WHO WEARS THE WHITE AND HAS NEVER ASKED WHOSE BODY IT IS OVER.
+# bc_is_kingsguard_trigger is a list of seven council positions and gates
+# bc_knight_the_white_cloak; it establishes that a man took the vow and nothing
+# else. AGOT keeps the rest of it in a scripted relation, `bodyguard` /
+# `bodyguard_target`, set in agot_start_bodyguarding in
+# 00_agot_kingsguard_effects.txt when a sworn sword is actually assigned to a
+# particular person. It was at zero occurrences here.
+#
+# THE DIRECTION IS FIXED BY AGOT AND IS AGAIN NOT THE OBVIOUS ONE. The person
+# being guarded is the one who takes `set_relation_bodyguard = scope:councillor`,
+# so it is the SWORN SWORD who ends up holding `bodyguard_target`, and on any
+# root `has_relation_bodyguard_target = X` reads "X is the person I stand over".
+# Both gates below use that trigger and neither uses `has_relation_bodyguard`.
+#
+# THE TWO GATES ARE THE TWO ENDS OF ONE ARRANGEMENT, and the arrangement is not
+# a rank, an oath or an office. It is a distance. The first asks whether
+# somebody in this line is keeping that distance to root. The second asks
+# whether root is keeping it to the man commanding this side.
+#
+# THE FIRST IS AN ITERATION over `any_side_knight`, which is not a link and
+# needs no guard, and uses `root` inside the entered scope for the reason
+# recorded on bc_side_has_kin_knight_trigger. The second takes the standing
+# guard on `side_commander`, which is an optional link.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction. Being stood over is the larger fact and wins the tie.
+#
+# NEITHER IS bc_is_kingsguard_trigger AND NEITHER IS bc_knight_pulls_him_out'S
+# GATE, WHICH ARE THE TWO NEAR MISSES WORTH NAMING. The first of those says a
+# man holds an office; this says which person that office currently resolves to,
+# and the relation exists in AGOT for arrangements that are not the Kingsguard
+# at all. The second is a rescue that happens - a man reaching a commander who
+# is losing - and both of these are about a standing condition that is true all
+# afternoon whether or not anything ever comes of it.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. AGOT assigns this relation deliberately
+# and one at a time, and both gates then require the other end of it to be
+# standing on this particular field.
+bc_a_man_in_this_line_is_sworn_to_his_body_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			has_relation_bodyguard_target = root
+		}
+	}
+}
+
+bc_the_one_he_is_sworn_to_commands_this_side_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		has_relation_bodyguard_target = scope:combat_side.side_commander
+	}
+	NOT = { bc_a_man_in_this_line_is_sworn_to_his_body_trigger = yes }
+}
