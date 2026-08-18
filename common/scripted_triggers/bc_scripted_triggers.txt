@@ -8932,3 +8932,50 @@ bc_he_follows_a_man_with_five_names_on_him_trigger = {
 		}
 	}
 }
+
+# BATCH 198 - THE BOYS WHO CARRY HIS SHIELD.
+#
+# `num_of_relation_agot_squire` RETURNED ZERO ACROSS THE WHOLE MOD, AND SO DID
+# `has_relation_agot_squire`. The mod has asked the squire question exactly
+# once and from the other end: `bc_knight_the_squires_best_day` in the knight
+# file gates on `has_trait = squire`, which is a fact about a boy who has not
+# been knighted yet. These two gates are about the man who HAS one, and in
+# AGOT that is a different person by definition - the trait sits on the pupil
+# and the relation is counted on the master.
+#
+# NOR IS THIS THE WARD AND GUARDIAN PAIR AT `:2494`. That batch asks whether
+# the man across the field raised the scoped man or was raised by him: one
+# named pair of people, and nothing else. These ask how many boys of his own
+# are trailing the scoped man about today, and never care who any of them is.
+#
+# AGOT OWNS THE RELATION AND AGOT SETS THE CEILING. `agot_squire` and its
+# corresponding `agot_knight` are defined at
+# `common/scripted_relations/00_agot_scripted_relations_knighting.txt:1`, and
+# `agot_can_take_squire_trigger` refuses a man a new one at
+# `num_of_relation_agot_squire < 2`
+# (`common/scripted_triggers/00_agot_knighting_triggers.txt:115-124`). Two is
+# therefore AGOT's own limit rather than a figure invented here. AGOT reads
+# the same count again as `num_of_relation_agot_squire > 1` in a tournament
+# event's weight at `events/agot_events/agot_knighthood_events.txt:1228`, and
+# `has_relation_agot_squire` is live six times over in AGOT's own interaction
+# files, from `common/character_interactions/00_agot_knight_interactions.txt`
+# at `:431`.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Two or more against exactly one, on
+# the same count on the same man. No negation is needed and none is written.
+#
+# NO GUARDS. Both are bare character-scope counts on the scoped man. Neither
+# names an optional link as a subject or as a target, so there is nothing here
+# that needs one.
+#
+# RARITY. A man must be a knight before AGOT will hand him a squire at all,
+# and the engine will not hand him a third. The first gate is that ceiling
+# itself. The second is the single boy, which is the commoner of the two and
+# still nothing like most men standing on a field.
+bc_there_are_two_boys_of_his_out_here_trigger = {
+	num_of_relation_agot_squire >= 2
+}
+
+bc_he_has_one_boy_of_his_own_trigger = {
+	num_of_relation_agot_squire = 1
+}
