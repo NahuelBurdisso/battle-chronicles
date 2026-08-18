@@ -2368,3 +2368,71 @@ bc_the_truce_still_holds_across_the_field_trigger = {
 		has_truce = scope:combat_side.enemy_side.side_commander
 	}
 }
+
+
+# --- what the noise on the far side means -------------------------------------
+#
+# EVERY LANGUAGE KEYWORD RETURNED ZERO OVER THE WHOLE MOD. Ninety-four batches
+# read culture six ways - the same culture, the westerosi/essosi split, the
+# wildling flag, the sea between them - and never once read the layer
+# underneath culture, which is the one that decides whether a man can
+# UNDERSTAND the field he is standing on. AGOT ships twenty-six languages of
+# its own in common/culture/pillars/00_agot_language.txt.
+#
+# NEITHER IS A SUBSET OF THE CULTURE GATES AND THE TWO AXES GENUINELY CROSS.
+# Two Westerosi cultures that share nothing else share language_agot_westeros,
+# so bc_foe_is_countryman_trigger can be false while the tongue is shared; and
+# language_agot_first_men and language_agot_old_ghis exist, so two men can be
+# on the same side of bc_foe_is_from_across_the_sea_trigger and still not have
+# a word in common. That crossing is the whole reason this layer is worth
+# reading separately.
+#
+# `knows_court_language_of` RATHER THAN `knows_language` OR
+# `knows_language_of_culture`. The first needs a language key and a
+# hand-written list would rot the first time AGOT added one. The second reads a
+# culture's language, which is a fact about a people rather than about the two
+# men. `knows_court_language_of` asks the question a battle actually poses -
+# whether THIS man can follow the tongue THAT hall gives its orders in - and it
+# takes a character, so it needs no key at all. Vanilla precedent is
+# common/character_interactions/00_alliance.txt:659 and :745, both with a
+# scope argument; AGOT overrides that file and keeps both lines.
+#
+# COURT LANGUAGE IS THE RIGHT ONE FOR A BATTLE. A landless knight's court
+# language is the language of the hall he belongs to, which is exactly the
+# language the orders around him are shouted in. A trigger about his personal
+# education would be a different and much less useful question.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. One requires that he does not know the
+# far side's court language and the other that he does, so no man can answer
+# yes to both. The second then adds the culture row, which makes it disjoint
+# from bc_foe_is_countryman_trigger as well.
+#
+# THE STANDARD GUARD ON BOTH, and `enemy_side` rather than `var:bc_battle_foe`,
+# for the reasons recorded on every other far-side gate in this file.
+#
+# THE SECOND READS `root.culture` FROM INSIDE AN ENTERED SCOPE, which is the
+# same form and the same reason as bc_foe_is_countryman_trigger: inside
+# `scope:...side_commander = { }` the current scope is the far commander, and
+# root is still the man the phase event is rolling for. That is the man whose
+# culture the question is about in BOTH pools - the commander in one file, the
+# knight in the other - so the trigger is correct from either.
+bc_the_far_side_is_only_noise_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		NOT = {
+			knows_court_language_of = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
+
+bc_he_can_hear_what_they_are_saying_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		knows_court_language_of = scope:combat_side.enemy_side.side_commander
+		NOT = {
+			scope:combat_side.enemy_side.side_commander = { culture = root.culture }
+		}
+	}
+}

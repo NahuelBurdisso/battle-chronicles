@@ -7073,3 +7073,105 @@ bc_knight_he_has_read_these_terms_before = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# They are not his people and he understands every word of it.
+#
+# `adapted`/`up`. The men opposite are of another country entirely and he can
+# follow them as easily as he follows his own rank, which is an accident of
+# which halls the two of them belong to and nothing he ever earned. For most of
+# the day it is only strange. Then, some time after it turns his side's way, it
+# stops being strange and starts being information: he hears the same
+# instruction given twice, which means it was not obeyed the first time; he
+# hears one name shouted in a register nobody uses for an order; he hears
+# forty yards of men stop talking to the far side of the field and start
+# talking to each other. Nobody beside him has any of that. So he moves a half
+# pace before the line in front of him admits anything is wrong, and it is
+# right, and it keeps being right. That is a reading and a change made on it,
+# which is what the KIND means, and the verb table hands out nothing, because
+# one man hearing better than his neighbours does not brace an army.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads a language, a
+# culture and the side row, and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_knight_there_is_no_seam_in_a_shieldwall, THE OTHER KNIGHT
+# `adapted`/`up`. That is a man setting down the habits of an upbringing
+# because they do not apply here. This is a man picking up something he never
+# had a use for until this afternoon, and the two gates share no row.
+#
+# THE GATE'S CULTURE ROW IS THE POINT AND IS NOT DECORATION. Understanding a
+# countryman is not a fact about anything; every second man on the field does
+# it. Understanding people who are not your own, well enough to hear a change
+# of register in them, is the whole moment, and the row is what makes this
+# disjoint from bc_foe_is_countryman_trigger rather than a wider version of it.
+#
+# THE DESC MAY NOT QUOTE ANYTHING ANYBODY SAYS, may not name a language or a
+# people, may not have him tell anyone what he heard, may not have him be
+# thanked or believed, may not have him take a prisoner, and may not have him
+# feel sorry for the far side. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_understands_the_far_rank = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_can_hear_what_they_are_saying_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Acting on half a second of noise, correctly, in a line, is a
+		# fighting man's skill and not a linguist's.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_understands_the_far_rank"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_understands_the_far_rank_toast
+				desc = bc_knight_he_understands_the_far_rank_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

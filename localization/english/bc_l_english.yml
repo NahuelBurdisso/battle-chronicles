@@ -3710,3 +3710,62 @@
 
  bc_knight_he_has_read_these_terms_before_toast:0 "He Is The One Who Agreed To It"
  bc_knight_he_has_read_these_terms_before_toast_desc:0 "Every other man along here is guessing what the far side will do next. He is not guessing, and it is worth nothing to him. He knows how that host moves once it has the shoulder, what it does with a flank that has started to bend, how long it keeps coming after the point where a reasonable host would stop. He knows because he was standing in the losing half of it once already and because he was in the room afterwards, dry-mouthed, while it was settled. None of that changes a single thing he can do about his own forty yards. It only means that where the men beside him are learning today as it happens, he is watching an itemised list he has seen before being read out again, and there is nothing to do with the knowledge except carry it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-FIVE. What the noise on the far side means.
+#
+# NEITHER DESC MAY NAME A LANGUAGE OR A PEOPLE. Not the Common Tongue, not the
+# Old Tongue, not High Valyrian, not Dothraki, and no country of origin for
+# anybody. Both gates read a court language against a character and neither
+# knows which tongue it was.
+#
+# NEITHER MAY QUOTE A WORD ANYBODY SAYS, in any language, translated or not.
+# The first cannot because he cannot understand it; the second must not,
+# because a quoted line would be the mod inventing dialogue for a host it knows
+# nothing about.
+#
+# NEITHER MAY PUT AN INTERPRETER, A HERALD, A CAPTURED MAN OR A DESERTER ON THE
+# PAGE. The whole subject is what does and does not cross four hundred yards of
+# open air on its own.
+#
+# NEITHER MAY USE THE WORDS "barbarous", "savage", "gibberish" or "babble".
+# All four are contempt rather than observation, and the first toast in
+# particular is about a man losing an instrument, not about him despising
+# anybody.
+#
+# THE FIRST MAY NOT HAVE HIM MISHEAR SOMETHING AND ACT ON IT - that would be a
+# different and much cheaper moment - may not have anybody offer to translate,
+# may not have him wish he had learned it, and may not let him solve the
+# problem in any degree.
+#
+# THE SECOND MAY NOT HAVE HIM TELL ANYBODY WHAT HE HEARD, be asked, be
+# believed, be thanked, or be noticed doing it. It may not have him take a
+# prisoner, may not have him feel sorry for the far side, may not have him
+# explain where he learned it, and may not have the hearing be a talent - it is
+# an accident of which hall he belongs to.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list".
+ bc_it_arrives_as_weather_toast:0 "It Comes Across With No More In It Than Rain"
+ bc_it_arrives_as_weather_toast_desc:0 "There is a thing every man who has ever run a field does without once deciding to do it, which is listen to the other host. Not for words, particularly. For the correction shouted twice, which says a line is being dressed and not re-formed. For one name repeated, which says who has gone down. For the moment the noise stops being aimed at anybody and becomes men speaking to the men next to them. He has had that for nothing his whole life and today he has none of it. What crosses the open ground reaches him with exactly as much in it as rain on a roof, and so the afternoon is being run on sight, which is half of what he is used to working with, on the day it is going the wrong way. There is no fixing it before dark and he has stopped trying.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_understands_the_far_rank_toast:0 "Nobody Beside Him Knows What He Just Heard"
+ bc_knight_he_understands_the_far_rank_toast_desc:0 "They are from somewhere else entirely and he follows them as easily as he follows his own rank, which he never earned and never had a use for before this afternoon. For most of the day it was only odd. Then it turns his side's way and the oddness quietly becomes something else: an instruction given a second time, which means the first one went nowhere. A name called in a register nobody uses for an order. A stretch of them stopping speaking outward and beginning to speak to each other. The rank in front of him is still perfectly upright and admits nothing, and he moves half a pace anyway, and he is right, and he is right again eleven minutes later. He does not say a word about it to the men on either side of him, and there would be no time and no way to explain it if he tried.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

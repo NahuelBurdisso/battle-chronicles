@@ -9647,3 +9647,117 @@ bc_the_seals_are_still_wet_enough = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-FIVE. What the noise on the far side means.
+#
+# Every language keyword returned zero over the whole mod. Ninety-four batches
+# read culture six ways and never once read the layer underneath it, which is
+# the one that decides whether a man can UNDERSTAND the field he is standing
+# on. AGOT ships twenty-six languages of its own, and the two axes genuinely
+# cross: two Westerosi cultures that share nothing else share a tongue, and two
+# men on the same side of the sea can still have no word in common.
+#
+# `knows_court_language_of` takes a character rather than a language key, so
+# nothing here rots when AGOT adds a tongue, and court language is the right
+# question for a battle: it is the language the orders around a man are shouted
+# in.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The whole far side is weather, and it is going badly.
+#
+# `adapted`/`down`. A commander reads an enemy with his ears as much as his
+# eyes and never thinks about it, because he has never been without it: the
+# shouted correction that tells you a line is being dressed rather than
+# reformed, the one name being called over and over that tells you who has just
+# gone down, the moment the noise stops being orders and becomes men talking to
+# each other. All of that is free and none of it is available today. What
+# reaches him across the four hundred yards has exactly as much information in
+# it as rain on a roof, and so he is running the afternoon on sight alone,
+# which is half the instrument, on the day it is going wrong. That is a reading
+# of the field rather than a thing the field did to the army, which is what the
+# KIND means, and the verb table hands out no modifier, which is right: an army
+# is not braced or bled because its commander cannot follow the shouting.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a language and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_the_wrong_war_entirely OR ANY OTHER CULTURE TEMPLATE. Those
+# read who the far side ARE. This reads whether anything they
+# say arrives, and the two cross in both directions - a Reachman fighting a
+# Northman is fighting a foreigner he can hear perfectly, and a man facing the
+# Old Tongue has not crossed any water at all.
+#
+# THIS IS NOT bc_eleven_days_of_hearsay, THE OTHER `adapted`/`down` MOMENT ON A
+# MISSING FACT. That one is about ground he was told about too recently and the
+# information is in principle obtainable, just not by dusk. This one is about a
+# channel that is closed for the whole afternoon and would be closed on any
+# ground in the world.
+#
+# THE DESC MAY NOT NAME A LANGUAGE, may not have anybody translate, may not put
+# an interpreter or a captured man on the page, may not have him mishear
+# something and act on it, and may not have him find the far side barbarous.
+# See the loc header.
+# ---------------------------------------------------------------------------
+bc_it_arrives_as_weather = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_far_side_is_only_noise_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The better he is at reading a field, the more precisely he can
+		# feel the half of the instrument that is missing.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_it_arrives_as_weather"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_it_arrives_as_weather_toast
+			desc = bc_it_arrives_as_weather_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
