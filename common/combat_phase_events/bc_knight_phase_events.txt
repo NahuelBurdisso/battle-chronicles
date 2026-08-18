@@ -13838,3 +13838,67 @@ bc_knight_the_far_lord_has_a_rising_behind_him = {
 		}
 	}
 }
+
+
+bc_knight_he_is_working_against_the_man_he_follows = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_working_against_the_man_he_follows_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Fighting well for a man you are working to ruin is not hypocrisy so
+		# much as competence, and it wants a hard sort of competence.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_is_working_against_the_man_he_follows"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_is_working_against_the_man_he_follows_toast
+				desc = bc_knight_he_is_working_against_the_man_he_follows_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

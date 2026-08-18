@@ -8509,3 +8509,79 @@ bc_the_far_lord_has_a_rising_behind_him_trigger = {
 		}
 	}
 }
+
+
+# BATCH 192 - THE PLOT THAT IS ALREADY RUNNING WHILE THIS IS GOING ON.
+#
+# CENSUS. `is_scheming_against` returns zero across the whole mod. The mod does
+# read schemes once - the murder batch at :3848 and :3854 uses `any_scheme` and
+# `any_targeting_scheme` with `scheme_type = murder` - and that batch asks
+# whether a man has a death running SOMEWHERE, or has one running against him
+# from SOMEWHERE. Neither of them has ever asked whether the somewhere is on
+# this field.
+#
+# NEITHER GATE CONTAINS THE MURDER PAIR AND NEITHER IS CONTAINED BY IT, and
+# both counterexamples are easy. A murder scheme aimed at a man three hundred
+# leagues from here answers yes to bc_he_has_a_murder_running_somewhere and no
+# to the first gate below. A seduction aimed squarely at the man across the
+# grass answers yes to the first gate below and no to the murder gate. The two
+# pairs overlap heavily in practice and contain each other nowhere, which is
+# the test.
+#
+# THE KEY IS LIVE IN BOTH TREES AND THE BLOCK FORM IS THEIRS. Vanilla writes
+# `is_scheming_against = { type = murder target = scope:target }` at
+# `common/activities/intents/shared_intents.txt:58` and
+# `is_scheming_against = { target = $VICTIM$ type = murder }` at
+# `common/scripted_effects/00_murder_effects.txt:385` and `:484`; AGOT ships
+# both of those files with the same lines, and uses the key again in its own
+# `common/scripted_triggers/00_hunt_triggers.txt:879`. The dump documents three
+# forms and the one used below is the third - `{ target = X }` on its own,
+# "considers all schemes".
+#
+# ALL SCHEMES AND NOT MURDER ONLY, WHICH IS THE OPPOSITE CHOICE FROM THE MURDER
+# BATCH AND IS MADE FOR THE SAME REASON. There, restricting to murder was what
+# made a gate out of `any_scheme`, which on its own fires for a large fraction
+# of the AI. Here the target does that work instead: naming one specific man
+# who is standing on this field today is narrow enough on its own, and adding
+# `type = murder` on top would make the first gate a strict subset of the
+# shipped one, which is exactly what may not happen.
+#
+# TWO DIFFERENT MEN, WHICH IS BATCH 149'S ARRANGEMENT. The first asks whether
+# root is working against the far commander; the second asks whether root is
+# working against the man he is taking orders from. A commander is his own side
+# commander, so the second gate on the commander pool would be a man scheming
+# against himself and would never fire; it is a knight row by construction, the
+# way batch 149's second gate is.
+#
+# GUARDS. Both walks are optional and naming an optional link as the TARGET of
+# a trigger is a read, which is the rule the dread batch wrote down. So each
+# gate carries the `exists` as a sibling and repeats it inside a `trigger_if`
+# limit. Neither gate changes scope: `is_scheming_against` is asked of root and
+# only its target is walked.
+#
+# RARITY. A scheme is a rare thing to have running on any given day, it has to
+# be running against this one man out of everybody the schemer has ever met,
+# and then he has to be standing in a battle with him. The second is rarer
+# still: it wants a man in the line who is working against the man he is
+# fighting for, and who is nonetheless having a good afternoon.
+bc_he_is_working_against_the_man_across_from_him_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		is_scheming_against = {
+			target = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
+
+bc_he_is_working_against_the_man_he_follows_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		is_scheming_against = {
+			target = scope:combat_side.side_commander
+		}
+	}
+}
