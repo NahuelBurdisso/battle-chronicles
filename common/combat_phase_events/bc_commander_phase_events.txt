@@ -14890,3 +14890,62 @@ bc_there_is_nothing_here_for_him_to_build = {
 		}
 	}
 }
+
+bc_the_levies_are_thin_because_he_is_spread_thin = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_holds_more_ground_than_one_man_can_run_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The gap is an administrative one, so the man most likely to be
+		# noticing it in the middle of a battle is the one who counts things.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = greedy
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = generous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_levies_are_thin_because_he_is_spread_thin"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_levies_are_thin_because_he_is_spread_thin_toast
+			desc = bc_the_levies_are_thin_because_he_is_spread_thin_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

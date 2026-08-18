@@ -7222,3 +7222,69 @@ bc_he_has_gone_deep_into_the_foot_melees_trigger = {
 		value >= 65
 	}
 }
+
+
+# BATCH 172 - MORE THAN HE CAN HOLD, AND MORE THAN HE CAN CARRY.
+#
+# TWO NUMBERS THE ENGINE KEEPS ABOUT EVERY CHARACTER AND THIS MOD HAS NEVER
+# ONCE LOOKED AT. `domain_limit`, `domain_limit_available` and
+# `domain_limit_percentage` were all at zero over the whole mod, and so were
+# `current_weight` and `base_weight`. The mod has a hundred and seventy-one
+# batches of opinions about what a man is, what he did and who he knows, and
+# has never asked how much land is in his hands or how much of him there is.
+#
+# THE FIRST IS NOT A STATION GATE AND NOT A WEALTH GATE. Station is tier and
+# the mod reads it eighteen times through `highest_held_title_tier`; wealth is
+# `gold` and the mod reads that in every direction including `gold < 0` twice.
+# `domain_limit_available < 0` is neither. It is the gap between what a man
+# holds personally and what the game says one man can administer, and it goes
+# negative for reasons that have nothing to do with rank or with money: an
+# inheritance that landed all at once, a conquest he could not hand out, a
+# title he took back off somebody and has not yet found a use for. A duke can
+# be comfortably inside it and a count can be two over.
+#
+# `< 0` IS VANILLA'S OWN LINE AND IT IS THE ONE THE GAME SHOUTS ABOUT.
+# 00_realm_actions.txt:83 uses exactly `domain_limit_available < 0` as the
+# condition for the important action that tells a player he is over his limit,
+# and 09_dlc_mpo_scripted_effects.txt:655 uses the same comparison. The dump
+# is explicit that the negative side is intended: "Negative values also work
+# for checking characters that are above their limit."
+#
+# THE SECOND IS THE PLAINEST FACT ABOUT A MAN THAT THIS MOD HAS NEVER READ.
+# `current_weight` is character scope with the full comparison set and the
+# dump's own example is `current_weight > 10`. `overweight_value` is a vanilla
+# named value, defined as 50 in 10_health_values.txt:367 beside
+# `underweight_value = -50`, and vanilla compares against it directly at
+# 00_activity_scripted_modifiers.txt:2866 and :2962. Using the named value
+# rather than the literal means that if a patch moves the line, this gate
+# moves with it.
+#
+# NO WEIGHT TRAIT IS INVOLVED AND THERE IS THEREFORE NO SUBSET PROBLEM. The
+# mod reads no weight-related trait anywhere - `obese`, `overweight`,
+# `underweight` and `malnourished` were all at zero - so this gate is not a
+# narrowing of anything already shipped. It is also not the same question as a
+# trait would be: the number is continuous and the trait is a threshold with
+# its own acquisition rules, and a man can sit above the line for a season
+# without the game ever having handed him a word for it.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads on a man the
+# caller has already entered. A landless man has no domain to be over, which
+# resolves as a clean no rather than an error, and every character has a
+# weight whether anybody has ever remarked on it or not.
+#
+# RARITY IS DIFFERENT ON THE TWO SIDES AND BOTH ARE FINE. Being over the
+# domain limit is a state the AI actively works to leave, because the penalty
+# for it is severe, so it is a snapshot of a man caught mid-reshuffle. Sitting
+# above the weight line is not rare in the population at large, but sitting
+# above it while also being a knight who is winning a battle is a much smaller
+# set, and the second half of that sentence is doing the work.
+#
+# NO NEGATION BETWEEN THEM. Two different facts about two different men, one
+# about a map and one about a body, and the two pools roll separately.
+bc_he_holds_more_ground_than_one_man_can_run_trigger = {
+	domain_limit_available < 0
+}
+
+bc_there_is_a_great_deal_of_him_trigger = {
+	current_weight >= overweight_value
+}
