@@ -9544,3 +9544,123 @@ bc_there_is_nothing_built_on_this_ground_trigger = {
 		}
 	}
 }
+
+
+# BATCH 206 - THE OTHER FIGHT THAT IS ALREADY HAPPENING ON THIS GROUND.
+#
+# CENSUS. `any_army_in_location`, `is_army_in_siege` and `army_owner` return
+# zero across the whole mod, and `is_at_war_with` appears three times, every
+# one of them the `is_at_war_with_liege` batch at :2901. The word "siege"
+# turns up sixteen times and not one of them is a gate: the note at :5827 that
+# `is_under_siege` is absent from the 1.19.0.6 dump, the `siege_phase_time`
+# ceiling read off a man's own trait XP at :7211, and the rest prose. Batch
+# 121 at :3952 counts the armies a MAN has raised; batch 190 at :8409 reads
+# the one army standing UNDER HIM; batch 204 at :9443 asks whether this
+# ground has already been taken. Nothing has ever asked what OTHER host is
+# standing in this province and what it is doing here.
+#
+# THE PRECEDENT IS AGOT'S OWN AND THESE TWO GATES ARE ITS TWO HALVES PUT
+# TOGETHER. `common/scripted_triggers/00_agot_lmf_triggers.txt:3` is a trigger
+# of AGOT's own making named `capital_province_being_besieged`, and its entire
+# body is `capital_province = { any_army_in_location = { army_owner = {
+# is_at_war_with = root } } }`. `common/decisions/agot_decisions/
+# 00_agot_colonization_decisions.txt:38` writes `any_army_in_location = {
+# is_army_in_siege = yes }` inside `root.location`, eight lines below the
+# `is_occupied`/`is_raided` pair batch 204 took from the same block. AGOT
+# writes the owner walk again against a saved scope rather than root at
+# `events/agot_lmf_events/agot_lmf_heir_events.txt:7489`, and reads
+# `is_army_in_siege` throughout its own content:
+# `common/scripted_triggers/00_agot_dragon_triggers.txt:1139`,
+# `common/story_cycles/agot_story_cycle_scenario_ninepenny_kings.txt:1165`,
+# `events/agot_events/agot_dragon_siege_events.txt:70`. Vanilla carries both
+# keys in one block at
+# `common/decisions/dlc_decisions/ep_3/06_ep3_laamp_decisions.txt:1489` and
+# `:1490`. A dotted event target on the right of `is_at_war_with` is ordinary
+# AGOT script - `is_at_war_with = scope:army.army_owner` and
+# `is_at_war_with = root.top_liege` are both written in its files.
+#
+# THE KEY SAYS IT COUNTS INTERRUPTED SIEGES, AND THAT IS THE WHOLE POINT.
+# triggers.log gives `is_army_in_siege` as "Is the scoped army in a siege
+# (this includes a siege interrupted by combat)?". A field battle fought in a
+# province where a siege is standing is nearly always a relief force arriving
+# at the wall, which means the besieging host is one of the two armies in this
+# very combat. The first gate is that afternoon seen from the relief's side
+# and the second is the same afternoon seen from the wall.
+#
+# DISJOINT BY CONSTRUCTION, THE FIRST WINNING THE TIE, which is batch 121's
+# arrangement at :3963. The first wants a besieging host here belonging to
+# somebody this side's commander is at war with. The second wants one he is
+# NOT at war with - his own side's siege, or a stranger's quarrel being
+# pressed on the same ground - and carries the first's negation outright.
+#
+# BOTH READ scope:combat_side.side_commander AND NOT root, deliberately. The
+# knight who fires the second is a household man who is usually in nobody's
+# war of his own, so `is_at_war_with = root` would come back false for every
+# besieger alive and the gate would fire for very nearly everybody. The man
+# whose quarrel this is is the man leading the side, so he is the one both
+# gates ask about, and the commander template reads the same fact about the
+# same person it would have read from root anyway.
+#
+# NOT THE FORTIFICATION, OCCUPATION OR SIEGE-ENGINE ROWS. Batch 148 at :5646
+# and :5656 asks whether there are WALLS here, which is true of a province
+# standing empty in peacetime; these ask whether anybody is at them today, and
+# a `fort_level` 10 province is unbesieged in most years of its life. Batch
+# 204 at :9443 asks whether the ground has already fallen or is being
+# stripped, and a siege in progress is precisely a holding that has NOT fallen
+# yet. `:7211` reads a man's own `military_engineer` trait XP - what he knows
+# about opening walls, in any province, in any year, war or no war. No gate
+# below is a subset or a superset of any of them.
+#
+# GUARDS. Two optional links are named, so both gates carry
+# `exists = scope:combat_side.combat.location` and
+# `exists = scope:combat_side.side_commander` as siblings and repeat both
+# inside the `trigger_if` limit before either one is read. `side_commander` is
+# named as the TARGET of `is_at_war_with`, which counts as a read and takes
+# the guard. `any_army_in_location` is an iterator rather than a link and so
+# takes no guard of its own.
+#
+# RARITY. Most battles in Westeros are fought on a road, a ford or an open
+# field with nothing under siege for fifty miles in any direction. The first
+# wants the enemy's siege standing in this same province and this side losing
+# the fight to lift it; the second wants this side to be the one at the wall,
+# with a relief force on top of it, and winning anyway.
+bc_the_enemy_is_already_at_a_wall_here_trigger = {
+	exists = scope:combat_side.combat.location
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.combat.location
+			exists = scope:combat_side.side_commander
+		}
+		scope:combat_side.combat.location = {
+			any_army_in_location = {
+				is_army_in_siege = yes
+				army_owner = {
+					is_at_war_with = scope:combat_side.side_commander
+				}
+			}
+		}
+	}
+}
+
+bc_this_side_is_the_one_at_the_wall_trigger = {
+	exists = scope:combat_side.combat.location
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.combat.location
+			exists = scope:combat_side.side_commander
+		}
+		scope:combat_side.combat.location = {
+			any_army_in_location = {
+				is_army_in_siege = yes
+				army_owner = {
+					NOT = {
+						is_at_war_with = scope:combat_side.side_commander
+					}
+				}
+			}
+		}
+	}
+	NOT = { bc_the_enemy_is_already_at_a_wall_here_trigger = yes }
+}
