@@ -3496,3 +3496,56 @@
 
  bc_knight_a_man_who_runs_here_runs_into_it_toast:0 "There Is Nowhere To Go That Is Not Also Theirs"
  bc_knight_a_man_who_runs_here_runs_into_it_toast_desc:0 "It is going badly and there is a thing every man along this stretch has worked out separately and none of them have said: in a country like this one, running is not a direction. Every treeline, every ford, every sunken lane for a day in any direction is known to the men trying to kill him and unknown to him, which means the ground behind the line is not an escape, it is simply more of the same problem with fewer people in it. So the shield stays up and the feet stay planted and the whole miserable business gets done standing, because standing is the only version of this afternoon that has ever worked for anybody in his position, and everyone here can feel that without being told.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-ONE. What was chosen for him, and what he chose.
+#
+# NEITHER DESC MAY NAME A LIFESTYLE, A FOCUS, A PERK OR A TREE. Both gates read
+# an education trait against a lifestyle, and both toasts have to read as a
+# fact about a man rather than as a readout of two fields on his sheet.
+#
+# NEITHER MAY USE THE WORDS "natural", "gift", "born to it", "vocation" or
+# "calling". All five are the reader's words about a man rather than his own,
+# and all five turn a plain observation into a verdict.
+#
+# NEITHER MAY PUT A TUTOR, A MASTER-AT-ARMS OR A SEPTON ON THE PAGE, and
+# neither may have him remember a particular day of his childhood. The
+# education trait is a fact about what was decided, not a scene, and the mod
+# does not have the scene.
+#
+# THE FIRST MAY NOT NAME THE THING HE DOES INSTEAD - no ledgers, no books, no
+# hawks, no council chamber, no bedchamber. The whole point is that the habits
+# arrive without their origin attached. It may not have anybody praise him or
+# remark on it, may not let him be pleased with himself, may not have him
+# compare himself to another commander, and may not have him conclude anything
+# about his life.
+#
+# THE SECOND MAY NOT NAME AN AGE, A YEAR OR A NUMBER OF YEARS - not "thirty",
+# not "twenty years", not "late". It may not name the trade he came from, may
+# not have him regret the choice, may not have another man sneer at him or
+# notice him at all, may not have him think about who taught him, may not have
+# him be afraid, and may not kill him or take a limb. The cost is arriving in
+# quarter-beats, not in wounds.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction".
+ bc_the_habits_he_actually_kept_toast:0 "He Is Doing This The Way He Does Everything Else"
+ bc_the_habits_he_actually_kept_toast_desc:0 "It is going well and the reasons it is going well are not soldier's reasons. He has held something back that nobody asked him to hold back. He has done the four things in the order that means none of them has to be done twice. He knows, without checking, what he has left, because knowing what is left is a habit he acquired somewhere that had nothing to do with any of this. All of that was in him before the horns went, and none of it was put there by the men who decided, once, what he was going to be. It works. It has been working since mid-morning, and the only strange part of it is how little of what he was taught he has needed today.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_did_not_start_at_seven_toast:0 "He Chose This, And It Is Charging Him For The Difference"
+ bc_knight_he_did_not_start_at_seven_toast_desc:0 "Nobody handed him this. He went and got it, on his own time, off men who had no particular reason to teach him, and he got far enough with it to be standing where he is standing. That was never the doubtful part. The doubtful part is the one that only ever shows up on an afternoon like this one, when it has gone long and gone wrong and there is no thinking left in him to spend: the block is right and comes a hair late, the shield goes back to somewhere reasonable instead of to the one place, and the difference between doing a thing correctly and never having done it any other way turns out to be worth exactly that much. He is still on his feet. He is simply on them expensively.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

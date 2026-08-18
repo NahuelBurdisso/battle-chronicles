@@ -2184,3 +2184,45 @@ bc_the_ground_belongs_to_the_far_side_trigger = {
 		}
 	}
 }
+
+
+# --- what was chosen for him, and what he chose ------------------------------
+#
+# `has_lifestyle` RETURNED ZERO OVER THE WHOLE MOD. Batch eighty-one read
+# education, which is a thing that was decided about a boy of eight by adults
+# who had their own reasons and which is fixed by sixteen. A lifestyle is the
+# opposite: it is what a grown man with his own household spends his own hours
+# on, year after year, and the engine tracks it separately for exactly that
+# reason. Nothing here had ever asked what he chose.
+#
+# NEITHER GATE READS A LIFESTYLE ON ITS OWN, and that is the whole design.
+# `has_lifestyle = martial_lifestyle` on a commander would fire for a very
+# large share of the men who command anything, and a gate that fires for nearly
+# everybody is not a gate. What is worth reading is the DISAGREEMENT between
+# the two: the man who was pointed at a thing and walked somewhere else, and
+# the man who was pointed away from a thing and walked back to it.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION AND ON BOTH ROWS. One requires a martial
+# education and no martial lifestyle; the other requires no martial education
+# and a martial lifestyle. Each row of one is the exact negation of the
+# corresponding row of the other, so no man can answer yes to both.
+#
+# NEITHER IS A SUBSET OF THE BATCH EIGHTY-ONE GATES. Those read a learning
+# education and an intrigue education with nothing else attached. The first of
+# these excludes both by requiring a martial education; the second includes
+# both and also stewardship and diplomacy, and then narrows all four by a row
+# they never had.
+#
+# `has_education_martial_trigger` IS VANILLA'S (00_scripted_triggers.txt:45),
+# the same wrapper batch eighty-one used for the learning and intrigue
+# branches, and it is level-agnostic - a martial education of any grade counts,
+# because the question is what the boy was pointed at and not how well it took.
+bc_he_was_pointed_at_war_and_left_trigger = {
+	has_education_martial_trigger = yes
+	NOT = { has_lifestyle = martial_lifestyle }
+}
+
+bc_he_was_pointed_elsewhere_and_came_back_trigger = {
+	NOT = { has_education_martial_trigger = yes }
+	has_lifestyle = martial_lifestyle
+}

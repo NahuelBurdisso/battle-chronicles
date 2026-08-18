@@ -6658,3 +6658,109 @@ bc_knight_a_man_who_runs_here_runs_into_it = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Nobody pointed him at this. He walked back to it late, and it is going badly.
+#
+# `bloodied`/`down`. He chose this. Some year in his twenties, with no tutor
+# and nobody's blessing, he decided that this was the thing he was going to be
+# and set about teaching himself out of other men's afternoons. It has taken.
+# He is here, in the line, with a knight's place in it. What he does not have
+# is the seven-year-old's fifteen thousand repetitions, and there is a specific
+# hour in a losing fight when that stops being a thing he can cover with will
+# and starts being a thing that is measured on his body - a parry that arrives
+# correct and a quarter-beat late, a shield that comes back up from the wrong
+# place because it was never put down from the right one. The verb table hands
+# out bc_bloodied, which is the honest reading: the cost is going onto the
+# army's account through him.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads an education, a
+# lifestyle and the side row, and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_there_is_no_seam_in_a_shieldwall. That one requires an
+# INTRIGUE education specifically and is on the winning side at `adapted`/`up`,
+# and its argument is a man setting a lifetime of habits DOWN because they do
+# not apply here. This is a man who picked his habits up on purpose, twenty
+# years too late to get them free, and is paying the difference. Neither gate
+# contains the other: that one takes any intrigue-raised knight however he
+# spends his life, this one takes the learning-, stewardship- and
+# diplomacy-raised as well and then narrows all four by a row that one never
+# had.
+#
+# THIS IS NOT bc_knight_the_squires_best_day OR bc_knight_twice_as_good. Those
+# read a trait about who he was born or apprenticed as. This reads a
+# disagreement between two things the engine holds about the same man, and a
+# trueborn merchant's son who took up the sword at thirty answers no to both of
+# those and yes to this.
+#
+# THE DESC MAY NOT NAME AN AGE, A YEAR OR A NUMBER OF YEARS, may not name the
+# trade he came from, may not have him regret the choice, may not have another
+# knight sneer at him or notice him at all, may not have him think about who
+# taught him, and may not kill him. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_did_not_start_at_seven = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_was_pointed_elsewhere_and_came_back_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who taught himself all the way up to a knight's place is a
+		# man who has spent a great deal of time thinking about exactly
+		# which parts of it he does not have.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_did_not_start_at_seven"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_did_not_start_at_seven_toast
+				desc = bc_knight_he_did_not_start_at_seven_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
