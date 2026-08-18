@@ -9871,3 +9871,108 @@ bc_he_taught_that_retreat = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-SEVEN. Which way the war travelled.
+#
+# THE MOD HAS READ THE WAR SCOPE THREE TIMES - how old, what kind, whose
+# signature - and never once asked who came to whom. Ninety-six batches, and
+# the first question anybody asks about a war has never been in the file.
+#
+# TWO TEMPLATES, ONE PER POOL, AND NO MAN CAN ANSWER YES TO BOTH GATES. The
+# attacker list and the defender list are the two halves of one object; see the
+# trigger header for why there is no explicit NOT here and none needed.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The season was his to choose. He is a named attacker, the side is winning.
+#
+# `measured`/`up`, ONE OF THE THREE SMALLEST CELLS IN THE CENSUS. `measured`
+# is the mod's word for reading the afternoon rather than being changed by it,
+# and this is the coldest version of that reading available: a man watching a
+# thing arrive that he ordered months ago. The verb table hands out nothing for
+# it, which is right. Nothing is braced, nothing is bled, nothing is chasing.
+# The army is doing what it was pointed at.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the war link and the
+# side row and never asks about a rung, so the grant is live.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_the_war_is_his_trigger'S MOMENT. That gate asks whether he is
+# the war leader - whether the quarrel is HIS to settle and there is nobody
+# further up to carry the blame. This one asks a different question with a
+# different answer set: a vassal called into his liege's invasion is an
+# attacker and is nobody's war leader, and a lord defending his own seat is a
+# war leader and no kind of attacker. Neither gate is a subset of the other and
+# neither argument is the other's. Ownership and direction are separate facts.
+#
+# THIS IS NOT bc_the_word_they_will_write_it_under EITHER. That man is thinking
+# about the account of the afternoon. This one is not thinking about the
+# afternoon at all; he is thinking about the winter before it, and the
+# afternoon is only the invoice arriving.
+#
+# THE DESC MAY NOT NAME THE WAR, ITS CAUSE OR ITS CLAIM, may not put a month or
+# a year or a count of days on the page, may not have him pleased with himself,
+# may not call the arrangement clever, may not have anybody praise the plan to
+# him, and may not have any part of the plan fail. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_season_was_his_to_choose = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_the_one_who_crossed_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Choosing a season is a stewardship act done a year early, and the
+		# men who do it are the men who can be bothered to.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_season_was_his_to_choose"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_season_was_his_to_choose_toast
+			desc = bc_the_season_was_his_to_choose_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

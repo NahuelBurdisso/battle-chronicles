@@ -2487,3 +2487,63 @@ bc_the_man_who_raised_him_commands_the_far_side_trigger = {
 		}
 	}
 }
+
+
+# --- which way this war travelled -------------------------------------------
+#
+# THE MOD HAS READ THE WAR THREE TIMES AND NEVER ASKED WHICH WAY IT WENT.
+# bc_war_is_long_trigger asks how old the quarrel is, bc_war_is_a_rebellion_trigger
+# asks what kind of quarrel it is, and bc_the_war_is_his_trigger asks whether
+# this man is the one who will sign whatever gets signed. Not one of the three
+# asks the first thing anybody asks about a war, which is who came to whom.
+# `is_attacker_in_war` and `is_defender_in_war` have both returned zero over
+# ninety-six batches.
+#
+# THESE ARE CHARACTER TRIGGERS WITH A WAR TARGET, NOT WAR TRIGGERS. The
+# 1.19.0.6 dump has them as "is the scope character in the target war as an
+# attacker" and the defender equivalent, supported scope character, supported
+# target war. So the shape is the opposite of bc_the_war_is_his_trigger, which
+# walks to the war and compares a character back against it: these are read on
+# the man and handed the war. AGOT precedent for the pair is
+# common/character_interactions/00_alliance.txt:1007 and :3811.
+#
+# THE WALK IS STILL bc_war_is_long_trigger'S, EXACTLY. A combat can exist
+# without a war behind it - the engine's own link is optional - so the `exists`
+# sits as a sibling and the read is nested in a trigger_if that repeats it.
+# Being the target rather than the scope does not make an absent link safe to
+# hand to a trigger, and this mod does not gamble on how the engine feels about
+# being given nothing.
+#
+# THEY ARE DISJOINT WITHOUT AN EXPLICIT NOT, WHICH IS UNUSUAL HERE AND WORTH
+# SAYING OUT LOUD. The last three batches each carried the negation of the
+# paired gate, because in every one of those cases the engine would cheerfully
+# answer yes twice. A war is not that shape. The attacker list and the defender
+# list are the two halves of one object, and being written into one is the
+# thing that keeps a man out of the other, so no NOT is added here and none is
+# missing.
+#
+# THE THIRD ANSWER IS NO TO BOTH, AND IT IS THE COMMON ONE. A man who is not a
+# named party - a courtier, a household knight, a hired sword, a son riding
+# with his father - is in neither list while standing in the exact middle of
+# the battle. That silence is correct rather than a hole, and it is also what
+# keeps these two off the "fires for nearly everybody" pile: in the knight pool
+# especially, the gate picks out the men whose own name is on the quarrel, not
+# the far larger number who arrived with somebody who has one.
+#
+# ROOT IS THE MAN THE TEMPLATE IS ABOUT in either pool, so either gate is
+# usable from either, for the reason recorded on bc_foe_is_countryman_trigger.
+bc_he_is_the_one_who_crossed_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		is_attacker_in_war = scope:combat_side.combat.combat_war
+	}
+}
+
+bc_the_war_came_to_him_trigger = {
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		is_defender_in_war = scope:combat_side.combat.combat_war
+	}
+}

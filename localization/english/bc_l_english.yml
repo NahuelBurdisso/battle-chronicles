@@ -3826,3 +3826,63 @@
 
  bc_knight_the_lesson_holds_the_line_toast:0 "The One Part He Can Still Do Correctly"
  bc_knight_the_lesson_holds_the_line_toast_desc:0 "Everything clever has gone out of him. It is that hour. What is left is the piece that was put in before any of the clever parts existed, low down, under where the fear reaches: where the left foot goes, what the shield does when the weight comes on, that the man beside you is the point of the entire exercise. He is not deciding to do it. It is simply what his body does when the day turns, and the two men on either side of him set themselves because he did, and the stretch stands for a good while longer than it has any business standing. It changes nothing about how this ends. He is aware of that. He is also aware, in a distant and unhelpful way, that the one thing he is still doing properly out here is somebody else's, and that the somebody else is four hundred yards away winning.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-SEVEN. Which way the war travelled.
+#
+# NEITHER DESC MAY NAME THE WAR, its cause, its claim, the title being fought
+# over, the man at the top of either side, or any place at all. The engine
+# holds two list memberships and nothing else, and everything else would be
+# invented.
+#
+# NEITHER MAY PUT A DATE ON THE PAGE. No month, no year, no count of days, no
+# season named outright even where the first one is entirely about seasons.
+# The first toast may describe weather and roads and grain, because a man
+# standing in a field can see all three; it may not tell the reader when.
+#
+# NEITHER MAY QUOTE OR DESCRIBE A DOCUMENT. Batch ninety-four owns paper. Both
+# of these men know things that are written down somewhere, and neither may go
+# and look at the writing.
+#
+# NEITHER MAY REPORT ON THE WAR AS A WHOLE. Who is winning the afternoon is a
+# thing a man on the field can see. Who is winning the war is not, and the mod
+# does not let anybody guess.
+#
+# THE FIRST MAY NOT HAVE HIM PLEASED WITH HIMSELF, may not use the word clever
+# or any synonym of it about him, may not have anybody praise the arrangement
+# to his face, may not have him explain it to a subordinate, and may not have
+# any part of it go wrong so that he can be seen recovering. Nothing goes
+# wrong. That is the entire content of the moment.
+#
+# THE SECOND MAY NOT NAME WHAT HE STANDS TO LOSE, may not have him blame the
+# man who brought him, may not stage leaving as an option he weighs and nobly
+# declines, may not have anybody notice what he is doing, and may not send
+# anybody to get him out. Nobody is coming.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away".
+ bc_the_season_was_his_to_choose_toast:0 "None Of This Is Arriving Unannounced"
+ bc_the_season_was_his_to_choose_toast_desc:0 "He is not surprised by any of it, and that turns out to be the whole of what he feels. The roads held. The grain was in. A levy raised at the point in the year he raised it is a levy of men who have nothing at home still standing in a field, and men like that come when they are called and stay when they are stood somewhere. The far side is where he expected them to be, because there was nowhere else on this stretch of country a sensible man would put them. He does not think of any of that as skill and would not thank anybody for saying it was. It is only the difference between an afternoon that happens to a man and an afternoon a man ordered a long time ago in a warm room with the shutters closed, and the second sort arrives with hardly anything left in it for him to decide. He watches it come in the way a man watches a barn go up after he has already paid for the timber.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_cannot_be_the_one_who_left_toast:0 "There Is No Version Of This Where He Is Carried Off It"
+ bc_knight_he_cannot_be_the_one_who_left_toast_desc:0 "It is going badly, and there is a shape this could take in which a man is allowed to be swept off the end of it. Most of the men beside him have that shape available. They came because somebody they follow came, and a tide that brings a man to a field can take him off it again, and nobody in any hall says his name twice about it afterwards. That is not available to him. His name is in the quarrel itself, put there in a small careful hand by somebody who has never been within sight of a field like this one, and what is being settled out here is not whether a battle is lost. So the fighting quietly turns into something else in his hands, without him announcing it to anybody: he stops trying to win any of this and starts working out what can still be kept from them before dark. This hedge. This next hour. He is aware it is a poor trade and he makes it, and he is not certain, in the part of his head that is still adding, whether the thing he is out here protecting is the land or only the sentence that gets written about him either way.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

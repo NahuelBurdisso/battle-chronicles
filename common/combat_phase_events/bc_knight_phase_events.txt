@@ -7281,3 +7281,112 @@ bc_knight_the_lesson_holds_the_line = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He cannot be the one who left. He is a named defender, the side is losing.
+#
+# `adapted`/`down`, THE RAREST PAIR IN THE LEDGER. `adapted` is the mod's word
+# for reading the field and changing what you are doing about it, and this is
+# the version of it that has nothing to do with terrain: what he re-reads is
+# not the ground but the question. He came out here to win a battle. Somewhere
+# in the going-backwards he works out that the battle is not the thing being
+# decided about him, and starts fighting for a different and much smaller
+# outcome. The verb table hands out nothing, which is right - he is not braced,
+# not bled and not chasing, he is doing arithmetic.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads the war link and
+# the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THE GATE IS THE POINT AND IT IS NARROW ON PURPOSE. Most knights in this mod
+# are courtiers and hired swords who are in neither war list, and they answer
+# no. The men this fires for are the ones whose own name went into the quarrel
+# - a landed knight called in, a lord serving in somebody else's line - and the
+# whole moment is the difference between those two kinds of man standing in the
+# same rank on the same bad afternoon.
+#
+# THIS IS NOT bc_knight_where_the_wages_are OR bc_they_are_not_his_smallfolk.
+# Those are about what a man is owed and who he owes it to. This one is about
+# a man who is not owed anything by anybody, because the obligation runs the
+# other way and has his name at the bottom of it.
+#
+# THIS IS NOT bc_knight_the_ground_here_was_worth_something. That man re-reads
+# the country he is standing in. This one never looks at the ground; the thing
+# he re-reads is what losing will actually cost him, which is a question the
+# field cannot answer and the settlement can.
+#
+# THE OPPOSITE END OF bc_the_season_was_his_to_choose AND NOT ITS MIRROR. That
+# moment is a man collecting on a decision made in a warm room a year ago. This
+# one is a man discovering that somebody else's warm room is where his afternoon
+# came from. The gates are disjoint and the pools roll separately, so no field
+# produces both.
+#
+# THE DESC MAY NOT NAME WHAT HE STANDS TO LOSE, may not put a place, a title or
+# a number on the page, may not have him blame his lord, may not have him
+# consider leaving and heroically decline, and may not let anybody come and get
+# him. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_cannot_be_the_one_who_left = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_war_came_to_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man with a name in the quarrel and the standing to keep it is
+		# the man who has already worked out what the terms will say.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_cannot_be_the_one_who_left"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_cannot_be_the_one_who_left_toast
+				desc = bc_knight_he_cannot_be_the_one_who_left_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
