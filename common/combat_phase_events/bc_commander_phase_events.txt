@@ -15303,3 +15303,62 @@ bc_the_law_at_home_says_they_must_obey_him = {
 		}
 	}
 }
+
+bc_the_hall_at_home_is_thinner_than_his_rank = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_hall_falls_short_of_his_rank_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A hall goes thin one decision at a time, and the man who can name
+		# every one of those decisions is the man who kept the accounts himself.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = generous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = greedy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_hall_at_home_is_thinner_than_his_rank"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_hall_at_home_is_thinner_than_his_rank_toast
+			desc = bc_the_hall_at_home_is_thinner_than_his_rank_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
