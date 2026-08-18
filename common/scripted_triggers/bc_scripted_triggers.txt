@@ -7089,3 +7089,66 @@ bc_at_least_three_men_alive_count_him_an_enemy_trigger = {
 bc_at_least_three_men_alive_count_him_a_friend_trigger = {
 	num_of_relation_friend >= 3
 }
+
+
+# BATCH 170 - THE DESK HE SITS AT, AND THE TONGUES HE ANSWERS IN.
+#
+# `is_councillor` WAS AT ZERO AND THE MOD ALREADY HAD OPINIONS ABOUT COUNCILS.
+# bc_commander_phase_events.txt:4544 gates on has_council_position =
+# councillor_marshal and :4609 on councillor_castellan, both of them men whose
+# seat is about war. Nothing has ever asked the plainer question of whether a
+# man sits on anybody's council at all, and the answer to that one is
+# interesting precisely where the two shipped gates are not.
+#
+# SO THE FIRST GATE CARRIES BOTH SHIPPED SEATS AS EXPLICIT NEGATIONS. A bare
+# `is_councillor = yes` is true of every marshal and every castellan, which
+# makes it a strict superset of two gates already in the mod and therefore not
+# a new question. Written with the two exclusions it becomes one: he sits on
+# somebody's council and his seat is NOT one of the two that has anything to
+# do with fighting. He is a chancellor, a steward, a spymaster or a spiritual
+# head, which is to say a man somebody keeps for a skill that is no use at all
+# on the ground he is standing on this afternoon.
+#
+# THE EXCLUSIONS ARE WRITTEN AS TWO `NOT` ROWS AND NOT AS ONE `NOR`. Both
+# spellings compile and both mean the same thing, but two rows survive a third
+# war seat being added later by anybody who reads this comment, and a `NOR`
+# invites somebody to add the third key inside it without noticing that the
+# gate has changed shape.
+#
+# `has_council_position` TAKES NO GUARD AND NEITHER DOES `is_councillor`. Both
+# are bare character-scope reads on a man the caller has already entered, and
+# a man on no council answers no to all three rows without traversing
+# anything. The engine keys are in the 1.19.0.6 dump; vanilla uses
+# `is_councillor = yes` live at 00_vassal_interactions.txt:1645 and
+# `is_councillor = no` at 00_scheme_interactions.txt:2407.
+#
+# THE SECOND GATE IS THE LANGUAGE COUNT, WHICH IS NOT THE LANGUAGE QUESTION
+# THE MOD ALREADY ASKS. bc_shares_court_language_trigger and its negation at
+# :2445 and :2454 ask whether one man can follow the orders being shouted
+# around another man - a fact about a pair. `num_of_known_languages` asks how
+# many tongues one man carries, which neither implies nor is implied by it: a
+# man with three languages may hold none that the far commander's hall uses,
+# and a man who shares that hall's tongue may know only his own.
+#
+# THREE IS VANILLA'S OWN BAR AND IT IS A HIGH ONE. The tradition at
+# 00_ritual_traditions.txt:1585 pairs `num_of_known_languages >= 3` with
+# `piety_level >= 3` and charges its unfulfilled-criteria penalty to anybody
+# who misses either, which is vanilla saying in script that three tongues is
+# an accomplishment rather than a baseline. Vanilla also keeps a
+# `language_soft_cap` named value (00_culture_values.txt:516) for exactly the
+# reason that most characters never approach it. A man who holds three has
+# spent years somewhere he was not born.
+#
+# THE TWO GATES ARE NOT NEGATED AGAINST EACH OTHER, for the standing reason:
+# they read two different facts about two different men, one about a
+# commander's employment and one about a knight's education, and the two pools
+# roll separately.
+bc_his_seat_on_the_council_has_nothing_to_do_with_war_trigger = {
+	is_councillor = yes
+	NOT = { has_council_position = councillor_marshal }
+	NOT = { has_council_position = councillor_castellan }
+}
+
+bc_he_can_follow_three_tongues_without_help_trigger = {
+	num_of_known_languages >= 3
+}
