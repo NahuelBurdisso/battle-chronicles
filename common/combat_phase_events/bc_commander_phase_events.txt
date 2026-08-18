@@ -10387,3 +10387,72 @@ bc_nothing_smaller_than_this_will_carry = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He may lawfully hold the man commanding the far side, and he is winning, so
+# the afternoon quietly stops being a battle and becomes an arrest with several
+# thousand men attending it. That change of purpose is what `adapted` is for -
+# the commander reading the field and altering what he is doing about it - and
+# the `up` is that the alteration is working. The army gets nothing out of the
+# KIND, by design: nothing about a change of intention braces a line, bleeds it
+# or sets it running.
+bc_he_would_rather_have_him_than_the_field = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_law_would_let_him_take_that_man_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing precisely what you are entitled to do with a man once you
+		# have him, and precisely what is voided if he dies on the way, is
+		# the one kind of learning that is useful at three in the afternoon.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_would_rather_have_him_than_the_field"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_would_rather_have_him_than_the_field_toast
+			desc = bc_he_would_rather_have_him_than_the_field_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

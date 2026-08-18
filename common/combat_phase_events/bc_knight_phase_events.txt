@@ -7782,3 +7782,76 @@ bc_knight_he_cannot_be_seen_to_want_this = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man commanding the far side has a lawful reason to hold him, and this
+# side is losing, so the ordinary exit from a lost battle is closed. Yielding
+# does not buy him a tent and a price; it buys him a room with a door. A man in
+# that position stops fighting to survive the day and starts fighting so that
+# nobody standing near him can afford to reach for him, which costs everyone
+# involved a great deal of blood - `bloodied` and `down`, the line paying for
+# one man's arithmetic.
+bc_knight_there_is_no_ransom_in_it_for_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_far_side_could_take_him_lawfully_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Making yourself too expensive to collect, rather than merely
+		# dangerous, is a specific piece of work and takes a specific
+		# amount of skill to keep up for an hour.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_there_is_no_ransom_in_it_for_him"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_there_is_no_ransom_in_it_for_him_toast
+				desc = bc_knight_there_is_no_ransom_in_it_for_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

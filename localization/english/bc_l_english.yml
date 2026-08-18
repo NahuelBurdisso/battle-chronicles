@@ -4126,3 +4126,70 @@
 
  bc_knight_he_cannot_be_seen_to_want_this_toast:0 "The Line Is Failing At Precisely The Rate He Once Hoped It Would"
  bc_knight_he_cannot_be_seen_to_want_this_toast_desc:0 "The rank gives another few feet and he goes back with it, no faster and no slower, and puts his shield where the sergeant expects a shield to be. He is very good at this today. He is being watched by nobody in particular and by every man within reach at the same time, which is the ordinary condition of standing in a line, and it has never once mattered before what his face was doing. It matters now. Everything happening in front of him is the thing he put his name to at a table in a cold room two winters ago, arriving on its own, without him, at no cost to him whatever, and if one man beside him ever comes to think that this occurred to him at any point in the afternoon then the table and the cold room and every name on the page go into the fire together. So he works. He takes his turn forward when it is his turn. He is tired at the correct hour and afraid in the correct places and he does not permit himself a single thought about any of it until well after dark.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 102 - who is allowed to put whom in a cell ------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE REASON. Not the crime, not the oath broken,
+# not the year it happened, not who ruled on it. The engine holds an
+# entitlement; the page holds two men who both know it exists and neither of
+# whom is going to explain it to a sergeant.
+#
+# NEITHER MAY STAGE THE CAPTURE. Nobody is taken, nobody yields, nobody is
+# disarmed, nobody is walked anywhere, and no hand closes on any bridle. Both of
+# these are about the shape an afternoon takes when the ending is available, not
+# about the ending arriving.
+#
+# NEITHER MAY PUT A PRICE ON ANYTHING. No sums, no ransom figures, no comparison
+# of what a man is worth alive against what he is worth dead. The whole weight
+# of both moments is that the ordinary trade is not on offer.
+#
+# NEITHER MAY USE THE WORDS "law", "lawful" or "legal". Men in armour do not
+# talk like clerks and this is not a document being read out; it is a thing both
+# of them have known since before they got up this morning.
+#
+# THE FIRST MAY NOT GLOAT, may not be shown as cruel, and may not want the man
+# for anything the page names. It may not have him give an order aloud that
+# explains the change, may not have the men understand what has changed, and may
+# not have the far side notice. It may not fail — he is winning and it is
+# working.
+#
+# THE SECOND MAY NOT DESCRIBE A CELL, imagine one, remember one, or mention a
+# door, a room, a chain or a key. It may not have him decide anything, since the
+# decision was made for him by somebody else years ago. It may not make him
+# heroic, may not have anybody thank or admire him, may not kill him on the
+# page, and may not let him get away.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark".
+ bc_he_would_rather_have_him_than_the_field_toast:0 "He Stops Trying To Break Them And Starts Trying To Close Around Them"
+ bc_he_would_rather_have_him_than_the_field_toast_desc:0 "Everything he has done since noon has been aimed at making the far side come apart, and it is coming apart, and somewhere in the middle of watching it happen he understands that this is the wrong thing to be building. A host that comes apart scatters. Scattering is what a beaten host is for. It is also, precisely, how a particular man ends the day forty miles from here on a borrowed horse with his helm in a ditch, and that particular man is the only object on this field that is worth more to him tomorrow than everything else on it put together. So the orders change and none of them sound like a change. The pressure comes off the centre by a degree nobody in it will feel. The wings, which were pushing, begin instead to lengthen. A reserve that was going to be spent breaking something is walked sideways and left standing where a road runs, doing nothing, in front of men who cannot think why. He is no longer beating them. He is building a shape, patiently, out of the pieces of a victory he has already won, and the shape has one opening left in it, and he is minding that opening himself.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_there_is_no_ransom_in_it_for_him_toast:0 "Every Other Man In This Rank Has An Ending Available That He Does Not"
+ bc_knight_there_is_no_ransom_in_it_for_him_toast_desc:0 "The men to either side of him are going to be all right. Not today, necessarily, and not all of them, but the shape of the thing they are inside has an exit in it — a hand up, a name given, a week of bad food and somebody's steward riding out with a sealed bag — and that exit is standing open for every single one of them and has never once been open for him. He knew that before the horns. He has known it for years. So the arithmetic he is doing while the line comes apart is not the arithmetic anybody near him is doing: he is not working out how to live through this, he is working out how to remain, for the next hour, an object that no reasonable man would put a hand on. He goes at them wide and low and keeps going, past the point where it is any use to the line, past the point where his own arm is answering properly, and the ground in front of him gets very bad indeed. It costs. Men beside him who would have stood are pulled forward into it and do not come out, and the line where he is standing bleeds for a decision that was never theirs and that he never once thought of as a decision.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

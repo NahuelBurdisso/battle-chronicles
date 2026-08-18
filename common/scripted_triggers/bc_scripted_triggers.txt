@@ -2771,3 +2771,61 @@ bc_there_is_a_faction_pointed_at_him_trigger = {
 bc_he_is_sworn_against_somebody_trigger = {
 	is_a_faction_member = yes
 }
+
+
+# --- who is allowed to put whom in a cell ------------------------------------
+#
+# THE MOD READS EVERY REASON TWO MEN COULD HAVE TO WANT EACH OTHER DEAD AND HAS
+# NEVER READ THE ONE THAT SAYS ONE OF THEM IS ALLOWED TO KEEP THE OTHER. Rivalry,
+# kin, house, faith, hooks, tyranny, opinion, kinslaying - the file is full of
+# private grievance and public reputation, and `has_imprisonment_reason` was at
+# zero occurrences. It is the only trigger in the engine that answers a question
+# about LAW between these two particular men, and the answer changes what a
+# battle is for: a field you can win is not the same field as one where the man
+# opposite is a thing you are entitled to carry home and hold.
+#
+# THE TWO GATES POINT THE SAME LAW IN OPPOSITE DIRECTIONS. The first asks
+# whether root may lawfully take the man commanding the far side. The second
+# asks whether that man may lawfully take root. The engine keeps these as two
+# separate facts and the mod has never asked either one.
+#
+# BOTH TAKE THE STANDING GUARD. `enemy_side.side_commander` is an optional
+# chained link, so each gate carries its own `exists` sibling and repeats it in
+# the `trigger_if` limit before reading through it. The second gate reads the
+# far commander's own reasons from inside his scope and therefore uses `root`,
+# not `prev`, for the reason recorded on bc_foe_is_countryman_trigger.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION. Both can be true at once
+# and often are - the reasons men accumulate against each other tend to be
+# mutual - and the two templates below are about opposite afternoons, one where
+# the law is an opportunity and one where it is a mouth. Written this way, the
+# man who may take is never also the man who may be taken, and taking wins the
+# tie because it is the half that decides what the whole field is doing.
+#
+# NEITHER IS bc_foe_is_formidable_trigger OR THE HOOK GATES, WHICH ARE THE NEAR
+# MISSES. A hook is leverage that gets spent in a conversation; formidability is
+# an estimate of what the far side can do to you this afternoon. This is neither.
+# It is a standing entitlement that exists on paper before anybody drew a sword
+# and will still exist tomorrow whichever way the field goes.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. An imprisonment reason has to be earned,
+# by one specific man against one specific other, and both gates then require
+# that man to be commanding the far side of this particular field today.
+bc_the_law_would_let_him_take_that_man_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_imprisonment_reason = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_the_far_side_could_take_him_lawfully_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			has_imprisonment_reason = root
+		}
+	}
+	NOT = { bc_the_law_would_let_him_take_that_man_trigger = yes }
+}
