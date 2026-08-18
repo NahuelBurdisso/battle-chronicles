@@ -8850,3 +8850,89 @@ bc_knight_there_is_no_version_of_this_where_they_leave = {
 		}
 	}
 }
+
+
+# --- the quarrel opposite is with somebody else -------------------------------
+#
+# GATE. bc_the_name_opposite_is_half_of_an_old_argument_trigger, read on the
+# enemy commander and carrying the exact negation of the commander-side gate,
+# so a field with one of these names at each end produces the commander page
+# only. The knight is losing.
+#
+# WHAT THIS MAY NOT SAY. Same prohibition as its pair and one more: the gate
+# establishes that the far commander's name means something old, and expressly
+# not that this knight is the other half of it. So this page may not claim the
+# quarrel is his, may not name a house, a sigil, a seat or a river, and may not
+# narrate the origin. What it may notice is that the men opposite are fighting
+# him the way you fight a stranger, briskly and without interest, because
+# whatever they are actually angry about is not standing in front of them.
+#
+# KIND. ordered/down. He is going backwards without coming apart, which is the
+# one pair the verb table deliberately leaves empty; the rung and the stress are
+# the whole consequence.
+#
+# SKILL. prowess, because noticing how you are being fought is a thing you learn
+# from the inside of a melee rather than from a map.
+bc_knight_their_quarrel_is_with_somebody_else = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_name_opposite_is_half_of_an_old_argument_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# You have to have been hated properly at least once to be able
+		# to tell, from the way a man comes at you, that he is not
+		# bothering.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_their_quarrel_is_with_somebody_else"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_their_quarrel_is_with_somebody_else_toast
+				desc = bc_knight_their_quarrel_is_with_somebody_else_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

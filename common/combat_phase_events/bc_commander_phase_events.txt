@@ -11395,3 +11395,84 @@ bc_the_oldest_arrangement_his_people_have_is_working = {
 		}
 	}
 }
+
+
+# --- the name was settled before the hedge -----------------------------------
+#
+# GATE. bc_his_name_is_half_of_an_old_argument_trigger, which is AGOT's own
+# list of the five house pairs whose quarrels predate the bookmark, read on the
+# commander himself. He is winning.
+#
+# WHAT THIS MAY NOT SAY. The gate answers a question about his name and says
+# nothing whatever about who is opposite him, so this page may not assert that
+# the other half of the feud is on this field, may not name a house, a sigil, a
+# seat or a river, and may not narrate where the quarrel came from. What it is
+# allowed to notice is that he is carrying a meaning that was fixed centuries
+# before this hedge, and that almost none of it is any use in a battle that is
+# about something else entirely.
+#
+# KIND. measured/up. The name is a fact he arrived with rather than a thing
+# today did to his army, and there is no modifier for having a surname, so this
+# falls through the verb table and grants nothing but the rung and the prestige.
+#
+# SKILL. diplomacy, because knowing exactly what your own name costs you in a
+# room is the diplomatic skill and not the martial one.
+bc_the_name_was_settled_before_the_hedge = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_name_is_half_of_an_old_argument_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has spent his life watching other men's faces do
+		# arithmetic when he gives his name knows precisely what it is
+		# worth and precisely what it is not.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_name_was_settled_before_the_hedge"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_name_was_settled_before_the_hedge_toast
+			desc = bc_the_name_was_settled_before_the_hedge_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

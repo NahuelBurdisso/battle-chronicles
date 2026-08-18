@@ -3630,3 +3630,63 @@ bc_his_people_do_not_usually_be_here_for_this_trigger = {
 	culture = { has_cultural_tradition = tradition_hit_and_run }
 	NOT = { bc_his_people_meet_it_where_it_stands_trigger = yes }
 }
+
+
+# --- the names that already mean an argument ---------------------------------
+#
+# THE MOD READS HOUSES AS A RELATION AND AS A COUNT AND HAS NEVER READ WHICH
+# HOUSE. bc_foe_is_house_trigger asks whether two men share a name; batch 111
+# asks how many people are left holding one. Neither of them has ever asked
+# what a particular name already means before anybody on this field was born.
+#
+# `agot_is_historical_feud_trigger` (00_agot_dynasty_triggers.txt:33) IS
+# AGOT'S OWN LIST and is used rather than a hand-written OR of dynasty keys for
+# the usual reason: it is five pairs of houses whose quarrels predate the
+# bookmark - Peake and Manderly, Jast and Falwell, Whitehill and Forrester,
+# Yronwood and Fowler, Blackwood and Bracken - and if AGOT ever adds a sixth
+# pair these two gates follow it without being touched.
+#
+# THE GUARD IS NOT OPTIONAL AND IT IS NOT AGOT'S. Read the trigger: it is a
+# bare `dynasty = dynasty:dynn_Peake` and the rest, with no `?=` anywhere,
+# where the trigger directly beneath it in the same file spells `dynasty ?=`
+# for the same kind of test. This setting is full of hedge knights and
+# sellswords with no dynasty at all, so both gates below put the standing
+# `exists = dynasty` guard in front of the call and nest the call in a
+# trigger_if that repeats it.
+#
+# NEITHER GATE CLAIMS THE OTHER HALF OF THE FEUD IS ON THE FIELD. The AGOT
+# trigger answers a question about one man's name and nothing about who is
+# opposite him; Blackwood facing Forrester answers yes twice and is not a feud
+# at all. Both toasts are written to what the gate actually says, which is that
+# a man is carrying a name whose meaning was settled centuries before this
+# hedge, and neither of them may assert that the counterpart is here.
+#
+# DISJOINT BY CONSTRUCTION. The second carries the exact negation of the first,
+# so a field with one of these names at each end produces the first only. That
+# is the right precedence: being the man with the name is a larger fact about
+# his afternoon than noticing the name on somebody else.
+#
+# RARITY. Ten houses on a map with several hundred, and then the man has to be
+# leading or standing in a battle.
+bc_his_name_is_half_of_an_old_argument_trigger = {
+	exists = dynasty
+	trigger_if = {
+		limit = { exists = dynasty }
+		agot_is_historical_feud_trigger = yes
+	}
+}
+
+bc_the_name_opposite_is_half_of_an_old_argument_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			exists = dynasty
+			trigger_if = {
+				limit = { exists = dynasty }
+				agot_is_historical_feud_trigger = yes
+			}
+		}
+	}
+	NOT = { bc_his_name_is_half_of_an_old_argument_trigger = yes }
+}
