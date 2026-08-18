@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 200 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 168 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 201 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 169 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and eighty-two batches, one per row of the table below, none of which needed a
+One hundred and eighty-three batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -767,6 +767,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | how many of his own are waiting at home | The mod has never counted a man's children. `any_child` returned a single hit over the whole tree and that hit is the substring inside `any_child_of_concubine` in a header; `num_of_children` is not in the 1.19.0.6 dump at all; `has_children` and `is_parent_of` returned zero. A hundred and seventy-nine batches have read who a man is sworn to, who he made, who he owes and who he married, and none has read who is at home waiting for him. This is not the spouse question - `is_married` is read fifteen times and reads a living arrangement - and not the heir question, which `any_heir_title` carries and which reads what a man stands to receive. The low gate is `count < 1` because that is how vanilla writes it at `00_adoption.txt:30`, and it carries `age >= 45` as well, because a man of twenty with no children has a life in front of him and the absence says nothing, while at forty-five it has become the shape of the life. Six or more and fewer than one cannot both hold, so no negation is written. | 2 templates, base 50, 80 |
 | whether the other man's land touches his | `character_is_realm_neighbor` and `character_is_land_realm_neighbor` both returned zero over the whole tree, and the eight hits on the word "neighbour" are every one of them header prose. A hundred and eighty batches have read what two men are to each other - sworn, kin, married, owed, hated, knighted by the same hand - and none has read the plainest thing two lords in Westeros can be to each other, which is next to each other. The engine's definition is narrower than the English word: the two men must be independent or share a liege *and* border by land, so two vassals of two different kings never qualify however close their fields lie. Vanilla writes it exactly this way at `03_fp2_wars.txt:40` and `07_ep3_wars.txt:4199`. The land variant is used rather than the plain one, because a border that exists only across water is not a thing a man rides over. The first gate asks whether the man commanding the far side is that neighbour and the second asks whether the man he is fighting under is, which is the standing two-men exception, so no negation is written. Both carry the far-side guard. | 2 templates, base 50, 80 |
 | whether either of the two who made him is still living | `has_father` and `has_mother` both returned zero over the whole tree, `is_child_of` returned zero, and the single hit on `is_parent_of` is the word sitting inside batch 180's own header. Batch 180 counted the people who exist because of him; nothing anywhere had asked after the two people he exists because of. The dump is plain: both are "does the character have a valid *living* father/mother", and the word carrying the weight is *living* - these do not ask whether a man is recorded as having had parents, which is true of very nearly everybody. AGOT writes it this way itself, guarding a father scope with `has_father = yes` at `00_war_effects.txt:620` and a mother scope with `has_mother = yes` at `:635`; vanilla has the identical pair at `:482` and `:497`. The commander row carries `age >= 40` and that floor is the point of it - every man alive was somebody's son at twenty and the fact says nothing, while at forty there is still somebody breathing who remembers him being carried. The knight row takes no floor because the pair of answers does that work: father gone and mother still living is an arrangement of a family rather than a stage of a life, and the generated men the engine hands this mod answer no to both. Disjoint by construction, since the first requires a living father and the second requires that there is none. Neither takes a guard - in every other script that uses them these two ARE the guard. | 2 templates, base 50, 80 |
+| which of his five is the worst one | `lowest_skill` returned zero across the whole mod. Batch 173 asked which of a man's five numbers is his largest and stopped there; nothing had asked the other end of the same list, which is the end that decides what happens when a day asks him for the thing he was never any good at. Different key and different arguments from 173, which reads `highest_skill = diplomacy` and `highest_skill_including_prowess = prowess`. A ranking is still not a threshold: a man with martial 14 can have it as his lowest number and a man with martial 5 can have intrigue 3 and fail. Vanilla's own form is `limit = { lowest_skill = $SKILL$ }` at `chinese_disciple_events.txt:897`, which AGOT ships unchanged at `:899`. The excluding form is used on purpose - prowess is what a man does with his hands and has no business in a ranking about what he is worst at thinking. Ties pass, per the dump, which is why the first gate carries `NOT = { lowest_skill = intrigue }` and the pair is disjoint by construction. Martial is the number the day is asking about, so a commander worst at it is being examined on his weakest subject in front of everybody; intrigue is the number about what a man keeps back, so a knight worst at it has nothing held in reserve, which on a field going well is no failing at all. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -785,16 +786,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and eighty-nine**, its "3, 3, 4 and 3"
-are 65, 65, 65 and 32, and the fall-through set is one hundred and sixty-two sites rather than
+plan 1's eighteen call sites are now **three hundred and ninety-one**, its "3, 3, 4 and 3"
+are 66, 65, 65 and 32, and the fall-through set is one hundred and sixty-three sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 200, knight 168.** Weight against vanilla's
+**Template totals are now commander 201, knight 169.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-eight templates against
-`knight_none`'s 2000 — one hundred and sixty-seven at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and sixty-nine templates against
+`knight_none`'s 2000 — one hundred and sixty-eight at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

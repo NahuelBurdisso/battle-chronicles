@@ -7875,3 +7875,65 @@ bc_his_mother_is_the_last_one_left_trigger = {
 	has_father = no
 	has_mother = yes
 }
+
+# BATCH 183 - WHICH OF HIS FIVE IS THE WORST ONE.
+#
+# `lowest_skill` RETURNED ZERO ACROSS THE WHOLE MOD. Batch 173 asked which of
+# a man's five numbers is his largest and stopped there. Nothing anywhere has
+# asked the other end of the same list, and the other end is the one that
+# decides what happens when a day asks him for something he has never been
+# any good at.
+#
+# THIS IS NOT BATCH 173 TURNED AROUND, BECAUSE IT IS A DIFFERENT KEY WITH
+# DIFFERENT ARGUMENTS. That batch reads `highest_skill = diplomacy` and
+# `highest_skill_including_prowess = prowess`. These read `lowest_skill` with
+# `martial` and `intrigue`. No gate here shares a key and an argument with
+# any gate there, and the populations barely overlap: the best talker in
+# Westeros can be worst at war or worst at guile or neither.
+#
+# A RANKING IS STILL NOT A THRESHOLD. The mod weighs `martial >= 12` in
+# dozens of `chance` rows and reads the far commander's `martial` against 16
+# and 8 at bc_scripted_triggers.txt:332 and :340. A man with martial 14 can
+# have it as his lowest number, because the rest of him is better than that,
+# and a man with martial 5 can have intrigue 3 and fail the first gate below.
+# Neither question narrows the other.
+#
+# VANILLA'S OWN FORM. `limit = { lowest_skill = $SKILL$ }` at
+# `events/education_and_childhood/chinese_disciple_events.txt:897`, which AGOT
+# ships unchanged at `:899` in its own copy of that file, so the trigger takes
+# a bare skill keyword as its argument and is live in this build. The dump
+# gives it as "Is the skill the lowest skill (excluding Prowess) of the
+# character?", character scope. The excluding form is the one used here on
+# purpose: prowess is what a man does with his hands and it has no business
+# in a ranking about what he is worst at THINKING.
+#
+# TIES PASS, AND THAT IS WHY THE FIRST GATE CARRIES A NEGATION. The dump says
+# it in the entry itself - "True even when there are multiple skills with the
+# same lowest value" - so a man whose martial and intrigue sit level at the
+# bottom would otherwise pass both rows at once. `NOT = { lowest_skill =
+# intrigue }` on the first row removes exactly that man and leaves the pair
+# disjoint by construction, which is the trick batch 173 used on its own
+# first gate for the same reason.
+#
+# WHY THESE TWO OF THE FIVE. Martial is the number the day is asking about,
+# so a commander who is worst at it is a man being examined on his weakest
+# subject in front of everybody. Intrigue is the number about what a man
+# keeps back, so a knight who is worst at it is a man with nothing held in
+# reserve and no second version of himself to fall back on, which on a field
+# that is going well is not a failing at all.
+#
+# RARITY. Five skills split roughly five ways before ties, and each gate then
+# takes only the half of that fifth on the right side of the battle. Batch
+# 173 accepted the same arithmetic at the other end of the same list.
+#
+# NO GUARD. Both are bare character-scope reads on a man the caller has
+# already entered. Every character has five skills whether anybody has ever
+# ranked them or not.
+bc_the_least_of_him_is_what_today_wants_trigger = {
+	lowest_skill = martial
+	NOT = { lowest_skill = intrigue }
+}
+
+bc_there_is_no_second_thought_in_him_trigger = {
+	lowest_skill = intrigue
+}
