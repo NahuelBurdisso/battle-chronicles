@@ -6014,3 +6014,74 @@ bc_this_ground_was_marked_out_for_something_that_never_came_trigger = {
 		}
 	}
 }
+
+# BATCH 154 - HOW LONG EACH OF THEM HAS BEEN AT WAR WITHOUT A DAY OFF.
+#
+# `days_of_continuous_war` returned zero across the whole mod. This is a battle
+# mod with a hundred and fifty batches of content in it and it had never once
+# asked the oldest question anybody asks a soldier, which is how long he has been
+# doing this. It has read the war's existence, its allies and its size, and never
+# its length.
+#
+# THE KEY IS CHARACTER SCOPE AND THE DUMP'S OWN DESCRIPTION IS BACKWARDS. The
+# 1.19.0.6 entry reads "Number of days the character has been in peace (0 if in
+# peace)", which cannot be both; every shipped use in the tree treats it as days
+# of unbroken war, and the parenthesis is the true half - a man at peace scores
+# nothing. Both gates below are written on that reading, and both are written at
+# figures the shipped files already use, so neither depends on my arithmetic.
+#
+# BOTH FIGURES ARE SHIPPED. Vanilla gates a vassal event on
+# `days_of_continuous_war > 730` at `events/relations_events/vassal_events.txt:
+# 2177` and AGOT ships that same line at that same number, and uses it again in
+# its own content at `common/story_cycles/
+# agot_story_cycle_scenario_rogue_prince.txt:230`. The ten-year figure is
+# vanilla's at `common/character_interactions/03_fp2_interactions.txt:2625` and
+# AGOT's at `:2691` of its own copy, as `days_of_continuous_war <= 3650`; this
+# uses the other side of the same number. The tree also uses `> 150` at
+# `events/travel_events/travel_events_bp3.txt:1343`, `>= 5` at
+# `events/lifestyles/warfare_lifestyle/martial_authority_events.txt:259` and
+# `>= 9125` at `events/harm_events.txt:8862`, all of which both games ship, so
+# the scale runs from a working week to a lifetime and these two sit in it.
+#
+# ONE BARE READ AND ONE GUARDED WALK. The first asks the scoped character about
+# himself and needs nothing. The second walks `enemy_side` and then that side's
+# `side_commander`, two genuinely optional links, so both `exists` rows sit as
+# siblings and both are repeated inside the `trigger_if` limit. The second is
+# named through `scope:combat_side` rather than `root` for batch 127's reason.
+#
+# TWO MEN, TWO DIFFERENT FIGURES, AND NO NEGATION. The first is two years and is
+# about whoever the template scoped. The second is ten years and is about a man
+# on the far side of the field. They are not the same claim, they are not
+# thresholds on each other, and one being true tells you nothing about the other:
+# two years of unbroken war is a hard season, ten is a way of life, and the two
+# men counting them have never met.
+#
+# THIS IS NOT THE WAR ROWS THE MOD ALREADY HAS. Those ask whether there is a war,
+# who is in it and how big it is - facts about the war. This asks how long the
+# MAN has been inside one, which is a different number: a lord who fought three
+# short wars back to back with a fortnight of peace between them scores that
+# fortnight as a reset, and a lord who has sat in one endless siege for two years
+# without drawing a sword scores the whole of it.
+#
+# RARITY. Most wars are settled in a season, and the counter resets on the first
+# day of peace, so two unbroken years is already a man whose luck or whose
+# neighbours have been unusual. Ten is the far tail - a man who has not had a
+# single peaceful day in a decade - and the second gate additionally requires the
+# far side to be led at all.
+bc_he_has_not_had_a_peaceful_day_in_two_years_trigger = {
+	days_of_continuous_war > 730
+}
+
+bc_the_man_across_the_field_has_been_at_this_for_ten_years_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			days_of_continuous_war > 3650
+		}
+	}
+}
