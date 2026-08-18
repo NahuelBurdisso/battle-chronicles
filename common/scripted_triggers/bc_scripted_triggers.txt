@@ -9118,3 +9118,87 @@ bc_the_boy_he_used_to_beat_commands_the_far_side_trigger = {
 		}
 	}
 }
+
+# BATCH 201 - THE OATH THAT HAD NO LORD IN IT.
+#
+# `has_relation_blood_brother` RETURNED ZERO ACROSS THE WHOLE MOD. The two
+# hits on the word are a note in
+# `common/character_memory_types/bc_memories.txt` at `:7` recording where a
+# memory's shape was copied from, and a line at
+# `:7055` in the relation-count batch's header observing that `blood_brother`
+# carries `relation_aliases = { friend }`. The relation itself has never been
+# read here.
+#
+# LIVE IN BOTH TREES, AND ONE OF THE LIVE ROWS IS IN THIS MOD'S OWN GENRE.
+# Vanilla writes `has_relation_blood_brother = liege` inside a knight phase
+# event, at `common/combat_phase_events/00_knight_phase_events.txt:1359`, as
+# one arm of the test for which knights the severed-head content may pick -
+# beside `is_acclaimed`, `is_close_family_of` and `is_powerful_vassal_of`,
+# which is the company the engine itself thinks this relation keeps. It also
+# writes it at `common/character_interactions/00_alliance.txt:399` and four
+# times in `09_mpo_interactions.txt` from `:3043`, and reads it through
+# `common/scripted_triggers/00_relation_triggers.txt`. AGOT ships twenty-two
+# files carrying the key.
+#
+# THIS IS NOT THE KIN ROWS AT `:221`. `is_close_family_of` is blood and
+# marriage. Blood-brotherhood is the arrangement men make precisely because
+# they are not kin and cannot become kin, and the engine keeps it in an
+# entirely separate list for that reason. A brother is an accident. This was
+# a decision, taken once, by two people, with nobody's permission.
+#
+# NOR IS IT THE RIVAL, NEMESIS OR GRUDGE ROWS, NOR BATCH 200'S PAIR, AND THE
+# ENGINE SAYS SO RATHER THAN THIS COMMENT.
+# `common/scripted_relations/00_scripted_relations.txt:310` gives
+# `blood_brother` the line `corresponding = blood_brother` and lists `rival`,
+# `nemesis`, `grudge`, `bully`, `victim`, `potential_friend` and
+# `potential_rival` among its `opposites`. Two men cannot be both.
+#
+# NOR IS IT THE RELATION COUNTS AT `:7086`, DESPITE THE ALIAS. `blood_brother`
+# carries `relation_aliases = { friend }` at `:323` of the same file, so a
+# sworn brother is one of the men `num_of_relation_friend >= 3` counts. That
+# gate asks how many standing bonds a man holds anywhere in the world; this
+# asks which man one particular bond points at, which is precisely the
+# distinction that batch's own header draws at `:7045` in the other direction.
+# Neither nests: a man may have sworn with exactly one man and fail the count,
+# and a man with five friends may have opened a vein with nobody.
+#
+# SYMMETRIC, WHICH IS WHY THE PAIR IS TWO MEN AND NOT TWO DIRECTIONS.
+# `corresponding = blood_brother` means there is no far end to read
+# differently, so the fostering pair's construction is simply unavailable
+# here. The pair asks one question of two different men instead - the man
+# across the field, and the man giving the orders on this side - which is
+# batch 149's arrangement, and the pools roll separately in any case.
+#
+# THE SECOND IS KNIGHT-ONLY BY CONSTRUCTION, WHICH IS BATCH 141'S LESSON. A
+# commander scoped into his own template IS `scope:combat_side.side_commander`,
+# and no man is his own blood brother, so the gate would be a silently
+# never-firing row in the commander pool. It is written into the knight file
+# only.
+#
+# GUARDS. Naming a link as the TARGET of a trigger is a read, so the first
+# carries both far-side `exists` lines as siblings and repeats them inside the
+# `trigger_if` limit, and the second carries its one.
+#
+# RARITY. The relation is granted by a single interaction between two grown
+# men who already like each other enough to bleed on it, most men never swear
+# it at all, and then the oath has to outlive whatever put the two of them on
+# a field together.
+bc_the_far_side_is_commanded_by_his_blood_brother_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		has_relation_blood_brother = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_he_swore_blood_with_the_man_giving_the_orders_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		has_relation_blood_brother = scope:combat_side.side_commander
+	}
+}

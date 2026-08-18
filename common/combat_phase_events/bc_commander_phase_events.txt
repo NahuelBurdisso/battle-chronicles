@@ -16606,3 +16606,62 @@ bc_the_boy_who_used_to_beat_him_commands_the_far_side = {
 		}
 	}
 }
+
+bc_the_far_side_is_commanded_by_his_blood_brother = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_far_side_is_commanded_by_his_blood_brother_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Two men who swore on it once have usually also drilled together,
+		# and a man knows the shape of what is coming at him.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_far_side_is_commanded_by_his_blood_brother"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_far_side_is_commanded_by_his_blood_brother_toast
+			desc = bc_the_far_side_is_commanded_by_his_blood_brother_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

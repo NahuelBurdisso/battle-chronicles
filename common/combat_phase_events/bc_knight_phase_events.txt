@@ -14406,3 +14406,66 @@ bc_knight_the_boy_he_used_to_beat_commands_the_far_side = {
 		}
 	}
 }
+
+bc_knight_he_swore_blood_with_the_man_giving_the_orders = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_swore_blood_with_the_man_giving_the_orders_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# An oath with no lord and no septon in it is a private treaty
+		# between equals, and some men are better at treaties than others.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_swore_blood_with_the_man_giving_the_orders"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_swore_blood_with_the_man_giving_the_orders_toast
+				desc = bc_knight_he_swore_blood_with_the_man_giving_the_orders_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
