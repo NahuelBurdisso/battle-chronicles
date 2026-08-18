@@ -10090,3 +10090,115 @@ bc_it_goes_where_he_goes = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-NINE. Weight, as opposed to rank.
+#
+# THE MOD HAS READ RANK EIGHT TIMES AND WEIGHT NEVER. The station batch reads
+# what a man holds; nothing has ever asked what he is worth to the man above
+# him, and in a realm those are different numbers. `is_powerful_vassal` and
+# `is_powerful_vassal_of` had both returned zero over ninety-eight batches.
+#
+# TWO TEMPLATES, ONE PER POOL, AND THE SECOND GATE'S EXPLICIT NOT IS WHAT KEEPS
+# THEM FROM BEING ONE BATCH WRITTEN TWICE. See the trigger header.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The one he cannot spend. One of his own great men is in the line, and the
+# side is winning.
+#
+# `adapted`/`up`, WHICH HANDS OUT NOTHING, AND THAT IS THE ARGUMENT. Nothing
+# about the army changes. What changes is the arrangement he builds on top of
+# it, and the arrangement is being built around one man who is standing in the
+# ranks with a sword like everybody else and who is also, on any other day of
+# the year, one of the few men whose agreement he needs to govern.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads an iteration over
+# the side and the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THE MOMENT IS A THING HE CANNOT DO, WHICH IS WHY IT IS `adapted` AND NOT
+# `ordered`. The place where the afternoon is actually going to be settled is
+# obvious and he has, standing right there, the man best placed to settle it.
+# Sending him means putting him in front of every witness on the field, which
+# makes him larger; not sending him and having somebody notice makes him larger
+# a different way; and losing him there is a vacancy that costs a year. So the
+# commander reads the field again and builds a version of the win that does not
+# route through that man at all - which is more work, and slower, and it
+# arrives, and that is the whole of it.
+#
+# THIS IS NOT bc_the_leash_runs_the_other_way, which is also `adapted`/`up`.
+# That is a specific piece of leverage held by one man over another and usable
+# once. This is structural weight: nobody did anything to anybody, no
+# transaction exists anywhere, and the difficulty would be identical if the two
+# men had never exchanged a word.
+#
+# THIS IS NOT bc_side_has_kin_knight_trigger'S MOMENTS EITHER. Blood in the
+# ranks is a thing he feels. This is a thing he calculates, and he would
+# calculate it about a man he liked.
+#
+# THE DESC MAY NOT NAME THE MAN, give his title or his seat, have the two of
+# them speak, have anybody else notice the arrangement, or have him resent it.
+# It may not have the great man do anything remarkable, because the point is
+# that he is not being allowed to. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_one_he_cannot_spend = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_one_of_his_great_men_is_in_the_ranks_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Governing men like that is the whole of the skill, and a man who
+		# has it is a man who is already doing this arithmetic at table.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_one_he_cannot_spend"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_one_he_cannot_spend_toast
+			desc = bc_the_one_he_cannot_spend_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

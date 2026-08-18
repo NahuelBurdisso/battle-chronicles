@@ -3943,3 +3943,61 @@
 
  bc_knight_he_would_rather_not_be_remembered_toast:0 "He Does It Well And He Does It Quietly"
  bc_knight_he_would_rather_not_be_remembered_toast_desc:0 "It is going their way and the work he has done is a decent part of why, and he is spending a small steady portion of his attention on making sure that fact settles somewhere else. Not by doing less. He would rather be dead than do less, and the men beside him have never had a reason to wonder about him. He simply lets the man on his right be the one standing forward when the thing gives, and lets the shout that goes up go up with somebody else's name in it, and when a rider looks along the line for who did that he is already turned away and moving. It is not modesty and he has never once been tempted to think of it as modesty. A name that gets written down gets read, and read by people who read a great many of them, and there is a man out there in the world with one other thing he could set beside it. So he wins the afternoon and lets it belong to whoever wants it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-NINE. Weight, as opposed to rank.
+#
+# NEITHER DESC MAY NAME ANYBODY, give a title, a seat, a realm or a hall, or
+# say how many men of that weight there are. The engine answers a yes and a no
+# and the mod has no access to the arithmetic behind either.
+#
+# NEITHER MAY HAVE THE TWO MEN SPEAK, look at each other, send anything, or be
+# pointed out to one another. The whole subject is a calculation each of them
+# is doing privately about the other's existence.
+#
+# NEITHER MAY HAVE ANYBODY ELSE NOTICE. No sergeant remarks on it, no rider
+# carries a message about it, nobody in the ranks understands what is being
+# arranged around them. If it were visible it would be politics; kept quiet it
+# is the thing this batch is about.
+#
+# THE FIRST MAY NOT RESENT IT, may not have the great man do anything
+# remarkable - the point is that he is not being allowed to - may not have the
+# arrangement fail or nearly fail, and may not explain itself to a subordinate.
+# It may not use the words "faction", "council" or "rival".
+#
+# THE SECOND MAY NOT NAME WHAT HE STANDS TO LOSE, may not have him think a
+# single word about the man commanding him, may not have him consider leaving,
+# may not have anybody thank him, notice him or come and stand with him because
+# of who he is, and may not let the holding change how the afternoon ends. It
+# does not.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read".
+ bc_the_one_he_cannot_spend_toast:0 "He Builds The Afternoon Around One Man And Does Not Use Him"
+ bc_the_one_he_cannot_spend_toast_desc:0 "There is a place out there where this is going to be decided, and it has been obvious for an hour which place it is, and standing thirty feet away with a sword and a wet surcoat is the man best able to go and decide it. He does not send him. Sending him puts him in front of everyone who is going to talk about today for the rest of the year, and a man of that size does not need to be made any larger by anybody's help. Keeping him back where somebody could remark on it does the same job from the other direction. And if he goes and does not come out of it, there is a chair empty next spring that takes a year to fill and costs more than the field is worth. So he builds a slower version. Two units that do not much want to be where he is putting them, a delay he would rather not have taken, a wider angle onto the same ground, and it works, and it takes longer, and nobody will ever know that the shape of the win was decided by an arithmetic that had nothing to do with the ground.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nothing_here_is_owed_toast:0 "Whatever Gives Today Will Not Be The Part He Was Standing In"
+ bc_knight_nothing_here_is_owed_toast_desc:0 "Nothing about being here is compulsory and that is not the comfort it sounds like. No summons brought him. Nobody out here can take anything off him, and nobody who will be asked about this afternoon afterwards is going to ask the man giving the orders. Which means the whole of it — the standing, the not standing, the exact minute a thing let go — is being written down somewhere as a description of what he is like, by men who are not here and will repeat it accurately for twenty years. So he plants himself and does not move, and it is not courage arriving and it is not stubbornness. It is the one calculation available. What gives today will give somewhere else along the line, and the account of it will have another name in that sentence, and he will be in a hall next winter listening to the story with a cup in his hand and nothing in it about him. The men on either side of him think he is very brave. He would not know how to begin explaining that they have it wrong.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

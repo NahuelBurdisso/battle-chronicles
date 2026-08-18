@@ -7496,3 +7496,110 @@ bc_knight_he_would_rather_not_be_remembered = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Nothing here is owed. He is one of somebody else's great men, the man
+# commanding him has no hold on him, and the side is losing.
+#
+# `entrenched`/`down` AND bc_shieldwall, WHICH IS THE ARGUMENT AND NOT A
+# FLOURISH. He braces, and the bracing is not courage arriving - it is the
+# single available answer to a question he has been turning over since the
+# afternoon started going wrong, which is what a man in his position can afford
+# to have happen next.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED, inside the commander block, for
+# the reason bc_knight_for_a_friend's comment gives.
+#
+# TEN STRESS.
+#
+# THE GATE'S NOT IS THE WHOLE SUBJECT. A powerful vassal standing in his own
+# liege's line is doing what powerful vassals do. This one is in somebody
+# else's line, under a man who cannot summon him, cannot revoke anything from
+# him and will not be asked about him afterwards by anybody who matters. Every
+# order he obeys today is obeyed by choice, which sounds like freedom and is
+# in fact the opposite: nothing here is owed, so nothing here is covered, and
+# the whole afternoon is being kept somewhere as an account of what he is like.
+#
+# SO THE ONE OUTCOME HE CANNOT HAVE IS A PLACE THAT BROKE WITH HIS NAME ON IT.
+# Not because the man commanding could punish it. Because it would be repeated
+# in halls where it would be repeated accurately, for twenty years, by men who
+# were not here. He sets himself and stays set for a reason that has nothing to
+# do with this field and everything to do with rooms he will be standing in
+# next winter.
+#
+# THIS IS NOT bc_knight_the_leash_holds, which is also `entrenched`/`down`.
+# That is a man held in place by a specific thing another man has on him. This
+# one is held in place by nothing at all, which turns out to hold better.
+#
+# THIS IS NOT bc_knight_where_the_wages_are. He is not being paid and there is
+# no contract; he outweighs most of the men who could offer him one.
+#
+# THE DESC MAY NOT NAME HIS REALM, his liege, his titles or any hall, may not
+# have him look at the commander or think a word about him, may not have him
+# consider leaving, may not have anybody thank him or notice, and may not let
+# the holding save the afternoon. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_nothing_here_is_owed = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_answers_to_somebody_else_entirely_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Standing still while it comes apart is a physical business before
+		# it is anything else, and the men who can do it are the men who
+		# could always do it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_here_is_owed"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_nothing_here_is_owed_toast
+				desc = bc_knight_nothing_here_is_owed_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

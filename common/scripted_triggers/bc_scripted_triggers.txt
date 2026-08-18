@@ -2613,3 +2613,62 @@ bc_nobody_alive_knows_it_trigger = {
 		}
 	}
 }
+
+
+# --- weight, as opposed to rank ---------------------------------------------
+#
+# THE MOD HAS READ RANK EIGHT TIMES AND WEIGHT NEVER. `highest_held_title_tier`
+# and `is_landed` carry the whole station batch, and both of them describe what
+# a man HOLDS. Neither says anything about what he is worth to the man above
+# him, and in a realm those are different numbers: a duke can be one of six men
+# a king cannot govern without, or he can be a duke. `is_powerful_vassal` and
+# `is_powerful_vassal_of` had both returned zero over ninety-eight batches.
+#
+# THE ENGINE'S OWN DEFINITION IS DELIBERATELY NOT RESTATED HERE. `is_powerful_vassal`
+# is documented on character as "Is the character a powerful vassal?" and the
+# threshold behind it belongs to the engine and to whatever a rule set does to
+# it. Writing a realm-fraction of our own would be this mod inventing a
+# constitution.
+#
+# THE FIRST GATE IS AN ITERATION AND NEEDS NO GUARD, for the reason recorded on
+# bc_side_has_kin_knight_trigger: `any_side_knight` is a list, not a link. It
+# uses `root` inside the entered scope for the same reason that trigger does -
+# once a scope is entered, `this` is the knight.
+#
+# THE SECOND GATE CARRIES AN EXPLICIT NOT AND THAT NOT IS THE POINT OF IT. A
+# powerful vassal standing in his own liege's line is an ordinary and rather
+# dull fact - it is what powerful vassals are for. The moment is the other one:
+# a great man of somebody else's realm in a line commanded by a man who has no
+# hold on him whatsoever. Without the NOT the second gate would be the first
+# gate's subject read from the wrong end, and the two would be the same batch
+# written twice.
+#
+# THE GUARD IS THE STANDING ONE. `side_commander` is optional, the `exists` sits
+# as a sibling, and the read - including the read inside the NOT - is nested in
+# a trigger_if that repeats it. A NOT around an unguarded link read is still an
+# unguarded link read.
+#
+# THIS IS NOT THE HOOK AXIS. bc_his_lord_holds_a_hook_trigger and
+# bc_he_holds_his_lords_hook_trigger are a specific piece of leverage between
+# two named men, held by one and usable once. This is structural: nobody did
+# anything to anybody, no transaction exists, and the weight would be exactly
+# the same if the two men had never met.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. Powerful vassals are a handful per realm
+# by construction, and the second gate then removes the common case.
+bc_one_of_his_great_men_is_in_the_ranks_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			is_powerful_vassal_of = root
+		}
+	}
+}
+
+bc_he_answers_to_somebody_else_entirely_trigger = {
+	is_powerful_vassal = yes
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		NOT = { is_powerful_vassal_of = scope:combat_side.side_commander }
+	}
+}
