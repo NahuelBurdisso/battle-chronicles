@@ -7348,3 +7348,60 @@ bc_the_best_thing_about_him_is_that_men_like_him_trigger = {
 bc_the_best_thing_about_him_is_his_own_arm_trigger = {
 	highest_skill_including_prowess = prowess
 }
+
+
+# BATCH 174 - WHAT WAS SETTLED BEFORE HE WAS BORN.
+#
+# THE MOD HAS READ THE BAD HALF OF A MAN'S INHERITANCE SINCE BATCH SEVENTY-SIX
+# AND HAS NEVER READ THE GOOD HALF, OR THE ARRANGEMENT THAT PRODUCED EITHER.
+# bc_his_body_was_dealt_to_him_trigger is `num_of_bad_genetic_traits >= 1` and
+# it is a gate about being written off. `num_of_good_genetic_traits` and
+# `parent_relatedness` were both at zero over the whole mod. The first is the
+# same engine count with the sign reversed, and it is not a subset of anything
+# shipped, because a count of the good ones says nothing at all about how many
+# bad ones sit beside it.
+#
+# THE SECOND GATE PINS THE FIRST OFF THE SHIPPED ONE BY CONSTRUCTION. Reading
+# `num_of_good_genetic_traits >= 2` on its own would have overlapped with
+# bc_his_body_was_dealt_to_him_trigger on every man who was handed a strong
+# back and a bad hip in the same hour, and the two moments would have been
+# fighting over the same subject. `num_of_bad_genetic_traits = 0` beside it -
+# the dump's own worked example for that key - makes the statement whole rather
+# than partial: not that some of what he was given was good, but that all of it
+# was.
+#
+# `parent_relatedness` IS NOT A TRAIT READ AND IS NOT ABOUT HIM. It is the
+# engine's own arithmetic on the two people who made him, documented as "the
+# percentage of shared DNA between the character's parents", traversing four
+# generations and sixty-two ancestors, with the dump's own worked comparison
+# written as `relatedness > 0.25`, where 0.0 is unrelated and 1.0 is identical
+# twins. A man can carry `inbred` and have parents who were strangers, and a
+# man can be the child of a brother and a sister and carry nothing at all. That
+# is why this is a different question from the trait count and not a narrowing
+# of it.
+#
+# 0.25 IS THE THRESHOLD AND 0.125 IS THE REASON IT IS NOT LOWER. Full siblings
+# sit at 0.5, half-siblings and an uncle with his niece sit at 0.25, and first
+# cousins sit at 0.125. In this setting a marriage between first cousins is not
+# a scandal, it is house policy, and a gate that opened at 0.125 would fire for
+# a large slice of every noble house on the map. A gate that fires for nearly
+# everybody is not a gate. `>= 0.25` takes the sibling, the half-sibling and
+# the uncle, and stops exactly where the ordinary begins.
+#
+# NO NEGATION BETWEEN THE TWO. They are two different facts about two different
+# men - one about what a man was handed and one about who handed it to him -
+# and the commander and knight pools roll separately, so the pair below can
+# never be competing to describe the same afternoon.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads. A character with
+# no recorded parents resolves the second as a clean no rather than an error,
+# which is the correct answer to a question about an arrangement nobody wrote
+# down.
+bc_everything_he_was_born_with_was_good_trigger = {
+	num_of_good_genetic_traits >= 2
+	num_of_bad_genetic_traits = 0
+}
+
+bc_his_father_and_mother_were_near_kin_trigger = {
+	parent_relatedness >= 0.25
+}
