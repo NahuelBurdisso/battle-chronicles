@@ -12458,3 +12458,68 @@ bc_there_is_no_son_to_make_this_survivable = {
 		}
 	}
 }
+
+# Batch 131, commander half. The man opposite is capable of winning this and is
+# not going to try, and the correct response to that is to do almost nothing at
+# all - set the feet, dress the line, and decline every invitation to commit
+# first. `entrenched`/`up` and `bc_shieldwall`, because standing still is the
+# whole of the action. `diplomacy >= 12`, because what is being read is a person
+# rather than a field.
+bc_the_other_man_does_not_want_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_man_opposite_has_no_appetite_for_this_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# What is being read here is a person and not a field, and it is
+		# being read from four hundred yards through a helm.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_other_man_does_not_want_this"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_other_man_does_not_want_this_toast
+			desc = bc_the_other_man_does_not_want_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

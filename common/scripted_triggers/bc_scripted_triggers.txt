@@ -4427,3 +4427,84 @@ bc_he_does_not_sleep_in_that_room_any_more_trigger = {
 		has_relation_kicked_from_marriage_bed = primary_spouse
 	}
 }
+
+# BATCH 131 - HOW MUCH APPETITE EACH OF THEM ACTUALLY HAS.
+#
+# The whole AI-personality surface returned zero over the mod: `ai_boldness`,
+# `ai_energy`, `ai_zeal`, `ai_greed`, `ai_compassion`, `ai_honor`,
+# `ai_rationality`, `ai_vengefulness`, `ai_sociability`. A hundred and thirty
+# batches have read traits, skills, stress, dread, opinion and tyranny, and not
+# one of them has read the number the engine itself uses to decide whether a man
+# will risk something.
+#
+# THE DUMP IS WRONG ABOUT THE SECOND ONE AND THE LIVE FILES ARE RIGHT.
+# `dread_modified_ai_boldness` is documented in 1.19.0.6 as
+# `dread_modified_ai_boldness = { character = root value >= 5 }`. That parameter
+# name does not appear in a single live file. Vanilla writes `dreaded_character`
+# sixty-seven times - `common/scripted_effects/00_interaction_effects.txt:733`
+# has `dreaded_character = scope:actor` with `value <= -50` under the comment
+# "Too scared to do anything" - and AGOT writes it too, at
+# `common/character_interactions/00_agot_spy_network_interactions.txt:421` with
+# `value < -20` and again at `:426` with `value < -45`. The live form is used
+# here. This is the second time the dump has been the less reliable of the two
+# and it is worth the note: the shipped files are the authority.
+#
+# THE SCALE IS SIGNED, NOT ZERO-TO-A-HUNDRED. Vanilla's own
+# `common/script_values/00_ai_values.txt:25` sets `high_positive_ai_value = 50`,
+# and the dread-modified reads above go to `-20`, `-45`, `-50`. So the range is
+# roughly minus a hundred to a hundred with nothing in the middle, and the
+# thresholds below are chosen against vanilla's own constants rather than
+# invented.
+#
+# BOTH GATES ARE ROOT-INDEPENDENT ON PURPOSE. Batch 127's header records why:
+# inside a scripted trigger there is no guarantee what `root` is. Every
+# character here is named through `scope:combat_side`, which the knight
+# templates already rely on to reach their own commander, so both gates read
+# the same men whichever pool called them.
+#
+# BOTH TAKE THE GUARD, AND THE FIRST TAKES TWO. `side_commander` and
+# `enemy_side.side_commander` are optional links, and naming one as the target
+# of `dreaded_character` is a read, so every `exists` is repeated inside the
+# `trigger_if` limit before anything is asked.
+#
+# THIS IS NOT THE DREAD ROWS. The shipped dread reads are all `dread` on the
+# scoped man himself - how frightening he is in general, to everybody. This
+# asks what that frightfulness has actually DONE to one specific person's
+# willingness to gamble today, which is a different number and can be small
+# while his dread is enormous, or large while it is nothing.
+#
+# TWO FACTS, TWO MEN. The first is the far commander's appetite once his fear of
+# the man opposite has been subtracted from it. The second is the plain,
+# unmodified appetite of the knight's OWN commander - not fear at all, just what
+# kind of man is about to give him an order. Neither implies the other and
+# neither is a threshold on the other's number, so neither carries a negation.
+#
+# RARITY. A signed scale with the mass in the middle means both tails are thin:
+# most men sit between the two thresholds, and the first needs a real dread
+# differential between two specific people on top of that.
+bc_the_man_opposite_has_no_appetite_for_this_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			dread_modified_ai_boldness = {
+				dreaded_character = scope:combat_side.side_commander
+				value <= -20
+			}
+		}
+	}
+}
+
+bc_the_man_leading_him_is_a_gambler_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			ai_boldness >= high_positive_ai_value
+		}
+	}
+}
