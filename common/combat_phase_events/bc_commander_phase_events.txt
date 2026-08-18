@@ -12183,3 +12183,82 @@ bc_men_under_his_roof_who_will_describe_this = {
 		}
 	}
 }
+
+
+# --- the companies are the part he can put a price on -------------------------
+#
+# GATE. bc_the_expensive_part_of_this_army_is_his_trigger, read on the
+# commander. He is losing.
+#
+# KIND. wild/down, so it takes bc_spent_horse on a losing side - the file's
+# pairing for a body of men being asked for more than it has left. That is
+# literally what is happening: the professional companies are the reason the
+# afternoon has not already ended, they are being used as the reason, and the
+# using is what is finishing them.
+#
+# WHAT THIS MAY NOT DO. It may not name a company, a captain, or a type of
+# soldier, may not say how many men are in any of them, and may not give an
+# order to one. It may not withdraw, order a withdrawal, rally, turn the day, or
+# end the day.
+#
+# SKILL. stewardship, because the thing this moment consists of is a man putting
+# a correct price on a thing while it is being destroyed, and that is an
+# accounting act performed under noise.
+bc_the_companies_are_the_part_he_can_price = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_expensive_part_of_this_army_is_his_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Pricing a thing correctly while it is being destroyed is an
+		# accounting act performed under noise.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_companies_are_the_part_he_can_price"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_companies_are_the_part_he_can_price_toast
+			desc = bc_the_companies_are_the_part_he_can_price_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -9688,3 +9688,88 @@ bc_knight_everything_he_wins_today_he_has_to_carry = {
 		}
 	}
 }
+
+
+# --- nothing over there is anybody's trade ------------------------------------
+#
+# GATE. bc_there_is_nothing_professional_opposite_trigger, read on the enemy
+# commander. The knight is winning.
+#
+# KIND. measured/up, which falls through the verb table, and that is exactly
+# right - nothing is being done to either army by this moment. It is a READ. He
+# has looked at the far side and correctly identified what it is made of, and
+# the whole value of the moment is that the identification is accurate and
+# arrives early.
+#
+# WHAT THIS MAY NOT DO. It may not sneer, may not call them cowards, may not
+# have any of them break, may not count them, and may not name what they are
+# carrying by any word that implies contempt. The read is professional and it is
+# not cruel - the men opposite are exactly where their lord told them to be. It
+# may not reach the far commander, kill a named man, or end the day.
+#
+# SKILL. martial, because recognising the difference between a body of men who
+# do this for a living and a body of men who were told to come is the first
+# thing a professional soldier learns and the last thing an amateur does.
+bc_knight_nothing_over_there_is_anybodys_trade = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_there_is_nothing_professional_opposite_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Telling a trade from an obligation at a hundred paces is the
+		# first thing a professional learns and the last thing an
+		# amateur does.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_over_there_is_anybodys_trade"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_nothing_over_there_is_anybodys_trade_toast
+				desc = bc_knight_nothing_over_there_is_anybodys_trade_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

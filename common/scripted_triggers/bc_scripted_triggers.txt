@@ -4188,3 +4188,68 @@ bc_there_are_strangers_eating_in_his_hall_trigger = {
 bc_he_is_a_guest_in_the_hall_he_is_fighting_for_trigger = {
 	is_foreign_court_guest = yes
 }
+
+
+# --- how much of this is bought and how much is owed --------------------------
+#
+# THE MEN-AT-ARMS SYSTEM RETURNED ZERO OVER THE WHOLE MOD. `any_maa_regiment`
+# zero, `maa_regiments_count` zero, `maa_regiments_max_count` zero,
+# `number_of_maa` zero. A hundred and twenty-six batches have read the size of a
+# host, the ground under it, the weather on it and the war around it, and not
+# one of them has ever read WHAT KIND OF ARMY IT IS. That is arguably the oldest
+# question there is about a medieval field and the mod has never asked it.
+#
+# THE 1.19.0.6 DUMP gives `maa_regiments_count` as "Current number of personal
+# MaA regiments", character scope, with the full set of comparators. It is live
+# and unguarded in AGOT at `common/character_interactions/00_alliance.txt:3525`
+# and `03_fp2_interactions.txt:3352`, at lines vanilla matches, and AGOT also
+# reads it in the dotted cross-value form at `06_ep3_laamp_interactions.txt:3142`.
+#
+# THE MOD USES THE PLAIN THRESHOLD FORM AND NOT THE CROSS-VALUE FORM. Comparing
+# `maa_regiments_count` against `maa_regiments_max_count` would be a prettier
+# gate - "he has bought everything his rank allows" - but doing it correctly
+# needs a dotted scope on both sides, and inside a scripted trigger there is no
+# guarantee about what `root` is. Two literal thresholds say almost the same
+# thing and cannot be wrong.
+#
+# `>= 4` AND `= 0`, AND BOTH NUMBERS ARE CHOSEN RATHER THAN CONVENIENT. The
+# personal regiment cap runs with title tier, so four standing companies means a
+# man of duke's rank or better who has actually spent the money, which is not
+# most raisers. Zero means a host with no professional core at all - levy,
+# household and whatever the knights brought - which is exactly what a poor
+# lord, a landless captain or an over-extended heir turns up with.
+#
+# THE FIRST TAKES NO GUARD, being a plain value read on the scoped character.
+# The second walks `scope:combat_side.enemy_side.side_commander` and takes the
+# standing one, with the `exists` as a sibling and the read nested in a
+# trigger_if that repeats it.
+#
+# THIS IS NOT AN ODDS GATE AND NOT A WEALTH GATE. `bc_their_host_gap_value` and
+# the side-size rows count men; `gold` and the debt gates read a purse. This
+# reads composition - the ratio of contract to obligation in a body of men - and
+# it is independent of both: a large host may be entirely levy, a small one
+# entirely professional, and a man in debt may be in debt precisely because he
+# bought companies.
+#
+# THE SECOND IS NOT RUMOUR AND DOES NOT NEED A CAMP TO REPORT IT. What a levy
+# looks like from a hundred paces is the single most legible fact on any
+# medieval field. Nothing matches, nobody keeps step, and the front rank is
+# holding whatever was in the barn.
+#
+# RARITY. Four regiments is money on top of rank. Zero is real but not universal
+# among the men who end up commanding a side. Neither fires for most commanders,
+# and they are read on different men in different pools, so neither carries a
+# negation of the other.
+bc_the_expensive_part_of_this_army_is_his_trigger = {
+	maa_regiments_count >= 4
+}
+
+bc_there_is_nothing_professional_opposite_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			maa_regiments_count = 0
+		}
+	}
+}
