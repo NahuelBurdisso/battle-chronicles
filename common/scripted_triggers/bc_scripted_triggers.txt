@@ -7590,3 +7590,58 @@ bc_nothing_in_him_agrees_with_the_man_opposite_trigger = {
 		}
 	}
 }
+
+
+# BATCH 178 - THE WRITTEN RULE HE HOLDS HIS OWN MEN BY.
+#
+# THE WHOLE REALM-LAW SYSTEM RETURNED ZERO OVER THE MOD. `has_realm_law` zero,
+# `has_realm_law_flag` zero, `has_realm_law_in_group` zero,
+# `realm_law_group_at_maximum_level` zero, `realm_law_group_at_minimum_level`
+# zero. A hundred and seventy-seven batches have read who is sworn to whom -
+# `is_vassal_of`, `is_liege_or_above_of`, `is_powerful_vassal`,
+# `is_independent_ruler`, batch 141's homage rows, batch 142's rosters - and not
+# one of them has ever read the written rule all of that runs under. Homage
+# is a relationship between two men. A law is a paragraph that outlives both
+# of them and decides what the relationship is allowed to demand.
+#
+# AGOT SHIPS ITS OWN `00_realm_laws.txt` AND KEEPS THE VANILLA GROUP. Its
+# `crown_authority` is declared at line 22 with `cumulative = yes` and
+# `default = crown_authority_1`, and the four levels sit at lines 29, 56, 144
+# and 238. So a ruler under this mod holds exactly one of `crown_authority_0`
+# through `crown_authority_3` at any moment, and holds it because somebody
+# moved it off the default.
+#
+# THE LEVELS ARE NAMED RATHER THAN ASKED FOR AS A GROUP MAXIMUM. The dump gives
+# `realm_law_group_at_maximum_level` and `realm_law_group_at_minimum_level` as
+# "does the scoped character have the maximum/minimum level of the realm law
+# group given", and says nothing at all about what either returns for a
+# character who holds no law in that group - a tribal ruler runs
+# `tribal_authority` instead, and a landless man runs nothing. `has_realm_law`
+# has no such hole: it is false when the man does not hold that law, for any
+# reason at all, including having no realm to hold it over.
+#
+# DISJOINT BY CONSTRUCTION, AND THE ENGINE ENFORCES IT. The group is cumulative
+# and a ruler holds one level of it, so the top and the bottom cannot both pass
+# on the same man. There are two whole levels between them and they are the two
+# that most of Westeros is actually sitting on.
+#
+# THIS IS NOT BATCH 141 AND NOT BATCH 142. Those read links - whether this man
+# is that man's vassal, whether this man employs that man as a knight. Both
+# gates here read a paragraph in a lawbook and neither of them names another
+# character at all.
+#
+# RARITY. The default is `crown_authority_1`, so neither gate can pass on a
+# realm nobody has legislated in. The first needs three increases pushed
+# through a council that has to be talked into every one of them; the second
+# needs a ruler who went the other way, which is a thing men do when they are
+# buying something with it.
+#
+# NEITHER TAKES A GUARD. Both rows are bare character-scope reads on a man the
+# caller has already entered.
+bc_the_law_in_his_realm_is_absolute_trigger = {
+	has_realm_law = crown_authority_3
+}
+
+bc_the_law_in_his_realm_is_a_courtesy_trigger = {
+	has_realm_law = crown_authority_0
+}
