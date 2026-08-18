@@ -8712,3 +8712,72 @@ bc_knight_nothing_about_today_will_be_settled_afterwards = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He paid for a conviction rather than a technique, and a conviction has no
+# instructions in it for an afternoon like this one. `entrenched`/`down` and
+# bc_shieldwall: he braces because bracing is the only thing the purchase told
+# him to do, and the line is better for it and the day is not.
+bc_knight_the_lesson_he_bought_only_works_one_way = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_paid_for_the_opposite_conviction_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man is likeliest to spend years on this particular opinion
+		# when he has the hands to make it true more often than not.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_lesson_he_bought_only_works_one_way"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_lesson_he_bought_only_works_one_way_toast
+				desc = bc_knight_the_lesson_he_bought_only_works_one_way_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

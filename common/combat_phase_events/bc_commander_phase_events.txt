@@ -11265,3 +11265,68 @@ bc_there_is_no_letter_that_would_help = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He bought this exact knowledge years ago and this is the afternoon it was
+# bought for. `ordered`/`down` is the second use of that pair in the mod and
+# the only correct one here: a formation that keeps its shape while it loses
+# ground, handed no modifier at all, because bc_pursuit is for going forward.
+bc_he_paid_good_years_to_learn_this_exact_thing = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_paid_to_know_how_to_go_backwards_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The years that bought the node are the same years that make a
+		# man able to use it while it is happening rather than after.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_paid_good_years_to_learn_this_exact_thing"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_paid_good_years_to_learn_this_exact_thing_toast
+			desc = bc_he_paid_good_years_to_learn_this_exact_thing_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

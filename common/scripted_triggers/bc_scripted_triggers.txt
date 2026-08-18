@@ -3533,3 +3533,54 @@ bc_the_man_opposite_answers_to_nobody_trigger = {
 	}
 	NOT = { bc_there_is_nobody_above_him_trigger = yes }
 }
+
+
+# --- what he paid to learn about going backwards -----------------------------
+#
+# THE MOD HAS NEVER READ A PERK. `has_perk` was at zero occurrences over a
+# hundred and fourteen batches. An education trait is what was done to a boy, a
+# focus is where a man's attention is this decade, and a perk is the third
+# thing and the only one of the three that is a PURCHASE: a node he spent years
+# of accumulated experience on, deliberately, in preference to the node beside
+# it. That is a much narrower statement about a man than either of the others.
+#
+# THE TWO CHOSEN ARE THE OPPOSITE ANSWERS TO ONE QUESTION, which is what makes
+# them a pair rather than two unrelated nodes. `organized_retreat_perk`
+# (common/lifestyle_perks/00_martial_1_strategy_tree_perks.txt:96) is a man who
+# decided that knowing how to go backwards was worth paying for.
+# `never_back_down_perk` (00_martial_3_chivalry_tree_perks.txt:229) is a man
+# who paid for the reverse conviction. Both are confirmed present in AGOT's own
+# copies of those files, which is where the line numbers above come from.
+#
+# THE SECOND CARRIES THE NEGATION because the trees are not exclusive and a man
+# with enough years in him can hold both nodes. When he does, the first wins:
+# having bought the knowledge of how to withdraw is the fact that describes
+# what he will actually do this afternoon, and the conviction is the thing that
+# gets overruled by it.
+#
+# NEITHER IS A SUBSET OF THE LIFESTYLE OR FOCUS GATES ALREADY SHIPPED. A perk
+# is permanent and a focus is not: bc_he_was_pointed_elsewhere_and_came_back_
+# trigger reads `has_lifestyle = martial_lifestyle`, which is a statement about
+# where the man's attention is now, and a lord who bought a martial node at
+# thirty and spends his fifties on books answers yes here and no there. The
+# batch 113 focus gates are the same case in the other direction.
+#
+# NEITHER IS bc_he_was_pointed_at_war_and_left_trigger EITHER. That gate is
+# about a boy pointed at arms who did not stay pointed at them. These are about
+# a specific sum of experience spent on a specific opinion, by a man who may
+# have been pointed anywhere at all.
+#
+# RARITY. Two nodes out of the twenty-four in the three martial trees, and each
+# of them sits deep enough that a man has to have spent a real part of his life
+# in that tree to be holding it.
+#
+# NEITHER TAKES A GUARD. Both are plain character triggers on root and neither
+# reads a link.
+bc_he_paid_to_know_how_to_go_backwards_trigger = {
+	has_perk = organized_retreat_perk
+}
+
+bc_he_paid_for_the_opposite_conviction_trigger = {
+	has_perk = never_back_down_perk
+	NOT = { bc_he_paid_to_know_how_to_go_backwards_trigger = yes }
+}
