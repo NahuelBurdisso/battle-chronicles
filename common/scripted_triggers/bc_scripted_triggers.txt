@@ -3407,3 +3407,67 @@ bc_he_is_attacking_somewhere_and_defending_somewhere_trigger = {
 	is_at_war_as_attacker = yes
 	is_at_war_as_defender = yes
 }
+
+
+# --- what his years are actually going into ----------------------------------
+#
+# THE MOD READS WHAT A MAN WAS TAUGHT AND HAS NEVER READ WHAT HE IS SPENDING
+# HIS YEARS ON NOW. `has_focus` was at zero occurrences across the whole mod.
+# An education trait is a fact about a boy; a lifestyle focus is a fact about
+# what the man has chosen to put his attention into this decade, and it can be
+# changed, and the two are not the same sentence.
+#
+# THE NEAR MISSES ARE bc_he_was_raised_for_books_trigger AND
+# bc_he_was_raised_for_the_dark_trigger, and the distinction is one this file
+# has already drawn once: those two wrap vanilla's education wrappers and ask
+# where a man STARTED. These ask where his years are GOING. Neither pair is a
+# subset of the other in either direction - a lord educated in arms can spend
+# his forties on books, and a maester-taught boy can spend his forties on
+# nothing of the kind.
+#
+# THE OTHER NEAR MISS IS `has_lifestyle`, which bc_he_was_pointed_at_war_and_
+# left_trigger and its partner already read as `martial_lifestyle`. Both gates
+# below are disjoint from that one by construction, because a learning focus
+# and an intrigue focus each put a man in a lifestyle that is not the martial
+# one. Nothing here can overlap with either shipped gate.
+#
+# DISJOINT WITHOUT A NEGATION, WHICH IS THE EXCEPTION AND NOT THE RULE HERE. A
+# character holds exactly one focus at a time and `set_focus` replaces rather
+# than adds, so these two cannot both answer yes and a `NOT` would be dead
+# script that implies a reader should worry about something the engine already
+# guarantees. This is written down so that the missing negation reads as a
+# decision rather than an oversight.
+#
+# THE ADVENTURER AND PIRATE VARIANTS ARE DELIBERATELY LEFT OUT. Vanilla adds
+# `learning_adventurer_focus` and `intrigue_adventurer_focus`, and AGOT adds
+# `learning_scholarship_landless_pirate_focus` (common/focuses/
+# 00_lifestyle_focuses.txt:1061). Those belong to landless governments and
+# describe a different life entirely, and folding them in would widen both
+# gates in exchange for a page that would then be wrong about half the men it
+# fired for.
+#
+# THE KEYS ARE LISTED RATHER THAN GROUPED because there is no group key for a
+# lifestyle's focuses to test, and all six are confirmed present in AGOT's own
+# override at 00_lifestyle_focuses.txt - intrigue at :467, :537 and :599,
+# learning at :967, :1013 and :1100.
+#
+# RARITY. Three focuses out of the nineteen a character can be running, and
+# then the man has to be standing in a battle while running one of them.
+#
+# NEITHER TAKES A GUARD. Both are plain character triggers on root and neither
+# reads a link.
+bc_the_years_are_going_into_books_trigger = {
+	OR = {
+		has_focus = learning_medicine_focus
+		has_focus = learning_scholarship_focus
+		has_focus = learning_theology_focus
+	}
+}
+
+bc_the_years_are_going_into_the_dark_trigger = {
+	OR = {
+		has_focus = intrigue_skulduggery_focus
+		has_focus = intrigue_temptation_focus
+		has_focus = intrigue_intimidation_focus
+	}
+}

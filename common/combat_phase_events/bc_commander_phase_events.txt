@@ -11133,3 +11133,69 @@ bc_there_is_a_second_map_in_his_head_and_it_is_worse = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# His years are going into books and the field is simply another thing to be
+# read. `adapted`/`up` is the KIND for a man whose advantage today is a habit
+# of attention rather than anything he does with his hands, and it hands out
+# nothing, which is correct: what changed was the reading, not the army.
+bc_he_learns_this_field_the_way_he_learns_anything_else = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_years_are_going_into_books_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The trick is not knowing more than the other man. It is having
+		# spent twenty years in the habit of finding out, which does not
+		# switch itself off because the subject is a hedge.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_learns_this_field_the_way_he_learns_anything_else"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_learns_this_field_the_way_he_learns_anything_else_toast
+			desc = bc_he_learns_this_field_the_way_he_learns_anything_else_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

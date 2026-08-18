@@ -4964,3 +4964,94 @@
 
  bc_knight_this_is_not_the_war_he_is_actually_fighting_toast:0 "He Is Winning An Afternoon That Belongs To Somebody Else And Means To Come Out Of It Whole"
  bc_knight_this_is_not_the_war_he_is_actually_fighting_toast_desc:0 "He has quarrels of his own and every one of them he opened. Nobody has ever come at him; he has always gone, and he knows that about himself the way he knows his own height, without approval and without shame. Today is not one of them. Today is a field he was asked onto, over a disagreement between two other men that will be settled in a room he will never see, and his name will not be in the settling. It is also going well, which is precisely the danger, because a day that is going well is a day when everybody around you wants it to go well faster. He can feel the rank wanting to move. It comes up through the men on either side of him the way a horse tells you it has decided something before it does it. What he does instead is get shorter and heavier. Shoulders down, shields in, the two on his left told twice to stop leaning out to look. Forward eats horses and wind and shins, and every one of those is a thing he will need in the spring, on ground that will be his own argument. So the line stands. The far side comes onto it and gets nothing, and comes on again and gets less, and is worse afterwards for having tried; and the afternoon shortens itself without taking anything from him that he had earmarked elsewhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 113 - what his years are actually going into ----------------------
+#
+# NEITHER OF THESE TWO MAY STAGE A MEMORY. No boyhood, no teacher, no hall, no
+# courtyard scene, nobody remembered by name or by office, and no sentence that
+# leaves this field for longer than the half-line it takes to say what a habit
+# is. Both pages are about a practice showing up in a place it was not built
+# for.
+#
+# NEITHER MAY NAME A BOOK, a text, a title, a language, a maester, a septon, a
+# letter or a scroll, and neither may have anything written down. The first is
+# about the shape of an attention, not about its subject matter.
+#
+# THE FIRST MAY NOT BE CLEVER AT ANYBODY. It may not out-think a named man, may
+# not have him pleased with himself, may not have anybody admire him, may not
+# have him explain anything to anybody, may not use the words "genius",
+# "brilliant" or "scholar", and may not end the day. It may not rally the line
+# and it may not produce a plan that a reader could write down.
+#
+# THE SECOND MAY NOT PLOT. No poison, no bribe, no arrangement made on the
+# field, no accomplice, no name of anybody he has ever dealt with, and no
+# suggestion that he is about to do anything except be here. It may not have
+# him run, may not have him captured, may not have him rescued, may not kill
+# anybody, may not have him call himself a coward, and may not end the day.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life", "it comes from meals", "one notch harder than the
+# situation asked for", "in a hall in winter with the fire going", "a step
+# further back than they were", "the sensible, almost administrative urge",
+# "thirty paces along the same rank", "since before he was worth knowing",
+# "the second answer is worse than the first was", "a longer route than the
+# one he learned to trust", "impatience of a very specific and unusual kind",
+# "a hundred paces is not a distance worth counting", "personally offended him
+# by existing", "horses standing with their heads down", "stops being an item
+# and starts being a soldier", "a piece of paper with a life attached", "the
+# specific way you are kind to something valuable", "refuse to be the reason
+# it goes any faster", "a conversation he was not at", "already been talked
+# about somewhere he was not", "at the going rate", "a defeat with nothing in
+# it", "the part where a man can be seen", "whose going first would settle
+# anything", "it arrives at him sideways", "the quantity is now so small that
+# it can be held in the head", "the temperature of the standing", "stopped
+# containing any doubt", "the shape of fighting and the pace of work", "become
+# a direction", "anything on the other side of the question", "in good order,
+# which is the only creditable thing", "precisely where to put his hands",
+# "the smallest correct answer there is", "still has an army in it at dusk",
+# "he has always gone", "the way a horse tells you it has decided something",
+# "get shorter and heavier", "a room he will never see".
+ bc_he_learns_this_field_the_way_he_learns_anything_else_toast:0 "He Is Going Over It Again Because Going Over Things Again Is What He Does"
+ bc_he_learns_this_field_the_way_he_learns_anything_else_toast_desc:0 "He has never thought of himself as a soldier and he stopped apologising for that some while ago. What he has instead is a habit, unglamorous and slow, of assuming that whatever is in front of him has rules in it he has not found yet, and of continuing to look some time after other men have decided they understand. So he watches. The far side's second attempt comes in and he watches it the way he would work at a passage he intends to go through four times — not, at first, for what it means, but for what it does twice. It does two things twice. The third attempt is still forming when he starts moving men who do not know why they are being moved, and the fourth goes into a stretch of ground he has quietly arranged to be worse than it looks. There is nothing dazzling anywhere in this. He cannot do it any faster than he does it and he takes no pleasure in it beyond the small flat satisfaction of a thing coming out where it should. It is the same ordinary labour he has applied to every difficult object of his life, turned on material he did not choose and finds a great deal cruder than he is used to, and by the middle of the afternoon he simply has more of the field in his head than the man opposite has, and that turns out to be all the difference there is.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_none_of_his_arrangements_reach_this_far_toast:0 "Everything He Is Good At Needs Quiet And Two People And He Has Neither"
+ bc_knight_none_of_his_arrangements_reach_this_far_toast_desc:0 "The work he is actually good at wants two conditions this hedge cannot supply: time, and somebody willing to be alone with him. He has spent the better part of eleven years getting very accurate about how a thing is made to happen from the far side of a courtyard without the person who made it happen ever being the person seen, and the whole of that accuracy is worth nothing here, in a rank folding from the right at about the pace of a man walking. What is left him is the part he never practised. He has a sword because everybody has a sword. He knows the four things you are taught with it and he knows them the way you know words you have not said aloud since you were small — in sequence, without any sense that the sequence is going to help. The first man to reach him he manages. The second he manages worse and takes something across the forearm for it, high up, where the mail stops being generous, and the shock of it is less about the pain than about how ordinary the whole exchange was. After that it stops being anything he can influence. They arrive faster than he can account for them, and there is no room anywhere in the afternoon for the single kind of cleverness he owns.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
