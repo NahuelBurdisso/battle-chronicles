@@ -13474,3 +13474,62 @@ bc_the_men_he_brought_are_exactly_what_was_written_down = {
 		}
 	}
 }
+
+bc_the_walls_over_this_field_are_not_going_to_open = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_this_field_lies_under_a_great_wall_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having spent a career learning what walls that size are for, and
+		# spending this afternoon learning what they are not for.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_walls_over_this_field_are_not_going_to_open"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_walls_over_this_field_are_not_going_to_open_toast
+			desc = bc_the_walls_over_this_field_are_not_going_to_open_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -5572,3 +5572,69 @@ bc_the_terms_he_holds_by_ask_almost_nothing_of_him_trigger = {
 		vassal_contract_obligation_level:feudal_government_levies <= feudal_levies_low_level
 	}
 }
+
+# BATCH 148 - WHAT IS STANDING ON THIS GROUND BESIDES THE TWO ARMIES.
+#
+# `fort_level`, `has_holding_type`, `has_special_building` and `is_under_siege`
+# all returned zero across the whole mod. The mod reads this province for its
+# terrain, its weather, its wealth, its owner and now its temper, and has never
+# once looked up. Whether there are walls over the field is the oldest fact in
+# the world about a battle and the mod could not say it.
+#
+# `fort_level` IS PROVINCE SCOPE AND BOTH NUMBERS ARE AGOT'S OWN. AGOT writes
+# `fort_level >= 10` twice as its own threshold for a great seat, at
+# `common/on_action/agot_on_actions/agot_game_start.txt:93` and
+# `common/on_action/province_on_actions.txt:770` (repeated at `:782`), and uses
+# the low end as `fort_level > 0` at `common/buildings/
+# 99_background_graphics_buildings.txt:89` and `common/customizable_localization/
+# 00_building_custom_localization.txt:18`. The second gate below is the exact
+# complement of that second form. Vanilla uses the same trigger at
+# `events/lifestyles/intrigue_lifestyle/intrigue_scheming_events.txt:8326`, in a
+# block that is explicitly about counting siegeable holdings.
+#
+# TEN IS NOT AN INVENTED NUMBER AND IT IS NOT A LARGE ONE BY ACCIDENT. Vanilla's
+# castle upgrades hand out fort levels in single digits and its great buildings
+# stack a few more on top; AGOT reserves double figures for the handful of seats
+# a reader would name without being prompted. A field that passes the first gate
+# is a field somebody built something enormous on, on purpose, a long time ago.
+#
+# GUARDS IN THE SHAPE THE GROUND ROWS USE. `combat.location` does not always
+# resolve; the guard is repeated inside the `trigger_if` limit. No county read is
+# needed here - `fort_level` sits directly on the province - so these are one
+# level shallower than the rich and poor country rows at 1336 and 1348.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Ten or more against exactly nothing.
+#
+# THIS IS NOT THE TERRAIN ROWS AND IT IS NOT THE DEVELOPMENT ROWS. Terrain is
+# what the ground was before anybody arrived; this is what was put on it
+# afterwards. Development is what the ground earns, and a rich county with no
+# walls and a poor county with a great fortress on it are both ordinary things.
+#
+# NEITHER GATE READS THE SCOPED MAN, so neither depends on what `root` is, and
+# neither is a claim about anybody's character. Both are claims about the field.
+#
+# RARITY. The first is the small set of provinces in the world with double-figure
+# fortification, and then the battle has to happen to be standing in one of them,
+# which is rarer still because armies fighting under walls that size are usually
+# there for the walls and not for each other. The second wants a province with
+# nothing on it worth the name, which is a real category and not a large one,
+# since most ground that gets fought over has been worth holding at some point.
+bc_this_field_lies_under_a_great_wall_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			fort_level >= 10
+		}
+	}
+}
+
+bc_there_is_nothing_standing_on_this_ground_at_all_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			fort_level = 0
+		}
+	}
+}
