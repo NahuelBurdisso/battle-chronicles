@@ -2829,3 +2829,45 @@ bc_the_far_side_could_take_him_lawfully_trigger = {
 	}
 	NOT = { bc_the_law_would_let_him_take_that_man_trigger = yes }
 }
+
+
+# --- the one who was preferred -----------------------------------------------
+#
+# THE MOD READS BLOOD AND HAS NEVER READ PREFERENCE. It knows who is kin, whose
+# house is whose, who fostered whom, who is a bastard, who stands to inherit and
+# who has a child on the way. Every one of those is a fact a herald could look
+# up. `num_of_relation_favorite_child` and `is_favorite_child` were both at zero
+# occurrences, and between them they are the only place the engine records the
+# thing families actually run on, which is that out of several people entitled
+# to the same amount of love, one of them gets more of it.
+#
+# THE TWO GATES ARE THE SAME FACT FROM THE TWO ENDS. The first asks whether root
+# is the one doing the preferring. The second asks whether root is the one being
+# preferred. A man can be both - most fathers were somebody's son - which is why
+# the second carries the first as an explicit negation and the two are disjoint
+# by construction. Doing the preferring wins that tie, because a man who is
+# owed something and also owes something is, on a battlefield, mostly the second
+# thing.
+#
+# NEITHER TAKES A GUARD. `num_of_relation_favorite_child` and `is_favorite_child`
+# are both plain reads on root, which is the character the template is already
+# rooted on, and there is no optional link in either.
+#
+# NEITHER IS bc_he_stands_to_inherit_trigger OR bc_a_child_of_his_is_on_the_way_trigger,
+# WHICH ARE THE NEAR MISSES WORTH NAMING. Inheritance is an order of names on a
+# roll and does not care who anybody likes; a child on the way is a fact about
+# next spring. This is neither an order nor a date. It is a standing arrangement
+# of somebody's affection that everybody in the household knows about and nobody
+# has ever written anywhere.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. The relation has to be deliberately set,
+# it is set for at most one person at a time by anybody who has it, and most
+# characters in the world are on neither end of one.
+bc_there_is_one_of_them_he_prefers_trigger = {
+	num_of_relation_favorite_child >= 1
+}
+
+bc_he_is_the_one_who_was_preferred_trigger = {
+	is_favorite_child = yes
+	NOT = { bc_there_is_one_of_them_he_prefers_trigger = yes }
+}

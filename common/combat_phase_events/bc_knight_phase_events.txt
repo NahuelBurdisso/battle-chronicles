@@ -7855,3 +7855,75 @@ bc_knight_there_is_no_ransom_in_it_for_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is the one who was preferred. Everything he is wearing and everything he
+# is sitting on was chosen for him ahead of somebody with an equal claim to it,
+# and today his side is winning, which is the first afternoon in his life that
+# offers him a way to make the arrangement look deserved. So he rides it past
+# the point where any of it is useful: `wild` and `up`, a rung gained and the
+# mounts finished in the same breath, which is exactly what the KIND is for.
+bc_knight_everything_he_has_was_handed_to_him = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_the_one_who_was_preferred_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has been given the best of everything since he could
+		# walk has usually also been given the best instruction, and it
+		# shows on the one day a year it matters.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_everything_he_has_was_handed_to_him"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_everything_he_has_was_handed_to_him_toast
+				desc = bc_knight_everything_he_has_was_handed_to_him_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

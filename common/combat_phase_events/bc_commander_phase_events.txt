@@ -10456,3 +10456,72 @@ bc_he_would_rather_have_him_than_the_field = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# There is somebody at home he loves more than the rest of them, and the field
+# is going against him. So he changes what the afternoon is for - it stops
+# being a battle he intends to win and becomes a number of men he intends to
+# still have at dusk, one of whom is himself. `adapted` is the commander
+# altering what he is doing after reading the field; `down` is that he is
+# reading a loss. The army gets no modifier out of it, which is correct: a
+# change of purpose does not brace a line or bleed it.
+bc_what_he_is_still_meaning_to_go_home_to = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_one_of_them_he_prefers_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Turning a losing field into an orderly departure is the hardest
+		# thing in the trade and the one that looks least like soldiering
+		# from outside.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = content
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_what_he_is_still_meaning_to_go_home_to"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_what_he_is_still_meaning_to_go_home_to_toast
+			desc = bc_what_he_is_still_meaning_to_go_home_to_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

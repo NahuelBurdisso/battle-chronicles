@@ -4193,3 +4193,69 @@
 
  bc_knight_there_is_no_ransom_in_it_for_him_toast:0 "Every Other Man In This Rank Has An Ending Available That He Does Not"
  bc_knight_there_is_no_ransom_in_it_for_him_toast_desc:0 "The men to either side of him are going to be all right. Not today, necessarily, and not all of them, but the shape of the thing they are inside has an exit in it — a hand up, a name given, a week of bad food and somebody's steward riding out with a sealed bag — and that exit is standing open for every single one of them and has never once been open for him. He knew that before the horns. He has known it for years. So the arithmetic he is doing while the line comes apart is not the arithmetic anybody near him is doing: he is not working out how to live through this, he is working out how to remain, for the next hour, an object that no reasonable man would put a hand on. He goes at them wide and low and keeps going, past the point where it is any use to the line, past the point where his own arm is answering properly, and the ground in front of him gets very bad indeed. It costs. Men beside him who would have stood are pulled forward into it and do not come out, and the line where he is standing bleeds for a decision that was never theirs and that he never once thought of as a decision.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 103 - the one who was preferred -----------------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE PERSON at the other end of it. No name, no
+# sex, no age, no title, no position in any birth order, and no count of how
+# many others there are. The engine holds one relation between two characters.
+# The page holds a man in armour and a weight he is carrying, and every fact
+# supplied about the other person makes the weight smaller than it is.
+#
+# NEITHER MAY USE THE WORDS "favourite", "favorite", "prefer" or "preferred",
+# and neither may state the comparison out loud. It is the sort of thing a
+# household knows and never says, and a page that says it has already got it
+# wrong.
+#
+# NEITHER MAY LEAVE THE FIELD. No flashback, no memory of a room, no scene at a
+# table, no farewell at a gate, no letter. Whatever is at home stays at home and
+# is present here only as pressure.
+#
+# THE FIRST MAY NOT ANNOUNCE A RETREAT, sound a horn, order a withdrawal in
+# words, or be seen by anybody to have changed his mind. It may not have him
+# consider his own death, may not have him weep, may not have him blame
+# anybody, and may not promise that it works. He is losing and the page does
+# not fix that.
+#
+# THE SECOND MAY NOT APOLOGISE FOR HIM and may not condemn him. It may not have
+# him think about what he was given, may not have anybody in the ranks resent
+# him or admire him, and may not have him prove anything to anybody named. It
+# may not have him fall, be unhorsed on the page, or be told to stop. What ends
+# is the horse, not the man, and the page may not treat that as a lesson.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low".
+ bc_what_he_is_still_meaning_to_go_home_to_toast:0 "He Quietly Changes What He Is Trying To Achieve Out Here"
+ bc_what_he_is_still_meaning_to_go_home_to_toast_desc:0 "Nothing about the next hour is going to be a victory and he stops asking it to be one. The interesting thing, and he notices himself doing it, is where the new instruction comes from. It is not the men, whom he has spent his adult life being responsible for and would spend all of today for if today were still worth spending. It is not the war, which will go on being what it is regardless of what happens on this grass. It is one small thing at the far end of a road he has not travelled in months, and it is not asking him for anything, and it does not know today is happening. He gives no order that anybody could write down as the moment he stopped trying. What he does is smaller and takes longer: a company held back that would have been fed in, a flank permitted to bend rather than bought back at the price it now costs, the road behind them checked, once, without turning his head. The men around him think he is still fighting the battle. He is fighting something else now, with the same tools, at the same pace, and by dusk he will know exactly how much of it he saved and exactly what it cost the field.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_everything_he_has_was_handed_to_him_toast:0 "The First Afternoon Of His Life That Will Take Any Payment At All"
+ bc_knight_everything_he_has_was_handed_to_him_toast_desc:0 "The animal under him is better than the one under any man he has passed today, and it was chosen for him, and it was chosen instead of being chosen for somebody with as much right to it as he had. So is the mail. So is the sword, so was the place in the line, so was the year of instruction from a master-at-arms who had other pupils and gave him the mornings. None of it can be given back and none of it was ever refusable and there has never before been a single thing he could do about any of it. There is today. The far side is going and he goes after it, and then he goes after it further, through the trampled ground and the dropped gear and the men who have already stopped being an army, past the last of the horns and past the point where anyone behind him could tell him anything. He does not tire. The horse does. It goes on carrying him a long time after it has stopped being able to and it will not be ridden again, and he comes back at dusk on foot, leading it, having finally spent something that was his.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
