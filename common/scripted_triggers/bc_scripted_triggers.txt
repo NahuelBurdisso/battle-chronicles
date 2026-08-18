@@ -5041,3 +5041,76 @@ bc_the_man_giving_the_orders_will_spend_him_trigger = {
 		}
 	}
 }
+
+# BATCH 141 - WHETHER THE CHAIN OF COMMAND IS ALSO A CHAIN OF HOMAGE.
+#
+# `is_vassal_of`, `is_liege_or_above_of`, `any_vassal`, `num_of_vassals`,
+# `any_courtier` and `any_liege_or_above` all returned zero across the whole
+# mod. A hundred and forty batches have asked who these men are to each other -
+# kin, friends, rivals, hooks, dread, opinion, truces, allies - and not one of
+# them has asked the oldest question in the setting, which is who holds land of
+# whom. Every man on the field is standing there because somebody owes somebody
+# something, and the mod has never once read the ledger it is all built on.
+#
+# BOTH ARE LIVE IN SHIPPED FILES. Vanilla writes `is_vassal_of = scope:host` at
+# `common/activities/activity_types/chariot_race.txt:702` and four times in
+# `common/activities/activity_types/coronation.txt`, and AGOT ships the same
+# reads at `chariot_race.txt:707` and `coronation.txt:1784`. Vanilla writes
+# `is_liege_or_above_of` at `common/activities/activity_types/debate.txt:846`,
+# at `common/casus_belli_types/06_ce1_wars.txt:361` and at
+# `common/casus_belli_types/07_ep3_wars.txt:4216`, and negates it at
+# `common/casus_belli_types/10_tgp_japan_wars.txt:1008`.
+#
+# THE FIRST IS KNIGHT-ONLY BY CONSTRUCTION AND THAT IS DELIBERATE. It asks
+# whether the scoped man holds his land of the man commanding this side. A
+# commander scoped into his own template IS `scope:combat_side.side_commander`,
+# and no man is his own vassal, so this gate is dead in the commander pool and
+# would be a silently-never-firing row if it were used there. It is used only on
+# the knight side. The second is the mirror-image problem solved the other way:
+# it reads the ENEMY side's commander, which is never the scoped man on either
+# pool, so it is live everywhere and is used on the commander side where it says
+# the most.
+#
+# BOTH TAKE THE GUARD, AND THE SECOND TAKES TWO. Naming a link as the TARGET of
+# a trigger is a read, so `side_commander`, `enemy_side` and
+# `enemy_side.side_commander` all carry their `exists` as a sibling and repeat
+# it inside the `trigger_if` limit before anything is asked. Both are named
+# through `scope:combat_side` rather than `root`, for batch 127's reason.
+#
+# THE PAIR CANNOT BOTH HOLD AND NO NEGATION IS NEEDED TO SAY SO. The first is
+# about the man leading his own side; the second is about the man leading the
+# other one. They are two facts about two different men, which is the same
+# construction batches 110, 113, 118, 120 and 123-137 use, and the feudal graph
+# is acyclic besides - a man cannot hold land of somebody who holds land of him.
+#
+# THIS IS NOT THE KIN ROWS, THE OPINION ROWS OR THE ALLY ROWS. Kinship is blood
+# and does not move; opinion is what a man feels this week; alliance is a
+# contract between equals that either can let lapse. Homage is none of those.
+# It is a standing legal fact that outlives the feeling, and men who loathe each
+# other are bound by it while brothers who love each other are not.
+#
+# RARITY. The first needs the knight to be a DIRECT vassal of the specific man
+# commanding this side - not a courtier, not a household knight, not a vassal of
+# his liege - which is a small slice of any army. The second needs the man
+# opposite to be his own man at some remove and to be in the field against him
+# anyway, which means a rebellion or a succession war, and needs both sides to
+# have a commander at all.
+bc_he_owes_this_man_his_homage_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		is_vassal_of = scope:combat_side.side_commander
+	}
+}
+
+bc_the_man_opposite_is_his_own_man_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		is_liege_or_above_of = scope:combat_side.enemy_side.side_commander
+	}
+}
