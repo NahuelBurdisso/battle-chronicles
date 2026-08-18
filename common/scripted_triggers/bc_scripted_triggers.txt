@@ -8146,3 +8146,72 @@ bc_it_never_woke_in_him_trigger = {
 	has_inactive_trait = depressed_genetic
 	NOT = { has_inactive_trait = lunatic_genetic }
 }
+
+# BATCH 187 - HOW HOT HIS FAITH IS RUNNING THIS YEAR.
+#
+# `fervor` RETURNED ZERO OVER THE WHOLE TREE, as a key and as a word. The mod
+# has read faith a great deal and always in one of two ways: what his faith
+# calls a sin or a virtue, which is the doctrine seam at `:6730` and at
+# `:1946`, and whose ground he is standing on, which is
+# bc_knight_the_ground_under_him_belongs_to_the_faith at
+# `bc_knight_phase_events.txt:11255`. Both of those ask what the faith SAYS.
+# Neither of them, and nothing else in a hundred and eighty-six batches, has
+# ever asked how loud it is saying it this year.
+#
+# THE DUMP. `fervor` is "What is the faith's fervor?", faith scope, with the
+# full set of comparators. It is a number the whole faith carries and it
+# moves - wars, temples, heresies and clergy all push it about - so the same
+# man on the same field can pass this gate one decade and fail it the next.
+#
+# THE RUNGS ARE VANILLA'S OWN, NOT INVENTED HERE. Vanilla's hunt pulse walks
+# the ladder at `common/activities/pulse_actions/hunt_pulse_actions.txt:1161`,
+# `:1165` and `:1169` in the order 75, 50, 25, which is the game telling us
+# where it thinks high and low are. The block form used below is vanilla's
+# too: `common/character_interactions/00_religious_interactions.txt:2114-2128`
+# writes `scope:actor.faith = { fervor < 50 }` and `scope:recipient.faith = {
+# fervor >= 50 }` as adjacent rows, and `:2124` writes `fervor <= 25`.
+#
+# AGOT KEEPS IT LIVE AND MOVES IT. `common/buildings/
+# 00_agot_monastery_buildings.txt:227-229` calls `change_fervor` off a temple
+# holding, so this is not a vanilla number sitting frozen under the mod; it
+# is a dial AGOT's own content turns.
+#
+# THIS IS NOT THE DOCTRINE SEAM AND CANNOT BE FOLDED INTO IT. A doctrine gate
+# asks a fixed question about the rules he lives under and changes its answer
+# only when he changes faith. This asks a number that changes without him
+# doing anything at all, and it is the same number for every man who shares
+# his faith, on both sides of the field. A man whose faith counts half his
+# habits as sins can be in a year when nobody is listening, and a man whose
+# faith forbids him almost nothing can be in a year when everybody is.
+#
+# NOT A SUBSET OF THE HOLY-GROUND TEMPLATE EITHER. That one reads the county
+# under his feet and is a fact about a place. This is a fact about a
+# congregation four hundred miles away.
+#
+# WHAT THE TWO ROWS ARE FOR. The first man is losing in a year when the
+# faith is at full voice, which means the afternoon is already spoken for -
+# whatever happens here will be read out as a judgement by people who were
+# not present, and he knows it while it is still happening. The second man is
+# winning in a year when hardly anybody is praying about anything, so nothing
+# is coming down from above to hold the line, and what holds it is the man on
+# either side of him and nothing else.
+#
+# DISJOINT BY CONSTRUCTION. One scalar, one faith, and 75 against 25. The two
+# gates cannot both be true. No negation is needed and none is written.
+#
+# RARITY. Fervor spends most of its life in the middle of the range and the
+# two ends are where the engine itself marks high and low. Neither of these
+# is a gate that fires for nearly everybody, and both of them will be true of
+# whole decades at a time rather than of scattered individuals, which is the
+# right shape for a fact about a faith rather than about a man.
+#
+# NEITHER TAKES A GUARD. Every character has a faith, and the read sits
+# inside the faith block the way the culture gates at `:1059`, `:1471` and
+# `:3645` sit inside theirs.
+bc_the_faith_is_running_hot_trigger = {
+	faith = { fervor >= 75 }
+}
+
+bc_nobody_much_is_praying_this_year_trigger = {
+	faith = { fervor <= 25 }
+}
