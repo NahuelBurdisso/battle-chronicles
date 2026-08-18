@@ -4253,3 +4253,64 @@ bc_there_is_nothing_professional_opposite_trigger = {
 		}
 	}
 }
+
+# BATCH 128 - THE MONEY THAT LEFT BEFORE THE WAR DID, AND THE OTHER TRADE.
+#
+# A hundred and twenty-seven batches have read what a man commands, what he
+# owns, who he owes, what is under his feet and what the weather is doing to
+# it. None of them has ever read what he has PAID SOMEBODY TO MAKE. The census
+# is clean: `inspiration` returns zero over the whole mod, in every form -
+# `any_sponsored_inspiration`, `has_completed_inspiration`, `any_inspiration`,
+# `can_sponsor_inspiration`.
+#
+# THE DUMP. `any_sponsored_inspiration` is "Iterate through all sponsored
+# inspirations", character scope, target inspiration, standard `count`
+# comparators. `has_completed_inspiration` is "Checks if the scoped character
+# has ever completed an inspiration", character scope, yes/no. AGOT runs both
+# live: the iterator with `count >= 3` and `count >= 2` in the fund-an-artisan
+# interaction at `common/character_interactions/02_ep1_interactions.txt:188`
+# and `:197`, and again at `00_prison_interactions.txt:8525`; the boolean at
+# `00_agot_lmf_interactions.txt:3332` and `:3410`, and in the court-position
+# requirements at `common/court_positions/types/00_agot_court_positions.txt:3264`.
+# AGOT ships its own `common/inspirations/00_inspirations.txt`, so the system
+# is not a dead vanilla surface here - it is furnished and running.
+#
+# NEITHER GATE TAKES A GUARD, FOR TWO DIFFERENT REASONS. The first is an
+# iterator, and an iterator over an empty list is a clean no; iterators are not
+# links. The second is a plain boolean read on the character already in scope,
+# with no dotted step in it at all. Nothing in this block reaches through an
+# optional link, so nothing in this block needs `exists`.
+#
+# TWO KEYWORDS, TWO FACTS, TWO MEN. The first is money going out of a purse for
+# a thing that is not finished. The second is a pair of hands that once
+# finished one. They are not two thresholds on one number and they are not the
+# same question asked from either end - a man may be paying for four workshops
+# and have never made anything, and a man may have built the finest thing in a
+# kingdom and be too poor to fund a nail. So neither carries a negation of the
+# other, and the engine keeps them apart anyway: the first is read on the side
+# commander, the second on a knight in the line, and the two pools roll
+# separately.
+#
+# THIS IS NOT A WEALTH GATE AND NOT A STATION GATE. `gold`, the debt rows and
+# the men-at-arms row of batch 127 all read the size or the shape of what he
+# can spend. This reads what he has already spent it ON, and specifically on
+# something with no military value whatever, commissioned in peace, still
+# unfinished. That is the whole point of it: it is the one line of his ledger
+# that this afternoon cannot reach.
+#
+# RARITY. Sponsorship costs real gold and AGOT's own AI actively throttles it -
+# the interaction above subtracts fifty from the will-do at three concurrent
+# works for an emperor and two for a king, which is the game telling us in its
+# own hand that even the richest men in Westeros are running two or three of
+# these at most, and most men are running none. A completed inspiration is
+# rarer still: it requires the whole arc to have run to its end on that
+# specific character. Neither fires for most men on most fields.
+bc_he_is_paying_for_something_being_made_at_home_trigger = {
+	any_sponsored_inspiration = {
+		count >= 1
+	}
+}
+
+bc_he_has_finished_a_thing_with_his_own_hands_trigger = {
+	has_completed_inspiration = yes
+}

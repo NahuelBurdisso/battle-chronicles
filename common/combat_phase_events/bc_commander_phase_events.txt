@@ -12262,3 +12262,68 @@ bc_the_companies_are_the_part_he_can_price = {
 		}
 	}
 }
+
+# Batch 128, commander half. He is losing and he is holding, and the part of
+# his mind that will not stop working has gone to the one item in his accounts
+# that has nothing to do with today: a thing he commissioned in peace, still
+# unfinished, being worked on at this moment by a man who does not know where
+# he is. `learning >= 12`, because keeping a work like that alive in your head
+# for a year is what patronage actually is.
+bc_the_work_he_paid_for_is_still_being_made = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_paying_for_something_being_made_at_home_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a year-long commission in your head while the line is
+		# being pushed backwards is a patron's habit, not a soldier's.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_work_he_paid_for_is_still_being_made"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_work_he_paid_for_is_still_being_made_toast
+			desc = bc_the_work_he_paid_for_is_still_being_made_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
