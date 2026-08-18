@@ -17445,3 +17445,63 @@ bc_the_name_he_carries_is_bigger_than_he_is = {
 		}
 	}
 }
+
+
+bc_he_holds_three_men_by_the_throat = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_holds_three_men_by_the_throat_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Collecting ropes and knowing which one to pull is one skill,
+		# and the man who has three of them has spent it on nothing else.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_holds_three_men_by_the_throat"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_holds_three_men_by_the_throat_toast
+			desc = bc_he_holds_three_men_by_the_throat_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

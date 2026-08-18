@@ -10353,3 +10353,66 @@ bc_the_name_they_gave_him_never_grew_trigger = {
 		}
 	}
 }
+
+
+# BATCH 215 - HOW MANY MEN HE HOLDS BY THE THROAT.
+#
+# `any_hooked_character` RETURNED ZERO ACROSS THE WHOLE MOD, and so did
+# `any_hooked_character_all`, `ordered_hooked_character`,
+# `random_hooked_character`, `has_strong_hook` and `has_weak_hook`. The mod
+# reads hooks exactly twice, in bc_his_lord_holds_a_hook_trigger and
+# bc_he_holds_his_lords_hook_trigger, and both of those ask about ONE rope
+# between two named men - the man whose war this is and the man standing in
+# it. Neither has ever asked how many ropes he is holding altogether. That is
+# a fact about a career rather than about a war, and no batch in two hundred
+# and fourteen has read it.
+#
+# THE FORM IS AGOT'S OWN. `events/agot_events/agot_colonization_events.txt`
+# writes `any_hooked_character = { ... count > 0 }` at :666-670, with a
+# literal count and not a script value, and follows it straight into an
+# `ordered_hooked_character` that picks the strongest of them out. Vanilla
+# pairs the iterator with `count >=` four times over in
+# `common/scripted_triggers/tgp_mandala_triggers.txt`, at :915-918, :966-969,
+# :1018-1021 and :1082-1085. The key also carries a trigger localization entry
+# of its own in `common/trigger_localization/00_script_list_triggers.txt` at
+# :38-41, which the game only writes for keys meant to be read out in a
+# tooltip.
+#
+# THREE IS THE BAR, AND IT IS CHOSEN TO KEEP THIS OFF THE SHIPPED PAIR.
+# `count >= 1` would be a strict superset of bc_he_holds_his_lords_hook_trigger
+# - a man holding his own war leader would answer yes to it every time - and
+# this mod does not ship gates that swallow their neighbours. At three the two
+# come apart in both directions: a man may hold exactly one rope and have it
+# round his liege's neck, and a man may hold three round men who are nowhere
+# near this field.
+#
+# ITERATORS ARE NOT LINKS, so the near gate takes no guard at all and an empty
+# list is a clean no. The far gate reads
+# `scope:combat_side.enemy_side.side_commander`, which is a character walk, so
+# it takes the standing guard - the full-chain `exists` as a sibling, and the
+# iterator nested inside a trigger_if that repeats it.
+#
+# THE TWO ARE MADE DISJOINT BY THE TIE-BREAK, batch 121's construction. Both
+# commanders can be collectors, and neither moment wants to share the picture
+# with the other, so the far gate denies the near one in its own body and the
+# tie goes to the near man.
+#
+# RARITY. A hook is spent when it is used, most characters hold none at all,
+# and the ones who hold any usually hold one. Standing on three at once is the
+# mark of a man who has spent years gathering them and cashing none, which is
+# a small set of men in any given year and a smaller one still on the
+# particular afternoon his line is going backwards.
+bc_he_holds_three_men_by_the_throat_trigger = {
+	any_hooked_character = { count >= 3 }
+}
+
+bc_the_man_opposite_holds_three_that_way_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_hooked_character = { count >= 3 }
+		}
+	}
+	NOT = { bc_he_holds_three_men_by_the_throat_trigger = yes }
+}
