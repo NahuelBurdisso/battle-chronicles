@@ -8502,3 +8502,74 @@ bc_knight_the_end_of_a_name_is_a_short_afternoon = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Every war with his name on it is one he opened, none of them is this one, and
+# this one is going well without needing anything clever from him. `entrenched`
+# is the KIND for a line that braces and gets bc_shieldwall for it, which is the
+# right consequence for a man whose entire interest today is in this being over
+# tidily and soon.
+bc_knight_this_is_not_the_war_he_is_actually_fighting = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_every_war_with_his_name_on_it_he_opened_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Fighting economically, in somebody else's quarrel, because
+		# every hour and every man spent here is an hour and a man not
+		# spent on your own, is a decision of the purse worn as armour.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_this_is_not_the_war_he_is_actually_fighting"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_this_is_not_the_war_he_is_actually_fighting_toast
+				desc = bc_knight_this_is_not_the_war_he_is_actually_fighting_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

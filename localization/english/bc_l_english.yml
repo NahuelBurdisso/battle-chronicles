@@ -4873,3 +4873,94 @@
 
  bc_knight_the_end_of_a_name_is_a_short_afternoon_toast:0 "They Are Not Chasing An Army Any More And Everybody Riding Knows It"
  bc_knight_the_end_of_a_name_is_a_short_afternoon_toast_desc:0 "The fighting stopped about a mile back. What is happening now has the shape of fighting and the pace of work, and root is in it with perhaps forty others, strung out across ground that is going soft, and the thing they are following has stopped being a formation and become a direction. He is aware, in the incurious way you are aware of the weather, that this is the shorter kind of afternoon: not the sort that ends when one army has had enough, but the sort that ends because there stops being anything on the other side of the question. There is no order to that effect. Nobody has said it. It is simply understood along the whole ragged length of the pursuit, in the way that men who have done this before understand what is expected without needing to be unpleasant about it, and it makes everybody slightly quieter and slightly more careful with their horses. Root rides. The ground goes past. He is not thinking about what is at the end of it, and he notices that he is not thinking about it, and he keeps riding anyway.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 112 - the shape of the rest of his wars ---------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE OTHER WAR, its enemy, its cause, its place
+# or its year, and neither may say how many wars there are. The engine has
+# already answered that. Both pages are about what carrying that answer feels
+# like on one afternoon in one field.
+#
+# NEITHER MAY USE A MESSENGER, a rider coming in, a letter, a dispatch, a
+# report or any news arriving from anywhere. Nothing may reach either man from
+# outside this field. What either of them knows about elsewhere, he brought
+# with him this morning.
+#
+# NEITHER MAY USE THE WORDS "campaign", "front", "strategy", "theatre" or
+# "invasion", and neither may draw, unroll, consult or own a map. The title of
+# the first is allowed its figure of speech and the page is not.
+#
+# THE FIRST MAY NOT RESOLVE INTO A DECISION. It may not withdraw, may not
+# break off, may not send anybody anywhere, may not rally, may not turn the
+# line, and may not end the day. It may not have him say the word "enough", may
+# not have anybody advise him, and may not have him blame a single person for
+# anything.
+#
+# THE SECOND MAY NOT BE ABOUT GREED IN WORDS, may not price anything in coin,
+# may not use the words "cost", "profit", "cheap" or "spend" of money, and may
+# not have root resent the man he is fighting for. It may not have him charge,
+# may not have him kill anybody, may not have him be praised, and may not end
+# the day.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life", "it comes from meals", "one notch harder than the
+# situation asked for", "in a hall in winter with the fire going", "a step
+# further back than they were", "the sensible, almost administrative urge",
+# "thirty paces along the same rank", "since before he was worth knowing",
+# "the second answer is worse than the first was", "a longer route than the
+# one he learned to trust", "impatience of a very specific and unusual kind",
+# "a hundred paces is not a distance worth counting", "personally offended him
+# by existing", "horses standing with their heads down", "stops being an item
+# and starts being a soldier", "a piece of paper with a life attached", "the
+# specific way you are kind to something valuable", "refuse to be the reason
+# it goes any faster", "a conversation he was not at", "already been talked
+# about somewhere he was not", "at the going rate", "a defeat with nothing in
+# it", "the part where a man can be seen", "whose going first would settle
+# anything", "it arrives at him sideways", "the quantity is now so small that
+# it can be held in the head", "the temperature of the standing", "stopped
+# containing any doubt", "the shape of fighting and the pace of work", "become
+# a direction", "anything on the other side of the question".
+ bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast:0 "He Is Giving Ground Here With Rather Less Than His Whole Attention"
+ bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast_desc:0 "The line is going backwards in good order, which is the only creditable thing about the afternoon, and he is running that retreat with a part of himself while the rest does sums about somewhere he is not. Every man he puts into the gap on the right is a man not standing in a different gap. Every hour this takes is an hour off a reckoning he is not present for and cannot hurry. He has been carrying the pair of them since the thaw and has got tolerably good at it, the way a man gets good at something heavy — not by finding it lighter but by learning precisely where to put his hands and then not moving them. What he has never got good at is being shouted at by one half while he is holding the other. The near business is loud, it is immediate, it is full of people watching his face for instructions, and it takes the whole of him by force every few minutes; and each time it lets go he has to find his place in the far one again from the top. So he gives today the smallest correct answer there is. Keep the shape. Give the ground away evenly. Put nothing into this that he will want in six weeks. It is not an answer that wins here. Here has stopped being winnable, and he worked that out early and without much feeling about it. It is an answer that still has an army in it at dusk.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_this_is_not_the_war_he_is_actually_fighting_toast:0 "He Is Winning An Afternoon That Belongs To Somebody Else And Means To Come Out Of It Whole"
+ bc_knight_this_is_not_the_war_he_is_actually_fighting_toast_desc:0 "He has quarrels of his own and every one of them he opened. Nobody has ever come at him; he has always gone, and he knows that about himself the way he knows his own height, without approval and without shame. Today is not one of them. Today is a field he was asked onto, over a disagreement between two other men that will be settled in a room he will never see, and his name will not be in the settling. It is also going well, which is precisely the danger, because a day that is going well is a day when everybody around you wants it to go well faster. He can feel the rank wanting to move. It comes up through the men on either side of him the way a horse tells you it has decided something before it does it. What he does instead is get shorter and heavier. Shoulders down, shields in, the two on his left told twice to stop leaning out to look. Forward eats horses and wind and shins, and every one of those is a thing he will need in the spring, on ground that will be his own argument. So the line stands. The far side comes onto it and gets nothing, and comes on again and gets less, and is worse afterwards for having tried; and the afternoon shortens itself without taking anything from him that he had earmarked elsewhere.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

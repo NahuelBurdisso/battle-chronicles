@@ -11066,3 +11066,70 @@ bc_the_arithmetic_of_the_name_is_very_small_now = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He has a war he started and a war that was started on him, they are in
+# different places, and the one he is standing in today is going backwards.
+# `ordered`/`down` is a formation that keeps its shape while it loses ground,
+# and it deliberately hands out nothing: bc_pursuit is for going forward and
+# there is no version of this afternoon where he goes forward.
+bc_there_is_a_second_map_in_his_head_and_it_is_worse = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_attacking_somewhere_and_defending_somewhere_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Running two wars at once out of one head, while one of them is
+		# in front of you shouting, is an administrative problem that
+		# happens to be taking place in a field.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_is_a_second_map_in_his_head_and_it_is_worse"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast
+			desc = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

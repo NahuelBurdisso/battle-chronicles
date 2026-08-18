@@ -3360,3 +3360,50 @@ bc_the_man_opposite_is_nearly_the_last_of_his_trigger = {
 	}
 	NOT = { bc_he_is_nearly_the_last_of_his_house_trigger = yes }
 }
+
+
+# --- the shape of the rest of his wars ---------------------------------------
+#
+# THE MOD ASKS WHO LEADS THIS WAR AND HAS NEVER ASKED WHAT ELSE HE IS IN.
+# bc_this_is_his_own_war_trigger reads `is_war_leader = root` off the war behind
+# this battle. That is one war. `is_at_war_as_attacker` and
+# `is_at_war_as_defender` were both at zero occurrences, and they are not about
+# this war at all - they are the shape of a man's whole ledger of wars on the
+# day he happens to be standing here.
+#
+# THE DUMP'S CAVEAT IS THE WHOLE REASON THESE ARE RARE ENOUGH TO BE GATES. Both
+# triggers are documented "Does not consider your lieges' wars". A knight riding
+# in his lord's host, with no war of his own, answers no to both of them. So
+# does every landless man on the field. What is left is the much smaller set of
+# people who are personally, in their own name, at war - and then the gates ask
+# what shape that is.
+#
+# THE FIRST IS DELIBERATELY AN EXCLUSIVE READING and is not just
+# `is_at_war_as_attacker`. A bare attacker gate would be true of half the map in
+# any decade with a war in it, and it would also be true of every man the second
+# gate is about, which would make the second a strict subset. Spelling the
+# negation in gives the first gate a meaning a bare one does not have: every war
+# with his name on it today is one he chose to open.
+#
+# THE SECOND IS THE OTHER HALF OF THE SAME SPLIT and needs no negation of the
+# first, because the first already excludes it by its own second row. They are
+# disjoint by construction in both directions, which is unusual here and worth
+# saying out loud so that nobody later "tidies" the first gate's `NOT` away and
+# silently makes the pair overlap.
+#
+# NEITHER TAKES A GUARD. Both are plain character triggers on root and neither
+# reads a link.
+#
+# NEITHER IS bc_this_is_his_own_war_trigger AND THAT IS THE NEAR MISS WORTH
+# NAMING. That one is about the war this battle belongs to and answers a
+# question about today. These answer a question about the year, and both of them
+# can be true of a man who is fighting somebody else's battle this afternoon.
+bc_every_war_with_his_name_on_it_he_opened_trigger = {
+	is_at_war_as_attacker = yes
+	NOT = { is_at_war_as_defender = yes }
+}
+
+bc_he_is_attacking_somewhere_and_defending_somewhere_trigger = {
+	is_at_war_as_attacker = yes
+	is_at_war_as_defender = yes
+}
