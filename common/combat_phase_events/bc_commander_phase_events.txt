@@ -9308,3 +9308,117 @@ bc_the_habits_he_actually_kept = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-TWO. The household, as opposed to the levy.
+#
+# Every court-position keyword returned zero over the whole mod. Ninety-one
+# batches read blood, oath, land, faith, tongue, crime, upbringing and
+# wages-by-the-company, and never once read the plainest arrangement a hall
+# contains: a man on somebody's payroll who lives in his rooms. It is not
+# vassalage, not kinship and not a mercenary contract - it is employment, it is
+# renewed rather than inherited, and it puts a particular kind of man in a
+# line.
+#
+# THE PAIR IS THE SAME ARRANGEMENT FROM BOTH ENDS, which is the shape batches
+# eighty-five and eighty-seven used, and the two pools roll separately so they
+# never compete for an afternoon.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# The men holding it are the ones he pays.
+#
+# `measured`/`up`. It is going well, and the reason it is going well is
+# standing forty yards away with a face he has seen at breakfast for nine
+# years. That produces an accounting rather than a feeling: he knows what each
+# of those men is owed, when he last raised it, which of them has people in his
+# kitchens, and what it will cost him - in money and in the very short list of
+# competent men who will take the work - if this afternoon uses them up. He
+# spends them anyway, because they are the ones who will do it. That is a
+# reading of the field rather than a thing the field did to the army, which is
+# what the KIND means, and the verb table hands out no modifier, which is
+# right: nobody is braced or bled by the commander doing a sum.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the knight list and
+# the side row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_his_blood_in_the_ranks, THE OTHER MOMENT BUILT ON
+# bc_side_has_kin_knight_trigger. That gate is `is_close_family_of` - blood and
+# marriage - and this one is a payroll. A hired huntsman is not close family of
+# the man who hires him and a brother in the knight list is not on anybody's
+# wages; the man who is both exists and is rare, and neither gate can be
+# reached from the other by dropping a row.
+#
+# THIS IS NOT bc_they_are_not_his_smallfolk OR bc_knight_where_the_wages_are,
+# THE TWO FREE-COMPANY MOMENTS. A company is a contract with a body of men and
+# ends when the contract does. A court position is one man, in his hall, renewed, and the
+# whole weight of this moment is that the commander knows his name and what he
+# eats.
+#
+# THE DESC MAY NOT NAME AN OFFICE - no champion, no huntsman, no bodyguard, no
+# master-at-arms - may not put a number of coins or a sum of wages on the page,
+# may not have him decide to reward anybody afterwards, may not have any of
+# them speak to him, and may not make him fond of them. See the loc header.
+# ---------------------------------------------------------------------------
+bc_the_men_he_knows_the_names_of = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_a_man_off_his_own_payroll_is_here_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing which forty yards of a line is doing the work is the
+		# skill, and it is the same skill that puts a name to the men
+		# standing in it.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_men_he_knows_the_names_of"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_men_he_knows_the_names_of_toast
+			desc = bc_the_men_he_knows_the_names_of_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

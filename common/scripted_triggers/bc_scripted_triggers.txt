@@ -2226,3 +2226,62 @@ bc_he_was_pointed_elsewhere_and_came_back_trigger = {
 	NOT = { has_education_martial_trigger = yes }
 	has_lifestyle = martial_lifestyle
 }
+
+
+# --- the household, as opposed to the levy ------------------------------------
+#
+# `has_court_position` AND EVERY COURT-POSITION ITERATOR RETURNED ZERO OVER THE
+# WHOLE MOD. Ninety-one batches read blood, oath, land, faith, tongue, crime,
+# upbringing and wages-by-the-company, and never once read the plainest
+# arrangement a hall contains: a man who is on somebody's payroll and lives in
+# his rooms. That is neither vassalage nor kinship nor a mercenary contract -
+# it is employment, it is renewed rather than inherited, and it puts a specific
+# and recognisable kind of man in a battle line.
+#
+# `any_court_position_employer` RATHER THAN `has_court_position`. The latter
+# needs a position key, and a hand-written list of keys would go stale the
+# moment AGOT adds a position - AGOT ships its own set on top of vanilla's. The
+# iterator asks the question the moments actually care about, which is not
+# WHICH office but WHOSE, and it needs no key at all. Vanilla precedent for
+# this exact form is events/dlc/ep2/wedding_events/ep2_wedding_events.txt:18540
+# (`any_court_position_employer = { this = root }`); AGOT uses the same
+# iterator at common/script_values/00_agot_nightswatch_values.txt:26.
+#
+# NEITHER IS A SUBSET OF bc_side_has_kin_knight_trigger. That trigger reads
+# `is_close_family_of`, which is blood and marriage; a hired huntsman is not
+# close family of the man who hires him, and a brother in the knight list is
+# not on anybody's payroll. The two gates overlap only on the rare man who is
+# both, and neither can be reached from the other by dropping a row.
+#
+# NO `exists` GUARD ON THE FIRST AND NONE IS NEEDED, for the reason recorded on
+# bc_side_has_kin_knight_trigger: `any_side_knight` is an ITERATOR, not a link,
+# and a side with no knights iterates nothing and answers false.
+#
+# `root`, NOT `prev` OR `this`, INSIDE THE TWO NESTED ITERATIONS. Inside
+# `any_side_knight` the current scope is the knight and inside
+# `any_court_position_employer` it is the employer; root is still the commander
+# the phase event is rolling for. Same rule and same reason as the note on
+# bc_side_has_kin_knight_trigger.
+#
+# THE COMMANDER MAY BE IN HIS OWN KNIGHT LIST and it does not matter here
+# either: a man cannot hold a court position under himself, so an unguarded
+# iteration cannot match on him.
+bc_a_man_off_his_own_payroll_is_here_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			any_court_position_employer = { this = root }
+		}
+	}
+}
+
+# The knight's end of the same arrangement. The link IS optional here - a side
+# can be leaderless - so this one pays for it with the standard guard.
+bc_the_man_who_pays_him_commands_here_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		any_court_position_employer = {
+			this = scope:combat_side.side_commander
+		}
+	}
+}

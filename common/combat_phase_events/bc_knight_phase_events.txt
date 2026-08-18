@@ -6764,3 +6764,111 @@ bc_knight_he_did_not_start_at_seven = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# His place is an arrangement, and the man the arrangement is with is here.
+#
+# `adapted`/`down`. Everyone else along this stretch is defending something
+# that stays where it is - a valley, a name, a roof their people are under. He
+# is defending an agreement. If it goes badly enough today he does not lose
+# land, because he has none to lose; he loses the rooms, the standing, the
+# place at the table and the reason anybody has for remembering his name, and
+# all four of those things are attached to one specific man who is currently
+# sitting a horse two hundred yards behind him. So somewhere in the second half
+# of the afternoon what he is actually doing quietly changes. He stops fighting
+# for the field, which is not his, and starts fighting for the man, who is. It
+# is a re-reading of what the day is about rather than a thing the day did to
+# the army, which is what the KIND means, and the verb table hands out no
+# modifier, which is right: one man privately deciding what he is here for does
+# not brace a line or bleed it.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a court position
+# and the side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_where_the_wages_are. That one requires the side
+# commander to lead a FREE COMPANY, is on the winning side, and is `wild`/`up`:
+# a man in a body of hired men going forward hard because forward is where the
+# money is. This is a household man in an ordinary host, losing, and the point
+# is that his arrangement is with one person rather than with a contract.
+#
+# THIS IS NOT bc_knight_a_hall_is_waiting_for_him, WHICH IS ITS EXACT OPPOSITE.
+# That reads heir titles: a man who could be elsewhere and is not. This one is
+# a man for whom there is no elsewhere, because the elsewhere was always the
+# same hall he is fighting to keep a place in.
+#
+# THIS IS NOT bc_knight_no_house_behind_him. `is_lowborn` is about birth and a
+# court position is about a contract, and a third son of a great house who took
+# a post because there was nothing else for him answers no to that one and yes
+# to this.
+#
+# THE DESC MAY NOT NAME AN OFFICE - no champion, no huntsman, no bodyguard, no
+# master-at-arms - may not name a sum or a wage, may not have him look at the
+# commander or be looked at, may not have him think about being dismissed in so
+# many words, may not have him resent the arrangement, and may not have him
+# swear anything. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_the_place_is_an_arrangement = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_who_pays_him_commands_here_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man good enough at this to be worth a post is a man who has
+		# thought carefully about what the post is worth.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_place_is_an_arrangement"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_place_is_an_arrangement_toast
+				desc = bc_knight_the_place_is_an_arrangement_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

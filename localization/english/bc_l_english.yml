@@ -3549,3 +3549,56 @@
 
  bc_knight_he_did_not_start_at_seven_toast:0 "He Chose This, And It Is Charging Him For The Difference"
  bc_knight_he_did_not_start_at_seven_toast_desc:0 "Nobody handed him this. He went and got it, on his own time, off men who had no particular reason to teach him, and he got far enough with it to be standing where he is standing. That was never the doubtful part. The doubtful part is the one that only ever shows up on an afternoon like this one, when it has gone long and gone wrong and there is no thinking left in him to spend: the block is right and comes a hair late, the shield goes back to somewhere reasonable instead of to the one place, and the difference between doing a thing correctly and never having done it any other way turns out to be worth exactly that much. He is still on his feet. He is simply on them expensively.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-TWO. The household, as opposed to the levy.
+#
+# NEITHER DESC MAY NAME AN OFFICE. No champion, no bodyguard, no huntsman, no
+# master-at-arms, no cupbearer. Both gates read an employment iterator that
+# does not care which post it is, and a toast that names one would be making up
+# a fact the engine did not give it.
+#
+# NEITHER MAY PUT A SUM ON THE PAGE - no coins, no marks, no wage, no figure of
+# any kind. The arrangement is the subject; the price of it is not, and a
+# number would turn both of these into complaints about money.
+#
+# NEITHER MAY USE THE WORDS "servant", "hireling", "lackey" or "retainer".
+# The first three are the reader's contempt rather than anybody's position, and
+# the fourth is a word the mod has not earned.
+#
+# THE FIRST MAY NOT HAVE ANY OF THEM SPEAK TO HIM or be spoken to, may not have
+# him decide to reward anybody after the battle, may not have him be fond of
+# them, may not have him feel guilty, and may not let the sum come out as a
+# conclusion about the kind of man he is. It is an accounting done while
+# winning and it stays an accounting.
+#
+# THE SECOND MAY NOT HAVE HIM LOOK AT THE COMMANDER or be looked at by him -
+# the whole moment happens at two hundred yards and inside one head. It may not
+# have him say the word "dismissed" or think it in so many words, may not have
+# him resent the arrangement, may not have him swear an oath or renew one, may
+# not have him imagine what happens to him afterwards in any detail, and may
+# not have him be brave about it.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively".
+ bc_the_men_he_knows_the_names_of_toast:0 "He Has Seen Those Faces At Breakfast"
+ bc_the_men_he_knows_the_names_of_toast_desc:0 "The stretch that is winning this is the stretch he could put names to in the dark, and knowing that does not warm him, it sets him counting. He knows which of them has a woman in his kitchens and which has been owed a raise since the autumn. He knows how few men in the world do that work properly and how long it takes to find one. He knows, roughly, what the afternoon will have used by dusk, and he keeps spending it, because they are the ones who will stand there and everyone on this field including them understands that this is what the arrangement has always been for. The sum comes out clean. He does not much like the look of it and he does not stop.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_place_is_an_arrangement_toast:0 "Not The Field. The Man."
+ bc_knight_the_place_is_an_arrangement_toast_desc:0 "Every other man along this stretch has something behind him that stays where it is if today goes wrong - a valley, a name, a roof with his people under it. What he has is an agreement, and an agreement does not survive on its own. So while it comes apart he finds that the thing he is holding has quietly stopped being this hedge and these forty yards, which were never his and never going to be, and become one rider back there on the slope, because everything he owns is downstream of that rider still existing at dusk. Nothing about his footing changes. He does not announce it. He simply knows, somewhere after the middle of the day, what he is actually out here doing, and it is not the same answer the men beside him would give.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
