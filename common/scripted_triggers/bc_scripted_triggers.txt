@@ -4562,3 +4562,51 @@ bc_the_face_in_the_line_is_not_his_own_trigger = {
 		story_type = story_wear_face
 	}
 }
+
+# BATCH 133 - WHO IS LEADING THE COLUMN AND WHO IS ONLY IN IT.
+#
+# `is_travelling`, `is_travel_leader`, `any_travel_plan` and
+# `is_travel_entourage_character` all returned zero across the whole mod. That
+# is a large silence: travel is one of the few states in this game that a
+# character can be in for months at a stretch, and the mod has three dozen gates
+# about what a man owns, whom he is related to and what he believes, and not one
+# about whether he is at this moment a long way from where he sleeps.
+#
+# The pair splits the same road two ways, which is the point. A travelling party
+# has exactly one leader and any number of people riding in his train, and the
+# two are not the same experience of the same journey. The man at the head of it
+# chose the route, set the pace, and is answerable for everyone behind him. The
+# men behind him are baggage with opinions.
+#
+# THEY ARE DISJOINT BY CONSTRUCTION. The engine is explicit that the travel
+# leader is himself part of the entourage - `is_travel_entourage_character` is
+# documented as "is the character travelling and part of the entourage (travel
+# leader is part of the entourage)". So the second gate would be a strict
+# superset of the first if it were left alone, and it is not left alone: it
+# carries `is_travel_leader = no` as a sibling, which cuts the leader back out.
+# A man passes exactly one of these two or neither. He cannot pass both.
+#
+# NO GUARDS. Both are plain booleans on the character in scope, not links, and a
+# man who is not travelling at all is simply a clean no on each.
+#
+# THESE ARE NOT THE HOME AND CAPITAL ROWS. Those ask where a man's holdings are
+# and whether he is fighting near them, which is a fact about geography that is
+# true of him whether he is standing in his own hall or two kingdoms away. This
+# asks whether he is in motion - whether there is a column somewhere with his
+# tents on it that expects to be somewhere else by the end of the week. A man
+# can be fighting on his own doorstep and still be mid-journey, and a man can be
+# very far from home and perfectly stationary.
+#
+# RARITY. Travel is a fraction of any character's life; most men on most days
+# are where they live. Of those who are travelling, exactly one per party leads
+# it, and the entourage row further excludes him. Neither gate is anywhere near
+# universal, and both describe a genuinely unusual thing to be doing on the
+# morning a battle starts.
+bc_he_is_the_one_the_column_follows_trigger = {
+	is_travel_leader = yes
+}
+
+bc_he_is_riding_in_another_mans_train_trigger = {
+	is_travel_entourage_character = yes
+	is_travel_leader = no
+}

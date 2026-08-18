@@ -12588,3 +12588,62 @@ bc_the_schedule_does_not_care_who_wins = {
 		}
 	}
 }
+
+bc_the_column_is_his_to_lose = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_the_one_the_column_follows_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has been counting a column for weeks counts a line
+		# without having to be told how.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_column_is_his_to_lose"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_column_is_his_to_lose_toast
+			desc = bc_the_column_is_his_to_lose_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
