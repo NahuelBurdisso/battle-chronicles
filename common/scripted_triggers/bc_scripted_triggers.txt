@@ -8008,3 +8008,68 @@ bc_the_line_runs_through_her_trigger = {
 	is_female = yes
 	matrilinear_marriage = yes
 }
+
+# BATCH 185 - THE PART OF HIM THAT WAS NEVER WRITTEN DOWN ANYWHERE.
+#
+# `has_sexuality` RETURNED ZERO OVER THE WHOLE TREE, and so did
+# `is_attracted_to_men`, `is_attracted_to_women`, `is_attracted_to_gender_of`,
+# and so did the words "sexual" and "attracted" in any comment in any file.
+# A hundred and eighty-four batches have read who a man loves. The lover seam
+# sits at `:2735` and `:2742` and asks whether the two commanders are lovers;
+# the rivalry, friendship, marriage and bastardy seams ask that same kind of
+# question about other pairs of named people. Every one of them reads a bond
+# between two people who both exist. Not one of them has ever read the thing
+# that decided which bonds were ever going to be available to him at all.
+#
+# THE DUMP. `has_sexuality` is "Does the character's sexuality match the
+# scripted? (heterosexual, homosexual, bisexual, asexual, none)", character
+# scope. Children carry `none` until one is rolled for them, which costs
+# nothing here, because nobody who has not come of age leads a host or rides
+# in a knight line.
+#
+# LIVE IN BOTH SHIPPED TREES. Vanilla writes the bare form at
+# `events/courtier_guest_management_events/courtier_guest_management_events
+# .txt:942`, the negated form at `events/activities/tour_activity/
+# tour_travel_events.txt:324` and again at `:2116`, and the homosexual row
+# directly beside the bisexual one at `events/councillor_task_events/
+# councillor_spouse_events/councillor_spouse_diplomacy_events.txt:1326-1327`.
+# AGOT reads it at `common/activities/intents/shared_intents.txt:126` and
+# `:256`, at `common/character_interactions/00_adoption.txt:59-60`, at
+# `00_marriage_interactions.txt:2713`, and at `00_scheme_interactions
+# .txt:2000`.
+#
+# THIS IS NOT THE LOVER SEAM AND CANNOT BE CONFUSED WITH IT.
+# `has_relation_lover` asks whether one particular arrangement exists right
+# now with one particular person. It can be true of a man of any sexuality
+# and it is false of nearly every man on the field on nearly every day. This
+# reads what the man is, which stays true of him alone in a tent with nobody
+# in it and no arrangement anywhere. A man can pass either one and fail the
+# other, in either direction, and neither row implies a single thing about
+# the other.
+#
+# WHAT THE TWO ROWS ARE ACTUALLY FOR. The first is a man who has spent his
+# whole life managing the distance between what he is and what the men around
+# him assume he is, and who has got very good at reading a room as a direct
+# result. The second is a man none of it ever reached, who was never turned
+# around by anybody and has therefore never had that particular part of his
+# attention spent. Both are private facts and both stay private in the
+# writing. The chronicle records a man's bearing and never his bed.
+#
+# DISJOINT BY CONSTRUCTION. A character carries exactly one sexuality, so
+# `homosexual` and `asexual` cannot both hold of the same man. No negation is
+# needed and none is written.
+#
+# RARITY. Sexuality is rolled at birth off a game rule and on the default
+# setting the large majority of characters come out heterosexual. Both gates
+# sit in the small remainder that is left over, and the second is the smaller
+# half of it. Neither one is a gate that fires for nearly everybody.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads on the subject
+# the caller has already entered.
+bc_the_thing_he_never_said_out_loud_trigger = {
+	has_sexuality = homosexual
+}
+
+bc_none_of_it_ever_reached_him_trigger = {
+	has_sexuality = asexual
+}
