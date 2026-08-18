@@ -8215,3 +8215,78 @@ bc_the_faith_is_running_hot_trigger = {
 bc_nobody_much_is_praying_this_year_trigger = {
 	faith = { fervor <= 25 }
 }
+
+
+# BATCH 188 - WHAT KIND OF COMPANY IS ACTUALLY STANDING ON THIS FIELD.
+#
+# `has_maa_of_type` RETURNED ZERO OVER THE WHOLE MOD, AND SO DID `onager`,
+# `mangonel`, `trebuchet` AND `house_guard`. Batch 129 read the men-at-arms
+# system once, with `maa_regiments_count`, and its own header admitted what it
+# was doing: it counted companies because counting was the answerable
+# question. How many is not what kind. A hundred and eighty-seven batches have
+# measured the size of a host, the ground under it, the weather on it, the war
+# around it and the man giving the orders, and not one of them has ever asked
+# what is actually parked in the line.
+#
+# THE DUMP PUTS THIS ON THE SIDE AND NOT ON THE MAN. "Does this combat side
+# have at least one MaA of the given regiment type?", combat_side scope. That
+# is the useful half of it: the side pools everything every army standing on
+# it brought, allies and summoned vassals included, rather than only the
+# companies the commander pays for out of his own books.
+#
+# AGOT USES THIS TRIGGER IN A FILE OF EXACTLY THIS KIND. `has_maa_of_type =
+# scorpions` and `has_maa_of_type = water_wizards` sit inside
+# `common/combat_phase_events/00_commander_phase_events.txt:613` and `:623`,
+# both of them as the `limit` of an `if` inside a `prev.enemy_side` block; the
+# same read appears at `common/on_action/combat_on_actions.txt:757` and twice
+# in `00_agot_dragon_scripted_modifiers.txt` at `:459` and `:473`. Vanilla's
+# own use is `events/war_events/combat_events.txt:2037`. The four type keys
+# are AGOT's own, from `common/men_at_arms_types/00_maa_types.txt`: `onager`
+# at `:727`, `mangonel` at `:925`, `trebuchet` at `:1119` and `house_guard`
+# at `:1249`.
+#
+# THIS IS NOT BATCH 129 AND IS NOT A SUBSET OF IT. `maa_regiments_count >= 4`
+# and `= 0` are counts on one man's personal books; these are types present
+# anywhere on a side that may be six lords deep. A commander with nothing
+# professional of his own can stand beside engines somebody else hauled up
+# the road, and a man with four companies bought and paid for may have
+# brought none of these four types to this particular field.
+#
+# ENGINES ON ONE SIDE, THE HOUSE COMPANY ON THE OTHER, AND THE PAIR IS
+# DISJOINT BY CONSTRUCTION. The first passes when the side has an onager, a
+# mangonel or a trebuchet standing in it. The second asks for the house guard
+# and then denies all three engines, so no side can answer yes to both, and
+# the two are read on different men in different pools besides.
+#
+# NEITHER TAKES A GUARD. `scope:combat_side` is saved before either gate is
+# asked and is read bare elsewhere in this file - `bc_field_is_bloody_trigger`
+# at `:191` does `scope:combat_side = { percent_enemies_killed >= 40 }` with
+# nothing in front of it. Only the walks that can end nowhere, `combat_war`
+# and the far commander, take the `exists` and the repeated `trigger_if`.
+#
+# RARITY. Siege weapons are bought to open walls and are the last thing a man
+# wants in a column that has to turn and fight in the open, so a side with one
+# in it is a side that was on its way somewhere else. `house_guard` requires
+# `warfare_legacy_5` on somebody's dynasty (`00_maa_types.txt:1249`), which is
+# five completed rungs of one legacy - a handful of houses late in a long
+# game and almost none at any bookmark. Neither of these is most fields.
+bc_there_are_engines_on_this_field_trigger = {
+	scope:combat_side = {
+		OR = {
+			has_maa_of_type = onager
+			has_maa_of_type = mangonel
+			has_maa_of_type = trebuchet
+		}
+	}
+}
+
+bc_the_house_guard_is_standing_here_trigger = {
+	scope:combat_side = {
+		has_maa_of_type = house_guard
+		NOR = {
+			has_maa_of_type = onager
+			has_maa_of_type = mangonel
+			has_maa_of_type = trebuchet
+		}
+	}
+}
