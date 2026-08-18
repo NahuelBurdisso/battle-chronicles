@@ -11755,3 +11755,66 @@ bc_knight_he_has_been_holding_his_own_ground_since_before_most_of_them_were_born
 		}
 	}
 }
+
+bc_knight_somebody_has_been_looking_after_this_country_for_years = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_this_country_is_held_down_to_the_last_hedge_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The ground hands him a road. Whether he is still fit to use it
+		# after the morning he has had is a separate question.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_somebody_has_been_looking_after_this_country_for_years"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_somebody_has_been_looking_after_this_country_for_years_toast
+				desc = bc_knight_somebody_has_been_looking_after_this_country_for_years_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

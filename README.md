@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 176 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 144 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 177 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 145 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and fifty-eight batches, one per row of the table below, none of which needed a
+One hundred and fifty-nine batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -743,6 +743,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | how many steps of rank are between the two of them | `tier_difference` returned zero across the whole mod, and the fifteen reads of `highest_held_title_tier` are all absolute bands - is he a duke, is he a king - so nothing had ever asked the question a herald would ask first, which is not what either man is but how far apart they are. Two full steps below against two full steps above, on the same subtraction between the same two men, so the pair is disjoint by construction. The form is shipped six times in a row in vanilla's education interactions and the dump's own baron-against-king example gives the sign as scoped minus target. The two gates do not fire at the same rate in the two pools, which is why the first goes to a commander and the second to a knight: a knight is frequently unlanded, so being two steps under the far commander is ordinary there, and being two steps over him is a great lord standing in somebody's line. | 2 templates, base 50, 80 |
 | how much of himself each man actually brings to a day | The AI-personality surface has been opened three times - `ai_boldness` in batch 131, `ai_zeal` and `ai_compassion` in 140, `ai_greed` and `ai_honor` in 152 - and `ai_energy` was still at zero reads, its only three appearances being the prose in those same headers listing what had been left. Boldness is how much risk he will accept, zeal is what he thinks the day is for, compassion is what he will spend other people on and greed is what he expects at the end; energy is none of those, it is how much of himself he puts into anything at all, and a man can be bold and idle at once. The pair is opposite tails of one signed ladder on one man, so it is disjoint by arithmetic and needs no negation, and both rows are bare self-reads that take no guard. Vanilla ships the same signed pair one rung in, ten lines apart, in its own childhood triggers. | 2 templates, base 50, 80 |
 | how long he has been the man in charge of anything | `years_as_ruler` returned zero across the whole mod. The station batch reads `is_landed` and `highest_held_title_tier`, batch 149 counted the provinces held in his own two hands and batch 156 measured the steps of rank between the two commanders, and every one of those asks what he holds rather than how long he has held it - which is the first thing the men behind him would say about him if you asked them instead. The dump's own description warns that the key returns -1 for a man who is not a ruler at all, so the low gate carries an explicit floor row as well as its ceiling: a bare `<= 1` would fire for every landless man on the field and would be a formality rather than a gate. AGOT can write `< 1` bare because its decision has already established a ruler by that line; nothing here has. Under two years against thirty or more, disjoint by construction, both bare self-reads. | 2 templates, base 50, 80 |
+| how firmly anybody holds the country they are fighting in | `county_control` returned zero over the whole mod - the six matches a census turns up are all `county_controller`, which names the man the county answers to rather than saying how much of an answer it is. Every ground row already shipped asks whose the place is or what has been built on it: terrain in the six closed bands, holding type in 151, the special building and the empty slot in 153, the holder and the controller, county opinion in the poor-country rows. None of them asks whether the writ reaches the far hedge, which is the fact that decides whether a stranger with an army can get a guide, buy bread, or find out what is behind the next rise. Thirty-three or under against ninety-five or over, on the two named constants vanilla defines, with sixty-two points of daylight between them. The guard is the nested one copied from bc_the_ground_is_his_own_trigger. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -761,16 +762,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and forty-one**, its "3, 3, 4 and 3"
-are 56, 58, 57 and 28, and the fall-through set is one hundred and forty-two sites rather than
+plan 1's eighteen call sites are now **three hundred and forty-three**, its "3, 3, 4 and 3"
+are 56, 58, 57 and 29, and the fall-through set is one hundred and forty-three sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 176, knight 144.** Weight against vanilla's
+**Template totals are now commander 177, knight 145.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and forty-four templates against
-`knight_none`'s 2000 — one hundred and forty-three at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and forty-five templates against
+`knight_none`'s 2000 — one hundred and forty-four at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

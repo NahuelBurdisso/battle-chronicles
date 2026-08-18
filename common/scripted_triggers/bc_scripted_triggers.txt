@@ -6345,3 +6345,74 @@ bc_he_has_had_the_seat_for_less_than_two_years_trigger = {
 bc_he_has_held_his_own_ground_for_thirty_years_trigger = {
 	years_as_ruler >= 30
 }
+
+# BATCH 159 - HOW FIRMLY ANYBODY AT ALL HOLDS THE COUNTRY THEY ARE FIGHTING IN.
+#
+# `county_control` returned zero over the whole mod. The six matches a census
+# turns up are all `county_controller`, which is a different key and answers a
+# different question: it names the man whose writ the county is under. Nothing
+# has ever read the NUMBER - how much of a writ it actually is.
+#
+# THE GROUND ROWS ALREADY SHIPPED ASK WHOSE IT IS AND WHAT IS ON IT. Terrain in
+# the six closed bands, the holding type in batch 151, the special building and
+# the empty slot in 153, the holder at `:1068`, the controller at `:2145`, county
+# opinion in the poor-country rows. Every one of them is about identity or about
+# what has been built. None of them is about whether the writ reaches the far
+# hedge, which is the fact that decides whether a stranger with an army can get a
+# guide, buy bread, or find out what is behind the next rise.
+#
+# THE FORM IS SHIPPED IN THE EXACT SHAPE THIS NEEDS. Vanilla writes
+# `scope:province.county = { county_control <= 20 }` at
+# `common/activities/activity_types/tour.txt:1994`, one of five bands walked down
+# the same block from `<= 100` at `:1973`. That is the same file and the same
+# construction the poor-country header already cites for `county_opinion`. The
+# named constants are defined at
+# `common/script_values/00_county_control_values.txt:20` and `:25` -
+# `low_county_control = 33` and `high_county_control_limit = 95` - and vanilla
+# reads the first of them as a trigger threshold at
+# `common/activities/pulse_actions/feast_pulse_actions.txt:556` and at
+# `common/laws/03_imperial_policies.txt:374`.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Thirty-three or under against ninety-five
+# or over, on one number about one county. Sixty-two points of daylight between
+# them.
+#
+# THE GUARD IS THE NESTED ONE, copied from bc_the_ground_is_his_own_trigger at
+# `:1068`. The battle's location is optional and the county off that province is
+# reached through it, so the outer `exists` sits as a sibling, the inner `exists`
+# sits inside the outer `trigger_if`, and the number is only read inside a second
+# `trigger_if` that repeats it.
+#
+# RARITY. A county sitting at ninety-five or above is one that has been quiet and
+# well administered for years, which a county with two armies standing in it
+# generally has not been. A county at thirty-three or below has usually been
+# taken recently, or is being held by somebody who cannot reach it, and armies do
+# march through those - but most of the map, most of the time, sits in the wide
+# middle that neither of these rows will look at.
+bc_nobody_out_here_really_answers_to_anybody_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		exists = scope:combat_side.combat.location.county
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location.county }
+			scope:combat_side.combat.location.county = {
+				county_control <= low_county_control
+			}
+		}
+	}
+}
+
+bc_this_country_is_held_down_to_the_last_hedge_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		exists = scope:combat_side.combat.location.county
+		trigger_if = {
+			limit = { exists = scope:combat_side.combat.location.county }
+			scope:combat_side.combat.location.county = {
+				county_control >= high_county_control_limit
+			}
+		}
+	}
+}
