@@ -4914,3 +4914,59 @@ bc_this_ground_is_holy_to_his_own_trigger = {
 		}
 	}
 }
+
+# BATCH 139 - THE HOUSEHOLD THAT IS NOT THE MARRIAGE.
+#
+# `any_concubine`, `any_former_concubine`, `any_child_of_concubine`,
+# `is_concubine` and `allowed_concubines` all returned zero across the whole
+# mod. Batch 130 opened the marriage axis and read the two things AGOT hides
+# inside it, and stopped there. Everything a man's household contains that is
+# NOT his marriage has been invisible since plan 1, in a setting that has salt
+# wives, paramours and a dynasty which practised the arrangement for three
+# hundred years.
+#
+# THE PAIR IS DISJOINT BY CONSTRUCTION AND THE `count = 0` ROW IS THE REASON.
+# The first is a man who has one now. The second is a man who does not have one
+# now and had one before, and the second says so in its own body rather than
+# relying on the first not firing. Without that row the two lists overlap
+# heavily - a man commonly holds a current arrangement and a lapsed one at the
+# same time - and the second gate stops meaning what its name says. It is not
+# defensive clutter. It is the whole distinction.
+#
+# `any_former_concubine` IS DOCUMENTED AS NOT PERSISTING PAST DEATH, WHICH IS
+# EXACTLY THE PROPERTY THIS WANTS. The list is a fact about a living man's own
+# history, not an inherited record, so the second gate cannot fire on somebody
+# who merely inherited a household. Vanilla reads it at
+# `common/scripted_triggers/00_birth_triggers.txt:84` and in its pregnancy
+# events; `any_concubine` is read by AGOT itself at
+# `common/on_action/death.txt:1945` and `common/scripted_effects/
+# 00_agot_lmf_effects.txt:106`.
+#
+# NO GUARDS. Both are iterators over the scoped character's own lists, and an
+# empty list is a clean no. Nothing here walks a link.
+#
+# THIS IS NOT THE MARRIAGE ROWS AND IT IS NOT THE KIN ROWS. Batch 130's two
+# gates read the state of a marriage through `primary_spouse` - whether it has
+# produced anything, whether he still sleeps in that room - and both require a
+# marriage to exist. Neither of these does. A man can pass either of these with
+# no wife at all, and can pass batch 130's with no concubine ever. The kin rows
+# count relatives; these count an arrangement, which is not a relative and is
+# not a marriage and has its own end.
+#
+# RARITY. The arrangement requires a faith that permits it, which is a minority
+# of the map, and then requires the man to have actually made one. The second is
+# rarer than the first, being the first plus an ending.
+bc_there_is_somebody_at_home_who_is_not_his_wife_trigger = {
+	any_concubine = {
+		count >= 1
+	}
+}
+
+bc_that_arrangement_has_already_ended_trigger = {
+	any_concubine = {
+		count = 0
+	}
+	any_former_concubine = {
+		count >= 1
+	}
+}
