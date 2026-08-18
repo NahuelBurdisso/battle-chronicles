@@ -6416,3 +6416,52 @@ bc_this_country_is_held_down_to_the_last_hedge_trigger = {
 		}
 	}
 }
+
+# BATCH 160 - WHAT KIND OF VASSAL THE ENGINE HAS ALREADY DECIDED HE IS.
+#
+# `has_vassal_stance` returned zero over the whole mod. The engine keeps, for
+# every vassal, a running answer to the question "what does this man want out of
+# serving you", and the mod has never once asked for it.
+#
+# THE FORM IS SHIPPED AND THE DUMP GIVES THE EXAMPLE VERBATIM. 1.19.0.6 lists
+# `has_vassal_stance = glory_hound` as its own illustration of the key. Vanilla
+# reads `has_vassal_stance = parochial` at
+# `common/buildings/temple_citadel_buildings.txt:816` and `= zealot` twenty lines
+# below it at `:836`, and `= courtly` at
+# `common/activities/pulse_actions/feast_pulse_actions_oltner.txt:1260`. Bare
+# key, bare value, no block and no target.
+#
+# THERE ARE EXACTLY FOUR STANCES AND A VASSAL HAS EXACTLY ONE. They are defined
+# at `common/vassal_stances/00_vassal_stances.txt` - `courtly` at `:1`,
+# `glory_hound` at `:172`, `parochial` at `:334`, `zealot` at `:510` - and each
+# carries a `score` block. The engine scores all four and the man holds whichever
+# wins. So THE TWO GATES BELOW ARE DISJOINT BY CONSTRUCTION, not by any negation
+# written here: one man cannot top two of them at once. AGOT ships no
+# `common/vassal_stances` folder of its own, so these are the four in play.
+#
+# A MAN WITH NO LIEGE HAS NO STANCE AND THAT IS A CLEAN NO. The key is read off
+# the scoped character with nothing optional walked, so neither row takes a
+# guard; an independent ruler simply fails both, the same way an empty iterator
+# fails without needing an `exists`.
+#
+# THIS IS NOT THE AI-PERSONALITY ROWS AND THE DIFFERENCE IS REAL, not a technical
+# dodge. `glory_hound`'s score is built out of `ai_boldness` minus `ai_compassion`
+# minus half of `ai_honor`, all three of which the mod already reads as absolute
+# thresholds in batches 131, 140 and 152. But a threshold asks whether a number
+# clears a bar, and a stance asks which of four appetites is the strongest one in
+# a particular man - a moderately bold man with no compassion and no scruples
+# tops this list, and a very bold man who is also kind does not. Nor is either
+# gate a subset of the thresholds: neither implies any particular value of any
+# of the three, only that the sum beat three rival sums.
+#
+# RARITY. One stance in four, on a man who has to be somebody's vassal at all,
+# on the side that is losing or winning respectively. The scoring is not uniform
+# across the four - `courtly` is the broad default for a quiet courtier - so
+# neither of the two chosen here is anywhere near a quarter of the field.
+bc_he_is_here_because_of_what_it_will_look_like_afterwards_trigger = {
+	has_vassal_stance = glory_hound
+}
+
+bc_he_would_rather_be_at_home_minding_his_own_trigger = {
+	has_vassal_stance = parochial
+}

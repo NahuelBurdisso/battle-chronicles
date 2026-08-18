@@ -14182,3 +14182,62 @@ bc_the_country_out_here_will_not_tell_him_anything = {
 		}
 	}
 }
+
+bc_this_was_never_his_war_and_it_is_costing_him_his_own_men = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_would_rather_be_at_home_minding_his_own_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who is good with a ledger has the particular misfortune of
+		# being able to price the afternoon while it is still going on.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = content
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = ambitious
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_was_never_his_war_and_it_is_costing_him_his_own_men"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast
+			desc = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

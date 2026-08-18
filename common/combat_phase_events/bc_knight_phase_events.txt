@@ -11818,3 +11818,66 @@ bc_knight_somebody_has_been_looking_after_this_country_for_years = {
 		}
 	}
 }
+
+bc_knight_this_is_the_precise_thing_he_came_all_this_way_for = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_here_because_of_what_it_will_look_like_afterwards_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Wanting to be seen doing it is common enough. Being able to do it
+		# in front of people is the part that thins the field.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_this_is_the_precise_thing_he_came_all_this_way_for"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_this_is_the_precise_thing_he_came_all_this_way_for_toast
+				desc = bc_knight_this_is_the_precise_thing_he_came_all_this_way_for_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
