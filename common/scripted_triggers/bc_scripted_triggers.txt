@@ -9039,3 +9039,82 @@ bc_he_could_lawfully_fight_his_own_side_trigger = {
 		has_any_cb_on = scope:combat_side.side_commander
 	}
 }
+
+# BATCH 200 - THE BOY WHO USED TO KNOCK HIM DOWN IN THE YARD.
+#
+# `has_relation_bully` AND `has_relation_victim` RETURNED ZERO ACROSS THE WHOLE
+# MOD. The mod has read what these men are to each other from nearly every
+# angle it can - blood, marriage, fostering, oath, wages, hooks, dread,
+# opinion, alliance, homage - and never once read the oldest and least
+# dignified of them, which is which of the two of them used to get hit.
+#
+# LIVE IN BOTH TREES AND IN THE CHARACTER-TARGET FORM. Vanilla writes both keys
+# against `$CHARACTER$` through
+# `common/scripted_triggers/00_relation_triggers.txt` from `:125`, negates
+# `has_relation_victim = root` at
+# `common/scripted_triggers/00_childhood_triggers.txt:78`, and reads
+# `has_relation_bully = root` in
+# `common/customizable_localization/00_character_descriptions.txt:877`, for
+# eighteen vanilla files carrying `bully` and seventeen carrying `victim`. AGOT
+# ships those files and writes the key in files of its own making besides, at
+# `events/agot_lmf_events/agot_lmf_army_events.txt:386` and `:2376`,
+# `events/agot_lmf_events/agot_lmf_feast_events.txt:257` and
+# `common/on_action/agot_on_actions/agot_ub_on_actions.txt:45`.
+#
+# THIS IS NOT THE FOSTERING ROWS AT `:2490`. A fostering is an arrangement two
+# grown men made about a boy, and it is the same fact read from both ends. This
+# is what happened inside somebody's arrangement while nobody was writing it
+# down, between two boys who were not consulted, and it points at whichever of
+# them was smaller that year rather than at whichever of them was owed
+# something.
+#
+# NOR IS IT THE RIVAL, NEMESIS OR GRUDGE ROWS, AND THE ENGINE SAYS SO RATHER
+# THAN THIS COMMENT. `common/scripted_relations/00_scripted_relations.txt:142`
+# gives `bully` the line `corresponding = victim` and lists `rival`, `nemesis`,
+# `grudge`, `friend` and `best_friend` among its `opposites`, so the man who is
+# the scoped man's bully is by definition not also his rival, his nemesis or
+# the man he holds a grudge against. A rivalry is a thing two adults arrived at
+# together. This one was arrived at by one of them.
+#
+# EACH CARRIES THE NEGATION OF THE OTHER, in the fostering pair's arrangement
+# rather than by argument. Ordinary play cannot make two men each other's
+# bully, but the engine would answer both if some future content set both
+# relations, and a gate that can be true beside its own opposite is not a gate.
+#
+# GUARDS. Naming a link as the TARGET of a trigger is a read, so both gates
+# carry both far-side `exists` lines as siblings and repeat them inside the
+# `trigger_if` limit.
+#
+# RARITY. The relation is handed out by childhood events between two boys of
+# close age in one hall, most men never acquire it in either direction, and
+# then both of them have to live thirty years, end up on opposite sides of one
+# war, and one of them has to be giving the orders.
+bc_the_boy_who_used_to_beat_him_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		has_relation_bully = scope:combat_side.enemy_side.side_commander
+		NOT = {
+			has_relation_victim = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
+
+bc_the_boy_he_used_to_beat_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		has_relation_victim = scope:combat_side.enemy_side.side_commander
+		NOT = {
+			has_relation_bully = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}
