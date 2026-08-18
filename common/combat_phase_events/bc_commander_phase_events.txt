@@ -17145,3 +17145,63 @@ bc_the_seat_behind_him_is_on_the_table = {
 		}
 	}
 }
+
+
+bc_there_are_too_many_banners_on_this_side = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_are_too_many_banners_on_this_side_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Getting four proud men to do one thing at one time is a skill,
+		# and the men who have it know exactly when they have run out.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = humble
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_are_too_many_banners_on_this_side"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_are_too_many_banners_on_this_side_toast
+			desc = bc_there_are_too_many_banners_on_this_side_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -9940,3 +9940,87 @@ bc_the_seat_across_the_field_is_on_the_table_trigger = {
 	}
 	NOT = { bc_the_seat_behind_him_is_on_the_table_trigger = yes }
 }
+
+
+# BATCH 210 - HOW MANY BANNERS ARE ACTUALLY STANDING ON EACH SIDE.
+#
+# CENSUS. `side_participant` returns zero across the whole mod.
+# `side_primary_participant` returns twenty-nine, because it is how nearly
+# every far-side gate in this file reaches the man opposite, and not one of
+# those twenty-nine asks how many participants there ARE. Two hundred and nine
+# batches have counted the men in a host over and over and have never once
+# counted the banners.
+#
+# THIS IS NOT BATCH 136. That pair reads `any_war_ally` off the primary
+# participant of each side at :4780 and :4792, which is a fact about the WAR -
+# who signed what, who owes whom, who is entitled to go home once the price has
+# been paid - and it is true in a throne room with nobody in a field at all.
+# This pair asks who is STANDING HERE, and the two come apart in both
+# directions: a man with six allies in the war can be on this field entirely
+# alone, and a side of five participants can contain no allies whatever,
+# because every one of them may be a vassal who was summoned and had no say in
+# it. No war-ally count predicts a participant count.
+#
+# NOR IS IT THE SIZE ROWS. Those count MEN, at :185 and :615. Four lords can
+# bring three thousand between them and one lord can bring eight; the number of
+# banners and the number of soldiers are separate facts, and this pair reads
+# the one nothing has read.
+#
+# THE FORM IS SHIPPED IN A FILE OF EXACTLY THIS KIND. Vanilla writes
+# `scope:combat_side = { any_side_participant = { ... } }` inside
+# `common/combat_phase_events/00_knight_phase_events.txt:1380`, and AGOT ships
+# the same block at `:1542` of its own copy of that file. The iterator appears
+# again at `common/on_action/combat_on_actions.txt:487` and `:675` and in
+# `common/scripted_effects/09_dlc_mpo_scripted_effects.txt:918`. The `count`
+# filter on an iterator is this mod's own standing idiom - batch 143 writes
+# `any_held_title = { count >= 2 ... }` at :5264.
+#
+# EACH GATE READS BOTH SIDES, WHICH IS THE POINT. A crowd is only interesting
+# against something. The first therefore asks for four or more banners here AND
+# exactly one opposite; the second asks for exactly one here AND four or more
+# opposite. That also makes the two DISJOINT BY CONSTRUCTION twice over - the
+# near count cannot be both four-or-more and one, and neither can the far.
+#
+# GUARDS. `scope:combat_side` is read bare, as it is everywhere else in this
+# file. `enemy_side` is a link and takes the standing `exists` as a sibling,
+# repeated inside the `trigger_if` limit before either side is entered.
+#
+# RARITY. Both gates want a lopsided count of BANNERS rather than of men, and
+# four hosts against one is a shape a war takes rarely and briefly, because a
+# gathering usually arrives in pieces and gets beaten in pieces. Then the first
+# wants that crowd to be LOSING to the one man, and the second wants the lone
+# house to be WINNING against the gathering, and each of those is the
+# uncomfortable half of an already narrow shape.
+bc_there_are_too_many_banners_on_this_side_trigger = {
+	exists = scope:combat_side.enemy_side
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side }
+		scope:combat_side = {
+			any_side_participant = {
+				count >= 4
+			}
+		}
+		scope:combat_side.enemy_side = {
+			any_side_participant = {
+				count = 1
+			}
+		}
+	}
+}
+
+bc_one_house_against_the_whole_gathering_trigger = {
+	exists = scope:combat_side.enemy_side
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side }
+		scope:combat_side = {
+			any_side_participant = {
+				count = 1
+			}
+		}
+		scope:combat_side.enemy_side = {
+			any_side_participant = {
+				count >= 4
+			}
+		}
+	}
+}
