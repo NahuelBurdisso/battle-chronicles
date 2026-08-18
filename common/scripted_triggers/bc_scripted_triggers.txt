@@ -5258,3 +5258,89 @@ bc_he_has_land_of_his_own_and_no_great_seat_trigger = {
 		title_tier >= duchy
 	}
 }
+
+# BATCH 144 - WHAT THE NAME IS WORTH, WHICH IS NOT HOW MANY CARRY IT.
+#
+# `dynasty_prestige_level` returned one occurrence across the whole mod, and it
+# is a line in the header of the house-size batch saying the mod had never read
+# it. That is still true. The mod asks whether two men share a house, whether a
+# house is nearly extinct, whether a house is half of a historical feud and
+# whether a house has bought a particular legacy perk. It has never asked what a
+# house is WORTH, which is the number the engine keeps for exactly that and the
+# only one of the four that moves during a game.
+#
+# THE LADDER AND BOTH FORMS ARE VANILLA'S. `common/character_interactions/
+# 00_alliance.txt:1864-1899` walks the whole scale in one block -
+# `dynasty_prestige_level = 0`, then `>= 2`, `>= 3`, `>= 4`, `>= 5`, `>= 6`,
+# `>= 7` - which is where the threshold below comes from rather than from
+# invention, and `common/achievements/standard_achievements.txt:261` compares
+# against a `max_dynasty_prestige_level` script value. The COMPARISON form used
+# by the second gate is vanilla's too: `common/activities/pulse_actions/
+# wedding_pulse_actions.txt:19` writes `dynasty ?= { dynasty_prestige_level >
+# scope:host.dynasty.dynasty_prestige_level }` and repeats it at `:32`, `:86`
+# and `:105`.
+#
+# THE SECOND IS RELATIVE AND THE FIRST IS ABSOLUTE, WHICH IS WHY NEITHER IS A
+# SUBSET OF THE OTHER. A man out of a fifth-rung house facing a second-rung one
+# passes the first and fails the second. Two obscure houses where the far one is
+# one rung up passes the second and fails the first. They are independent in
+# both directions and no negation is needed to make them so.
+#
+# THE SECOND COMPARES THE TWO COMMANDERS AND NOT THE SCOPED MAN, ON PURPOSE.
+# Vanilla can write `scope:host.dynasty...` because it has a saved scope to hand.
+# Inside a scripted trigger there is no guarantee what `root` is - batch 127's
+# lesson - so both sides of the comparison are named through `scope:combat_side`,
+# which makes the gate mean something better than "his" name would anyway: what
+# is asked is which of the two names leading this field is the heavier one, and
+# a knight who passes it is standing under the lighter of the two.
+#
+# FIVE GUARDS ON THE SECOND AND THEY ARE ALL LOAD-BEARING. `side_commander`,
+# `enemy_side`, `enemy_side.side_commander` and BOTH dynasties are optional -
+# this setting is full of men with no house at all, and the mod's own house-size
+# batch records that - and a `dynasty` read that is also the right-hand side of
+# a comparison is still a read. Every `exists` is repeated inside the
+# `trigger_if` limit.
+#
+# THIS IS NOT THE HOUSE-SIZE ROWS AND IT IS NOT THE FEUD ROWS. Size and worth
+# come apart hard: a house can be down to two living members and still be one of
+# the great names of the age, and a house can have forty members and be worth
+# nothing to anybody. The feud gates ask whether a specific pair of names has a
+# specific history; these ask what either name is worth to people with no
+# history in it at all. The perk gates ask what a house has bought; this asks
+# what it is.
+#
+# RARITY. Vanilla's own ladder treats the fifth rung as the top third of a scale
+# that runs past seven, and reaching it takes decades of renown, so the first is
+# a small number of houses on any map. The second needs both sides to be led,
+# both leaders to have a house, and the far one's to be strictly the heavier -
+# which is at most half of the fields where all of that is true, and in practice
+# fewer, because the heavier name is more often the one with the army.
+bc_the_name_he_carries_is_a_great_one_trigger = {
+	exists = dynasty
+	trigger_if = {
+		limit = { exists = dynasty }
+		dynasty = {
+			dynasty_prestige_level >= 5
+		}
+	}
+}
+
+bc_the_name_opposite_outweighs_the_name_here_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.side_commander.dynasty
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	exists = scope:combat_side.enemy_side.side_commander.dynasty
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.side_commander.dynasty
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+			exists = scope:combat_side.enemy_side.side_commander.dynasty
+		}
+		scope:combat_side.enemy_side.side_commander.dynasty = {
+			dynasty_prestige_level > scope:combat_side.side_commander.dynasty.dynasty_prestige_level
+		}
+	}
+}
