@@ -9386,3 +9386,78 @@ bc_this_war_has_only_two_names_in_it_trigger = {
 		}
 	}
 }
+
+
+# BATCH 204 - THE GROUND WAS ALREADY SOMEBODY'S PROBLEM.
+#
+# CENSUS. `is_occupied` and `is_raided` both return zero across the whole mod,
+# and so do `is_county_capital`, `has_ongoing_construction`, `num_buildings`
+# and `available_loot`. The mod walks to the battle province constantly - the
+# six band wrappers from :117 to :170 all enter
+# `scope:combat_side.combat.location` - but every single thing it has ever
+# asked a province is what KIND OF GROUND it is. Nothing has ever asked what
+# has been HAPPENING to that ground. This batch is the first province gate in
+# the mod that is not a terrain question.
+#
+# IT DOES NOT BELONG IN bc_ground_triggers.txt. That file holds the six terrain
+# bands and nothing else, and validate counts every `agot_is_*_terrain` mention
+# in it against the 23 base helpers; anything added there breaks the partition
+# check. Neither gate below mentions a terrain, and both live here with the
+# rest of the province wrappers.
+#
+# PRECEDENT, AND AGOT PAIRS THESE TWO ITSELF. `common/decisions/agot_decisions/
+# 00_agot_colonization_decisions.txt:30` and `:31` are consecutive lines inside
+# one `root.location = { }` block reading `is_occupied = no` and `is_raided =
+# no` together, in a file of AGOT's own making, to decide whether a man can go
+# and look at his own settlement. AGOT reads `is_occupied = yes` again on a
+# saved province scope at `events/agot_lmf_events/agot_lmf_heir_events.txt
+# :7488`, `:8608` and `:8942`. Vanilla has both as well: `is_occupied = no` at
+# `common/decisions/dlc_decisions/ep3_decisions.txt:322` and across
+# `common/scripted_effects/tgp_mandala_scripted_effects.txt` from `:3002`, and
+# `is_raided = yes` throughout `events/dlc/mpo/mpo_migration_events.txt` from
+# `:1490`. triggers.log gives both as yes/no with Supported Scopes: province.
+#
+# DISJOINT BY CONSTRUCTION, the fostering pair's arrangement at :2490-2510: a
+# province can be occupied and raided at the same time, so each gate carries
+# the negation of the other and the overlap belongs to neither. What is left is
+# two different kinds of trouble rather than two readings of one.
+#
+# NOT THE WAR-SCALE ROWS EITHER. Batch 203 at :9366 counts the names in the
+# war and batch 202 at :9264 asks who has paid for it; both are properties of
+# the war. This is a property of one province, and a huge war can be fought
+# across untouched ground while a two-name war burns a county to the roots.
+#
+# GUARDS. `combat.location` does not always resolve - bc_context_effects.txt
+# records the `BC: ground missing` case - so both gates carry `exists =
+# scope:combat_side.combat.location` as a sibling and repeat it in the
+# `trigger_if` limit, exactly as the six band wrappers do from :117.
+#
+# RARITY. Occupation needs somebody to have taken the holding and still be
+# sitting on it, which is a minority of provinces even in wartime and a small
+# minority of the ones a field battle happens in, since armies that have just
+# taken a place tend to move on. An active raid is rarer still and does not
+# last long. The first wants the ground already lost while this side is losing
+# the battle for it; the second wants the countryside being stripped in the
+# same province while this side is winning, which is a victory with nothing
+# underneath it.
+bc_this_ground_is_already_in_other_hands_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			is_occupied = yes
+			is_raided = no
+		}
+	}
+}
+
+bc_this_ground_is_being_stripped_while_they_fight_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			is_raided = yes
+			is_occupied = no
+		}
+	}
+}

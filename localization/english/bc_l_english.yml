@@ -55219,3 +55219,1255 @@
 
  bc_knight_this_war_has_only_two_names_in_it_toast:0 "Nobody Else Came"
  bc_knight_this_war_has_only_two_names_in_it_toast_desc:0 "Two names in the whole business. One man said a thing to another man and the other man answered it, and then the world at large declined to have an opinion: no allies, no favours called in, nobody arriving late to be thanked for it afterwards. Two households and a field. He finds that clarifying. There is no wider account to protect out here and no third party whose feelings today has to accommodate, and so when the far line gives he goes at it without a scrap of the caution a complicated war teaches a man. He is spending things he would ordinarily hoard - wind, horse, the good arm, the few seconds of surprise a man gets exactly once - and spending all of them at once, because there is nothing to save them for and no one else's timetable to keep. It is not restraint and it is not trying to be. Somewhere underneath it he understands that a quarrel small enough for two names is also small enough to be settled for good, and things settled for good do not come back in the spring.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 204 - the ground was already somebody's problem ------------------
+#
+# THE FIRST MAY NOT NAME a place, a people, a house, a sigil, a title or an
+# ancestor, quote a saying, have a rider arrive or a message go out. He may not
+# order a withdrawal, rally, turn the day, or end the day.
+#
+# THE SECOND MAY NOT NAME a place, a people, a house, a sigil or a title, or
+# quote a saying. Nobody may cheer him or use his name. He may not kill a named
+# man, reach the far commander, or end the day.
+#
+# NEITHER MAY count anything in thousands.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a corner
+# at a time", "nobody has come to tell", "the last thing he is sure of", "a
+# clock made out of daylight", "keeps his hands still", "the version of this
+# rank", "not a copper more", "he need not be here", "there is no audience",
+# "the account was closed", "the ground has no opinion", "in the order he was
+# taught", "there was nothing to find", "everything there is is already here",
+# "stays set", "nowhere else for them to be", "a place rather than a thing",
+# "the fractions", "one word", "at the pace the rank", "the other reason",
+# "arriving at a rate", "eight feet wide", "how thin", "cannot be recalled",
+# "where it is comfortable", "a join is a place", "all the way back", "since he
+# was nine", "running is not a direction", "how little of what he was taught",
+# "on them expensively", "at breakfast", "downstream of that rider", "which
+# parts seize first", "the third-best line", "worth the table", "an itemised
+# list", "rain on a roof", "half a pace", "he does not wait to see",
+# "arithmetic he did once before", "before any of the clever parts existed",
+# "four hundred yards away", "the roads held", "already paid for the timber",
+# "in a small careful hand", "this hedge, this next hour", "the only copy",
+# "two thirds of himself", "a name that gets written down gets read", "a chair
+# empty next spring", "a wet surcoat", "for twenty years", "a second meaning
+# attached", "in front of witnesses", "belongs only to him", "further off than
+# his own arm", "three or four paces at a time", "the number is smaller", "at
+# the good part", "before the horses are even cool", "comes back walking", "a
+# table in a cold room", "at the correct hour", "until well after dark", "forty
+# miles from here", "on a borrowed horse", "minding that opening himself", "an
+# exit in it", "a sealed bag", "wide and low", "the far end of a road", "does
+# not know today is happening", "would have been fed in", "gave him the
+# mornings", "on foot, leading it", "spent something that was his", "could
+# still go either way", "a slightly worse seat", "set it down somewhere he
+# cannot get back to", "had no view on the matter", "a man on his right", "does
+# anybody ask him why", "sign a name you know", "about four people alive",
+# "dressing off somebody", "too tidy to be an accident", "answered before it is
+# finished", "not being beaten by an army at all", "one exact measurement
+# left", "the only thing today that has been done properly", "the best view on
+# the field", "the knowing is worse than the not going", "the work is being in
+# one place", "the finest hour of somebody else's life", "it comes from meals",
+# "one notch harder than the situation asked for", "in a hall in winter with
+# the fire going", "a step further back than they were", "the sensible, almost
+# administrative urge", "thirty paces along the same rank", "since before he
+# was worth knowing", "the second answer is worse than the first was", "a
+# longer route than the one he learned to trust", "impatience of a very
+# specific and unusual kind", "a hundred paces is not a distance worth
+# counting", "personally offended him by existing", "horses standing with their
+# heads down", "stops being an item and starts being a soldier", "a piece of
+# paper with a life attached", "the specific way you are kind to something
+# valuable", "refuse to be the reason it goes any faster", "a conversation he
+# was not at", "already been talked about somewhere he was not", "at the going
+# rate", "a defeat with nothing in it", "the part where a man can be seen",
+# "whose going first would settle anything", "it arrives at him sideways", "the
+# quantity is now so small that it can be held in the head", "the temperature
+# of the standing", "stopped containing any doubt", "the shape of fighting and
+# the pace of work", "become a direction", "anything on the other side of the
+# question", "in good order, which is the only creditable thing", "precisely
+# where to put his hands", "the smallest correct answer there is", "still has
+# an army in it at dusk", "he has always gone", "the way a horse tells you it
+# has decided something", "get shorter and heavier", "a room he will never
+# see", "rules in it he has not found yet", "what it does twice", "arranged to
+# be worse than it looks", "more of the field in his head", "somebody willing
+# to be alone with him", "from the far side of a courtyard", "where the mail
+# stops being generous", "the single kind of cleverness he owns", "the same
+# sentence has stopped being a boast", "nobody whose business this also is",
+# "somebody arrives on Thursday", "answering questions with one syllable", "no
+# room above this", "in a warm chamber in the autumn", "a bad horse tells you
+# no at the second", "nothing behind the asking", "a problem with a known
+# shape", "eleven decisions taken in the right sequence", "pieces that are
+# still pieces", "a small private religion", "it has no second part", "an odd
+# immovable lump", "the only instruction he owns", "no breath spare",
+# "declining to improve something that is already working", "the invitation is
+# always to move something", "the man who moves first has answered a question
+# nobody put to him", "exactly the same the fifth time", "starts with leaving",
+# "half a mile off before the answer arrives", "somewhere to go", "be a thing
+# that gets hit", "it never came up", "in the way a debt is an inheritance",
+# "decides in advance how a certain sort of conversation is going to go",
+# "contributes precisely nothing", "decided by things he actually did", "the
+# flat efficiency of men doing a job of work", "the extra half-inch", "the way
+# a door gives ground", "is not here at all", "he is simply what is in front of
+# them", "losing in one piece", "too tired to be choosing it", "without either
+# of them looking", "he can spend it and he cannot add to it", "run out before
+# the daylight does", "an account of what the roof cost", "a short entry with a
+# date on it", "it will contain nothing", "how small it goes when it is put
+# away", "he has started pricing it", "it is not a hope, it is a schedule",
+# "one part of a document going grey at a time", "it waits, like a bill",
+# "doing sums about barrels", "whose whole autumn is being organised around",
+# "a hard, unpleasant, entirely useless way", "one more time than the situation
+# strictly asks for", "be a man who noticed a joke", "the right order and it is
+# also, quietly, the cheap one", "a version of this afternoon he could have run
+# more carefully", "patient and unhurried", "households look outward", "none of
+# them are reading it correctly", "the worst hour of his life and it is not the
+# dangerous one", "no access to it whatever", "asked for more than the horse
+# has", "fighting the wrong danger", "twelve deep and is eight", "nothing
+# behind the standing", "took the share quietly", "no order that gets him the
+# missing men back", "the shortest and least ambitious task", "a beat and a
+# half after the moment needs them", "breaking has a shape", "a place he does
+# not much like remembering", "keeps his mouth shut about why", "in the same
+# flat voice he uses on himself", "strength committed in two directions", "the
+# sum reorganises itself", "takes the panic out of the arithmetic", "survive
+# today being a defeat", "a rank does not come apart politely", "one host and
+# not one enemy", "the wound in his forearm that he will remember longer than
+# the victory", "they are going to do this again", "he gave the seal away
+# himself", "somebody has to answer the letters", "the version of the
+# arrangement where he is not in the room", "learning it can manage", "like a
+# coin in a boot", "a long ragged smear", "he holds the seat, he does not own
+# it", "slightly cold, the way a fact does", "warm, and dry, and not here",
+# "nearer to a smell", "none of it is being supervised", "refusing to be
+# hurried", "would say so under oath", "the second and third things", "he has
+# been in a room with that man", "the register he drops into", "visibly stopped
+# negotiating", "not one person will ever know what the reason was", "stops
+# solving the battle", "the way a dialect is in them", "four generations of
+# somebody else's expenditure", "does not get to be fastidious", "the same sour
+# old master", "luck does not last", "already correct before anybody taught it
+# to him", "came in with the surname", "could not tell you their name", "polite
+# about the wine", "whether it goes back at a walk", "the last order today that
+# will still matter next year", "a won thing keeps", "a description is worth
+# roughly a tenth of a memory", "it is not courage. It is freight", "on a horse
+# that has begun to tell him about it", "what a guest is for", "in an ordinary
+# voice", "stops being a figure and becomes a sort of weather", "a part of his
+# head that will not be switched off", "this is what they were for", "no
+# version of the winter in which he replaces this", "the length of one held
+# breath", "not the length of the shafts", "waiting to be told the next thing",
+# "keeps its interval when the interval gets uncomfortable", "braver this
+# afternoon than he is", "does not know today is happening", "never once stood
+# over him", "he thinks of it as insurance now", "the kind of thought a man has
+# in a chair", "going forward at its own speed", "the stage past which there is
+# nothing further to be done to it", "a boast about the wrong subject", "made
+# once and not repeated", "leaving alone whatever part does not need him",
+# "stay in the hour", "it came across anyway, unasked", "a door somebody has to
+# check twice a day", "arrives in entirely the wrong order", "which of them are
+# worth the trouble of keeping", "arranging itself quietly around a gap", "one
+# small permanent adjustment", "to the last stag", "a chair that nobody sits in
+# any more", "he is a sum", "sound well repeated afterwards by people who were
+# elsewhere", "a second one to be paid for", "precisely as quiet as it was in
+# the first of them", "the loudest thing in his household", "the ordinary
+# consolation of his class", "somebody small asleep in a hall a long way off",
+# "it is the line", "the loose quick look of people who can already taste the
+# end of it", "twice he has told himself it was the ground", "by never once
+# referring to it", "it is invisible, it is meant to be", "present the account
+# tomorrow", "you can see it in what the other man is not doing", "another
+# man's reason for hesitating", "declines every invitation to be the one who
+# commits first", "the one where the ground was wrong", "feel the shape of it
+# the way a man feels weather", "buys a quarter of an hour with somebody's
+# life", "a wider notion of what is worth attempting", "would not wager a horse
+# on", "the length of a slow count", "the complete indifference of the
+# transaction", "doing the single thing it does", "he had never put it in
+# words", "as courteous as they were on the day he signed", "he answers to it
+# as readily as he answers to weather", "he has had it eleven days", "the two
+# words it says badly", "it is maintenance", "at speed a body forgets what it
+# is pretending to be", "not one degree better", "the surface of something very
+# patient", "the same job with the shouting brought forward", "which complaint
+# is a real one", "it is that they have stopped checking", "where to sleep for
+# a month", "understands why, and does not say so", "not become a different man
+# from the one they have been following", "he is fighting in what happened to
+# be on him", "at the pace of oxen", "the four places on his body where the
+# answer is no", "taking things on the flat of it", "at half his weight", "he
+# is not sure they should", "these men came because of him", "every one of
+# those debts is finite", "the office does not get tired", "the sum of what
+# people privately think of him", "they never gave him the other kind of word
+# to break", "lines that believed and lines that did not", "doubts they have
+# decided not to raise today", "a decision you would have to make on purpose
+# while two people watch", "the ones we do not speak to afterwards", "a habit
+# that has not yet had a reason to stop", "it does not remove enemies, it only
+# schedules them", "the way another man knows his own children's ages",
+# "everybody signed and nobody meant", "less like a victory and more like a
+# lease", "three other afternoons sit somewhere in the future with his name on
+# them", "the bad part is that it happens slowly and you are awake for all of
+# it", "there is no benefit in their arriving early", "does not care for the
+# acquaintance", "harder than the situation warrants", "he is not doing it for
+# them", "standing here inside an arrangement rather than a loyalty", "like men
+# fulfilling a term", "until the debt is considered settled", "invisible from
+# any distance and enormous from here", "asking is the one thing that would
+# make it happen", "the pressure on his shield changed character", "a hand's
+# width of daylight between them that neither of them owns", "not a weakness,
+# exactly. a seam", "a skill and not an intention", "while both halves are
+# still expecting the other half to close it", "more times than is dignified",
+# "chosen by careful men in a warm room", "none of it has any purchase out
+# here", "pushing at each other in the wrong order", "that being correct was
+# load-bearing", "in the older, colder sense", "saying it is not the
+# mechanism", "no reason on the earth to be careful", "nobody watching will
+# connect the two", "he would pay considerably more than that", "the fall of
+# it, the footing", "reading it that way", "already knowing what it was",
+# "harder would be simpler", "a kind of settledness", "a different and worse
+# category of thing", "they do not need to say anything about it to each
+# other", "terrain is the thing you cannot argue with", "a second thing, older,
+# sitting underneath the first", "it would come out wrong", "the thing his feet
+# are doing", "not one boot-length", "the little accommodating shuffle a line
+# makes", "it is nobody's decision", "made by whoever is least willing", "he
+# cannot make his feet do the other thing", "not taking any of the pleasure in
+# it", "without having decided to, is arithmetic", "that loose look now", "any
+# man shouting his name this morning", "the figure is not one and it is not
+# two", "when sending the reserve would feel best", "would make the finer
+# story", "forty horse he has no way of replacing", "larger than the one people
+# count", "neither generosity nor meanness", "how far a given quantity has to
+# reach", "worth the retelling", "a second set of rooms", "what sort of day it
+# had been", "no notion that there is a question available", "it works more
+# like subtraction", "two things to come back for", "a willingness that was
+# simply not in him a year ago", "surrendering the width of his own boots",
+# "keep something back for", "have the fact right and everything underneath it
+# wrong", "did not ride onto this ground carrying a question", "a natural place
+# where it is finished", "begin without knowing it to steer toward it", "he has
+# no such place", "started to drift wide around midday", "a danger set against
+# a gain", "the private balance every other man", "before anybody else could
+# afford to", "his eyes are ordinary and getting worse", "stops spending any
+# part of himself on deciding it", "survive being said", "three men repeating
+# it badly", "including the half that nobody said", "no second portion where
+# somebody comes out after him", "the shape an order has", "he appears as a
+# quantity and not as a man", "the anger does not arrive", "four good strides
+# out of the animal", "at the price that had already been allowed for", "from
+# where the sum was worked", "has served him for thirty years", "who did he get
+# it from", "what would it cost him to lose it", "closer to bookkeeping", "the
+# thing that keeps what he has got", "every scrap of it came from here", "not
+# making one of the errors a cornered man makes", "what the bookkeeping insists
+# he ought to be", "the method has a hole in it", "the ledger only predicts the
+# men for whom the ledger is the point", "an exception to his own rule", "going
+# back through the entries", "if you traced that back far enough", "not one of
+# them has ever traced it", "a particular understanding with a particular man",
+# "how many days and with what and in whose company", "a different thing from
+# meeting it handsomely", "counted the days off on his fingers", "the least
+# rousing reason", "after the rousing ones have burned themselves out", "at a
+# speed the rest of them can actually hold", "keeping his own dressing", "the
+# other thing is only running", "the chase kept its shape", "not from anything
+# painted on a shield", "watched most of them move for years", "never in his
+# life gone in on the second rank", "drifts a little to the right under
+# pressure", "only because his father stood there", "doing precisely what they
+# cost", "rather than hiring them by the season", "the going in first is what
+# the money has always been for", "quarter-days and grain and stabling", "the
+# thing he bought being delivered to him", "it is being delivered faultlessly",
+# "whose habits he could recite from memory", "while the good news is still
+# arriving", "entirely within their rights", "somebody else's quarrel", "does
+# not have that available to him", "every animal under him has come", "the roof
+# his people are under this winter", "a version of itself that pauses", "no
+# nobility in it whatsoever", "the ground under him has turned to a paste",
+# "the one that has always told him where to be", "it has not yet told him
+# anything else", "can hold that one thing whole in his head", "its own hall
+# and its own steward", "at different speeds and draw quite different
+# conclusions", "running each part of it forward in his mind", "longer over a
+# decision than the moment allowed", "obvious for one part of what he holds",
+# "while he was reconciling the two", "the ground immediately in front", "he
+# can see that version quite clearly", "the trick of being one man standing on
+# a slope", "no restful place to stand between those two", "have nothing and
+# are owed everything", "a roof that is his, and the ground under it", "one
+# good animal and the harness to put on it", "judge, to a nicety", "as though
+# he deserved more of it", "the way you are conscious of a stone in a boot",
+# "the pace that keeps a horse alive for a second day", "a full year of what
+# that ground makes", "the cheapest thing he will pay for today", "in that
+# particular manner", "to a living soul", "an accurate map in his head of what
+# every name in the world is worth", "standing at his shoulder doing nothing
+# but harm", "a competent captain would have taken hold of", "carry the same
+# map in a rougher version", "since the banners went up", "considerably more
+# expensive than that", "it has made them wait", "a quarter-beat before each
+# push", "a fraction less in each recovery", "no man would own to and no man
+# could be charged with", "an order against a feeling", "between now and dusk",
+# "expecting to be somewhere else in an hour", "if anybody were tactless enough
+# to ask", "who would not be standing somewhere else", "trained since childhood
+# to do", "out of modesty", "handed before he could walk", "adjusted where they
+# put their feet", "first noticed that at fifteen", "which turned out to be
+# worse", "the only settlement he can live inside", "separately and on its own
+# account", "pull the two reasons apart", "Everything wide about what he holds
+# is held for him by other men", "cost him a night's sleep", "off ground he has
+# never walked", "a man he sees twice a year", "keeps drifting sideways", "bad
+# enough to justify going home", "it is not the part that is failing", "the
+# real measure of a man", "how far he can ask", "how hard he can hold", "while
+# the asking was easy", "the one number he never grew", "he preferred them
+# settled", "doing arithmetic", "built for quiet years", "the asking was
+# polite", "either would say aloud", "a bed in somebody else's hall", "four
+# separate stretches of working ground", "the sensible thing was the obvious
+# one", "losing wages and a chance at something", "a season's attention",
+# "worth the most it will ever be worth", "the things in front of him have
+# faces", "noticing early, correcting small", "large enough to become
+# interesting", "which he recognises as the worse of the two signs", "No boy
+# has turned up at the edge of a field", "where the soft going is", "sold his
+# quartermaster anything at any price", "having a view about who ought to win",
+# "The hate went cold a long while back", "a vast and even-handed
+# indifference", "every hedge and gate for a day's ride in any direction",
+# "carried past doors that stay shut", "a hollow that anybody local could have
+# warned him about", "the country behind them is glad they came", "the ground
+# would be tidied up afterwards", "precisely the same tidying for the men
+# opposite", "has no proper word for and has given up looking for one", "Water
+# arrives", "no business within a hundred paces", "set it down and turn round
+# and go back for more", "digging a ditch this time yesterday", "would not take
+# a coin for it", "puts up with an army the way a hand puts up with a
+# splinter", "under no obligation he can find anywhere", "the small permanent
+# cost of minding his own back", "somewhere around the fourth push", "the
+# ground was with them", "nothing whatever to do with the slope", "The line he
+# is holding is the correct length", "since the second push", "will hear about
+# today in a fortnight", "resenting it quietly", "finding fresh reasons to",
+# "it has been met exactly, to the man", "the men beyond what he owed are the
+# men who plough", "ruined him inside three years", "the correct figure is not
+# enough", "no version of today in which he did the wrong thing", "He kept to
+# the terms", "the only currency they were ever really written in", "watching
+# it counted out", "On paper he owes next to nothing", "no obligation has ever
+# done for anyone", "a lord in a hurry once settled with his people cheaply",
+# "sat out this whole season", "nothing owing and nothing said", "give a decent
+# account of why", "the not-pressing is a sort of statement in itself", "a
+# decision and not a schedule", "no grievance in his arm", "doing sums between
+# pushes", "at about the third hour", "absurd to then stand somewhere
+# comfortable", "plainly, and rather infectiously, enjoying itself", "since
+# about the second hour", "put there four hundred years ago", "of use to nobody
+# at all today", "the men on the wall-walk", "the way a farmer watches
+# weather", "a fight this undecided", "would be an idiot to", "he cannot even
+# resent it cleanly", "correct as written", "A wall that is not yours is not a
+# flank", "an extremely large object that does not move", "removing his choices
+# one direction at a time", "a line with nowhere remaining to bend", "There is
+# nothing here", "no wall, no ditch, no barn, no bank", "a wide uninterested
+# stretch of country", "never been worth building on", "without ever deciding
+# to look", "does a specific thing to a line", "checking behind them for a
+# thing that is not there", "every check costs a fraction", "he has caught
+# himself at it twice", "stopped treating the emptiness as a difficulty",
+# "started treating it as the arrangement", "Nowhere to fall back to also means
+# nowhere to be come at from", "No shelter for him is no shelter for them",
+# "steadier than he has ever been on ground with walls on it", "There is no
+# second army", "living inside it since the light came up", "He called out all
+# of it", "the generous-looking three quarters", "something to be reasonable
+# with afterwards", "garrisons that had not been emptied since long before he
+# was born", "visible in the harvest", "able to lose politely", "one outcome in
+# two coats", "No second effort when the roads dry", "these same men standing
+# further away", "worth precisely what a secret is worth", "the thing it hides
+# is being demonstrated in public", "replaced by nobody, ever", "keeping his
+# face in the shape it would be in if there were a reserve", "any accounting
+# that would stand up in a hall", "neither has ever put it into words", "it is
+# not a chasm", "turns up in ledgers rather than in rooms", "sitting between
+# them politely for years", "without the tiny delay", "obedience is a gift they
+# have chosen to hand over", "the delay is the entire insult", "everything
+# after it is decoration", "shortly after noon that he would not have given",
+# "mends what needs mending on his own account", "the pleasure of being right
+# where people can hear", "which of the two of them they answer to", "Nothing
+# the far line does means what it would mean if his own men did it", "the
+# entire shape of his day", "he read it as breaking", "out of the same
+# movement, quicker, from a slightly altered angle", "the opening half of a
+# sentence", "Their noise tells him nothing", "the sound they make when they
+# are pleased", "trying to learn a language in the middle of an argument", "a
+# scout reports meaning rather than motion", "none of them hold the meanings",
+# "to answer what has already finished happening", "reading him fluently since
+# first light", "a stranger is only a stranger in one direction at a time",
+# "carried his shield in a way he last saw at a market fair", "somebody's
+# second son from four valleys over", "the recognition arrived a beat behind
+# the blow", "They form up the way his own lot form up", "the weight on a
+# different part of them", "a particular shuffle", "playing at this in the same
+# kind of yard", "knowing a trick and being able to stop it are separate
+# skills", "understanding every single thing they are about to attempt", "no
+# useful moment in the middle of a battle", "which lord's summons turned up at
+# which hall", "this is what going his way looks like", "The fighting is
+# between buildings now", "does not stay a line for as long as it takes to say
+# so", "carried his right wing back past the first row of workshops",
+# "commanding a thing that has no shape", "He cannot see forty paces in any
+# direction", "a great many small ones happening in yards and doorways", "in
+# the same rank an hour ago", "different fights with different odds two streets
+# apart", "the smoke is deciding where his flanks are", "runs across the fight
+# and both sides stop for the length of it", "the only thing either army still
+# does together", "the flat way a man is aware of a bill he will be handed
+# later", "worth a fraction of what he rode past this morning", "somebody who
+# did not ask for either of them", "the men standing on it who are not fighting
+# have not gone anywhere", "in a doorway and along a low wall", "at a distance
+# of perhaps thirty paces", "leaving would be a kind of answer", "they would
+# rather not give it", "His feet stay where he puts them", "he does not open
+# up", "takes the man in front of him properly and then takes the next one",
+# "the small tidy piece of the line he is responsible for", "has not moved a
+# yard backwards", "because of what is built behind him or because of who is
+# stood under it", "neither has ever been separate from the other for anybody",
+# "rather the point of putting a building there", "looked at by people he
+# cannot argue with afterwards", "He priced this before he set out", "the price
+# has been falling all afternoon", "ransoms off whoever was worth ransoming",
+# "a season of somebody else's income", "a debt written off that he has been
+# carrying too long", "stopped believing in any of them", "want men taken alive
+# and standing where you can reach them", "the ones still on their feet and
+# furthest away", "Horses want a field you hold at dusk", "the day is not going
+# to be his", "unlike the profits the costs are all real and all already
+# spent", "who eat whether or not this works", "the ones who are not going to
+# eat again", "whose people will want something from him in spring", "doing
+# sums in a corner of his head", "every version he tries comes out the same
+# way", "how much of the loss he can still avoid taking", "Something is being
+# denied to the men in front of him", "They fight hard. They fight cleanly",
+# "steps over and past him instead of making certain", "unless somebody has
+# told them and gone on telling them", "gone through without thinking about
+# it", "gone the long way round instead", "the long way round is the reason
+# they are losing this stretch of the line", "He does not admire it", "on the
+# ground with a thing you did not see", "in the gap between one and the next",
+# "has decided what may be done to win and has made it stick", "men who are
+# dying of it", "a beautiful thing to have on the other side of a field from
+# you", "It is behind his right shoulder", "took longer to build than his line
+# has been alive", "make the afternoon he is having look extremely small",
+# "they have put their backs to the stone", "the one thing on this field that
+# will not give way", "holding a shorter frontage than they should be", "losing
+# more slowly than they would in the open", "Every time he looks up", "Nothing
+# that happens below it today will make the slightest difference to it", "it
+# does not care which way this goes", "unmarked, doing the thing it was made
+# for", "trying to take that as steadiness and it will not sit that way",
+# "patiently and without malice", "watched a great many afternoons", "not going
+# to be remembered by anybody who was not standing in it", "far too flat and
+# far too wide to have happened on its own", "cut stone half-sunk in the grass
+# at intervals", "the line goes somewhere and then simply stops", "was never
+# begun", "the best fighting ground on this whole field and nobody meant it to
+# be", "nothing to turn an ankle on", "footing like a yard", "going forward
+# faster than he has any business going", "taking men at a flat run", "coming
+# off one and onto the next while they are still deciding where he went", "no
+# idea whose plan this was or why it stopped", "the only thing about it that
+# matters to him is that it is level", "wanted something here badly enough to
+# move a hill for it", "letting a stranger kill people on it quickly", "has not
+# spent a peaceful day in ten years", "legible in every single thing that side
+# does", "Nothing over there is being improvised", "The reserve went in at the
+# moment it should have gone in", "holding a reserve while your own front
+# bends", "a stomach that only gets built one way", "Nobody over there is
+# hurrying", "a route that somebody clearly walked before the fighting
+# started", "Their second line is resting", "knows to the hour what a body of
+# men has left in it", "had thought, until about noon, that it had aged him",
+# "It is repetition", "has already seen go wrong for somebody else, several
+# times, in several countries", "years of quiet evenings afterwards", "if it
+# were ever his turn to be standing on the winning side of it", "since he slept
+# anywhere he could call his own", "the ordinary condition of his life rather
+# than an interruption of it", "Everything decorative has gone", "he does not
+# set himself", "raising his shield higher than it needs to go", "shortened by
+# about a hand's breadth", "that hand's breadth was never arriving anywhere",
+# "He eats when there is food in front of him without deciding to", "which of
+# the sounds behind him require turning round", "think he is gifted and he is
+# not especially", "the only one of them who has not had a winter off", "mostly
+# the absence of everything that used to be wasted", "noticed that it is going
+# well the same way he would notice weather", "he can no longer clearly picture
+# the room he grew up in", "he stopped trying to some months ago", "keeping one
+# eye on where the far banner is", "It is not that he wants to get at the man
+# under it", "drifting, slowly and without anybody steering it", "the two of
+# them end up in the same ten feet of ground", "he has known for hours what
+# happens then", "can defend himself against most of what walks about", "a
+# different order of thing", "put into a yard at four and never really taken
+# out of it", "not a matter of a good day and a bad one", "is worth precisely
+# nothing inside four paces", "pushed steadily back towards the place where
+# four paces is all there will be", "fighting the whole battle at a slight
+# angle to it", "spending attention he cannot spare", "is in no particular
+# hurry", "would need less than a minute", "long enough to have formed an
+# opinion", "the man under it cannot use a sword", "He carries the weight
+# wrong", "has been taught the moves and has never had to make one against a
+# person genuinely trying", "he was got out of it by other people quickly, and
+# he let them", "that would go one way and only one way", "what to do with
+# knowing it", "a great many men who are not going to stand aside", "doing
+# extremely well precisely because he is in it", "would come apart behind him",
+# "an errand that finishes with one man dead who was never the reason any of
+# them are here", "So he stays", "the way a man looks at a debt he has decided
+# not to collect", "stands two full steps above him", "quietly organised around
+# that", "because somebody very large asked", "sent their best and sent them
+# early", "paid in advance and expect to be paid again", "which is a smaller
+# word", "here as a favour, and a favour is a thing men look at again in the
+# afternoon", "outweighed rather than outfought", "the distinction will not
+# survive the week", "What will be said is short", "four times the reach in the
+# countryside behind it", "a name that nobody in three regions may refuse",
+# "who stood where and how it ended", "arrange the two of them in their heads
+# by the sizes they already know", "the one that was true this morning before
+# either army moved", "standing in a rank with a shield on his arm", "a thing
+# he chose this morning and has not revisited", "He could be on the rise
+# behind, being handed reports", "watching would have been intolerable", "none
+# of those reasons would sound well said out loud", "how little difference it
+# makes where he is standing", "has not adjusted his footwork", "Nobody has
+# offered him a better place in the line", "one competent shield and about the
+# same weight of work as anybody else in that stretch", "it would be going
+# about as well without him", "the most agreeable thought he has had in a
+# year", "sitting fully formed in his head", "for the better part of an hour",
+# "Not from doubt", "name the company that ought to move", "roughly what the
+# move would cost", "get the whole of it out in nine words", "turns nine words
+# inside a man into nine words out of him", "it has been absent for some years
+# now", "today of all days it has not come back", "watches the bend get worse",
+# "Someone at his elbow puts a question to him", "answers it correctly and
+# briefly and then stops again", "which is by now most of him", "keeps offering
+# the observation", "the observation gets truer on its own", "without his
+# having to do anything at all to help it along", "over the ditch first, which
+# nobody had asked of him", "back through his own front at a run", "did not
+# turn round to check whether they were following", "holding the left when the
+# left wanted a body in it", "eleven minutes later on the right", "neither of
+# them worth stopping for", "collected in spots where he had no particular
+# business standing", "would be genuinely puzzled to hear it called that",
+# "waiting for something to come to him", "the single most unbearable thing he
+# can picture doing", "takes whichever half of it involves going somewhere",
+# "The horse is finished", "where he wants to be standing when the next thing
+# starts", "The seat is not two years under him yet", "those two facts are
+# being quietly attached to each other", "his instructions arrive a half-beat
+# late", "get carried out by men who glance at each other first", "That glance
+# costs nothing measurable", "could not name a single one of them for it",
+# "running at a slight discount", "what it would give a man it had known
+# longer", "he has not earned the argument", "It is going backwards square",
+# "nobody will be able to blame the men", "keeps its shape all the way to the
+# bottom of a field", "only one person left to hang the afternoon on", "He has
+# been that person for twenty-one months", "a stretch of hedgerow eleven days'
+# ride from here", "through four bad harvests and two winters that took
+# children", "the fourth or fifth position from the end of a line", "doing the
+# simplest job on the field", "an economy that the men on either side of him
+# have started copying", "He does not step back when the pressure comes on",
+# "which is the part the young ones cannot manage", "the man who stays where he
+# said he would stay", "a very specific physical habit", "he sets his weight
+# and it goes past him", "still there afterwards because he was", "The line
+# bulges everywhere except the width of him", "a farmer, a miller, a boy
+# minding geese", "the shape of twenty miles out of them inside an hour",
+# "which parts of it to disbelieve", "the most useful thing he owns", "the
+# farms were empty when they passed them", "The mill has no wheel in it",
+# "stopped reaching the far end of it some years ago", "everybody who could
+# leave has", "answers questions with silence in every direction at once",
+# "reading the ground itself all morning", "a much poorer instrument", "he has
+# read it wrong twice", "The second time cost him the left", "what the third
+# mistake is going to be from inside it", "the worst place to do that work
+# from", "has been minding it properly and for a long time", "the difference is
+# not sentimental, it is under his boots", "metalled and drains to both sides",
+# "squared and gapped at intervals somebody thought about", "a causeway across
+# the wet part", "should not, by the look of the wet part, exist", "where every
+# second step is a decision", "the landscape simply tells him where he can go",
+# "the eleven men keeping station off his shoulder", "They are not clever men",
+# "The ground is doing the thinking", "keep the line straight and keep walking
+# forward", "coming apart faster than it can back away from them", "Nothing
+# about this was ever his", "the ambition behind the quarrel is not his", "he
+# would be willing to repeat out loud to a widow", "the specific hundred and
+# ninety or so who came out with him", "a discouraging number of them by name",
+# "by trade, and by which holding they came off", "the arithmetic running under
+# everything else he does", "The bank that just broke was mostly his", "The gap
+# it left is being filled by more of his", "the shape of the settlement
+# afterwards", "will keep whatever there is to keep", "explain to a valley why
+# a third of it did not come back", "every part of that explanation will be
+# true", "none of it will be any use to anybody standing in front of him", "not
+# going to pretend, even privately", "any reason more impressive than the one
+# he is here for", "people would afterwards say who had been in the worst part
+# of it", "he intended to be the answer", "slightly inconvenient for anybody
+# wanting to look down on him", "he is extremely good at it", "that is where
+# being seen is worth most", "an enormous amount of very hard work", "the men
+# who followed him in for less vain reasons are alive because of it", "soaked
+# to the elbow and grinning", "in a way that will be described unkindly",
+# "folded the men opposite backwards over their own second rank", "not one of
+# the witnesses who will criticise his motives later", "standing far enough
+# forward to have seen it happen", "The runner comes back and says it is
+# holding", "raised in the same schoolroom as both of them", "what that word is
+# doing", "covering everything from comfortable to unspeakable", "the disgrace
+# is not in being cut to pieces", "it is in mentioning that you are being cut
+# to pieces", "stopped asking and started counting instead", "He counts
+# standards, which is unreliable", "how far the noise has crept along the line
+# since he last checked", "how many of them are walking with somebody helping",
+# "considerably worse than what the words told him", "the gap between the two
+# has been widening since midday", "believed he was doing the decent thing",
+# "how a mass of men behaves he learned before he was twelve", "the ordinary
+# business of a summer rather than a catastrophe", "three men wide at the point
+# and hollow behind", "have already privately decided and are waiting for an
+# excuse", "the man with the bad shoulder who does not yet know he is the
+# hinge", "None of that is cleverness", "the same recognition a farmer has for
+# weather", "by seeing the thing four hundred times", "shifts two paces to his
+# right without being told to", "the men either side of him shift because he
+# did", "ninety seconds later the hollow part comes apart exactly where he was
+# standing waiting for it", "He gave the order plainly and loudly and in the
+# correct words", "looked at the ground while receiving it", "for as long as he
+# can remember", "It went out through men who could not quite bring themselves
+# to face the source of it", "by the time it reached the third rank", "become a
+# rumour of an order", "interpreted in the direction of his own preference",
+# "the left goes forward and the centre does not", "fills up with people who
+# have no idea whose fault that is", "He knows exactly whose fault it is", "not
+# a thing he can mend by saying it again, louder", "not doing anything the men
+# either side of him are not also doing", "he is the one they can see",
+# "Whatever accident of bone happened in him before he was born", "a face that
+# carries at forty paces in bad light", "the entire problem of holding a line
+# together", "cannot make out a word of what is being shouted", "have simply
+# been watching his head", "When it goes forward they go forward", "they stop
+# level", "keeps a line a line rather than a crowd walking in the same
+# direction", "he has spent most of his life resenting it", "it is doing more
+# work than his arm is", "Everything he is genuinely excellent at was finished
+# a fortnight ago", "nobody was there to watch him do it", "He got an army
+# across bad country in the wet without losing the carts", "He kept the bread
+# coming when the roads were mud to the axle", "the reason these men are
+# standing here at all", "strung out along forty miles of track eating their
+# own boots", "And none of it is any use now", "a question of who leans harder
+# for longer", "no clever arrangement of anything that answers it", "he can see
+# with a horrible clarity that the answer is no", "a trade that stopped needing
+# him the instant the lines touched", "the one skill he has left is being able
+# to work the sum exactly", "the sum is not one he wants", "a frightened body
+# of men stops being a body of men", "becomes a number of separate people who
+# have each privately decided to be somewhere else", "he can feel it coming the
+# way other men feel weather in a knee", "He did not learn that here", "on
+# beaches and in yards and in places where the ones opposite were not
+# soldiers", "nothing at stake but what could be carried away", "The skill
+# transfers perfectly", "He goes at the seam half a breath before it opens",
+# "looks like courage from behind and is only familiarity", "remember the
+# afternoon as the part where everything came right", "He rode it the way he
+# has always ridden one", "as though it belonged to somebody else, because for
+# most of his life it did", "There was an appointment once that a man is
+# supposed to hold until he dies", "nobody has ever put in writing what he did
+# to lose it", "What he kept was the training", "still the most correct man on
+# this field", "His ranks are dressed, his intervals are right", "his reserve
+# is standing exactly where a reserve is supposed to stand", "in the proper
+# form with the proper words in the proper sequence", "All of it is immaculate
+# and all of it is moving slowly backwards", "the form and the outcome are two
+# separate objects", "execute every part of the craft without a flaw and still
+# be losing", "being looked at while it happens is the part he was most
+# thoroughly trained for", "It happened to him once before, years ago",
+# "everybody who saw it has been careful around him since", "He does not
+# remember it as anything at all", "afterwards he asked them, quite reasonably,
+# what they were staring at", "the noise has gone a long way off", "as though
+# the afternoon were taking place on the other side of a wall", "his arm has
+# stopped consulting him about anything", "They are objects in the way of
+# something", "he could not tell you what the something is", "soaked to the
+# shoulder and none of it came out of him", "a quiet, agreeable, entirely
+# absent feeling sitting in his chest", "ashamed of tomorrow and cannot get at
+# today", "He swore something once, out loud, with people standing there to
+# hear it", "then he stopped keeping it", "it has walked into every hall behind
+# him since", "the wing has simply come apart, the way wings do", "men who were
+# a line ten minutes ago are a crowd going the wrong way", "not one of them
+# looks at him as they pass", "their eyes forward and their mouths shut",
+# "saying the words a commander says at exactly this moment", "the words are
+# worth what his word is worth", "He worked it out years ago and has carried
+# the answer ever since", "still holding one broken promise against him", "get
+# the two of them apart in his own head", "There was an inheritance in front of
+# him once and an arrangement behind it", "he put down both and swore himself
+# to a thing that would give him neither", "Men assume that was a loss", "He
+# has never once described it that way", "close enough that their shoulders
+# knock when they breathe", "none of the three of them has moved a foot in a
+# quarter of an hour", "churned to a grey paste and it is holding", "He is not
+# doing anything clever and he is not trying to", "he was drilled at for
+# years", "to stay precisely where he was put", "beside men he will never have
+# to wonder about", "has come at this stretch four separate times", "exactly
+# one dream in his life that turned out to be a report", "every detail in it
+# arrived afterwards in the correct order", "the details he had spent a season
+# trying to prevent", "without checking it against a thing that is not there",
+# "He looks at the soft ground on his left and revises", "He looks at the
+# horse-lines and revises again", "a little later than the situation it
+# describes", "half of his attention is permanently occupied", "an afternoon he
+# cannot get back to and cannot use", "The men around him believe they are
+# watching him think", "what he was shown was never about today at all", "has
+# spent this entire afternoon questioning it anyway", "Twice a year, since long
+# before anybody put a sword in his hand, he burns", "somewhere with a great
+# deal of fire in it", "something enormous is moving through the fire on
+# purpose", "awake in the ordinary dark with the smell of it still on him", "He
+# has told two people in his life", "Neither was the slightest help", "he
+# cannot be hurried", "the men to either side of him have gone loud with it",
+# "working at precisely the rate he began at", "taking what is offered him,
+# declining what is not", "stepping over the ones already down without looking
+# down at them", "it is not the thing that is coming", "knows what the room
+# under his hall is for", "a good many of them know somebody who has been in
+# it", "he has never troubled to keep it as one", "He does the work himself,
+# without hurrying", "letting other people do it wastes half the effect", "the
+# arithmetic that frightened men do", "how far back it is, what the ground
+# behind is like, who is standing on it", "the people in front will probably
+# only kill him", "holding a stretch of mud that is no longer worth holding",
+# "a reason he spent years building into them", "to be followed for a different
+# reason today", "making certain that nobody would offer him one", "He killed a
+# man in a passage once, at night", "the business was found out inside a week",
+# "He has worn the word for it ever since", "nobody has ever let him set it
+# down", "because it would be a peculiar thing to say, is that he was good at
+# it", "Not the cruelty - there was none, it was over very quickly - but the
+# reading", "which way he would turn when he heard something", "in daylight, in
+# an enormous amount of noise", "against people who are trying to do it back to
+# him", "a fault in the line opposite, perhaps eight paces to his right", "it
+# comes open for less than a breath at a time", "He already knows which breath
+# he intends to use", "They carried him up here at dawn and set the chair down
+# where the ground is highest", "there is no other arrangement available",
+# "Everything he knows about war he still knows", "the twenty minutes in which
+# a man goes and looks", "His left is being cut apart", "get down there, put
+# his own face in front of theirs", "whether it is fear or ground or simply too
+# many of them", "So he sits above it, entirely upright", "being told things by
+# men who are out of breath", "are already a little out of date", "He has known
+# for some hours that it would not be", "the one thing he can still do from a
+# chair is refuse to be moved off it", "When he was eleven they walked him into
+# the surf", "held him there past struggling, past stillness", "until whatever
+# it is that argues about staying had finished arguing", "they hauled him out
+# and knelt on him and worked at him until the water came back up", "he does
+# not remember being frightened, which is the part nobody believes", "bleeding
+# from the forearm and from somewhere above the ear", "have begun to give way,
+# not all at once but in the way a bank does", "going into every gap they
+# leave", "the unhurried, thorough persistence of somebody", "has already
+# settled the largest question available", "the small remaining work of the
+# afternoon", "What is behind him is a faith. What is in front of him is only
+# weather", "He has been keeping the count without meaning to", "he could put a
+# year to each of them", "the one who was passed over", "the one whose brother
+# it was", "has never said a word about it and never needed to", "None of the
+# three is in front of him this afternoon", "That is not how these things
+# arrange themselves", "his own left folding inward at a rate he can measure",
+# "with a clarity he resents", "which of the three hears of it first", "He has
+# gone whole seasons without any of them crossing his mind", "It takes a man's
+# enemies out of storage, puts them in order", "There are three of them and he
+# knows within twenty paces where two are standing", "That is the entire
+# substance of it", "He is not braver than the man at his shoulder and he is
+# not stronger", "a piece of arithmetic done years ago and never since
+# revisited", "then three men stop whatever they are holding and come, and two
+# of them arrive", "he takes the step the line wants taking", "does not look
+# back to see whether it was taken with him", "A line follows the man at its
+# front once that man has stopped negotiating about it", "they are going one
+# way now, at one pace", "nobody needing to be told a thing twice", "Later he
+# will thank them or he will not", "it will alter nothing for any of the four",
+# "His competence is a real thing and all of it is filed somewhere else", "He
+# is good with ledgers, or with quiet men", "the part of a year that decides
+# whether anybody eats", "the seat he holds was given him for that and the
+# giving of it was correct", "Nobody consulted him about this afternoon",
+# "watching something he can describe with complete accuracy and cannot alter
+# by describing it", "the single instinct his whole working life has trained
+# into him", "never to spend a thing that cannot be got again", "So the line
+# does not go forward and it does not come back. It thickens", "shorter and
+# denser and much harder to shift", "He will not know for another hour",
+# "Knowing was never the part he was kept for", "He collected them the way
+# other men collect scars", "one in a household he was sent to and did not want
+# to be in", "one from a woman who believed she was teaching him something else
+# entirely", "one out of four winters of undiluted boredom", "Nobody has ever
+# suggested it was worth anything", "across forty paces of churned ground the
+# men opposite are talking to each other constantly", "none of it is meant for
+# him, and every word of it is arriving", "He repeats none of it to anybody",
+# "moves left before there is a visible reason to move left", "standing where
+# the weight is going to fall a moment before it falls", "he has been right
+# four times running", "hearing the shape of the next quarter of an hour while
+# everybody around him is hearing noise", "Give him a week and a river and he
+# will put an army across it", "he will tell you which course to strike and how
+# many days it takes", "he has been right to the day since he was thirty years
+# old", "None of that is what is being asked of him", "There is no wall", "a
+# slope, a great deal of open grass", "giving ground at a rate that is not a
+# rout yet", "the one thing left that still resembles his craft", "He keeps
+# them in their ranks", "moves men from where there are too many of them to
+# where there are too few", "arithmetic worked against a hillside", "a
+# structure coming apart rather faster than one careful man can hold it
+# together", "The footing is worse and the men are trying considerably harder",
+# "nobody has agreed to any rules", "it is the same problem it has always been.
+# Two arm's lengths", "A man's weight settling forward onto his front foot
+# before he swings", "The half-beat after a shield comes up", "He spent twenty
+# summers in churned sand learning to read precisely that", "three fingers'
+# worth of scars and a shoulder that warns him about rain", "never once the
+# useful accomplishment his people had hoped he was acquiring", "It is useful
+# now", "He is not fighting harder than the men to either side of him",
+# "arriving at the right answer eleven times in twelve while they arrive at it
+# seven", "across a quarter of an hour that gap is the whole afternoon", "There
+# are more seats in his own hand than one man was ever meant to keep", "there
+# was nobody left to hand it to", "each of them sensible on the day it
+# happened", "What arrives with a seat is a hall, a steward, a set of accounts
+# and a levy", "what a man gives back for it is his attention", "does not
+# divide as neatly as land does", "the muster came in short. Not empty",
+# "ground that has not seen the man whose name is on it in three years", "as a
+# thinness on his left where there should be none", "he can account for every
+# bit of it, and the account comes back to him", "He is a wide man", "remarked
+# upon at every table he has ever sat down at, always as a joke", "not one of
+# the men who made the joke ever put a shoulder into him", "Both are behind him
+# now and one of them is not getting up again", "supposed to show up once the
+# fighting has gone on a while", "still standing precisely where he started",
+# "still swinging the same heavy thing at the same unhurried rate", "The line
+# has quietly stopped trying to go round him and started forming up on him
+# instead", "There is a great deal of him and all of it is in the way", "Nobody
+# has ever said he was much of a soldier and he has never said it either",
+# "What he is good at is people", "which man has a sick wife and which one has
+# a brother he does not speak to", "he says the right thing at the right moment
+# without appearing to have chosen it", "leave four days later unable to say
+# why they no longer do", "None of that was ever meant to be load-bearing",
+# "the shouting has stopped meaning anything", "staying exactly where they are
+# for one reason, which is him. Not his orders", "It is the only thing that is
+# holding", "affection was never built to take this kind of weight for very
+# long", "Take him away from a fight and there is not much to look at", "a poor
+# talker and a worse manager, has never had an idea worth repeating", "a
+# hundred evenings of other men being interesting while he worked out what to
+# do with his hands", "The one thing he has ever been the best in a room at is
+# this", "men coming at him out of the press with no warning and no order to
+# any of it", "a scramble asks precisely one question and asks it over and
+# over", "He knows the answer. He has always known the answer", "For the length
+# of this hour, and no longer, the world wants exactly the thing he is best
+# at", "He was born with everything a man is supposed to want and none of the
+# things he is supposed to dread", "Tall, sound, clear-eyed, quick to
+# understand a thing said once", "a face that people trust before he has opened
+# his mouth", "Nothing was ever wrong with him", "concluding, without troubling
+# to check, that whatever was coming would be handled", "He is handling it.
+# That is the difficult part to explain afterwards", "made early, made on good
+# information", "the ground has gone on being lost at the same steady pace
+# regardless", "being well made and being enough are separate questions",
+# "nobody has ever asked him the second one until today", "closer kin than
+# anybody cares to say out loud", "It arrives ahead of him in a room", "the
+# thing men are careful not to mention and then mention anyway, three cups in",
+# "as a kindness or as a knife", "watched for the tremor, the stammer, the
+# thing they were all waiting to find", "coming out through a gash above the
+# knee and another one across the forearm", "running down into the mud the same
+# colour and the same speed as everybody else's", "The men who were careful not
+# to mention it are behind him, going where he goes", "There is a great deal of
+# him, and every part of it is real", "no two of them describe the same man,
+# and all of them are right", "That has been an asset for thirty years. It is
+# not one now", "each of the four things he is answered a different one first",
+# "one of them wanted to be certain, and one of them could not stand another
+# moment of not moving", "So he did all four, in order, each of them a little
+# late", "Every single decision was defensible on its own terms", "a man
+# arguing with himself in front of an audience that is dying while he does it",
+# "Nobody has ever needed a second sentence about him", "an entirely
+# uncomplicated man, no wit to speak of, no opinions worth having", "nothing
+# behind the eyes that anybody has ever wanted to hear more about", "In a hall
+# he is furniture", "he is the piece of the line that does not move", "the same
+# unremarkable person was still standing on it afterwards", "breathing hard,
+# waiting for the next lot", "not appearing to have had a thought about any of
+# it", "Complicated men are elsewhere doing complicated things", "This is what
+# the whole afternoon has been resting on", "it has been a peaceful holding",
+# "Rents collected, disputes heard", "two dry summers got through without
+# anybody starving", "in the way a man assumes the roof will hold", "he would
+# find it recognisable from the accounts of it", "Nothing had prepared him for
+# how loud it is", "the loudness never stops to let a man finish a thought",
+# "unable to see anything past the third rank", "old by the time they arrived
+# and wrong by the time he acted on them", "He is not a coward and he has not
+# run", "at the worst possible moment to discover it", "he learned from people
+# describing it afterwards", "He could name them in order if anybody asked",
+# "it is closer to an absence of surprise", "how long the shouting lasts before
+# it changes pitch", "what a line looks like a minute before it goes", "already
+# moving into the bend", "throw away exactly this by going at it too eagerly",
+# "Three of the words that describe him describe the man on the other side",
+# "he has known it since the heralds finished", "would occur to the man
+# opposite in the same order", "the proof of that is arriving in front of him
+# rank by rank", "He feints, and the feint is read", "he has always committed
+# late and it has always been the right instinct", "already standing where late
+# arrives", "There is no trick left that belongs to him alone", "assembled from
+# the same short list", "only beat one another with numbers or with ground",
+# "both went the other way before any of this started", "He has never met the
+# man commanding over there and does not need to", "done in a manner he finds
+# personally insulting", "the hoarding of good men", "the willingness to spend
+# an hour on a thing that wanted a minute", "drawn from opposite ends of
+# whatever list the gods keep", "that is not a figure of speech", "in exactly
+# the way that man never would", "without asking anybody first", "come along
+# because it is obvious", "there is a document, and the document is unusually
+# clear about him", "cannot raise a levy without his leave", "cannot take a
+# case anywhere but his hall", "the better part of forty years to get it
+# written that way", "it is the achievement of his life", "worth precisely
+# nothing here", "Nobody out in front of him has read it", "not a vassal to be
+# corrected", "faster than an order can travel", "which no clause anywhere
+# covers", "giving them has been the whole of the job", "traded the last of it
+# away for peace and coin", "a seat with no teeth in it", "answer when it suits
+# them", "settle their quarrels between themselves", "tell him afterwards if
+# they remember", "nothing is ever going to arrive because he is owed it", "go
+# and stand in front of and take", "very good at the standing part", "going has
+# always been the only method available to him", "the method works where people
+# can see it", "a great hall behind him with an expectation attached to it",
+# "has not met the expectation in some years", "The tapestries went first",
+# "then the second cook", "the roof over the west range", "still open to the
+# sky", "he has stopped mentioning", "the wages of men who wanted paying before
+# they would ride", "put a figure on every piece of it", "to the last coin",
+# "holding an exact price for it", "refuse to sit next to each other", "would
+# be worth what it cost if it took", "orders the next one anyway", "better than
+# he is and everybody, himself included, knows it", "the plate that comes out
+# for guests who were not expecting plate", "owed to a man standing where he
+# stands", "young enough to be told not to", "not respect exactly", "the habit
+# of being looked at", "already arranged so the eye finds him", "not minding
+# that it does", "having never once assumed they were not", "at the widest part
+# of it, where the most eyes are", "Being looked at and being useful are not
+# usually the same work", "put them in order without thinking", "all morning
+# without meaning to", "The eldest is nearly a man", "the smallest cannot walk
+# yet", "Somewhere under his breastbone", "a sum running that has nothing to do
+# with the field", "carried back instead of walking", "deal honestly with the
+# little ones", "which would quietly not", "step out ahead of it and be seen
+# doing it", "behind the second rank", "from a sensible distance", "nobody who
+# watched him today would call it that", "a man with less arranged behind him",
+# "not one anywhere in the middle of this line", "He is forty-six and there is
+# no one", "No smaller version of him being taught the grip", "hear about this
+# afternoon from a man who was standing here", "He settled a long time ago what
+# that means", "has to happen in the open", "close enough that other men can
+# see the whole of it", "he does not hoard himself", "at the sagging part of
+# the far line", "when he is opened along the arm he changes hands", "the gap
+# already twice the width it was", "The cut will scar", "ask him where he got
+# it", "why he could afford to take it", "arguing about a strip of pasture",
+# "eleven years", "knows the other man's steward by sight", "has drunk his wine
+# twice", "three of his runaway smallfolk", "without being asked to", "a bull
+# returned in kind", "two men and a table", "in one afternoon", "neither of the
+# original arguments", "That is not the worst of it", "taught him exactly how
+# the man thinks", "his opposite number has watched him make before", "over
+# smaller things", "in warmer rooms", "from his own gate on a clear day", "is
+# not his liege and never has been", "on the far bank of the same stream",
+# "whose strayed sheep have been walked back", "whose dogs have been cursed
+# at", "his harvest is late this year", "for the fourth time", "he gives none
+# of it back", "no drawn map could teach anybody", "which track turns to
+# porridge under rain", "where a horse can come up the bank", "the way a man
+# uses a room he grew up in", "without deciding to", "The line bends around
+# him", "He is forty-one and there is still a man alive", "who taught him to
+# hold a rein", "Nobody who has not had that arrangement understands it", "The
+# seat is his", "the men out here are his", "the choices of the last twenty
+# years", "underneath all of it sits the plain fact", "is breathing this
+# afternoon", "has opinions about how they turned out", "It is not that he
+# wants the approval", "He gave up wanting it a long while back", "mostly
+# believes himself when he says so", "the standard exists", "before he was old
+# enough to argue with it", "the ground here is soft", "the wing is folding",
+# "run out of ideas at exactly the hour", "went into the ground when he was
+# nineteen", "has mostly stopped turning it over", "His mother is another
+# matter", "she is sharp", "notices things across a room", "the only person
+# breathing", "what he was like before he was any of this", "the shape of the
+# fight changes twice inside a minute", "shield lower", "feet further apart",
+# "weight off the front foot", "the kind of adjustment a man makes without
+# thinking", "he settled in advance that he is going back", "would take the
+# loss badly and has already taken one", "There are five things a man is asked
+# to be", "he has always been worst at this one", "Nobody at home would call it
+# a failing", "He keeps accounts nobody has ever caught out", "have them leave
+# in one piece", "he has read more than the man who taught him to read", "None
+# of that is what is wanted out here", "the knack he has never had", "looking
+# at ground and men and daylight", "knowing which of the three runs out first",
+# "arriving as a fact rather than as a choice", "a company that should have
+# shifted a quarter of an hour ago", "being taken apart where it stands", "he
+# did not see it coming until it was already happening", "none of it is
+# concealed", "a plan sitting behind a plan", "never said one thing while
+# meaning a second", "knew something the rest did not", "a way of getting used
+# badly by cleverer people", "no part of him standing off to one side", "with
+# an eye on afterwards", "He is where he was put", "the fellow on his left
+# steps up", "he steps with him without being told", "the ground on his right
+# opens a little", "he shuts it instead of filling it with himself", "It is not
+# brilliance", "the whole of a man arriving in one place at one time", "worth a
+# good deal more out here than it ever was indoors", "signed what he signed",
+# "complained about it out loud", "for two decades", "a boy who is not called
+# what he is called", "every hedge he has had cut back", "every hard winter",
+# "under somebody else's name", "badly begun", "ground he would never have
+# picked", "the one part still left to him", "where the weight is coming down",
+# "stops trying to win anything at all", "smaller and colder business", "worse
+# than it has to be lost", "came apart while he stood there watching it", "came
+# to her house and not the other way about", "two hundred miles from here",
+# "hers before they are anybody's", "never once had to think about that", "bent
+# in the middle three times", "this time it has not come back", "the animal
+# under her", "one good run left in it", "into the bend before it can close",
+# "takes the whole wing with her", "intends to sit and watch her go alone",
+# "the space behind her fills up", "were holding a minute ago", "The horses
+# will pay for this tonight", "Every rider there knows it", "sit in a hall full
+# of men", "his face doing one thing", "in forty years he has never once
+# slipped", "There was somebody, a long while ago", "There has been nobody
+# since", "either half of that", "any use to him this afternoon", "the habit
+# underneath it", "four decades of working out what a room will bear", "before
+# he opens his mouth", "exactly as well on a hillside", "The left has gone
+# soft", "has seen that it has", "does not argue with the fact", "the thing it
+# cannot give him", "the thing it still can", "without explaining himself to
+# anybody", "not something he has ever done", "turned around by somebody",
+# "watched it happen to every friend he has", "understood not one minute of
+# it", "Nothing of that kind has ever reached him", "what he is missing",
+# "never once minded not knowing", "a very quiet head", "come apart at the
+# join", "between two of its companies", "the pace of a walking horse",
+# "competing for the room that fact needs", "at the speed he judged", "not a
+# stride faster", "hold the shape", "anything clever", "by the time the second
+# rank gets to it", "still not said a word", "It is in him somewhere", "has
+# never once shown", "Two men of his blood", "in front of a hall full of
+# people", "folded up inside him", "waiting to be asked for", "spent his life
+# listening to himself", "a thought arrives faster than a thought should",
+# "stops and turns it over", "forty-odd years", "nothing has ever come back
+# wrong", "the discipline he brings to a bad hour", "going backwards in good
+# order", "the ends folding in as the middle gives", "nobody turning to look
+# behind him", "not letting go of something that wants to go", "There is no
+# shouting from him at all", "afraid of hearing come out of his own mouth",
+# "The same thing sleeps in him", "when he was about fourteen", "over the
+# course of one afternoon", "sitting still and waiting on it", "perhaps an hour
+# of thought", "Not one man riding beside him knows", "it has never woken", "a
+# fair chance it never will", "no part of himself set aside for dread", "an
+# edge across the top of the shoulder", "does not change hands for it",
+# "somewhere he will find tonight", "gets his mail off", "bleeding in a steady
+# unhurried way", "the plain work of somebody", "put the worst of it on the
+# table", "getting along without that particular fear", "It has been a loud few
+# years", "The temples are full", "discuss very little else", "since the last
+# harvest", "by somebody who was nowhere near it", "about to hand them another
+# one", "how this afternoon is going to sound", "before the afternoon has even
+# finished", "he will not be there to answer", "a building he will not be
+# standing in", "who will nod along to it", "changes nothing whatever about the
+# hillside", "does not let it change him either", "what is actually left to
+# him", "two companies still in some kind of shape", "the distance across to
+# the trees", "how much daylight the far side has to spend", "the small correct
+# decisions", "in the order they want making", "with nothing on his face at
+# all", "certain to get repeated", "Hardly anybody has prayed about anything in
+# years", "The temples are cold", "barely keeps the roofs on", "whatever is
+# supposed to be up there", "longer than he can date", "the way a man is aware
+# of weather", "which is to say it does not come up", "the exact patch of
+# dirt", "nothing over his head to appeal to", "nothing on its way", "the
+# shield on his arm", "the shoulder pressed against his own", "the first to
+# give", "It keeps through the second push", "goes into it and stops dead",
+# "the far side has started to lean", "worth a good deal more than the dirt
+# is", "There are engines in his column", "there should not be", "to open a
+# wall that has not been reached yet", "the pace of the slowest ox on it", "the
+# far side has arrived early", "the whole of that timber", "where none of it
+# will fire once", "The teams go first", "Something in the noise", "the draught
+# animals", "take the traces with them", "a great deal of frame and rope",
+# "where his second rank wanted forming", "He works around it", "where the
+# frames are not", "gives up the width that costs him", "the same gap he has
+# just conceded", "put its weight into it", "does not look at the engines
+# again", "Looking at them costs time", "less of than men", "is not levy and it
+# is not hired", "Somebody's great-grandfather", "nobody in that line has
+# stopped since", "it shows inside the first minute", "they do not drift", "the
+# way a door moves", "never stood beside anything like it", "he stops fighting
+# the way he came here fighting", "working short and closed up", "one eye
+# behind him", "nothing committed", "the people either side of him might go",
+# "about a hundred heartbeats", "nothing behind him worth an eye", "He
+# lengthens", "steps into the strokes", "instead of leaning off them", "at the
+# pace that company sets", "which is not quick and does not stop", "in an
+# orderly way", "starts giving it in a hurry", "Three generations back", "a
+# thing left this family", "has never come home", "He knows precisely where it
+# sits", "whose wall it is on", "which room", "how many men stand between him",
+# "the arithmetic of it", "old enough to be told about it", "None of that is on
+# this hillside", "a rank that will not hold", "how much of himself to spend",
+# "another quarter of an hour", "He spends too much", "goes into the second
+# rank himself", "further in than a man carrying what he is carrying", "has any
+# business going", "the habit of reaching for something", "always just out of
+# reach", "does not switch off when the ground changes", "A point finds him
+# under the arm", "before he is pulled back out of it", "The rank gives
+# anyway", "his own blood coming warm down the inside of the sleeve", "doing
+# sums about daylight", "three days' ride from here", "His family is owed
+# something", "there is no road to it", "It went across water", "behind a door
+# nobody of his standing", "will ever be let through", "the plain fact he grew
+# up inside", "nothing can be done about it", "no claim to press", "nobody to
+# press it against", "handed down like furniture", "it is not where it
+# belongs", "carried it about with nowhere to put it", "comes apart directly in
+# front of him", "at last, somewhere to put it", "past the point where he ought
+# to have stopped", "three paces deeper than the man on his left", "working
+# with no economy whatever", "taking ground the way a man takes ground", "on a
+# worse afternoon it would have finished him", "the whole front comes in after
+# him", "The sacks went empty four days ago", "what a man could hold in one
+# fist", "He has known the figure to the day", "he is the sort who keeps the
+# tally", "the tally has done him no good whatever", "a number written down
+# twice a day", "does not turn into bread", "is standing on nothing", "which is
+# the part he did not expect", "into the notch where the ground drops away",
+# "takes the weight there with the rest of them", "on the same empty belly they
+# have", "the only thing he has left to give", "costs him nothing he still
+# owns", "The rank holds", "It also does not move, and cannot", "not moving is
+# now the entire extent of what he is able to do", "did not march out here for
+# a war", "They came for cattle and grain", "whatever else would lift", "the
+# shape of the whole morning", "men peeling off in twos", "towards a barn door
+# with a sack in hand", "the far side folds", "all that peeling off", "from a
+# nuisance into the difference", "between finishing this and making a mess of
+# it", "He does not go to the barn", "sets himself at the shoulder of the
+# fold", "holds the men either side of him straight", "the plain method of
+# being visibly straight himself", "repeating the same short order", "until it
+# stops being anything anyone hears", "becomes something their feet do without
+# troubling them", "The ones who wanted the barn stay", "What goes forward goes
+# forward as a line", "a scatter of thieves", "spent the afternoon failing to
+# take", "men who owe him everything have gone into arms against him", "he has
+# known it for weeks", "the smallest connection to that quarrel", "The men
+# opposite want no part of it", "would have marched out here regardless",
+# "fighting two things at once", "only one of them is in front of him", "how he
+# spends the afternoon", "he will not commit the reserve", "what he has left
+# for the other business", "a man keeping something back", "cannot at the same
+# time be pressing", "wanted weight behind it in the first hour", "did not get
+# any", "By the second it is bending", "He alters what he is doing", "each
+# alteration is a smaller version of the one before", "the whole shape of the
+# day", "an argument going on a fortnight's ride from here", "not badly made
+# and they are not badly led", "coming apart anyway", "it takes him some while
+# to work out why", "They keep looking sideways", "Not at him - at each other",
+# "at the ranks beside their own", "the way men look when they are not sure",
+# "the fellow on their flank", "will still be standing there in an hour", "back
+# where they come from", "taken up arms against the lord who brought them", "a
+# good number of these have kin in it", "So he does not press", "the pace of a
+# man laying a wall", "one course at a time", "taking a step where the step is
+# free", "none where it is not", "lets the looking-sideways do the work", "that
+# hurrying would have spoiled", "The line opposite opens along the seams", "it
+# carried onto the grass with it", "Something is already in motion", "against
+# the man on the far side", "nothing whatever to do with the afternoon", "set
+# going in a room", "months ago", "people who are not here", "another six
+# weeks", "come to nothing", "indifferent to what happens on this slope",
+# "aware of it the entire time", "That is the difficulty", "the orders a man in
+# his position gives", "a half-beat late", "busy with the other arithmetic",
+# "what today costs that", "whether he would prefer it so", "He settles none of
+# those questions", "quickly enough as well", "repeated along a line for two
+# hours", "is a hole", "When the hole finally shows", "belongs to somebody else
+# to fall into", "means to be rid of the man", "whose banner he is standing
+# under", "slowness is the whole merit of it", "meaning it has stopped feeling
+# like much", "prevents him from fighting for the man", "fighting extremely
+# well", "who believes people are one thing at a time", "change what he is
+# doing every few minutes", "without being told", "does precisely that",
+# "shortens where the footing narrows", "opens out where it widens", "gives
+# back a pace", "a bad patch of ground", "comes on again into the space it
+# leaves behind", "worth two of anyone near him", "still be worth two of them
+# next year", "when the slow thing arrives", "entitled to a dozen sworn men",
+# "ridden out with three", "dead, or ransomed", "never taken into the
+# household", "stops mattering the moment the horns go", "the work those men
+# would have done", "still wants doing", "nobody to hand it to", "a hub with
+# spokes", "he sees a fault", "he says a word", "closes it before it widens",
+# "there is no spoke", "So he goes himself", "slower coming back", "not quick
+# enough at all", "under the skirt of his mail", "finds the thigh", "stays in
+# the saddle", "the one part of it he manages well", "works down into his
+# boot", "put together well enough", "nothing behind them", "the way such
+# things are found out", "opening a fault in their front", "waiting to be
+# punished for it", "no punishment arrives", "On a proper field", "shut inside
+# a minute", "whoever the far lord keeps", "simply stays open", "he keeps going
+# into it", "a cut across the forearm", "does not locate until much later",
+# "neither slows him", "the one soft place on a line", "stop to take stock of
+# himself", "bleeding freely", "bends back off the crest", "the only thing
+# pushing on it", "nobody there to push back", "happening to his left", "being
+# done on purpose", "a man who was shown how", "There is a word for it
+# somewhere", "where old soldiers argue", "has never seen it worked", "each
+# part of it prepares the next", "the mark of a taught thing", "rather than a
+# lucky one", "the pressure comes off where he strengthens", "where he has just
+# thinned", "before he has finished thinning", "a method he cannot yet
+# describe", "somebody being outthought", "narrower and thicker", "refuse to be
+# shifted off it", "every yard he does not give", "the men who stand in the
+# paying place", "It holds", "Holding is the whole of what it does", "Nobody
+# above him has ever done this", "worked out years ago", "keep behind his
+# teeth", "drilled in it by somebody patient", "in a yard", "resented every
+# hour of it", "what his hands do when the shouting starts", "nothing arrives
+# that fits", "fits the field in general", "this twenty yards of it", "So he
+# obeys roughly", "underneath the obeying", "his own small patch of men",
+# "shields lapped the other way round", "the second rank standing closer than
+# feels right", "leaning very slightly into the slope", "It ought not to
+# matter", "It matters enormously", "folds the ranks either side of him",
+# "walked into a wall built by somebody who knew about walls", "He has been
+# called it since he was a young man", "not a thing anybody says to his face",
+# "which is worse", "everybody has agreed on it", "The far line knows it too",
+# "has been repeating it since the horns went", "the flat idiot chant", "when
+# they are not yet frightened", "carries up the slope perfectly well", "spent a
+# decade being careful", "people who would rather he were not", "never once
+# shifted the word", "he stops being careful", "He takes the middle himself",
+# "where he can be watched taking it", "past the point where forward stops
+# being an argument", "turns into an appetite", "the men who love him for it",
+# "a place with nothing behind it at all", "The word does not change", "It
+# simply acquires more to work with", "Men who have never stood beside him",
+# "what he is supposed to be", "which is a nuisance", "made true again in front
+# of every new set of eyes", "Nobody here says it aloud", "They do the other
+# thing", "leave a small clear space around him", "watch what he does with it",
+# "never in his life been able to leave such a space alone", "So he spends it",
+# "the joint where two of their companies meet", "on his own at first", "on his
+# own is quicker", "the men either side have worked out", "they were meant to
+# come as well", "three paces past where it was sensible to stop", "the way a
+# fire goes through a stable", "no plan whatever for afterwards", "It works
+# most times", "keeps on being true", "worked out what the man opposite", "the
+# first half hour", "by looking inward", "the same failing", "two different
+# sets of priests", "two different books", "the same short sentence", "men like
+# the pair of them", "foretell the far side beautifully", "where that man will
+# grasp", "where he will hurry", "spend something he ought to have kept",
+# "right about every one of them", "a fraction slower", "it is recognition", "a
+# slow sour business", "commits nothing he cannot take back", "probes where he
+# ought to lean", "Late in the day", "correct about everything", "got nothing
+# whatever out of being correct", "a hundred paces further up the field",
+# "never spent one moment thinking about him", "put into each of them by
+# different people", "in different halls", "both sets of people thought well of
+# it", "rarer than blood", "the man giving the orders", "the fourth rank", "the
+# same idea of what a well-spent hour looks like", "sounds like nothing at
+# all", "comes under pressure", "thirty times an hour", "between what feels
+# urgent and what is right", "takes the second one every time", "the same
+# direction his commander is taking it", "not one detail of the afternoon
+# discussed", "No signal passes", "None is required", "goes forward at the pace
+# of somebody in no hurry", "not yet been wrong about which foot goes next",
+# "five men in the ground because of him", "not guilt, it is procedure", "He
+# has done this before", "what has to be settled afterwards", "who has to be
+# paid", "will not accept payment", "under the noise he is already settling
+# it", "ranking the whole afternoon", "what it will cost to close", "what it
+# might still be worth", "his line is tidy", "His instructions are exact", "not
+# one of them is wrong", "half a step behind the field", "totting up what the
+# aftermath will take", "the middle of the thing", "where he is standing",
+# "walking away from him", "never put anybody in the ground", "in all the years
+# of carrying a shield", "somebody who has put five there", "the odd part",
+# "the count between them", "makes no difference whatever", "how the two of
+# them work", "does not flinch at the man's shadow", "looking for a sixth on
+# his behalf", "He does what he is told", "on the beat", "in the place he was
+# told to do it", "so unremarkable", "the ranks either side steady", "without
+# working out why", "a kind of steadiness", "being frightened of nothing", "a
+# better kind", "weighed a man honestly", "nothing in him to be frightened of",
+# "He has the second kind", "the ground in front of him", "further from where
+# it was", "behind his right shoulder", "which is where he put them", "quietly
+# rebuilding the whole day", "He does not say so", "would not say so under
+# torture", "every adjustment he makes", "a second reason underneath the first
+# one", "the same pair of lads", "this flank rather than that one", "the going
+# is kinder", "this pace rather than a quicker one", "a boy on a blown horse",
+# "this instruction given twice", "watching to see whether they had
+# understood", "sound taken singly", "a plan with a hole where its nerve ought
+# to be", "keeps finding the hole", "without ever once knowing it is there",
+# "nothing at all behind its right shoulder", "twelve years old", "useless in
+# the way all of them are useless", "paced out where the boy would stand", "far
+# enough back to be safe", "near enough to see everything", "the way he is
+# fighting", "Not harder", "Cleaner", "one he would be content to have copied",
+# "the wasteful ones have gone", "the flourish", "the extra step", "the
+# half-second spent being angry", "a shorter, duller and far more effective
+# version of him", "not showing off", "that is the opposite of this", "He is
+# demonstrating", "started doing it his way without being asked", "a thing done
+# slowly and correctly in front of you", "very hard not to imitate", "the men
+# either side of him", "a cause against that man", "the kind a court would hear
+# without laughing", "carrying it for years", "finding the season to spend it",
+# "He could have chosen the month", "the year his granary was full", "a day he
+# did not pick", "in a quarrel belonging to somebody above him", "the one man
+# alive", "a lawful right to come for", "on his own terms", "It sits under
+# everything he orders", "Not rage", "far too old for rage", "a slow,
+# distracting arithmetic", "how differently this might have gone", "while he
+# runs it", "slightly after the moment they were meant for", "slightly
+# overworked when they do", "is not overworking anything", "The man whose
+# orders he is taking", "owes him something", "he can say exactly what", "the
+# size of it", "the year it began", "the argument that would carry it",
+# "rehearsed that argument in the dark", "more times than he would ever admit
+# to", "he folded it up and put it away", "a debt is a thing you can take out
+# again unchanged", "a line that breaks cannot be taken out again", "So he
+# fights for him", "Properly, without reservation", "harder than men who are
+# owed nothing", "setting a grievance aside on purpose", "leaves the hands very
+# free", "complicated by wanting anything", "He will want it again soon
+# enough", "Not while this is still going on", "the strange effect", "forty-six
+# years old", "commanded in nine campaigns", "a particular way his shoulders
+# came up", "whose hand was on the far line", "they have not come down since",
+# "He knows exactly what that is worth", "It is worth nothing", "cannot get
+# within a quarter mile of him", "has no more men than he has", "a moderate
+# soldier", "the part of him that was nine", "is still nine", "quicker than he
+# is", "a half-step ahead of him", "it all goes out hot", "waiting feels like
+# being made to wait", "He answers pressure where it lands", "instead of where
+# it is going", "he is not fighting the far side at all", "standing behind a
+# boy in a doorway", "did not know the far side's hand at first", "what it was
+# frightened of", "the worse of the two", "he is the reason it ever learned to
+# be", "a smaller one in a hall", "none of it was large", "a shove going
+# through a doorway", "something wet put in a bed", "a word repeated until it
+# stuck to somebody", "not thought about a minute of it in twenty years", "in
+# the middle of a rank that is going forward", "extremely quiet and extremely
+# exact", "No shouting", "Nothing wasted", "as well as he has ever done
+# anything", "taking no pleasure in it whatever", "the part he cannot get
+# round", "the only apology available", "waiting to be let past", "and it is
+# not one", "an afternoon a long way back", "a knife and two palms", "no
+# witness who counted", "the pair of them meant it", "have gone on meaning it",
+# "the slightest use to anybody", "since the spring", "The line is bending",
+# "where it will go and roughly when", "not clever and he does not pretend it
+# is", "the worst of the bend", "stays there, and stays there", "long after the
+# arithmetic", "stopped agreeing with him", "It is not tactics", "Of all the
+# men alive", "whose watching he cannot have", "longer than it has any right
+# to", "costs more than it is worth", "two ways of saying the same thing",
+# "Somewhere behind his teeth", "doing the job properly", "would never have
+# asked this of him", "the one he swore with", "the swearing was no ceremony",
+# "a bad idea two young men had", "the end of a long night", "declined to be
+# embarrassed about", "the next twenty years", "The far line is opening now",
+# "first through the gap", "a man can mention afterwards", "He does not go
+# first", "the pace the men on either side of him", "can actually hold", "keeps
+# his dressing", "the way it needs to open", "the way it would look best
+# opening", "That is all of it", "Nobody will ever know he decided anything",
+# "an oath between equals", "useful to a man rather than impressive at him",
+# "never once been confused about which", "Everything that has happened in this
+# war", "happened because he paid for it", "The levies, the carts, the winter
+# fodder", "the smiths kept working", "past the point where it made any sense",
+# "out of one purse", "the purse was his", "came when they came", "went home
+# when they liked", "the ground is going wrong in front of him", "the only
+# sensible thing left", "give up the shape he has been holding", "stand in a
+# worse one", "will last longer", "It works for a while", "less well than he
+# needed", "already see the hour", "when it stops working at all", "What sits
+# badly is not the losing", "thought about carefully and often", "nobody to
+# divide it with", "A war fought by many men", "can be lost by many men", "a
+# single name written against every entry", "whatever gets written at the
+# bottom tonight", "under that same name", "has fought this war by himself",
+# "the far rank refuses to come apart", "out of his own stores", "no part of it
+# he has not touched", "the knight does not push", "He has an opening and he
+# lets it sit", "plants his feet", "gets his shoulder where it belongs",
+# "offers nothing to work with", "no forward lean to catch", "no hole behind
+# him", "no reason to hope", "seen what happens to men who hurry", "rewards
+# them for about a minute", "he holds, and goes on holding", "the weight of a
+# war", "carrying alone since the first thaw", "settles down onto that one
+# man", "a little further with every minute", "nobody spends being clever",
+# "There are more parties to this", "than he can hold in his head", "without
+# effort", "something slightly different out of the afternoon", "Some of them
+# are here", "Most of them are not", "All of them will hear about it", "he does
+# the sum properly", "every term of it in its place", "what the ground will
+# bear", "what his men have left in them", "what the far side is trying to
+# buy", "how much it is prepared to pay", "The sum comes out clean", "exactly
+# what it said an hour ago", "not winnable in the way anybody would like it
+# won", "He is right", "Being right is not the difficulty", "this many names on
+# it", "handed an unwelcome answer", "simply take it", "separately, to each of
+# them", "doing the arithmetic correctly", "like a man not trying", "Two names
+# in the whole business", "said a thing to another man", "the other man
+# answered it", "the world at large declined to have an opinion", "no favours
+# called in", "nobody arriving late to be thanked", "Two households and a
+# field", "He finds that clarifying", "no wider account to protect", "no third
+# party whose feelings", "when the far line gives", "without a scrap of the
+# caution", "a complicated war teaches a man", "things he would ordinarily
+# hoard", "wind, horse, the good arm", "the few seconds of surprise", "a man
+# gets exactly once", "spending all of them at once", "nothing to save them
+# for", "no one else's timetable to keep", "It is not restraint", "not trying
+# to be", "a quarrel small enough for two names", "small enough to be settled
+# for good", "do not come back in the spring".
+ bc_this_ground_is_already_in_other_hands_toast:0 "Somebody Else's Field"
+ bc_this_ground_is_already_in_other_hands_toast_desc:0 "The holding behind them changed hands before he ever got here and the men sitting in it are not his. He knows it the way a man knows a bad tooth. Everything today is being done on borrowed ground: the fodder is gone, the wells are watched, and the tracks he would want for shifting a wing are tracks somebody else has been using for a fortnight and knows better than he does. So he does it by the book instead. He forms clean, he gives each instruction to the man it belongs to in the order it belongs in, and the whole thing goes off as neatly as a drill on a summer morning. None of it helps. Doing it properly on ground that is not yours is a very tidy way to lose, and he can watch the tidiness of it from where he stands - each part correct, each part arriving a fraction after the moment that would have made it worth its price - while the holding behind him goes on belonging to somebody else.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_this_ground_is_being_stripped_while_they_fight_toast:0 "While The Barns Burn"
+ bc_knight_this_ground_is_being_stripped_while_they_fight_toast_desc:0 "They are winning and there is smoke in the wrong direction. Not off the fighting. Out past the treeline, where somebody's riders are working through the same county at their leisure, taking what they find and burning what they cannot carry, and none of it has the least connection to who wins here. He has been in the front rank long enough today to have another man's blood drying in the creases of his hand, and he is still going forward, hard, because forward is the only thing available to him. He is not going to catch riders. He knows that perfectly well. The whole shape of the afternoon is that the thing he can beat is standing directly in front of him and the thing that will actually cost this county its winter is four miles off and has never once been inside his reach. So he takes it out on what is to hand. It is not clever and it is extremely effective, and the men beside him have stopped asking why he will not stop for water.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
