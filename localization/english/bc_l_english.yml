@@ -3657,3 +3657,56 @@
 
  bc_knight_he_has_seen_a_household_stop_toast:0 "He Knows Which Parts Seize First"
  bc_knight_he_has_seen_a_household_stop_toast_desc:0 "He has been through the whole business once before and then built the entire apparatus a second time, which means he is the only man on this stretch who has watched from the inside as a house that was working stops working. Nobody plans for the second week. So the afternoon comes apart and he does the least stirring thing available to him: back one pace when the pace is called, shoulder still touching the shoulder beside him, and a flat refusal of every opportunity the day offers to make itself memorable. The rank goes backwards and does not open. He is not being careful with himself, exactly. He is being careful with a set of arrangements that only stay standing while he does.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-FOUR. The paper that is still good.
+#
+# NEITHER DESC MAY QUOTE THE DOCUMENT or put a single word of it on the page,
+# may not name the war that produced it, may not say which year it was signed
+# in, and may not say how long it has left to run. The engine holds that a
+# truce exists and nothing else.
+#
+# NEITHER MAY HAVE THE TWO MEN SEE EACH OTHER, meet, exchange a herald, parley,
+# or send anybody across. Both toasts happen at the distance a battle actually
+# has in it, which is too far to recognise a face.
+#
+# NEITHER MAY USE THE WORDS "irony", "absurd", "farce" or "sworn enemy". The
+# first three are the reader laughing at the situation from outside it, and the
+# fourth is exactly what neither of these men is - that is the entire subject.
+#
+# THE FIRST MAY NOT HAVE HIM CONSIDER BREAKING IT, may not have him be merciful
+# in so many words, may not have him give an order that a reader could copy,
+# may not have him feel good about himself, and may not turn the restraint into
+# a virtue. It is a calculation about a table in a year's time and it stays
+# one.
+#
+# THE SECOND MAY NOT DESCRIBE THE EARLIER BATTLE - no field, no weather, no
+# moment from it - may not say what the terms were, may not have him ransomed
+# or held on the page, may not have him warn anybody or be believed, may not
+# have him be resigned to dying, and may not let him be right about the future
+# in any specific way. He recognises a shape; he does not have information.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line".
+ bc_the_seals_are_still_wet_enough_toast:0 "Neither Of Them Declared Anything"
+ bc_the_seals_are_still_wet_enough_toast_desc:0 "In a chest at home there is a folded thing with two seals on it, and it has years left on it, and nothing happening on this field touches it - a third man opened this war and read out a list, and both their names were on it, at opposite ends. So the fighting is entirely real and so is the agreement, and holding the two of them in one head at the same time produces a very practical set of limits now that the day is going his way. He can have the field. He cannot have the afternoon that would feel best, because the afternoon that would feel best is one he would be sitting across a table explaining next spring, under those same seals, to the man he would have taken it from. It stops being a question of temper somewhere in the middle of the day and becomes a question of what is worth the table.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_has_read_these_terms_before_toast:0 "He Is The One Who Agreed To It"
+ bc_knight_he_has_read_these_terms_before_toast_desc:0 "Every other man along here is guessing what the far side will do next. He is not guessing, and it is worth nothing to him. He knows how that host moves once it has the shoulder, what it does with a flank that has started to bend, how long it keeps coming after the point where a reasonable host would stop. He knows because he was standing in the losing half of it once already and because he was in the room afterwards, dry-mouthed, while it was settled. None of that changes a single thing he can do about his own forty yards. It only means that where the men beside him are learning today as it happens, he is watching an itemised list he has seen before being read out again, and there is nothing to do with the knowledge except carry it.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -2325,3 +2325,46 @@ bc_he_buried_her_and_filled_the_place_trigger = {
 	is_married = yes
 	any_former_spouse = { is_alive = no }
 }
+
+
+# --- the paper that is still good --------------------------------------------
+#
+# `has_truce` RETURNED ZERO OVER THE WHOLE MOD. Ninety-three batches read what
+# two men are to each other by blood, faith, tongue, oath, land and wages, and
+# never once read the one thing they may have actually signed. A truce is the
+# only bond in the game that is a DOCUMENT: it has a term, it was agreed to by
+# both of them in a specific year over a specific defeat, and it is still in
+# force this afternoon.
+#
+# IT IS NOT A CONTRADICTION FOR THIS TO FIRE. A truce stops a man DECLARING a
+# war on the other; it does nothing about a war a third man declared and called
+# them both into on opposite sides. That is the whole moment: neither of them
+# chose today, both of them are keeping the letter of the thing that is in a
+# chest at home, and they are on a field together anyway.
+#
+# ONE TRIGGER, BOTH POOLS. It reads the scoped character against the far side's
+# commander and never touches `root`, which is exactly the property that makes
+# bc_the_ground_belongs_to_the_far_side_trigger usable from the knight file. A
+# commander asks it about himself; a knight asks it about himself. There is no
+# second trigger here because there would be nothing different in it.
+#
+# THE STANDARD GUARD. `enemy_side.side_commander` is an optional link - a side
+# can be leaderless - so the read sits inside a trigger_if whose limit repeats
+# the exists, per the mod-wide rule.
+#
+# `enemy_side`, NOT `var:bc_battle_foe`. The variable is written by
+# bc_battle_open_effect inside a moment's effect and does not exist during a
+# battle's first is_valid. Same reason as every other far-side gate.
+#
+# THE DIRECTION IS THE SCOPED MAN'S. The API is explicit that truces are one
+# way - the question is whether the SCOPED character cannot attack the target -
+# so this asks whether the paper binds him, not whether it binds the other man.
+# That is the correct direction for both moments: each is about a man keeping
+# something he agreed to.
+bc_the_truce_still_holds_across_the_field_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_truce = scope:combat_side.enemy_side.side_commander
+	}
+}

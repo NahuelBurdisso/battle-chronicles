@@ -9535,3 +9535,115 @@ bc_nothing_waiting_at_the_other_end = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-FOUR. The paper that is still good.
+#
+# `has_truce` returned zero over the whole mod. Ninety-three batches read what
+# two men are to each other by blood, faith, tongue, oath, land and wages, and
+# never once read the one thing they may have actually signed. A truce is the
+# only bond in the game that is a document, with a term and a year and a defeat
+# behind it, and it does not stop either of them being called into somebody
+# else's war on opposite sides.
+#
+# ONE TRIGGER SERVES BOTH POOLS because it never touches `root`. The two
+# moments below take the same fact and do completely different things with it,
+# and the pools roll separately, so they never compete for an afternoon.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# He is winning a battle against a man he is at peace with.
+#
+# `measured`/`up`. There is a document in a chest at home with both their seals
+# on it and a term on it that has years left to run, and nothing about today
+# breaks it, because neither of them declared anything - a third man did, and
+# called them from opposite ends of a list. The battle is real and the paper is
+# also real, and the arithmetic that follows from holding both of those at once
+# is what this moment is. It is going his way, so the arithmetic has teeth: he
+# is the one who gets to decide how far this goes, and every yard past the
+# necessary one is a yard he will be explaining across a table in a year, under
+# the same seals, to the same man. So it stays a battle rather than becoming a
+# settling. That is a reading rather than a thing the field did to the army,
+# which is what the KIND means, and the verb table hands out no modifier, which
+# is right: nobody's line is braced or bled by their commander remembering a
+# document.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads a truce and the side
+# row and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_the_old_grudge OR ANYTHING BUILT ON THE NEMESIS RELATION.
+# Those are built on a history of blood between two men and are hot. A truce is the opposite kind of
+# history: it is what got WRITTEN DOWN after the blood, it has a date on it, and
+# the whole point of this moment is that the writing is still working.
+#
+# THIS IS NOT ANY OF THE BOND-LADDER MOMENTS - kin, house, countryman, faith.
+# All of those read what two men ARE to each other, which nobody chose. This
+# reads the one thing they agreed to.
+#
+# THE DESC MAY NOT QUOTE THE DOCUMENT, may not name the war that produced it,
+# may not say which of them lost it, may not have him consider breaking it, may
+# not have a herald or a parley on the page, may not have the two of them see
+# each other, and may not make him merciful in so many words. See the loc
+# header.
+# ---------------------------------------------------------------------------
+bc_the_seals_are_still_wet_enough = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_truce_still_holds_across_the_field_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing exactly how far a won afternoon can be pushed is the same
+		# skill as knowing how far it must be.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = vengeful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_seals_are_still_wet_enough"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_seals_are_still_wet_enough_toast
+			desc = bc_the_seals_are_still_wet_enough_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

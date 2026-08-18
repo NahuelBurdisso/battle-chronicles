@@ -6972,3 +6972,104 @@ bc_knight_he_has_seen_a_household_stop = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He took this man's terms once. He is about to find out what they cost twice.
+#
+# `bloodied`/`down`. The paper is his: he is the one bound by it, which means
+# there was a war, and he was on the wrong end of it, and he sat somewhere with
+# a dry mouth while the terms were read out and then agreed to them. Everyone
+# else on this stretch is guessing about the man on the far side. He is not
+# guessing. He knows how that host moves in the last hour, what it does with a
+# broken flank, whether it takes men alive and what it charges for them, and
+# every one of those facts is arriving this afternoon in the same order it
+# arrived the first time. That is not foreknowledge doing him any good. It is a
+# bill he has seen before, itemised, being presented again, and the verb table
+# hands out bc_bloodied because the cost is going onto the army's account
+# through the men who are learning it for the first time.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a truce and the
+# side row and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_the_old_wound OR bc_knight_the_old_sword. Those read a
+# wound and a weapon and are about a man who has been in battles. This is about a man who has been in THIS battle, against THIS host,
+# and signed the ending of it.
+#
+# THE SAME GATE AS bc_the_seals_are_still_wet_enough AND A COMPLETELY DIFFERENT
+# ARGUMENT. That moment is a winning commander deciding how far a won afternoon
+# may be pushed when he will have to live beside the loser under the same
+# seals. This is a losing knight recognising the shape of an afternoon he has
+# already survived once. The two pools roll separately, so no field can produce
+# both.
+#
+# THE DESC MAY NOT DESCRIBE THE EARLIER BATTLE, may not name the war or the
+# field, may not say what the terms were, may not have him ransomed or
+# imprisoned on the page, may not have him meet or see the enemy commander, may
+# not have him warn anybody, and may not have him be resigned to dying. See the
+# loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_has_read_these_terms_before = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_truce_still_holds_across_the_field_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Recognising a host's habits from inside a line is a fighting man's
+		# skill and not a scholar's.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_read_these_terms_before"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_has_read_these_terms_before_toast
+				desc = bc_knight_he_has_read_these_terms_before_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
