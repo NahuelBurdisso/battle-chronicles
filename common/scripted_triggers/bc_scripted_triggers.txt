@@ -7937,3 +7937,74 @@ bc_the_least_of_him_is_what_today_wants_trigger = {
 bc_there_is_no_second_thought_in_him_trigger = {
 	lowest_skill = intrigue
 }
+
+# BATCH 184 - WHICH WAY THE MARRIAGE WAS WRITTEN.
+#
+# `matrilinear_marriage` AND `matrilinear_betrothal` BOTH RETURNED ZERO OVER
+# THE WHOLE TREE, and so did the word itself. Batch 88 opened marriage and
+# several batches have worked it since - who the marriage joined, what it
+# produced, whether it ended, whether the wife is close family to the man
+# commanding the other side. Every one of those reads the arrangement as a
+# thing that happened between two houses. None of them has ever read the one
+# clause of it that Westeros cares about most, which is whose name the
+# children get.
+#
+# THE DUMP AND AGOT'S OWN USE. `matrilinear_marriage` is "Is the marriage
+# with the spouse matrilinear?", character scope, yes/no. AGOT reads it bare
+# on a character beside a sex row at `events/mpo_chaotic_kurultai_succession
+# .txt:909-910`, which is `is_male = yes` followed by `matrilinear_marriage =
+# yes` - the exact form used below - and reads it eight more times from
+# inside a spouse iteration in `events/marriage_effect_events.txt`.
+#
+# THE KEY IS NOT A SECOND `is_married`. Batch 88's header records why a bare
+# `is_married = yes` is not a gate: it is nearly every landed man over
+# twenty. This is the narrow clause inside that arrangement, and it cannot be
+# true of an unmarried man at all, so it carries the marriage requirement
+# without spending it.
+#
+# THE SAME FLAG MEANS TWO DIFFERENT THINGS ABOUT THE TWO PEOPLE IT BINDS, AND
+# THAT IS WHY THE SEX ROW IS PART OF THE GATE RATHER THAN DECORATION. For the
+# man it means he handed over the thing a Westerosi man is raised to believe
+# is not his to hand over: his sons are hers, and whatever he does today is
+# written down against a name he was not born to. For the woman it means the
+# opposite - the line runs through her, her husband came to her house, and
+# the children out here in the world are hers before they are anybody's. One
+# clause, two facts, and no way to write either of them without the row that
+# says which of the two is standing on this field.
+#
+# THIS IS NOT bc_the_orders_are_taken. That template gates `is_female = yes`
+# and winning and is about a host that has stopped discussing the fact; it
+# reads sex and nothing else. This reads a clause in a marriage contract, and
+# the sex row is there to say which side of that clause the subject is on. A
+# woman who never married, or married the ordinary way, passes that template
+# and fails this one.
+#
+# THE LOSING ROW SITS ON THE MAN AND THE WINNING ROW ON THE WOMAN, WHICH IS
+# THE RULE THE HOST BLOCK AT bc_commander_phase_events.txt:4004 ALREADY SET.
+# A fact about a woman on a losing field becomes the host's explanation for
+# the defeat, and this mod does not write that sentence. A man who married
+# into his wife's line and is losing is not that sentence at all; the man
+# doing the judging in his case is himself.
+#
+# DISJOINT BY CONSTRUCTION. `is_male = yes` against `is_female = yes` on the
+# same clause. No negation is needed and none is written.
+#
+# RARITY. Both halves are thin and that is the point. Matrilinear marriage is
+# the arrangement a house accepts when it has no sons and will not let the
+# name stop, so it is uncommon everywhere and rarer still among the men who
+# end up leading a host. The second gate additionally needs a woman in the
+# knight line, which AGOT supplies from the North, the Iron Islands, Dorne
+# and beyond the Wall, and not from anywhere else.
+#
+# NEITHER TAKES A GUARD. Both rows are bare character-scope reads on a man or
+# a woman the caller has already entered, and an unmarried subject is a clean
+# no rather than an error.
+bc_his_sons_will_carry_her_name_trigger = {
+	is_male = yes
+	matrilinear_marriage = yes
+}
+
+bc_the_line_runs_through_her_trigger = {
+	is_female = yes
+	matrilinear_marriage = yes
+}
