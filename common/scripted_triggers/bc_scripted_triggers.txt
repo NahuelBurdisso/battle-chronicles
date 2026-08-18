@@ -10416,3 +10416,78 @@ bc_the_man_opposite_holds_three_that_way_trigger = {
 	}
 	NOT = { bc_he_holds_three_men_by_the_throat_trigger = yes }
 }
+
+
+# BATCH 216 - HOW MANY MEN UNDER HIM ARE BIG ENOUGH TO BE A PROBLEM.
+#
+# `number_of_powerful_vassals` RETURNED ZERO ACROSS THE WHOLE MOD, and so did
+# `any_powerful_vassal`, `random_powerful_vassal` and `any_powerful_family`.
+# Batch 193 named the key in its own census and then did not use it, which is
+# the closest this mod has ever come. What it does have is the weight pair -
+# whether one of his own great men is standing in the ranks, and whether he is
+# himself a great man of somebody else's realm - and both of those are about
+# ONE named man's standing. Neither counts.
+#
+# THE KEY IS AGOT'S OWN AND VANILLA'S BOTH. AGOT reads it in its own script
+# values at `common/script_values/00_agot_btw_maintenance_values.txt:280` and
+# at `common/script_values/00_agot_general_values.txt:225-226`, where it gates
+# a division and therefore has to be a real number rather than a flag. Vanilla
+# reads it twenty-two times, AGOT twenty, and the key carries a trigger
+# localization entry of its own at
+# `common/trigger_localization/00_character_triggers.txt:1411`, which the game
+# only writes for keys meant to be read out in a tooltip.
+#
+# FIVE IS THE BAR AND THE ENGINE CHOSE IT, NOT THIS MOD.
+# `NPowerfulVassal.NUM_PER_TIER` is `{ 0 0 3 4 5 5 5 }` in both trees'
+# `common/defines/00_defines.txt`, vanilla at :779-781 and AGOT at :870-872,
+# and it is the number of vassals the game will mark powerful according to the
+# primary title tier of the man they answer to. A landless man and a baron get
+# none of them, a count at most three, a duke at most four. FIVE IS ONLY
+# REACHABLE AT KING TIER OR ABOVE, and then only if he really has five vassals
+# worth the label - vanilla's own `tests/000_powerful_vassals.txt` walks the
+# ladder down from `= 5` at :27 to `= 1` at :43, so five is the top of it.
+# That is the whole point of the bar: this is not "he has vassals", it is "he
+# wears something with five men under it who could each be a war by
+# themselves".
+#
+# IT IS NOT THE WEIGHT PAIR AND NOT A SUPERSET OF IT. A man with five marked
+# vassals may have none of them on this field, which the first weight gate
+# requires; a man with three may have one of them standing in his line, which
+# this gate refuses. The two come apart in both directions, and they are
+# asking different questions anyway - the weight pair is about who owes whom,
+# this is about how many of those debts exist at once.
+#
+# THE SECOND GATE IS THE SAME FACT ABOUT THE MAN HE FOLLOWS, and it belongs in
+# the knight file only. The `NOT = { this = scope:combat_side.side_commander }`
+# row makes it unable to fire in the commander pool at all, because there root
+# IS the side commander and the gate would collapse into the first one. That is
+# batch 141's lesson written into the gate instead of left to the reader.
+#
+# GUARDS. The first gate reads a number off root and takes no guard. The second
+# walks `scope:combat_side.side_commander`, which is a character link, so it
+# takes the standing guard - the full-chain `exists` as a sibling and
+# everything else, the NOT included, nested in a trigger_if that repeats it.
+#
+# THE TWO POOLS ROLL SEPARATELY, batch 149's construction, so neither gate
+# denies the other. A knight who is himself a landed king would answer yes to
+# the first, but the first is only ever asked of the man commanding and the
+# second only of the man in the rank.
+#
+# RARITY. Kings and emperors are a small share of the men who end up running an
+# army in the field, most of the ones who do have fewer than five vassals large
+# enough to be marked, and each gate then wants its own man on the right side
+# of the day.
+bc_five_great_men_stand_under_him_trigger = {
+	number_of_powerful_vassals >= 5
+}
+
+bc_five_great_men_stand_under_the_man_he_follows_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		NOT = { this = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			number_of_powerful_vassals >= 5
+		}
+	}
+}
