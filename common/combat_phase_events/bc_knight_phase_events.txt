@@ -13710,3 +13710,67 @@ bc_knight_what_he_is_owed_is_out_of_reach = {
 		}
 	}
 }
+
+
+bc_knight_this_host_came_here_to_plunder = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_this_host_came_here_to_plunder_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a line together when every man in it would rather be at a
+		# barn door is a trade, and not many men out here have learned it.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = greedy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_this_host_came_here_to_plunder"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_this_host_came_here_to_plunder_toast
+				desc = bc_knight_this_host_came_here_to_plunder_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

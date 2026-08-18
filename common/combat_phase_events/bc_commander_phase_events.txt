@@ -15954,3 +15954,63 @@ bc_there_is_something_of_his_in_another_mans_hands = {
 		}
 	}
 }
+
+
+bc_the_column_under_him_is_starving = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_column_under_him_is_starving_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who keeps the tally of the sacks knows to the day how long he
+		# has, and knowing it does not put one loaf back in the carts.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_column_under_him_is_starving"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_column_under_him_is_starving_toast
+			desc = bc_the_column_under_him_is_starving_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -8354,3 +8354,79 @@ bc_what_he_is_owed_is_out_of_reach_trigger = {
 	has_any_artifact_claim = yes
 	NOT = { has_outstanding_artifact_claims = yes }
 }
+
+# BATCH 190 - WHAT THE HOST UNDER HIM IS RUNNING ON.
+#
+# CENSUS. `army_supply` appears three times in this mod and `supplies` twice,
+# and every one of the five is an ordinary English word inside a comment - a
+# toast that "supplies" a fact, the "ordinary supply of fear", a rung
+# "starving" the one above it. `commanding_army` appears exactly once, in
+# batch 149's header, noting that `is_commanding_army` returned zero.
+# `is_army_in_raid`, `forage`, `provision` and `victual` return nothing at all.
+# This mod has counted the host's men, its regiments, its rank, its ground and
+# its weather, and has never once asked what it is eating or why it came.
+#
+# BOTH KEYS ARE LIVE SCRIPT, NOT DUMP ENTRIES. AGOT writes
+# `scope:army = { army_supply <= 25 }` at
+# `events/agot_lmf_events/agot_lmf_army_events.txt:708` and again at `:4112`,
+# and `army_supply <= 50` at `:700`. `is_army_in_raid` is in AGOT's own
+# scripted triggers at `common/scripted_triggers/00_agot_lmf_triggers.txt:198`,
+# and it is read off the two armies of a battle at
+# `events/travel_events/travel_danger_events_joe.txt:921` and `:922`, which is
+# the exact situation these two gates sit in. The walk is precedented in
+# combat as well: `side_primary_participant.commanding_army = { ... }` is
+# written inside a combat event at `events/war_events/combat_events.txt:2545`,
+# and AGOT saves `commanding_army` off a character at
+# `events/agot_lmf_events/agot_lmf_army_events.txt:178`.
+#
+# THIS IS NOT BATCH 149. That batch read two numbers about a man's LANDS -
+# what he could raise and what he has raised - and both would read the same
+# in his own hall with no war on at all. These two are facts about the HOST
+# STANDING HERE: its larder and its errand. A great lord with everything
+# raised can be starving in the ninth week of a march, and a small one can
+# still be carrying full sacks on the second day. Neither number is anywhere
+# inside the other.
+#
+# DISJOINT BY CONSTRUCTION. The first wants supply at or under a quarter; the
+# second names a raid AND requires supply above a quarter, so no army alive
+# can satisfy both, and neither gate is a subset of the other. Batch 129
+# counted what one man keeps on his own books and batch 188 asked what kind of
+# company is standing on the field; neither of them touches the army's stores
+# or the reason it marched.
+#
+# GUARDS. This is a two-step walk that can end nowhere twice over -
+# `side_commander` is optional, and a commander need not be leading an army at
+# all - so both gates carry the full `exists` on the whole chain as a sibling
+# and repeat it inside the `trigger_if` limit before any read happens.
+#
+# RARITY. The first wants a column that has burned three quarters of its
+# stores, which happens to armies deep in hostile ground late in a campaign
+# and to nobody at home, and then wants that man leading and losing. The
+# second wants a host that came for plunder rather than for a war and got
+# caught at it - ironborn ashore, wildlings south of the Wall, a neighbour's
+# outriders run down among the fields - which is a small fraction of the
+# battles fought in Westeros and none at all of the ones fought over a throne.
+bc_the_column_under_him_is_starving_trigger = {
+	exists = scope:combat_side.side_commander.commanding_army
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander.commanding_army
+		}
+		scope:combat_side.side_commander.commanding_army = {
+			army_supply <= 25
+		}
+	}
+}
+
+bc_this_host_came_here_to_plunder_trigger = {
+	exists = scope:combat_side.side_commander.commanding_army
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander.commanding_army
+		}
+		scope:combat_side.side_commander.commanding_army = {
+			is_army_in_raid = yes
+			army_supply > 25
+		}
+	}
+}

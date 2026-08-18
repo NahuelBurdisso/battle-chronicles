@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 207 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 175 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 208 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 176 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and eighty-nine batches, one per row of the table below, none of which needed a
+One hundred and ninety batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -774,6 +774,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | how hot his faith is running this year | `fervor` returned zero over the whole tree, as a key and as a word. The mod has read faith a great deal and always in one of two ways - what his faith calls a sin or a virtue, which is the doctrine seam at `bc_scripted_triggers.txt:6730` and `:1946`, and whose ground he is standing on, which is `bc_knight_the_ground_under_him_belongs_to_the_faith` at `bc_knight_phase_events.txt:11255`. Both ask what the faith says; neither asks how loud it is saying it this year. The rungs are vanilla's own: the hunt pulse walks 75, 50, 25 at `hunt_pulse_actions.txt:1161`, `:1165` and `:1169`, and the block form is vanilla's too - `00_religious_interactions.txt:2114-2128` writes `scope:actor.faith = { fervor < 50 }` beside `scope:recipient.faith = { fervor >= 50 }`, and `:2124` writes `fervor <= 25`. AGOT keeps the dial live and turns it, calling `change_fervor` off a temple holding at `00_agot_monastery_buildings.txt:227-229`. A doctrine gate asks a fixed question about the rules he lives under and only changes answer when he changes faith; this is a number that moves without him doing anything and reads the same for every man of his faith on both sides of the field. The commander is losing in a year when the faith is at full voice and knows the afternoon is already spoken for; the knight is winning in a year when nothing is coming down from above, so what holds the ground is the man on either side of him. Disjoint by construction: one scalar, 75 against 25. | 2 templates, base 50, 80 |
 | what kind of company is standing on this field | `has_maa_of_type` returned zero over the whole tree, and so did `onager`, `mangonel`, `trebuchet` and `house_guard`. The mod read the men-at-arms system once, in batch 129, and counted it: `maa_regiments_count >= 4` and `= 0` at `bc_scripted_triggers.txt:4262` and `:4266`. How many is not what kind, and a count on one man's own books is not a type present anywhere on a side that may be six lords deep. The dump puts this trigger on the combat side rather than on the character, which is the useful half of it. AGOT uses it in a file of exactly this kind - `has_maa_of_type = scorpions` and `= water_wizards` at `00_commander_phase_events.txt:613` and `:623`, again at `combat_on_actions.txt:757` and twice in `00_agot_dragon_scripted_modifiers.txt` - and vanilla's own use is `combat_events.txt:2037`. The four type keys are AGOT's, from `00_maa_types.txt` at `:727`, `:925`, `:1119` and `:1249`. The commander is losing on a hillside with a siege train parked in it that was bought for a wall he never reached; the knight is winning beside a household company that only exists because somebody's dynasty finished five rungs of a legacy. Disjoint by construction: the second asks for the house guard and denies all three engines. | 2 templates, base 50, 80 |
 | the thing he is owed and has not got | The mod reads artifacts exactly once and only as possession: `bc_he_carries_valyrian_steel_trigger` at `bc_scripted_triggers.txt:1785` walks `any_equipped_character_artifact` and asks AGOT's own `agot_is_valyrian_steel_artifact` of what is on the man's belt. `has_any_artifact_claim`, `has_outstanding_artifact_claims`, `any_personal_claimed_artifact` and `any_house_claimed_artifact` were all at zero over the whole tree, and those are the questions about what he is owed rather than what he has. Both keys are vanilla's and AGOT ships both live: `has_any_artifact_claim = yes` opens the artifact casus belli at `01_ep1_wars.txt:8`, and `has_outstanding_artifact_claims = yes` gates four artifact interactions at `00_artifact_interactions.txt` `:1661`, `:2505`, `:3386` and `:4515` and AGOT's own Valyrian steel demand at `00_agot_valyrian_steel_interactions.txt:328`. The dump's own wording is the whole batch - "any artifact claims at all" against "any artifact claims that can be pressed" - so the commander is a man who could go and take the thing back and is instead losing a hillside, and the knight is a man whose family is owed something with no road to it at all. The cheap key is written first on both gates because the dump marks the second EXPENSIVE and these are asked every phase of every battle. Disjoint by construction: both need a claim, one requires it pressable and the other denies it. | 2 templates, base 50, 80 |
+| what the host under him is running on | The commander's own army, reached through `side_commander.commanding_army`, is asked two questions the mod had never put to it: how much is left in the carts (`army_supply <= 25`) and why it marched at all (`is_army_in_raid`). Batch 149 read what a man's lands could raise and had raised; these read the larder and the errand of the host actually standing here, which are facts about the campaign rather than the realm. Disjoint by construction: the first wants supply at or under a quarter, the second wants a raid with supply above a quarter. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -792,16 +793,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **four hundred and three**, its "3, 3, 4 and 3"
-are 68, 67, 68 and 33, and the fall-through set is one hundred and sixty-seven sites rather than
+plan 1's eighteen call sites are now **four hundred and five**, its "3, 3, 4 and 3"
+are 68, 68, 68 and 34, and the fall-through set is one hundred and sixty-seven sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 207, knight 175.** Weight against vanilla's
+**Template totals are now commander 208, knight 176.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and seventy-five templates against
-`knight_none`'s 2000 — one hundred and seventy-four at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and seventy-six templates against
+`knight_none`'s 2000 — one hundred and seventy-five at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
