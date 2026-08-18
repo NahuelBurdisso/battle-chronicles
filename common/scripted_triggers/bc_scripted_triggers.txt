@@ -7646,14 +7646,23 @@ bc_the_law_in_his_realm_is_a_courtesy_trigger = {
 	has_realm_law = crown_authority_0
 }
 
-# THE HALL HE KEEPS AND WHAT HIS RANK EXPECTS OF IT. The engine keeps two
-# numbers about a man's court. One is what the court actually is - the
-# grandeur it has earned from its rooms, its artifacts, its servants and the
-# amenities he pays to keep running. The other is what a man of his tier is
-# expected to keep, which rises with the titles and does not care how he came
-# by them. Most halls sit at the expected number, because a man notices when
-# his own roof embarrasses him and does something about it before anybody
-# says so out loud. The two gates below read the men on either side of that.
+# BATCH 179 - THE HALL HE KEEPS AND WHAT HIS RANK EXPECTS.
+#
+# THE COURT GRANDEUR SYSTEM RETURNED ZERO OVER THE MOD.
+# `court_grandeur_current` zero, `court_grandeur_current_level` zero,
+# `court_grandeur_base` zero, `court_grandeur_minimum_expected_level` zero. A
+# hundred and seventy-eight batches have asked what a man owns, what he is
+# owed and what he owes, and not one of them has asked what the place he
+# lives in looks like against what his rank is assumed to require.
+#
+# THE ENGINE KEEPS TWO NUMBERS ABOUT A MAN'S COURT. One is what the court
+# actually is - the grandeur it has earned from its rooms, its artifacts, its
+# servants and the amenities he pays to keep running. The other is what a man
+# of his tier is expected to keep, which rises with the titles and does not
+# care how he came by them. Most halls sit at the expected number, because a
+# man notices when his own roof embarrasses him and does something about it
+# before anybody says so out loud. The two gates below read the men on either
+# side of that.
 #
 # THIS IS NOT THE MONEY QUESTION AND NOT THE ARTIFACT QUESTION. What is in
 # his treasury is a number he can change this afternoon, and what hangs on
