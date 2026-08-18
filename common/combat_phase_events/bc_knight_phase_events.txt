@@ -8643,3 +8643,72 @@ bc_knight_none_of_his_arrangements_reach_this_far = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man on the far side answers to nobody, so there is no larger authority
+# that will tidy this up in a room afterwards. `wild`/`up` is the pair for a
+# day that has to be finished on the day: it grants the rung and it costs the
+# horses in the same breath, which is exactly what riding like that costs.
+bc_knight_nothing_about_today_will_be_settled_afterwards = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_opposite_answers_to_nobody_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The men who ride hardest at this are the ones who have
+		# understood soonest that there is no third party in it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = reckless
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_nothing_about_today_will_be_settled_afterwards"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_nothing_about_today_will_be_settled_afterwards_toast
+				desc = bc_knight_nothing_about_today_will_be_settled_afterwards_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

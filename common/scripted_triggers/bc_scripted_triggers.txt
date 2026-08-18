@@ -3471,3 +3471,65 @@ bc_the_years_are_going_into_the_dark_trigger = {
 		has_focus = intrigue_intimidation_focus
 	}
 }
+
+
+# --- who there is above him -------------------------------------------------
+#
+# THE MOD HAS READ RANK, TENURE AND WEIGHT AND HAS NEVER READ INDEPENDENCE.
+# `highest_held_title_tier` and `is_landed` carry the station batch,
+# `is_powerful_vassal` carries the weight batch, and all three of them describe
+# a man's position INSIDE a realm. `is_independent_ruler` was at zero
+# occurrences and asks the one question none of them asks: whether there is
+# anybody above him at all.
+#
+# THE NEAR MISS IS bc_facing_a_crown_trigger, which reads
+# `highest_held_title_tier >= tier_kingdom` on the far commander. Rank and
+# independence are not the same fact in either direction - a vassal king holds
+# tier_kingdom and answers to an emperor, and a merchant prince or a pirate
+# lord answers to nobody at all while holding nothing so grand. Neither gate
+# below is a subset of that one and it is not a subset of either.
+#
+# THE OTHER NEAR MISS IS bc_this_is_his_own_war_trigger, which asks who opened
+# the war this battle belongs to. A vassal can be the war leader of his own
+# rebellion while having a liege in the world; independence is about the map
+# and not about today.
+#
+# `is_landless_ruler` WAS CONSIDERED AS THE SECOND GATE AND REJECTED. It is
+# documented as "holds any title, but no on-map land", which makes it a strict
+# subset of the shipped `is_landed = no` on bc_commander_phase_events.txt:1928,
+# and a gate that is contained by a gate the mod already fires on is not a new
+# question. The pairing below is by direction instead.
+#
+# THE FIRST IS A COMMANDER-POOL GATE IN PRACTICE. A knight in somebody's line
+# is a courtier or a vassal and answers no to it almost always; there is no
+# harm in the knight pool asking, and no expectation that it will ever say yes.
+# The second is the reverse and works from either pool, because its subject is
+# the man on the other side and its only condition on root is a negative one.
+#
+# THEY ARE DISJOINT BY CONSTRUCTION. The second carries the exact negation of
+# the first, so a field where both commanders answer to nobody produces the
+# first and never the second, which is the correct precedence: being the man
+# with nobody above him is the larger fact about an afternoon than noticing it
+# about somebody else.
+#
+# RARITY. Most wars in this setting are fought between men who both have a
+# liege somewhere, and most of the men standing in the line have two or three
+# above them. Independence at the head of a battle is a minority case and the
+# second gate narrows it further by requiring that root is not in it.
+#
+# THE FIRST TAKES NO GUARD; the second takes the standing one, because an enemy
+# side can be leaderless.
+bc_there_is_nobody_above_him_trigger = {
+	is_independent_ruler = yes
+}
+
+bc_the_man_opposite_answers_to_nobody_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			is_independent_ruler = yes
+		}
+	}
+	NOT = { bc_there_is_nobody_above_him_trigger = yes }
+}

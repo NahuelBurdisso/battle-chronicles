@@ -5055,3 +5055,98 @@
 
  bc_knight_none_of_his_arrangements_reach_this_far_toast:0 "Everything He Is Good At Needs Quiet And Two People And He Has Neither"
  bc_knight_none_of_his_arrangements_reach_this_far_toast_desc:0 "The work he is actually good at wants two conditions this hedge cannot supply: time, and somebody willing to be alone with him. He has spent the better part of eleven years getting very accurate about how a thing is made to happen from the far side of a courtyard without the person who made it happen ever being the person seen, and the whole of that accuracy is worth nothing here, in a rank folding from the right at about the pace of a man walking. What is left him is the part he never practised. He has a sword because everybody has a sword. He knows the four things you are taught with it and he knows them the way you know words you have not said aloud since you were small — in sequence, without any sense that the sequence is going to help. The first man to reach him he manages. The second he manages worse and takes something across the forearm for it, high up, where the mail stops being generous, and the shock of it is less about the pain than about how ordinary the whole exchange was. After that it stops being anything he can influence. They arrive faster than he can account for them, and there is no room anywhere in the afternoon for the single kind of cleverness he owns.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 114 - who there is above him --------------------------------------
+#
+# NEITHER OF THESE TWO MAY NAME A REALM, a crown, a title, a seat, a house or a
+# place, and neither may use the words "independent", "sovereign", "vassal" or
+# "liege". The engine has already answered the question of who stands above
+# whom. Both pages are about what that answer does to an afternoon.
+#
+# NEITHER MAY PRODUCE A LETTER, a messenger, a rider coming in or a document of
+# any kind. The first is allowed its figure of speech in the title and nothing
+# on the page may cash it.
+#
+# NEITHER MAY USE THE WORDS "ransom", "quarter", "terms", "treaty" or
+# "surrender", and neither may have anybody consider giving in, being spared or
+# sparing. Both pages are about the absence of a third party, not about mercy.
+#
+# THE FIRST MAY NOT NEGOTIATE, may not rally, may not turn the line, may not
+# have him blame anybody living or dead, may not have him say anything aloud,
+# may not have him wounded, and may not end the day. It may not congratulate
+# him on noticing.
+#
+# THE SECOND MAY NOT REACH THE FAR COMMANDER, may not see him, may not kill or
+# take anybody, may not have root think about what he will be given for this,
+# may not have the horse die, and may not end the day.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life", "it comes from meals", "one notch harder than the
+# situation asked for", "in a hall in winter with the fire going", "a step
+# further back than they were", "the sensible, almost administrative urge",
+# "thirty paces along the same rank", "since before he was worth knowing",
+# "the second answer is worse than the first was", "a longer route than the
+# one he learned to trust", "impatience of a very specific and unusual kind",
+# "a hundred paces is not a distance worth counting", "personally offended him
+# by existing", "horses standing with their heads down", "stops being an item
+# and starts being a soldier", "a piece of paper with a life attached", "the
+# specific way you are kind to something valuable", "refuse to be the reason
+# it goes any faster", "a conversation he was not at", "already been talked
+# about somewhere he was not", "at the going rate", "a defeat with nothing in
+# it", "the part where a man can be seen", "whose going first would settle
+# anything", "it arrives at him sideways", "the quantity is now so small that
+# it can be held in the head", "the temperature of the standing", "stopped
+# containing any doubt", "the shape of fighting and the pace of work", "become
+# a direction", "anything on the other side of the question", "in good order,
+# which is the only creditable thing", "precisely where to put his hands",
+# "the smallest correct answer there is", "still has an army in it at dusk",
+# "he has always gone", "the way a horse tells you it has decided something",
+# "get shorter and heavier", "a room he will never see", "rules in it he has
+# not found yet", "what it does twice", "arranged to be worse than it looks",
+# "more of the field in his head", "somebody willing to be alone with him",
+# "from the far side of a courtyard", "where the mail stops being generous",
+# "the single kind of cleverness he owns".
+ bc_there_is_no_letter_that_would_help_toast:0 "He Has Been Nobody's Man All His Life And It Has Never Cost Him Anything Before"
+ bc_there_is_no_letter_that_would_help_toast_desc:0 "The thought turns up while the left is being pressed in for the second time, and it is not fear, and it is not new. He has always known there is nobody over him. It has been the quiet pleasure of his whole adult life, a thing he has enjoyed in a hundred small ways he would be embarrassed to list. What has changed is that the same sentence has stopped being a boast and become a description of his afternoon. There is nobody whose business this also is. Nobody with a larger interest than his own who might therefore be expected to spend men on it. No hand anywhere that is going to reach in from outside the hedge and alter the sum. So he alters what he is doing underneath the orders, which do not change and would not change if help were coming. What changes is the class of decision he is willing to make. He stops making the kind that are worth making if somebody arrives on Thursday — the ground held a little longer than it wants to be held, the line kept whole at the price of being thin — and starts making the other kind, the ones you make when the whole of the future available to you is the next two hours and the road behind. The men do not see any of this. To them he has simply got quieter and begun answering questions with one syllable.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_nothing_about_today_will_be_settled_afterwards_toast:0 "Whatever This Afternoon Turns Out To Be Worth Is Being Decided By People Who Are Currently Riding"
+ bc_knight_nothing_about_today_will_be_settled_afterwards_toast_desc:0 "The far side is moving and everybody along this stretch has worked out the same thing at about the same moment, without one of them putting it into a sentence: there is no room above this. No older men in a warm chamber in the autumn, weighing what happened here against three other things and calling it a draw. Nothing that happens today is going to be revised by anybody, because the man it would have to be revised with is the man they are chasing and he is the top of it. So it has to be all of it, and it has to be now, and every part of that lands on the horses. Root asks his for the third long effort in an hour and gets it, which is the trouble with a good one — a bad horse tells you no at the second and saves itself and you learn to hate it for that, and a good horse simply keeps producing what is asked until there is nothing behind the asking. He can feel the change in it under him, in the breathing first and then in the way it comes back to his leg a beat late, and he keeps going, because the alternative is a version of this that has to be done again in the spring.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

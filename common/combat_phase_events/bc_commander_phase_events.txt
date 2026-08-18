@@ -11199,3 +11199,69 @@ bc_he_learns_this_field_the_way_he_learns_anything_else = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# There is nobody above him, which is a fine thing on most days and today means
+# there is nobody to send for. `adapted`/`down` is a reading that changes and
+# an army that does not, and it deliberately hands out nothing, because what he
+# has worked out is not a manoeuvre.
+bc_there_is_no_letter_that_would_help = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_nobody_above_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who has spent his life arranging matters between
+		# himself and other men of his own standing notices faster
+		# than most when there is nobody left to arrange with.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_there_is_no_letter_that_would_help"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_there_is_no_letter_that_would_help_toast
+			desc = bc_there_is_no_letter_that_would_help_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
