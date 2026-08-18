@@ -574,7 +574,7 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". ONE HUNDRED AND
-# TWENTY of the three hundred and fifty-nine call sites are adapted or
+# TWENTY of the three hundred and sixty-one call sites are adapted or
 # measured - the five plan 1 shipped (bc_ground_favours_us, bc_lines_bogged_down
 # and the pop-up options .0001b, .0002b and .0003b) plus one hundred and
 # fifteen from later content batches - and every one of them is supposed to
@@ -597,10 +597,10 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at three hundred and fifty-nine call sites:
+# at three hundred and sixty-one call sites:
 #
-#   measured/down 30  bloodied/up 30   ordered/up 30     wild/down 30
-#   entrenched/up 30  bloodied/down 29  wild/up 30       adapted/up 30
+#   measured/down 30  bloodied/up 31   ordered/up 30     wild/down 30
+#   entrenched/up 30  bloodied/down 30  wild/up 30       adapted/up 30
 #   entrenched/down 30  ordered/down 30  measured/up 30  adapted/down 30
 #
 # The table's BEHAVIOUR has not changed as those cells filled - it never asked
@@ -634,9 +634,9 @@ bc_add_verb_effect = {
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
-# pair census above: bc_bloodied from 59 sites, bc_shieldwall from 60,
+# pair census above: bc_bloodied from 61 sites, bc_shieldwall from 60,
 # bc_spent_horse from 60, bc_pursuit from 30, and 150 falling through. Those five
-# sum to the three hundred and fifty-nine, which is the check.
+# sum to the three hundred and sixty-one, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

@@ -6937,3 +6937,86 @@ bc_he_has_done_the_work_himself_in_a_cellar_trigger = {
 bc_it_is_common_knowledge_that_he_killed_somebody_trigger = {
 	has_trait = murderer
 }
+
+# BATCH 168 - TWO BODIES SOMEBODY ELSE'S SCRIPT HAS ALREADY RULED ON.
+#
+# THE MOD READS INJURY CONSTANTLY AND HAS NEVER READ THE ONE THAT IS NOT AN
+# INJURY. `maimed`, `one_legged`, `one_eyed`, `disfigured`, `greyscale`, the
+# three `wounded` rungs and the physique ladders are all over both phase-event
+# files. `crippled` censuses at zero, and so does `drowned_man`.
+#
+# `crippled` IS A CATEGORY BOUNDARY IN THIS SETTING, NOT A WOUND. AGOT defines
+# it at `common/traits/00_agot_traits.txt:1462` as `category = health` with
+# `prowess = -30`, `martial = -3`, `diplomacy = -1`, `fertility = -0.5`,
+# `dread_baseline_add = -5`, `dread_loss_mult = 0.75` and `ai_energy = -20`.
+# Then it puts him inside `is_malformed_trigger`
+# (`common/scripted_triggers/00_agot_lmf_trait_triggers.txt:44`) next to
+# `dwarf`, `hunchbacked`, `inbred`, `albino`, `scaly`, `leper` and `scurvy`.
+# That is not a list of hurts. It is a list of things the world has decided a
+# man IS.
+#
+# AGOT'S OWN SCRIPT MAKES THIS A COMMANDER GATE AND THIS FILE DID NOT CHOOSE
+# IT. `agot_has_traits_preventing_knighthood_trigger`
+# (`common/scripted_triggers/00_agot_knighting_triggers.txt:2`) names
+# `crippled` at `:14`, in the same OR as `blind`, `one_legged`, `one_handed`,
+# `incapable`, `infirm` and all three `physique_bad` rungs, under the comment
+# "Simply having any of these traits will disqualify you from knighthood."
+# The knight half of this mod is closed to him by the setting itself.
+#
+# AND THE ENGINE STILL LETS HIM COMMAND, WHICH IS THE WHOLE TEMPLATE. There is
+# no `disables_combat_leadership` on this trait and no `incapacitating` line.
+# Compare `seclusion` at `common/traits/00_agot_lmf_traits.txt:1`, which
+# carries both. AGOT wrote a body that may not be knighted and may still be
+# handed an army, and this mod has never once said anything about that man.
+#
+# IT IS NOT A PROWESS ROW. The prowess rows ask how good a man is with a
+# weapon in his hand. `prowess = -30` does not answer that question badly, it
+# removes the question. Note also the two dread lines pointing the same way:
+# the engine's own reading is that such a man is harder to be frightened of and
+# then holds what fear he does get for longer than most.
+#
+# `drowned_man` IS THE OTHER HALF AND ITS DEFINITION CONTAINS A JOKE THE
+# CHRONICLE CAN USE. `common/traits/00_agot_traits.txt:1921`: `physical = no`,
+# `category = fame`, `same_faith_opinion = 10`, `clergy_opinion = 10`,
+# `monthly_piety = 1`, `prowess = 2`. The engine files it as NOT PHYSICAL. The
+# rite it records is holding a man under salt water until he stops and then
+# working him until he starts again, which is the most physical thing in the
+# whole trait file. The template is written into that gap.
+#
+# NOT BATCH 165'S ROW AND AGOT SAYS SO ITSELF. `order_member` is a man who
+# joined a fighting order and can lose it. This is a priesthood.
+# `remove_religious_traits_effect` at
+# `common/scripted_effects/00_agot_lmf_effects.txt:543` strips `order_member`
+# at `:567` and adds `broke_vows` in the same breath - and strips
+# `drowned_man` at `:550` and adds NOTHING. AGOT's own script holds that the
+# two offices are not the same kind of promise, and neither gate contains the
+# other.
+#
+# BOTH GRANTS ARE LIVE. `crippled` is added by
+# `events/agot_events/agot_dragon_slaying_events.txt:6334`,
+# `agot_religious_decision_events.txt:127` and
+# `events/agot_lmf_events/agot_lmf_lover_events.txt:13586`, and removed again
+# only behind a `heal_crippled` character flag at
+# `common/scripted_effects/00_agot_effects.txt:4439`. `drowned_man` comes from
+# `00_agot_effects.txt:499` and `:518`, from
+# `common/scripted_effects/00_agot_councillor_effects.txt:344`, and it is on
+# the map at start from `history/characters/00_agot_char_iron_islands.txt:557`.
+#
+# NOTHING FORBIDS ONE MAN FROM HOLDING BOTH AND NO NEGATION IS WRITTEN. The
+# rite is survivable and does not always leave a man whole. The two rows are
+# asked about two different men on two different sides and the pools roll
+# separately, so no single battle can claim both things about one person.
+#
+# RARITY. The first needs a specific catastrophe that AGOT hands out from three
+# places and takes back from almost none. The second needs a man of one faith,
+# holding one of its offices, who is also standing in a battle line.
+#
+# BOTH ARE ROOT-RELATIVE, BARE `has_trait`, NO WALK AND NO GUARD. The first is
+# read on the commander and the second on the knight.
+bc_his_body_gave_out_before_the_war_did_trigger = {
+	has_trait = crippled
+}
+
+bc_they_held_him_under_until_he_stopped_trigger = {
+	has_trait = drowned_man
+}
