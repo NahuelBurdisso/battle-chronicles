@@ -8290,3 +8290,67 @@ bc_the_house_guard_is_standing_here_trigger = {
 		}
 	}
 }
+
+
+# BATCH 189 - THE THING HE IS OWED AND HAS NOT GOT.
+#
+# THE MOD READS ARTIFACTS EXACTLY ONCE AND ONLY AS POSSESSION.
+# `bc_he_carries_valyrian_steel_trigger` at `:1785` walks
+# `any_equipped_character_artifact` and asks AGOT's own
+# `agot_is_valyrian_steel_artifact` of what is on the man's belt. That is a
+# question about what he HAS. `has_any_artifact_claim`,
+# `has_outstanding_artifact_claims`, `any_personal_claimed_artifact` and
+# `any_house_claimed_artifact` were all at zero occurrences over the whole
+# mod, and those are the questions about what he is OWED. In a world whose
+# swords have names and outlive the men who carry them, the mod has never once
+# looked at the empty scabbard.
+#
+# THE TWO KEYS ARE VANILLA'S AND AGOT SHIPS BOTH LIVE. `has_any_artifact_claim
+# = yes` is the first line of the artifact casus belli's
+# `allowed_for_character` block at `common/casus_belli_types/
+# 01_ep1_wars.txt:8`, in AGOT's copy as well as vanilla's.
+# `has_outstanding_artifact_claims = yes` gates four separate artifact
+# interactions at `common/character_interactions/00_artifact_interactions.txt`
+# `:1661`, `:2505`, `:3386` and `:4515`, and AGOT puts it on its OWN Valyrian
+# steel demand at `common/character_interactions/
+# 00_agot_valyrian_steel_interactions.txt:328`. That last one is the whole
+# argument for this batch in one line: AGOT built a bespoke interaction around
+# the idea that a man is owed a blade somebody else is wearing.
+#
+# THE DIFFERENCE BETWEEN THE TWO KEYS IS THE BATCH. The dump: the first is
+# "any artifact claims at all", the second is "any artifact claims that can be
+# pressed". A claim that cannot be pressed is a claim on something whose
+# holder is out of reach, or beyond a border, or nobody the engine will let
+# him move against. So the first gate is a man who could go and take the thing
+# back and has not, and the second is a man who is owed something and has no
+# road to it at all.
+#
+# THE CHEAP KEY IS WRITTEN FIRST ON BOTH GATES AND THAT ORDER IS DELIBERATE.
+# The dump marks `has_any_artifact_claim` CHEAP and
+# `has_outstanding_artifact_claims` EXPENSIVE, and these are combat phase
+# gates, asked of every candidate on every phase of every battle. Putting the
+# cheap key first means the expensive one is only ever reached for the small
+# number of men who hold a claim at all; for everybody else the row fails on
+# the first line. Do not reorder them.
+#
+# DISJOINT BY CONSTRUCTION. Both require a claim; the first requires that at
+# least one of them can be pressed and the second denies it. No character can
+# answer yes to both, and no negation of a whole gate is needed to say so.
+#
+# NEITHER TAKES A GUARD. Both are plain yes/no reads on the scoped character
+# with no scope walk in either, the same as `has_father` and `has_mother` in
+# batch 180.
+#
+# RARITY. Artifact claims are made by inheritance disputes, by theft, by a
+# holding changing hands with the contents still in it, and by AGOT's own
+# Valyrian steel machinery. They are real and they are not common, and the
+# split between pressable and not splits an already small set in two.
+bc_there_is_something_of_his_in_another_mans_hands_trigger = {
+	has_any_artifact_claim = yes
+	has_outstanding_artifact_claims = yes
+}
+
+bc_what_he_is_owed_is_out_of_reach_trigger = {
+	has_any_artifact_claim = yes
+	NOT = { has_outstanding_artifact_claims = yes }
+}

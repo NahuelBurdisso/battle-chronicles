@@ -13646,3 +13646,67 @@ bc_knight_the_house_guard_is_standing_here = {
 		}
 	}
 }
+
+
+bc_knight_what_he_is_owed_is_out_of_reach = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_what_he_is_owed_is_out_of_reach_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Nothing to press and nowhere to press it leaves a man with only one
+		# place to put any of that, and it is wherever he is standing.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = reckless
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_what_he_is_owed_is_out_of_reach"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_what_he_is_owed_is_out_of_reach_toast
+				desc = bc_knight_what_he_is_owed_is_out_of_reach_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
