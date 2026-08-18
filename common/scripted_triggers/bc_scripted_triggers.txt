@@ -8430,3 +8430,82 @@ bc_this_host_came_here_to_plunder_trigger = {
 		}
 	}
 }
+
+
+# BATCH 191 - THE OTHER WAR, THE ONE THAT IS NOT THIS ONE.
+#
+# CENSUS. `is_in_civil_war` returns zero across the whole mod. The word "civil
+# war" appears six times and every one of those is a comment about
+# `is_civil_war`, which is a different key on a different scope: it is read on
+# the war behind this combat by bc_war_is_a_rebellion_trigger at :964 and asks
+# whether THIS quarrel is a rising. `is_a_faction_member` and
+# `has_targeting_faction` at :2785 ask who is conspiring against whom, which
+# is a state of intent rather than a state of war. Nothing in the mod has ever
+# asked whether the man on this field has a second war going on somewhere else.
+#
+# THE KEY IS LIVE IN BOTH TREES. `is_in_civil_war = no` is written in vanilla
+# at `common/activities/activity_types/tour.txt:38` and `:45`, at
+# `common/character_interactions/06_ep3_interactions.txt:1845`, `:1849`,
+# `:7538` and `:7541`, and at
+# `common/character_interactions/06_ep3_scheme_interactions.txt:2187` and
+# `:2213`; AGOT ships the same lines at `tour.txt:45` and `:52`,
+# `06_ep3_interactions.txt:1909` and `:1913`, and
+# `06_ep3_scheme_interactions.txt:2266` and `:2292`. Character scope, plain
+# yes/no, no target.
+#
+# BOTH GATES DENY THAT THIS WAR IS THE CIVIL WAR, AND THAT IS THE WHOLE POINT.
+# `is_in_civil_war` on a man fighting in a rising would be true because of the
+# rising he is standing in, which would make it a strict superset of
+# bc_war_is_a_rebellion_trigger and worth nothing. Both gates therefore carry
+# the negation of `is_civil_war` on the war behind this combat, so what is left
+# is exactly the case that gate cannot see: an ordinary war between realms,
+# fought by a man who also has his own people in arms behind him.
+#
+# TWO DIFFERENT MEN, WHICH IS BATCH 149'S ARRANGEMENT. The first reads root,
+# who in the commander pool is the man the template is about. The second reads
+# the far side's commander, so it says something about the enemy rather than
+# about the man asking. Neither can be a subset of the other and the two pools
+# roll separately in any case.
+#
+# GUARDS. `combat_war` is optional and `enemy_side.side_commander` is optional,
+# so every read of either is nested in a `trigger_if` whose limit repeats the
+# `exists`, with the `exists` also standing as a sibling so that a missing
+# scope fails the gate instead of passing it vacuously. `is_in_civil_war` on
+# root is a bare character-scope test and needs no guard, and it is written
+# first in the first gate because it is the cheapest line in the block.
+#
+# RARITY. Both want a man carrying two wars at once, which is a specific and
+# unhappy condition: most lords fighting a neighbour are not simultaneously
+# being defied at home, and most men being defied at home have the sense not to
+# march out against anybody else while it lasts. The second wants that to be
+# true of the far commander while this side is winning, which is the shape of
+# a realm losing a battle it should have won.
+bc_he_has_another_rising_behind_him_trigger = {
+	is_in_civil_war = yes
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			NOT = { is_civil_war = yes }
+		}
+	}
+}
+
+bc_the_far_lord_has_a_rising_behind_him_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	exists = scope:combat_side.combat.combat_war
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			is_in_civil_war = yes
+		}
+	}
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.combat_war }
+		scope:combat_side.combat.combat_war = {
+			NOT = { is_civil_war = yes }
+		}
+	}
+}
