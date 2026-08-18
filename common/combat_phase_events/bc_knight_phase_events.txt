@@ -15621,3 +15621,67 @@ bc_knight_only_one_man_stands_sideways_of_him = {
 		}
 	}
 }
+
+
+bc_knight_he_has_three_living_sisters = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_has_three_living_sisters_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Three sisters is three households that will hear about this
+		# by winter, and he has always known exactly how that works.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_three_living_sisters"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_has_three_living_sisters_toast
+				desc = bc_knight_he_has_three_living_sisters_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -10715,3 +10715,86 @@ bc_only_one_man_stands_sideways_of_him_trigger = {
 		count = 1
 	}
 }
+
+
+# BATCH 220 - HOW MANY BROTHERS, AND HOW MANY SISTERS.
+#
+# CENSUS. `any_sibling` returned zero across the whole mod, and so did
+# `is_sibling_of`, `is_twin_of` and `num_of_relation_sibling`. The word
+# "sibling" occurs a hundred and nine times and the word "brother" a hundred
+# and seven, and every single one of those is prose inside a header or an
+# unrelated key such as a sworn brother of the Watch. Two hundred and nineteen
+# batches have counted a man's children and, last time out, his uncles and
+# cousins, and have never once counted the people he grew up beside.
+#
+# PRECEDENT. The iterator is one of the heaviest in either tree - a hundred and
+# ninety-nine occurrences in vanilla, three hundred and twenty-four in AGOT -
+# and the exact shape used here is vanilla's own. `common/character_
+# interactions/06_ep3_interactions.txt:4749` writes `any_sibling = { count >= 3
+# is_male = yes ... }`, and the same file writes the sex filter again at :4824
+# with `count = 0  is_male = yes`. A sex filter inside this iterator is quite
+# ordinary script: eighteen occurrences in vanilla and thirty-four in AGOT put
+# `is_male` or `is_female` inside the block. AGOT runs the iterator in its own
+# files too - common/character_interactions/00_agot_lmf_interactions.txt:891
+# and :941 filter siblings by trait and age, and
+# common/customizable_localization/00_agot_lmf_custom_loc.txt:910 and the lines
+# below it run a whole ladder of them - so this is AGOT's own vocabulary and
+# not merely an inherited key.
+#
+# THREE IS VANILLA'S BAR, NOT AN INVENTED ONE. `count >= 3` beside a sex filter
+# is written at 06_ep3_interactions.txt:4749 exactly. AGOT's own threshold
+# census over the same iterator runs `count = 0` six times, `count >= 2` four
+# times, `count = 3` three times and `count >= 3` and `count > 3` once each, so
+# three sits inside the range shipped script actually uses.
+#
+# WHAT THE TWO GATES ARE ASKING. The first is a man with three or more living
+# brothers, every one of whom is closer to his seat than anybody else alive, on
+# a field he is losing. The second is a man with three or more living sisters,
+# standing in the rank of a side that is winning.
+#
+# TWO FACTS, TWO MEN, AND NEITHER IS A THRESHOLD ON THE OTHER. This is the
+# terrain-band pattern rather than the two-keyword pattern: one iterator asked
+# two unrelated questions. A man can have four brothers and no sisters, four
+# sisters and no brothers, or four of each, so neither gate is a subset or a
+# superset of the other and neither carries a negation. The engine keeps them
+# apart regardless - the first is read on the man commanding, the second on a
+# man in the line, and the two pools roll separately, which is batch 149's
+# construction.
+#
+# IT IS NOT BATCH 180'S CHILDREN AND NOT BATCH 219'S SIDEWAYS KIN. Children are
+# the people who exist because of him; the extended family is uncles, aunts,
+# nephews, nieces and cousins, which the engine keeps as a separate list
+# entirely. Siblings are on neither list. A man with six children can be an
+# only child, and a man with nine cousins can have had no brother live past
+# infancy.
+#
+# IT IS NOT THE NEARLY-EXTINCT-HOUSE ROW EITHER, and neither gate is a subset
+# or a superset of it. That row counts living members of a dynasty, which
+# includes every cousin and great-uncle carrying the name; this counts one
+# generation of one household. A man can be the last of a great name and still
+# have three brothers, because three brothers and himself is four people and
+# the house may have lost forty.
+#
+# NEITHER TAKES A GUARD. Both are iterators, and an iterator over an empty list
+# is a clean no. Iterators are not links, and there is no dotted step anywhere
+# in this block.
+#
+# RARITY. Three living brothers at once wants a mother who bore four sons and a
+# household that kept them all alive through the fevers, the falls and the
+# first war each of them was old enough for, which is a real state and far from
+# the common one; the same is true of three living sisters, with the marriages
+# that scattered them working against it as well. Each gate then wants its own
+# man on the right side of the day.
+bc_he_has_three_living_brothers_trigger = {
+	any_sibling = {
+		count >= 3
+		is_male = yes
+	}
+}
+
+bc_he_has_three_living_sisters_trigger = {
+	any_sibling = {
+		count >= 3
+		is_female = yes
+	}
+}
