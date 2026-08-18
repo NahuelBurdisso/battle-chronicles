@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 180 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 148 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 181 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 149 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and sixty-two batches, one per row of the table below, none of which needed a
+One hundred and sixty-three batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -747,6 +747,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | what kind of vassal the engine has already decided he is | `has_vassal_stance` returned zero over the whole mod. The engine keeps, for every vassal, a running answer to the question of what the man wants out of serving you, and nothing here had ever asked for it. There are exactly four stances, each with a `score` block, and a vassal holds whichever one wins, so the glory hound and the parochial lord are disjoint by construction rather than by any negation written here. AGOT ships no vassal-stance folder of its own, so vanilla's four are the four in play. This is not the AI-personality rows: a threshold asks whether a number clears a bar, a stance asks which of four appetites is strongest in one man, and a moderately bold man with no compassion and no scruples tops the glory-hound list while a very bold kind one does not. A man with no liege has no stance, which is a clean no and needs no guard. | 2 templates, base 50, 80 |
 | what his people think a life is actually for | `has_cultural_pillar` returned zero over the whole mod; its single appearance was a line of header prose listing what the culture surface still had unread. The tradition pair asks how a people fights and batch 150 asks what two peoples make of each other, and neither has ever asked the one question the pillars answer, which is what a culture is FOR. A culture holds exactly one ethos, so bellicose against stoic is disjoint by construction - AGOT ships vanilla's seven ethos pillars plus five of its own, twelve in play, one per culture. Read inside `culture = { }` exactly as the tradition rows already are, and `culture` off a character takes no guard. Counted over AGOT's own culture files, twenty-seven of a hundred and fifty-nine cultures carry each of the two, which makes this deliberately the plainest fact in the batch: what is rare is not the culture, it is a moment where the culture is the thing worth saying. | 2 templates, base 50, 80 |
 | what his face has been doing for him since he was a boy | `has_trait_rank` and both beauty groups censused at zero over the whole mod, README included; the mod reads what a man is good at, what he believes, who he answers to and what the war has already done to him, and had never once asked what he looks like. Both rows are `rank >= 2`, which is the top two rungs of a three-rung ladder, and `>=` rather than `<=` because the engine counts "no trait" and "rank 0" as the same thing, so a `<` row would be true of every plain-faced man alive. The two ladders list each other in their `opposites` blocks, so nothing needs negating. The commander is a man whose orders arrive in the third rank as a rumour because nobody relaying them wanted to look at the source; the knight is the man the far end of the line has been steering by because his head carries at forty paces in bad light. | 2 templates, base 50, 80 |
+| the craft he has on a day that does not want it | No commander-category trait had ever appeared in an `is_valid` gate anywhere in the mod, which is a strange gap for a mod about battles: the mod hands ten of them out through the style and terrain award ladders and reads one, `winter_soldier`, in two `chance` rows, which is a weight rather than a gate. `logistician` and `reaver` censused at zero and were chosen precisely because neither ladder can ever award them, so both gates always describe a life the man had before he entered a chronicle rather than something this mod gave him three battles ago. The rungs of their XP tracks are deliberately not read - the question is whether the craft is in him, not how decorated he is. The commander is a quartermaster whose entire excellence finished a fortnight before the horns; the knight learned when a frightened body of men stops being one somewhere with no cause attached and nothing at stake but what could be carried away. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -765,16 +766,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and forty-nine**, its "3, 3, 4 and 3"
-are 58, 58, 58 and 30, and the fall-through set is one hundred and forty-five sites rather than
+plan 1's eighteen call sites are now **three hundred and fifty-one**, its "3, 3, 4 and 3"
+are 58, 58, 59 and 30, and the fall-through set is one hundred and forty-six sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 180, knight 148.** Weight against vanilla's
+**Template totals are now commander 181, knight 149.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and forty-eight templates against
-`knight_none`'s 2000 — one hundred and forty-seven at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and forty-nine templates against
+`knight_none`'s 2000 — one hundred and forty-eight at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

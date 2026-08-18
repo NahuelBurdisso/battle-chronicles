@@ -14359,3 +14359,62 @@ bc_they_have_never_liked_looking_at_him_and_today_it_costs_him = {
 		}
 	}
 }
+
+bc_the_part_he_is_good_at_finished_a_fortnight_ago = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_whole_craft_was_used_up_before_the_first_horn_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The better a man is at the arithmetic of an army, the faster he can
+		# work out that the arithmetic has stopped being the problem.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = diligent
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = lazy
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_part_he_is_good_at_finished_a_fortnight_ago"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast
+			desc = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

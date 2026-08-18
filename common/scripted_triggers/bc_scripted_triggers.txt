@@ -6581,3 +6581,61 @@ bc_men_have_been_staring_at_his_face_his_whole_life_trigger = {
 		rank >= 2
 	}
 }
+
+# BATCH 163 - THE CRAFT HE ACTUALLY HAS, ON A DAY THAT DOES NOT WANT IT.
+#
+# NO COMMANDER-CATEGORY TRAIT HAS EVER APPEARED IN AN `is_valid` GATE ANYWHERE
+# IN THIS MOD, which is a strange gap for a mod about battles. The mod HANDS
+# THEM OUT: bc_style_award_effect in `bc_reputation_effects.txt:128` awards
+# aggressive_attacker, unyielding_defender, flexible_leader, cautious_leader,
+# reckless and organizer off a style streak, and the terrain ladder below it
+# awards desert_warrior, rough_terrain_expert, winter_soldier and the rest off
+# a terrain streak. The only place one is ever READ is two `chance` rows on
+# winter_soldier, at `bc_knight_phase_events.txt:578` and `:5338`, and a chance
+# row is a weight, not a gate. `logistician` and `reaver` censused at zero over
+# the whole mod, README included.
+#
+# THESE TWO ARE OUTSIDE THE AWARD TABLES AND THAT IS THE WHOLE REASON THEY WERE
+# CHOSEN. Gating on aggressive_attacker or organizer would close a loop on
+# itself: this mod gives a commander the trait for fighting a certain way, and
+# would then start firing moments at him for holding a trait it handed him
+# three battles ago, which reads as the mod admiring its own bookkeeping.
+# Neither of the two traits below can be granted by anything in this mod, in
+# either ladder, so both gates are always a statement about a life the man had
+# before he ever entered a chronicle.
+#
+# BOTH ARE SHIPPED, BOTH ARE `category = commander`, AND NEITHER IS INVENTED.
+# AGOT's `common/traits/00_traits.txt` has `logistician` at `:13451` with
+# `category = commander`, `flag = commander_trait_flag`, `supply_duration` and
+# a pile of terrain attrition modifiers, and `reaver` at `:15373` with the same
+# category and flag, `raid_speed = 0.4` and `hostile_county_attrition = -0.3`.
+# Both carry XP tracks.
+#
+# THE TRACK IS DELIBERATELY NOT READ AND THIS IS NOT THE BEAUTY BATCH. Both
+# traits have rungs, and `has_trait_rank` would reach them. It is not asked
+# here, because the question is not how far along the ladder he is - it is
+# whether the craft is in him at all, and the first rung already means a man
+# who has spent years doing this specific thing. Reading the rung would turn a
+# statement about what a man is into a statement about how decorated he is.
+#
+# NOTHING FORBIDS ONE MAN FROM HOLDING BOTH AND NO NEGATION IS WRITTEN. The
+# commander traits are not `opposites` of each other - the mod's own note at
+# `bc_reputation_effects.txt:108` records that reckless and cautious_leader are
+# the only opposed pair among the twelve it can award, verified across the
+# whole of AGOT's trait file. So a man could be both a quartermaster and a
+# raider. The two rows below are asked about two different men on two different
+# sides, and the pools roll separately, so the overlap can never produce one
+# battle claiming both things about one person.
+#
+# RARITY. Commander traits arrive through lifestyle perks, education and a
+# narrow set of events, and most men who end up leading a wing of somebody
+# else's army have none of them at all. These are the two nobody takes on
+# purpose either: one is the reward for having been made responsible for feeding
+# an army, the other for having spent a decade taking things off people.
+bc_his_whole_craft_was_used_up_before_the_first_horn_trigger = {
+	has_trait = logistician
+}
+
+bc_he_learned_this_work_taking_things_off_people_trigger = {
+	has_trait = reaver
+}
