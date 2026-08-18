@@ -8781,3 +8781,72 @@ bc_knight_the_lesson_he_bought_only_works_one_way = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Everything his people know about war assumes you can leave, and this line
+# cannot. `wild`/`down` and bc_spent_horse: the animal is what gets used up
+# when a man keeps trying to make room in a place that has none.
+bc_knight_there_is_no_version_of_this_where_they_leave = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_people_do_not_usually_be_here_for_this_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The men who ride at the edges hardest, looking for the gap
+		# their whole way of war depends on, are the ones who are good
+		# enough to have always found one before.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = impatient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_there_is_no_version_of_this_where_they_leave"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_there_is_no_version_of_this_where_they_leave_toast
+				desc = bc_knight_there_is_no_version_of_this_where_they_leave_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

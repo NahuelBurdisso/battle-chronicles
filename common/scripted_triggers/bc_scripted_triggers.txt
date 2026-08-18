@@ -3584,3 +3584,49 @@ bc_he_paid_for_the_opposite_conviction_trigger = {
 	has_perk = never_back_down_perk
 	NOT = { bc_he_paid_to_know_how_to_go_backwards_trigger = yes }
 }
+
+
+# --- how his people fight, as opposed to who they are ------------------------
+#
+# THE MOD HAS ASKED WHO A MAN'S PEOPLE ARE THREE TIMES AND HAS NEVER ASKED HOW
+# THEY FIGHT. bc_he_is_free_folk_trigger and the westerosi wrapper name a
+# people; bc_foe_is_countryman_trigger asks whether two men share one. All
+# three are questions of identity. `has_cultural_tradition` was at zero
+# occurrences and asks a question of method, and the two are orthogonal - a
+# Westerosi culture can hold either of the traditions below and so can a
+# culture from anywhere else.
+#
+# THE TRIGGER IS CULTURE-SCOPED, NOT CHARACTER-SCOPED. The 1.19.0.6 dump gives
+# its form as `<culture> = { has_cultural_tradition = scope:tradition }`, so
+# both gates spell `culture = { ... }` around it, exactly as
+# bc_he_is_free_folk_trigger already does for agot_is_wildling_culture. A bare
+# `has_cultural_tradition` on a character would not be a narrower gate, it
+# would be a broken one.
+#
+# `culture` TAKES NO GUARD. Every character has one, and this file already
+# reads it unguarded in three places.
+#
+# THE TWO CHOSEN ARE VANILLA'S OWN MATCHED PAIR, tradition_stand_and_fight and
+# tradition_hit_and_run, at common/culture/traditions/00_combat_traditions.txt
+# :2516 and :2391 in AGOT's copy of the file. They are the two opposite answers
+# to the question of what a people does when it meets an army, which is what
+# makes them a pair here rather than two traditions picked for flavour.
+#
+# THEY ARE NOT ENGINE-EXCLUSIVE, which is why the second carries a negation.
+# AGOT's copy sets `is_shown = { always = yes }` on both and has commented out
+# the exclusivity clauses vanilla shipped, so a culture that acquired both
+# would answer yes twice. When it does, the standing tradition wins: this mod's
+# every moment happens inside a set-piece battle, which is the situation
+# tradition_stand_and_fight is about, and the raiding tradition describes what
+# those same people do on all the days they are not in one.
+#
+# RARITY. A culture holds a handful of traditions out of the several dozen it
+# could, and these are two specific ones out of the combat category alone.
+bc_his_people_meet_it_where_it_stands_trigger = {
+	culture = { has_cultural_tradition = tradition_stand_and_fight }
+}
+
+bc_his_people_do_not_usually_be_here_for_this_trigger = {
+	culture = { has_cultural_tradition = tradition_hit_and_run }
+	NOT = { bc_his_people_meet_it_where_it_stands_trigger = yes }
+}
