@@ -4970,3 +4970,74 @@ bc_that_arrangement_has_already_ended_trigger = {
 		count >= 1
 	}
 }
+
+# BATCH 140 - THE TWO APPETITES THAT ARE NOT COURAGE.
+#
+# Batch 131 opened the AI-personality surface and spent exactly one of the nine
+# attributes on it. `ai_boldness` has been read since; `ai_energy`, `ai_zeal`,
+# `ai_greed`, `ai_compassion`, `ai_honor`, `ai_rationality`, `ai_vengefulness`
+# and `ai_sociability` still return zero over the whole mod apart from the one
+# line of batch 131's own header that lists them. The engine keeps nine numbers
+# describing what a man wants and the mod reads one of them.
+#
+# THE SCALE AND THE THRESHOLDS COME FROM VANILLA, NOT FROM INVENTION. Vanilla's
+# `common/script_values/00_ai_values.txt:22-34` defines the whole ladder:
+# `very_low_positive_ai_value = 10`, `low_positive_ai_value = 20`,
+# `medium_positive_ai_value = 35`, `high_positive_ai_value = 50`,
+# `very_high_positive_ai_value = 75`, and the same six mirrored negative. Both
+# gates below are written against those constants rather than against raw
+# numbers, so if Paradox retunes the ladder these move with it.
+#
+# BOTH ATTRIBUTES ARE LIVE IN SHIPPED FILES. Vanilla reads `ai_zeal` at
+# `common/activities/activity_types/pilgrimage.txt:23` (`ai_zeal >= 100`, which
+# is above even the very-high constant) and again at `:593`, and weights
+# pilgrimage intents by it at `common/activities/intents/
+# pilgrimage_intents.txt:62`. `ai_compassion` is read at
+# `common/accolade_types/04_ep2_skilled_attributes.txt:755`, at
+# `common/activities/activity_types/local_examination.txt:977` and at
+# `common/activities/intents/shared_intents.txt:76`.
+#
+# ONE GUARD, ONE BARE READ, AND THE DIFFERENCE IS THE USUAL ONE. The first asks
+# the scoped character about himself, which needs nothing - whoever the template
+# scoped is standing right there. The second walks `side_commander`, which is a
+# genuinely optional link, so it carries the `exists` as a sibling and repeats
+# it inside the `trigger_if` limit before the number is read. The second is
+# named through `scope:combat_side` rather than `root` for batch 127's reason.
+#
+# THIS IS NOT BATCH 131'S PAIR AND IT IS NOT A THRESHOLD ON ITS NUMBER.
+# `ai_boldness` is how much risk a man will accept. Zeal is what he thinks the
+# day is FOR, and compassion is what he is willing to spend other people on.
+# A cautious man can be a zealot; a bold man can be kind. None of the three
+# implies either of the others, and none of these gates asks about boldness at
+# all, so no negation is required to keep them apart.
+#
+# THIS IS NOT THE TRAIT ROWS EITHER. No shipped gate anywhere in the mod reads
+# `zealous`, `cynical`, `compassionate` or `callous` - those four appear only as
+# weights inside `chance` blocks, which do not gate anything. A trait is a
+# binary the character sheet shows; these are the continuous numbers the AI
+# actually decides on, and a man can sit in either tail with none of the four
+# traits on him.
+#
+# TWO FACTS, TWO MEN. The first is what the scoped man himself believes he is
+# doing here. The second is what the man who gives him his orders is prepared to
+# do with him. Neither implies the other and neither is about the other's
+# number, so the pair carries no negation for the same reason batch 131's did
+# not.
+#
+# RARITY. The ladder is signed and most of the population sits near the middle,
+# so both tails are thin by construction; the first asks for the second-highest
+# rung of six and the second for the third-lowest, and the second additionally
+# requires the side to have a commander at all.
+bc_he_believes_this_more_than_the_men_beside_him_trigger = {
+	ai_zeal >= very_high_positive_ai_value
+}
+
+bc_the_man_giving_the_orders_will_spend_him_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			ai_compassion <= high_negative_ai_value
+		}
+	}
+}

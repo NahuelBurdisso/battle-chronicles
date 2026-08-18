@@ -13001,3 +13001,62 @@ bc_the_household_he_answers_to_is_larger_than_the_marriage = {
 		}
 	}
 }
+
+bc_the_reason_he_gives_is_not_the_reason_they_would_give = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_believes_this_more_than_the_men_beside_him_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having thought the larger question all the way through, and
+		# arriving at an answer nobody else in the line has arrived at.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_reason_he_gives_is_not_the_reason_they_would_give"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast
+			desc = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
