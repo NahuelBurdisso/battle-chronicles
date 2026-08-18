@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 184 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 152 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 185 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 153 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and sixty-six batches, one per row of the table below, none of which needed a
+One hundred and sixty-seven batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -751,6 +751,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | two marks another script put on a man | Every one of the mod's sixteen `has_character_modifier` call sites reads one of the mod's own `bc_` rungs; it had never read a modifier somebody else's script wrote onto a character. `agot_former_kingsguard` and `berserker` both censused at zero. The commander gate uses the MODIFIER and not AGOT's `former_kingsguard` trait, because that trait is only ever added inside `on_action/death.txt` - a gate written on it would have validated cleanly and never fired for a living man. It is the exact complement of `bc_is_kingsguard_trigger`, and not by convention: AGOT's dismissal block removes the `kingsguard` trait and adds this modifier in the same four lines. `berserker` is handed out by AGOT's own copy of this file family, in `00_knight_phase_events.txt`, and a hundred and fifty knight templates had never asked about it. | 2 templates, base 50, 80 |
 | vows broken and vows kept | `broke_vows` and `order_member` both censused at zero. The mod has read faith forty-three times and every reading was a count or a comparison - how many sins, how many virtues, whether the far side prays to something else - never a specific promise a specific man made out loud. Neither trait is a sin trait, so neither sits inside the `num_sinful_traits` gate; both are `category = fame` and both carry `inheritance_blocker = all`, shutting the same door on a man from opposite sides. The two are disjoint because AGOT's own `remove_religious_traits_effect` strips `order_member` and adds `broke_vows` in the same three lines, not because anything here negates anything. Both grant paths were verified live before either template was written, which after batch 164 is a step of the method rather than a lucky catch. | 2 templates, base 50, 80 |
 | the men who were shown something | The mod had never once read AGOT's magic. `greensight` and `dragon_dreams` both censused at zero across a hundred and sixty-five batches. The two definitions are nearly the same object with different ancestors - both `category = fame`, both `stress_gain_mult = 0.25`, both carrying a NEGATIVE `general_opinion` and a positive bonus from their own kind, which is why neither template lets the man be believed. Neither gate is a culture or faith row in disguise: `agot_birth_magic_traits_effect` is a `random_list` weighted 9949 to nothing, so the right ancestry is a prerequisite and almost never the outcome. And the birth roll only writes a dormant flag - the flag becomes a trait only when a hostile scheme is aimed at the sleeper and he foresees it. These gates read the trait, not the flag: a man who already dreamt true once and was proved right by events he could not stop. Two rarities multiplied, and the rarest pair in the file. | 2 templates, base 50, 80 |
+| the cellar and the passage | `torturer` and `murderer` both censused at zero, which is odd next to the shipped `tyranny` row - but tyranny is a running total of takings and neither of these is a total of anything. The two definitions could hardly be less alike: `torturer` is `category = lifestyle` carrying `dread_gain_mult`, prowess, levies and a scheme line, a set of capabilities; `murderer` is `category = fame` carrying `general_opinion = -15` and nothing else at all, a thing a man is called. Neither is the dread rows - `torturer` multiplies the RATE at which frightening acts become dread, so a man can hold it with a dread of nothing. `murderer` is the exact inverse of the secret rows and that is why it goes on a WINNING knight: `general_opinion` applies to everybody at once, so the men beside him are not discovering anything. `sadistic` stays where the mod already had it, in the chance block, because it is what a man enjoys rather than what he has done. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -769,16 +770,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and fifty-seven**, its "3, 3, 4 and 3"
-are 59, 59, 60 and 30, and the fall-through set is one hundred and forty-nine sites rather than
+plan 1's eighteen call sites are now **three hundred and fifty-nine**, its "3, 3, 4 and 3"
+are 59, 60, 60 and 30, and the fall-through set is one hundred and fifty sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 184, knight 152.** Weight against vanilla's
+**Template totals are now commander 185, knight 153.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and fifty-two templates against
-`knight_none`'s 2000 — one hundred and fifty-one at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and fifty-three templates against
+`knight_none`'s 2000 — one hundred and fifty-two at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

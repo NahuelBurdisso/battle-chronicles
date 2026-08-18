@@ -6863,3 +6863,77 @@ bc_he_was_shown_something_once_and_it_was_real_trigger = {
 bc_the_fire_in_his_sleep_belongs_to_his_blood_trigger = {
 	has_trait = dragon_dreams
 }
+
+# BATCH 167 - THE WORK HE DID WITH HIS OWN HANDS AND THE THING HE IS CALLED.
+#
+# `torturer` AND `murderer` BOTH CENSUS AT ZERO OVER THE WHOLE TREE, README
+# included. This is odd, because the file directly above already asks what a
+# man's own world has convicted him of and answers it with `tyranny`. Tyranny
+# is a running total of takings. Neither of these is a total of anything.
+#
+# THE TWO DEFINITIONS COULD NOT BE LESS ALIKE AND THAT IS WHY THEY PAIR.
+# `torturer` at `common/traits/00_traits.txt:1839` is `category = lifestyle`
+# with `dread_gain_mult = 0.5`, `prowess = 4`, `levy_size = 0.1`, an
+# `enemy_hostile_scheme_phase_duration_add`, `ai_honor = -30` and
+# `ai_vengefulness = 20`. It is a set of capabilities. `murderer` at `:12589`
+# is `category = fame` with `general_opinion = -15` and a negative ruler
+# designer cost and NOTHING ELSE - no skill, no dread, no scheme line. It gives
+# a man no power of any kind. It is purely a thing he is called.
+#
+# NEITHER IS THE DREAD ROWS AND NEITHER IS THE TYRANNY ROW. Dread is a feeling
+# in other people that decays the moment he stops feeding it, and this file
+# reads it about twenty times. `torturer` does not raise his dread; it
+# multiplies the RATE at which frightening acts convert into dread, which is a
+# statement about what he is willing to do rather than about how frightened
+# anybody currently is. A man can carry the trait with a dread of nothing,
+# having done the work quietly on people whose absence nobody noticed.
+#
+# `murderer` IS THE EXACT INVERSE OF THIS FILE'S SECRET ROWS, WHICH IS THE
+# POINT OF PUTTING IT ON A WINNING KNIGHT. A secret is a fact that has not got
+# out. `general_opinion = -15` means this one did: it is applied to everybody
+# in the world at once, with no proximity test and no expiry. The knight
+# template is built on that. The men beside him are not discovering anything.
+# They made their peace with it years ago and are standing next to him anyway.
+#
+# `sadistic` IS NOT THIS AND THE MOD ALREADY USES IT CORRECTLY. This mod reads
+# `sadistic` twice, both times as a `chance` modifier and never as a gate, and
+# that is the right split. `sadistic` is what a man ENJOYS. `torturer` is what
+# he has DONE, repeatedly, well enough for the game to write it down. The
+# commander template below keeps `sadistic` in the chance block for exactly the
+# reason it is already used that way and does not promote it into the gate.
+#
+# NEITHER GATE CONTAINS THE OTHER. The work in the cellar is lawful in most
+# realms and is done to men who are already prisoners; it does not require
+# having murdered anybody. And the corridor does not require having ever owned
+# a cellar. There is nothing to negate here and the two rows are asked about
+# two different men on two different sides in any case.
+#
+# BOTH GRANTS ARE LIVE. `torturer` arrives with the intrigue perk of the same
+# name - `common/scripted_effects/00_agot_character_history_perks_effects.txt`
+# `:1063` adds the perk and the trait in the same block - and also from
+# `00_agot_effects.txt:4234` (a wanderer random list), from
+# `00_agot_citadel_effects.txt:1282`, from
+# `events/agot_events/agot_ruins_events.txt:490` and from
+# `agot_scenario_defiance_of_duskendale_events.txt:120`. There is a weighted
+# roll for it in
+# `common/scripted_character_templates/00_agot_character_templates.txt:2307`.
+# `murderer` is written by the harm events when a killing lands and a killer is
+# attributed - `events/harm_events.txt:7628` and `:7710`, both inside a
+# `hidden_effect` beside `add_kinslayer_trait_or_nothing_effect` - and by
+# `events/agot_filler/00_agot_the_north_filler_events.txt:3273` and `:3425`,
+# `agot_targaryen_invasion_events.txt:2830`, `court_yearly_events.txt:3849` and
+# `common/character_interactions/00_agot_religious_interactions.txt:242`.
+#
+# RARITY. The first needs a man who spent a perk point on the work and then
+# kept doing it; the second needs a killing that both succeeded and was pinned
+# on him afterwards, which is two failures of a scheme rather than one.
+#
+# BOTH ARE ROOT-RELATIVE, BARE `has_trait`, NO WALK AND NO GUARD. The first is
+# read on the commander and the second on the knight.
+bc_he_has_done_the_work_himself_in_a_cellar_trigger = {
+	has_trait = torturer
+}
+
+bc_it_is_common_knowledge_that_he_killed_somebody_trigger = {
+	has_trait = murderer
+}
