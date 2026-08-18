@@ -4508,3 +4508,57 @@ bc_the_man_leading_him_is_a_gambler_trigger = {
 		}
 	}
 }
+
+# BATCH 132 - THE TWO STORIES A MAN CAN BE CARRYING ONTO A FIELD.
+#
+# `any_owned_story` returned zero over the whole mod. AGOT ships fifty-nine
+# story-cycle files and the mod had never asked whether either man in front of
+# it is in the middle of one.
+#
+# THE DUMP. `any_owned_story` is "Iterate through all owned stories for a
+# character", character scope, target story, and it takes an optional type
+# filter. `story_type` is "Is the story in scope of this type?", story scope.
+# AGOT reads exactly this form: `any_owned_story = { story_type = story_wear_face
+# ... }` at `common/character_interactions/00_agot_religious_interactions.txt:449`
+# and again in `common/on_action/agot_on_actions/agot_general_on_actions.txt:35`,
+# and the loan cycle is filtered the same way at
+# `common/scripted_effects/00_agot_banking_effects.txt:2130`.
+#
+# NEITHER GATE TAKES A GUARD. Both are iterators and an iterator over an empty
+# list is a clean no.
+#
+# ONE KEYWORD, TWO STORIES, TWO MEN, AND THE STORIES HAVE NOTHING TO DO WITH
+# EACH OTHER. This is the terrain-band pattern rather than the two-keyword
+# pattern: the same iterator asked about two entirely unrelated cycles. Neither
+# is a threshold on the other and neither implies the other, so neither carries
+# a negation.
+#
+# THE FIRST IS NOT THE DEBT ROWS. Every shipped money gate reads `gold`, which
+# is a purse - what is in his hands at this moment. A live loan is the opposite
+# state: a man who has just borrowed is CARRYING coin, and may read as wealthy
+# on every gate this mod already ships, while owing more than he has. The two
+# can be true together or separately and neither implies the other.
+#
+# THE SECOND IS NOT THE NICKNAME ROW OR THE SQUIRE ROW. Those ask what the line
+# knows about a man who is who he says he is. This asks about a man who is not,
+# and AGOT keeps that in a story rather than a trait precisely because it is a
+# process with a beginning and an end.
+#
+# RARITY. Loans are taken by lords who have run out of coin and are settled or
+# defaulted within a few years, so the state is real but transient and far from
+# universal. The second is rare by construction - it requires a very specific
+# and very expensive sequence to have happened to a very specific kind of
+# person - and it is meant to be. A line in which nobody is wearing somebody
+# else's face is the ordinary case, and the point of the row is the afternoon
+# where that is not true.
+bc_he_borrowed_to_pay_for_this_trigger = {
+	any_owned_story = {
+		story_type = story_agot_loan
+	}
+}
+
+bc_the_face_in_the_line_is_not_his_own_trigger = {
+	any_owned_story = {
+		story_type = story_wear_face
+	}
+}

@@ -12523,3 +12523,68 @@ bc_the_other_man_does_not_want_this = {
 		}
 	}
 }
+
+# Batch 132, commander half. He borrowed for this host, he is losing it, and the
+# thing coming apart in his head is the assumption that winning would have
+# settled the debt. `adapted`/`down` and a fall-through, which is exact - nothing
+# is being done to either army, what changes is what he understands the money to
+# have bought. `stewardship >= 12`, because the moment is a schedule of payments
+# read correctly under bad conditions.
+bc_the_schedule_does_not_care_who_wins = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_borrowed_to_pay_for_this_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A schedule of payments read correctly while the second rank is
+		# giving ground.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_schedule_does_not_care_who_wins"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_schedule_does_not_care_who_wins_toast
+			desc = bc_the_schedule_does_not_care_who_wins_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
