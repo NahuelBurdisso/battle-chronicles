@@ -4136,3 +4136,55 @@ bc_his_house_paid_for_getting_home_trigger = {
 		}
 	}
 }
+
+
+# --- the people in his hall who are not his -----------------------------------
+#
+# THE GUEST SYSTEM RETURNED ZERO OVER THE WHOLE MOD. `any_foreign_court_guest`
+# is zero, `is_foreign_court_guest` is zero, and so are the pool-guest forms. A
+# hundred and twenty-five batches have read who a man is related to, who he
+# employs, who he owes, who wants him dead and what his house bought before he
+# was born, and not one of them has read the simplest social fact about a
+# household: THAT SOME OF THE PEOPLE IN IT BELONG TO SOMEBODY ELSE.
+#
+# THE 1.19.0.6 DUMP is explicit about the distinction and it is the distinction
+# that makes this worth reading. `is_foreign_court_guest` - "Is the character a
+# guest from another court? In contrast to is_pool_guest the character has a
+# liege", yes/no, character scope. `any_foreign_court_guest` - "Iterate through
+# all guests visiting from another court (in contrast to pool_guest they have a
+# liege)", character scope, character target. A POOL GUEST IS NOBODY'S. A
+# FOREIGN COURT GUEST IS SOMEBODY'S, and the somebody is not the man whose bread
+# he is eating. That is the whole moment in both halves.
+#
+# BOTH ARE LIVE AND UNGUARDED IN AGOT. `is_foreign_court_guest = yes` at
+# `common/character_interactions/00_courtier_and_guest_interactions.txt:646` and
+# `00_agot_lmf_interactions.txt:2914`; `any_foreign_court_guest` at
+# `00_diarch_interactions.txt:1425` and `00_prison_interactions.txt:108`, both
+# of which vanilla also carries at the matching lines.
+#
+# NO GUARDS ON EITHER. The first is an iterator, and iterators are not links -
+# an empty hall is a clean no. The second is a plain yes/no read on the scoped
+# character with no link traversed at all.
+#
+# THE TWO GATES READ TWO DIFFERENT FACTS ABOUT TWO DIFFERENT MEN, so neither
+# carries a negation, on the same reasoning as the diarchy, memory and legacy
+# pairs. The first asks whether the man commanding here has strangers under his
+# roof. The second asks whether the man standing in this rank IS one, in
+# somebody else's. The engine keeps them apart structurally: the side commander
+# is not in the knight list and the pools roll separately.
+#
+# THIS IS NOT A COURT SIZE GATE AND NOT A HOSPITALITY GATE. It does not count
+# courtiers, it does not read wealth, grandeur or a royal court, and it says
+# nothing about how many people are in a hall. It reads one thing only, which is
+# whether any of them will be going home to report.
+#
+# RARITY. Guests arrive through a mechanic that most halls in most years are not
+# hosting, and the second half needs the guest to have been picked as a knight
+# on top of that.
+bc_there_are_strangers_eating_in_his_hall_trigger = {
+	any_foreign_court_guest = { count >= 1 }
+}
+
+bc_he_is_a_guest_in_the_hall_he_is_fighting_for_trigger = {
+	is_foreign_court_guest = yes
+}

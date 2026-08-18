@@ -9604,3 +9604,87 @@ bc_knight_the_fifteen_percent_nobody_can_see = {
 		}
 	}
 }
+
+
+# --- everything he wins today he has to carry -------------------------------
+#
+# GATE. bc_he_is_a_guest_in_the_hall_he_is_fighting_for_trigger, read on the
+# knight. He is winning.
+#
+# KIND. wild/up, so it takes bc_spent_horse on a winning side - the file's
+# pairing for a pursuit that has stopped being a formation. The argument earns
+# it directly: a man with a seat behind him has reasons to stop, and this one
+# has none, so he goes further than the men beside him and the horse under him
+# pays for the difference.
+#
+# WHAT THIS MAY NOT DO. It may not name his own lord, say where he is from, why
+# he is here, how long he has been here, or when he goes back. It may not have
+# him claim anything, be promised anything, or be spoken to about his position.
+# It may not reach the far commander, kill a named man, or end the day.
+#
+# SKILL. martial, because a man in this position has spent a great deal of time
+# thinking about how a reputation is actually assembled, and the answer is a
+# technical one that most men in a rank have never had to work out.
+bc_knight_everything_he_wins_today_he_has_to_carry = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_is_a_guest_in_the_hall_he_is_fighting_for_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing precisely which parts of an afternoon travel, and
+		# which parts stay in the field they happened in, is a
+		# professional question.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_everything_he_wins_today_he_has_to_carry"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_everything_he_wins_today_he_has_to_carry_toast
+				desc = bc_knight_everything_he_wins_today_he_has_to_carry_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

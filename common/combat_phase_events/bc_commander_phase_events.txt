@@ -12104,3 +12104,82 @@ bc_somebody_dead_already_paid_for_this_hour = {
 		}
 	}
 }
+
+
+# --- there are men under his roof who will describe this ----------------------
+#
+# GATE. bc_there_are_strangers_eating_in_his_hall_trigger, read on the
+# commander. He is losing.
+#
+# KIND. ordered/down, which falls through the verb table, and the pairing is
+# exactly what the ladder's own comment says it is for - a formation that keeps
+# its shape while going backwards. That is the whole content of the moment: the
+# afternoon is lost and the only remaining variable is the shape of the losing,
+# because the shape is the part that gets carried away and repeated.
+#
+# WHAT THIS MAY NOT DO. It may not name a guest, say whose man he is, where he
+# is from, what he thinks, or what he will say. It may not have anybody present
+# on the field who was not already on it. It may not withdraw, order a
+# withdrawal, rally, turn the day, or end the day.
+#
+# SKILL. diplomacy, because the entire subject of the moment is what a thing
+# looks like from outside, and the men who are good at that are good at it in a
+# hall long before they are any good at it in a field.
+bc_men_under_his_roof_who_will_describe_this = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_are_strangers_eating_in_his_hall_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Caring what a bad afternoon looks like from outside it is a
+		# hall-trained instinct arriving in the wrong building.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_men_under_his_roof_who_will_describe_this"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_men_under_his_roof_who_will_describe_this_toast
+			desc = bc_men_under_his_roof_who_will_describe_this_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
