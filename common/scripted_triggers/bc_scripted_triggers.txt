@@ -10204,3 +10204,83 @@ bc_this_war_is_about_who_owns_whom_trigger = {
 		}
 	}
 }
+
+
+# BATCH 213 - WHAT CONDITION THE THING IN HIS HAND IS IN.
+#
+# CENSUS. `artifact_durability` returns zero across the whole mod, and so do
+# `artifact_max_durability`, `is_equipped`, `artifact_type`, `is_unique` and
+# `has_artifact_modifier`. The word "artifact" appears forty-four times and
+# outside of comments it is exactly two things: the Valyrian steel pair at
+# :1785 and :1795, which asks what a man's gear is MADE OF, and the claim
+# pair at :8349 and :8354, which asks what gear he is OWED and cannot get to.
+# Nothing has ever asked what state the thing he is actually holding is in.
+#
+# NOT `num_artifact_kills`, WHICH WAS THE FIRST CANDIDATE ON THIS SCOPE. The
+# dump carries it - "How many kills has this artifact been used in?" - and it
+# would have been the better story, but two greps returned nothing: it has
+# ZERO live usages in vanilla and zero in AGOT. A key no shipped script reads
+# is a key with no observed behaviour to copy, and this file does not open one.
+#
+# THE BAR IS THE ENGINE'S OWN DEFINE AND BOTH TREES AGREE ON IT.
+# `ARTIFACT_VERY_LOW_DURABILITY = 5.0` sits in vanilla's
+# `common/defines/00_defines.txt:1481` and AGOT copies the same value forward
+# at `common/defines/00_defines.txt:1591`, alongside
+# `ARTIFACT_LOW_DURABILITY = 20.0`. Reading the define rather than writing 5
+# is the habit this file already has with `low_county_control` and
+# `high_county_control_limit`.
+#
+# PRECEDENT FOR THE COMPARISON IS THOROUGH IN BOTH TREES. Vanilla writes
+# `artifact_durability <= define:NInventory|ARTIFACT_LOW_DURABILITY` and the
+# VERY_LOW form in `common/character_interactions/00_artifact_interactions.txt`
+# at :366, :386 and :4773; the engine ships `on_artifact_durability_low` and
+# `on_artifact_durability_very_low` as on_actions in
+# `common/on_action/inventory_on_actions.txt:107` and `:122`. AGOT uses the
+# same comparison in a scripted trigger of its own authorship,
+# `at_is_worthless_artifact_trigger` at
+# `common/scripted_triggers/at_artifact_triggers.txt:62`, and again in
+# `common/scripted_effects/00_at_artifact_effects.txt:114` and `:122`. The
+# dump gives Supported Scopes: artifact, which is why both gates below spell
+# an iteration around the test rather than reading it on a character.
+#
+# `any_equipped_character_artifact`, NOT `any_character_artifact`, for the
+# reason the Valyrian pair gives at :1769: a sword in a vault at home is not
+# on this field, and a sword in a vault at home does not wear out in front of
+# anybody either.
+#
+# THE SHAPE IS THE VALYRIAN PAIR'S, EXACTLY. The first is root-relative and
+# takes no guard, because an iterator is not a link. The second reaches across
+# to the man opposite and carries the standing single `exists` on
+# `enemy_side.side_commander` as a sibling, repeated in the `trigger_if`.
+#
+# DISJOINT BY CONSTRUCTION, WHICH THE VALYRIAN PAIR DELIBERATELY IS NOT. That
+# pair lets both ends be true at once because two men carrying named steel is
+# an ordinary afternoon in this setting. Two men whose gear is five points off
+# breaking is not a picture either moment wants to share, so the second gate
+# carries `NOT = { <first gate> }`, which is the tie-break this file already
+# uses at :3963.
+#
+# RARITY. Most men on most fields carry nothing the engine calls an artifact
+# at all, and of those who do, the great majority carry something above the
+# low bar, let alone the very low one. Five points of durability is a thing
+# that has been carried through years without being taken to anybody who could
+# mend it - which is a fact about the man's household as much as about the
+# object.
+bc_the_thing_in_his_hand_is_nearly_done_trigger = {
+	any_equipped_character_artifact = {
+		artifact_durability <= define:NInventory|ARTIFACT_VERY_LOW_DURABILITY
+	}
+}
+
+bc_the_foe_is_fighting_with_a_ruin_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_equipped_character_artifact = {
+				artifact_durability <= define:NInventory|ARTIFACT_VERY_LOW_DURABILITY
+			}
+		}
+	}
+	NOT = { bc_the_thing_in_his_hand_is_nearly_done_trigger = yes }
+}

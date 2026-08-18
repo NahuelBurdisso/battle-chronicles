@@ -15173,3 +15173,67 @@ bc_knight_this_war_is_about_who_owns_whom = {
 		}
 	}
 }
+
+
+bc_knight_the_foe_is_fighting_with_a_ruin = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_foe_is_fighting_with_a_ruin_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Reading a man's gear before you read the man is a habit that
+		# takes years and saves a great deal of unnecessary courage.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_foe_is_fighting_with_a_ruin"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_foe_is_fighting_with_a_ruin_toast
+				desc = bc_knight_the_foe_is_fighting_with_a_ruin_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
