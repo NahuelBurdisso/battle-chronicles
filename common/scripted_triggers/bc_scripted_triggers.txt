@@ -9664,3 +9664,116 @@ bc_this_side_is_the_one_at_the_wall_trigger = {
 	}
 	NOT = { bc_the_enemy_is_already_at_a_wall_here_trigger = yes }
 }
+
+
+# BATCH 207 - WHETHER THE FAR SIDE MAKES WAR THE WAY HIS PEOPLE DO.
+#
+# CENSUS. `has_same_culture_martial_tradition`, `has_same_culture_language`,
+# `has_same_culture_heritage` and `has_same_culture_ethos` all return zero
+# across the whole mod. Culture is read in nine live places and every one of
+# them is one of three questions. Whether the far commander shares his culture
+# outright - `bc_foe_is_countryman_trigger` at :238, and the same comparison
+# again at :2456. Whether ONE culture holds ONE NAMED thing -
+# `has_cultural_tradition` at :3645 and :3649, `has_cultural_pillar` at :6531
+# and :6535, `agot_is_wildling_culture` at :1059, `agot_is_westerosi_culture`
+# at :1471. Or how the two peoples FEEL about each other - batch 150's
+# `cultural_acceptance` at :5792 and :5811. Nothing has ever asked whether two
+# different peoples happen to make war in the same way.
+#
+# THE KEY AND ITS FORM ARE VANILLA'S, AND AGOT SHIPS THE SAME FILE. On a
+# culture scope the key takes a culture target:
+# `common/decisions/10_culture_conversion_decisions.txt:74` writes
+# `capital_province.culture = { has_same_culture_martial_tradition =
+# root.culture }`, which is the dotted-target form both gates below use, and
+# AGOT ships that same decision with the same line at `:90`.
+# `events/culture_events/culture_notification_events.txt:105` and `:117` put
+# the key beside its three sisters inside a `calc_true_if`, and
+# `events/decisions_events/iberia_north_africa_events.txt:1667`, `:1925` and
+# `:1967` all write it negated, which is exactly what the second gate does.
+#
+# BOTH SIDES ARE NAMED THROUGH scope:combat_side AND NOT root. That is batch
+# 150's construction at :5791, reading off the same two culture scopes: inside
+# a scripted trigger there is no guarantee what root is, and naming both
+# commanders makes the gate mean what the two peoples LEADING this field do
+# with a war, which is a fact about the battle rather than about whichever man
+# happens to be scoped.
+#
+# BOTH GATES REQUIRE THE TWO CULTURES TO DIFFER, AND THAT CLAUSE IS NOT
+# DECORATION. Two men of one culture necessarily share a martial tradition, so
+# without it the first gate would be a strict SUPERSET of
+# `bc_foe_is_countryman_trigger` at :238 and would answer yes every time a
+# lord met his own neighbour. With it, neither gate can overlap the countryman
+# row at all, in either direction.
+#
+# DISJOINT BY CONSTRUCTION. The same pillar against not the same pillar, over
+# the same pair of cultures, with the identical difference clause on both.
+#
+# NOT THE NAMED-CUSTOM ROWS AND NOT BATCH 150. `:3645` and `:3649` ask whether
+# ONE culture holds ONE tradition out of the several dozen it could carry;
+# `:6531` and `:6535` ask which ETHOS pillar one culture was built with.
+# Martial tradition is a different pillar, and the question here is a
+# comparison rather than a lookup: two peoples can share this pillar and hold
+# no named tradition in common, and two peoples who both stand and fight can
+# have been given different pillars. Batch 150 at :5792 asks how the two
+# peoples FEEL about each other, which is a number that drifts with marriages
+# and campaigns; this asks how they FIGHT, which does not move at all unless a
+# culture is remade.
+#
+# GUARDS. The far side is a two-step walk, so both gates carry
+# `exists = scope:combat_side.side_commander`,
+# `exists = scope:combat_side.enemy_side` and
+# `exists = scope:combat_side.enemy_side.side_commander` as siblings and
+# repeat all three inside the `trigger_if` limit before any read, which is
+# what batch 150 does at :5782. `culture` itself takes no guard - every
+# character has one, and it is not an optional link the way `side_commander`
+# is.
+#
+# RARITY. Both gates want a battle between two different peoples, and most
+# wars in Westeros are not that: a rebellion, a succession or a border quarrel
+# usually puts the same culture on both sides of the field. Inside that
+# minority the first wants the two to have arrived at the same way of making
+# war regardless, and the second wants them not to have, and then one wants
+# the side losing and the other wants it winning.
+bc_the_far_people_make_war_the_way_his_do_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		NOT = {
+			scope:combat_side.side_commander = {
+				culture = scope:combat_side.enemy_side.side_commander.culture
+			}
+		}
+		scope:combat_side.side_commander.culture = {
+			has_same_culture_martial_tradition = scope:combat_side.enemy_side.side_commander.culture
+		}
+	}
+}
+
+bc_the_far_people_make_war_nothing_like_his_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		NOT = {
+			scope:combat_side.side_commander = {
+				culture = scope:combat_side.enemy_side.side_commander.culture
+			}
+		}
+		NOT = {
+			scope:combat_side.side_commander.culture = {
+				has_same_culture_martial_tradition = scope:combat_side.enemy_side.side_commander.culture
+			}
+		}
+	}
+}
