@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 182 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 150 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 183 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 151 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and sixty-four batches, one per row of the table below, none of which needed a
+One hundred and sixty-five batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -749,6 +749,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | what his face has been doing for him since he was a boy | `has_trait_rank` and both beauty groups censused at zero over the whole mod, README included; the mod reads what a man is good at, what he believes, who he answers to and what the war has already done to him, and had never once asked what he looks like. Both rows are `rank >= 2`, which is the top two rungs of a three-rung ladder, and `>=` rather than `<=` because the engine counts "no trait" and "rank 0" as the same thing, so a `<` row would be true of every plain-faced man alive. The two ladders list each other in their `opposites` blocks, so nothing needs negating. The commander is a man whose orders arrive in the third rank as a rumour because nobody relaying them wanted to look at the source; the knight is the man the far end of the line has been steering by because his head carries at forty paces in bad light. | 2 templates, base 50, 80 |
 | the craft he has on a day that does not want it | No commander-category trait had ever appeared in an `is_valid` gate anywhere in the mod, which is a strange gap for a mod about battles: the mod hands ten of them out through the style and terrain award ladders and reads one, `winter_soldier`, in two `chance` rows, which is a weight rather than a gate. `logistician` and `reaver` censused at zero and were chosen precisely because neither ladder can ever award them, so both gates always describe a life the man had before he entered a chronicle rather than something this mod gave him three battles ago. The rungs of their XP tracks are deliberately not read - the question is whether the craft is in him, not how decorated he is. The commander is a quartermaster whose entire excellence finished a fortnight before the horns; the knight learned when a frightened body of men stops being one somewhere with no cause attached and nothing at stake but what could be carried away. | 2 templates, base 50, 80 |
 | two marks another script put on a man | Every one of the mod's sixteen `has_character_modifier` call sites reads one of the mod's own `bc_` rungs; it had never read a modifier somebody else's script wrote onto a character. `agot_former_kingsguard` and `berserker` both censused at zero. The commander gate uses the MODIFIER and not AGOT's `former_kingsguard` trait, because that trait is only ever added inside `on_action/death.txt` - a gate written on it would have validated cleanly and never fired for a living man. It is the exact complement of `bc_is_kingsguard_trigger`, and not by convention: AGOT's dismissal block removes the `kingsguard` trait and adds this modifier in the same four lines. `berserker` is handed out by AGOT's own copy of this file family, in `00_knight_phase_events.txt`, and a hundred and fifty knight templates had never asked about it. | 2 templates, base 50, 80 |
+| vows broken and vows kept | `broke_vows` and `order_member` both censused at zero. The mod has read faith forty-three times and every reading was a count or a comparison - how many sins, how many virtues, whether the far side prays to something else - never a specific promise a specific man made out loud. Neither trait is a sin trait, so neither sits inside the `num_sinful_traits` gate; both are `category = fame` and both carry `inheritance_blocker = all`, shutting the same door on a man from opposite sides. The two are disjoint because AGOT's own `remove_religious_traits_effect` strips `order_member` and adds `broke_vows` in the same three lines, not because anything here negates anything. Both grant paths were verified live before either template was written, which after batch 164 is a step of the method rather than a lucky catch. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -767,16 +768,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and fifty-three**, its "3, 3, 4 and 3"
-are 59, 58, 59 and 30, and the fall-through set is one hundred and forty-seven sites rather than
+plan 1's eighteen call sites are now **three hundred and fifty-five**, its "3, 3, 4 and 3"
+are 59, 59, 60 and 30, and the fall-through set is one hundred and forty-seven sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 182, knight 150.** Weight against vanilla's
+**Template totals are now commander 183, knight 151.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and fifty templates against
-`knight_none`'s 2000 — one hundred and forty-nine at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and fifty-one templates against
+`knight_none`'s 2000 — one hundred and fifty at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the

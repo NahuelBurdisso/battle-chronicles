@@ -14477,3 +14477,62 @@ bc_he_still_does_everything_correctly_and_it_is_still_going_backwards = {
 		}
 	}
 }
+
+bc_the_oath_he_broke_is_older_than_this_war = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_thing_he_swore_is_on_record_as_broken_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who knows exactly what he swore is the man least able to
+		# pretend, on a bad afternoon, that it was never said.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_oath_he_broke_is_older_than_this_war"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_oath_he_broke_is_older_than_this_war_toast
+			desc = bc_the_oath_he_broke_is_older_than_this_war_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
