@@ -3784,3 +3784,56 @@ bc_a_wedding_is_waiting_on_the_man_opposite_trigger = {
 	}
 	NOT = { bc_there_is_a_wedding_waiting_on_him_trigger = yes }
 }
+
+
+# --- the slow thing that is running while he is here --------------------------
+#
+# `any_scheme` AND `any_targeting_scheme` BOTH RETURNED ZERO OVER THE WHOLE MOD.
+# The mod reads a man's hatreds and his friendships and his secrets and his
+# hooks, and it has never read the one thing that is actually in motion: a plot
+# with a clock on it, running in some other part of the world, while he spends
+# an afternoon in a hedge.
+#
+# BOTH ARE ITERATORS AND ITERATORS ARE NOT LINKS, so neither takes a guard: an
+# empty list is a clean no. The 1.19.0.6 dump gives `any_scheme` as "Iterate
+# through all schemes owned by the character" and `any_targeting_scheme` as
+# "Iterate through all schemes targeting the character", both character scope,
+# both yielding scheme scope.
+#
+# `scheme_type = murder` IS READ IN SCHEME SCOPE and is vanilla's own idiom -
+# 00_scheme_interactions.txt:1582 and :2038 spell exactly this inside
+# `any_targeting_scheme`. The key is `murder`, which is the first line of
+# common/schemes/scheme_types/murder_scheme.txt in vanilla AND in AGOT's
+# override of the same file, so the type survives AGOT.
+#
+# MURDER AND NOT ANY SCHEME AT ALL. `any_scheme = { count >= 1 }` would fire for
+# a large fraction of the AI, which is not a gate. Restricting it to the one
+# scheme type that intends a death makes both halves narrow and makes both of
+# them mean something specific on a battlefield.
+#
+# NO NEGATION BETWEEN THEM, AND THAT IS A DECISION. These are two different
+# facts and a man may perfectly well be both a plotter and a target. What keeps
+# the templates apart is the engine: the first is a commander template and the
+# second is a knight template, the side commander is not in the knight list, and
+# the pools roll separately. Batches 113 and 118 made the same call.
+#
+# THE SECOND IS A FACT ITS SUBJECT DOES NOT HAVE. A scheme targeting a man is
+# not something he is told about, and the toast written on this gate is
+# accordingly forbidden from letting him find out, suspect, or name anybody. The
+# mod has narrated around a man before - a conversation he was not at, a room he
+# will never see - and this is the same move with more at stake.
+#
+# RARITY. A murder plot is a rare thing to have running at any given moment even
+# among the AI, it has to be running on this exact day, and then the man has to
+# be leading or fighting in a battle.
+bc_he_has_a_murder_running_somewhere_trigger = {
+	any_scheme = {
+		scheme_type = murder
+	}
+}
+
+bc_somebody_is_trying_to_have_him_killed_trigger = {
+	any_targeting_scheme = {
+		scheme_type = murder
+	}
+}

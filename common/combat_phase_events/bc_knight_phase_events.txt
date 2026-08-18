@@ -9105,3 +9105,84 @@ bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill = {
 		}
 	}
 }
+
+
+# --- the most dangerous thing in his life is not on this field ----------------
+#
+# GATE. bc_somebody_is_trying_to_have_him_killed_trigger, read on the knight
+# himself. He is losing.
+#
+# KIND. wild/down, so this takes bc_spent_horse. He is on the wrong end of the
+# afternoon and using the animal up staying in it, which is exactly what the
+# wild verb is for, and the SWING says plainly that none of it is working.
+#
+# THE FACT IS NOT HIS. He is not told, does not suspect, and learns nothing
+# today. The page carries the knowledge and he does not, and it may not name
+# anybody, place the plot, give it a method, advance it, or let anybody on this
+# field mention it. It may not kill him either - the scheme belongs to another
+# system entirely and this template has no business resolving it.
+#
+# SKILL. prowess, because what is being measured is the willingness and the
+# ability to keep spending yourself on a losing hour.
+bc_knight_the_worst_thing_in_his_life_is_elsewhere = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_somebody_is_trying_to_have_him_killed_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Staying in a bad hour long enough to use a horse up in it is
+		# a thing only a genuinely dangerous man manages.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = reckless
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = paranoid
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_worst_thing_in_his_life_is_elsewhere"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_the_worst_thing_in_his_life_is_elsewhere_toast
+				desc = bc_knight_the_worst_thing_in_his_life_is_elsewhere_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
