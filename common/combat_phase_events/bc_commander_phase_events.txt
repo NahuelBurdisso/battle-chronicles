@@ -13769,3 +13769,62 @@ bc_the_day_has_stopped_being_worth_what_he_came_for = {
 		}
 	}
 }
+
+bc_the_thing_behind_him_will_be_here_long_after_today = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_something_stands_on_this_ground_that_stands_nowhere_else_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing what the thing is, who put it here and roughly how long
+		# ago, which is knowledge that is doing him no good whatever today.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_thing_behind_him_will_be_here_long_after_today"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_thing_behind_him_will_be_here_long_after_today_toast
+			desc = bc_the_thing_behind_him_will_be_here_long_after_today_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

@@ -574,7 +574,7 @@ bc_add_verb_effect = {
 # NO `else` ARM. adapted and measured are the KINDs that describe how the
 # commander READ the battle rather than what the battle DID to the army, and
 # there is no army modifier that means "he judged it well". ONE HUNDRED AND NINE of the
-# three hundred and twenty-nine call sites are adapted or measured - the five plan 1 shipped
+# three hundred and thirty-one call sites are adapted or measured - the five plan 1 shipped
 # (bc_ground_favours_us, bc_lines_bogged_down and the pop-up options .0001b,
 # .0002b and .0003b) plus one hundred and four from later content batches - and every one of
 # them is supposed to fall through. Twenty-seven more, all `ordered`/`down`, fall
@@ -596,11 +596,11 @@ bc_add_verb_effect = {
 # shipped eighteen call sites using nine of the twelve (KIND, SWING) pairs and
 # recorded `entrenched`/`down`, `wild`/`up` and `ordered`/`down` as unreachable.
 # **ALL TWELVE PAIRS ARE NOW REACHED.** Counted mechanically over the whole mod
-# at three hundred and twenty-nine call sites:
+# at three hundred and thirty-one call sites:
 #
 #   measured/down 28  bloodied/up 28   ordered/up 28     wild/down 28
-#   entrenched/up 28  bloodied/down 27  wild/up 27       adapted/up 27
-#   entrenched/down 27  ordered/down 27  measured/up 27  adapted/down 27
+#   entrenched/up 28  bloodied/down 27  wild/up 28       adapted/up 27
+#   entrenched/down 28  ordered/down 27  measured/up 27  adapted/down 27
 #
 # The table's BEHAVIOUR has not changed as those cells filled - it never asked
 # about any pair but `ordered`'s. What changed is that plan 1's claim that a
@@ -633,9 +633,9 @@ bc_add_verb_effect = {
 #
 # ALL FOUR MODIFIERS ARE REACHABLE, so an absent verb in testing is a bug and not
 # a gap in the call sites. Re-counted 2026-08-17 across the whole mod, from the
-# pair census above: bc_bloodied from 55 sites, bc_shieldwall from 55,
-# bc_spent_horse from 55, bc_pursuit from 28, and 136 falling through. Those five
-# sum to the three hundred and twenty-nine, which is the check.
+# pair census above: bc_bloodied from 55 sites, bc_shieldwall from 56,
+# bc_spent_horse from 56, bc_pursuit from 28, and 136 falling through. Those five
+# sum to the three hundred and thirty-one, which is the check.
 # (Plan 1's numbers were 3, 3, 4 and 3, when there were eighteen call sites.)
 #
 # THE MARKER STRINGS ARE LITERALS, NOT $KIND$. Two reasons. $PARAM$ substitution

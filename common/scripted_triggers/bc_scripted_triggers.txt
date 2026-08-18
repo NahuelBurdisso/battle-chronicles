@@ -5936,3 +5936,81 @@ bc_the_man_across_the_field_will_not_stoop_trigger = {
 		}
 	}
 }
+
+# BATCH 153 - THE THING ON THIS GROUND THAT NOBODY BUILT FOR A BATTLE.
+#
+# Batch 151 read `has_holding_type` and said in its own header that
+# `has_special_building` was documented, still unread, and being left for a later
+# batch on purpose, because it would not be disjoint from either of that batch's
+# rows - a special building can sit in a castle, a city or a temple. This is that
+# later batch, and the way to make the pair disjoint is to ask about the SLOT
+# rather than about the holding.
+#
+# THE TWO KEYS ARE BOTH IN THE 1.19.0.6 DUMP, both province scope, both yes/no:
+# `has_special_building` ("does the province (holding) have a special building?")
+# and `has_special_building_slot` ("does the province (holding) have a special
+# building slot?"). A slot is where one may be put; a building is one that is
+# there. Every province with a building has a slot, and the interesting set is
+# the provinces that have the slot and nothing standing in it.
+#
+# BOTH FORMS ARE LIVE IN SHIPPED FILES. Vanilla reads `has_special_building =
+# yes` at `common/customizable_localization/00_building_custom_localization.txt:
+# 178`, `:186`, `:194`, `:203`, `:212` and `:221`, in the achievement loc at
+# `common/customizable_localization/10_ach_custom_loc.txt:749`, `:758`, `:767`,
+# `:776` and `:796`, and through `title_province` at
+# `common/customizable_localization/00_hold_court_custom_joe.txt:85`, `:121` and
+# `:157`. AGOT reads the same form at `common/suggestions/01_suggestions.txt:750`
+# and ships the loc file with those lines commented. For the slot, vanilla gates
+# a university visit on `has_special_building_slot = yes` at
+# `common/activities/activity_types/university_visit.txt:213`, and AGOT ships the
+# same gate at `:219` of its own copy.
+#
+# THE TWO ARE DISJOINT BY AN EXPLICIT NOT, not by construction, and the NOT is
+# the whole point of the second row. A province that has a building necessarily
+# has the slot it is standing in, so without the negation the second gate would
+# be a strict superset of the first and the two would fire together constantly.
+# With it, the second is exactly the empty-handed half.
+#
+# GUARDS IN THE SHAPE THE GROUND ROWS USE, and one level shallower than the rich
+# and poor country rows at 1336 and 1348, since neither key needs a county read.
+# `combat.location` does not always resolve; the guard sits as a sibling and is
+# repeated inside the `trigger_if` limit.
+#
+# THIS IS NOT BATCH 148'S PAIR AND IT IS NOT BATCH 151'S. Fort level is how much
+# wall has been raised, which is a number and is about defence. Holding type is
+# what the place is for. This is whether somebody, at some point, decided this
+# particular spot deserved a thing that exists nowhere else - and the second row
+# is the sadder version, a place that was marked out for exactly that and never
+# got it. Neither row is a subset of any of those four: a special building can
+# stand at any fort level, in any holding type, and an empty slot says nothing
+# about either.
+#
+# NEITHER GATE READS THE SCOPED MAN, so neither depends on what `root` is.
+#
+# RARITY. Special buildings are a handful of provinces in the world by design -
+# they are the map's named exceptions, and AGOT's are the places a reader would
+# name unprompted. Slots are commoner than buildings but they are still a small
+# set, and the second gate additionally wants the slot to be sitting empty in the
+# year this battle is happening, which is a fact about somebody's unfinished
+# ambition and not about the map. On top of both, the fight has to be standing in
+# that exact barony rather than in one of the others in the same county.
+bc_something_stands_on_this_ground_that_stands_nowhere_else_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			has_special_building = yes
+		}
+	}
+}
+
+bc_this_ground_was_marked_out_for_something_that_never_came_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			has_special_building_slot = yes
+			NOT = { has_special_building = yes }
+		}
+	}
+}
