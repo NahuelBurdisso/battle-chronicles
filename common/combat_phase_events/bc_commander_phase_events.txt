@@ -12327,3 +12327,68 @@ bc_the_work_he_paid_for_is_still_being_made = {
 		}
 	}
 }
+
+# Batch 129, commander half. He is winning, and the first thing the win makes
+# him think about is not the field at all but the cells at home, which are
+# about to have more men in them. `adapted`, because nothing is being done to
+# either army here - what changes is what he privately understands winning to
+# consist of. `diplomacy >= 12`, because a prisoner is a negotiation that lasts
+# a season and a man who is good at that is the man who thinks of it first.
+bc_winning_means_the_cells_fill_again = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_keeping_men_in_his_own_cells_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A prisoner is a negotiation that runs for a season, and the men
+		# who are good at those are the ones who see them coming.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_winning_means_the_cells_fill_again"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_winning_means_the_cells_fill_again_toast
+			desc = bc_winning_means_the_cells_fill_again_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

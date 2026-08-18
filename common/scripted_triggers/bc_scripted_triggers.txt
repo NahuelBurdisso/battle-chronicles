@@ -4314,3 +4314,59 @@ bc_he_is_paying_for_something_being_made_at_home_trigger = {
 bc_he_has_finished_a_thing_with_his_own_hands_trigger = {
 	has_completed_inspiration = yes
 }
+
+# BATCH 129 - THE DOORS AT HOME, AND THE ONE THAT IS ALREADY SHUT.
+#
+# The mod reads captivity from exactly one direction and always has. Batch 118
+# read hostages, `is_hostage` occurring ten times; the imprisonment-reason pair
+# above reads whether the LAW would let one of these two men keep the other.
+# Nothing anywhere reads whether either of them is ALREADY keeping somebody.
+# The census is clean: `any_prisoner` zero, `num_of_prisoners` zero,
+# `is_imprisoned` zero, `any_close_family_member` zero.
+#
+# THE DUMP. `any_prisoner` is "Iterate through all prisoners", character scope,
+# target character. `any_close_family_member` is "Iterate through all the close
+# family [father, mother, siblings, children, grandparents]", character scope.
+# `is_imprisoned` is "is the character imprisoned?", character scope, yes/no.
+# AGOT runs all three, and runs the second and third in exactly the nested form
+# used here: `common/casus_belli_types/00_agot_rv_rescue_wars.txt:36` has
+# `any_close_family_member = { OR = { is_imprisoned = yes ... } }` and `:111`
+# has `any_prisoner`. `00_religious_war.txt:2106` iterates prisoners with an
+# inner check as well. This is AGOT's own rescue-war arithmetic, borrowed.
+#
+# NEITHER GATE TAKES A GUARD. Both are iterators, and an iterator over an empty
+# list is a clean no. Iterators are not links. There is no dotted step anywhere
+# in this block.
+#
+# TWO KEYWORDS, TWO FACTS, TWO MEN, AND THE TWO FACTS ARE OPPOSITE ENDS OF THE
+# SAME DOOR. The first is a man who is holding somebody. The second is a man
+# somebody is holding. Neither implies the other and neither is a threshold on
+# the other's number - a gaoler's own family may be entirely at liberty, and a
+# man with a brother in a cell may keep nobody at all - so neither carries a
+# negation of the other, and the engine keeps them apart regardless: the first
+# is read on the side commander, the second on a knight in the line, and the
+# two pools roll separately.
+#
+# WHY TWO AND NOT ONE. A single prisoner is an accident - a skirmish that went
+# well, a guest who said the wrong thing, a debt that ran out of patience. Two
+# or more at once is a different kind of fact about a household: it means
+# somebody is running a gaol, with a man to carry the bread and a door somebody
+# has to check, and it means the arithmetic of ransom is a live and familiar
+# part of his year rather than a thing that happened to him once.
+#
+# RARITY. Most lords in Westeros hold nobody at all on most days; prisoners
+# arrive from fields and sieges and leave again as soon as a price is agreed,
+# so the state is transient by design. Close family is a bounded list of at most
+# a dozen people, and at any given moment nearly all of them are at liberty.
+# Neither of these fires for most men on most fields.
+bc_he_is_keeping_men_in_his_own_cells_trigger = {
+	any_prisoner = {
+		count >= 2
+	}
+}
+
+bc_somebody_of_his_blood_is_in_a_cell_tonight_trigger = {
+	any_close_family_member = {
+		is_imprisoned = yes
+	}
+}

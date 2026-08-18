@@ -9840,3 +9840,71 @@ bc_knight_the_hands_do_not_know_the_difference = {
 		}
 	}
 }
+
+# Batch 129, knight half. Somebody of his blood is already in somebody's cell,
+# his side is going backwards, and he has worked out that the men in front of
+# him would much rather take him than kill him - which is precisely the reason
+# he will not let them. `prowess >= 12`, because what is being measured is the
+# capacity to keep paying for an hour that is already lost.
+bc_knight_a_second_cell_in_the_same_family = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_somebody_of_his_blood_is_in_a_cell_tonight_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Staying upright once the hour is lost is the whole of what this
+		# moment measures.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_second_cell_in_the_same_family"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_a_second_cell_in_the_same_family_toast
+				desc = bc_knight_a_second_cell_in_the_same_family_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
