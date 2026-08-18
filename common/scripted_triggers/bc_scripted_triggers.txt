@@ -7288,3 +7288,63 @@ bc_he_holds_more_ground_than_one_man_can_run_trigger = {
 bc_there_is_a_great_deal_of_him_trigger = {
 	current_weight >= overweight_value
 }
+
+
+# BATCH 173 - WHICH OF HIS FIVE IS THE BEST ONE.
+#
+# THE MOD READS SKILL NUMBERS CONSTANTLY AND HAS NEVER ONCE ASKED WHICH NUMBER
+# IS HIS LARGEST. A hundred and some `add = 30` rows weigh a man against an
+# absolute bar - `prowess >= 12`, `martial >= 12`, `stewardship >= 12` - and
+# two gates at bc_scripted_triggers.txt:332 and :340 read the enemy commander's
+# `martial` against 16 and 8. All of those are thresholds. `highest_skill` and
+# `highest_skill_including_prowess` are the other question entirely: not how
+# much of a thing he has, but which of the things he has is the most of him.
+#
+# A THRESHOLD AND A RANKING ARE NOT SUBSETS OF EACH OTHER IN EITHER DIRECTION.
+# A man with diplomacy 8 can have diplomacy as his best skill, because the rest
+# of him is worse; a man with diplomacy 16 can have martial 18 and fail this
+# same gate. The two questions cut the population across each other, which is
+# why neither one narrows the other.
+#
+# THE TWO KEYS DIFFER ON EXACTLY ONE THING AND IT IS THE ONE THAT MATTERS HERE.
+# `highest_skill` is the dump's "highest skill (excluding Prowess)"; the other
+# includes it. Vanilla's steal_herd_outcome_events.txt:295 passes `prowess` to
+# the including form, which is the proof that `prowess` is a legal argument to
+# it and not to the other, and 00_skill_effects.txt:27 uses the same key as a
+# bare `trigger = ` alias. AGOT branches five ways on the excluding form at
+# yearly_events_7.txt:3739-3759 and picks a character's idle portrait animation
+# off it at b_agot_animations.txt:53-113, so both forms are live in this build.
+#
+# TIES PASS. The dump says so twice, in both entries: "True even when there are
+# multiple skills with the same highest value." A man who is equally the best
+# talker and the best scholar he could be passes the first gate below, and that
+# is correct - the gate asks whether nothing about him is better, not whether
+# something about him is unique.
+#
+# THE PAIR IS DISJOINT BY CONSTRUCTION. The first gate carries an explicit
+# `NOT = { highest_skill_including_prowess = prowess }`, so a man whose arm
+# beats all five of his skills cannot be the subject of it. Without that line
+# the first would have been the weaker statement - diplomacy leads the five,
+# never mind the body - and the two would have overlapped on every charming man
+# who can also fight. With it, the first says the best thing about him is that
+# men like him, full stop, and the second says the best thing about him is his
+# arm, full stop, and no man alive satisfies both.
+#
+# RARITY. Five skills split roughly five ways before ties, and the losing side
+# and the prowess exclusion both cut into that fifth. The second gate is not
+# rare among knights, who are frequently chosen for exactly this, but a knight
+# whose body outranks all five of his skills AND who is winning AND whose phase
+# has come apart into a scramble is a much smaller set than the first clause on
+# its own.
+#
+# NO GUARD. Both are bare character-scope reads on a man the caller has already
+# entered. Every character has five skills and a prowess whether anybody has
+# ever ranked them or not.
+bc_the_best_thing_about_him_is_that_men_like_him_trigger = {
+	highest_skill = diplomacy
+	NOT = { highest_skill_including_prowess = prowess }
+}
+
+bc_the_best_thing_about_him_is_his_own_arm_trigger = {
+	highest_skill_including_prowess = prowess
+}

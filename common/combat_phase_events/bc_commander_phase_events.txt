@@ -14949,3 +14949,62 @@ bc_the_levies_are_thin_because_he_is_spread_thin = {
 		}
 	}
 }
+
+bc_they_are_still_here_because_they_like_him = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_best_thing_about_him_is_that_men_like_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The gate is a ranking and the weight is a threshold, so the man most
+		# worth writing down is the one who is both: best at it, and good at it.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_they_are_still_here_because_they_like_him"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_they_are_still_here_because_they_like_him_toast
+			desc = bc_they_are_still_here_because_they_like_him_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
