@@ -9354,3 +9354,86 @@ bc_knight_winning_this_one_finishes_nothing = {
 		}
 	}
 }
+
+
+# --- the man they are beating is somebody's servant ---------------------------
+#
+# GATE. bc_the_man_opposite_is_holding_it_for_somebody_else_trigger, read on the
+# enemy commander. The knight is winning.
+#
+# KIND. wild/up, so it takes bc_spent_horse on a winning side, which is the
+# pairing this file already uses for a chase that has stopped being a formation.
+# The far host is going and the pursuit is going with it, loose and strung out
+# and nobody's neat idea of anything.
+#
+# WHAT THIS MAY NOT DO. It may not name the man whose command it is, say where
+# he is, what he is doing, how old he is or why he is not here. It may not reach
+# the far commander, kill a named man, capture anybody, be told anything by
+# anybody, or end the day.
+#
+# SKILL. prowess, because this is a thing you notice from a saddle at speed with
+# your arm already tired, and the men who have breath left at that point are the
+# men who are good at the physical part of it.
+bc_knight_beating_a_man_who_owns_none_of_it = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_opposite_is_holding_it_for_somebody_else_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having anything left to think with at the end of a chase is
+		# a question about the body before it is a question about the
+		# head.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_beating_a_man_who_owns_none_of_it"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_beating_a_man_who_owns_none_of_it_toast
+				desc = bc_knight_beating_a_man_who_owns_none_of_it_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

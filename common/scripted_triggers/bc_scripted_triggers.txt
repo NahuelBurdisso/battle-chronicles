@@ -3943,3 +3943,66 @@ bc_the_man_opposite_has_a_second_host_trigger = {
 	}
 	NOT = { bc_he_has_a_second_host_somewhere_trigger = yes }
 }
+
+
+# --- the man who is holding it while he is out here ---------------------------
+#
+# THE DIARCHY SYSTEM RETURNED ZERO OVER THE WHOLE MOD. `is_diarch` is zero,
+# `has_active_diarchy` is zero, and the only two occurrences of the string
+# `diarch` anywhere in this submod are filename citations inside comments in
+# `bc_scripted_effects.txt` and `bc_script_values.txt`. A hundred and twenty-two
+# batches have read who a man's enemies are, who his family are, who is owed
+# money by him and who wants him dead, and none of them has ever read the one
+# arrangement that answers a different question entirely: not who is against
+# him, but WHOSE AUTHORITY IS ACTUALLY BEING SPENT ON THIS FIELD.
+#
+# THE 1.19.0.6 DUMP gives `has_active_diarchy` as "Does the scoped character has
+# an active diarchy", yes/no, character scope, and `is_diarch` as "Is the scoped
+# character currently an active diarch of anyone?", yes/no, character scope.
+# AGOT uses both live and unguarded: `has_active_diarchy = yes` at
+# `common/casus_belli_types/00_event_war.txt:3605` and at
+# `common/character_interactions/00_marriage_interactions.txt:904`, and
+# `is_diarch = yes` at `00_event_war.txt:3674` and throughout
+# `common/character_interactions/00_diarch_interactions.txt`. This is a system
+# the submod's host game is running, not a vanilla feature being wished onto
+# Westeros - a regency over a child, or a man deliberately seated beside his
+# lord, is about as Westerosi as an arrangement gets.
+#
+# THE TWO GATES READ TWO DIFFERENT FACTS ABOUT TWO DIFFERENT MEN, which is why
+# neither carries a negation of the other. The first asks whether the man
+# commanding here left somebody behind him holding his seal. The second asks
+# whether the man commanding the far host holds his own command on somebody
+# else's account. They are not two halves of one fact and they are not on the
+# same axis in the sense the distinctness rule cares about: a man may be both,
+# either or neither, and the two produce entirely different afternoons. The
+# separation that matters is structural and the engine provides it - the side
+# commander is not in the knight list, and the two pools roll separately.
+#
+# NEITHER OF THESE IS A LOYALTY GATE. `diarch_loyalty` and `diarchy_swing` exist
+# and are deliberately not read: how well the arrangement is going is a question
+# about a household, and a man standing in a battle has no access to today's
+# answer. That the arrangement EXISTS is a fact of a different kind. It was
+# announced, it was witnessed, and everybody who matters has known about it
+# since it was made.
+#
+# THE SECOND IS RUMOUR AND IS WRITTEN AS RUMOUR. Who holds a great man's seat is
+# not a secret and never has been; it is the sort of thing heralds say out loud.
+# What is not knowable from a rank, and is therefore not written, is how that
+# man is doing at it.
+#
+# RARITY. A diarchy needs a ruler who is a child, or incapable, or who chose to
+# seat somebody next to himself, and then the relevant man has to be standing in
+# a battle on the day. Most lords in most years have no diarch and are nobody's.
+bc_somebody_else_is_holding_his_seat_trigger = {
+	has_active_diarchy = yes
+}
+
+bc_the_man_opposite_is_holding_it_for_somebody_else_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			is_diarch = yes
+		}
+	}
+}

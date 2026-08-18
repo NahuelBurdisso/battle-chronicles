@@ -11866,3 +11866,83 @@ bc_this_is_the_cheaper_of_the_two = {
 		}
 	}
 }
+
+
+# --- there is a man at home signing things in his name ------------------------
+#
+# GATE. bc_somebody_else_is_holding_his_seat_trigger, read on the commander. He
+# is losing.
+#
+# KIND. ordered/down, which falls through the verb table, and that is the right
+# answer twice: nothing is being done to the army that a modifier could
+# describe, and the subject of the moment is not the army at all. It is what a
+# defeat out here costs a man at a table he is not sitting at.
+#
+# WHAT THIS MAY NOT DO. It may not name the man holding the seat, say what he is
+# doing with it, have him send anything or be sent anything, have a rider
+# arrive, have anybody at home take a decision on the page, or suggest treachery
+# of any kind - the arrangement is legitimate and the moment is worse for that.
+# It may not withdraw, rally, turn the day, or end the day.
+#
+# SKILL. diplomacy, because an arrangement in which another man holds your seal
+# while you are away is a thing you negotiated, and the men who are good at it
+# are the men who understood at the time exactly what they were lending.
+bc_a_man_at_home_signing_in_his_name = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_somebody_else_is_holding_his_seat_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing precisely what you handed over, and what a bad
+		# afternoon does to the value of it, is the same skill that
+		# made the arrangement in the first place.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_a_man_at_home_signing_in_his_name"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_a_man_at_home_signing_in_his_name_toast
+			desc = bc_a_man_at_home_signing_in_his_name_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
