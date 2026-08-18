@@ -4785,3 +4785,58 @@ bc_the_other_side_did_not_come_alone_trigger = {
 		}
 	}
 }
+
+# BATCH 137 - WHAT EACH OF THEM IS OWED ON PAPER.
+#
+# `any_claim`, `has_claim_on` and `is_claimant` all returned zero across the
+# whole mod. That is a surprising gap in a setting built almost entirely out of
+# claims. A hundred and thirty-six batches have read what a man holds, what he
+# owes, whom he hates and where he sleeps, and not one has read the thing this
+# entire war is legally about: a piece of parchment saying something ought to
+# have been his.
+#
+# THE TWO READS SPLIT ON `pressed`, WHICH IS THE ONLY DISTINCTION THAT MATTERS.
+# A pressed claim is one somebody is currently fighting over - it is in a war
+# aim, it has men dying for it today. An unpressed claim is the same parchment
+# with nobody acting on it: a thing that is true, and filed, and doing nothing.
+# The engine keeps both under one iterator and separates them with a parameter,
+# and vanilla uses both values - `pressed = yes` at
+# `common/scripted_triggers/00_courtier_guest_management_triggers.txt:643` and
+# `pressed = no` at `common/script_values/destiny_score_interest_value.txt:473`.
+# AGOT ships the same lines.
+#
+# NEITHER IS A SUBSET OF THE OTHER AND NEITHER NEEDS A NEGATION. They are two
+# disjoint filters over one list, but a man can be in both results at once,
+# holding one claim that men are dying for today and three more that nobody has
+# mentioned in twenty years. Both statements stay true and describe different
+# afternoons.
+#
+# THE THRESHOLDS ARE NOT THE SAME NUMBER AND THAT IS DELIBERATE. One pressed
+# claim is already unusual - it requires an active war whose aim is that title.
+# Unpressed claims accumulate: they arrive by inheritance, marriage and grant
+# and they never expire on their own, so one of them is nearly ambient among
+# highborn men. Three is the number that makes the second gate mean what its
+# name says, which is a man carrying a folder rather than a man carrying a
+# grievance. A gate that fires for nearly everybody is not a gate.
+#
+# NO GUARDS. Both are iterators over the scoped character's own list, and an
+# empty list is a clean no. Nothing here walks a link.
+#
+# THIS IS NOT THE WAR ROWS OR THE INHERITANCE ROWS. The war rows ask about the
+# war he is standing in from the outside - its length, its cause, its declarer.
+# This asks what is written in his own name whether or not anybody is currently
+# doing anything about it, and the second gate specifically asks about the
+# titles nobody is doing anything about, which is the opposite of a war.
+bc_something_of_his_is_being_fought_for_trigger = {
+	any_claim = {
+		pressed = yes
+		count >= 1
+	}
+}
+
+bc_he_is_owed_things_nobody_is_fighting_for_trigger = {
+	any_claim = {
+		pressed = no
+		count >= 3
+	}
+}
