@@ -5186,3 +5186,75 @@ bc_he_keeps_a_household_of_sworn_swords_trigger = {
 		count >= 8
 	}
 }
+
+# BATCH 143 - HOW MANY SEATS EACH OF THEM ACTUALLY HOLDS.
+#
+# `any_held_title`, `has_primary_title`, `any_directly_owned_province` and
+# `any_sub_realm_county` all returned zero across the whole mod. The mod has
+# read RANK eight times - `highest_held_title_tier` on this man or the man
+# opposite, `is_powerful_vassal`, `is_independent_ruler` - and has never once
+# read HOW MUCH. Rank is the tallest thing a man holds. It says nothing at all
+# about whether he holds one of them or nine, and in this setting that is most
+# of the difference between a duke and a great house.
+#
+# THE SYNTAX IS VANILLA'S, VERBATIM. `common/activities/activity_types/
+# gruesome_festival.txt:443-445` writes `any_held_title = { count >= 2  tier =
+# tier_county }`, which is the count-plus-filter form used below, and
+# `common/casus_belli_types/07_ep3_wars.txt:3970-3971` writes
+# `every_held_title = { title_tier >= duchy ... }`, which is the comparison
+# vocabulary. Note that these are two different vocabularies for the same fact -
+# `tier = tier_county` inside the iterator, `title_tier >= duchy` for a
+# comparison - and the mod's existing rank reads use a THIRD, the
+# `highest_held_title_tier >= tier_kingdom` script-value form. All three are
+# live in shipped files. The comparison form is the one wanted here.
+# `title_tier >= county` is also live at `common/casus_belli_types/
+# 00_claim.txt:458` and `title_tier >= duchy` at
+# `common/character_interactions/00_diarch_interactions.txt:784` and `:850`.
+#
+# THE PAIR IS DISJOINT BY CONSTRUCTION AND THE `count = 0` ROW IS THE REASON,
+# exactly as in batch 139. Without it the second gate is a strict SUPERSET of
+# the first - a man holding two duchies also holds at least one title of county
+# tier or better - and the first becomes a subset of the second, which is the
+# collision batch 72 shipped by accident. The second gate therefore says in its
+# own body that he holds nothing of duchy tier or above, and the two can never
+# both pass.
+#
+# NO GUARDS. Both are iterators over the scoped character's own held titles. An
+# empty list is a clean no, and nothing here walks a link.
+#
+# THIS IS NOT THE RANK ROWS. `bc_facing_a_crown_trigger` reads
+# `highest_held_title_tier >= tier_kingdom` on the FAR commander; these read the
+# scoped man. More importantly rank and quantity come apart in both directions:
+# a vassal king holds one title of kingdom tier and may hold nothing else worth
+# the name, while a man with four duchies and no crown outranks nobody and
+# outweighs almost everybody. The second gate in particular passes men the rank
+# reads cannot distinguish from a landless household knight, because rank alone
+# cannot tell a count with a seat of his own from a man with nothing.
+#
+# IT IS NOT THE WEIGHT ROWS EITHER. `is_powerful_vassal` is defined by the
+# engine relative to a specific liege's realm and an independent duke is not
+# one however much he holds; a powerful vassal may hold exactly one duchy.
+# Neither gate below is a subset of that one in either direction.
+#
+# RARITY. The first needs two seats of duchy tier or better in one pair of
+# hands, which on any given map is a handful of men. The second needs the scoped
+# man to be landed at all - most knights are household men and hold nothing -
+# and then to have stopped below a duchy, which is the great majority of those
+# who are landed but a small slice of any army.
+bc_he_holds_more_than_one_great_seat_trigger = {
+	any_held_title = {
+		count >= 2
+		title_tier >= duchy
+	}
+}
+
+bc_he_has_land_of_his_own_and_no_great_seat_trigger = {
+	any_held_title = {
+		count >= 1
+		title_tier >= county
+	}
+	any_held_title = {
+		count = 0
+		title_tier >= duchy
+	}
+}
