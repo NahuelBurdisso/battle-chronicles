@@ -4465,3 +4465,78 @@
 
  bc_knight_the_best_afternoon_he_will_never_have_toast:0 "The Whole Of It Is Happening Just Over There And None Of It Is His"
  bc_knight_the_best_afternoon_he_will_never_have_toast_desc:0 "It is going beautifully and he can see all of it. That is the difficulty. Down in the line, where a man's world is two arms wide and full of noise, nobody knows this is a great day yet; up here it is perfectly obvious, and he has the best view on the field of the sort of afternoon that gets talked about in halls for thirty years by men who were in it. He can name the gap. He knows precisely where he would go, at what moment, and what would happen after — and there is a long stretch of the day where the knowing is worse than the not going, because the knowing keeps arriving in fresh detail and there is nothing at all to do with it. So he does the work. The work is being in one place. He shifts his weight when the ground under him gets soft and he moves when the man he is standing over moves and he does not move otherwise, not when the far banner goes down, not when the cheering starts on the right, not once. At dusk he will have taken nothing, done nothing anyone can name, and stood, correctly, through the finest hour of somebody else's life.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 107 - the marriage that is standing on both sides -----------------
+#
+# NEITHER OF THESE TWO MAY NAME THE OTHER MAN or give his age, house, title,
+# nickname or sex, and neither may name the married child or the spouse. Neither
+# may use the words "son-in-law", "good-son", "father-in-law", "good-father",
+# "dowry" or "betrothal". The engine holds one relation; both pages hold a meal
+# that happened years ago and is still doing work today.
+#
+# NEITHER MAY STAGE THE WEDDING as a scene, may not go back to it in more than a
+# clause, and may not describe the contract, the terms, the negotiation or who
+# got the better of it. The arrangement is finished business. Only its residue
+# is on this field.
+#
+# NEITHER MAY HAVE THE TWO MEN SPEAK today, meet, ride at each other, or
+# recognise each other across the field. Nothing in either page is an encounter.
+#
+# THE FIRST MAY NOT WIN THE BATTLE, may not kill or capture anybody, may not
+# have him give an order that is quoted, and may not have him feel clever about
+# it. It may not have him gloat, may not have him grieve, may not mention the
+# marriage souring, and may not have anybody else on his own side know why the
+# order was the right one. The knowing is private and it stays private.
+#
+# THE SECOND MAY NOT RALLY, may not turn the line, may not have him strike
+# anybody down, may not have him wounded, and may not have the day end. It may
+# not have him look for the other man, may not have the other man look at him,
+# may not have him think about his marriage in any warm way, and may not use the
+# words "shame", "pride" or "honour".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life".
+ bc_he_has_watched_this_man_carve_at_his_own_table_toast:0 "He Knows What That Man Does When A Thing Stops Going Well"
+ bc_he_has_watched_this_man_carve_at_his_own_table_toast_desc:0 "The far side does something at midday that nobody around him can read, and he reads it immediately, and the reading does not come from any part of him that was trained. It comes from meals. It comes from years of sitting across a board from a man and watching what he did with his hands when a dish was late, when a servant spilled, when a conversation went somewhere he had not agreed to go — the small tightening, the pause, then the correction that is always one notch harder than the situation asked for. That is what is happening out there now, at the scale of four thousand men, and it is the same tightening. He says nothing about how he knows. He gives the order in the flat voice of a man who has simply decided, and it is the right order, and it goes on being the right order for two hours because the far side keeps making the correction he has already watched him make in a hall in winter with the fire going. Nobody near him will ever be told where any of it came from.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_will_not_be_the_one_who_gives_first_toast:0 "There Is Exactly One Man Here Whose Opinion Of Him Is Already Written"
+ bc_knight_he_will_not_be_the_one_who_gives_first_toast_desc:0 "The line has begun to do the thing lines do before they stop being lines: the men to his left have started to find reasons to be a step further back than they were, and each reason is a good one, and the sum of them is a retreat that nobody has ordered. He can feel the pull of it in his own feet. It is not fear exactly. It is the sensible, almost administrative urge to be where everybody else is going to be in a minute. And there is one man perhaps thirty paces along the same rank who has known him since before he was worth knowing, who was owed a great deal in the making of what he now is, and who is going to spend the rest of a long life in the same halls he does. So he sets his feet where they already are and he leaves them there. The shields on either side of him find him not moving and it becomes fractionally harder for them to move either. The ground still goes. It goes slower, and it goes with the front of it intact, and the whole of the reason for that is one calculation he made about the rest of his life while the middle of the day was falling apart around him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

@@ -8145,3 +8145,75 @@ bc_knight_the_best_afternoon_he_will_never_have = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man who handed him his marriage is standing in the same losing line, close
+# enough to see which way he leans. `entrenched` is the KIND for a line that
+# braces, and `entrenched`/`down` is one of the three pairs plan 1 called
+# unreachable: a formation that gets bc_shieldwall precisely because it is going
+# backwards and refusing to go faster. Nothing here is a rally and the page does
+# not turn the day around.
+bc_knight_he_will_not_be_the_one_who_gives_first = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_father_of_his_spouse_is_in_this_line_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a position you have no tactical reason left to hold,
+		# for four hours, because of who can see you hold it, is a matter
+		# of the body rather than the head.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_will_not_be_the_one_who_gives_first"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_will_not_be_the_one_who_gives_first_toast
+				desc = bc_knight_he_will_not_be_the_one_who_gives_first_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -3043,3 +3043,66 @@ bc_the_one_he_is_sworn_to_commands_this_side_trigger = {
 	}
 	NOT = { bc_a_man_in_this_line_is_sworn_to_his_body_trigger = yes }
 }
+
+
+# --- the marriage that is standing on both sides -----------------------------
+#
+# THE MOD HAS READ MARRIAGE THREE TIMES AND HAS NEVER READ THE IN-LAWS.
+# bc_he_married_into_the_other_side_trigger asks whether one of root's spouses
+# is close family of the man commanding the far side, and there is a pregnancy
+# gate near it; both go through `any_spouse`. AGOT keeps the rest of it in a
+# scripted relation, `agot_parent_in_law` / `agot_child_in_law`, set in
+# on_lmf_in_law_setup in agot_lmf_misc_on_actions.txt and again at game start.
+# `has_relation_agot_child_in_law` was at zero occurrences here.
+#
+# THE DIRECTION IS FIXED BY AGOT AND IS, FOR ONCE, THE OBVIOUS ONE, BUT CHECK
+# IT ANYWAY. In on_lmf_in_law_setup it is `every_parent` of the newly married
+# character that takes `set_relation_agot_child_in_law = scope:spouse`, so the
+# PARENT holds `agot_child_in_law` and the person who married in holds
+# `agot_parent_in_law`. On any root, `has_relation_agot_child_in_law = X` reads
+# "X married one of my children". Both gates below are written from the older
+# end of that arrangement and neither uses `has_relation_agot_parent_in_law`.
+#
+# THE FIRST DELIBERATELY READS child_in_law AND NOT parent_in_law, AND THAT IS
+# A DISTINCTNESS DECISION RATHER THAN A TASTE ONE. `is_close_family_of` covers
+# parents, so a gate saying "the far commander is my spouse's father" would be
+# a strict SUBSET of bc_he_married_into_the_other_side_trigger and would not be
+# allowed to ship. Read the other way round it is not: the man who married
+# root's child is not close family of root's spouse, and the shipped gate never
+# sees him.
+#
+# THE SECOND IS THE SAME ARRANGEMENT SEEN FROM THE YOUNGER END, iterated over
+# root's own line rather than aimed across the field. It is not a subset of
+# bc_side_has_kin_knight_trigger either, and for the same reason in reverse: a
+# spouse's father is not close family, so that gate has never counted him.
+#
+# THE FIRST TAKES THE STANDING GUARD on `enemy_side.side_commander`, which is an
+# optional link. The second is an iteration over `any_side_knight`, which is not
+# a link and needs no guard, and uses `root` inside the entered scope for the
+# reason recorded on bc_side_has_kin_knight_trigger.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction. Both can be true on one field - a man can have married a
+# daughter to the far side and be standing beside his own wife's father - and
+# when they are, the man across the field is the larger fact and wins the tie.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. AGOT only sets this relation on living
+# parents at the moment a marriage is made, both gates then require the other
+# end of it to be armed and on this particular field, and the first additionally
+# requires him to be running the far side rather than merely standing in it.
+bc_the_one_who_married_his_child_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_relation_agot_child_in_law = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_the_father_of_his_spouse_is_in_this_line_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			has_relation_agot_child_in_law = root
+		}
+	}
+	NOT = { bc_the_one_who_married_his_child_commands_the_far_side_trigger = yes }
+}

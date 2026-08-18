@@ -10728,3 +10728,71 @@ bc_the_distance_beside_him_never_changes = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# The man running the far side married one of his children, which means he has
+# sat opposite him at meals for years and knows the shape of how he thinks. The
+# side is winning because of that and not because of anything the ground did.
+# `adapted` is the KIND for a commander READING the battle rather than the
+# battle doing something to the army, so this hands out no army modifier at all
+# and is not supposed to: knowing a man is not the same as breaking him.
+bc_he_has_watched_this_man_carve_at_his_own_table = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_one_who_married_his_child_commands_the_far_side_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Years of watching how a man handles small decisions, and then
+		# spending it correctly on one large one, is study rather than
+		# soldiering.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_has_watched_this_man_carve_at_his_own_table"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_he_has_watched_this_man_carve_at_his_own_table_toast
+			desc = bc_he_has_watched_this_man_carve_at_his_own_table_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
