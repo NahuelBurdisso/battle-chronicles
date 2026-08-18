@@ -8585,3 +8585,69 @@ bc_he_is_working_against_the_man_he_follows_trigger = {
 		}
 	}
 }
+
+# BATCH 193 - THE SADDLES NOBODY IS SITTING IN.
+#
+# `number_of_knights` and `max_number_of_knights` both returned zero across the
+# whole mod, as did `number_of_powerful_vassals`, `number_of_election_votes`
+# and `levies_to_liege`. Batch 142 counted a household once, with `any_knight =
+# { count >= 8 }`, and that is the only roster this mod has ever counted. It
+# has never asked how many swords a man is ENTITLED to seat - a number the
+# engine derives from his lands rather than from his choices - nor whether his
+# two numbers agree.
+#
+# BOTH KEYS ARE LIVE IN BOTH TREES, AND SO IS THE PAIRING. Vanilla compares the
+# two at `common/character_interactions/00_courtier_and_guest_interactions.txt`
+# line 296, at `common/decisions/tutorial_decisions.txt:1172` and at
+# `events/councillor_task_events/marshal_task_events.txt:102`, and the other
+# way round at `common/important_actions/00_war_actions.txt:246`. AGOT ships
+# its own copies at `00_courtier_and_guest_interactions.txt:325`, at
+# `marshal_task_events.txt:102` and at three places in
+# `events/agot_lmf_events/agot_lmf_army_events.txt` - `:644`, `:687` and
+# `:3643`. Bare thresholds are live too: `number_of_knights > 6` sits in both
+# trees at `common/character_interactions/06_ep3_laamp_interactions.txt`.
+#
+# THIS IS NOT BATCH 142'S HOUSEHOLD. That gate asks whether a man keeps eight
+# sworn swords. These ask whether the swords he keeps come to half or less of
+# what his lands would let him keep. Three or fewer is disjoint from eight or
+# more by arithmetic, so neither of these can be a subset or a superset of it,
+# and neither of them can be stated at all without the entitlement number,
+# which batch 142 never touches.
+#
+# TWO MEN, ONE FACT, AS IN BATCH 191. The first asks it of the man giving the
+# orders on this side; the second asks it of the man giving them on the far
+# side. Neither implies the other in either direction, the two pools roll
+# separately, and a field where both hold is a field where two short-handed
+# lords have found each other, which is a perfectly ordinary afternoon and not
+# a contradiction.
+#
+# ONE BARE PAIR, ONE GUARDED WALK. The first reads two scalars off the scoped
+# character and takes no guard, the way every bare character-scope read in this
+# file does. The second walks to the far side's commander, which can end
+# nowhere, so it carries both `exists` lines as siblings and repeats them
+# inside the `trigger_if` limit before either number is read.
+#
+# RARITY. A man must be large enough to seat six and be riding with three or
+# fewer, which is the exact shortfall vanilla itself thinks worth an important
+# action notice. It is the condition of a house that has just buried its
+# household, or of an heir who has not got round to hiring one. It is not the
+# condition of a lord who has been in charge for ten years.
+bc_half_his_saddles_came_empty_trigger = {
+	number_of_knights <= 3
+	max_number_of_knights >= 6
+}
+
+bc_the_far_lord_rode_out_short_handed_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.enemy_side.side_commander = {
+			number_of_knights <= 3
+			max_number_of_knights >= 6
+		}
+	}
+}

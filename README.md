@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 210 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 178 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 211 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 179 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and ninety-two batches, one per row of the table below, none of which needed a
+One hundred and ninety-three batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -777,6 +777,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | what the host under him is running on | The commander's own army, reached through `side_commander.commanding_army`, is asked two questions the mod had never put to it: how much is left in the carts (`army_supply <= 25`) and why it marched at all (`is_army_in_raid`). Batch 149 read what a man's lands could raise and had raised; these read the larder and the errand of the host actually standing here, which are facts about the campaign rather than the realm. Disjoint by construction: the first wants supply at or under a quarter, the second wants a raid with supply above a quarter. | 2 templates, base 50, 80 |
 | the other war, the one that is not this one | `is_in_civil_war` was at zero across the mod, and the six "civil war" mentions it does have are all comments about `is_civil_war`, which is a different key on a different scope - `bc_war_is_a_rebellion_trigger` reads it on the war behind this combat. This asks instead whether the man has a SECOND war going on somewhere else. Both gates deny that this war is the civil war, which is what stops the first from being a strict superset of the shipped rebellion gate: what is left is an ordinary war between realms fought by a man who also has his own people in arms behind him. The first reads root, the second reads the far side's commander, so they are two facts about two different men in batch 149's arrangement. Live in both trees - vanilla `tour.txt:38` and `06_ep3_interactions.txt:1845`, AGOT `tour.txt:45` and `06_ep3_interactions.txt:1909`. Commander half is `adapted`/`down`, a man who will not commit a reserve he needs for the other business; knight half is `measured`/`up`, a line coming apart along seams it brought with it, worked slowly rather than rushed. | 2 templates, base 50, 80 |
 | the plot that is already running while this is going on | `is_scheming_against` was at zero. The mod reads schemes once - the murder batch uses `any_scheme` and `any_targeting_scheme` with `scheme_type = murder` - and that batch asks whether a man has a death running SOMEWHERE. Neither half ever asked whether the somewhere is on this field. Neither new gate contains the murder pair nor is contained by it: a murder aimed at a man three hundred leagues away answers yes to the shipped gate and no to this one, a seduction aimed at the man across the grass answers the other way round. Restricting these to murder would have made the first a strict subset of the shipped gate, so the TARGET does the narrowing instead. Live block form in both trees - vanilla `shared_intents.txt:58` and `00_murder_effects.txt:385`, AGOT the same plus `00_hunt_triggers.txt:879`. The second is a knight row by construction: a commander is his own side commander, so on the commander pool it would be a man scheming against himself. Commander half is `ordered`/`down`, every order a half-beat late; knight half is `adapted`/`up`, a man fighting superbly for someone he intends to ruin. | 2 templates, base 50, 80 |
+| the saddles nobody is sitting in | `number_of_knights` and `max_number_of_knights` were both at zero, as were `number_of_powerful_vassals`, `number_of_election_votes` and `levies_to_liege`. Batch 142 counted a household once, `any_knight = { count >= 8 }`, and that is the only roster the mod had ever counted; it had never asked how many swords a man is ENTITLED to seat, a number the engine derives from his lands rather than his choices. These ask whether the two numbers agree. Three or fewer of an entitled six or more is disjoint from batch 142's eight or more by arithmetic, so neither gate can be a subset or a superset of it, and neither can even be stated without the entitlement number. Both keys are live in both trees and so is the pairing - vanilla compares them at `00_courtier_and_guest_interactions.txt:296`, `tutorial_decisions.txt:1172` and `marshal_task_events.txt:102`, and the other way round at `00_war_actions.txt:246`; AGOT ships its own copies plus three in `agot_lmf_army_events.txt`. Two men, one fact, as in batch 191: the first asks it of this side's commander with a bare pair of scalar reads, the second of the far side's commander through a guarded walk. Commander half is `bloodied`/`down`, a lord doing his own errands until a spear finds his thigh; knight half is `bloodied`/`up`, a fault nobody comes to mend. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -795,16 +796,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **four hundred and nine**, its "3, 3, 4 and 3"
-are 68, 68, 68 and 34, and the fall-through set is one hundred and seventy-one sites rather than
+plan 1's eighteen call sites are now **four hundred and eleven**, its "3, 3, 4 and 3"
+are 70, 68, 68 and 34, and the fall-through set is one hundred and seventy-one sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 210, knight 178.** Weight against vanilla's
+**Template totals are now commander 211, knight 179.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and seventy-eight templates against
-`knight_none`'s 2000 — one hundred and seventy-seven at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and seventy-nine templates against
+`knight_none`'s 2000 — one hundred and seventy-eight at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
