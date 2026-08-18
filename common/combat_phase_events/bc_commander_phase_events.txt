@@ -14241,3 +14241,62 @@ bc_this_was_never_his_war_and_it_is_costing_him_his_own_men = {
 		}
 	}
 }
+
+bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_his_people_think_saying_it_hurts_is_the_shameful_part_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having to work out the state of your own line by looking at it,
+		# because asking will only ever get you one answer.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast
+			desc = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

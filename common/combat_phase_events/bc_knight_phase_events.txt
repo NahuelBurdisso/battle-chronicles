@@ -11881,3 +11881,66 @@ bc_knight_this_is_the_precise_thing_he_came_all_this_way_for = {
 		}
 	}
 }
+
+bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_his_people_think_a_fight_is_the_point_of_the_week_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Growing up around fighting teaches a man to read one. Whether it
+		# also made him any good at doing it is a separate accident.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for_toast
+				desc = bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

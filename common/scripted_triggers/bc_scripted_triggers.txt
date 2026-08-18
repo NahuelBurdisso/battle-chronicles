@@ -6465,3 +6465,53 @@ bc_he_is_here_because_of_what_it_will_look_like_afterwards_trigger = {
 bc_he_would_rather_be_at_home_minding_his_own_trigger = {
 	has_vassal_stance = parochial
 }
+
+# BATCH 161 - WHAT HIS PEOPLE THINK A LIFE IS ACTUALLY FOR.
+#
+# `has_cultural_pillar` returned zero over the whole mod. Its single appearance
+# is a line of header prose in batch 150 listing what the culture surface still
+# had unread. The tradition pair at `:3625` reads how a people fights, batch 150
+# reads what two cultures make of each other, and neither has ever asked the one
+# question the pillars answer, which is what the culture is FOR.
+#
+# A CULTURE HAS EXACTLY ONE ETHOS AND THAT IS WHERE THE DISJOINTNESS COMES FROM.
+# Ethos is one of the four pillar slots and it holds a single value. AGOT ships
+# `common/culture/pillars/00_ethos.txt` with vanilla's seven - `ethos_bellicose`
+# at `:2`, `ethos_stoic` at `:27`, then bureaucratic, spiritual, courtly,
+# egalitarian and communal - and adds five of its own in
+# `00_agot_ethos.txt`: festive, mystic, methodical, assertive, fervent. Twelve
+# in play, one per culture, so the two gates below cannot both be true of one
+# man and nothing needs negating.
+#
+# THE FORM IS SHIPPED AND IT IS THE ONE THE MOD ALREADY USES FOR CULTURE. Vanilla
+# writes `has_cultural_pillar = ethos_bellicose` at
+# `common/accolade_names/00_accolade_names.txt:4424` and at
+# `common/accolade_types/04_ep2_skilled_attributes.txt:224`, and
+# `has_cultural_pillar = ethos_spiritual` at `00_accolade_names.txt:4406`. The
+# key is read inside a `culture = { }` block, exactly as
+# bc_his_people_meet_it_where_it_stands_trigger reads its tradition at `:3626`,
+# and `culture` off a character is not an optional link, so neither row takes a
+# guard.
+#
+# THIS IS NOT THE TRADITION ROWS AND IT IS NOT BATCH 150. A tradition is one
+# habit out of a dozen a culture may carry; the ethos is the single word the
+# engine uses for what the culture values above everything else, and a culture
+# can stand and fight while being stoic, bureaucratic or communal about it.
+# Neither gate implies either shipped tradition and neither tradition implies
+# either gate. Batch 150 asked what two peoples make of EACH OTHER, which is a
+# number between two cultures; this asks what one of them is, on its own, with
+# nobody to compare it to.
+#
+# RARITY. Counted over AGOT's own culture files, twenty-seven of a hundred and
+# fifty-nine cultures carry `ethos_bellicose` and twenty-seven carry
+# `ethos_stoic`, so each gate is about one man in six before the side row and
+# the readiness row are applied on top of it. That is wider than most rows in
+# this file and it is deliberately the plainest fact in the batch - what is rare
+# is not the culture, it is a moment where the culture is the thing worth saying.
+bc_his_people_think_a_fight_is_the_point_of_the_week_trigger = {
+	culture = { has_cultural_pillar = ethos_bellicose }
+}
+
+bc_his_people_think_saying_it_hurts_is_the_shameful_part_trigger = {
+	culture = { has_cultural_pillar = ethos_stoic }
+}
