@@ -3889,3 +3889,57 @@ bc_the_host_opposite_is_sick_trigger = {
 	}
 	NOT = { bc_there_is_sickness_in_his_own_camp_trigger = yes }
 }
+
+
+# --- the other host that has his name on it -----------------------------------
+#
+# `any_army` RETURNED ZERO OVER THE WHOLE MOD. A hundred and twenty batches have
+# read the men in front of a commander, the men beside him, the ground under
+# him and the war he is inside, and not one of them has ever asked the simplest
+# strategic question there is: whether this field is the whole of what he
+# currently has in the world, or one of two places his name is being spent
+# today. The 1.19.0.6 dump gives `any_army` as "Iterate through all armies",
+# character scope, yielding army scope.
+#
+# `count >= 2` AND NOT `count >= 1`. The host standing on this field is itself
+# one of the entries, so `count >= 1` would be true of every raiser in every
+# battle and would not be a gate at all. Two is the smallest number that means
+# what the moment is about.
+#
+# ITERATORS ARE NOT LINKS, so the first gate takes no guard. The second walks
+# scope:combat_side.enemy_side.side_commander and takes the standing one, with
+# the `exists` as a sibling and the read nested in a trigger_if that repeats it.
+#
+# THIS IS NOT AN ODDS GATE. bc_their_host_gap_value and the side-size rows read
+# how many men are on this field. This reads whether there is a second field at
+# all, which is a fact about a campaign rather than a fact about a battle, and
+# the two are independent in both directions: a man may be outnumbered here and
+# have nothing anywhere else, or hold the larger host here and still have half
+# his strength sitting in front of somebody's gate a week's ride away.
+#
+# THE SECOND IS RUMOUR AND MUST BE WRITTEN AS RUMOUR. Where the far lord's other
+# host is, and what it is doing, is not knowable from a rank. That there is one
+# is exactly the sort of thing a camp knows, because armies are raised in public
+# and men on the roads talk.
+#
+# DISJOINT BY CONSTRUCTION, the first winning the tie. Both sides in a large war
+# will often answer yes, and having half of one's own strength elsewhere is a
+# larger fact about a man's afternoon than knowing that the enemy does.
+#
+# RARITY. Most raisers hold one host at a time; a second raised army standing
+# somewhere else on the same day is a thing that happens in the middle of a big
+# war and not otherwise, and then the man has to be in a battle.
+bc_he_has_a_second_host_somewhere_trigger = {
+	any_army = { count >= 2 }
+}
+
+bc_the_man_opposite_has_a_second_host_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			any_army = { count >= 2 }
+		}
+	}
+	NOT = { bc_he_has_a_second_host_somewhere_trigger = yes }
+}

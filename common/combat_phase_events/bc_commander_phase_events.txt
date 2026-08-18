@@ -11788,3 +11788,81 @@ bc_the_ranks_were_shorter_before_anybody_drew = {
 		}
 	}
 }
+
+
+# --- this is the cheaper of the two things he is doing today ------------------
+#
+# GATE. bc_he_has_a_second_host_somewhere_trigger, read on the commander. He is
+# losing.
+#
+# KIND. adapted/down, and it falls through the verb table, which is correct
+# twice over: nothing is being done to the army that a modifier could describe,
+# and what is actually happening is a revision - he is re-pricing this field
+# downward against the other one and finding that he can afford to.
+#
+# WHAT THIS MAY NOT DO. It may not say where the other host is, who commands it,
+# what it is besieging or marching to, how many men are in it, or when it moves.
+# It may not have a rider arrive, may not have him send an order to it, may not
+# have him withdraw, may not rally, and may not end the day.
+#
+# SKILL. stewardship, because holding two hosts in the field at once is an
+# accounting problem before it is a martial one, and the man who is good at it
+# is the man who can put a price on a field while he is standing in it.
+bc_this_is_the_cheaper_of_the_two = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_a_second_host_somewhere_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Deciding which of your own two efforts is the one worth
+		# keeping is a ledger decision taken at speed and under noise.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_this_is_the_cheaper_of_the_two"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_this_is_the_cheaper_of_the_two_toast
+			desc = bc_this_is_the_cheaper_of_the_two_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

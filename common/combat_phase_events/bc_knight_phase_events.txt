@@ -9269,3 +9269,88 @@ bc_knight_they_were_beaten_before_he_got_here = {
 		}
 	}
 }
+
+
+# --- winning this one does not finish anything --------------------------------
+#
+# GATE. bc_the_man_opposite_has_a_second_host_trigger, read on the enemy
+# commander and carrying the exact negation of the commander-side gate. The
+# knight is winning.
+#
+# KIND. bloodied/up, so it takes bc_bloodied on a winning side. That pairing is
+# already shipped in twenty-two other places and it is the right one here: the
+# rank is going forward and it is being taken apart while it does, and the point
+# of the moment is that the price is being paid for something that settles less
+# than the men shouting believe.
+#
+# WHAT THIS MAY NOT DO. It may not say where the other host is, who leads it,
+# what it is doing, or when it will come. It may not have a rider arrive with
+# news, may not have anybody senior explain the war to him, may not reach the
+# far commander, may not kill a named man, and may not end the day.
+#
+# SKILL. martial, because knowing that a broken host on a field is not the same
+# thing as a beaten enemy is the one piece of strategy a man in a rank is
+# actually in a position to have learned.
+bc_knight_winning_this_one_finishes_nothing = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_opposite_has_a_second_host_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# The men who have been in more than one of these are the ones
+		# who can tell the difference between the end of a battle and
+		# the end of a war while the first one is still going on.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_winning_this_one_finishes_nothing"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_winning_this_one_finishes_nothing_toast
+				desc = bc_knight_winning_this_one_finishes_nothing_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
