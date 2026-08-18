@@ -4718,3 +4718,70 @@ bc_somebody_still_holds_his_surrender_trigger = {
 		count >= 1
 	}
 }
+
+# BATCH 136 - WHICH OF THE TWO SIDES DID NOT COME ALONE.
+#
+# `any_war_ally` returned zero across the whole mod. A hundred and thirty-five
+# batches have read this war's length, its cause, its declarer and its stakes,
+# and not one of them has asked the simplest question a man can ask standing in
+# a line and looking left: is everybody here for the same reason, or has
+# somebody else's banner turned up with its own arithmetic attached.
+#
+# THE TWO GATES READ THE TWO SIDES, NOT THE TWO MEN. This is the first pair in
+# the mod where the distinction between them is which ARMY is being asked about
+# rather than which character. The first asks whether the side the scoped man is
+# standing in has allies in it; the second asks whether the side opposite does.
+# Both are read through `scope:combat_side`, which makes them role-agnostic -
+# nothing here is a property only a commander has, so either file may call
+# either gate, and a knight reaches them the same way he already reaches his own
+# side's primary participant in the hook rows above.
+#
+# THEY ARE NOT MIRRORS AND NEITHER IMPLIES THE OTHER. Wars are frequently
+# lopsided: one side is a coalition and the other is one furious man. Both can
+# be coalitions, and both can be nobody, and a side's ally count says nothing
+# whatever about the other side's. No negation is needed and none is written.
+#
+# BOTH TAKE THE GUARD. `side_primary_participant` is an optional link and the
+# second walks two of them, so its `exists` rows come in a pair, exactly as
+# batch 131's dread-modified gate does.
+#
+# `any_war_ally` IS AN ITERATOR INSIDE AN ENTERED SCOPE, WHICH IS NOT THE SAME
+# AS AN ITERATOR AT THE TOP LEVEL. The iterator itself needs no guard, but the
+# scope it runs inside is a link and that link does.
+#
+# THIS IS NOT THE HOST-SIZE ROWS OR THE OUTNUMBERED ROWS. Those count men.
+# Allies are not men - a side with four allies can be smaller than a side with
+# none, and the fact that matters here is not the size of the line but that some
+# part of it belongs to somebody who can go home whenever he decides the price
+# has been paid.
+#
+# RARITY. Most wars in this game are two people. Alliances are called in
+# deliberately and cost something to call, so a side that has one is a side
+# where somebody has already spent a favour to be standing here.
+bc_this_side_did_not_come_alone_trigger = {
+	exists = scope:combat_side.side_primary_participant
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_primary_participant }
+		scope:combat_side.side_primary_participant = {
+			any_war_ally = {
+				count >= 1
+			}
+		}
+	}
+}
+
+bc_the_other_side_did_not_come_alone_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_primary_participant
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_primary_participant
+		}
+		scope:combat_side.enemy_side.side_primary_participant = {
+			any_war_ally = {
+				count >= 1
+			}
+		}
+	}
+}
