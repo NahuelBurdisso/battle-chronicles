@@ -8795,3 +8795,75 @@ bc_he_has_a_name_men_say_kindly_trigger = {
 	has_any_nickname = yes
 	NOT = { has_bad_nickname = yes }
 }
+
+# BATCH 196 - THE WORD TWO FAITHS BOTH USE ABOUT THE SAME THING.
+#
+# `has_same_sinful_trait` and `has_same_virtue_trait` both returned zero across
+# the whole mod. What the mod has is `num_sinful_traits >= 2` and
+# `num_virtuous_traits >= 2`, one man counted against his own faith, shipped
+# with the header at `:1648`. That is a verdict on one man by one doctrine.
+# These are something the engine will do that no count can: take TWO men, find
+# a word they both carry, and ask whether the two doctrines that judge them -
+# which need not be the same doctrine - happen to agree about that word.
+#
+# BOTH ARE LIVE IN BOTH TREES. Vanilla writes `has_same_sinful_trait = root`
+# and `has_same_virtue_trait = root` side by side at
+# `events/activities/tournaments/james_tournament_events.txt:170-171` and
+# `:231-232`, and the sinful form at eight places in
+# `events/yearly_events/bp1_yearly_james.txt` from `:805` onwards. AGOT carries
+# its own live copy of the yearly file with the same lines at `:805`, `:813`,
+# `:820`, `:841`, `:853`, `:867`, `:877` and `:889`. The dump gives the shape
+# as `scope:character_1 = { has_same_sinful_trait = scope:character_2 }`.
+#
+# NOT THE SHIPPED COUNTS. A man with two sins by his own faith may share none
+# of them with the man opposite, and two men may share one sinful word while
+# neither of them carries a second, so neither of these gates can be a subset
+# or a superset of `bc_his_own_faith_counts_against_him_trigger` or of
+# `bc_his_own_faith_counts_for_him_trigger`.
+#
+# NOT BATCH 177 EITHER. That batch counts three personality traits in common
+# without caring what anybody thinks of them. These need ONE trait in common
+# and then need two separate doctrines to have independently condemned or
+# praised it. Three shared harmless words pass 177 and fail these; one shared
+# sinful word passes these and fails 177.
+#
+# NOT A SHARED-FAITH GATE. `bc_foe_is_heathen` asks whether the two men pray to
+# different things. These do not care: the point of "by both of their
+# respective faiths" is that two different doctrines can arrive at the same
+# verdict about the same man, and often do, because the list of things a
+# religion is prepared to call a fault is short and human.
+#
+# TWO MEN, TWO WORDS, NO NESTING. The first reads the man across the field and
+# asks what they are damned for together. The second reads the man giving the
+# orders on this side and asks what they are praised for together. Both may be
+# true of one afternoon without either implying the other - a knight can share
+# a virtue with his own commander while his commander shares a vice with the
+# far one - and the pools roll separately in any case.
+#
+# GUARDS. Naming a link as the TARGET of a trigger is a read, so the first
+# carries both far-side `exists` lines as siblings and again inside the
+# `trigger_if` limit, and the second carries its one.
+#
+# RARITY. Two men of three or four words each must share one, and the two
+# doctrines judging them must both have an opinion about that word and the same
+# opinion. Most pairs of men on most fields share nothing that either religion
+# has bothered to write down.
+bc_the_same_word_damns_them_both_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		has_same_sinful_trait = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_the_same_word_speaks_well_of_them_both_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		has_same_virtue_trait = scope:combat_side.side_commander
+	}
+}

@@ -14091,3 +14091,66 @@ bc_knight_he_has_a_name_men_say_kindly = {
 		}
 	}
 }
+
+bc_knight_the_same_word_speaks_well_of_them_both = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_same_word_speaks_well_of_them_both_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Two men who were praised for the same thing tend to have been
+		# praised by different people, and to have noticed each other.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_same_word_speaks_well_of_them_both"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_same_word_speaks_well_of_them_both_toast
+				desc = bc_knight_the_same_word_speaks_well_of_them_both_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
