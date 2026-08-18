@@ -9392,12 +9392,12 @@ bc_this_war_has_only_two_names_in_it_trigger = {
 #
 # CENSUS. `is_occupied` and `is_raided` both return zero across the whole mod,
 # and so do `is_county_capital`, `has_ongoing_construction`, `num_buildings`
-# and `available_loot`. The mod walks to the battle province constantly - the
-# six band wrappers from :117 to :170 all enter
-# `scope:combat_side.combat.location` - but every single thing it has ever
-# asked a province is what KIND OF GROUND it is. Nothing has ever asked what
-# has been HAPPENING to that ground. This batch is the first province gate in
-# the mod that is not a terrain question.
+# and `available_loot`. The mod reads this province from several angles
+# already - the six terrain bands from :117, `fort_level` at :5646 and :5656,
+# `has_holding_type` at :5874 and :5884, `has_special_building` at :6021 and
+# :6031, and through the county its development at :1362 and its holder at
+# :1091 and :2154 - and every one of those asks what the ground IS or WHO
+# HOLDS it. Not one of them asks what has been HAPPENING to it.
 #
 # IT DOES NOT BELONG IN bc_ground_triggers.txt. That file holds the six terrain
 # bands and nothing else, and validate counts every `agot_is_*_terrain` mention
@@ -9467,12 +9467,11 @@ bc_this_ground_is_being_stripped_while_they_fight_trigger = {
 #
 # CENSUS. `is_county_capital`, `num_buildings`, `combined_building_level`,
 # `building_slots`, `free_building_slots` and `has_free_building_slot` all
-# return zero across the whole mod. Batch 204 at :9443 was the first province
-# gate here that was not a terrain question and it asked what has been
-# HAPPENING to the ground - taken, or being stripped. This one asks what is
-# STANDING on it, which is a different fact entirely: a burnt-out county seat
-# has been happening to for months and is still a county seat, and an empty
-# hillside can be perfectly peaceful and still have nothing on it at all.
+# return zero across the whole mod. Batch 204 at :9443 asked what has been
+# HAPPENING to the ground - taken, or being stripped. This one asks HOW MUCH IS
+# ON it, which is a different fact entirely: a burnt-out county seat has been
+# happening to for months and is still a county seat, and an empty hillside can
+# be perfectly peaceful and still have nothing on it at all.
 #
 # IT DOES NOT BELONG IN bc_ground_triggers.txt for the same reason batch 204
 # does not. That file holds the six terrain bands and nothing else, validate
@@ -9502,11 +9501,15 @@ bc_this_ground_is_being_stripped_while_they_fight_trigger = {
 # :2490-2510: five or more buildings against none, and county seat against not.
 # No province can satisfy both halves of either pair.
 #
-# NOT THE BATTLE-SIZE ROWS AND NOT THE OCCUPATION ROWS. `:185` and the size
-# bucket at :615 count men on the field. Batch 204 at :9443 asks whether the
-# ground has been taken or is being stripped, and a county seat can be
-# untouched while an empty hillside is occupied, so neither gate here is a
-# subset or superset of either of those.
+# NOT THE BATTLE-SIZE, OCCUPATION, FORTIFICATION OR HOLDING ROWS. `:185` and
+# the size bucket at :615 count men on the field. Batch 204 at :9443 asks
+# whether the ground has been taken or is being stripped, and a county seat can
+# be untouched while an empty hillside is occupied. Batch 148 at :5646 and
+# :5656 counts WALLS, which `num_buildings` does not count, and a great
+# fortress can stand in a province with one economic building on it. `:5874`
+# and `:5884` ask which KIND of holding sits here and `:6021` and `:6031` ask
+# whether it carries a special building, and none of the three moves with the
+# ordinary building count. No gate here is a subset or superset of any of them.
 #
 # GUARDS. `combat.location` does not always resolve, so both gates carry
 # `exists = scope:combat_side.combat.location` as a sibling and repeat it in
