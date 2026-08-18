@@ -13415,3 +13415,62 @@ bc_the_country_here_will_not_help_either_of_them = {
 		}
 	}
 }
+
+bc_the_men_he_brought_are_exactly_what_was_written_down = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_terms_he_holds_by_take_most_of_what_he_can_raise_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing to the man what the terms take from him every time somebody
+		# else decides there is going to be a war.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = calm
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_men_he_brought_are_exactly_what_was_written_down"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_men_he_brought_are_exactly_what_was_written_down_toast
+			desc = bc_the_men_he_brought_are_exactly_what_was_written_down_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

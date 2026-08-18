@@ -5493,3 +5493,82 @@ bc_the_people_on_this_ground_are_content_with_the_man_who_owns_it_trigger = {
 		}
 	}
 }
+
+# BATCH 147 - WHAT THE PARCHMENT SAYS HE OWES, WHICH IS NOT THE SAME AS WHAT HE
+# IS WILLING TO BRING.
+#
+# `vassal_contract_obligation_level`, `vassal_contract_has_modifiable_obligations`
+# and every `feudal_levies_*_level` script value returned zero across the whole
+# mod. Batch 141 asked whether the chain of command was also a chain of homage -
+# whether this man owes that man anything at all. It never asked HOW MUCH, and
+# the engine keeps that as a number on a contract, and the number is the single
+# most military fact in the whole vassal system: it is literally what fraction
+# of his men he is obliged to hand over.
+#
+# THE KEY, THE VALUES AND THE GUARD ARE ALL AGOT'S OWN. AGOT writes
+# `vassal_contract_obligation_level:feudal_government_levies` against the named
+# script values at `common/subject_contracts/contracts/special_contracts.txt:64`,
+# `:82`, `:251`, `:318`, `:387` and `:436`, and at
+# `common/decisions/30_court_decisions.txt:215`, `:224` and `:308`. The levels
+# themselves are vanilla's, defined at `common/script_values/
+# 00_goverment_values.txt:87-91` as exempt 0, low 1, normal 2, high 3,
+# extortionate 4, and AGOT's own contract group `lp_feudal_vassal` at
+# `common/subject_contracts/groups/00_agot_subject_contract_groups.txt:1-13`
+# carries `feudal_government_levies`, so the key is live in this setting.
+#
+# THE GUARD PAIR IS AGOT'S TOO, IN ONE PIECE.
+# `special_contracts.txt:384-387` reads `government_has_flag =
+# government_is_feudal` and the levy obligation level in the same block, for the
+# obvious reason: the key only exists on a feudal contract, and a man on some
+# other kind of contract is not a lower number on this scale, he is off the
+# scale entirely. `vassal_contract_has_modifiable_obligations` - AGOT's spelling,
+# used at `common/character_interactions/00_modifiy_vassal_contract.txt:21` and
+# repeatedly after it - covers the rest: it is documented as meaning they have a
+# contract at all, they use obligation levels, and they are count or above. A
+# top liege has no contract to read; both guards are repeated inside the
+# `trigger_if` limit in the usual way.
+#
+# `government_has_flag` IS ALREADY IN THE MOD ONCE, at 1205, reading
+# `government_is_mercenary` as the ARGUMENT of a gate. Here it is a guard rather
+# than the fact being asked about, and the two flags cannot both hold anyway.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. One is `>= feudal_levies_high_level`,
+# which is three, and the other is `<= feudal_levies_low_level`, which is one.
+# Nothing sits in both.
+#
+# THIS IS NOT THE HOMAGE ROWS. Batch 141 asks a yes-or-no about a relationship
+# between two named men on this field. These ask a number on a document, about a
+# relationship with a man who is not here and may never have been in a battle in
+# his life. A knight can owe his homage to the man beside him and owe his levies
+# to somebody four hundred miles away, and the mod could not previously say
+# either half of that.
+#
+# RARITY. `normal` is the default level the engine hands out and most contracts
+# in most realms sit on it, so both gates are asking for a contract somebody
+# went to the trouble of changing - a liege who squeezed, or a liege who was
+# squeezed - and then for that man to be standing in a battle on the day. High
+# and extortionate together are the top two rungs of five, exempt and low the
+# bottom two, and the middle rung is where nearly everybody is.
+bc_the_terms_he_holds_by_take_most_of_what_he_can_raise_trigger = {
+	government_has_flag = government_is_feudal
+	vassal_contract_has_modifiable_obligations = yes
+	trigger_if = {
+		limit = {
+			government_has_flag = government_is_feudal
+			vassal_contract_has_modifiable_obligations = yes
+		}
+		vassal_contract_obligation_level:feudal_government_levies >= feudal_levies_high_level
+	}
+}
+
+bc_the_terms_he_holds_by_ask_almost_nothing_of_him_trigger = {
+	government_has_flag = government_is_feudal
+	vassal_contract_has_modifiable_obligations = yes
+	trigger_if = {
+		limit = {
+			government_has_flag = government_is_feudal
+			vassal_contract_has_modifiable_obligations = yes
+		}
+		vassal_contract_obligation_level:feudal_government_levies <= feudal_levies_low_level
+	}
+}

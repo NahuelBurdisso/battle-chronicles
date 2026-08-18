@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 164 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 132 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 165 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 133 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and forty-six batches, one per row of the table below, none of which needed a
+One hundred and forty-seven batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -731,6 +731,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | what the name is worth | The engine keeps a number for what a house is worth to people who have no history with it, and the mod had never read it, which the house-size batch's own header admits. One commander is a man whose whole useful skill is knowing where every name sits relative to every other, on a field where the far name is the heavier one and his own line knows it and has started, very slightly, to wait. One knight carries a great name well enough that nobody on either side of him will ever be able to say whether it was the name or the man holding that stretch. The first gate is absolute and the second is relative, so neither contains the other. Neither man may name a house, a father, an ancestor, a sigil or a title, quote a saying, or have anybody bring him word. | 2 templates, base 50, 80 |
 | the reach and the grip | The mod has read a man's RANK eight times and how many SEATS he holds once, and had never once read how much GROUND there is, or the gap between the ground that answers to him and the ground his own hands are on. One commander governs a wide realm entirely through other men, holds almost none of it himself, and discovers on a losing afternoon that reach measures how far he can ask and not how hard he can hold. One knight left four stretches of his own working ground standing in order to come out under somebody else's banner, and does the job better than the men beside him for reasons that have nothing to do with duty. The two gates are disjoint by construction - three or fewer demesne provinces against four or more - so no man can ever pass both. | 2 templates, base 50, 80 |
 | the temper of the country | The mod has read the county under the battle three ways - how rich it is, whose it is, and what the weather and terrain are doing - and had never asked what the people standing in the doorways think of the man whose name is on it. `county_opinion` censused at zero. One commander is losing on ground whose people gave up having a view about anybody's wars years ago, where nothing is sold, nobody lies to him and nobody warns him, and his hurt men are carried past shut doors. One knight is winning on ground that has decided, under no obligation anyone can find, which of the two lines it would rather see still standing, and water keeps arriving that nobody asked for. The bands are the outer rungs of vanilla's own ladder and the pair is disjoint by construction. | 2 templates, base 50, 80 |
+| the terms he holds by | Batch 141 asked whether this man owes that man anything at all. It never asked how much, and the engine keeps that as a number on a contract - the single most military fact in the vassal system, since it is literally what fraction of his men he must hand over. One commander holds by terms set near the top of the scale, has met them exactly and brought nothing beyond them, and is losing while standing in the middle of a settlement he cannot be blamed for. One knight owes next to nothing on paper, came anyway, and fights without any grievance in his arm at all. The key, the script values and the feudal-government guard are all read from AGOT's own contract files. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -749,16 +750,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and seventeen**, its "3, 3, 4 and 3"
-are 53, 53, 53 and 27, and the fall-through set is one hundred and thirty-one sites rather than
+plan 1's eighteen call sites are now **three hundred and nineteen**, its "3, 3, 4 and 3"
+are 53, 54, 54 and 27, and the fall-through set is one hundred and thirty-one sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 164, knight 132.** Weight against vanilla's
+**Template totals are now commander 165, knight 133.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and thirty-two templates against
-`knight_none`'s 2000 — one hundred and thirty-one at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and thirty-three templates against
+`knight_none`'s 2000 — one hundred and thirty-two at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
