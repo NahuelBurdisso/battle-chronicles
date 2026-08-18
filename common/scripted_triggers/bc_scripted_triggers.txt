@@ -6515,3 +6515,69 @@ bc_his_people_think_a_fight_is_the_point_of_the_week_trigger = {
 bc_his_people_think_saying_it_hurts_is_the_shameful_part_trigger = {
 	culture = { has_cultural_pillar = ethos_stoic }
 }
+
+# BATCH 162 - WHAT HIS FACE HAS BEEN DOING FOR HIM SINCE HE WAS A BOY.
+#
+# `has_trait_rank` AND BOTH BEAUTY GROUPS CENSUSED AT ZERO OVER THE WHOLE MOD,
+# README included. The keyword has never been used here and the two groups have
+# never been named, in script or in prose. The mod reads a great deal about men
+# - what they are good at, what they believe, who they answer to, what the war
+# has already done to them - and has never once asked what they look like.
+#
+# THE FORM IS SHIPPED IN BOTH TREES AND THIS IS THE EXACT BLOCK. AGOT's own copy
+# of the file family this mod extends writes
+# `has_trait_rank = { trait = wounded rank = 1 }` in
+# `common/combat_phase_events/00_knight_phase_events.txt` at `:32`, `:39`,
+# `:47`, `:105`, `:112`, `:119` and `:292`. Vanilla writes the comparator form
+# on the very groups used below - `has_trait_rank = { trait = beauty_good
+# rank >= 1 }` at `events/activities/tour_activity/tour_general_events.txt:2041`
+# and again at `:2368`, and `rank >= 2` at `:2091`. Nothing here is invented.
+#
+# THE RANK-ZERO TRAP IS REAL AND BOTH ROWS ARE WRITTEN AROUND IT. The 1.19.0.6
+# documentation warns that not having the trait and holding rank 0 count as the
+# same thing, so `rank < X` on its own is always true of a man who has no trait
+# in the group at all. Every plain-faced man in the game would pass such a row.
+# Both rows below are therefore `>=`, which reads upward from a rung that only
+# exists if the trait exists, and neither needs a floor row.
+#
+# RANK TWO, NOT RANK ONE, AND THE WEIGHTS ARE WHY. AGOT ships the ladder at
+# `common/traits/00_traits.txt` with the `group = beauty_bad` line of the first
+# rung at `:7748` and the matching `group = beauty_good` line at `:7874`, and
+# `beauty_good_3` at `:7958`. The birth weights run 0.5 for the first rung,
+# 0.25 for the second and 0.15 for the third on both sides. Gating at rank 1
+# would take nine tenths of everyone who has any of it; gating at rank 3 alone
+# would make both templates something a player might never see. Rank 2 takes
+# the top two rungs, which is the same choice the physique pair made at
+# `bc_knight_built_for_it` by OR-ing the top two `has_trait` rows - written
+# here with the keyword that does it properly instead.
+#
+# THE TWO GATES CANNOT BOTH BE TRUE AND THE ENGINE ENFORCES IT, not the script.
+# `beauty_bad_1` lists `beauty_good` in its `opposites` block at `:7735` and
+# `beauty_good_3` lists `beauty_bad` at `:7960`; the two ladders are opposed
+# group to group, so no character carries a rung on both. Nothing needs
+# negating, and in any case the two rows are asked about two different men.
+#
+# THIS IS NOT THE PHYSIQUE BATCH AND IT IS NOT THE PROWESS ROWS. Physique is
+# what he can carry and how hard he is to move. Prowess is how well he fights.
+# This is what happens in other men's faces before he has done anything at all,
+# which is a fact about them rather than about him, and it does not predict
+# either of the other two - AGOT is full of enormous ugly men and beautiful
+# ones who cannot hold a shield up.
+#
+# RARITY. Rank two or better is one man in something like six on each side of
+# the ladder before the readiness row and the side row are applied on top, and
+# the far rung is genetically constrained on top of that. It is a fact that
+# most men on a field do not have, in either direction.
+bc_men_have_been_flinching_at_his_face_his_whole_life_trigger = {
+	has_trait_rank = {
+		trait = beauty_bad
+		rank >= 2
+	}
+}
+
+bc_men_have_been_staring_at_his_face_his_whole_life_trigger = {
+	has_trait_rank = {
+		trait = beauty_good
+		rank >= 2
+	}
+}

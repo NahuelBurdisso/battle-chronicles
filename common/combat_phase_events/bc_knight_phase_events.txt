@@ -11944,3 +11944,66 @@ bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for = {
 		}
 	}
 }
+
+bc_knight_the_whole_line_can_find_him_without_being_told_where_to_look = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_men_have_been_staring_at_his_face_his_whole_life_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being easy to pick out of a crowd is only an advantage if the man
+		# they are all watching is still upright by the end of it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_the_whole_line_can_find_him_without_being_told_where_to_look"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_the_whole_line_can_find_him_without_being_told_where_to_look_toast
+				desc = bc_knight_the_whole_line_can_find_him_without_being_told_where_to_look_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
