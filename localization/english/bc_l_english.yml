@@ -4259,3 +4259,69 @@
 
  bc_knight_everything_he_has_was_handed_to_him_toast:0 "The First Afternoon Of His Life That Will Take Any Payment At All"
  bc_knight_everything_he_has_was_handed_to_him_toast_desc:0 "The animal under him is better than the one under any man he has passed today, and it was chosen for him, and it was chosen instead of being chosen for somebody with as much right to it as he had. So is the mail. So is the sword, so was the place in the line, so was the year of instruction from a master-at-arms who had other pupils and gave him the mornings. None of it can be given back and none of it was ever refusable and there has never before been a single thing he could do about any of it. There is today. The far side is going and he goes after it, and then he goes after it further, through the trampled ground and the dropped gear and the men who have already stopped being an army, past the last of the horns and past the point where anyone behind him could tell him anything. He does not tire. The horse does. It goes on carrying him a long time after it has stopped being able to and it will not be ridden again, and he comes back at dusk on foot, leading it, having finally spent something that was his.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 104 - whose oath is the one that broke ----------------------------
+#
+# NEITHER OF THESE TWO MAY NAME THE LIEGE, give his title, his house, his seat
+# or his cause, and neither may state what the rebellion is about. The engine
+# knows there is a man at the top of a chain and that the chain has a break in
+# it. That is all either page is allowed to know.
+#
+# NEITHER MAY USE THE WORDS "rebel", "rebellion", "traitor" or "treason". Those
+# are words for after, said by whoever won, and both of these are happening
+# during.
+#
+# NEITHER MAY IMAGINE THE ENDING. No block, no rope, no pardon, no terms, no
+# knee, no reckoning at any later date. Both men are inside an afternoon and
+# neither of them is permitted to see past dusk.
+#
+# THE FIRST MAY NOT DOUBT, may not regret, may not justify himself, and may not
+# be shown as either right or wrong. He is winning and the win is real. It may
+# not have him say any of this aloud, may not have anybody congratulate him, and
+# may not have a single man in his army understand what has occurred to him. It
+# may not use the word "oath".
+#
+# THE SECOND MAY NOT RESENT ANYBODY BY NAME, may not consider leaving, may not
+# be tempted to, and may not have anybody near him desert on the page. It may
+# not make him noble, may not have anybody notice what he is doing, and may not
+# reward him. It may not have him think about the quarrel at all beyond knowing
+# that it is not his, and it may not use the word "loyalty".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his".
+ bc_the_word_for_this_has_one_ending_toast:0 "Winning It Is The Part That Makes It Permanent"
+ bc_the_word_for_this_has_one_ending_toast_desc:0 "It occurs to him, watching a wing go in exactly where he sent it and do exactly what he asked of it, that he has been thinking about today as a thing that could still go either way, and that this has not been true for some time. There is no arrangement at the end of a field like this one. There is no version of the next year in which men sit down and agree that a misunderstanding got out of hand and everybody goes back to a slightly worse seat than they had. That version stopped existing at some point between dawn and now, and it did not stop existing because anything went badly. It stopped because things went well. Every good hour he has had out here has removed one more of the endings in which he simply carries on being what he was, and he has had a great many good hours, and there is nothing in front of him now but the one ending left. He watches the far line give again. He is entirely calm. He has the strange, weightless sensation of a man who has been carrying a decision for months and has just set it down somewhere he cannot get back to.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_was_not_asked_about_any_of_it_toast:0 "He Has Kept Every Promise He Ever Made And This Is Where It Put Him"
+ bc_knight_he_was_not_asked_about_any_of_it_toast_desc:0 "Not one of the reasons this field exists is a reason of his. He did not want it, was not consulted about it, does not stand to gain a foot of ground or a copper from it going well, and is going to spend the rest of his life explaining, to men who will not believe him, that he had no view on the matter whatsoever. He is not angry about that. Anger would require somebody to be angry at, and the only candidate is a man he is required to obey and has obeyed correctly every day of his adult life, which is precisely why he is here. So he narrows what he is responsible for until it is a size he can actually be responsible for. There is a man on his right. There is a man on his left. There is a stretch of churned grass in front of the three of them that is going to be given up eventually and is not going to be given up in the next quarter of an hour, and holding that — not the battle, not the war, not whatever is going to be decided about all of this in some hall at the end of it — is a job. He takes it. The three of them do not move, and the rank re-forms on them twice, and neither time does anybody ask him why.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

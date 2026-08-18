@@ -7927,3 +7927,75 @@ bc_knight_everything_he_has_was_handed_to_him = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# His own oath is whole. Every part of it has been kept. The man he swore it to
+# is the one who broke his, and that is the entire reason this knight is
+# standing on a losing field with nothing whatever of his own in the quarrel.
+# He cannot leave and there is nothing here he wants, so what is left to hold
+# is the piece of line he is actually standing in: `entrenched` and `down`, a rank
+# bracing while it loses, which is precisely what bc_shieldwall is for.
+bc_knight_he_was_not_asked_about_any_of_it = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_man_above_him_broke_first_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a piece of a line that is losing, for no reason you would
+		# be able to give afterwards, is the least glamorous competence in
+		# the trade and the one that keeps armies from evaporating.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = calm
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = vengeful
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_was_not_asked_about_any_of_it"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_was_not_asked_about_any_of_it_toast
+				desc = bc_knight_he_was_not_asked_about_any_of_it_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

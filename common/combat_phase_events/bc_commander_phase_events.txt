@@ -10525,3 +10525,71 @@ bc_what_he_is_still_meaning_to_go_home_to = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is in the field against the man he swore to, and he is winning. The KIND
+# is `measured` because what happens to him this afternoon is not something the
+# battle does to his army - it is something he works out about the result while
+# the result is still arriving - and `measured` hands out no modifier, which is
+# exactly right. Nothing here braces a line, bleeds it or sets it running. What
+# changes is only what the man understands he has done.
+bc_the_word_for_this_has_one_ending = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_broken_with_his_own_lord_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing how complete a victory has to be before it stops being a
+		# victory and starts being a settled question is a soldier's
+		# judgement and not a courtier's.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_word_for_this_has_one_ending"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_the_word_for_this_has_one_ending_toast
+			desc = bc_the_word_for_this_has_one_ending_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
