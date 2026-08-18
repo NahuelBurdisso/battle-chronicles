@@ -8651,3 +8651,86 @@ bc_the_far_lord_rode_out_short_handed_trigger = {
 		}
 	}
 }
+
+# BATCH 194 - THE TRICK THE OTHER MAN HAS AND HE HAS NOT.
+#
+# `character_has_commander_trait_scope_does_not` returned zero across the whole
+# mod. The mod knows perfectly well that the commander traits are a separate
+# short list - `bc_reputation_effects.txt` hands them out at `:486` and `:509`
+# behind `number_of_commander_traits < 3`, and two headers in this file already
+# quote `category = commander` and `flag = commander_trait_flag` - and it has
+# never once asked, as a gate, which of the men on a field is carrying one that
+# another is not.
+#
+# THIS IS NOT BATCH 177'S COMPARISON. That batch counts PERSONALITY traits,
+# three in common or three opposing, and personality is what a man is like.
+# These read the commander list, which is not what a man is like but what he
+# has been taught to do with a line of men. The two lists do not intersect: no
+# trait carries both `category = personality` and `category = commander`, so
+# neither of these gates can be a subset or a superset of either of batch
+# 177's, and a man may pass one pair and fail the other in any combination.
+#
+# NOR IS IT `bc_foe_is_formidable`. That gate reads the far commander's martial
+# at 16, a number. A commander trait is not a number and is not implied by one:
+# the engine hands these out through the warfare lifestyle, the marshal's task
+# and a small set of events, so a middling man may carry two and a man with
+# eighteen martial may carry none.
+#
+# THE DIRECTION MATTERS AND IT IS EASY TO GET BACKWARDS. The key reads "does
+# the CHARACTER named on the right have a commander trait the SCOPE does not".
+# Vanilla writes it in the pupil's scope with the teacher on the right at
+# `events/councillor_task_events/marshal_task_events.txt:225` and `:1851` and
+# in `common/scripted_effects/00_education_effects.txt:3016` with
+# `scope:educator` on the right; the warfare lifestyle writes it with `prev` at
+# `events/lifestyles/warfare_lifestyle/learn_commander_trait_events.txt:567`,
+# `:578`, `:610` and `:635`, and `events/relations_events/vassal_events.txt`
+# line 2640 writes `root = { character_has_commander_trait_scope_does_not =
+# prev }`. AGOT ships its own copies of all five files. In every one of them
+# the man on the right is the man who knows the thing.
+#
+# TWO MEN LOOKING THE OTHER WAY FROM EACH OTHER. The first is read in the
+# commander's own scope and puts the far commander on the right, so it asks
+# whether the man opposite was taught something he was not. The second walks to
+# this side's own commander and puts the scoped knight on the right, so it asks
+# whether the man in the line was taught something the man giving the orders
+# was not. Neither implies the other, they concern different pairs of men, and
+# the two pools roll separately in any case.
+#
+# THE SECOND USES `root` ON PURPOSE, LIKE bc_side_has_kin_knight_trigger. Once
+# the walk has moved the scope to the commander, the knight the template is
+# rolling for is only reachable as `root` - `prev` and `this` would both be
+# wrong here, and vanilla's own `vassal_events.txt:2640` writes exactly this
+# shape.
+#
+# GUARDS. Naming a link as the TARGET of a trigger is a read. The first names
+# the far side's commander and carries both `exists` lines as siblings and
+# again inside the `trigger_if` limit; the second names this side's commander
+# and carries its one.
+#
+# RARITY. The list is short and most men never earn a word from it, so the
+# first needs a far commander who has been taught something at all and then
+# needs this man not to have been taught the same thing, and the second needs a
+# knight who has been taught something his own commander has not - which is the
+# rarer of the two, because the man handed the army is usually the man who has
+# been at this longest.
+bc_the_man_opposite_has_learned_something_he_has_not_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		character_has_commander_trait_scope_does_not = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_he_has_learned_something_the_man_leading_him_has_not_trigger = {
+	exists = scope:combat_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.side_commander }
+		scope:combat_side.side_commander = {
+			character_has_commander_trait_scope_does_not = root
+		}
+	}
+}
