@@ -10562,3 +10562,69 @@ bc_six_roofs_answer_to_him_directly_trigger = {
 bc_everything_he_holds_is_one_roof_trigger = {
 	domain_size = 1
 }
+
+
+# BATCH 218 - HOW MUCH ARRIVES EVERY MONTH WITHOUT HIM DOING ANYTHING.
+#
+# CENSUS. `monthly_character_income` returned zero across the whole mod, and so
+# did `monthly_character_expenses`, `monthly_character_balance`,
+# `yearly_character_balance` and the bare words `income` and `expenses`. Two
+# hundred and seventeen batches of money questions, and every one of them has
+# read the purse rather than the pipe feeding it.
+#
+# PRECEDENT. The key is live and heavy in both trees - a hundred and sixty-four
+# uncommented uses in vanilla, a hundred and thirty-two in AGOT - and both
+# thresholds used here are shipped ones. `>= 20` is vanilla's own middle rung
+# for a man with real money coming in, at
+# common/decisions/dlc_decisions/ep_3/06_ep3_admin_decisions.txt:965, :1046,
+# :1467 and :1544, where it sits in a ladder that runs 100, 80, 60, 40, 20, and
+# again in common/script_values/00_ai_values.txt:1700 where the AI uses it to
+# decide whether a man can afford a thing. AGOT carries all four decision uses
+# at :978, :1059, :1494 and :1571. `< 0.3` is AGOT's own, written by AGOT and
+# not inherited, at events/agot_events/agot_colonization_events.txt:534, where
+# it is the test for an AI lord who has nothing to work with. AGOT reads the
+# key in its own files elsewhere too - common/important_actions/
+# 00_agot_actions.txt:118 compares it against expenses, and
+# common/script_values/01_agot_dynamic_values.txt:2 and :12 build values out of
+# it - so this is not a vanilla key the submod merely inherits.
+#
+# WHAT THE TWO GATES ARE ASKING. The first is a man who does not have to think
+# about money on a monthly basis, because twenty a month arrives whether he
+# attends to it or not, and who is standing on a field he is losing anyway. The
+# second is a man for whom almost nothing arrives at all, under a third of a
+# coin a month, standing in the rank of a side that is winning.
+#
+# THEY ARE DISJOINT BY CONSTRUCTION. Twenty is not under a third. No character
+# answers yes to both, in either pool, on any day, so neither gate has to name
+# the other and no tie-break row is needed.
+#
+# THIS IS FLOW AND THE SHIPPED MONEY GATES ARE STOCK. Every money row this mod
+# already owns reads `gold` - what is in his hands at this moment, including
+# `gold < 0` twice - or reads a live loan. Income is the other thing entirely.
+# A man can have twenty a month arriving and an empty chest, because he spends
+# it the week it lands; a man can be sitting on a hoard he inherited with
+# almost nothing coming in behind it. Neither gate here is a subset or a
+# superset of any purse row, and on any given man the two facts routinely
+# disagree.
+#
+# GUARDS. Both gates read a number off root, which is the scoped character in
+# both pools and always present. Neither takes a guard and neither walks a
+# link.
+#
+# THE TWO POOLS ROLL SEPARATELY, batch 149's construction, so a knight who is
+# himself richly landed never denies the commander gate and a poor commander
+# never denies the knight gate. Each gate is only ever asked of its own man.
+#
+# RARITY. Twenty a month is the middle of vanilla's own five-rung ladder and
+# above it, which puts the first gate on well-established lords rather than on
+# every man who happens to be holding a title, and then it wants him losing.
+# Under a third of a coin is AGOT's line for a lord with nothing to spend,
+# which excludes both the comfortable and the merely modest, and then it wants
+# him in the rank on a winning side.
+bc_a_great_deal_arrives_every_month_trigger = {
+	monthly_character_income >= 20
+}
+
+bc_almost_nothing_arrives_for_him_trigger = {
+	monthly_character_income < 0.3
+}
