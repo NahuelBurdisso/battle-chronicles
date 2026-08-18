@@ -8073,3 +8073,76 @@ bc_the_thing_he_never_said_out_loud_trigger = {
 bc_none_of_it_ever_reached_him_trigger = {
 	has_sexuality = asexual
 }
+
+# BATCH 186 - THE THING THAT IS IN HIM AND HAS NEVER ONCE COME OUT.
+#
+# `has_inactive_trait` RETURNED ZERO OVER THE WHOLE TREE. The word "inactive"
+# appears twice in the mod and both are prose - the diarchy rarity note at
+# `:4012` and the physique list at `:6962`. `depressed` returns zero as a
+# word and as a key. Madness was opened long ago at `:1302` with
+# bc_his_mind_is_not_his_own_trigger, four rows of `has_trait` across
+# `lunatic_1`, `lunatic_genetic`, `possessed_1` and `possessed_genetic`, and
+# other batches have read the body he was dealt through
+# `num_of_bad_genetic_traits`. Every one of those reads something that is
+# true of him where anybody can see it. None of them has ever read the trait
+# that is on his sheet and switched off.
+#
+# THE DUMP. `has_inactive_trait` is "Does the character have this trait or a
+# trait of this trait group amongst their inactive traits?", character scope.
+# The inactive list is a separate list from the trait list, which is the
+# whole reason the engine ships a second trigger for it.
+#
+# VANILLA PROVES THE TWO LISTS ARE SEPARATE, IN ONE EVENT.
+# `events/trait_specific_events/trait_specific_events.txt:343-366` is the
+# event that gives a man the madness. Its trigger is `NOT = { has_trait =
+# lunatic }` - so the event only runs on a man who does NOT answer yes to the
+# trait - and its immediate then reads `if = { limit = { has_inactive_trait =
+# lunatic_genetic } make_trait_active = lunatic_genetic } else = { add_trait
+# = lunatic_1 }`. A man carrying the dormant gene reaches that `if` and takes
+# the first arm. He therefore fails `has_trait` and passes
+# `has_inactive_trait` at the same instant, and vanilla is built on that
+# being so. The same pattern runs at `:446` for `possessed_genetic`, at
+# `:562` for `depressed_genetic`, and at
+# `trait_specific_ongoing_events.txt:1834`.
+#
+# AGOT SHIPS BOTH KEYS UNCHANGED. `depressed_genetic` at
+# `common/traits/00_traits.txt:5945` and `lunatic_genetic` at `:6012`, the
+# second one under vanilla's own comment calling it schizophrenia.
+#
+# DISJOINT FROM THE MADNESS GATE, AND NOT BY ACCIDENT. Because an inactive
+# trait does not answer `has_trait`, a man carrying only the dormant gene
+# fails all four rows of bc_his_mind_is_not_his_own_trigger. The two gates
+# cannot both be true of the same man on the same afternoon, so neither
+# template can ever be a subset of the other, and the two never write about
+# the same subject. The same reasoning covers
+# bc_his_body_was_dealt_to_him_trigger: a switched-off trait is not applying
+# its modifiers to anybody, which is what switched off means, so a man whose
+# only bad genetic trait is the sleeping one reads a plain zero there.
+#
+# THAT IS ALSO THE ENTIRE POINT OF THE PAIR. These are men who have been
+# waiting their whole lives for a thing that has not happened. Nobody has
+# ever seen it in either of them, nothing has ever tested as anything, and
+# both of them know exactly which of their kin it took and roughly what age
+# it took them at. The first has spent forty years listening to himself for
+# it. The second stopped listening a long time ago and got on with the day.
+#
+# DISJOINT BY CONSTRUCTION BETWEEN THE TWO ROWS AS WELL. The second gate
+# negates the first's key outright, so a man carrying both sleeping traits
+# goes to the first row and only the first row.
+#
+# RARITY. Both are thin and neither pretends otherwise. A dormant bad gene
+# has to be inherited and then not triggered, and the men it runs in are a
+# small and specific set of houses. This is the opposite of a gate that fires
+# for nearly everybody; it is a gate that waits.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope reads on the subject
+# the caller has already entered, and a man with an empty inactive list is a
+# clean no rather than an error.
+bc_the_thing_he_was_born_carrying_trigger = {
+	has_inactive_trait = lunatic_genetic
+}
+
+bc_it_never_woke_in_him_trigger = {
+	has_inactive_trait = depressed_genetic
+	NOT = { has_inactive_trait = lunatic_genetic }
+}
