@@ -4787,3 +4787,89 @@
 
  bc_knight_the_name_is_promised_and_the_day_is_not_toast:0 "There Is A Version Of Him Written Down Somewhere And It Is Not This One"
  bc_knight_the_name_is_promised_and_the_day_is_not_toast_desc:0 "The day has gone wrong in the ordinary way, without a moment in it anybody will remember, and that is the thing he cannot stand about it. A defeat with nothing in it. He rides at the part of the far line that is furthest from anything useful, because it is the part where a man can be seen, and he does it three times, and each time it costs the horse under him more than it costs anybody in front of him. Nothing comes of it. He does not break anything, he does not reach anybody worth reaching, and by the third pass his horse is doing something with its head that he has felt before and has never once ignored, and he ignores it. What he is riding at is not the enemy. It is a line of writing in a chamber he has never been inside, saying what he will be allowed to be called one day, on the day somebody else has finished being it, and he has begun to understand that it is a description of a man he will have to become in public rather than a promise about who he already is. The line goes back behind him while he is doing this. He knows that too.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+# --- batch 111 - how many people are left with that name ---------------------
+#
+# NEITHER OF THESE TWO MAY NAME A HOUSE, a person, a seat, a sigil or a motto,
+# and neither may use the words "extinct", "line", "blood", "heir" or "last" of
+# a person. The engine has already done the counting. Both pages are about what
+# a very small number feels like from inside on one particular afternoon.
+#
+# NEITHER MAY LIST THE DEAD, may not say how any of them died, may not give a
+# war, a year or a place for any of it, and may not have anybody remember
+# anybody. The subtractions all happened somewhere else and neither page is
+# allowed to go there.
+#
+# NEITHER MAY MENTION CHILDREN, marriages, pregnancies, betrothals or any
+# arrangement for continuing anything. Both pages are about arithmetic that has
+# already been done, not about arithmetic somebody could still do.
+#
+# THE FIRST MAY NOT RALLY, may not turn the line, may not have him wounded, may
+# not have him consider his own death directly, and may not have him say
+# anything to anybody. It may not have the men around him know what he is
+# thinking, may not have anybody comfort him, and may not end the day.
+#
+# THE SECOND MAY NOT REACH THE MAN, may not kill him, may not capture him, may
+# not have him seen close up, and may not have him say a word. It may not have
+# root feel pity, may not have root feel triumph, may not have root decide
+# anything about it, and may not use the words "hunt", "quarry" or "finish".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty
+# years", "a second meaning attached", "in front of witnesses", "belongs only
+# to him", "further off than his own arm", "three or four paces at a time",
+# "the number is smaller", "at the good part", "before the horses are even
+# cool", "comes back walking", "a table in a cold room", "at the correct
+# hour", "until well after dark", "forty miles from here", "on a borrowed
+# horse", "minding that opening himself", "an exit in it", "a sealed bag",
+# "wide and low", "the far end of a road", "does not know today is happening",
+# "would have been fed in", "gave him the mornings", "on foot, leading it",
+# "spent something that was his", "could still go either way", "a slightly
+# worse seat", "set it down somewhere he cannot get back to", "had no view on
+# the matter", "a man on his right", "does anybody ask him why", "sign a name
+# you know", "about four people alive", "dressing off somebody", "too tidy to
+# be an accident", "answered before it is finished", "not being beaten by an
+# army at all", "one exact measurement left", "the only thing today that has
+# been done properly", "the best view on the field", "the knowing is worse
+# than the not going", "the work is being in one place", "the finest hour of
+# somebody else's life", "it comes from meals", "one notch harder than the
+# situation asked for", "in a hall in winter with the fire going", "a step
+# further back than they were", "the sensible, almost administrative urge",
+# "thirty paces along the same rank", "since before he was worth knowing",
+# "the second answer is worse than the first was", "a longer route than the
+# one he learned to trust", "impatience of a very specific and unusual kind",
+# "a hundred paces is not a distance worth counting", "personally offended him
+# by existing", "horses standing with their heads down", "stops being an item
+# and starts being a soldier", "a piece of paper with a life attached", "the
+# specific way you are kind to something valuable", "refuse to be the reason
+# it goes any faster", "a conversation he was not at", "already been talked
+# about somewhere he was not", "at the going rate", "a defeat with nothing in
+# it", "the part where a man can be seen", "whose going first would settle
+# anything".
+ bc_the_arithmetic_of_the_name_is_very_small_now_toast:0 "There Is Not Very Much Of This Left And Most Of It Is Sitting On This Horse"
+ bc_the_arithmetic_of_the_name_is_very_small_now_toast_desc:0 "It arrives at him sideways, the way the important things do, while he is watching the second rank shuffle to fill a gap that is going to open again in a moment. It is not a thought about dying. He has had those and they are ordinary and they do not feel like this. It is a much flatter observation, almost clerical: that whatever this afternoon does to him it is also doing to a quantity, and the quantity is now so small that it can be held in the head without effort, which was not true when he was young and is the whole of what has changed. He does not do anything about it. There is nothing to do about it that is different from what he was already doing, which is to make the men in front of him stand where they are for one more push, and then one after that. What it changes is the temperature of the standing. He stops thinking about the battle in terms of the ground and starts thinking about it in terms of hours, and he goes very calm, and the line — which has no idea why — finds that the orders coming down it have got shorter and stopped containing any doubt at all.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_the_end_of_a_name_is_a_short_afternoon_toast:0 "They Are Not Chasing An Army Any More And Everybody Riding Knows It"
+ bc_knight_the_end_of_a_name_is_a_short_afternoon_toast_desc:0 "The fighting stopped about a mile back. What is happening now has the shape of fighting and the pace of work, and root is in it with perhaps forty others, strung out across ground that is going soft, and the thing they are following has stopped being a formation and become a direction. He is aware, in the incurious way you are aware of the weather, that this is the shorter kind of afternoon: not the sort that ends when one army has had enough, but the sort that ends because there stops being anything on the other side of the question. There is no order to that effect. Nobody has said it. It is simply understood along the whole ragged length of the pursuit, in the way that men who have done this before understand what is expected without needing to be unpleasant about it, and it makes everybody slightly quieter and slightly more careful with their horses. Root rides. The ground goes past. He is not thinking about what is at the end of it, and he notices that he is not thinking about it, and he keeps riding anyway.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

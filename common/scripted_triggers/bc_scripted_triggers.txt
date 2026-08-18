@@ -3289,3 +3289,74 @@ bc_the_far_side_keeps_famous_men_and_he_does_not_trigger = {
 		any_acclaimed_knight = { count >= 1 }
 	}
 }
+
+
+# --- how many people are left with that name ---------------------------------
+#
+# THE MOD READS HOUSES AND HAS NEVER COUNTED ONE. `bc_foe_is_house_trigger` and
+# its neighbours ask whether two men share a house; nothing anywhere asks how
+# many people are in it. `any_dynasty_member` and `dynasty_prestige_level` were
+# both at zero occurrences.
+#
+# THE COUNT IS TWO AND THE THRESHOLD IS BORROWED, NOT INVENTED. Vanilla's own
+# 00_relation_triggers.txt uses `any_dynasty_member = { count <= 2 }` twice for
+# the same idea, and two is the number that makes the gate mean what its name
+# says: him, and at most one other person anywhere in the world. Three would
+# have caught every minor house on the map and a gate that fires for nearly
+# everybody is not a gate.
+#
+# `is_alive = yes` IS INSIDE THE COUNT ON PURPOSE. The iterator is believed to
+# list living members only, and if that is right the filter costs nothing. If it
+# is ever wrong, the filter is the difference between "nearly the last of his
+# house" and "a house that has not existed for two hundred years", which is not
+# a difference this mod can afford to leave to belief.
+#
+# `dynasty` IS AN OPTIONAL LINK AND TAKES THE STANDING GUARD. Lowborn characters
+# have none, and this setting is full of them - hedge knights, sellswords, men
+# raised out of nowhere by a war. Both gates guard it, and the second guards it
+# twice, once on the far commander and once on that man's dynasty.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction. Two nearly-extinct houses can absolutely meet on one field -
+# that is most of what the later part of a long war looks like - and when they
+# do, being the last one yourself is the larger fact and wins the tie. The
+# negation is safe because the first gate carries its own guard, which is the
+# precedent recorded on bc_the_one_he_loves_is_in_this_line_trigger.
+#
+# NEITHER IS bc_foe_is_house_trigger AND NEITHER IS
+# bc_his_own_people_have_a_ledger_trigger. The first of those asks whether two
+# men share a name; this asks how much of a name is left. The second counts what
+# a man has done to his own vassals, which is a thing he chose; this counts
+# something that has been done to him by thirty years of other people's wars.
+bc_he_is_nearly_the_last_of_his_house_trigger = {
+	exists = dynasty
+	trigger_if = {
+		limit = { exists = dynasty }
+		dynasty = {
+			any_dynasty_member = {
+				count <= 2
+				is_alive = yes
+			}
+		}
+	}
+}
+
+bc_the_man_opposite_is_nearly_the_last_of_his_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			exists = dynasty
+			trigger_if = {
+				limit = { exists = dynasty }
+				dynasty = {
+					any_dynasty_member = {
+						count <= 2
+						is_alive = yes
+					}
+				}
+			}
+		}
+	}
+	NOT = { bc_he_is_nearly_the_last_of_his_house_trigger = yes }
+}

@@ -10999,3 +10999,70 @@ bc_the_names_are_all_on_the_other_side_of_the_field = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# There is him, and there is at most one other person left carrying the name,
+# and the line is going backwards. `entrenched` is the KIND for a line that
+# braces, and `entrenched`/`down` is one of the three pairs plan 1 called
+# unreachable: bc_shieldwall handed out precisely because the thing being held
+# is not ground.
+bc_the_arithmetic_of_the_name_is_very_small_now = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_is_nearly_the_last_of_his_house_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Holding a formation together for the sake of a thing that does
+		# not fit in a formation is a question of temperament and not of
+		# skill.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = stubborn
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_arithmetic_of_the_name_is_very_small_now"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_arithmetic_of_the_name_is_very_small_now_toast
+			desc = bc_the_arithmetic_of_the_name_is_very_small_now_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
