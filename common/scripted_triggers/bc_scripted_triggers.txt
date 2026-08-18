@@ -2672,3 +2672,56 @@ bc_he_answers_to_somebody_else_entirely_trigger = {
 		NOT = { is_powerful_vassal_of = scope:combat_side.side_commander }
 	}
 }
+
+
+# --- the third relation ------------------------------------------------------
+#
+# THE MOD READS TWO OF THE THREE AND HAS NEVER READ THE THIRD. `has_relation_friend`
+# gates bc_knight_for_a_friend, `has_relation_rival` gates bc_knight_knows_that_man
+# and the whole rivalry seam, and in ninety-nine batches `has_relation_lover` has
+# never appeared once. The mod reads marriage, kin, house, fostering, wardship,
+# employment and wages - every bond in this setting that somebody wrote down -
+# and the one the engine keeps that nobody writes down was still missing.
+#
+# BOTH RELATION READS ALSO POINT SOMEWHERE THE MOD HAS NEVER POINTED ONE. Every
+# `has_relation_*` in the file is aimed at the side commander or the enemy's
+# side commander. The second gate below aims one INTO THE RANKS, at whoever
+# happens to be standing in the same line, which is where a bond like this
+# would actually be found.
+#
+# THE FIRST GATE TAKES THE STANDING GUARD. `enemy_side.side_commander` is an
+# optional chained link. The second gate is an iteration and takes none, for
+# the reason recorded on bc_side_has_kin_knight_trigger, and uses `root` inside
+# the entered scope for the same reason that one does.
+#
+# THE SECOND GATE CARRIES THE FIRST AS AN EXPLICIT NEGATION, rather than
+# repeating its body. Both could otherwise be true of one man on one afternoon
+# - the engine allows more than one such relation - and the two templates below
+# are about opposite arrangements of the same field. Written this way, the man
+# whose bond is across the line is never also the man whose bond is beside him,
+# and the first gate wins that tie because it is the larger fact.
+#
+# NEITHER GATE IS `is_married`. bc_he_married_into_the_other_side_trigger is a
+# treaty between two families and can exist between people who have met four
+# times; this is the engine's other list entirely, it is nobody's arrangement,
+# and it appears and disappears without a single document changing hands.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. The relation is uncommon to begin with
+# and both gates then require the other person to be standing on this
+# particular field on this particular afternoon.
+bc_the_one_he_loves_commands_the_far_side_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		has_relation_lover = scope:combat_side.enemy_side.side_commander
+	}
+}
+
+bc_the_one_he_loves_is_in_this_line_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			has_relation_lover = root
+		}
+	}
+	NOT = { bc_the_one_he_loves_commands_the_far_side_trigger = yes }
+}

@@ -4001,3 +4001,66 @@
 
  bc_knight_nothing_here_is_owed_toast:0 "Whatever Gives Today Will Not Be The Part He Was Standing In"
  bc_knight_nothing_here_is_owed_toast_desc:0 "Nothing about being here is compulsory and that is not the comfort it sounds like. No summons brought him. Nobody out here can take anything off him, and nobody who will be asked about this afternoon afterwards is going to ask the man giving the orders. Which means the whole of it — the standing, the not standing, the exact minute a thing let go — is being written down somewhere as a description of what he is like, by men who are not here and will repeat it accurately for twenty years. So he plants himself and does not move, and it is not courage arriving and it is not stubbornness. It is the one calculation available. What gives today will give somewhere else along the line, and the account of it will have another name in that sentence, and he will be in a hall next winter listening to the story with a cup in his hand and nothing in it about him. The men on either side of him think he is very brave. He would not know how to begin explaining that they have it wrong.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH ONE HUNDRED. The third relation.
+#
+# NEITHER DESC MAY NAME THE PERSON, give their sex, house, title, age or where
+# they are from. The engine holds a relation and nothing else. This prohibition
+# is stricter than the usual one and it is not squeamishness: the moment is a
+# man's attention bending around somebody, and every fact supplied about that
+# somebody makes it a smaller thing than it is.
+#
+# NEITHER MAY PUT A SCENE FROM BEFORE THE BATTLE ON THE PAGE. No room, no
+# arrival, no last conversation, no thing that was said. Both men may carry
+# what they know; neither may go and stand in it.
+#
+# NEITHER MAY HAVE THE TWO OF THEM MEET, see each other, call out, send
+# anything, or receive word. The first is separated by the entire field and the
+# second by a line that is coming apart, and the distance is what both toasts
+# are made of.
+#
+# NEITHER MAY HAVE ANYBODY ELSE KNOW. No sergeant guesses, no rider carries it,
+# nobody in the ranks understands what is being done or why. A bond nobody
+# wrote down is not one anybody on a field is going to work out at speed.
+#
+# THE FIRST MAY NOT CONSIDER STOPPING, sparing anybody, sending terms, or
+# easing off, and may not have any of that occur to him and be dismissed. He is
+# winning properly. It may not have him weep, and it may not let him enjoy any
+# part of the afternoon.
+#
+# THE SECOND MAY NOT FIND THEM, reach them, see them, or learn one thing about
+# how they are. It may not have him abandon his place in a way that gets men
+# killed on the page, may not have anybody praise or condemn what he is doing,
+# and may not end well for either of them. It may not use the word "love".
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider", "which parts seize first", "the third-best line", "worth the
+# table", "an itemised list", "rain on a roof", "half a pace", "he does not
+# wait to see", "arithmetic he did once before", "before any of the clever
+# parts existed", "four hundred yards away", "the roads held", "already paid
+# for the timber", "in a small careful hand", "this hedge, this next hour",
+# "the only copy", "two thirds of himself", "a name that gets written down
+# gets read", "a chair empty next spring", "a wet surcoat", "for twenty years".
+ bc_no_version_of_this_that_is_not_also_theirs_toast:0 "There Is No Good Hour Left In This That Is Only His"
+ bc_no_version_of_this_that_is_not_also_theirs_toast_desc:0 "It is going well. It has been going well since the middle of the day and it is going to keep going well, and he has been handed, one after another, a series of small clean successes that each arrive with a second meaning attached to them. The flank folds: good. The flank folds onto somebody. The far line thins in the place he wanted it thin. Riders stop coming out of it. Somewhere in the second half of the afternoon he stops receiving the battle as a run of gains and begins receiving it as a list of things he is choosing, one at a time, in front of witnesses, with no way at all of choosing differently and no way of not knowing. He does not slow down. He does not do any of it less well than he is able to. The orders keep going out in the same voice they went out in at dawn and the men carrying them notice nothing whatever, and he goes on winning it, hour after hour, and there is not one part of it left that belongs only to him.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_one_distance_instead_of_a_battle_toast:0 "He Has Stopped Fighting A Battle And Started Working On A Gap"
+ bc_knight_one_distance_instead_of_a_battle_toast_desc:0 "Somewhere off to his left, he thinks, and it has been thinking for a while now rather than knowing, there is a part of this line that matters more to him than the rest of it does. He could not point at it. He has an idea, and an idea is the whole of what any man in a rank ever has about anything further off than his own arm, and the day is taking that idea apart at the same rate it is taking everything else apart. So he stops working on the battle. He is not much use to it any more and it is not much use to him. What he works on instead is a distance — closing it, in the pauses, three or four paces at a time, through men who are moving the other way and have every right to be, taking whatever comes at him from the side because turning to answer it properly costs ground he cannot buy back. He does not get there. That is not the point and he has stopped expecting it. The point is that the number is smaller than it was an hour ago, and he intends to spend whatever is left of this afternoon making it smaller again.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

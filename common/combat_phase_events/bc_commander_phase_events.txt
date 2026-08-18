@@ -10202,3 +10202,119 @@ bc_the_one_he_cannot_spend = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH ONE HUNDRED. The third relation.
+#
+# THE MOD READS TWO OF THE THREE AND HAS NEVER READ THE THIRD. Friend gates
+# bc_knight_for_a_friend, rival gates bc_knight_knows_that_man and the whole
+# rivalry seam, and `has_relation_lover` had never appeared once. Ninety-nine
+# batches of marriage, kin, house, fostering, wardship, employment and wages -
+# every bond in this setting that somebody wrote down - and the one the engine
+# keeps that nobody writes down was still missing.
+#
+# TWO TEMPLATES, ONE PER POOL, AND THE SECOND GATE CARRIES THE FIRST AS AN
+# EXPLICIT NEGATION so that the man whose bond is across the line is never also
+# the man whose bond is beside him. See the trigger header.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Every good thing that happens is also happening to them. The one he loves
+# commands the far side, and his own side is winning.
+#
+# `measured`/`up`, WHICH HANDS OUT NOTHING, AND THE NOTHING IS THE ARGUMENT.
+# The army is not being changed by this in any direction. It is not braced, it
+# is not bled, and it is emphatically not chasing. What is happening is that
+# the man running it has stopped experiencing the afternoon as a series of
+# gains and started experiencing it as a series of outcomes he is choosing
+# between, and the mod has one KIND for a commander reading the battle rather
+# than being changed by it.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED. The gate reads the enemy commander
+# link and the side row and never asks about a rung, so the grant is live.
+#
+# FIFTY PRESTIGE, AND THE MOD IS NOT PRETENDING THAT IS A REWARD. It is what a
+# winning afternoon does to a man's standing. Nothing in the seam is able to
+# say what it costs him, and nothing in this template pretends the prestige and
+# the cost are on the same ledger.
+#
+# THE WINNING ROW AND NOT THE LOSING ONE, DELIBERATELY. The losing version of
+# this is bc_a_room_somewhere_in_tonight, which is a man withdrawing carefully
+# because of somebody he will have to sit down in front of tonight, and it is
+# already written. Winning is the harder and less obvious afternoon and it is
+# the one this batch takes: there is no version of the good day that is not
+# also happening to the other person, and he cannot put the day down.
+#
+# THIS IS NOT bc_foe_is_kin_trigger'S MOMENTS OR bc_he_married_into_the_other_side_trigger'S.
+# Blood is inherited and a marriage is a treaty between two families that can
+# exist between people who have met four times. This is nobody's arrangement,
+# it is on no document anywhere, and it can end on a Tuesday without a single
+# seal being broken - which is exactly why the afternoon cannot be handled by
+# anybody the way the other two can.
+#
+# THE DESC MAY NOT NAME THE PERSON, may not give their sex, house or title, may
+# not have him picture them, may not have the two of them see each other or
+# send anything, may not put a scene from before the battle on the page, may
+# not have him consider stopping or sparing anybody, and may not have anybody
+# on his own side know. See the loc header.
+# ---------------------------------------------------------------------------
+bc_no_version_of_this_that_is_not_also_theirs = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_one_he_loves_commands_the_far_side_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who is merely coping with the battle has no attention left
+		# over for this. It takes a commander good enough that the afternoon
+		# is not using all of him.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = compassionate
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = callous
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_no_version_of_this_that_is_not_also_theirs"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_no_version_of_this_that_is_not_also_theirs_toast
+			desc = bc_no_version_of_this_that_is_not_also_theirs_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

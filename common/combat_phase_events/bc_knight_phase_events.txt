@@ -7603,3 +7603,109 @@ bc_knight_nothing_here_is_owed = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is not fighting the battle any more. The one he loves is somewhere in this
+# same line, and the side is losing.
+#
+# `adapted`/`down`, THE RAREST PAIR IN THE LEDGER, AND THE MOST LITERAL USE OF
+# `adapted` IN THE KNIGHT FILE. He reads the field and changes what he is doing
+# about it, and what he changes it to is not a tactic. The verb table hands out
+# nothing, which is right: he is not braced, not bled and not chasing. He has
+# simply stopped solving the afternoon and started solving one distance.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED, inside the commander block, for
+# the reason bc_knight_for_a_friend's comment gives.
+#
+# TEN STRESS.
+#
+# THE GATE POINTS INTO THE RANKS AND THAT IS NEW. Every other `has_relation_*`
+# in this file is aimed at the side commander or the enemy's, and this one asks
+# whether the person is anywhere in the same line - which is where a bond
+# nobody wrote down would actually be found.
+#
+# THE MOD DOES NOT KNOW WHERE EITHER OF THEM IS STANDING and the template must
+# not pretend it does. He has an idea. An idea is all a man in a line ever has
+# about anything more than twenty feet away, and the whole moment runs on the
+# gap between the idea and the fact.
+#
+# THIS IS NOT bc_knight_for_a_friend. That gates on `has_relation_friend`
+# toward the man commanding him and is about serving somebody well. This one is
+# not about the commander at all, is not about service, and would be identical
+# if the commander were a stranger, which he may well be.
+#
+# THIS IS NOT bc_side_has_kin_knight_trigger'S MOMENTS. Blood in the ranks is a
+# fact he was born into and can name to a herald. This is on no document, was
+# arranged by nobody, and could end without a seal being broken - and it is the
+# one moving him.
+#
+# THE DESC MAY NOT NAME THE PERSON, give their sex, house or title, may not
+# have him find them, see them, reach them, call out, or learn anything about
+# how they are, may not have anybody else understand what he is doing, and may
+# not let the afternoon end well for either of them on the page. See the loc
+# header.
+# ---------------------------------------------------------------------------
+bc_knight_one_distance_instead_of_a_battle = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_the_one_he_loves_is_in_this_line_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Working across a line that is coming apart, instead of standing
+		# in your place in it, is a thing only a man who is good at this
+		# survives long enough to keep doing.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_one_distance_instead_of_a_battle"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_one_distance_instead_of_a_battle_toast
+				desc = bc_knight_one_distance_instead_of_a_battle_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
