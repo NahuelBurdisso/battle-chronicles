@@ -13355,3 +13355,63 @@ bc_most_of_what_answers_to_him_is_not_his = {
 		}
 	}
 }
+
+bc_the_country_here_will_not_help_either_of_them = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_people_on_this_ground_hate_the_man_who_owns_it_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Reading a countryside the way other men read a face, and knowing
+		# within a morning that this one has decided nothing here is its
+		# business.
+		modifier = {
+			add = 30
+			intrigue >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_country_here_will_not_help_either_of_them"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_country_here_will_not_help_either_of_them_toast
+			desc = bc_the_country_here_will_not_help_either_of_them_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

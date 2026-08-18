@@ -5415,3 +5415,81 @@ bc_the_ground_he_owns_is_in_his_own_two_hands_trigger = {
 		count >= 4
 	}
 }
+
+# BATCH 146 - WHAT THE PEOPLE WHO LIVE ON THIS GROUND THINK OF THE MAN WHO OWNS
+# IT, WHICH IS NEITHER WHAT IT IS WORTH NOR WHOSE IT IS.
+#
+# `county_opinion` returned zero across the whole mod. The mod has read this
+# county three ways already - how rich it is (`development_level`, the rich and
+# poor country rows), whose it is (`county.holder`, `county_controller`, the
+# held-not-owned rows) and what the weather and the terrain on it are doing -
+# and has never once asked what the people standing in the doorways think of
+# the man whose name is on it.
+#
+# THE TRIGGER IS LANDED_TITLE SCOPE AND THE PATH IS VANILLA'S. `common/
+# activities/activity_types/tour.txt:2490` writes exactly the shape used here -
+# `scope:province.county = { county_opinion < 0 }` - and repeats it at `:2497`;
+# the same file uses the bare county form at `:469` and `:476`. The bands come
+# from `common/activities/intents/chariot_race_intents.txt`, which walks the
+# whole ladder: `county_opinion >= 10` at `:80`, `< 0` at `:89`, `<= -20` at
+# `:98`, `<= -40` at `:107`, and on the other end `<= 90` at `:291` and `< 50`
+# at `:299`. The two numbers below are the outer ends of vanilla's own ladder
+# rather than invented ones.
+#
+# GUARDS, IN THE SHAPE THE GROUND ROWS ALREADY USE. `combat.location` does not
+# always resolve, and a province does not always have a county - the rich and
+# poor country rows at 1336 and 1348 nest an `exists = county` inside the
+# location's own `trigger_if` for exactly that reason, and these do the same.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. One is `<= -40` and the other is `>= 50`
+# of the same number on the same title. There is no county on any map that can
+# pass both.
+#
+# THIS IS NOT THE RICH AND POOR COUNTRY ROWS AND IT IS NOT THE OWNERSHIP ROWS.
+# Development says what the ground makes; it says nothing about whether the
+# people who make it are willing. A rich county can be sullen and a poor one
+# devoted, and both of those are more common than the reverse. The ownership
+# rows ask whose name is on the county and whose men are holding it - a legal
+# fact, settled in a chancery. This asks a fact settled in kitchens, and the two
+# have no reliable relationship at all: a man can own a county outright, control
+# it completely, and be loathed on every acre of it.
+#
+# NEITHER GATE READS THE SCOPED MAN. Both read the county and its own count, so
+# neither depends on what `root` is - batch 127's lesson - and neither is a
+# statement about the man the moment is written for. What is being said is that
+# the ground itself has a temper, and that an army fighting on ground with a
+# temper is not fighting the same battle as an army fighting on quiet ground.
+#
+# RARITY. Vanilla's own ladder treats `<= -40` as its bottom rung, which needs
+# lost control or a foreign culture or faith or a badly chosen law on top of an
+# ordinary grievance; `>= 50` is near the top of a scale vanilla caps its own
+# checks at ninety. Most counties in most years sit in the middle and pass
+# neither, and the county also has to be the one the battle happens to be
+# standing in.
+bc_the_people_on_this_ground_hate_the_man_who_owns_it_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			exists = county
+			trigger_if = {
+				limit = { exists = county }
+				county = { county_opinion <= -40 }
+			}
+		}
+	}
+}
+
+bc_the_people_on_this_ground_are_content_with_the_man_who_owns_it_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			exists = county
+			trigger_if = {
+				limit = { exists = county }
+				county = { county_opinion >= 50 }
+			}
+		}
+	}
+}
