@@ -16252,3 +16252,62 @@ bc_the_man_opposite_has_learned_something_he_has_not = {
 		}
 	}
 }
+
+bc_he_rides_under_an_ugly_name = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_rides_under_an_ugly_name_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man who can feel exactly how he is spoken of is a man who will
+		# spend an afternoon trying to be spoken of differently.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = vengeful
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = forgiving
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_rides_under_an_ugly_name"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_rides_under_an_ugly_name_toast
+			desc = bc_he_rides_under_an_ugly_name_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

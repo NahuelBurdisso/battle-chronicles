@@ -8734,3 +8734,64 @@ bc_he_has_learned_something_the_man_leading_him_has_not_trigger = {
 		}
 	}
 }
+
+# BATCH 195 - THE NAME OTHER PEOPLE ALREADY USE FOR HIM.
+#
+# `has_any_nickname` and `has_bad_nickname` both returned zero across the whole
+# mod. This is the strangest hole yet found. `bc_reward_effects.txt` hands out
+# forty-odd nicknames at `:166` onwards - the warrior, greysteel, fireball,
+# breakspear, shieldbreaker, widowmaker - so the mod WRITES names onto men for
+# what they do in these battles and has never once READ one back. A chronicle
+# that gives a man a name and then never notices he has it is only half a
+# chronicle.
+#
+# BOTH KEYS ARE LIVE IN BOTH TREES. Vanilla writes `has_bad_nickname = yes` at
+# `common/scripted_effects/00_nickname_effects.txt:5` and `:10`, at
+# `common/scripted_effects/00_decisions_effects.txt:1223`, at
+# `00_major_decisions_scripted_effects.txt:3581` and at
+# `common/casus_belli_types/00_event_war.txt:3288`, and `has_any_nickname` at
+# `00_nickname_effects.txt:41`, `00_prison_effects.txt:916` and
+# `00_event_war.txt:3289`. AGOT ships its own live copies of the first at
+# `00_nickname_effects.txt:5` and `:10`, at
+# `common/scripted_effects/00_religious_interaction_effects.txt:1525`, at
+# `events/agot_events/agot_targaryen_invasion_events.txt:1478` and `:1491` and
+# at `events/activities/tour_activity/tour_travel_events.txt:257`, and of the
+# second at `common/on_action/agot_on_actions/agot_game_start.txt:258` and
+# `:264` and at six places in `00_agot_character_data_effects.txt`.
+#
+# DISJOINT BY CONSTRUCTION, AND THE DENIAL IS LOAD-BEARING. A bad nickname is a
+# nickname, so `has_any_nickname = yes` on its own would be a strict SUPERSET
+# of the first gate and the pair would be nested rather than paired. The second
+# therefore denies the first outright, which makes the two impossible to
+# satisfy at once on any character and turns them into what they are meant to
+# be: a man people have named for something ugly, and a man people have named
+# for something else.
+#
+# NOT A COUNT AND NOT A REPUTATION NUMBER.
+# `bc_the_name_opposite_outweighs_the_name_here` reads dynasty renown, which is
+# what a house is worth. A nickname is what one man is called, it attaches to
+# nobody else alive, and it survives the house losing everything. Neither gate
+# here reads renown and the renown gate reads no name.
+#
+# THE FEEDBACK IS DELIBERATE. The forty names in `bc_reward_effects.txt` are
+# all AGOT's approving ones, so the mod's own rewards can only ever make the
+# SECOND gate true. A man this chronicle named ten battles ago can now be
+# gated on carrying that name, and nothing the mod does will ever push a man
+# into the first gate - that one is the game's own verdict, arrived at without
+# us.
+#
+# NO GUARDS. Both are bare `yes/no` reads on the scoped character, which is the
+# one shape in this file that has never needed one.
+#
+# RARITY. Most men in this setting die unnamed. Of the minority who are called
+# anything at all, the ugly names are a small slice, so the first is rare on
+# any field and the second wants a man who has already done something somebody
+# thought worth a word.
+bc_he_rides_under_an_ugly_name_trigger = {
+	has_bad_nickname = yes
+}
+
+bc_he_has_a_name_men_say_kindly_trigger = {
+	has_any_nickname = yes
+	NOT = { has_bad_nickname = yes }
+}

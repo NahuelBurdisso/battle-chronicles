@@ -14028,3 +14028,66 @@ bc_knight_he_has_learned_something_the_man_leading_him_has_not = {
 		}
 	}
 }
+
+bc_knight_he_has_a_name_men_say_kindly = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_has_a_name_men_say_kindly_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A name earned once has to be earned again in front of whoever has
+		# not seen it, and the ones who mind that are the ones who go first.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = humble
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_a_name_men_say_kindly"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_has_a_name_men_say_kindly_toast
+				desc = bc_knight_he_has_a_name_men_say_kindly_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
