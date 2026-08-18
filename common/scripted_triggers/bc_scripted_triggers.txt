@@ -7152,3 +7152,73 @@ bc_his_seat_on_the_council_has_nothing_to_do_with_war_trigger = {
 bc_he_can_follow_three_tongues_without_help_trigger = {
 	num_of_known_languages >= 3
 }
+
+
+# BATCH 171 - THE NUMBER BEHIND THE NAME.
+#
+# `has_trait_xp` APPEARED NOWHERE IN THIS MOD IN A HUNDRED AND SEVENTY
+# BATCHES. Every trait read here, and there are hundreds of them, is
+# `has_trait = x`: a yes or a no about a name. But a large family of the
+# traits this mod already reads are TRACKED traits, and the engine keeps a
+# number from 0 to 100 behind each of them. `unyielding_defender` at 33 and
+# `unyielding_defender` at 100 are the same key and the same word, and every
+# gate in this mod has been unable to tell them apart.
+#
+# THE FIRST GATE IS THE TOP OF A TRACK. `military_engineer` (00_traits.txt:
+# 12004) is `category = commander` with `flag = commander_trait_flag` and a
+# single unnamed `track` with rungs at 33, 66 and 100. The rungs are not
+# cosmetic: at 66 the trait starts granting `advantage = 1`, and at 100 it
+# grants `advantage = 2`, `martial = 1` and a fourth stack of
+# `siege_phase_time = -0.1`. `value >= 100` is therefore the actual ceiling of
+# the track and not an arbitrary band.
+#
+# THE TRAIT IS AT ZERO IN THIS MOD, SO THERE IS NO SUBSET PROBLEM. This is
+# worth stating because there would have been one almost anywhere else:
+# `has_trait_xp = { trait = X value >= n }` implies `has_trait = X`, so
+# writing this against `aggressive_attacker`, `unyielding_defender`,
+# `organizer`, `cautious_leader`, `winter_soldier` or any of the terrain
+# experts would have produced a strict subset of a gate already shipped.
+# `military_engineer` and `tourney_participant` were both at zero occurrences
+# over the whole mod, which is why they are the two the batch uses.
+#
+# NO `track` KEY ON THE FIRST, A `track` KEY ON THE SECOND, AND THAT IS THE
+# RULE RATHER THAN A CHOICE. The 1.19.0.6 dump: "Track name is required if the
+# trait has multiple tracks, otherwise should not be provided."
+# `military_engineer` has one track and vanilla's own name block for it
+# (00_traits.txt:12004) omits the key. `tourney_participant` has four -
+# `foot`, `bow`, `horse` and `wit` (00_traits.txt:15072) - and every read
+# vanilla makes of it names one.
+#
+# SIXTY-FIVE IS VANILLA'S OWN SECOND RUNG on all four of those tracks, which
+# run 30, 65, 100. `foot` is the one that means the melee on the ground rather
+# than the horse, the bow or the wit, and it is the only one of the four that
+# describes what a man is doing while a battle is happening to him.
+#
+# BOTH READS ARE BARE CHARACTER-SCOPE AND TAKE NO GUARD. A man without the
+# trait at all returns a clean no from `has_trait_xp` rather than erroring,
+# which is why vanilla's own icon block at 00_traits.txt:14786 stacks four of
+# them inside one `AND` without testing `has_trait` first.
+#
+# NEITHER GATE IS RARE BY ACCIDENT. The first is the literal maximum of a
+# commander track, reached by a man who has spent a working lifetime on the
+# one part of war that involves arithmetic. The second is the upper half of a
+# tourney track, which a man only fills by turning up to the lists year after
+# year and winning on foot when he gets there. Neither is a thing that happens
+# to somebody; both are things a man did on purpose for twenty years.
+#
+# NO NEGATION BETWEEN THEM. Two different facts about two different men, on
+# two tracks that share nothing, and the two pools roll separately.
+bc_nobody_alive_builds_a_siege_engine_better_trigger = {
+	has_trait_xp = {
+		trait = military_engineer
+		value >= 100
+	}
+}
+
+bc_he_has_gone_deep_into_the_foot_melees_trigger = {
+	has_trait_xp = {
+		trait = tourney_participant
+		track = foot
+		value >= 65
+	}
+}
