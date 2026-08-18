@@ -10796,3 +10796,71 @@ bc_he_has_watched_this_man_carve_at_his_own_table = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He is losing a battle that he would once have solved in the first hour by
+# leaving the ground entirely, and the whole of his craft today is the craft of
+# somebody who has to do it the long way. `adapted` is the KIND for a commander
+# READING the battle rather than the battle doing something to the army, and it
+# hands out no modifier, which is the point: nothing about the army changed
+# when he lost the thing. Only the size of what he is allowed to attempt did.
+bc_the_answer_he_used_to_have_is_not_available = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_used_to_arrive_from_above_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Working out, in the middle of losing, exactly which of your
+		# habits were only ever habits of a man with an advantage is a
+		# thing done with the head and not with the hands.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = arrogant
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_answer_he_used_to_have_is_not_available"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_answer_he_used_to_have_is_not_available_toast
+			desc = bc_the_answer_he_used_to_have_is_not_available_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

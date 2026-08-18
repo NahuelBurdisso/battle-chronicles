@@ -8217,3 +8217,75 @@ bc_knight_he_will_not_be_the_one_who_gives_first = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# Somebody else in this line was one of the handful of people alive who could do
+# the other thing, and today he is going forward on a horse like everybody else,
+# and root is the man trying to stay level with him. `wild` is the KIND that
+# grants a rung and blows the horses in the same breath, which is what a whole
+# rank ends up riding like when the pace at the front of it is being set by a
+# man comparing it to something no horse has ever done.
+bc_knight_a_horse_is_a_very_slow_way_to_arrive = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_one_in_this_line_used_to_arrive_from_above_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Riding a horse at the speed you would like it to be going,
+		# rather than the speed it can survive, is a decision made in the
+		# body and paid for by the animal.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = reckless
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = patient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_horse_is_a_very_slow_way_to_arrive"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_a_horse_is_a_very_slow_way_to_arrive_toast
+				desc = bc_knight_a_horse_is_a_very_slow_way_to_arrive_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

@@ -3106,3 +3106,68 @@ bc_the_father_of_his_spouse_is_in_this_line_trigger = {
 	}
 	NOT = { bc_the_one_who_married_his_child_commands_the_far_side_trigger = yes }
 }
+
+
+# --- the thing he does not have any more -------------------------------------
+#
+# THE MOD HAS MENTIONED DRAGONRIDERS EXACTLY TWICE AND BOTH TIMES IN A COMMENT.
+# The note at the top of bc_knight_phase_events.txt records that AGOT's own
+# combat phase events include a dragonrider entry at base = 100000 gated behind
+# `is_current_dragonrider_warfare`, and that it therefore does not crowd this
+# mod's pool. That is the whole of the mod's engagement with the subject. No
+# gate anywhere reads a dragon trait.
+#
+# BOTH GATES BELOW ARE THE PHOTOGRAPHIC NEGATIVE OF THAT AGOT EVENT. AGOT's
+# fires for a man who has a dragon on this field. These fire for a man who used
+# to have one and is standing in the mud like everybody else. `dragonrider` is
+# never read here; the two traits that are read are the two AGOT swaps it for.
+#
+# THE TWO TRAITS ARE BOTH REQUIRED AND NEITHER IS SUFFICIENT ON ITS OWN. In
+# agot_dragon.0018 a rider whose dragon has just died has `dragonrider` removed
+# and takes `dragonwidowed` if scope:dragonwidowed exists and
+# `dragonless_dragonrider` otherwise, and agot_untame_dragon in
+# 00_agot_dragon_effects.txt hands out `dragonless_dragonrider` again for a
+# beast that is still alive and simply no longer his. The mod does not care
+# which of the three ways it went. It cares that the man could once do a thing
+# he cannot do today, so the `OR` covers both traits and nothing distinguishes
+# them downstream.
+#
+# NEITHER GATE READS `agot_dragon`, THE RELATION, AND THAT IS DELIBERATE. That
+# relation is self-corresponding - `corresponding = agot_dragon` - so it is held
+# by the dragon as well as by the rider, and a gate built on it would be true of
+# the beast. The traits are only ever on people.
+#
+# THE FIRST IS A PLAIN TRAIT TEST ON ROOT and takes no guard, because a trait is
+# not a link. The second is an iteration over `any_side_knight`, which is not a
+# link either, and uses `root` inside the entered scope for the reason recorded
+# on bc_side_has_kin_knight_trigger.
+#
+# THE SECOND CARRIES THE FIRST AS AN EXPLICIT NEGATION and is therefore disjoint
+# by construction, which also settles the one case that would otherwise be
+# ambiguous: `any_side_knight` will hand back root himself if root is knighted
+# on this side, so without the negation a man would satisfy the second gate by
+# being the first gate. He does not. Having been the rider is the larger fact
+# and wins the tie.
+#
+# NEITHER FIRES FOR NEARLY EVERYBODY. There is no era of this map in which more
+# than a handful of living people have ever been on a dragon, and both gates
+# then require one of that handful to be armed and standing on this field with
+# the thing already taken off him.
+bc_he_used_to_arrive_from_above_trigger = {
+	OR = {
+		has_trait = dragonless_dragonrider
+		has_trait = dragonwidowed
+	}
+}
+
+bc_one_in_this_line_used_to_arrive_from_above_trigger = {
+	scope:combat_side = {
+		any_side_knight = {
+			OR = {
+				has_trait = dragonless_dragonrider
+				has_trait = dragonwidowed
+			}
+		}
+	}
+	NOT = { bc_he_used_to_arrive_from_above_trigger = yes }
+}
