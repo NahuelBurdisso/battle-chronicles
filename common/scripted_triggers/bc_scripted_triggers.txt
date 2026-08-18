@@ -4668,3 +4668,53 @@ bc_the_man_he_follows_wears_a_thin_crown_trigger = {
 		}
 	}
 }
+
+# BATCH 135 - WHICH DIRECTION THE LAST PEACE RAN.
+#
+# `any_truce_holder` and `any_truce_target` both returned zero across the whole
+# mod. That is a real omission, because a truce is the only object in this game
+# that is a durable, dated record of a war somebody LOST - it exists precisely
+# because two men stopped, and it remembers which of them had to. A hundred and
+# thirty-four batches have read wars, grudges, dread, opinion and kin, and not
+# one of them has read the small legal residue of the last time this went badly
+# for somebody.
+#
+# THE PAIR IS THE SAME OBJECT READ FROM ITS TWO ENDS, AND THAT IS THE POINT. A
+# truce has a winner and a loser. `any_truce_target` iterates the men this
+# character holds one over - the people who are not allowed to come for him,
+# because he beat them recently enough that the game is still counting. Its
+# mirror `any_truce_holder` iterates the men who hold one over HIM, which is the
+# same fact told the other way round: he is the one who stopped.
+#
+# NEITHER IS A SUBSET OF THE OTHER AND NEITHER CARRIES A NEGATION. They point in
+# opposite directions, and a man who has fought on both sides of his career can
+# be in both lists at once without either statement becoming less true. The two
+# gates also read two different men - a commander and a knight, from pools that
+# roll separately - so on the afternoon they are both true they are true about
+# different people, which is the same reasoning batches 110, 113, 118, 120 and
+# everything from 123 onward record.
+#
+# NO GUARDS. Both are iterators, and an iterator over an empty list is a clean
+# no. Nothing here is an optional link.
+#
+# THIS IS NOT THE WAR ROWS. Those ask about the war he is standing in - how long
+# it has run, who declared it, what it is for. This asks about a DIFFERENT war,
+# one that is already over, and about the paperwork it left behind. A man can be
+# in the first year of a fresh war and still be carrying three truces from the
+# last one, and a man can have fought for a decade without ever generating a
+# single one, because truces come from settlements and not from fighting.
+#
+# RARITY. A truce requires a concluded war with a surrender in it and expires on
+# a timer, so the state is real, dated and transient. Most men in most lines have
+# neither list populated.
+bc_men_who_may_not_come_for_him_yet_trigger = {
+	any_truce_target = {
+		count >= 1
+	}
+}
+
+bc_somebody_still_holds_his_surrender_trigger = {
+	any_truce_holder = {
+		count >= 1
+	}
+}
