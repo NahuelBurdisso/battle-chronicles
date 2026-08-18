@@ -6872,3 +6872,103 @@ bc_knight_the_place_is_an_arrangement = {
 		}
 	}
 }
+
+
+# ---------------------------------------------------------------------------
+# He has already seen what one death does to a household, and it is going
+# badly.
+#
+# `ordered`/`down`. He buried one wife and then, because that is what men in
+# his position do, he went and built the whole apparatus again - a contract, a
+# household, people who eat because he keeps eating. The difference between him
+# and the man beside him is that he has watched the machinery of a family stop
+# from the inside and knows exactly which parts seize first. So on an afternoon
+# that is coming apart he does the least romantic thing available: he gives
+# ground in step, keeps the man on either side of him, and declines every
+# chance to make the day mean something. The formation goes backwards and does
+# not break, which is what the KIND is for, and the SWING is why the verb table
+# hands out nothing - a pursuit modifier for a rank walking backwards would be
+# a lie about the afternoon.
+#
+# THE FALTERING RUNG IS GRANTED AND GUARDED. The gate reads a marriage row, a
+# burial row and the side row, and never asks about a rung.
+#
+# TEN STRESS.
+#
+# THIS IS NOT bc_knight_the_man_who_is_the_name. That one is a knight beside
+# the head of his house and is about rank inside a family. This is a man's
+# second household and the specific education a first one gave him, and a
+# landless hedge knight twice married answers no to that gate and yes to this.
+#
+# THIS IS NOT bc_knight_a_hall_is_waiting_for_him. Titles waiting for a man are
+# a reason he could leave; a household depending on him is a reason he cannot
+# afford a gesture. Those are different sentences and the second one keeps him
+# in the line rather than explaining why he is in it.
+#
+# THE DESC MAY NOT NAME EITHER WIFE, may not say how the first one died, may
+# not put a child on the page, may not have him picture home, may not have him
+# make a promise, may not have him be afraid, and may not let anybody else on
+# the field notice what he is doing or thank him for it. See the loc header.
+# ---------------------------------------------------------------------------
+bc_knight_he_has_seen_a_household_stop = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_buried_her_and_filled_the_place_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Going backwards in step under pressure is a skill and not a mood,
+		# and it is the same skill that keeps him alive doing it.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = reckless
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_seen_a_household_stop"
+
+		add_stress = 10
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				bc_faltering_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_knight_he_has_seen_a_household_stop_toast
+				desc = bc_knight_he_has_seen_a_household_stop_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

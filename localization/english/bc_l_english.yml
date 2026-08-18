@@ -3602,3 +3602,58 @@
 
  bc_knight_the_place_is_an_arrangement_toast:0 "Not The Field. The Man."
  bc_knight_the_place_is_an_arrangement_toast_desc:0 "Every other man along this stretch has something behind him that stays where it is if today goes wrong - a valley, a name, a roof with his people under it. What he has is an agreement, and an agreement does not survive on its own. So while it comes apart he finds that the thing he is holding has quietly stopped being this hedge and these forty yards, which were never his and never going to be, and become one rider back there on the slope, because everything he owns is downstream of that rider still existing at dusk. Nothing about his footing changes. He does not announce it. He simply knows, somewhere after the middle of the day, what he is actually out here doing, and it is not the same answer the men beside him would give.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+
+# ---------------------------------------------------------------------------
+# BATCH NINETY-THREE. The one he buried.
+#
+# NEITHER DESC MAY NAME A WIFE, living or dead, and neither may say how she
+# died or how long ago. The engine holds a marriage that ended and nothing
+# else; a cause, a year or a name would be invented.
+#
+# NEITHER MAY PUT A CHILD ON THE PAGE. Children are batch eighty-eight's
+# subject and a different gate entirely, and both of these moments are about
+# the shape of a household rather than its contents.
+#
+# NEITHER MAY HAVE HIM PICTURE HER, remember a room, hear a voice or hold an
+# object. The mod does not do flashbacks and the toast has one afternoon in it.
+#
+# NEITHER MAY USE THE WORDS "grief", "mourning", "widower", "lonely" or
+# "heartbroken". Every one of them is the reader's summary of the man rather
+# than anything he would recognise, and the first gate in particular collapses
+# into sentiment the moment one of them appears.
+#
+# THE FIRST MAY NOT MAKE HIM BRAVE and may not let him or anybody else read it
+# as courage - the whole point is that a brake is missing rather than that an
+# engine was added. It may not have him wish to die, may not have him seek
+# death, may not have anybody on the field know anything about his household,
+# and may not make him tragic or admirable.
+#
+# THE SECOND MAY NOT HAVE HIM MAKE A PROMISE, may not have him be afraid, may
+# not have another man notice what he is doing or thank him for it, may not
+# have him think of the second marriage as a replacement in so many words, and
+# may not have him be bitter about having built it all again.
+#
+# SPENT PHRASES THIS BLOCK MAY NOT REUSE: "the men have noticed", "nobody has
+# said anything", "he has stopped counting", "he has been listening to it",
+# "there is nothing left behind him", "every choice today", "the riders
+# stopped", "to the letter", "he is still working", "half the line", "he has
+# not done anything", "three places", "he cannot see", "one end of it", "every
+# man here", "one thing worth", "the fourth hour", "the second hour", "a
+# corner at a time", "nobody has come to tell", "the last thing he is sure of",
+# "a clock made out of daylight", "keeps his hands still", "the version of
+# this rank", "not a copper more", "he need not be here", "there is no
+# audience", "the account was closed", "the ground has no opinion", "in the
+# order he was taught", "there was nothing to find", "everything there is is
+# already here", "stays set", "nowhere else for them to be", "a place rather
+# than a thing", "the fractions", "one word", "at the pace the rank", "the
+# other reason", "arriving at a rate", "eight feet wide", "how thin", "cannot
+# be recalled", "where it is comfortable", "a join is a place", "all the way
+# back", "since he was nine", "running is not a direction", "how little of
+# what he was taught", "on them expensively", "at breakfast", "downstream of
+# that rider".
+ bc_nothing_waiting_at_the_other_end_toast:0 "He Goes Into The Gap Without The Argument First"
+ bc_nothing_waiting_at_the_other_end_toast_desc:0 "Most men of rank carry a small fitting behind the breastbone that makes them take the third-best line instead of the best one, and it costs half a second, and the half second is the reason they are still doing this in ten years. His came out some while back and was not put in again. It has nothing to do with nerve and he would say so shortly if anybody asked, which nobody will, because nobody out here knows the first thing about his household and there is no reason they should. What it means in practice is that when the far side opens at the shoulder he is already moving, with no quiet conversation to have about it first, and the gap gets used while it is still a gap. That is why this is working. It is also why the horse lines will be short in the morning.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"
+
+ bc_knight_he_has_seen_a_household_stop_toast:0 "He Knows Which Parts Seize First"
+ bc_knight_he_has_seen_a_household_stop_toast_desc:0 "He has been through the whole business once before and then built the entire apparatus a second time, which means he is the only man on this stretch who has watched from the inside as a house that was working stops working. Nobody plans for the second week. So the afternoon comes apart and he does the least stirring thing available to him: back one pace when the pace is called, shoulder still touching the shoulder beside him, and a flat refusal of every opportunity the day offers to make itself memorable. The rank goes backwards and does not open. He is not being careful with himself, exactly. He is being careful with a set of arrangements that only stay standing while he does.[bc_chronicle_subject.Custom('bc_ground_clause')][bc_chronicle_subject.Custom('bc_bond_clause')][bc_chronicle_subject.Custom('bc_scale_clause')]"

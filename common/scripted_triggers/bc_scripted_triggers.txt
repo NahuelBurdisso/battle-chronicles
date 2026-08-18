@@ -2285,3 +2285,43 @@ bc_the_man_who_pays_him_commands_here_trigger = {
 		}
 	}
 }
+
+
+# --- the one he buried -------------------------------------------------------
+#
+# `any_former_spouse` RETURNED ZERO OVER THE WHOLE MOD. Batch eighty-eight read
+# the marriage a man is currently inside - a wife on the far side, a child on
+# the way - and stopped there. The engine also keeps the marriages that ENDED,
+# and in Westeros the overwhelming majority of them ended the one way, which
+# means this list is mostly a list of the dead.
+#
+# `is_alive = no` IS THE WHOLE POINT AND IS NOT OPTIONAL. A former spouse can
+# also be a living annulment or a woman sent back to her father, and neither of
+# those is the fact these two moments are built on. The row keeps the iterator
+# to the burials.
+#
+# `is_married` IS DOING REAL WORK HERE, WHICH IT COULD NOT DO ALONE. Batch
+# eighty-eight's header records why a bare `is_married = yes` is not a gate: it
+# is nearly every landed man in the game. Sitting beside a burial it stops
+# being a census line and becomes the only question that matters about it -
+# whether he filled the place again or left it empty - and the two gates split
+# the widowed on exactly that row.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. One requires `is_married = no` and the
+# other `is_married = yes`, over the identical burial row, so no man can answer
+# yes to both.
+#
+# NEITHER IS A SUBSET OF THE BATCH EIGHTY-EIGHT GATES. That batch's first gate
+# requires a living spouse related to the enemy commander, which the first of
+# these excludes outright by requiring no spouse at all, and which the second
+# neither implies nor is implied by. Its second gate is a pregnancy, which is a
+# fact about a household that is growing rather than one that lost somebody.
+bc_he_buried_her_and_left_the_place_empty_trigger = {
+	is_married = no
+	any_former_spouse = { is_alive = no }
+}
+
+bc_he_buried_her_and_filled_the_place_trigger = {
+	is_married = yes
+	any_former_spouse = { is_alive = no }
+}

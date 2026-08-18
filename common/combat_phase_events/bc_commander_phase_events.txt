@@ -9422,3 +9422,116 @@ bc_the_men_he_knows_the_names_of = {
 		}
 	}
 }
+
+
+# ===========================================================================
+# BATCH NINETY-THREE. The one he buried.
+#
+# `any_former_spouse` returned zero over the whole mod. Batch eighty-eight read
+# the marriage a man is currently inside and stopped there; the engine also
+# keeps the marriages that ended, and in Westeros the overwhelming majority of
+# them ended the one way. `is_alive = no` keeps the iterator to the burials,
+# and `is_married` - which batch eighty-eight rejected as a gate on its own,
+# because it is nearly every landed man in the game - does real work beside a
+# burial, because it is the only question anybody actually asks about one.
+#
+# THE TWO GATES ARE DISJOINT BY CONSTRUCTION on the `is_married` row over an
+# identical burial row.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# There is nobody left to be careful for, and he is winning.
+#
+# `wild`/`up`. Every other man with rank on this field carries a small
+# permanent brake fitted somewhere behind the breastbone, and it is a face, and
+# it is why he takes the third-best line instead of the best one and comes back
+# in the evening to a hall where somebody asks how it went. That fitting was
+# taken out of this man some years ago and never replaced. It does not make him
+# brave - he would tell you flatly that it has nothing to do with courage - it
+# simply means that when the far side opens this afternoon there is no quiet
+# internal argument to have before he goes into the gap, and so he goes into it
+# a half-hour earlier than a married man would. It works. It is also the
+# reason the horse lines will be short tomorrow, which is what `wild` means and
+# why it is not `ordered`: the rung and the spent horses come out of the same
+# decision and arrive in the same breath.
+#
+# THE MOMENTUM RUNG IS GRANTED AND GUARDED, AND bc_spent_horse COMES FROM THE
+# VERB TABLE, NOT FROM HERE. The gate reads a marriage row and a burial row and
+# the side row, and never asks about a rung.
+#
+# FIFTY PRESTIGE.
+#
+# THIS IS NOT bc_the_wrath_takes_him OR bc_the_old_grudge, THE TWO `wild`/`up`
+# MOMENTS THE LEDGER COMMENT NAMES. Both of those are a man being carried by something hot -
+# a temper, a name he has been waiting years to meet. This one is the absence
+# of something cold. Nothing is driving him; a thing that used to hold him back
+# is missing, and the arithmetic comes out the same way for a completely
+# different reason.
+#
+# THIS IS NOT bc_the_heir_is_a_child. That reads what his death costs the
+# realm and makes him careful. This reads what his death costs one household,
+# finds the household already gone, and makes him quick.
+#
+# THE DESC MAY NOT NAME HER, may not say how she died, may not say how long
+# ago, may not have him picture her or remember a room, may not have him say or
+# think that he wants to die, may not have anybody on the field know any of it,
+# and may not make him tragic. See the loc header.
+# ---------------------------------------------------------------------------
+bc_nothing_waiting_at_the_other_end = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_buried_her_and_left_the_place_empty_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Seeing the gap at all is the skill. Going into it without the
+		# argument first is what this moment is.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_nothing_waiting_at_the_other_end"
+
+		add_prestige = 50
+
+		if = {
+			limit = { NOT = { bc_has_momentum_trigger = yes } }
+			bc_momentum_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+		send_interface_toast = {
+			type = event_toast_effect_good
+			title = bc_nothing_waiting_at_the_other_end_toast
+			desc = bc_nothing_waiting_at_the_other_end_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
