@@ -13887,3 +13887,62 @@ bc_the_man_opposite_has_been_doing_this_since_before_he_started = {
 		}
 	}
 }
+
+bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_far_commander_is_out_of_his_league_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Understanding the shape of the whole field perfectly well, which is
+		# the one thing that stops mattering at four paces.
+		modifier = {
+			add = 30
+			martial >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = craven
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = brave
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast
+			desc = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

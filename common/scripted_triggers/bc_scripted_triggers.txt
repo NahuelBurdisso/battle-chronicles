@@ -6085,3 +6085,87 @@ bc_the_man_across_the_field_has_been_at_this_for_ten_years_trigger = {
 		}
 	}
 }
+
+# BATCH 155 - THE GAP BETWEEN HIS HANDS AND THE FAR COMMANDER'S.
+#
+# `prowess_diff` returned zero across the whole mod. `prowess` is on nearly every
+# `chance` block in the file and is read as an absolute threshold in dozens of
+# them, and in a hundred and fifty-four batches nothing has ever compared one
+# man's hands to another's. An absolute prowess row says whether he is good. It
+# cannot say the only thing that matters if the two of them ever end up within
+# reach of each other, which is who is better.
+#
+# THE FORM AND THE FIGURE ARE BOTH VANILLA'S. `prowess_diff = { target = X
+# value <= -15 }` appears at `common/character_interactions/
+# 00_trait_interactions.txt:689` under vanilla's own comment "Don't challenge
+# people hopelessly out of your league", and again at `:881`, at
+# `common/character_interactions/00_artifact_interactions.txt:2405`, at
+# `common/character_interactions/01_fp1_interactions.txt:786` and at
+# `common/character_interactions/00_perk_interactions.txt:1595`. Every one of
+# those five is fifteen. AGOT ships all of them unchanged.
+#
+# THE SIGN IS SCOPED MINUS TARGET, AND VANILLA'S COMMENT IS THE PROOF. The block
+# above sits on `scope:actor` with `target = scope:recipient` and subtracts a
+# thousand from the AI's willingness to duel, so a NEGATIVE difference has to
+# mean the actor is the weaker man. The first gate below is therefore the one
+# where the far commander is out of the scoped man's league, and the second is
+# the reverse.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Fifteen below against fifteen above on
+# the same subtraction between the same two men. No negation is needed and none
+# is written.
+#
+# NAMING THE FAR COMMANDER AS A TARGET IS A READ, so it takes the full guard.
+# Both `exists` rows sit as siblings and both are repeated inside the
+# `trigger_if` limit before the comparison is made, and the man is named through
+# `scope:combat_side` rather than `root` for batch 127's reason. This is the
+# rule the mod has used since the `is_vassal_of` rows: a link used as a target is
+# not a free mention.
+#
+# BOTH GATES WORK IN BOTH POOLS, and batch 141's lesson does not bite here.
+# That lesson was about gates comparing the scoped man to HIS OWN side's
+# commander, which is a never-firing row on the commander pool because a scoped
+# commander is that man. The far commander is a different person from everybody
+# on this side of the field, so a commander may be fifteen below him and a knight
+# may be fifteen above him, and both rows mean what they say in either file.
+#
+# THIS IS NOT A COMPETENCE GATE AND IT IS NOT THE MARTIAL ROWS. Martial is how
+# well he moves an army; prowess is what happens if somebody reaches him.
+# Fifteen points of prowess is not a matter of degree - it is the distance
+# between a man who has trained since he could stand and a man who has not - and
+# the gate says nothing about whether either of them is any good at the job they
+# are actually doing today.
+#
+# RARITY. Prowess is tightly distributed and fifteen is most of its usable range,
+# so the tails are thin at both ends; vanilla treats the same figure as the point
+# where an AI with any judgement refuses a duel outright. Both gates additionally
+# require the far side to be led at all.
+bc_the_far_commander_is_out_of_his_league_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		prowess_diff = {
+			target = scope:combat_side.enemy_side.side_commander
+			value <= -15
+		}
+	}
+}
+
+bc_the_far_commander_is_out_of_his_depth_trigger = {
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		prowess_diff = {
+			target = scope:combat_side.enemy_side.side_commander
+			value >= 15
+		}
+	}
+}
