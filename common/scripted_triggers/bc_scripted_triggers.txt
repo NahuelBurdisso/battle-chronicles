@@ -1506,10 +1506,12 @@ bc_season_is_winter_trigger = {
 
 # --- this is not the only war he is in ---------------------------------------
 #
-# THE MOD ASKS FIVE QUESTIONS ABOUT THE WAR AND ALL FIVE ARE ABOUT THIS ONE.
+# THE MOD ASKS SEVEN QUESTIONS ABOUT THE WAR AND ALL SEVEN ARE ABOUT THIS ONE.
 # bc_war_is_long_trigger asks how long it has run, bc_war_is_a_rebellion_trigger
 # what kind it is, bc_the_war_is_his_trigger and bc_this_is_his_own_war_trigger
-# whose it is, bc_fighting_his_lords_war_trigger whose it is not. Every one of
+# whose it is, bc_fighting_his_lords_war_trigger whose it is not, and
+# bc_he_is_the_one_who_crossed_trigger and bc_the_war_came_to_him_trigger which
+# way it travelled. Every one of
 # them takes for granted that there is a war, singular, and that the man on
 # this field is inside it and nothing else. In a setting whose defining
 # conflict is called the War of the Five Kings, that is a peculiar assumption.
@@ -2491,7 +2493,7 @@ bc_the_man_who_raised_him_commands_the_far_side_trigger = {
 
 # --- which way this war travelled -------------------------------------------
 #
-# THE MOD HAS READ THE WAR THREE TIMES AND NEVER ASKED WHICH WAY IT WENT.
+# THE MOD HAS READ THE WAR SCOPE THREE TIMES AND NEVER ASKED WHICH WAY IT WENT.
 # bc_war_is_long_trigger asks how old the quarrel is, bc_war_is_a_rebellion_trigger
 # asks what kind of quarrel it is, and bc_the_war_is_his_trigger asks whether
 # this man is the one who will sign whatever gets signed. Not one of the three
@@ -2529,6 +2531,15 @@ bc_the_man_who_raised_him_commands_the_far_side_trigger = {
 # keeps these two off the "fires for nearly everybody" pile: in the knight pool
 # especially, the gate picks out the men whose own name is on the quarrel, not
 # the far larger number who arrived with somebody who has one.
+#
+# THEY ARE NOT THE side_primary_participant FAMILY, WHICH IS THE NEAR MISS
+# WORTH NAMING. bc_fighting_his_lords_war_trigger, bc_this_is_his_own_war_trigger
+# and the two hook gates all compare a man against the WAR LEADER OF HIS OWN
+# SIDE, which is a question about who is answerable for the quarrel rather than
+# which way it travelled. A vassal called into his liege's invasion answers no
+# to bc_this_is_his_own_war_trigger and yes to bc_he_is_the_one_who_crossed_trigger;
+# a lord defending his own seat answers yes to the first and no to the second.
+# Neither gate here is a subset of any of those and neither reuses an argument.
 #
 # ROOT IS THE MAN THE TEMPLATE IS ABOUT in either pool, so either gate is
 # usable from either, for the reason recorded on bc_foe_is_countryman_trigger.
