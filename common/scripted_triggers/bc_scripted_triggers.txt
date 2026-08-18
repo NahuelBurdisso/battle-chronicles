@@ -5796,3 +5796,73 @@ bc_the_two_peoples_on_this_field_know_each_other_well_trigger = {
 		}
 	}
 }
+
+# BATCH 151 - WHAT KIND OF PLACE THIS FIELD BELONGS TO.
+#
+# `has_holding_type` returned zero across the whole mod apart from the one line
+# of batch 148's header that lists it as untouched. Batch 148 asked how tall the
+# thing standing on this ground is; it never asked what the thing IS. A castle
+# barony, a market town and a sept are three completely different places to have
+# a battle in, and the mod could describe none of them.
+#
+# `is_under_siege` IS NOT IN THE 1.19.0.6 DUMP AT ALL and is therefore not used
+# here, for the same reason `devastation` was refused: an undocumented keyword
+# is not worth the zero-error baseline. `has_special_building` is documented and
+# still unread, and is left for a later batch on purpose - it would not be
+# disjoint from either row below, since a special building can sit in any kind
+# of holding.
+#
+# THE TWO HOLDING NAMES ARE VANILLA'S OWN, DEFINED AT
+# `common/holdings/00_holdings.txt:83` (`city_holding`) and `:135`
+# (`church_holding`), alongside `castle_holding` at `:1` and `tribal_holding` at
+# `:54`. Vanilla reads the first form at
+# `common/activities/pulse_actions/survey_actions.txt:86`, `:100`, `:121`,
+# `:135`, `:462` and `:476`; AGOT reads it at
+# `common/casus_belli_types/00_agot_nights_watch_wars.txt:46`. AGOT reads the
+# second form throughout `common/buildings/00_temple_buildings.txt`, at `:3292`,
+# `:3380`, `:3464` and `:3558` among many others, and vanilla and AGOT both
+# gate coronations on it - `common/activities/activity_types/coronation.txt:3639`
+# in vanilla and `:3665` in AGOT.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. A barony holds one holding and it is one
+# type. No province can pass both, and no negation is needed to say so.
+#
+# GUARDS IN THE SHAPE THE GROUND ROWS USE. `combat.location` does not always
+# resolve; the guard sits as a sibling and is repeated inside the `trigger_if`
+# limit. `has_holding_type` sits directly on the province, so these are one level
+# shallower than the rich and poor country rows at 1336 and 1348, exactly like
+# batch 148's pair.
+#
+# THIS IS NOT BATCH 148'S PAIR. That one reads a number and this one reads a
+# kind, and neither implies the other in either direction: a wealthy free city
+# can carry a higher fort level than a small castle, and a sept can be walled or
+# open. Nothing here is a subset of `fort_level >= 10` or of `fort_level = 0`.
+#
+# NEITHER GATE READS THE SCOPED MAN, so neither depends on what `root` is. Both
+# are claims about the field, like the terrain rows and unlike almost everything
+# else the mod asks.
+#
+# RARITY. Most baronies in the world are castles; cities and temples are the
+# minority holdings by design, since a county that is all market and no keep does
+# not survive. On top of that the battle has to be standing in that particular
+# barony rather than in one of the others in the same county, and armies pick
+# their ground for reasons that have nothing to do with what is built on it.
+bc_this_field_belongs_to_a_town_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			has_holding_type = city_holding
+		}
+	}
+}
+
+bc_this_field_belongs_to_the_faith_trigger = {
+	exists = scope:combat_side.combat.location
+	trigger_if = {
+		limit = { exists = scope:combat_side.combat.location }
+		scope:combat_side.combat.location = {
+			has_holding_type = church_holding
+		}
+	}
+}

@@ -27,8 +27,8 @@ reads the index, so a stale index can only ever report a pass).
 
 | Path | What |
 |---|---|
-| `common/combat_phase_events/bc_commander_phase_events.txt` | 168 commander moments (7 shipped by plan 1, the rest from the content sessions) |
-| `common/combat_phase_events/bc_knight_phase_events.txt` | 136 knight moments (3 shipped by plan 1) |
+| `common/combat_phase_events/bc_commander_phase_events.txt` | 169 commander moments (7 shipped by plan 1, the rest from the content sessions) |
+| `common/combat_phase_events/bc_knight_phase_events.txt` | 137 knight moments (3 shipped by plan 1) |
 | `common/modifiers/bc_momentum_modifiers.txt` | the momentum ladder, 3 tiers each way |
 | `common/scripted_effects/bc_scripted_effects.txt` | how momentum is applied, cleared, paced |
 | `common/scripted_triggers/bc_scripted_triggers.txt` | every situation gate, one place, incl. `bc_battle_is_notable_trigger` |
@@ -570,7 +570,7 @@ different fixes.
 
 ## Content session, 2026-08-17 (no run — static verification only)
 
-One hundred and fifty batches, one per row of the table below, none of which needed a
+One hundred and fifty-one batches, one per row of the table below, none of which needed a
 runtime answer. The measured problem they
 answer is one number: **ten moment templates produced 233 firings in 44
 battles**, so a player who fights one war reads the same ten sentences over and
@@ -735,6 +735,7 @@ open ground with an unremarkable commander used to match nothing, and now does.
 | what is standing on this ground | The mod reads the battle's province for terrain, weather, wealth, owner and temper, and had never once looked up. `fort_level` censused at zero, and whether there are walls over a field is the oldest fact in the world about a battle. One commander chose to fight under a great fortress because a wall looked like a secured flank, and is losing while discovering that a wall which is not yours is an extremely large object that does not move and has been removing his choices one direction at a time. One knight is winning on ground with nothing on it at all, having decided early to stop treating the emptiness as a difficulty and start treating it as the arrangement. Ten and nothing are both AGOT's own numbers. | 2 templates, base 50, 80 |
 | what each of them could raise | This is a battle mod. It has read rank, renown, seats, provinces, contracts and the ground itself, and had never once read the plainest military number the engine keeps about a man. One commander has called out at least four fifths of everything available to him, is losing, and is the only man on the field who knows there is no second army behind him. One knight could raise more men than the man commanding him, takes the orders anyway without the small lag that would have said everything, and is winning. Mobilisation and capacity are opposite ends of one sentence and neither number tells you the other; the second gate is knight-only by construction, since no man is larger than himself. | 2 templates, base 50, 80 |
 | what the two peoples make of each other | `cultural_acceptance`, which the mod had never read once - the commander who cannot read a single thing the far line is doing, at twenty-five acceptance or less, and the knight who finds the men opposite are not foreign at all, at seventy-five or more. Vanilla's own tour bands, both sides named through `scope:combat_side` rather than `root`, disjoint by construction. | 2 templates, base 50, 80 |
+| what kind of place the field belongs to | `has_holding_type`, which batch 148 listed as untouched and left that way - the commander whose line has gone into a town's streets and stopped being a line, and the knight holding ground that belongs to the faith with people watching him who are not soldiers and are not leaving. Vanilla's own holding names, disjoint because a barony holds one holding. `is_under_siege` was refused: it is not in the 1.19.0.6 dump. | 2 templates, base 50, 80 |
 
 **All six ground bands are now gated on as well as narrated.**
 `bc_scripted_triggers.txt` wrapped four of six with a note to add the rest when
@@ -753,16 +754,16 @@ foe can be both, and both templates can be valid on the same roll. The bond
 content batches reached the first two, and this session's knight trait batch
 reached the third. The pair census and the modifier reach counts in
 `bc_ledger_effects.txt` are re-counted mechanically at the end of every batch —
-plan 1's eighteen call sites are now **three hundred and twenty-five**, its "3, 3, 4 and 3"
-are 54, 55, 54 and 27, and the fall-through set is one hundred and thirty-five sites rather than
+plan 1's eighteen call sites are now **three hundred and twenty-seven**, its "3, 3, 4 and 3"
+are 54, 55, 55 and 28, and the fall-through set is one hundred and thirty-five sites rather than
 five. The table's *behaviour* is unchanged; only its comments went wrong, and wrong in the
 direction that invites a bad fix, which is why the counting command is now
 written into the comment that carries the numbers.
 
-**Template totals are now commander 168, knight 136.** Weight against vanilla's
+**Template totals are now commander 169, knight 137.** Weight against vanilla's
 `commander_none` at 1000: roughly 400 (the calibrated seven) + 300 + 180 + 70
-+ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and thirty-six templates against
-`knight_none`'s 2000 — one hundred and thirty-five at 80 and `bc_knight_pulls_him_out` at 60,
++ 90 + 110 + 100 + 70 + 60 + 120 + 120 + 80 + 120 + 100 + 100 + 50 + 60 + 100 + 100 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50; on the knight side, one hundred and thirty-seven templates against
+`knight_none`'s 2000 — one hundred and thirty-six at 80 and `bc_knight_pulls_him_out` at 60,
 held below the rest because it is the one knight moment that writes something
 permanent.
 If a sweep shows the original seven crowded out, **the character batch is the
