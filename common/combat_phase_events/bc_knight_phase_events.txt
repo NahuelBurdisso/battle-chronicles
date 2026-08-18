@@ -9437,3 +9437,87 @@ bc_knight_beating_a_man_who_owns_none_of_it = {
 		}
 	}
 }
+
+
+# --- he has been in a room with that man --------------------------------------
+#
+# GATE. bc_he_shares_an_afternoon_with_the_man_opposite_trigger, read on the
+# knight. He is winning.
+#
+# KIND. entrenched/up, so it takes bc_shieldwall, and the argument earns it. The
+# consequence of the recognition is not sentiment and is not hesitation. It is
+# that he stops moving. He plants where he is and stays there, because the one
+# thing he will not do this afternoon is give ground in front of a man who knows
+# his face and would remember it.
+#
+# WHAT THIS MAY NOT DO. It may not say what the shared occasion was, where, when
+# or who else was at it. It may not have the two of them speak, signal, or be
+# aware of each other in any mutual way - the recognition runs one direction
+# only. It may not reach the far commander, kill a named man, or end the day.
+#
+# SKILL. diplomacy, because the men who have a face like that filed away are the
+# men who spent time in halls where it was worth filing, and because keeping
+# your head straight about a man you have eaten with while trying to beat him is
+# the same muscle.
+bc_knight_he_has_been_in_a_room_with_that_man = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_he_shares_an_afternoon_with_the_man_opposite_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Whether a face from a hall is filed under anything useful is
+		# a question about how the man behaved in the hall.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = arrogant
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = cynical
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_he_has_been_in_a_room_with_that_man"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_he_has_been_in_a_room_with_that_man_toast
+				desc = bc_knight_he_has_been_in_a_room_with_that_man_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}

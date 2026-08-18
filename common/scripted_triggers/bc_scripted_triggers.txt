@@ -4006,3 +4006,69 @@ bc_the_man_opposite_is_holding_it_for_somebody_else_trigger = {
 		}
 	}
 }
+
+
+# --- what is already written in him -------------------------------------------
+#
+# THE MEMORY SYSTEM RETURNED ZERO OVER THE WHOLE MOD. `any_memory` is zero,
+# `any_character_memory` is zero, `has_memory_category` is zero and
+# `has_memory_participant` is zero. A hundred and twenty-three batches have read
+# what a man owns, who he is related to, what he believes, who he owes and what
+# the weather is doing to him, and not one of them has ever read THE THING THE
+# GAME ITSELF KEEPS ABOUT HIS PAST. Memories are the engine's own record of what
+# has already happened to a character, and this is a mod about a man in the
+# middle of something that will become one.
+#
+# THE 1.19.0.6 DUMP gives `any_memory` as "Iterate through all memories of a
+# character", character scope, yielding character_memory, with an optional type
+# filter; `has_memory_category` as "Does the character memory have this memory
+# category?"; and `has_memory_participant` as "Does the character memory have
+# this target character as a participant?", character_memory scope, character
+# target. Vanilla spells the participant test as a scope target at
+# `common/scripted_rules/00_rules.txt:386-392`, inside exactly this shape - an
+# `any_memory` on one man testing a saved scope as participant.
+#
+# THE `battle` CATEGORY IS REAL AND IS NOT UNIVERSAL. It is declared on
+# `witnessed_death_battle_good`, `witnessed_death_battle_good_killer` and
+# `witnessed_death_battle_bad` in `common/character_memory_types/
+# character_memories_1.txt:1980-2040`, and on three more in
+# `ce1_memories.txt:2-60`, always alongside `war` and either `martial` or
+# `death`. It is not a counter of battles fought. It is the much narrower thing:
+# whether one of these has ever left something behind in him.
+#
+# THE TWO GATES READ TWO DIFFERENT FACTS ABOUT TWO DIFFERENT MEN, so neither
+# carries a negation of the other, on the same reasoning as the diarchy pair.
+# The first asks whether the man commanding here has a battle already written
+# into him. The second asks whether the man standing in this rank shares a
+# recorded afternoon with the man commanding the far host. A man may have both,
+# either or neither, and the structural separation is the engine's: the side
+# commander is not in the knight list and the two pools roll separately.
+#
+# ITERATORS ARE NOT LINKS, so the first gate takes no guard and an empty list is
+# a clean no. The second reads `scope:combat_side.enemy_side.side_commander` as
+# a TARGET, which is a read, so it takes the standing guard - the `exists` as a
+# sibling and the iterator nested in a trigger_if that repeats it.
+#
+# THE SECOND IS NOT RUMOUR AND DOES NOT NEED TO BE. Everything in it happened to
+# the man doing the remembering. He was there. That is what a memory is, and it
+# is the reason this gate can license something the far-side gates never can:
+# not a thing the camp says, but a thing he personally knows.
+#
+# RARITY. Battle memories are written by particular event chains rather than by
+# fighting, so most men who have been in a battle do not have one; and a shared
+# memory with the specific man commanding the other host today is rarer still.
+bc_he_has_one_of_these_already_written_in_him_trigger = {
+	any_memory = {
+		has_memory_category = battle
+	}
+}
+
+bc_he_shares_an_afternoon_with_the_man_opposite_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		any_memory = {
+			has_memory_participant = scope:combat_side.enemy_side.side_commander
+		}
+	}
+}

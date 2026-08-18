@@ -11946,3 +11946,83 @@ bc_a_man_at_home_signing_in_his_name = {
 		}
 	}
 }
+
+
+# --- the one he already has ---------------------------------------------------
+#
+# GATE. bc_he_has_one_of_these_already_written_in_him_trigger, read on the
+# commander. He is losing.
+#
+# KIND. wild/down, so it takes bc_spent_horse on a losing side - the file's
+# pairing for a host that has come loose and is being asked for more than it has
+# left. That is the right modifier here because the moment is not a decision. It
+# is a man doing the job with part of himself unavailable, and the army pays for
+# the part that is missing.
+#
+# WHAT THIS MAY NOT DO. It may not say what the earlier battle was, where, when,
+# who was in it, who won it or who died in it. No names, no year, no place. It
+# may not have him tell anybody about it, be asked about it, or draw a lesson
+# from it that he then applies. It may not withdraw, rally, turn the day, or end
+# the day.
+#
+# SKILL. learning, because being able to look at the thing your own head is
+# doing, name it, and go on working anyway is the one competence that helps
+# here, and it is not a martial one.
+bc_the_one_he_already_has = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_one_of_these_already_written_in_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Recognising what your own head has started doing, while it
+		# is doing it, is a scholar's trick before it is a soldier's.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_the_one_he_already_has"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_the_one_he_already_has_toast
+			desc = bc_the_one_he_already_has_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
