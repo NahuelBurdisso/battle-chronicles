@@ -3733,3 +3733,54 @@ bc_he_keeps_a_man_paid_to_be_better_at_this_trigger = {
 bc_there_is_a_chain_and_a_tower_behind_him_trigger = {
 	employs_court_position = maester_court_position
 }
+
+
+# --- the arrangement that has not happened yet --------------------------------
+#
+# `is_betrothed` RETURNED ZERO OVER THE WHOLE MOD. The mod reads marriages at
+# length - a living wife, a pregnant one, a buried one, a wife's father in the
+# far line, a marriage into the other side - and it has never once read the
+# state that comes before all of that, which is a contract signed by other
+# people about a wedding that has not happened. `is_betrothed` is documented in
+# the 1.19.0.6 dump as "Is the scope character betrothed?", character scope,
+# yes/no.
+#
+# NEITHER IS A SUBSET OF THE MARRIAGE GATES. A betrothal is not a marriage: the
+# batch eighty-eight pair needs a living spouse, the widower pair needs a dead
+# former one, and none of the four says anything about a promise outstanding. A
+# betrothed widower answers yes to one of the widower gates and yes to this one,
+# which is two true facts about the same man and not a containment either way.
+#
+# THE SECOND TAKES THE STANDING GUARD because it walks
+# scope:combat_side.enemy_side.side_commander, which is an optional link: the
+# `exists` sits as a sibling and the read is nested in a trigger_if that repeats
+# it. `is_betrothed` itself needs nothing - it is a plain character test.
+#
+# THE SECOND IS ALSO KNOWABLE, WHICH MATTERS FOR WHAT IS WRITTEN ON IT. A
+# betrothal in this setting is not a private arrangement; it is negotiated
+# between houses, announced, and talked about for a year before the day. A man
+# in the line may perfectly well know who the lord opposite is promised to
+# without ever having been within a hundred yards of him.
+#
+# DISJOINT BY CONSTRUCTION, the first winning the tie, on the usual reasoning:
+# the promise a man is carrying himself is a larger fact about his afternoon
+# than the promise somebody else is carrying.
+#
+# RARITY. Most adults with anything to command are already married, and most
+# betrothals in the game belong to children who are not standing in any battle.
+# What is left is a narrow band - the unmarried grown man with a contract
+# outstanding - and then he has to be leading or fighting here.
+bc_there_is_a_wedding_waiting_on_him_trigger = {
+	is_betrothed = yes
+}
+
+bc_a_wedding_is_waiting_on_the_man_opposite_trigger = {
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = { exists = scope:combat_side.enemy_side.side_commander }
+		scope:combat_side.enemy_side.side_commander = {
+			is_betrothed = yes
+		}
+	}
+	NOT = { bc_there_is_a_wedding_waiting_on_him_trigger = yes }
+}

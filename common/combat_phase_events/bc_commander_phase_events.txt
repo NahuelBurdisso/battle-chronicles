@@ -11555,3 +11555,81 @@ bc_what_the_paid_man_left_in_their_hands = {
 		}
 	}
 }
+
+
+# --- a date in the spring that assumes he is alive ----------------------------
+#
+# GATE. bc_there_is_a_wedding_waiting_on_him_trigger, read on the commander. He
+# is losing.
+#
+# KIND. bloodied/down, and bc_bloodied is the right verb: this is the hour that
+# costs, and the outstanding contract is the thing that makes the cost legible
+# to him. Without it the afternoon would only be expensive; with it there is a
+# figure on the other side of the ledger that today is quietly deleting.
+#
+# WHAT THIS MAY NOT DO. It may not name the other party, describe her, decide
+# anything about the match, break it off, or have anybody mention it aloud. It
+# may not rally, may not turn the day, and may not end it.
+#
+# SKILL. stewardship, because a betrothal is a contract before it is anything
+# else and the men who read contracts properly are the men who know exactly what
+# is voided by a bad afternoon.
+bc_a_date_in_the_spring_that_assumes_he_is_alive = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_a_wedding_waiting_on_him_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Knowing precisely which clauses of your own life are
+		# conditional on getting through the afternoon is an
+		# administrative habit and not a martial one.
+		modifier = {
+			add = 30
+			stewardship >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = ambitious
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = content
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_a_date_in_the_spring_that_assumes_he_is_alive"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast
+			desc = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

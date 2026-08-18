@@ -9023,3 +9023,85 @@ bc_knight_three_lines_of_a_letter_eventually = {
 		}
 	}
 }
+
+
+# --- somebody is planning a feast around a man we are trying to kill ----------
+#
+# GATE. bc_a_wedding_is_waiting_on_the_man_opposite_trigger, read on the enemy
+# commander and carrying the exact negation of the commander-side gate. The
+# knight is winning.
+#
+# KIND. wild/up. He gets the rung and bc_spent_horse in the same breath, which
+# is the whole point of calling it wild rather than ordered: he is doing well
+# and he is using the animal up doing it, and the reason he keeps going forward
+# is a thought rather than an order.
+#
+# WHAT THIS MAY NOT DO. It may not reach the far commander, see him, kill him,
+# kill a named man at all, name the other party to the match, have anybody speak
+# the arrangement aloud, or end the day. It may not be told to stop.
+#
+# SKILL. prowess, because the man who can afford to spend the afternoon riding
+# at the far end of a winning field is the man who is good enough to still be on
+# the horse at the end of it.
+bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill = {
+	type = knight
+
+	is_valid = {
+		is_alive = yes
+		bc_chronicle_ready_trigger = yes
+		bc_a_wedding_is_waiting_on_the_man_opposite_trigger = yes
+		bc_side_is_winning_trigger = yes
+	}
+
+	chance = {
+		base = 80
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Only a man who is genuinely good at this gets to choose where
+		# on a moving field he spends the last of his horse.
+		modifier = {
+			add = 30
+			prowess >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = callous
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_knight
+		bc_mark_chronicle_effect = yes
+		debug_log = "BC: fired bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill"
+
+		add_prestige = 50
+
+		scope:combat_side.side_commander ?= {
+			bc_battle_open_effect = yes
+
+			if = {
+				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				bc_momentum_minor_effect = yes
+			}
+
+			bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
+
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill_toast
+				desc = bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill_toast_desc
+				left_icon = scope:bc_knight
+			}
+		}
+	}
+}
