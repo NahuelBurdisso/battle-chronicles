@@ -7405,3 +7405,55 @@ bc_everything_he_was_born_with_was_good_trigger = {
 bc_his_father_and_mother_were_near_kin_trigger = {
 	parent_relatedness >= 0.25
 }
+
+
+# BATCH 175 - HOW MANY WORDS THERE ARE FOR HIM.
+#
+# THE MOD NAMES PERSONALITY TRAITS CONSTANTLY AND HAS NEVER ONCE COUNTED THEM.
+# `has_trait = brave`, `has_trait = patient`, `has_trait = arrogant` appear on
+# chance blocks all through both event files, and every one of those asks
+# whether a particular word is on a particular man. `number_of_personality_
+# traits` asks the other thing: how many words there are on him at all. It was
+# at zero over the whole mod, as were `number_of_traits` and
+# `number_of_lifestyle_traits`.
+#
+# A NAME AND A COUNT DO NOT NARROW EACH OTHER. A man with four personality
+# traits may or may not be brave; a brave man may have that as his only word or
+# as one of four. Neither gate below is a subset or a superset of any
+# `has_trait` row already shipped, in either direction, and the same argument
+# was made and checked at batch one hundred and seventy-one for `has_trait_xp`
+# and at one hundred and seventy-three for `highest_skill`.
+#
+# BOTH THRESHOLDS ARE VANILLA'S OWN NAMED VALUES AND NEITHER IS A LITERAL.
+# 00_basic_values.txt:1359-1361 defines `personality_trait_minimum = 2`,
+# `personality_trait_standard = 3` and `personality_trait_limit = 4` in three
+# consecutive lines, and vanilla compares against the last of them directly -
+# yearly_events_4.txt:1371 and 00_prison_interactions.txt:4864 both gate trait
+# gains on `number_of_personality_traits < personality_trait_limit`. Writing 4
+# and 2 as literals here would work today and would quietly drift the day a
+# patch decides a man can hold five words. Written this way, the gates move
+# with the game.
+#
+# THE PAIR IS DISJOINT BY CONSTRUCTION AND THE GAP BETWEEN THEM IS THE WHOLE
+# ORDINARY POPULATION. Four or more on one side, fewer than two on the other,
+# and everybody the game handed its standard three to falls between the two and
+# is described by neither. That gap is the point: this is a gate about the men
+# at the ends of the distribution, not a gate about having a personality.
+#
+# RARITY IS REAL ON BOTH ENDS. The engine hands out three by default and treats
+# four as the ceiling, so the first gate takes only men who are full up, and
+# the second takes only men the game never finished writing - a courtier who
+# came out of a pool thin, a child who was given one word and grew up before
+# anybody added another. Neither is common, and both then require the man to be
+# standing in a battle on the correct side of it.
+#
+# NEITHER TAKES A GUARD. Both are bare character-scope counts on a man the
+# caller has already entered, and a man with no personality traits at all
+# answers the second one truthfully rather than erroring.
+bc_there_is_no_room_in_him_for_another_word_trigger = {
+	number_of_personality_traits >= personality_trait_limit
+}
+
+bc_one_word_covers_the_whole_of_him_trigger = {
+	number_of_personality_traits < personality_trait_minimum
+}

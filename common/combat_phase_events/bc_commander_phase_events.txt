@@ -15067,3 +15067,62 @@ bc_he_was_made_correctly_and_it_is_not_enough = {
 		}
 	}
 }
+
+bc_all_four_of_his_qualities_want_something_different = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_there_is_no_room_in_him_for_another_word_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# A man with four of everything is worth writing down when he is the sort
+		# who notices he has four of everything, which is a learned man's problem.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = patient
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = impatient
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_all_four_of_his_qualities_want_something_different"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_all_four_of_his_qualities_want_something_different_toast
+			desc = bc_all_four_of_his_qualities_want_something_different_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
