@@ -6291,3 +6291,57 @@ bc_he_has_not_wanted_to_be_anywhere_for_a_long_time_trigger = {
 bc_he_has_never_been_able_to_sit_still_trigger = {
 	ai_energy >= high_positive_ai_value
 }
+
+# BATCH 158 - HOW LONG THE MAN HAS BEEN THE MAN IN CHARGE OF ANYTHING.
+#
+# `years_as_ruler` returned zero across the whole mod. The station batch reads
+# `is_landed` and `highest_held_title_tier`, batch 149 counted the provinces he
+# holds in his own two hands, and batch 156 measured the steps of rank between
+# the two commanders. Every one of those asks what he holds. None of them has
+# ever asked how long he has held it, which is the first thing the men standing
+# behind him would say about him if you asked them instead.
+#
+# THE FORM IS SHIPPED IN BOTH TREES AND BOTH TAILS ARE SHIPPED. Vanilla reads
+# `years_as_ruler >= 5` and `years_as_ruler >= 10` at
+# `common/script_values/10_ach_values.txt:1674` and `:1680`. AGOT reads
+# `years_as_ruler >= 3` at
+# `common/decisions/agot_decisions/00_agot_lmf_decisions.txt:303` and
+# `years_as_ruler < 1` at `:354` in the same file. Bare comparison, character
+# scope, no target and no block. The 1.19.0.6 dump gives the full operator set.
+#
+# THE MINUS ONE IS THE WHOLE TRAP AND THE FIRST GATE HANDLES IT EXPLICITLY. The
+# dump's own description says the key returns -1 when the character is not a
+# ruler at all, so a bare `years_as_ruler <= 1` would fire for every landless
+# man on the field and would not be a gate, it would be a formality. AGOT can
+# write `< 1` bare because its decision has already established a ruler by the
+# time that line is read; nothing here has. So the first gate carries the floor
+# row as well as the ceiling row, and the two together say what is meant: he is
+# a ruler, and he has been one for less than two years.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Under two years against thirty or more,
+# on one number about one man.
+#
+# BOTH ARE BARE SELF-READS. Nothing optional is walked in either row, so neither
+# takes a guard, and neither names anybody but the scoped man.
+#
+# BOTH IMPLY `is_landed = yes` AND THAT IS NOT A COLLISION, for batch 149's
+# reason restated. `is_landed` is read in the commander pool only - the knight
+# file's two mentions of it are header prose about a commander - and the two
+# pools roll separately. More to the point the fact read here is duration, not
+# existence: two men equally landed, equally titled and holding equally many
+# provinces can sit at opposite ends of this number, and nothing shipped could
+# previously tell them apart.
+#
+# RARITY. The first needs a man who took the seat inside the last two years and
+# is already commanding a battle in the field and losing it. The second needs
+# three decades of continuous rule, which on top of an ordinary accession age
+# means a man well into his fifties who is riding as somebody's knight rather
+# than running his own side of the day.
+bc_he_has_had_the_seat_for_less_than_two_years_trigger = {
+	years_as_ruler >= 0
+	years_as_ruler <= 1
+}
+
+bc_he_has_held_his_own_ground_for_thirty_years_trigger = {
+	years_as_ruler >= 30
+}

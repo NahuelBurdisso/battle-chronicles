@@ -14064,3 +14064,62 @@ bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it = {
 		}
 	}
 }
+
+bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_he_has_had_the_seat_for_less_than_two_years_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Being able to talk to men is not the difficulty. The difficulty is
+		# that talking well is exactly what a new man is expected to do.
+		modifier = {
+			add = 30
+			diplomacy >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = paranoid
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trusting
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast
+			desc = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}
