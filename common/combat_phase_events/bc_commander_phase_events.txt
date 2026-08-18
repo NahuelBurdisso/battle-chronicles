@@ -13592,3 +13592,62 @@ bc_there_is_nothing_left_at_home_to_send_for = {
 		}
 	}
 }
+
+bc_he_cannot_read_a_single_thing_the_far_line_is_doing = {
+	type = commander
+
+	is_valid = {
+		bc_chronicle_ready_commander_trigger = yes
+		bc_the_two_peoples_on_this_field_are_strangers_trigger = yes
+		bc_side_is_losing_trigger = yes
+	}
+
+	chance = {
+		base = 50
+		modifier = {
+			factor = 0.5
+			has_game_rule = bc_frequency_low
+		}
+		modifier = {
+			factor = 2
+			has_game_rule = bc_frequency_high
+		}
+		# Having read every account of war he could lay hands on and finding
+		# that none of them were written about people who fight like this.
+		modifier = {
+			add = 30
+			learning >= 12
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = cynical
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = compassionate
+		}
+	}
+
+	effect = {
+		save_scope_as = bc_commander
+		bc_battle_open_effect = yes
+		bc_mark_chronicle_commander_effect = yes
+		debug_log = "BC: fired bc_he_cannot_read_a_single_thing_the_far_line_is_doing"
+
+		add_stress = 10
+
+		if = {
+			limit = { NOT = { bc_is_faltering_trigger = yes } }
+			bc_faltering_minor_effect = yes
+		}
+
+		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast
+			desc = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast_desc
+			left_icon = scope:bc_commander
+		}
+	}
+}

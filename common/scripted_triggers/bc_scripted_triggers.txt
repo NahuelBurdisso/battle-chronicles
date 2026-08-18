@@ -5709,3 +5709,90 @@ bc_he_could_put_more_men_in_a_field_than_the_man_commanding_him_trigger = {
 		max_military_strength > scope:combat_side.side_commander.max_military_strength
 	}
 }
+
+# BATCH 150 - WHAT THE TWO PEOPLES ON THIS FIELD MAKE OF EACH OTHER.
+#
+# `cultural_acceptance`, `has_cultural_pillar`, `has_doctrine`,
+# `has_same_culture_as` and `has_same_faith_as` all returned zero across the
+# whole mod. The mod reads `faith` exactly once in a scripted trigger - line 250,
+# on the far commander, as a plain inequality - and reads `culture` only for
+# named cultural traditions. It has never asked the question that sits
+# underneath both, which is not what either side believes but how much of each
+# other they can stand.
+#
+# THE TRIGGER IS CULTURE SCOPE AND BOTH BANDS ARE SHIPPED NUMBERS. Vanilla's
+# `common/activities/activity_types/tour.txt:217-220` writes
+# `cultural_acceptance = { target = root.culture  value <= 25 }` and repeats the
+# same band at `:446`; `common/achievements/ep1_achievements.txt:125-128` uses
+# `value >= 95` at the far end. AGOT ships the same file and the same call sites
+# at `common/activities/activity_types/tour.txt:224`, `:453`, `:465` and `:2516`.
+# The lower band below is vanilla's own; the upper one is set below vanilla's
+# achievement number on purpose, because ninety-five is a figure written to be
+# hard to reach on purpose and seventy-five is what two peoples who have lived
+# beside each other for generations actually sit at.
+#
+# BOTH SIDES ARE NAMED THROUGH `scope:combat_side`, NOT `root`. That is batch
+# 127's lesson and batch 144's construction: inside a scripted trigger there is
+# no guarantee what `root` is, and naming both commanders explicitly makes the
+# gate mean something better than "his" culture would - what is asked is what
+# the two peoples LEADING this field make of each other, which is a fact about
+# the battle rather than about whichever man happens to be scoped.
+#
+# `culture` TAKES NO GUARD. Every character has one; it is not an optional link
+# in the sense `side_commander` or `dynasty` are. The three `exists` rows that
+# are here are there for the commanders and the enemy side, and every one of
+# them is repeated inside the `trigger_if` limit.
+#
+# THE TWO ARE DISJOINT BY CONSTRUCTION. Twenty-five or less against seventy-five
+# or more of the same number on the same pair of cultures.
+#
+# THIS IS NOT THE FAITH ROW AT 250 AND IT IS NOT THE TRADITION ROWS. The faith
+# row asks whether two men happen to believe different things, which is a yes or
+# a no and says nothing about temperature; two faiths can differ and be
+# comfortable, or share a name and loathe each other. The tradition rows ask
+# whether a culture holds a particular named custom. This asks what two peoples
+# have made of each other over time, which is the only one of the three that
+# moves during a game.
+#
+# RARITY. Acceptance is a slow number. It sits near the middle for most pairs
+# most of the time, drifts up between neighbours who intermarry and down between
+# ones who do not, and both gates want an outer quarter of the scale AND both
+# sides of this battle to be led. Two peoples at twenty-five or less have
+# generally not been fighting each other often enough to have got used to it.
+bc_the_two_peoples_on_this_field_are_strangers_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.side_commander.culture = {
+			cultural_acceptance = {
+				target = scope:combat_side.enemy_side.side_commander.culture
+				value <= 25
+			}
+		}
+	}
+}
+
+bc_the_two_peoples_on_this_field_know_each_other_well_trigger = {
+	exists = scope:combat_side.side_commander
+	exists = scope:combat_side.enemy_side
+	exists = scope:combat_side.enemy_side.side_commander
+	trigger_if = {
+		limit = {
+			exists = scope:combat_side.side_commander
+			exists = scope:combat_side.enemy_side
+			exists = scope:combat_side.enemy_side.side_commander
+		}
+		scope:combat_side.side_commander.culture = {
+			cultural_acceptance = {
+				target = scope:combat_side.enemy_side.side_commander.culture
+				value >= 75
+			}
+		}
+	}
+}
