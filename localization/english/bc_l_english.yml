@@ -968,6 +968,24 @@
  bc_battle_memory_lost_desc_second_perspective:0 "you stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
  bc_battle_memory_lost_desc_third_perspective:0 "[owner.GetName] stood in the line at [ROOT.Var('battle_location').GetProvince.GetName], and the line did not hold"
 
+# The 2026-08-17 session added bc_nemesis_memory and bc_lifesaver_memory and gave
+# both a full set of nine descriptions, but no NAME key - the bare type id, which
+# is a separate key from every `_desc` and is what the memory list prints as the
+# entry's title. The engine reported it at load as
+# `character_memory_type.cpp:63: Character memory name 'X' is not localized`, the
+# first and only `bc_` lines in a 416k-line error.log. Their descriptions sit
+# with the rest of the 08-17 variants further down; the names belong here, beside
+# the other three, because this is where a reader looking for a title will come.
+#
+# NO PARTICIPANT TAG IN EITHER TITLE. Both types declare one - `nemesis` and
+# `lifesaver` - and every one of their descriptions uses it, but the titles
+# follow bc_shieldbrother_memory above, which also has a tag available and also
+# spends none of it: a title is a list-entry heading and the participant is
+# already named in the line the reader opens.
+
+ bc_nemesis_memory:0 "was beaten a third time by the same man"
+ bc_lifesaver_memory:0 "was pulled out of a press by a knight"
+
 # --- memory variants (2026-08-17) -------------------------------------------
 #
 # Two more per perspective, pooled by the `random_valid` block each memory type
