@@ -1863,7 +1863,7 @@ bc_shieldbrother_forged_ground = {
 # effect block, and three knight sites behind the same
 # `scope:combat_side.side_commander ?=` link, which for bc_shieldbrother_forged
 # is a SECOND block on that link rather than the same one
-# (bc_knight_phase_events.txt:231 and :285). Either way a failed `?=` skips the
+# (bc_knight_phase_events.txt:239 and :293). Either way a failed `?=` skips the
 # open call and the toast together.
 #
 # DO NOT SHORTEN THAT TO "UNREACHABLE" AND DELETE THE ARM. A bond clause on a
@@ -2229,8 +2229,8 @@ bc_bond_clause = {
 # than assigns. The combat is both sides. A clause phrased as a claim about
 # his men would therefore report something the variable never measured, and would
 # collide with the moments' own gates: bc_flank_collapses fires only when he is
-# outnumbered (bc_commander_phase_events.txt:221) and bc_van_breaks_through only
-# when he is outnumbering (:290).
+# outnumbered (bc_commander_phase_events.txt:233) and bc_van_breaks_through only
+# when he is outnumbering (:306).
 #
 # THE VERB HAS TO BE AGENTLESS AS WELL AS THE SUBJECT SHARED. Two drafts shipped
 # and were pulled for this, and they are QUOTED rather than described, because
@@ -2284,7 +2284,7 @@ bc_bond_clause = {
 #      here in its first phrasing - see the paragraph above on both hosts. Grep
 #      the phase-event files for `bc_side_is_outnumber`, which is where that
 #      failure was found. Grepping them for bc_battle_size returns one hit and it
-#      is a comment (bc_knight_phase_events.txt:230); NO moment gates on the
+#      is a comment (bc_knight_phase_events.txt:238); NO moment gates on the
 #      variable, which is exactly why row 2 has to be a separate grep of the
 #      whole mod rather than of these two files.
 #   4. Reads the same after ALL TEN toast literals, because this clause is
@@ -2300,11 +2300,11 @@ bc_bond_clause = {
 # `is_valid` blocks will not confirm it. NOTHING enforces once-per-battle on any
 # of them: bc_banner_falls gates only on the chronicle cooldown, not faltering,
 # and losing (bc_commander_phase_events.txt:39-43), while bc_rally_the_line
-# requires faltering (:96-99) and clears it again through bc_rally_effect
-# (bc_scripted_effects.txt:92-95), so banner, rally, banner is a reachable
+# requires faltering (:100-103) and clears it again through bc_rally_effect
+# (bc_scripted_effects.txt:231-234), so banner, rally, banner is a reachable
 # sequence inside one combat. The three knight moments are weaker
 # still - they are `type = knight` (defined at bc_knight_phase_events.txt:50,
-# :118 and :191; the `type` row is the line after each), so a second knight can
+# :122 and :199; the `type` row is the line after each), so a second knight can
 # do the same thing in the same fight, and the toast is written about the one man
 # it fired for.
 #

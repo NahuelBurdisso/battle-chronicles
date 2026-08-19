@@ -1,15 +1,154 @@
 ﻿# Battle Chronicles - shared effects.
 #
 # Every event reaches for momentum through the four wrappers below, never through
-# add_character_modifier directly. Tuning the whole mod is then two numbers and
-# one ladder in this file.
+# add_character_modifier directly. Tuning the whole mod is then one duration, one
+# ladder and the two depth rungs in this file.
 #
 # NOTE: `$PARAM$` substitution inside a quoted string EATS THE SPACE IN FRONT OF
 # IT ("applied $MODIFIER$" prints "appliedbc_momentum_major"). Harmless in a log,
 # never build a display string on it.
 
-# The leaf. Everything funnels here so duration lives in exactly one place.
+# --- the depth escalator ----------------------------------------------------
+#
+# THE LADDER HAD COLLAPSED ONTO ITS BOTTOM RUNG. Censused 2026-08-19 across all
+# 444 phase-event templates: 411 of the 416 momentum applications ask for
+# `minor`, 5 ask for `major`, and NOT ONE asks for `decisive`. The reason is not
+# a bug, it is how the 434 templates of the 08-17/08-18 batches were generated -
+# magnitude was assigned from swing direction alone, every `down` getting
+# bc_faltering_minor_effect and every `up` bc_momentum_minor_effect, so no
+# magnitude judgment was ever made at any of them. The advantage = +/-6 and
+# +/-10 rungs in bc_momentum_modifiers.txt were dead content.
+#
+# THE FIX IS NOT TO PROMOTE THE TEMPLATES. Reading the 434 names makes the case:
+# they are CONTEXT READS, not field events - "he has three living sisters",
+# "the seals are still wet enough", "the name is a weight". A context read is
+# worth a minor nudge and nothing more, and asking one of them for a decisive
+# swing would be worse design than the flat ladder it replaced. Only the ~14
+# hand-authored templates are physical events (banner falls, flank collapses,
+# van breaks through, knight unhorses a lord) and those already ask for major.
+#
+# SO DEPTH ESCALATES INSTEAD. What a moment is worth is not only what it says,
+# it is also WHEN IN THE BATTLE it says it. The sixth blow of a long grind lands
+# harder than the first regardless of which context read won the roll, and that
+# battles build is the whole premise of the mod. The requested rung is now a
+# FLOOR and the ledger depth raises it:
+#
+#   moments 1-3  ->  as requested
+#   moments 4-5  ->  one rung up
+#   moments 6+   ->  two rungs up
+#
+# RUNGS 4 AND 6, NOT 3 AND 4. bc_record_effective_tier_effect's rungs sit at 3
+# and 4 because they were tuned as a CEILING, where a low rung makes the top
+# tier rarer. Here they are a FLOOR and the same numbers would invert the
+# distribution: with 411 of 416 calls asking for minor, a +1 step at moment 3
+# would make major the common case. Against a measured mean of 4.2 moments per
+# battle, 4 and 6 give roughly 72% minor / 23% major / 5% decisive.
+#
+# THE MOMENTS COUNT IS READ ON THE SCOPE THIS RUNS ON, WHICH IS ALWAYS RIGHT.
+# Knight templates wrap both bc_momentum_*_effect and bc_record_moment_effect in
+# the same `scope:combat_side.side_commander ?= { ... }` block, so the modifier
+# and the ledger land on one character. No reach-through belongs here, and one
+# added would break the commander path.
+#
+# GUARDED, AND THE ABSENT CASE IS REAL. Pop-up options answered after combat end
+# have had bc_battle_moments removed by bc_clear_scratch_effect - the same case
+# bc_record_moment_effect documents at length. Nested, not two sibling rows in
+# one `limit`: CK3 does not short-circuit.
 bc_add_momentum_effect = {
+	if = {
+		limit = { exists = var:bc_battle_moments }
+		if = {
+			limit = { var:bc_battle_moments >= 6 }
+			debug_log = "BC: momentum depth two"
+			bc_momentum_step2_effect = { MODIFIER = $MODIFIER$ }
+		}
+		else_if = {
+			limit = { var:bc_battle_moments >= 4 }
+			debug_log = "BC: momentum depth one"
+			bc_momentum_step1_effect = { MODIFIER = $MODIFIER$ }
+		}
+		else = {
+			debug_log = "BC: momentum depth none"
+			bc_apply_momentum_rung_effect = { MODIFIER = $MODIFIER$ }
+		}
+	}
+	else = {
+		debug_log = "BC: momentum depth none"
+		bc_apply_momentum_rung_effect = { MODIFIER = $MODIFIER$ }
+	}
+}
+
+# One rung up. The four escalating arms strip the rungs BELOW the one they are
+# about to grant, because add_character_modifier of a DIFFERENT modifier stacks
+# where the same one merely refreshes - without the strip a long battle would
+# end holding minor + major + decisive at once, which is advantage 19 off a
+# ladder whose top rung is 10.
+#
+# NO UPPER GUARD, DELIBERATELY. The resolved rung is monotonic inside a battle
+# because bc_battle_moments only ever increases, so a later moment cannot
+# resolve lower than an earlier one asking for the same tier. The one exception
+# is the single template in the mod that requests `decisive` outright being
+# followed by a minor request in the same battle, which is not worth a guard.
+bc_momentum_step1_effect = {
+	if = {
+		limit = { flag:$MODIFIER$ = flag:bc_momentum_minor }
+		remove_character_modifier = bc_momentum_minor
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_momentum_major }
+	}
+	else_if = {
+		limit = { flag:$MODIFIER$ = flag:bc_momentum_major }
+		remove_character_modifier = bc_momentum_minor
+		remove_character_modifier = bc_momentum_major
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_momentum_decisive }
+	}
+	else_if = {
+		limit = { flag:$MODIFIER$ = flag:bc_faltering_minor }
+		remove_character_modifier = bc_faltering_minor
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_faltering_major }
+	}
+	else_if = {
+		limit = { flag:$MODIFIER$ = flag:bc_faltering_major }
+		remove_character_modifier = bc_faltering_minor
+		remove_character_modifier = bc_faltering_major
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_faltering_decisive }
+	}
+	else = {
+		bc_apply_momentum_rung_effect = { MODIFIER = $MODIFIER$ }
+	}
+}
+
+# Two rungs up. Both non-top rungs land on the same place, so this is two arms
+# rather than four.
+bc_momentum_step2_effect = {
+	if = {
+		limit = {
+			OR = {
+				flag:$MODIFIER$ = flag:bc_momentum_minor
+				flag:$MODIFIER$ = flag:bc_momentum_major
+			}
+		}
+		remove_character_modifier = bc_momentum_minor
+		remove_character_modifier = bc_momentum_major
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_momentum_decisive }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				flag:$MODIFIER$ = flag:bc_faltering_minor
+				flag:$MODIFIER$ = flag:bc_faltering_major
+			}
+		}
+		remove_character_modifier = bc_faltering_minor
+		remove_character_modifier = bc_faltering_major
+		bc_apply_momentum_rung_effect = { MODIFIER = bc_faltering_decisive }
+	}
+	else = {
+		bc_apply_momentum_rung_effect = { MODIFIER = $MODIFIER$ }
+	}
+}
+
+# The leaf. Everything funnels here so duration lives in exactly one place.
+bc_apply_momentum_rung_effect = {
 	add_character_modifier = {
 		modifier = $MODIFIER$
 		days = 20
@@ -186,6 +325,35 @@ bc_start_popup_cooldown_effect = {
 	add_character_flag = {
 		flag = bc_popup_cooldown
 		days = 60
+	}
+}
+
+# --- toast budget -----------------------------------------------------------
+# 10 DAYS, ON THE RECIPIENT. See bc_can_toast_trigger in bc_scripted_triggers.txt
+# for why the recipient needs a budget of his own at all - in short, every other
+# cooldown in the mod is taken on the SUBJECT, and a knight moment's subject is
+# not the man who gets the message.
+#
+# WHY 10 AND NOT 15. Phase events roll every COMBAT_EVENT_DAYS = 5, so this is a
+# budget of one toast per two rolls, or about three across a 30-day battle. 15
+# would have matched bc_chronicle_recent and rounded to two per battle, which is
+# fewer moments than a battle with 444 templates behind it deserves; 5 would be
+# no throttle at all, since it expires before the next roll. The number is the
+# one dial to turn if the volume is still wrong - turn THIS, not the `chance`
+# weights, because the weights decide WHICH moment speaks and this decides HOW
+# OFTEN the player hears one.
+#
+# A FLAG, not a modifier, for the reason bc_start_popup_cooldown_effect records:
+# modifiers are wiped at combat end, so a modifier-based lockout silently resets
+# every battle - which for this budget would mean it never survives to throttle
+# the second battle of a war.
+#
+# SET BEFORE THE TOAST, INSIDE THE SAME `if`. Not inside the toast body: the
+# mod's rule is that a toast is purely presentational, and this is state.
+bc_start_toast_cooldown_effect = {
+	add_character_flag = {
+		flag = bc_toast_cooldown
+		days = 10
 	}
 }
 

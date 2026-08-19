@@ -705,13 +705,13 @@
 # about him rather than by accommodating him: "not yet in the fighting" denotes
 # men who have not gone in, and he went in and came back out, so he is in neither
 # the few nor the many. That event is `type = knight` and its is_valid carries no
-# size gate (bc_knight_phase_events.txt:124-132), so a small battle is a routine
+# size gate (bc_knight_phase_events.txt:128-136), so a small battle is a routine
 # host for the pairing.
 #
 # TWO STRAINS ARE NOT FIXED AND ARE RECORDED RATHER THAN HIDDEN. Both are between
 # the SMALL arm and a literal that implies men still out of the fighting; the huge
 # and large arms reinforce those same literals.
-#   bc_ground_favours_us - a COMMANDER moment, bc_commander_phase_events.txt:328 -
+#   bc_ground_favours_us - a COMMANDER moment, bc_commander_phase_events.txt:344 -
 #   reads `They have to come to us across all of it.`, which puts the enemy host
 #   short of contact. bc_battle_size counts BOTH sides, so read strictly, near
 #   half the combat is not yet in the fighting and `are few` is wrong for the
@@ -735,8 +735,8 @@
 # about his men would report something the variable never
 # measured. It would also collide with the moments' own gates: a toast carries
 # the commander's portrait, and bc_flank_collapses fires only when he is
-# outnumbered (bc_commander_phase_events.txt:221) while bc_van_breaks_through
-# fires only when he is outnumbering (:290). TWO drafts shipped and were pulled
+# outnumbered (bc_commander_phase_events.txt:233) while bc_van_breaks_through
+# fires only when he is outnumbering (:306). TWO drafts shipped and were pulled
 # for this, and they are different drafts - quoted rather than paraphrased,
 # because paraphrasing them is how they got merged into one in an earlier note:
 #   b3e7c32  " Whole companies will be kept out of the fighting and never put in
@@ -1268,6 +1268,16 @@
 # --- the opening ------------------------------------------------------------
 
  bc_chronicles.0011.t:0 "The Lines Close"
+# THE FOUR TITLES BELOW CARRY THE SAME BAN AS THE INTRO POOL AND A STRICTER ONE.
+# The title renders ABOVE the paragraph that resolves the ground and the foe, so
+# none of them may name terrain, the other host, numbers, or how it is going -
+# a title that did would contradict the chain under it whenever they disagreed.
+# All five are about the same thing the intro pool is about: that nothing has
+# resolved and an order has to go out anyway.
+ bc_chronicles.0011.t_b:0 "Before the First Order"
+ bc_chronicles.0011.t_c:0 "The Last Quiet"
+ bc_chronicles.0011.t_d:0 "What the Day Gets Built On"
+ bc_chronicles.0011.t_e:0 "Nothing Is Settled Yet"
  bc_chronicles.0011.desc_intro:0 "The hosts are in reach of one another and nothing has been settled yet. Whatever is chosen now will have to be lived with all day."
 # THE THREE ADDED 2026-08-17 MAY NOT MENTION THE GROUND, THE OTHER HOST'S NAME,
 # NUMBERS ON EITHER SIDE, OR HOW IT IS GOING - the two paragraphs that follow
@@ -1281,6 +1291,18 @@
  bc_chronicles.0011.a:0 "Press them before they are set."
  bc_chronicles.0011.b:0 "Hold the ground and let them come."
  bc_chronicles.0011.c:0 "Wait. See how the first ranks fare."
+# THE SIX BELOW ARE VARIANTS 2 AND 3 OF THE BASE POSTURES. Only three of the
+# nine render on any one eve - see the option block in bc_eve_events.txt - so
+# these are never read next to a, b and c and may reuse their shape. What they
+# may NOT do is name the ground or the foe: a posture is chosen before the
+# ground chain below has said anything, and options d-k are where the field and
+# the man across it are answered.
+ bc_chronicles.0011.l:0 "Thin the centre. Put the weight on both wings."
+ bc_chronicles.0011.m:0 "Refuse the left. Anchor it and let them wrap."
+ bc_chronicles.0011.n:0 "Everything forward at once. One hour decides it."
+ bc_chronicles.0011.o:0 "Down off the horses. This one is fought standing."
+ bc_chronicles.0011.p:0 "He goes in where it is thickest. Say so before they form."
+ bc_chronicles.0011.q:0 "Hold the ends. Let the middle give if it must."
  bc_chronicles.0011.desc_kin:0 "The banners across the field are ones he grew up under. Somebody over there taught him to ride."
  bc_chronicles.0011.desc_heathen:0 "They will pray before this, as he will, and not to the same thing."
  bc_chronicles.0011.desc_countryman:0 "The men across the field speak as his do. Whatever is decided here, both sides will tell it in the same tongue."

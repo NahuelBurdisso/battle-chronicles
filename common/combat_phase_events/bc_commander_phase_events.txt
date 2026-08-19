@@ -77,11 +77,15 @@ bc_banner_falls = {
 			add_stress = 10
 			bc_record_moment_effect = { TIER = major KIND = wild SWING = down }
 
-			send_interface_toast = {
-				type = event_toast_effect_bad
-				title = bc_banner_falls_toast
-				desc = bc_banner_falls_toast_desc
-				left_icon = scope:bc_commander
+			if = {
+				limit = { bc_can_toast_trigger = yes }
+				bc_start_toast_cooldown_effect = yes
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = bc_banner_falls_toast
+					desc = bc_banner_falls_toast_desc
+					left_icon = scope:bc_commander
+				}
 			}
 		}
 	}
@@ -137,11 +141,15 @@ bc_rally_the_line = {
 			bc_rally_effect = yes
 			bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-			send_interface_toast = {
-				type = event_toast_effect_good
-				title = bc_rally_the_line_toast
-				desc = bc_rally_the_line_toast_desc
-				left_icon = scope:bc_commander
+			if = {
+				limit = { bc_can_toast_trigger = yes }
+				bc_start_toast_cooldown_effect = yes
+				send_interface_toast = {
+					type = event_toast_effect_good
+					title = bc_rally_the_line_toast
+					desc = bc_rally_the_line_toast_desc
+					left_icon = scope:bc_commander
+				}
 			}
 		}
 	}
@@ -196,11 +204,15 @@ bc_horse_killed_under_him = {
 		add_prestige = 50
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_horse_killed_toast
-			desc = bc_horse_killed_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_horse_killed_toast
+				desc = bc_horse_killed_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -265,11 +277,15 @@ bc_flank_collapses = {
 			bc_faltering_major_effect = yes
 			bc_record_moment_effect = { TIER = decisive KIND = wild SWING = down }
 
-			send_interface_toast = {
-				type = event_toast_effect_bad
-				title = bc_flank_collapses_toast
-				desc = bc_flank_collapses_toast_desc
-				left_icon = scope:bc_commander
+			if = {
+				limit = { bc_can_toast_trigger = yes }
+				bc_start_toast_cooldown_effect = yes
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = bc_flank_collapses_toast
+					desc = bc_flank_collapses_toast_desc
+					left_icon = scope:bc_commander
+				}
 			}
 		}
 	}
@@ -328,11 +344,15 @@ bc_van_breaks_through = {
 			bc_momentum_major_effect = yes
 			bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
 
-			send_interface_toast = {
-				type = event_toast_effect_good
-				title = bc_van_breaks_through_toast
-				desc = bc_van_breaks_through_toast_desc
-				left_icon = scope:bc_commander
+			if = {
+				limit = { bc_can_toast_trigger = yes }
+				bc_start_toast_cooldown_effect = yes
+				send_interface_toast = {
+					type = event_toast_effect_good
+					title = bc_van_breaks_through_toast
+					desc = bc_van_breaks_through_toast_desc
+					left_icon = scope:bc_commander
+				}
 			}
 		}
 	}
@@ -384,11 +404,15 @@ bc_ground_favours_us = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_ground_favours_us_toast
-			desc = bc_ground_favours_us_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_ground_favours_us_toast
+				desc = bc_ground_favours_us_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -437,11 +461,15 @@ bc_lines_bogged_down = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_lines_bogged_down_toast
-			desc = bc_lines_bogged_down_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_lines_bogged_down_toast
+				desc = bc_lines_bogged_down_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -530,11 +558,15 @@ bc_winter_bites = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_winter_bites_toast
-			desc = bc_winter_bites_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_winter_bites_toast
+				desc = bc_winter_bites_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -584,11 +616,15 @@ bc_dust_and_thirst = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_dust_and_thirst_toast
-			desc = bc_dust_and_thirst_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_dust_and_thirst_toast
+				desc = bc_dust_and_thirst_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -643,11 +679,15 @@ bc_the_woods_hide_us = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_woods_hide_us_toast
-			desc = bc_the_woods_hide_us_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_woods_hide_us_toast
+				desc = bc_the_woods_hide_us_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -691,11 +731,15 @@ bc_the_long_war = {
 		add_stress = 5
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_long_war_toast
-			desc = bc_the_long_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_long_war_toast
+				desc = bc_the_long_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -746,11 +790,15 @@ bc_too_wide_to_see = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_too_wide_to_see_toast
-			desc = bc_too_wide_to_see_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_too_wide_to_see_toast
+				desc = bc_too_wide_to_see_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -805,11 +853,15 @@ bc_the_killing_is_general = {
 		bc_momentum_major_effect = yes
 		bc_record_moment_effect = { TIER = major KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_killing_is_general_toast
-			desc = bc_the_killing_is_general_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_killing_is_general_toast
+				desc = bc_the_killing_is_general_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -875,11 +927,15 @@ bc_kin_across_the_line = {
 		add_stress = 15
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_kin_across_the_line_toast
-			desc = bc_kin_across_the_line_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_kin_across_the_line_toast
+				desc = bc_kin_across_the_line_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -927,11 +983,15 @@ bc_the_old_wolf = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_old_wolf_toast
-			desc = bc_the_old_wolf_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_old_wolf_toast
+				desc = bc_the_old_wolf_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -984,11 +1044,15 @@ bc_the_green_boy = {
 		add_stress = 10
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_green_boy_toast
-			desc = bc_the_green_boy_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_green_boy_toast
+				desc = bc_the_green_boy_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1048,11 +1112,15 @@ bc_his_lords_war = {
 		add_prestige = 25
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_his_lords_war_toast
-			desc = bc_his_lords_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_his_lords_war_toast
+				desc = bc_his_lords_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1146,11 +1214,15 @@ bc_the_wrath_takes_him = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_wrath_takes_him_toast
-			desc = bc_the_wrath_takes_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_wrath_takes_him_toast
+				desc = bc_the_wrath_takes_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1203,11 +1275,15 @@ bc_the_patient_hand = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_patient_hand_toast
-			desc = bc_the_patient_hand_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_patient_hand_toast
+				desc = bc_the_patient_hand_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1256,11 +1332,15 @@ bc_the_wine_at_noon = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_wine_at_noon_toast
-			desc = bc_the_wine_at_noon_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_wine_at_noon_toast
+				desc = bc_the_wine_at_noon_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1310,11 +1390,15 @@ bc_the_zealot_will_not_stop = {
 		add_piety = 50
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_zealot_will_not_stop_toast
-			desc = bc_the_zealot_will_not_stop_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_zealot_will_not_stop_toast
+				desc = bc_the_zealot_will_not_stop_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1374,11 +1458,15 @@ bc_he_looks_for_the_road = {
 		add_stress = 10
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_he_looks_for_the_road_toast
-			desc = bc_he_looks_for_the_road_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_he_looks_for_the_road_toast
+				desc = bc_he_looks_for_the_road_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1432,11 +1520,15 @@ bc_the_practised_eye = {
 		add_prestige = 25
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_practised_eye_toast
-			desc = bc_the_practised_eye_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_practised_eye_toast
+				desc = bc_the_practised_eye_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1520,11 +1612,15 @@ bc_the_broken_ground_holds = {
 		bc_momentum_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_broken_ground_holds_toast
-			desc = bc_the_broken_ground_holds_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_broken_ground_holds_toast
+				desc = bc_the_broken_ground_holds_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1576,11 +1672,15 @@ bc_the_green_closes_in = {
 		bc_faltering_minor_effect = yes
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_green_closes_in_toast
-			desc = bc_the_green_closes_in_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_green_closes_in_toast
+				desc = bc_the_green_closes_in_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1662,11 +1762,15 @@ bc_the_old_grudge = {
 		add_stress = 10
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_old_grudge_toast
-			desc = bc_the_old_grudge_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_old_grudge_toast
+				desc = bc_the_old_grudge_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1727,11 +1831,15 @@ bc_gods_on_both_sides = {
 		add_piety = 50
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_gods_on_both_sides_toast
-			desc = bc_gods_on_both_sides_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_gods_on_both_sides_toast
+				desc = bc_gods_on_both_sides_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1783,11 +1891,15 @@ bc_the_same_tongue = {
 		add_stress = 5
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_same_tongue_toast
-			desc = bc_the_same_tongue_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_same_tongue_toast
+				desc = bc_the_same_tongue_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1887,11 +1999,15 @@ bc_the_crown_on_the_field = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_crown_on_the_field_toast
-			desc = bc_the_crown_on_the_field_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_crown_on_the_field_toast
+				desc = bc_the_crown_on_the_field_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -1964,11 +2080,15 @@ bc_nothing_but_the_horse = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_nothing_but_the_horse_toast
-			desc = bc_nothing_but_the_horse_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_nothing_but_the_horse_toast
+				desc = bc_nothing_but_the_horse_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2037,11 +2157,15 @@ bc_his_blood_in_the_ranks = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_his_blood_in_the_ranks_toast
-			desc = bc_his_blood_in_the_ranks_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_his_blood_in_the_ranks_toast
+				desc = bc_his_blood_in_the_ranks_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2140,11 +2264,15 @@ bc_they_fear_me_more = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_they_fear_me_more_toast
-			desc = bc_they_fear_me_more_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_they_fear_me_more_toast
+				desc = bc_they_fear_me_more_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2208,11 +2336,15 @@ bc_no_fear_in_them = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_no_fear_in_them_toast
-			desc = bc_no_fear_in_them_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_no_fear_in_them_toast
+				desc = bc_no_fear_in_them_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2278,11 +2410,15 @@ bc_the_hard_hand = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_hard_hand_toast
-			desc = bc_the_hard_hand_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_hard_hand_toast
+				desc = bc_the_hard_hand_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2369,11 +2505,15 @@ bc_the_hands_are_not_steady = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_hands_are_not_steady_toast
-			desc = bc_the_hands_are_not_steady_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_hands_are_not_steady_toast
+				desc = bc_the_hands_are_not_steady_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2434,11 +2574,15 @@ bc_he_cannot_stop = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_cannot_stop_toast
-			desc = bc_he_cannot_stop_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_cannot_stop_toast
+				desc = bc_he_cannot_stop_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2529,11 +2673,15 @@ bc_taught_to_do_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_taught_to_do_this_toast
-			desc = bc_taught_to_do_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_taught_to_do_this_toast
+				desc = bc_taught_to_do_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2607,11 +2755,15 @@ bc_never_learned_the_trade = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_never_learned_the_trade_toast
-			desc = bc_never_learned_the_trade_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_never_learned_the_trade_toast
+				desc = bc_never_learned_the_trade_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2695,11 +2847,15 @@ bc_he_will_not_chase_them = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_he_will_not_chase_them_toast
-			desc = bc_he_will_not_chase_them_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_he_will_not_chase_them_toast
+				desc = bc_he_will_not_chase_them_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2788,11 +2944,15 @@ bc_the_chest_is_empty = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_chest_is_empty_toast
-			desc = bc_the_chest_is_empty_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_chest_is_empty_toast
+				desc = bc_the_chest_is_empty_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2863,11 +3023,15 @@ bc_the_gods_are_watching = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_gods_are_watching_toast
-			desc = bc_the_gods_are_watching_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_gods_are_watching_toast
+				desc = bc_the_gods_are_watching_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -2956,11 +3120,15 @@ bc_he_cannot_get_there = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_cannot_get_there_toast
-			desc = bc_he_cannot_get_there_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_cannot_get_there_toast
+				desc = bc_he_cannot_get_there_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3035,11 +3203,15 @@ bc_he_holds_one_place = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_holds_one_place_toast
-			desc = bc_he_holds_one_place_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_holds_one_place_toast
+				desc = bc_he_holds_one_place_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3143,11 +3315,15 @@ bc_the_trick_they_did_not_see = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_trick_they_did_not_see_toast
-			desc = bc_the_trick_they_did_not_see_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_trick_they_did_not_see_toast
+				desc = bc_the_trick_they_did_not_see_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3214,11 +3390,15 @@ bc_he_has_read_about_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_has_read_about_this_toast
-			desc = bc_he_has_read_about_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_has_read_about_this_toast
+				desc = bc_he_has_read_about_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3287,11 +3467,15 @@ bc_they_came_for_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_they_came_for_him_toast
-			desc = bc_they_came_for_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_they_came_for_him_toast
+				desc = bc_they_came_for_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3384,11 +3568,15 @@ bc_the_other_man_is_better = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_other_man_is_better_toast
-			desc = bc_the_other_man_is_better_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_other_man_is_better_toast
+				desc = bc_the_other_man_is_better_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3455,11 +3643,15 @@ bc_the_gap_he_left = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_gap_he_left_toast
-			desc = bc_the_gap_he_left_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_gap_he_left_toast
+				desc = bc_the_gap_he_left_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3549,11 +3741,15 @@ bc_they_are_shouting_his_name = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_they_are_shouting_his_name_toast
-			desc = bc_they_are_shouting_his_name_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_they_are_shouting_his_name_toast
+				desc = bc_they_are_shouting_his_name_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3621,11 +3817,15 @@ bc_the_name_is_a_weight = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_name_is_a_weight_toast
-			desc = bc_the_name_is_a_weight_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_name_is_a_weight_toast
+				desc = bc_the_name_is_a_weight_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3725,11 +3925,15 @@ bc_the_horses_are_already_gone = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_the_horses_are_already_gone_toast
-			desc = bc_the_horses_are_already_gone_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_the_horses_are_already_gone_toast
+				desc = bc_the_horses_are_already_gone_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3799,11 +4003,15 @@ bc_they_were_chasing_an_hour_ago = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_were_chasing_an_hour_ago_toast
-			desc = bc_they_were_chasing_an_hour_ago_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_were_chasing_an_hour_ago_toast
+				desc = bc_they_were_chasing_an_hour_ago_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3899,11 +4107,15 @@ bc_this_has_been_a_long_afternoon = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_neutral
-			title = bc_this_has_been_a_long_afternoon_toast
-			desc = bc_this_has_been_a_long_afternoon_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = bc_this_has_been_a_long_afternoon_toast
+				desc = bc_this_has_been_a_long_afternoon_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -3992,11 +4204,15 @@ bc_nothing_is_stopping_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_nothing_is_stopping_this_toast
-			desc = bc_nothing_is_stopping_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_nothing_is_stopping_this_toast
+				desc = bc_nothing_is_stopping_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4090,11 +4306,15 @@ bc_the_orders_are_taken = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_orders_are_taken_toast
-			desc = bc_the_orders_are_taken_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_orders_are_taken_toast
+				desc = bc_the_orders_are_taken_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4161,11 +4381,15 @@ bc_no_name_at_all = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_no_name_at_all_toast
-			desc = bc_no_name_at_all_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_no_name_at_all_toast
+				desc = bc_no_name_at_all_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4260,11 +4484,15 @@ bc_the_war_has_his_name_on_it = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_war_has_his_name_on_it_toast
-			desc = bc_the_war_has_his_name_on_it_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_war_has_his_name_on_it_toast
+				desc = bc_the_war_has_his_name_on_it_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4330,11 +4558,15 @@ bc_the_man_who_started_it = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_man_who_started_it_toast
-			desc = bc_the_man_who_started_it_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_man_who_started_it_toast
+				desc = bc_the_man_who_started_it_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4422,11 +4654,15 @@ bc_the_thing_they_have_on_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_thing_they_have_on_him_toast
-			desc = bc_the_thing_they_have_on_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_thing_they_have_on_him_toast
+				desc = bc_the_thing_they_have_on_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4490,11 +4726,15 @@ bc_the_leash_runs_the_other_way = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_leash_runs_the_other_way_toast
-			desc = bc_the_leash_runs_the_other_way_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_leash_runs_the_other_way_toast
+				desc = bc_the_leash_runs_the_other_way_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4578,11 +4818,15 @@ bc_the_marshals_own_work = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_marshals_own_work_toast
-			desc = bc_the_marshals_own_work_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_marshals_own_work_toast
+				desc = bc_the_marshals_own_work_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4645,11 +4889,15 @@ bc_the_castellan_outdoors = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_castellan_outdoors_toast
-			desc = bc_the_castellan_outdoors_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_castellan_outdoors_toast
+				desc = bc_the_castellan_outdoors_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4721,11 +4969,15 @@ bc_the_watch_has_no_reserve = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_watch_has_no_reserve_toast
-			desc = bc_the_watch_has_no_reserve_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_watch_has_no_reserve_toast
+				desc = bc_the_watch_has_no_reserve_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4813,11 +5065,15 @@ bc_the_short_war = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_short_war_toast
-			desc = bc_the_short_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_short_war_toast
+				desc = bc_the_short_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4915,11 +5171,15 @@ bc_the_parchment_and_the_men = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_parchment_and_the_men_toast
-			desc = bc_the_parchment_and_the_men_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_parchment_and_the_men_toast
+				desc = bc_the_parchment_and_the_men_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -4992,11 +5252,15 @@ bc_they_have_their_reason = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_have_their_reason_toast
-			desc = bc_they_have_their_reason_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_have_their_reason_toast
+				desc = bc_they_have_their_reason_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5070,11 +5334,15 @@ bc_the_small_man = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_small_man_toast
-			desc = bc_the_small_man_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_small_man_toast
+				desc = bc_the_small_man_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5179,11 +5447,15 @@ bc_the_thing_he_always_does = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_thing_he_always_does_toast
-			desc = bc_the_thing_he_always_does_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_thing_he_always_does_toast
+				desc = bc_the_thing_he_always_does_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5261,11 +5533,15 @@ bc_the_gamble_that_does_not_pay = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_gamble_that_does_not_pay_toast
-			desc = bc_the_gamble_that_does_not_pay_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_gamble_that_does_not_pay_toast
+				desc = bc_the_gamble_that_does_not_pay_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5361,11 +5637,15 @@ bc_the_record_does_not_help_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_record_does_not_help_him_toast
-			desc = bc_the_record_does_not_help_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_record_does_not_help_him_toast
+				desc = bc_the_record_does_not_help_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5450,11 +5730,15 @@ bc_the_man_who_has_done_this_before = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_man_who_has_done_this_before_toast
-			desc = bc_the_man_who_has_done_this_before_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_man_who_has_done_this_before_toast
+				desc = bc_the_man_who_has_done_this_before_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5551,11 +5835,15 @@ bc_the_same_country_again = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_same_country_again_toast
-			desc = bc_the_same_country_again_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_same_country_again_toast
+				desc = bc_the_same_country_again_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5629,11 +5917,15 @@ bc_he_learned_it_too = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_learned_it_too_toast
-			desc = bc_he_learned_it_too_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_learned_it_too_toast
+				desc = bc_he_learned_it_too_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5736,11 +6028,15 @@ bc_they_do_not_ask_for_terms = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_do_not_ask_for_terms_toast
-			desc = bc_they_do_not_ask_for_terms_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_do_not_ask_for_terms_toast
+				desc = bc_they_do_not_ask_for_terms_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5810,11 +6106,15 @@ bc_the_fire_is_ahead_of_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_fire_is_ahead_of_him_toast
-			desc = bc_the_fire_is_ahead_of_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_fire_is_ahead_of_him_toast
+				desc = bc_the_fire_is_ahead_of_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5908,11 +6208,15 @@ bc_the_other_half_of_the_realm = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_other_half_of_the_realm_toast
-			desc = bc_the_other_half_of_the_realm_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_other_half_of_the_realm_toast
+				desc = bc_the_other_half_of_the_realm_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -5989,11 +6293,15 @@ bc_his_own_war = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_his_own_war_toast
-			desc = bc_his_own_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_his_own_war_toast
+				desc = bc_his_own_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6101,11 +6409,15 @@ bc_the_shorter_of_the_two_orders = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_shorter_of_the_two_orders_toast
-			desc = bc_the_shorter_of_the_two_orders_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_shorter_of_the_two_orders_toast
+				desc = bc_the_shorter_of_the_two_orders_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6181,11 +6493,15 @@ bc_he_does_not_move_from_the_rise = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_does_not_move_from_the_rise_toast
-			desc = bc_he_does_not_move_from_the_rise_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_does_not_move_from_the_rise_toast
+				desc = bc_he_does_not_move_from_the_rise_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6287,11 +6603,15 @@ bc_they_have_the_shape_of_it_now = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_they_have_the_shape_of_it_now_toast
-			desc = bc_they_have_the_shape_of_it_now_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_they_have_the_shape_of_it_now_toast
+				desc = bc_they_have_the_shape_of_it_now_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6394,11 +6714,15 @@ bc_there_is_nowhere_to_desert_to = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_nowhere_to_desert_to_toast
-			desc = bc_there_is_nowhere_to_desert_to_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_nowhere_to_desert_to_toast
+				desc = bc_there_is_nowhere_to_desert_to_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6494,11 +6818,15 @@ bc_every_ditch_here_has_a_name = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_every_ditch_here_has_a_name_toast
-			desc = bc_every_ditch_here_has_a_name_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_every_ditch_here_has_a_name_toast
+				desc = bc_every_ditch_here_has_a_name_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6571,11 +6899,15 @@ bc_it_is_his_own_country_underfoot = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_it_is_his_own_country_underfoot_toast
-			desc = bc_it_is_his_own_country_underfoot_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_it_is_his_own_country_underfoot_toast
+				desc = bc_it_is_his_own_country_underfoot_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6669,11 +7001,15 @@ bc_he_chose_the_hour = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_chose_the_hour_toast
-			desc = bc_he_chose_the_hour_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_chose_the_hour_toast
+				desc = bc_he_chose_the_hour_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6749,11 +7085,15 @@ bc_they_came_to_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_they_came_to_him_toast
-			desc = bc_they_came_to_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_they_came_to_him_toast
+				desc = bc_they_came_to_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6854,11 +7194,15 @@ bc_it_all_comes_down_to_the_crossings = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_it_all_comes_down_to_the_crossings_toast
-			desc = bc_it_all_comes_down_to_the_crossings_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_it_all_comes_down_to_the_crossings_toast
+				desc = bc_it_all_comes_down_to_the_crossings_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -6952,11 +7296,15 @@ bc_the_sea_holds_that_flank = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_sea_holds_that_flank_toast
-			desc = bc_the_sea_holds_that_flank_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_sea_holds_that_flank_toast
+				desc = bc_the_sea_holds_that_flank_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7059,11 +7407,15 @@ bc_they_are_not_his_smallfolk = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_are_not_his_smallfolk_toast
-			desc = bc_they_are_not_his_smallfolk_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_are_not_his_smallfolk_toast
+				desc = bc_they_are_not_his_smallfolk_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7161,11 +7513,15 @@ bc_the_other_banner_is_a_kings = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_other_banner_is_a_kings_toast
-			desc = bc_the_other_banner_is_a_kings_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_other_banner_is_a_kings_toast
+				desc = bc_the_other_banner_is_a_kings_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7260,11 +7616,15 @@ bc_the_order_nobody_can_explain = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_order_nobody_can_explain_toast
-			desc = bc_the_order_nobody_can_explain_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_order_nobody_can_explain_toast
+				desc = bc_the_order_nobody_can_explain_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7381,11 +7741,15 @@ bc_the_thin_country = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_thin_country_toast
-			desc = bc_the_thin_country_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_thin_country_toast
+				desc = bc_the_thin_country_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7497,11 +7861,15 @@ bc_the_other_mans_trouble = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_other_mans_trouble_toast
-			desc = bc_the_other_mans_trouble_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_other_mans_trouble_toast
+				desc = bc_the_other_mans_trouble_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7610,11 +7978,15 @@ bc_the_wrong_war_entirely = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_wrong_war_entirely_toast
-			desc = bc_the_wrong_war_entirely_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_wrong_war_entirely_toast
+				desc = bc_the_wrong_war_entirely_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7717,11 +8089,15 @@ bc_the_winter_outlasts_the_war = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_winter_outlasts_the_war_toast
-			desc = bc_the_winter_outlasts_the_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_winter_outlasts_the_war_toast
+				desc = bc_the_winter_outlasts_the_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7824,11 +8200,15 @@ bc_the_other_front = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_other_front_toast
-			desc = bc_the_other_front_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_other_front_toast
+				desc = bc_the_other_front_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -7931,11 +8311,15 @@ bc_the_heir_is_a_child = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_heir_is_a_child_toast
-			desc = bc_the_heir_is_a_child_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_heir_is_a_child_toast
+				desc = bc_the_heir_is_a_child_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8038,11 +8422,15 @@ bc_the_story_is_already_written = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_story_is_already_written_toast
-			desc = bc_the_story_is_already_written_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_story_is_already_written_toast
+				desc = bc_the_story_is_already_written_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8141,11 +8529,15 @@ bc_the_field_keeps_no_accounts = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_field_keeps_no_accounts_toast
-			desc = bc_the_field_keeps_no_accounts_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_field_keeps_no_accounts_toast
+				desc = bc_the_field_keeps_no_accounts_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8247,11 +8639,15 @@ bc_the_wrong_instrument_beautifully = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_wrong_instrument_beautifully_toast
-			desc = bc_the_wrong_instrument_beautifully_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_wrong_instrument_beautifully_toast
+				desc = bc_the_wrong_instrument_beautifully_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8353,11 +8749,15 @@ bc_every_banner_did_its_part = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_every_banner_did_its_part_toast
-			desc = bc_every_banner_did_its_part_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_every_banner_did_its_part_toast
+				desc = bc_every_banner_did_its_part_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8458,11 +8858,15 @@ bc_the_bright_thing_on_the_far_side = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_bright_thing_on_the_far_side_toast
-			desc = bc_the_bright_thing_on_the_far_side_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_bright_thing_on_the_far_side_toast
+				desc = bc_the_bright_thing_on_the_far_side_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8561,11 +8965,15 @@ bc_the_fractions_are_adding_up = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_fractions_are_adding_up_toast
-			desc = bc_the_fractions_are_adding_up_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_fractions_are_adding_up_toast
+				desc = bc_the_fractions_are_adding_up_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8660,11 +9068,15 @@ bc_the_word_they_will_write_it_under = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_word_they_will_write_it_under_toast
-			desc = bc_the_word_they_will_write_it_under_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_word_they_will_write_it_under_toast
+				desc = bc_the_word_they_will_write_it_under_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8760,11 +9172,15 @@ bc_the_other_reason_men_stand = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_other_reason_men_stand_toast
-			desc = bc_the_other_reason_men_stand_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_other_reason_men_stand_toast
+				desc = bc_the_other_reason_men_stand_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8863,11 +9279,15 @@ bc_the_argument_that_he_has_one = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_argument_that_he_has_one_toast
-			desc = bc_the_argument_that_he_has_one_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_argument_that_he_has_one_toast
+				desc = bc_the_argument_that_he_has_one_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -8967,11 +9387,15 @@ bc_a_room_somewhere_in_tonight = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_a_room_somewhere_in_tonight_toast
-			desc = bc_a_room_somewhere_in_tonight_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_a_room_somewhere_in_tonight_toast
+				desc = bc_a_room_somewhere_in_tonight_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9068,11 +9492,15 @@ bc_the_join_is_a_place = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_join_is_a_place_toast
-			desc = bc_the_join_is_a_place_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_join_is_a_place_toast
+				desc = bc_the_join_is_a_place_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9172,11 +9600,15 @@ bc_eleven_days_of_hearsay = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_eleven_days_of_hearsay_toast
-			desc = bc_eleven_days_of_hearsay_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_eleven_days_of_hearsay_toast
+				desc = bc_eleven_days_of_hearsay_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9300,11 +9732,15 @@ bc_the_habits_he_actually_kept = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_habits_he_actually_kept_toast
-			desc = bc_the_habits_he_actually_kept_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_habits_he_actually_kept_toast
+				desc = bc_the_habits_he_actually_kept_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9414,11 +9850,15 @@ bc_the_men_he_knows_the_names_of = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_men_he_knows_the_names_of_toast
-			desc = bc_the_men_he_knows_the_names_of_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_men_he_knows_the_names_of_toast
+				desc = bc_the_men_he_knows_the_names_of_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9527,11 +9967,15 @@ bc_nothing_waiting_at_the_other_end = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_nothing_waiting_at_the_other_end_toast
-			desc = bc_nothing_waiting_at_the_other_end_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_nothing_waiting_at_the_other_end_toast
+				desc = bc_nothing_waiting_at_the_other_end_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9639,11 +10083,15 @@ bc_the_seals_are_still_wet_enough = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_seals_are_still_wet_enough_toast
-			desc = bc_the_seals_are_still_wet_enough_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_seals_are_still_wet_enough_toast
+				desc = bc_the_seals_are_still_wet_enough_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9753,11 +10201,15 @@ bc_it_arrives_as_weather = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_it_arrives_as_weather_toast
-			desc = bc_it_arrives_as_weather_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_it_arrives_as_weather_toast
+				desc = bc_it_arrives_as_weather_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9863,11 +10315,15 @@ bc_he_taught_that_retreat = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_taught_that_retreat_toast
-			desc = bc_he_taught_that_retreat_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_taught_that_retreat_toast
+				desc = bc_he_taught_that_retreat_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -9968,11 +10424,15 @@ bc_the_season_was_his_to_choose = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_season_was_his_to_choose_toast
-			desc = bc_the_season_was_his_to_choose_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_season_was_his_to_choose_toast
+				desc = bc_the_season_was_his_to_choose_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10082,11 +10542,15 @@ bc_it_goes_where_he_goes = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_it_goes_where_he_goes_toast
-			desc = bc_it_goes_where_he_goes_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_it_goes_where_he_goes_toast
+				desc = bc_it_goes_where_he_goes_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10194,11 +10658,15 @@ bc_the_one_he_cannot_spend = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_one_he_cannot_spend_toast
-			desc = bc_the_one_he_cannot_spend_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_one_he_cannot_spend_toast
+				desc = bc_the_one_he_cannot_spend_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10310,11 +10778,15 @@ bc_no_version_of_this_that_is_not_also_theirs = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_no_version_of_this_that_is_not_also_theirs_toast
-			desc = bc_no_version_of_this_that_is_not_also_theirs_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_no_version_of_this_that_is_not_also_theirs_toast
+				desc = bc_no_version_of_this_that_is_not_also_theirs_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10379,11 +10851,15 @@ bc_nothing_smaller_than_this_will_carry = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_nothing_smaller_than_this_will_carry_toast
-			desc = bc_nothing_smaller_than_this_will_carry_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_nothing_smaller_than_this_will_carry_toast
+				desc = bc_nothing_smaller_than_this_will_carry_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10448,11 +10924,15 @@ bc_he_would_rather_have_him_than_the_field = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_would_rather_have_him_than_the_field_toast
-			desc = bc_he_would_rather_have_him_than_the_field_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_would_rather_have_him_than_the_field_toast
+				desc = bc_he_would_rather_have_him_than_the_field_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10517,11 +10997,15 @@ bc_what_he_is_still_meaning_to_go_home_to = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_what_he_is_still_meaning_to_go_home_to_toast
-			desc = bc_what_he_is_still_meaning_to_go_home_to_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_what_he_is_still_meaning_to_go_home_to_toast
+				desc = bc_what_he_is_still_meaning_to_go_home_to_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10585,11 +11069,15 @@ bc_the_word_for_this_has_one_ending = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_word_for_this_has_one_ending_toast
-			desc = bc_the_word_for_this_has_one_ending_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_word_for_this_has_one_ending_toast
+				desc = bc_the_word_for_this_has_one_ending_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10652,11 +11140,15 @@ bc_something_he_taught_comes_back_to_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_something_he_taught_comes_back_to_him_toast
-			desc = bc_something_he_taught_comes_back_to_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_something_he_taught_comes_back_to_him_toast
+				desc = bc_something_he_taught_comes_back_to_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10720,11 +11212,15 @@ bc_the_distance_beside_him_never_changes = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_distance_beside_him_never_changes_toast
-			desc = bc_the_distance_beside_him_never_changes_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_distance_beside_him_never_changes_toast
+				desc = bc_the_distance_beside_him_never_changes_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10788,11 +11284,15 @@ bc_he_has_watched_this_man_carve_at_his_own_table = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_has_watched_this_man_carve_at_his_own_table_toast
-			desc = bc_he_has_watched_this_man_carve_at_his_own_table_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_has_watched_this_man_carve_at_his_own_table_toast
+				desc = bc_he_has_watched_this_man_carve_at_his_own_table_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10856,11 +11356,15 @@ bc_the_answer_he_used_to_have_is_not_available = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_answer_he_used_to_have_is_not_available_toast
-			desc = bc_the_answer_he_used_to_have_is_not_available_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_answer_he_used_to_have_is_not_available_toast
+				desc = bc_the_answer_he_used_to_have_is_not_available_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10924,11 +11428,15 @@ bc_the_guarantee_has_picked_up_a_sword = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_guarantee_has_picked_up_a_sword_toast
-			desc = bc_the_guarantee_has_picked_up_a_sword_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_guarantee_has_picked_up_a_sword_toast
+				desc = bc_the_guarantee_has_picked_up_a_sword_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -10991,11 +11499,15 @@ bc_the_names_are_all_on_the_other_side_of_the_field = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_names_are_all_on_the_other_side_of_the_field_toast
-			desc = bc_the_names_are_all_on_the_other_side_of_the_field_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_names_are_all_on_the_other_side_of_the_field_toast
+				desc = bc_the_names_are_all_on_the_other_side_of_the_field_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11058,11 +11570,15 @@ bc_the_arithmetic_of_the_name_is_very_small_now = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_arithmetic_of_the_name_is_very_small_now_toast
-			desc = bc_the_arithmetic_of_the_name_is_very_small_now_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_arithmetic_of_the_name_is_very_small_now_toast
+				desc = bc_the_arithmetic_of_the_name_is_very_small_now_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11125,11 +11641,15 @@ bc_there_is_a_second_map_in_his_head_and_it_is_worse = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast
-			desc = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast
+				desc = bc_there_is_a_second_map_in_his_head_and_it_is_worse_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11191,11 +11711,15 @@ bc_he_learns_this_field_the_way_he_learns_anything_else = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_he_learns_this_field_the_way_he_learns_anything_else_toast
-			desc = bc_he_learns_this_field_the_way_he_learns_anything_else_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_he_learns_this_field_the_way_he_learns_anything_else_toast
+				desc = bc_he_learns_this_field_the_way_he_learns_anything_else_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11257,11 +11781,15 @@ bc_there_is_no_letter_that_would_help = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_no_letter_that_would_help_toast
-			desc = bc_there_is_no_letter_that_would_help_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_no_letter_that_would_help_toast
+				desc = bc_there_is_no_letter_that_would_help_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11322,11 +11850,15 @@ bc_he_paid_good_years_to_learn_this_exact_thing = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_paid_good_years_to_learn_this_exact_thing_toast
-			desc = bc_he_paid_good_years_to_learn_this_exact_thing_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_paid_good_years_to_learn_this_exact_thing_toast
+				desc = bc_he_paid_good_years_to_learn_this_exact_thing_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11387,11 +11919,15 @@ bc_the_oldest_arrangement_his_people_have_is_working = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_oldest_arrangement_his_people_have_is_working_toast
-			desc = bc_the_oldest_arrangement_his_people_have_is_working_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_oldest_arrangement_his_people_have_is_working_toast
+				desc = bc_the_oldest_arrangement_his_people_have_is_working_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11468,11 +12004,15 @@ bc_the_name_was_settled_before_the_hedge = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_name_was_settled_before_the_hedge_toast
-			desc = bc_the_name_was_settled_before_the_hedge_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_name_was_settled_before_the_hedge_toast
+				desc = bc_the_name_was_settled_before_the_hedge_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11547,11 +12087,15 @@ bc_what_the_paid_man_left_in_their_hands = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_what_the_paid_man_left_in_their_hands_toast
-			desc = bc_what_the_paid_man_left_in_their_hands_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_what_the_paid_man_left_in_their_hands_toast
+				desc = bc_what_the_paid_man_left_in_their_hands_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11625,11 +12169,15 @@ bc_a_date_in_the_spring_that_assumes_he_is_alive = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast
-			desc = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast
+				desc = bc_a_date_in_the_spring_that_assumes_he_is_alive_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11702,11 +12250,15 @@ bc_today_is_only_the_loud_half = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_today_is_only_the_loud_half_toast
-			desc = bc_today_is_only_the_loud_half_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_today_is_only_the_loud_half_toast
+				desc = bc_today_is_only_the_loud_half_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11780,11 +12332,15 @@ bc_the_ranks_were_shorter_before_anybody_drew = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_ranks_were_shorter_before_anybody_drew_toast
-			desc = bc_the_ranks_were_shorter_before_anybody_drew_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_ranks_were_shorter_before_anybody_drew_toast
+				desc = bc_the_ranks_were_shorter_before_anybody_drew_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11858,11 +12414,15 @@ bc_this_is_the_cheaper_of_the_two = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_is_the_cheaper_of_the_two_toast
-			desc = bc_this_is_the_cheaper_of_the_two_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_is_the_cheaper_of_the_two_toast
+				desc = bc_this_is_the_cheaper_of_the_two_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -11938,11 +12498,15 @@ bc_a_man_at_home_signing_in_his_name = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_a_man_at_home_signing_in_his_name_toast
-			desc = bc_a_man_at_home_signing_in_his_name_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_a_man_at_home_signing_in_his_name_toast
+				desc = bc_a_man_at_home_signing_in_his_name_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12018,11 +12582,15 @@ bc_the_one_he_already_has = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_one_he_already_has_toast
-			desc = bc_the_one_he_already_has_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_one_he_already_has_toast
+				desc = bc_the_one_he_already_has_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12096,11 +12664,15 @@ bc_somebody_dead_already_paid_for_this_hour = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_somebody_dead_already_paid_for_this_hour_toast
-			desc = bc_somebody_dead_already_paid_for_this_hour_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_somebody_dead_already_paid_for_this_hour_toast
+				desc = bc_somebody_dead_already_paid_for_this_hour_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12175,11 +12747,15 @@ bc_men_under_his_roof_who_will_describe_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_men_under_his_roof_who_will_describe_this_toast
-			desc = bc_men_under_his_roof_who_will_describe_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_men_under_his_roof_who_will_describe_this_toast
+				desc = bc_men_under_his_roof_who_will_describe_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12254,11 +12830,15 @@ bc_the_companies_are_the_part_he_can_price = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_companies_are_the_part_he_can_price_toast
-			desc = bc_the_companies_are_the_part_he_can_price_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_companies_are_the_part_he_can_price_toast
+				desc = bc_the_companies_are_the_part_he_can_price_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12319,11 +12899,15 @@ bc_the_work_he_paid_for_is_still_being_made = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_work_he_paid_for_is_still_being_made_toast
-			desc = bc_the_work_he_paid_for_is_still_being_made_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_work_he_paid_for_is_still_being_made_toast
+				desc = bc_the_work_he_paid_for_is_still_being_made_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12384,11 +12968,15 @@ bc_winning_means_the_cells_fill_again = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_winning_means_the_cells_fill_again_toast
-			desc = bc_winning_means_the_cells_fill_again_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_winning_means_the_cells_fill_again_toast
+				desc = bc_winning_means_the_cells_fill_again_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12450,11 +13038,15 @@ bc_there_is_no_son_to_make_this_survivable = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_no_son_to_make_this_survivable_toast
-			desc = bc_there_is_no_son_to_make_this_survivable_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_no_son_to_make_this_survivable_toast
+				desc = bc_there_is_no_son_to_make_this_survivable_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12515,11 +13107,15 @@ bc_the_other_man_does_not_want_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_other_man_does_not_want_this_toast
-			desc = bc_the_other_man_does_not_want_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_other_man_does_not_want_this_toast
+				desc = bc_the_other_man_does_not_want_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12580,11 +13176,15 @@ bc_the_schedule_does_not_care_who_wins = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_schedule_does_not_care_who_wins_toast
-			desc = bc_the_schedule_does_not_care_who_wins_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_schedule_does_not_care_who_wins_toast
+				desc = bc_the_schedule_does_not_care_who_wins_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12639,11 +13239,15 @@ bc_the_column_is_his_to_lose = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_column_is_his_to_lose_toast
-			desc = bc_the_column_is_his_to_lose_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_column_is_his_to_lose_toast
+				desc = bc_the_column_is_his_to_lose_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12698,11 +13302,15 @@ bc_nobody_here_swore_to_the_office = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_nobody_here_swore_to_the_office_toast
-			desc = bc_nobody_here_swore_to_the_office_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_nobody_here_swore_to_the_office_toast
+				desc = bc_nobody_here_swore_to_the_office_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12757,11 +13365,15 @@ bc_the_list_of_men_who_may_not_come = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_list_of_men_who_may_not_come_toast
-			desc = bc_the_list_of_men_who_may_not_come_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_list_of_men_who_may_not_come_toast
+				desc = bc_the_list_of_men_who_may_not_come_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12816,11 +13428,15 @@ bc_part_of_this_line_is_on_loan = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_part_of_this_line_is_on_loan_toast
-			desc = bc_part_of_this_line_is_on_loan_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_part_of_this_line_is_on_loan_toast
+				desc = bc_part_of_this_line_is_on_loan_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12875,11 +13491,15 @@ bc_the_parchment_is_being_decided_today = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_parchment_is_being_decided_today_toast
-			desc = bc_the_parchment_is_being_decided_today_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_parchment_is_being_decided_today_toast
+				desc = bc_the_parchment_is_being_decided_today_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12934,11 +13554,15 @@ bc_the_field_belongs_to_a_god_he_does_not_keep = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_field_belongs_to_a_god_he_does_not_keep_toast
-			desc = bc_the_field_belongs_to_a_god_he_does_not_keep_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_field_belongs_to_a_god_he_does_not_keep_toast
+				desc = bc_the_field_belongs_to_a_god_he_does_not_keep_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -12993,11 +13617,15 @@ bc_the_household_he_answers_to_is_larger_than_the_marriage = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_household_he_answers_to_is_larger_than_the_marriage_toast
-			desc = bc_the_household_he_answers_to_is_larger_than_the_marriage_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_household_he_answers_to_is_larger_than_the_marriage_toast
+				desc = bc_the_household_he_answers_to_is_larger_than_the_marriage_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13052,11 +13680,15 @@ bc_the_reason_he_gives_is_not_the_reason_they_would_give = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast
-			desc = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast
+				desc = bc_the_reason_he_gives_is_not_the_reason_they_would_give_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13111,11 +13743,15 @@ bc_the_man_across_the_field_holds_his_land_of_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_man_across_the_field_holds_his_land_of_him_toast
-			desc = bc_the_man_across_the_field_holds_his_land_of_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_man_across_the_field_holds_his_land_of_him_toast
+				desc = bc_the_man_across_the_field_holds_his_land_of_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13170,11 +13806,15 @@ bc_the_men_being_used_up_are_the_ones_he_pays = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = up }
 
-		send_interface_toast = {
-			type = event_toast_effect_good
-			title = bc_the_men_being_used_up_are_the_ones_he_pays_toast
-			desc = bc_the_men_being_used_up_are_the_ones_he_pays_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = bc_the_men_being_used_up_are_the_ones_he_pays_toast
+				desc = bc_the_men_being_used_up_are_the_ones_he_pays_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13229,11 +13869,15 @@ bc_there_is_more_than_one_seat_behind_him_to_lose = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_more_than_one_seat_behind_him_to_lose_toast
-			desc = bc_there_is_more_than_one_seat_behind_him_to_lose_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_more_than_one_seat_behind_him_to_lose_toast
+				desc = bc_there_is_more_than_one_seat_behind_him_to_lose_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13288,11 +13932,15 @@ bc_the_heavier_of_the_two_names_is_the_other_one = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_heavier_of_the_two_names_is_the_other_one_toast
-			desc = bc_the_heavier_of_the_two_names_is_the_other_one_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_heavier_of_the_two_names_is_the_other_one_toast
+				desc = bc_the_heavier_of_the_two_names_is_the_other_one_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13347,11 +13995,15 @@ bc_most_of_what_answers_to_him_is_not_his = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_most_of_what_answers_to_him_is_not_his_toast
-			desc = bc_most_of_what_answers_to_him_is_not_his_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_most_of_what_answers_to_him_is_not_his_toast
+				desc = bc_most_of_what_answers_to_him_is_not_his_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13407,11 +14059,15 @@ bc_the_country_here_will_not_help_either_of_them = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_country_here_will_not_help_either_of_them_toast
-			desc = bc_the_country_here_will_not_help_either_of_them_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_country_here_will_not_help_either_of_them_toast
+				desc = bc_the_country_here_will_not_help_either_of_them_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13466,11 +14122,15 @@ bc_the_men_he_brought_are_exactly_what_was_written_down = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_men_he_brought_are_exactly_what_was_written_down_toast
-			desc = bc_the_men_he_brought_are_exactly_what_was_written_down_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_men_he_brought_are_exactly_what_was_written_down_toast
+				desc = bc_the_men_he_brought_are_exactly_what_was_written_down_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13525,11 +14185,15 @@ bc_the_walls_over_this_field_are_not_going_to_open = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_walls_over_this_field_are_not_going_to_open_toast
-			desc = bc_the_walls_over_this_field_are_not_going_to_open_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_walls_over_this_field_are_not_going_to_open_toast
+				desc = bc_the_walls_over_this_field_are_not_going_to_open_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13584,11 +14248,15 @@ bc_there_is_nothing_left_at_home_to_send_for = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_nothing_left_at_home_to_send_for_toast
-			desc = bc_there_is_nothing_left_at_home_to_send_for_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_nothing_left_at_home_to_send_for_toast
+				desc = bc_there_is_nothing_left_at_home_to_send_for_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13643,11 +14311,15 @@ bc_he_cannot_read_a_single_thing_the_far_line_is_doing = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast
-			desc = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast
+				desc = bc_he_cannot_read_a_single_thing_the_far_line_is_doing_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13702,11 +14374,15 @@ bc_the_line_has_gone_into_the_streets = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_line_has_gone_into_the_streets_toast
-			desc = bc_the_line_has_gone_into_the_streets_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_line_has_gone_into_the_streets_toast
+				desc = bc_the_line_has_gone_into_the_streets_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13761,11 +14437,15 @@ bc_the_day_has_stopped_being_worth_what_he_came_for = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_day_has_stopped_being_worth_what_he_came_for_toast
-			desc = bc_the_day_has_stopped_being_worth_what_he_came_for_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_day_has_stopped_being_worth_what_he_came_for_toast
+				desc = bc_the_day_has_stopped_being_worth_what_he_came_for_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13820,11 +14500,15 @@ bc_the_thing_behind_him_will_be_here_long_after_today = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_thing_behind_him_will_be_here_long_after_today_toast
-			desc = bc_the_thing_behind_him_will_be_here_long_after_today_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_thing_behind_him_will_be_here_long_after_today_toast
+				desc = bc_the_thing_behind_him_will_be_here_long_after_today_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13879,11 +14563,15 @@ bc_the_man_opposite_has_been_doing_this_since_before_he_started = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_man_opposite_has_been_doing_this_since_before_he_started_toast
-			desc = bc_the_man_opposite_has_been_doing_this_since_before_he_started_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_man_opposite_has_been_doing_this_since_before_he_started_toast
+				desc = bc_the_man_opposite_has_been_doing_this_since_before_he_started_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13938,11 +14626,15 @@ bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast
-			desc = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast
+				desc = bc_if_that_man_ever_gets_within_reach_of_him_it_is_finished_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -13997,11 +14689,15 @@ bc_losing_to_that_man_will_be_written_down_differently = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_losing_to_that_man_will_be_written_down_differently_toast
-			desc = bc_losing_to_that_man_will_be_written_down_differently_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_losing_to_that_man_will_be_written_down_differently_toast
+				desc = bc_losing_to_that_man_will_be_written_down_differently_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14056,11 +14752,15 @@ bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it_toast
-			desc = bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it_toast
+				desc = bc_he_can_see_what_needs_doing_and_cannot_make_himself_reach_for_it_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14115,11 +14815,15 @@ bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast
-			desc = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast
+				desc = bc_every_man_out_there_took_his_orders_from_somebody_else_two_years_ago_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14174,11 +14878,15 @@ bc_the_country_out_here_will_not_tell_him_anything = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_country_out_here_will_not_tell_him_anything_toast
-			desc = bc_the_country_out_here_will_not_tell_him_anything_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_country_out_here_will_not_tell_him_anything_toast
+				desc = bc_the_country_out_here_will_not_tell_him_anything_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14233,11 +14941,15 @@ bc_this_was_never_his_war_and_it_is_costing_him_his_own_men = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast
-			desc = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast
+				desc = bc_this_was_never_his_war_and_it_is_costing_him_his_own_men_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14292,11 +15004,15 @@ bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast
-			desc = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast
+				desc = bc_nobody_on_this_side_is_going_to_tell_him_how_bad_it_is_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14351,11 +15067,15 @@ bc_they_have_never_liked_looking_at_him_and_today_it_costs_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_have_never_liked_looking_at_him_and_today_it_costs_him_toast
-			desc = bc_they_have_never_liked_looking_at_him_and_today_it_costs_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_have_never_liked_looking_at_him_and_today_it_costs_him_toast
+				desc = bc_they_have_never_liked_looking_at_him_and_today_it_costs_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14410,11 +15130,15 @@ bc_the_part_he_is_good_at_finished_a_fortnight_ago = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast
-			desc = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast
+				desc = bc_the_part_he_is_good_at_finished_a_fortnight_ago_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14469,11 +15193,15 @@ bc_he_still_does_everything_correctly_and_it_is_still_going_backwards = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast
-			desc = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast
+				desc = bc_he_still_does_everything_correctly_and_it_is_still_going_backwards_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14528,11 +15256,15 @@ bc_the_oath_he_broke_is_older_than_this_war = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_oath_he_broke_is_older_than_this_war_toast
-			desc = bc_the_oath_he_broke_is_older_than_this_war_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_oath_he_broke_is_older_than_this_war_toast
+				desc = bc_the_oath_he_broke_is_older_than_this_war_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14587,11 +15319,15 @@ bc_the_dream_keeps_getting_in_front_of_the_field = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_dream_keeps_getting_in_front_of_the_field_toast
-			desc = bc_the_dream_keeps_getting_in_front_of_the_field_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_dream_keeps_getting_in_front_of_the_field_toast
+				desc = bc_the_dream_keeps_getting_in_front_of_the_field_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14646,11 +15382,15 @@ bc_the_line_holds_because_going_back_means_going_past_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_line_holds_because_going_back_means_going_past_him_toast
-			desc = bc_the_line_holds_because_going_back_means_going_past_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_line_holds_because_going_back_means_going_past_him_toast
+				desc = bc_the_line_holds_because_going_back_means_going_past_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14705,11 +15445,15 @@ bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it_toast
-			desc = bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it_toast
+				desc = bc_the_one_part_of_the_field_he_cannot_reach_is_all_of_it_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14764,11 +15508,15 @@ bc_there_are_three_of_them_who_have_waited_for_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_are_three_of_them_who_have_waited_for_this_toast
-			desc = bc_there_are_three_of_them_who_have_waited_for_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_are_three_of_them_who_have_waited_for_this_toast
+				desc = bc_there_are_three_of_them_who_have_waited_for_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14823,11 +15571,15 @@ bc_the_problem_in_front_of_him_is_not_his_department = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_problem_in_front_of_him_is_not_his_department_toast
-			desc = bc_the_problem_in_front_of_him_is_not_his_department_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_problem_in_front_of_him_is_not_his_department_toast
+				desc = bc_the_problem_in_front_of_him_is_not_his_department_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14882,11 +15634,15 @@ bc_there_is_nothing_here_for_him_to_build = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_nothing_here_for_him_to_build_toast
-			desc = bc_there_is_nothing_here_for_him_to_build_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_nothing_here_for_him_to_build_toast
+				desc = bc_there_is_nothing_here_for_him_to_build_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -14941,11 +15697,15 @@ bc_the_levies_are_thin_because_he_is_spread_thin = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_levies_are_thin_because_he_is_spread_thin_toast
-			desc = bc_the_levies_are_thin_because_he_is_spread_thin_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_levies_are_thin_because_he_is_spread_thin_toast
+				desc = bc_the_levies_are_thin_because_he_is_spread_thin_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15000,11 +15760,15 @@ bc_they_are_still_here_because_they_like_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_are_still_here_because_they_like_him_toast
-			desc = bc_they_are_still_here_because_they_like_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_are_still_here_because_they_like_him_toast
+				desc = bc_they_are_still_here_because_they_like_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15059,11 +15823,15 @@ bc_he_was_made_correctly_and_it_is_not_enough = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_was_made_correctly_and_it_is_not_enough_toast
-			desc = bc_he_was_made_correctly_and_it_is_not_enough_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_was_made_correctly_and_it_is_not_enough_toast
+				desc = bc_he_was_made_correctly_and_it_is_not_enough_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15118,11 +15886,15 @@ bc_all_four_of_his_qualities_want_something_different = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_all_four_of_his_qualities_want_something_different_toast
-			desc = bc_all_four_of_his_qualities_want_something_different_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_all_four_of_his_qualities_want_something_different_toast
+				desc = bc_all_four_of_his_qualities_want_something_different_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15177,11 +15949,15 @@ bc_nobody_told_him_what_the_noise_is_like = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_nobody_told_him_what_the_noise_is_like_toast
-			desc = bc_nobody_told_him_what_the_noise_is_like_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_nobody_told_him_what_the_noise_is_like_toast
+				desc = bc_nobody_told_him_what_the_noise_is_like_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15236,11 +16012,15 @@ bc_the_man_opposite_thinks_the_way_he_does = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_man_opposite_thinks_the_way_he_does_toast
-			desc = bc_the_man_opposite_thinks_the_way_he_does_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_man_opposite_thinks_the_way_he_does_toast
+				desc = bc_the_man_opposite_thinks_the_way_he_does_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15295,11 +16075,15 @@ bc_the_law_at_home_says_they_must_obey_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_law_at_home_says_they_must_obey_him_toast
-			desc = bc_the_law_at_home_says_they_must_obey_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_law_at_home_says_they_must_obey_him_toast
+				desc = bc_the_law_at_home_says_they_must_obey_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15354,11 +16138,15 @@ bc_the_hall_at_home_is_thinner_than_his_rank = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_hall_at_home_is_thinner_than_his_rank_toast
-			desc = bc_the_hall_at_home_is_thinner_than_his_rank_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_hall_at_home_is_thinner_than_his_rank_toast
+				desc = bc_the_hall_at_home_is_thinner_than_his_rank_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15413,11 +16201,15 @@ bc_six_of_them_are_waiting_at_home = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_six_of_them_are_waiting_at_home_toast
-			desc = bc_six_of_them_are_waiting_at_home_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_six_of_them_are_waiting_at_home_toast
+				desc = bc_six_of_them_are_waiting_at_home_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15472,11 +16264,15 @@ bc_the_war_is_with_the_man_next_door = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_war_is_with_the_man_next_door_toast
-			desc = bc_the_war_is_with_the_man_next_door_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_war_is_with_the_man_next_door_toast
+				desc = bc_the_war_is_with_the_man_next_door_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15531,11 +16327,15 @@ bc_his_father_is_alive_to_hear_of_this = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_his_father_is_alive_to_hear_of_this_toast
-			desc = bc_his_father_is_alive_to_hear_of_this_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_his_father_is_alive_to_hear_of_this_toast
+				desc = bc_his_father_is_alive_to_hear_of_this_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15590,11 +16390,15 @@ bc_the_least_of_him_is_what_today_wants = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_least_of_him_is_what_today_wants_toast
-			desc = bc_the_least_of_him_is_what_today_wants_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_least_of_him_is_what_today_wants_toast
+				desc = bc_the_least_of_him_is_what_today_wants_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15649,11 +16453,15 @@ bc_his_sons_will_carry_her_name = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_his_sons_will_carry_her_name_toast
-			desc = bc_his_sons_will_carry_her_name_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_his_sons_will_carry_her_name_toast
+				desc = bc_his_sons_will_carry_her_name_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15708,11 +16516,15 @@ bc_the_thing_he_never_said_out_loud = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_thing_he_never_said_out_loud_toast
-			desc = bc_the_thing_he_never_said_out_loud_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_thing_he_never_said_out_loud_toast
+				desc = bc_the_thing_he_never_said_out_loud_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15767,11 +16579,15 @@ bc_the_thing_he_was_born_carrying = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_thing_he_was_born_carrying_toast
-			desc = bc_the_thing_he_was_born_carrying_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_thing_he_was_born_carrying_toast
+				desc = bc_the_thing_he_was_born_carrying_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15826,11 +16642,15 @@ bc_the_faith_is_running_hot = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_faith_is_running_hot_toast
-			desc = bc_the_faith_is_running_hot_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_faith_is_running_hot_toast
+				desc = bc_the_faith_is_running_hot_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15886,11 +16706,15 @@ bc_there_are_engines_on_this_field = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_are_engines_on_this_field_toast
-			desc = bc_there_are_engines_on_this_field_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_are_engines_on_this_field_toast
+				desc = bc_there_are_engines_on_this_field_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -15946,11 +16770,15 @@ bc_there_is_something_of_his_in_another_mans_hands = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_is_something_of_his_in_another_mans_hands_toast
-			desc = bc_there_is_something_of_his_in_another_mans_hands_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_is_something_of_his_in_another_mans_hands_toast
+				desc = bc_there_is_something_of_his_in_another_mans_hands_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16006,11 +16834,15 @@ bc_the_column_under_him_is_starving = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_column_under_him_is_starving_toast
-			desc = bc_the_column_under_him_is_starving_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_column_under_him_is_starving_toast
+				desc = bc_the_column_under_him_is_starving_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16066,11 +16898,15 @@ bc_he_has_another_rising_behind_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_has_another_rising_behind_him_toast
-			desc = bc_he_has_another_rising_behind_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_has_another_rising_behind_him_toast
+				desc = bc_he_has_another_rising_behind_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16126,11 +16962,15 @@ bc_he_is_working_against_the_man_across_from_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_is_working_against_the_man_across_from_him_toast
-			desc = bc_he_is_working_against_the_man_across_from_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_is_working_against_the_man_across_from_him_toast
+				desc = bc_he_is_working_against_the_man_across_from_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16185,11 +17025,15 @@ bc_half_his_saddles_came_empty = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_half_his_saddles_came_empty_toast
-			desc = bc_half_his_saddles_came_empty_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_half_his_saddles_came_empty_toast
+				desc = bc_half_his_saddles_came_empty_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16244,11 +17088,15 @@ bc_the_man_opposite_has_learned_something_he_has_not = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_man_opposite_has_learned_something_he_has_not_toast
-			desc = bc_the_man_opposite_has_learned_something_he_has_not_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_man_opposite_has_learned_something_he_has_not_toast
+				desc = bc_the_man_opposite_has_learned_something_he_has_not_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16303,11 +17151,15 @@ bc_he_rides_under_an_ugly_name = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_rides_under_an_ugly_name_toast
-			desc = bc_he_rides_under_an_ugly_name_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_rides_under_an_ugly_name_toast
+				desc = bc_he_rides_under_an_ugly_name_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16362,11 +17214,15 @@ bc_the_same_word_damns_them_both = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_same_word_damns_them_both_toast
-			desc = bc_the_same_word_damns_them_both_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_same_word_damns_them_both_toast
+				desc = bc_the_same_word_damns_them_both_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16421,11 +17277,15 @@ bc_there_are_five_names_on_him_already = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_are_five_names_on_him_already_toast
-			desc = bc_there_are_five_names_on_him_already_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_are_five_names_on_him_already_toast
+				desc = bc_there_are_five_names_on_him_already_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16480,11 +17340,15 @@ bc_there_are_two_boys_of_his_out_here = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_are_two_boys_of_his_out_here_toast
-			desc = bc_there_are_two_boys_of_his_out_here_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_are_two_boys_of_his_out_here_toast
+				desc = bc_there_are_two_boys_of_his_out_here_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16539,11 +17403,15 @@ bc_he_could_have_made_this_war_himself = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_could_have_made_this_war_himself_toast
-			desc = bc_he_could_have_made_this_war_himself_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_could_have_made_this_war_himself_toast
+				desc = bc_he_could_have_made_this_war_himself_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16598,11 +17466,15 @@ bc_the_boy_who_used_to_beat_him_commands_the_far_side = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_boy_who_used_to_beat_him_commands_the_far_side_toast
-			desc = bc_the_boy_who_used_to_beat_him_commands_the_far_side_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_boy_who_used_to_beat_him_commands_the_far_side_toast
+				desc = bc_the_boy_who_used_to_beat_him_commands_the_far_side_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16657,11 +17529,15 @@ bc_the_far_side_is_commanded_by_his_blood_brother = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_far_side_is_commanded_by_his_blood_brother_toast
-			desc = bc_the_far_side_is_commanded_by_his_blood_brother_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_far_side_is_commanded_by_his_blood_brother_toast
+				desc = bc_the_far_side_is_commanded_by_his_blood_brother_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16717,11 +17593,15 @@ bc_this_whole_war_is_on_his_own_ledger = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_whole_war_is_on_his_own_ledger_toast
-			desc = bc_this_whole_war_is_on_his_own_ledger_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_whole_war_is_on_his_own_ledger_toast
+				desc = bc_this_whole_war_is_on_his_own_ledger_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16777,11 +17657,15 @@ bc_this_war_has_a_crowd_of_names_in_it = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_war_has_a_crowd_of_names_in_it_toast
-			desc = bc_this_war_has_a_crowd_of_names_in_it_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_war_has_a_crowd_of_names_in_it_toast
+				desc = bc_this_war_has_a_crowd_of_names_in_it_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16837,11 +17721,15 @@ bc_this_ground_is_already_in_other_hands = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_ground_is_already_in_other_hands_toast
-			desc = bc_this_ground_is_already_in_other_hands_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_ground_is_already_in_other_hands_toast
+				desc = bc_this_ground_is_already_in_other_hands_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16897,11 +17785,15 @@ bc_they_are_fighting_on_the_county_seat = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_they_are_fighting_on_the_county_seat_toast
-			desc = bc_they_are_fighting_on_the_county_seat_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_they_are_fighting_on_the_county_seat_toast
+				desc = bc_they_are_fighting_on_the_county_seat_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -16957,11 +17849,15 @@ bc_the_enemy_is_already_at_a_wall_here = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_enemy_is_already_at_a_wall_here_toast
-			desc = bc_the_enemy_is_already_at_a_wall_here_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_enemy_is_already_at_a_wall_here_toast
+				desc = bc_the_enemy_is_already_at_a_wall_here_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17017,11 +17913,15 @@ bc_the_far_people_make_war_the_way_his_do = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_far_people_make_war_the_way_his_do_toast
-			desc = bc_the_far_people_make_war_the_way_his_do_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_far_people_make_war_the_way_his_do_toast
+				desc = bc_the_far_people_make_war_the_way_his_do_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17077,11 +17977,15 @@ bc_this_column_is_all_horse_and_no_bow = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_column_is_all_horse_and_no_bow_toast
-			desc = bc_this_column_is_all_horse_and_no_bow_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_column_is_all_horse_and_no_bow_toast
+				desc = bc_this_column_is_all_horse_and_no_bow_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17137,11 +18041,15 @@ bc_the_seat_behind_him_is_on_the_table = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_seat_behind_him_is_on_the_table_toast
-			desc = bc_the_seat_behind_him_is_on_the_table_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_seat_behind_him_is_on_the_table_toast
+				desc = bc_the_seat_behind_him_is_on_the_table_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17197,11 +18105,15 @@ bc_there_are_too_many_banners_on_this_side = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_there_are_too_many_banners_on_this_side_toast
-			desc = bc_there_are_too_many_banners_on_this_side_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_there_are_too_many_banners_on_this_side_toast
+				desc = bc_there_are_too_many_banners_on_this_side_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17257,11 +18169,15 @@ bc_this_field_is_a_crossroads = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_field_is_a_crossroads_toast
-			desc = bc_this_field_is_a_crossroads_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_field_is_a_crossroads_toast
+				desc = bc_this_field_is_a_crossroads_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17317,11 +18233,15 @@ bc_this_war_is_over_the_sea_lanes = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_this_war_is_over_the_sea_lanes_toast
-			desc = bc_this_war_is_over_the_sea_lanes_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_this_war_is_over_the_sea_lanes_toast
+				desc = bc_this_war_is_over_the_sea_lanes_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17377,11 +18297,15 @@ bc_the_thing_in_his_hand_is_nearly_done = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_thing_in_his_hand_is_nearly_done_toast
-			desc = bc_the_thing_in_his_hand_is_nearly_done_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_thing_in_his_hand_is_nearly_done_toast
+				desc = bc_the_thing_in_his_hand_is_nearly_done_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17437,11 +18361,15 @@ bc_the_name_he_carries_is_bigger_than_he_is = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_the_name_he_carries_is_bigger_than_he_is_toast
-			desc = bc_the_name_he_carries_is_bigger_than_he_is_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_the_name_he_carries_is_bigger_than_he_is_toast
+				desc = bc_the_name_he_carries_is_bigger_than_he_is_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17497,11 +18425,15 @@ bc_he_holds_three_men_by_the_throat = {
 
 		bc_record_moment_effect = { TIER = minor KIND = ordered SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_holds_three_men_by_the_throat_toast
-			desc = bc_he_holds_three_men_by_the_throat_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_holds_three_men_by_the_throat_toast
+				desc = bc_he_holds_three_men_by_the_throat_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17557,11 +18489,15 @@ bc_five_great_men_stand_under_him = {
 
 		bc_record_moment_effect = { TIER = minor KIND = wild SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_five_great_men_stand_under_him_toast
-			desc = bc_five_great_men_stand_under_him_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_five_great_men_stand_under_him_toast
+				desc = bc_five_great_men_stand_under_him_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17617,11 +18553,15 @@ bc_six_roofs_answer_to_him_directly = {
 
 		bc_record_moment_effect = { TIER = minor KIND = entrenched SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_six_roofs_answer_to_him_directly_toast
-			desc = bc_six_roofs_answer_to_him_directly_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_six_roofs_answer_to_him_directly_toast
+				desc = bc_six_roofs_answer_to_him_directly_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17677,11 +18617,15 @@ bc_a_great_deal_arrives_every_month = {
 
 		bc_record_moment_effect = { TIER = minor KIND = adapted SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_a_great_deal_arrives_every_month_toast
-			desc = bc_a_great_deal_arrives_every_month_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_a_great_deal_arrives_every_month_toast
+				desc = bc_a_great_deal_arrives_every_month_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17737,11 +18681,15 @@ bc_his_sideways_kin_are_a_crowd = {
 
 		bc_record_moment_effect = { TIER = minor KIND = bloodied SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_his_sideways_kin_are_a_crowd_toast
-			desc = bc_his_sideways_kin_are_a_crowd_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_his_sideways_kin_are_a_crowd_toast
+				desc = bc_his_sideways_kin_are_a_crowd_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }
@@ -17797,11 +18745,15 @@ bc_he_has_three_living_brothers = {
 
 		bc_record_moment_effect = { TIER = minor KIND = measured SWING = down }
 
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = bc_he_has_three_living_brothers_toast
-			desc = bc_he_has_three_living_brothers_toast_desc
-			left_icon = scope:bc_commander
+		if = {
+			limit = { bc_can_toast_trigger = yes }
+			bc_start_toast_cooldown_effect = yes
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = bc_he_has_three_living_brothers_toast
+				desc = bc_he_has_three_living_brothers_toast_desc
+				left_icon = scope:bc_commander
+			}
 		}
 	}
 }

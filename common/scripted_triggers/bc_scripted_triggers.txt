@@ -549,6 +549,79 @@ bc_can_interrupt_player_trigger = {
 	NOT = { has_character_flag = bc_popup_cooldown }
 }
 
+# --- toast budget ------------------------------------------------------------
+# THE RECIPIENT'S BUDGET, AND IT IS A DIFFERENT CHARACTER FROM THE SUBJECT'S.
+# This is the whole reason it exists. Every other pacing gate in this mod is
+# taken on the character the moment happened TO:
+#   - bc_chronicle_ready_commander_trigger reads the commander's own flag
+#   - bc_chronicle_ready_trigger reads the KNIGHT's own flag
+# and a knight toast is then delivered to `scope:combat_side.side_commander`,
+# who was never asked. So N knights on a side carry N independent 15-day
+# cooldowns and the commander they all report to carries none. Estimated
+# consequence, from the gate census: a 20-knight side feeds its commander
+# roughly one toast per knight per three phases - about five per 5-day phase,
+# thirty across a 30-day battle - and no change to the `chance` weights can cap
+# that, because the flood scales with the number of SUBJECTS and the weights
+# only decide which subject speaks.
+#
+# THIS TRIGGER IS EVALUATED IN THE RECIPIENT'S SCOPE, not the subject's. At
+# every call site the enclosing scope is already the commander: the commander
+# events root on him, and the knight events wrap their toast in
+# `scope:combat_side.side_commander ?= { ... }`. That is why it can be a plain
+# character trigger with no scope link of its own.
+#
+# `is_ai = no` IS FIRST AND IT IS NOT AN OPTIMISATION. Without it every AI
+# commander in the world takes a character flag on every moment of every
+# battle, which is save bloat for a message nobody is there to read. With it,
+# an AI recipient fails the trigger and the toast is skipped entirely - which
+# is safe ONLY because no toast body in this mod contains an effect. That was
+# verified across all 446 blocks before this trigger was written: the only keys
+# any of them use are type, title, desc, left_icon and one right_icon. IF A
+# TOAST EVER GAINS AN EFFECT, THIS GATE SILENTLY STOPS IT RUNNING FOR AI - and
+# the mod's own measurement says a toast body DOES run for an AI subject, so
+# that would be a real behaviour change and not a no-op. Keep state out of
+# toasts; this trigger is now a second reason why.
+bc_can_toast_trigger = {
+	is_ai = no
+	NOT = { has_character_flag = bc_toast_cooldown }
+}
+
+# --- the eve's posture variant ----------------------------------------------
+# WHICH THREE OF THE EVE'S NINE POSTURES ARE ON OFFER. var:bc_eve_variant is
+# rolled in bc_chronicles.0011's `immediate` and read by nine option triggers;
+# this is the guarded read all nine share.
+#
+# PARAMETERISED BECAUSE NINE COPIES OF THE GUARD IS HOW THE EVE'S desc CHAINS
+# GOT THE WAY THEY ARE. bc_eve_events.txt already carries fifteen verbatim
+# copies of one guarded scope read, with a header warning that changing the
+# test means changing all fifteen. That was unavoidable there - CK3 gives no
+# way to attach a pool to one trigger inside a desc block - but an option
+# `trigger` is an ordinary trigger and can call a scripted one, so here it is
+# avoidable and is avoided.
+#
+# NESTED, NOT SIBLING. CK3 does not short-circuit a trigger block, so
+# `exists = var:X` next to `var:X = $N$` still evaluates the comparison on a
+# missing variable and logs `Variable 'X' is used but is never set`. The
+# trigger_if idiom is the mod's standard answer and is the same shape the eve's
+# scope reads use.
+#
+# THE VARIABLE IS NEVER CLEARED, AND THAT IS DELIBERATE. It must not go into
+# bc_clear_scratch_effect: the eve is a pop-up sitting in a queue and can be
+# answered after the combat ended, and a variant cleared out from under it
+# would leave the event rendering with NO base options at all - the same class
+# of failure the file header describes for scratch-vs-scope, one step worse
+# because it removes choices rather than prose. It is overwritten by the next
+# eve, it only ever lands on a player (bc_eve_offer_effect gates is_ai = no
+# before the raise), and a stale value is harmless because every read is a
+# comparison and never an arithmetic one.
+bc_eve_variant_trigger = {
+	exists = var:bc_eve_variant
+	trigger_if = {
+		limit = { exists = var:bc_eve_variant }
+		var:bc_eve_variant = $N$
+	}
+}
+
 # --- was this battle worth remembering --------------------------------------
 #
 # ROOT is the combat side. This is the one trigger in the file that does not
@@ -1254,7 +1327,7 @@ bc_he_leads_a_free_company_trigger = {
 # underneath it, and not redundant with the four identity triggers above.
 #
 # `highest_held_title_tier` AND `tier_kingdom` ARE ALREADY IN THE MOD, on the
-# commander himself, at bc_commander_phase_events.txt:1850. That template's
+# commander himself, at bc_commander_phase_events.txt:1962. That template's
 # header claims "no `is_valid` anywhere in the mod reads a title tier", which
 # was true when it was written and stops being true here; the claim is load-
 # bearing for ITS distinctness argument only, and this trigger asks about a
@@ -3515,7 +3588,7 @@ bc_the_years_are_going_into_the_dark_trigger = {
 #
 # `is_landless_ruler` WAS CONSIDERED AS THE SECOND GATE AND REJECTED. It is
 # documented as "holds any title, but no on-map land", which makes it a strict
-# subset of the shipped `is_landed = no` on bc_commander_phase_events.txt:1928,
+# subset of the shipped `is_landed = no` on bc_commander_phase_events.txt:2044,
 # and a gate that is contained by a gate the mod already fires on is not a new
 # question. The pairing below is by direction instead.
 #
@@ -6610,7 +6683,7 @@ bc_men_have_been_staring_at_his_face_his_whole_life_trigger = {
 # reckless and organizer off a style streak, and the terrain ladder below it
 # awards desert_warrior, rough_terrain_expert, winter_soldier and the rest off
 # a terrain streak. The only place one is ever READ is two `chance` rows on
-# winter_soldier, at `bc_knight_phase_events.txt:578` and `:5338`, and a chance
+# winter_soldier, at `bc_knight_phase_events.txt:602` and `:5582`, and a chance
 # row is a weight, not a gate. `logistician` and `reaver` censused at zero over
 # the whole mod, README included.
 #
@@ -7028,10 +7101,10 @@ bc_they_held_him_under_until_he_stopped_trigger = {
 # Every read in this mod is pairwise - has_relation_agot_* nine times,
 # has_relation_bodyguard four, has_relation_guardian four, has_relation_ward
 # four, has_relation_lover three, has_relation_friend once at
-# bc_knight_phase_events.txt:1906, has_relation_rival twice at :1984 and
-# :2071, and the rivalry ladder's three removal tests. All of them ask "is
+# bc_knight_phase_events.txt:1994, has_relation_rival twice at :2076 and
+# :2167, and the rivalry ladder's three removal tests. All of them ask "is
 # THIS man that to him", aimed at the side commander or the enemy's. The one
-# count anywhere in the file, num_of_relation_favorite_child >= 1 at :2886,
+# count anywhere in the file, num_of_relation_favorite_child >= 1 at :3022,
 # is a presence test wearing a count's clothes. Nothing has ever asked how
 # many.
 #
@@ -7094,8 +7167,8 @@ bc_at_least_three_men_alive_count_him_a_friend_trigger = {
 # BATCH 170 - THE DESK HE SITS AT, AND THE TONGUES HE ANSWERS IN.
 #
 # `is_councillor` WAS AT ZERO AND THE MOD ALREADY HAD OPINIONS ABOUT COUNCILS.
-# bc_commander_phase_events.txt:4544 gates on has_council_position =
-# councillor_marshal and :4609 on councillor_castellan, both of them men whose
+# bc_commander_phase_events.txt:4784 gates on has_council_position =
+# councillor_marshal and :4853 on councillor_castellan, both of them men whose
 # seat is about war. Nothing has ever asked the plainer question of whether a
 # man sits on anybody's council at all, and the answer to that one is
 # interesting precisely where the two shipped gates are not.
@@ -7980,7 +8053,7 @@ bc_there_is_no_second_thought_in_him_trigger = {
 # and fails this one.
 #
 # THE LOSING ROW SITS ON THE MAN AND THE WINNING ROW ON THE WOMAN, WHICH IS
-# THE RULE THE HOST BLOCK AT bc_commander_phase_events.txt:4004 ALREADY SET.
+# THE RULE THE HOST BLOCK AT bc_commander_phase_events.txt:4220 ALREADY SET.
 # A fact about a woman on a losing field becomes the host's explanation for
 # the defeat, and this mod does not write that sentence. A man who married
 # into his wife's line and is losing is not that sentence at all; the man
@@ -8154,7 +8227,7 @@ bc_it_never_woke_in_him_trigger = {
 # calls a sin or a virtue, which is the doctrine seam at `:6730` and at
 # `:1946`, and whose ground he is standing on, which is
 # bc_knight_the_ground_under_him_belongs_to_the_faith at
-# `bc_knight_phase_events.txt:11255`. Both of those ask what the faith SAYS.
+# `bc_knight_phase_events.txt:11799`. Both of those ask what the faith SAYS.
 # Neither of them, and nothing else in a hundred and eighty-six batches, has
 # ever asked how loud it is saying it this year.
 #

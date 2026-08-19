@@ -67,7 +67,7 @@ bc_battle_open_effect = {
 	# the top of every effect block: the seven commander events call this effect
 	# at the top, but the knight events call it nested inside their
 	# `scope:combat_side.side_commander ?=` block (bc_knight_phase_events.txt:101,
-	# :169, :232). Upstream of every read is what matters, not the line number.
+	# :173, :240). Upstream of every read is what matters, not the line number.
 	save_scope_as = bc_chronicle_subject
 
 	scope:combat_side.enemy_side.side_commander ?= {
@@ -210,10 +210,11 @@ bc_battle_open_effect = {
 #
 # bc_record_moment_effect = { TIER = minor|major|decisive  KIND = <kind>  SWING = up|down }
 #
-# TIER as passed is the REQUESTED tier. The escalation ladder below is a CEILING
-# and can only lower it — a site asking for `minor` on the tenth moment still gets
-# `minor`. That is why exactly two call sites request `decisive`: a ceiling cannot
-# manufacture a tier nobody asks for.
+# TIER as passed is the REQUESTED tier, and it is a FLOOR. The ladder below can
+# only RAISE it — a site asking for `minor` on the sixth moment of a battle gets
+# `decisive`, and a site asking for `decisive` gets it on moment one. This is the
+# reverse of how the ladder worked until 2026-08-19, and the reversal is the
+# whole point: see that header for the census that forced it.
 #
 # SWING exists because polarity is real in the shipped events and neither of the
 # other two parameters carries it. bc_horse_killed_under_him and
@@ -282,28 +283,36 @@ bc_record_moment_effect = {
 	}
 }
 
-# The ceiling, then the style write. Split out of the seam only because the
-# ceiling has to resolve BEFORE the style comparison can use it — the style is
+# The depth escalator, then the style write. Split out of the seam only because
+# the rung has to resolve BEFORE the style comparison can use it — the style is
 # keyed on EFFECTIVE tier, not requested.
 #
-# The ceiling is read AFTER bc_battle_moments is incremented, so the first moment
+# The depth is read AFTER bc_battle_moments is incremented, so the first moment
 # of a battle sees 1, not 0, and there is no zero case.
 #
-#   moments 1-2  ->  minor
-#   moments 3     ->  major
-#   moments 4+   ->  decisive
+#   moments 1-3  ->  as requested
+#   moments 4-5  ->  one rung up
+#   moments 6+   ->  two rungs up
 #
-# THE DECISIVE RUNG WAS 5 AND IT WAS MEASURED TOO HIGH. Across two logged runs
-# (874 moments, ~80 combat ends) `decisive` fired exactly ONCE. The reason is that
-# battles average about 4.2 moments, so a floor of 5 sat ABOVE the mean and the
-# rung was not rare, it was very nearly unreachable - which also meant family 3's
-# wound, which hangs off this arm alone, could never be measured at all.
+# IT WAS A CEILING UNTIL 2026-08-19 AND THAT IS WHAT KILLED THE TOP TWO RUNGS.
+# A ceiling cannot manufacture a tier nobody asks for, and the 2026-08-19 census
+# of all 444 templates found 437 asking for `minor`, 6 for `major` and 1 for
+# `decisive` — so RANK 1 was effectively the only style the mod could ever write,
+# and bc_wound_effect, which hangs off the two arms below and nowhere else, was
+# statically reachable by two templates in the whole mod. Three runs of "BC:
+# wound" reading zero were that, not a bug.
 #
-# 4 IS THE MEAN, NOT A GUESS. It puts the rung at roughly the length of a typical
-# battle, so a decisive moment needs a battle that ran a little long rather than
-# one twice the usual length. **Re-measure before moving it again** - the next run
-# is the first with any decisive data at all, and the major band is now a single
-# moment wide, which is the part most likely to need a second look.
+# THE TEMPLATES ARE NOT THE THING TO FIX. bc_scripted_effects.txt's escalator
+# header carries the full argument: the 434 batch templates are context reads,
+# not field events, and a context read is honestly worth `minor`. What a moment
+# is worth is also WHEN IT LANDS, so depth raises the rung instead.
+#
+# RUNGS 4 AND 6 ARE THE MEAN AND A LITTLE PAST IT, and they are deliberately the
+# same two numbers the momentum escalator uses, so the modifier a moment applies
+# and the style it writes can never disagree about how big that moment was.
+# Battles average about 4.2 moments, which puts ~72% of moments at the requested
+# rung, ~23% one up and ~5% two up. **Re-measure before moving them again** — the
+# 4-and-6 pair has never been run.
 #
 # THE COMPARISON IS `flag:$TIER$ = flag:decisive`, NOT `$TIER$ = decisive`. A bare
 # `$TIER$ = decisive` substitutes textually to `decisive = decisive`, and `decisive`
@@ -317,8 +326,17 @@ bc_record_moment_effect = {
 bc_record_effective_tier_effect = {
 	if = {
 		limit = {
-			flag:$TIER$ = flag:decisive
-			var:bc_battle_moments >= 4
+			OR = {
+				flag:$TIER$ = flag:decisive
+				AND = {
+					flag:$TIER$ = flag:major
+					var:bc_battle_moments >= 4
+				}
+				AND = {
+					flag:$TIER$ = flag:minor
+					var:bc_battle_moments >= 6
+				}
+			}
 		}
 		bc_write_style_effect = { RANK = 3 KIND = $KIND$ }
 		debug_log = "BC: moment decisive"
@@ -337,27 +355,28 @@ bc_record_effective_tier_effect = {
 	else_if = {
 		limit = {
 			OR = {
-				flag:$TIER$ = flag:decisive
 				flag:$TIER$ = flag:major
+				AND = {
+					flag:$TIER$ = flag:minor
+					var:bc_battle_moments >= 4
+				}
 			}
-			var:bc_battle_moments >= 3
 		}
 		bc_write_style_effect = { RANK = 2 KIND = $KIND$ }
 		debug_log = "BC: moment major"
 
 		# THE MAJOR ARM WOUNDS TOO, AND IT IS THE ARM THAT DOES THE WORK.
-		# Measured 2026-08-15: the whole mod asks for `decisive` exactly ten
-		# times a run, all ten from bc_flank_collapses, and seven of those ten
-		# arrive while the ledger still holds 1-2 moments, so they demote to
-		# minor. Decisive resolved ONCE in 44 battles. Hanging the wound off
-		# that arm alone gave it a single opportunity in a 500k-line log, which
-		# is why "BC: wound" read zero for three runs while nothing was
-		# actually broken - the rung above it was starving it.
+		# Under the old ceiling this arm was the wound's only realistic route:
+		# `decisive` was requested ten times a run, all ten from
+		# bc_flank_collapses, and seven of those arrived while the ledger held
+		# 1-2 moments and demoted to minor, so decisive resolved ONCE in 44
+		# battles. That demotion cannot happen now — the ladder only raises —
+		# but the arm still does most of the work, because it is where the ~23%
+		# of moments that land at depth 4-5 arrive.
 		#
-		# Major resolved 45 times in the same run. Same arm shape, same $SWING$,
-		# and bc_wound_effect's own var:bc_battle_wounded guard still caps it at
-		# one wound per battle, so this widens the sample without widening the
-		# outcome.
+		# bc_wound_effect's own var:bc_battle_wounded guard caps it at one wound
+		# per battle either way, so keeping both arms widens the sample without
+		# widening the outcome.
 		bc_wound_effect = { SWING = $SWING$ }
 	}
 	else = {

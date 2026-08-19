@@ -44,7 +44,33 @@
 # ---------------------------------------------------------------------------
 bc_chronicles.0011 = {
 	type = character_event
-	title = bc_chronicles.0011.t
+
+	# THE TITLE WAS THE LAST FIXED SURFACE ON THIS EVENT. Everything below it
+	# pools - four intro lines, three lines per foe value, two per ground band -
+	# and the one string the player reads FIRST was a single key that never
+	# moved. That is what made the eve read as the same event every time even
+	# after the prose underneath it was pooled: a reader recognises the heading
+	# before the paragraph.
+	#
+	# `title` TAKES A desc BLOCK. Shipped vanilla, twice, and both are
+	# random_valid specifically: fp2_el_cid_events.txt:85 and
+	# learning_theology_events.txt:2407. The bare descs need no trigger for the
+	# same reason the intro pool's do - a random_valid with no triggered arms is
+	# always valid, so the title can never come up empty.
+	#
+	# ALL FIVE MUST BE TRUE OF EVERY BATTLE, exactly like the intro pool, and
+	# for a stricter reason: the title renders above the paragraph that decides
+	# the ground and the foe, so a title naming either would contradict the
+	# chains below it whenever they disagreed.
+	title = {
+		random_valid = {
+			desc = bc_chronicles.0011.t
+			desc = bc_chronicles.0011.t_b
+			desc = bc_chronicles.0011.t_c
+			desc = bc_chronicles.0011.t_d
+			desc = bc_chronicles.0011.t_e
+		}
+	}
 	theme = martial
 
 	# THREE PARAGRAPHS, ASSEMBLED: what is happening, who is across the field,
@@ -391,31 +417,166 @@ bc_chronicles.0011 = {
 		animation = personality_bold
 	}
 
+	# THE VARIANT ROLL. Picks which THREE of the nine base postures are on offer.
+	#
+	# WHY THE BASE OPTIONS NEEDED THIS AND THE CONTEXTUAL ONES DID NOT. Options
+	# d through k are gated on the ground, the foe or the man, so they already
+	# differ from eve to eve. Options a, b and c were gated on nothing at all -
+	# they rendered, in that order, on every eve ever offered. So the top three
+	# slots of the option list were a fixed sequence no matter what the battle
+	# was, and those are the slots the player reads first.
+	#
+	# THREE POSTURES SHOWN, NOT NINE. Showing all nine would be more content on
+	# screen and less of a decision: the whole point of a posture is that taking
+	# one means not taking the others, and nine near-adjacent trades read as a
+	# list rather than a choice. Three is also what the event has always shown.
+	#
+	# EQUAL WEIGHTS, ON PURPOSE. There is no argument for one set of postures
+	# being rarer than another - they are three ways of framing the same
+	# question, not three degrees of anything. If a variant later earns a gate
+	# (a mounted-only set, say) it belongs in the option triggers, not here,
+	# because a variant that rolls and then shows nothing would leave the eve
+	# with no base options at all.
+	#
+	# ROLLED IN `immediate`, WHICH IS BEFORE THE OPTIONS ARE EVALUATED. Option
+	# triggers are evaluated when the window renders and immediate runs when the
+	# event fires, so the variable is always set by the time anything reads it.
+	# It is still read through bc_eve_variant_trigger's `exists` guard, because
+	# a save made before this version has no such variable on the commander and
+	# the eve in his queue would read a variable that genuinely does not exist.
 	immediate = {
 		debug_log = "BC: eve popup 0011"
+
+		random_list = {
+			1 = { set_variable = { name = bc_eve_variant value = 1 } }
+			1 = { set_variable = { name = bc_eve_variant value = 2 } }
+			1 = { set_variable = { name = bc_eve_variant value = 3 } }
+		}
 	}
 
 	# NO `trigger` ON THIS EVENT. Both gates were taken in bc_eve_offer_effect
 	# before the raise - re-testing them here would let a commander who passed
 	# the gate lose the event to a race and take the 90-day cooldown for nothing.
 
+	# =======================================================================
+	# THE NINE BASE POSTURES, IN THREE VARIANTS OF THREE.
+	#
+	# Every option from here to the `d` block is gated ONLY on
+	# var:bc_eve_variant, so exactly three of the nine ever render and the
+	# contextual options d-k are added on top of whichever three came up.
+	#
+	# NON-DOMINATION IS CHECKED WITHIN A VARIANT AND NOWHERE ELSE, because the
+	# player never sees two variants at once. That is what makes nine postures
+	# affordable out of five modifiers: `bc_pursuit for 10 stress` may appear
+	# in variant 2 and again in variant 3 without either being the same
+	# CHOICE, since the two it is weighed against are different both times.
+	# Inside a variant the rule is strict - no option may be another's
+	# modifier for a lower price - and it is why m and o are the free ones of
+	# their sets while carrying the heavier downsides.
+	#
+	# NO OPTION HERE APPLIES MOMENTUM, and the file header says why: the
+	# battle has not started, the eve is about shape and not advantage. All
+	# nine go through bc_add_verb_effect so family 2's 20 days stays in one
+	# place, which is the same route options d-k take.
+	#
+	# ONE MARKER PER VARIANT, NOT ONE PER OPTION. What is unproven here is
+	# whether the roll rotates at all; which of a variant's three a player
+	# prefers is a taste question no marker can settle. Per the workspace rule
+	# on marking every step whose failure needs a different fix: a variant
+	# marker at zero while `BC: eve offered` counts means the roll or the
+	# guard failed, and that is one fix. Three markers at roughly equal counts
+	# is the pass.
+	# =======================================================================
+
+	# --- variant 1: the moment ---------------------------------------------
+	# The original three, unchanged in effect and in price. They are the
+	# plainest reading of the eve - go now, stand still, or wait and see - and
+	# they stay variant 1 because a player who has seen the old event should
+	# meet something he recognises a third of the time rather than never.
 	option = {
 		name = bc_chronicles.0011.a
+		trigger = { bc_eve_variant_trigger = { N = 1 } }
 
 		bc_add_verb_effect = { MODIFIER = bc_bloodied }
 		add_stress = 10
+		debug_log = "BC: eve variant 1"
 	}
 
 	option = {
 		name = bc_chronicles.0011.b
+		trigger = { bc_eve_variant_trigger = { N = 1 } }
 
 		bc_add_verb_effect = { MODIFIER = bc_shieldwall }
 	}
 
 	option = {
 		name = bc_chronicles.0011.c
+		trigger = { bc_eve_variant_trigger = { N = 1 } }
 
 		add_prestige = -25
+	}
+
+	# --- variant 2: the shape of the line ----------------------------------
+	# Where the weight goes, rather than whether to commit it. n is the only
+	# base posture in the mod that grants two POSITIVE modifiers; it pays for
+	# them with the heaviest stress price on the event, which is what keeps it
+	# from dominating l. m is the free one and its price is structural - it is
+	# the only posture in this variant that gives up pursuit, so a commander
+	# who takes it wins the field and does not get to exploit it.
+	option = {
+		name = bc_chronicles.0011.l
+		trigger = { bc_eve_variant_trigger = { N = 2 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_pursuit }
+		add_stress = 10
+		debug_log = "BC: eve variant 2"
+	}
+
+	option = {
+		name = bc_chronicles.0011.m
+		trigger = { bc_eve_variant_trigger = { N = 2 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_ground_held }
+	}
+
+	option = {
+		name = bc_chronicles.0011.n
+		trigger = { bc_eve_variant_trigger = { N = 2 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		bc_add_verb_effect = { MODIFIER = bc_pursuit }
+		add_stress = 15
+	}
+
+	# --- variant 3: the men, not the plan ----------------------------------
+	# What the host is asked to be, rather than where it is put. o is the
+	# second option in the mod to pair a positive with a negative - option f
+	# is the other - and like f it is free at the point of choice and pays in
+	# the modifier itself: dismounted knights are worth a fifth less all day.
+	# That is what lets it sit next to p and q without dominating either.
+	option = {
+		name = bc_chronicles.0011.o
+		trigger = { bc_eve_variant_trigger = { N = 3 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_shieldwall }
+		bc_add_verb_effect = { MODIFIER = bc_spent_horse }
+		debug_log = "BC: eve variant 3"
+	}
+
+	option = {
+		name = bc_chronicles.0011.p
+		trigger = { bc_eve_variant_trigger = { N = 3 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_bloodied }
+		add_stress = 15
+	}
+
+	option = {
+		name = bc_chronicles.0011.q
+		trigger = { bc_eve_variant_trigger = { N = 3 } }
+
+		bc_add_verb_effect = { MODIFIER = bc_ground_held }
+		add_stress = 5
 	}
 
 	# TWO CONTEXTUAL OPTIONS. `trigger` on an event option HIDES it when false,
