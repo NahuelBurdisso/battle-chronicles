@@ -37,12 +37,12 @@
 #   moments 4-5  ->  one rung up
 #   moments 6+   ->  two rungs up
 #
-# RUNGS 8 AND 13, RE-TUNED 2026-08-19 FROM THE FIRST RUN OF THIS LADDER. They
-# were 4 and 6, fitted to a mean of 4.2 moments per battle that the 434-template
-# batch had already made stale: 888 moments over 128 commander-sides measures
-# ~6.9 each, so the old mean sat ON the top rung and 45% of moments resolved
-# decisive against a 5% target. 8 and 13 are fitted to that run's tail - and
-# RE-MEASURE, because a fit to three buckets is a model, not a census.
+# RUNGS 11 AND 16, THE SECOND RE-TUNE, 2026-08-19. History: 4 and 6 were fitted
+# to 4.2 moments per battle, stale since the 434-template batch, and gave 41%
+# decisive against a 5% target; 8 and 13, fitted to that run, gave 18%. This pair
+# is fitted to the 8/13 run - 1432 moments over 192 commander-sides, ~7.5 each,
+# P(depth<8)=0.61, P(8-12)=0.21, P(>=13)=0.18. 11 puts the low rung at the 72nd
+# percentile. 16 IS A DELIBERATE MISS OF THE 5% TARGET - see the ledger file.
 #
 # THE MOMENTS COUNT IS READ ON THE SCOPE THIS RUNS ON, WHICH IS ALWAYS RIGHT.
 # Knight templates wrap both bc_momentum_*_effect and bc_record_moment_effect in
@@ -58,12 +58,12 @@ bc_add_momentum_effect = {
 	if = {
 		limit = { exists = var:bc_battle_moments }
 		if = {
-			limit = { var:bc_battle_moments >= 13 }
+			limit = { var:bc_battle_moments >= 16 }
 			debug_log = "BC: momentum depth two"
 			bc_momentum_step2_effect = { MODIFIER = $MODIFIER$ }
 		}
 		else_if = {
-			limit = { var:bc_battle_moments >= 8 }
+			limit = { var:bc_battle_moments >= 11 }
 			debug_log = "BC: momentum depth one"
 			bc_momentum_step1_effect = { MODIFIER = $MODIFIER$ }
 		}

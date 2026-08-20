@@ -307,12 +307,15 @@ bc_record_moment_effect = {
 # not field events, and a context read is honestly worth `minor`. What a moment
 # is worth is also WHEN IT LANDS, so depth raises the rung instead.
 #
-# RUNGS 8 AND 13 ARE THE MEAN AND WELL PAST IT, and they are deliberately the
-# same two numbers the momentum escalator uses, so the modifier a moment applies
-# and the style it writes can never disagree about how big that moment was.
-# They were 4 and 6 for one run: against the measured ~6.9 moments per commander
-# that put the MEAN ON THE TOP RUNG and made decisive 45% of all moments, where
-# 5% was wanted. Re-measure after this pair too — see bench.md section 5.
+# RUNGS 11 AND 16, deliberately the same two numbers the momentum escalator uses,
+# so the modifier a moment applies and the style it writes can never disagree
+# about how big that moment was. Measured over two runs: 4/6 gave 41% decisive
+# and 8/13 gave 18%, against a nominal 5% target and ~7.5 moments per commander.
+# 11 is the 72nd percentile of that distribution. 16 IS NOT THE 5% POINT - the
+# tail fit puts that near 21, and 5% was inherited from the spec, never argued.
+# THE TOP RUNG IS DELIBERATELY REACHABLE: bc_wound_effect and style RANK 3 both
+# hang off decisive and nothing else, and at 5% the wound returns to the near-dead
+# state three runs of zero already documented. ~10% is the intent. Re-measure.
 #
 # THE COMPARISON IS `flag:$TIER$ = flag:decisive`, NOT `$TIER$ = decisive`. A bare
 # `$TIER$ = decisive` substitutes textually to `decisive = decisive`, and `decisive`
@@ -330,11 +333,11 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:decisive
 				AND = {
 					flag:$TIER$ = flag:major
-					var:bc_battle_moments >= 8
+					var:bc_battle_moments >= 11
 				}
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 13
+					var:bc_battle_moments >= 16
 				}
 			}
 		}
@@ -358,7 +361,7 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:major
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 8
+					var:bc_battle_moments >= 11
 				}
 			}
 		}

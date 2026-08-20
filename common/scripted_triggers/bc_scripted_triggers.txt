@@ -10897,14 +10897,14 @@ bc_he_has_three_living_sisters_trigger = {
 #
 # `exists` AS A SIBLING PLUS A REPEATED `trigger_if`, because CK3 does not
 # short-circuit and guarantees no evaluation order among siblings - a bare
-# `var:bc_battle_moments >= 8` next to an `exists` still evaluates when the
+# `var:bc_battle_moments >= 11` next to an `exists` still evaluates when the
 # variable is absent. Absent is the ordinary case here: the gate is tested on the
 # commander before bc_battle_open_effect has run in that battle.
 bc_depth_rung_one_trigger = {
 	exists = var:bc_battle_moments
 	trigger_if = {
 		limit = { exists = var:bc_battle_moments }
-		var:bc_battle_moments >= 8
+		var:bc_battle_moments >= 11
 	}
 }
 
@@ -10912,7 +10912,7 @@ bc_depth_rung_two_trigger = {
 	exists = var:bc_battle_moments
 	trigger_if = {
 		limit = { exists = var:bc_battle_moments }
-		var:bc_battle_moments >= 13
+		var:bc_battle_moments >= 16
 	}
 }
 
@@ -10920,9 +10920,9 @@ bc_depth_rung_two_trigger = {
 # escalator resolves for a template asking `minor`, which is what 411 of the 416
 # momentum call sites ask for:
 #
-#   depth < 8    -> minor      settled once minor is held
-#   depth 8-12   -> major      settled once major is held
-#   depth >= 13  -> decisive   settled only once decisive is held
+#   depth < 11    -> minor     settled once minor is held
+#   depth 11-15   -> major     settled once major is held
+#   depth >= 16   -> decisive  settled only once decisive is held
 #
 # THE FIVE TEMPLATES THAT ASK FOR `major` ARE UNDER-SERVED BY THIS, and so is any
 # request shifted up by the bc_swing_dramatic game rule: both resolve one rung
