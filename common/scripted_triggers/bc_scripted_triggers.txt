@@ -10871,3 +10871,89 @@ bc_he_has_three_living_sisters_trigger = {
 		is_female = yes
 	}
 }
+
+# --- the depth rungs, and the settled gates --------------------------------
+# Added 2026-08-19 after the first run of the depth escalator. THE ESCALATOR WAS
+# NOT BROKEN AND NOT MIS-SCOPED - it was starved by the call sites. 204 momentum
+# calls and 216 faltering ones were wrapped in a `NOT = { ...has... }` gate, which
+# refuses a second grant while any rung is held, and a second grant is the only
+# thing an escalator can escalate. Measured: 236 momentum calls against 888
+# moments, and 79% of them at `depth none`, because the one call a battle got was
+# almost always its FIRST moment, when the depth is 1.
+#
+# So the gate had to learn the difference between "already has momentum" and
+# "already has the momentum this moment would grant". These two triggers are that
+# second question, and they are NEW NAMES ON PURPOSE: bc_has_momentum_trigger and
+# bc_is_faltering_trigger keep their plain meaning for their two other consumers -
+# bc_foe_commander_is_faltering_trigger reads the enemy commander's state for
+# prose, and bc_events.txt:523 gates a pop-up. Redefining the old triggers would
+# have silently changed both.
+#
+# THE RUNGS ARE READ THROUGH A TRIGGER, NOT INLINE, so each constant lives in one
+# place. They must stay equal to the numbers in bc_add_momentum_effect and
+# bc_record_effective_tier_effect: if the gate and the escalator disagree about
+# where a rung starts, the gate lets a call through that then grants the rung
+# already held, and the modifier merely refreshes for another 20 days.
+#
+# `exists` AS A SIBLING PLUS A REPEATED `trigger_if`, because CK3 does not
+# short-circuit and guarantees no evaluation order among siblings - a bare
+# `var:bc_battle_moments >= 8` next to an `exists` still evaluates when the
+# variable is absent. Absent is the ordinary case here: the gate is tested on the
+# commander before bc_battle_open_effect has run in that battle.
+bc_depth_rung_one_trigger = {
+	exists = var:bc_battle_moments
+	trigger_if = {
+		limit = { exists = var:bc_battle_moments }
+		var:bc_battle_moments >= 8
+	}
+}
+
+bc_depth_rung_two_trigger = {
+	exists = var:bc_battle_moments
+	trigger_if = {
+		limit = { exists = var:bc_battle_moments }
+		var:bc_battle_moments >= 13
+	}
+}
+
+# "The momentum this moment would grant is already held." Read against what the
+# escalator resolves for a template asking `minor`, which is what 411 of the 416
+# momentum call sites ask for:
+#
+#   depth < 8    -> minor      settled once minor is held
+#   depth 8-12   -> major      settled once major is held
+#   depth >= 13  -> decisive   settled only once decisive is held
+#
+# THE FIVE TEMPLATES THAT ASK FOR `major` ARE UNDER-SERVED BY THIS, and so is any
+# request shifted up by the bc_swing_dramatic game rule: both resolve one rung
+# higher than the ladder above assumes, so the gate can call them settled while a
+# higher rung was still available. That is a stale rung for the rest of the
+# battle, never a wrong one, and pushing the request through the trigger would
+# mean parameterising 420 call sites to serve five.
+bc_momentum_settled_trigger = {
+	OR = {
+		has_character_modifier = bc_momentum_decisive
+		AND = {
+			has_character_modifier = bc_momentum_major
+			NOT = { bc_depth_rung_two_trigger = yes }
+		}
+		AND = {
+			has_character_modifier = bc_momentum_minor
+			NOT = { bc_depth_rung_one_trigger = yes }
+		}
+	}
+}
+
+bc_faltering_settled_trigger = {
+	OR = {
+		has_character_modifier = bc_faltering_decisive
+		AND = {
+			has_character_modifier = bc_faltering_major
+			NOT = { bc_depth_rung_two_trigger = yes }
+		}
+		AND = {
+			has_character_modifier = bc_faltering_minor
+			NOT = { bc_depth_rung_one_trigger = yes }
+		}
+	}
+}

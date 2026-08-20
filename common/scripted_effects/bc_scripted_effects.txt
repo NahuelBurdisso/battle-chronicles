@@ -37,12 +37,12 @@
 #   moments 4-5  ->  one rung up
 #   moments 6+   ->  two rungs up
 #
-# RUNGS 4 AND 6, NOT 3 AND 4. bc_record_effective_tier_effect's rungs sit at 3
-# and 4 because they were tuned as a CEILING, where a low rung makes the top
-# tier rarer. Here they are a FLOOR and the same numbers would invert the
-# distribution: with 411 of 416 calls asking for minor, a +1 step at moment 3
-# would make major the common case. Against a measured mean of 4.2 moments per
-# battle, 4 and 6 give roughly 72% minor / 23% major / 5% decisive.
+# RUNGS 8 AND 13, RE-TUNED 2026-08-19 FROM THE FIRST RUN OF THIS LADDER. They
+# were 4 and 6, fitted to a mean of 4.2 moments per battle that the 434-template
+# batch had already made stale: 888 moments over 128 commander-sides measures
+# ~6.9 each, so the old mean sat ON the top rung and 45% of moments resolved
+# decisive against a 5% target. 8 and 13 are fitted to that run's tail - and
+# RE-MEASURE, because a fit to three buckets is a model, not a census.
 #
 # THE MOMENTS COUNT IS READ ON THE SCOPE THIS RUNS ON, WHICH IS ALWAYS RIGHT.
 # Knight templates wrap both bc_momentum_*_effect and bc_record_moment_effect in
@@ -58,12 +58,12 @@ bc_add_momentum_effect = {
 	if = {
 		limit = { exists = var:bc_battle_moments }
 		if = {
-			limit = { var:bc_battle_moments >= 6 }
+			limit = { var:bc_battle_moments >= 13 }
 			debug_log = "BC: momentum depth two"
 			bc_momentum_step2_effect = { MODIFIER = $MODIFIER$ }
 		}
 		else_if = {
-			limit = { var:bc_battle_moments >= 4 }
+			limit = { var:bc_battle_moments >= 8 }
 			debug_log = "BC: momentum depth one"
 			bc_momentum_step1_effect = { MODIFIER = $MODIFIER$ }
 		}

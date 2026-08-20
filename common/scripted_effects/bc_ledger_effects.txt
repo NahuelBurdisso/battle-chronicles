@@ -307,12 +307,12 @@ bc_record_moment_effect = {
 # not field events, and a context read is honestly worth `minor`. What a moment
 # is worth is also WHEN IT LANDS, so depth raises the rung instead.
 #
-# RUNGS 4 AND 6 ARE THE MEAN AND A LITTLE PAST IT, and they are deliberately the
+# RUNGS 8 AND 13 ARE THE MEAN AND WELL PAST IT, and they are deliberately the
 # same two numbers the momentum escalator uses, so the modifier a moment applies
 # and the style it writes can never disagree about how big that moment was.
-# Battles average about 4.2 moments, which puts ~72% of moments at the requested
-# rung, ~23% one up and ~5% two up. **Re-measure before moving them again** — the
-# 4-and-6 pair has never been run.
+# They were 4 and 6 for one run: against the measured ~6.9 moments per commander
+# that put the MEAN ON THE TOP RUNG and made decisive 45% of all moments, where
+# 5% was wanted. Re-measure after this pair too — see bench.md section 5.
 #
 # THE COMPARISON IS `flag:$TIER$ = flag:decisive`, NOT `$TIER$ = decisive`. A bare
 # `$TIER$ = decisive` substitutes textually to `decisive = decisive`, and `decisive`
@@ -330,11 +330,11 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:decisive
 				AND = {
 					flag:$TIER$ = flag:major
-					var:bc_battle_moments >= 4
+					var:bc_battle_moments >= 8
 				}
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 6
+					var:bc_battle_moments >= 13
 				}
 			}
 		}
@@ -358,7 +358,7 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:major
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 4
+					var:bc_battle_moments >= 8
 				}
 			}
 		}

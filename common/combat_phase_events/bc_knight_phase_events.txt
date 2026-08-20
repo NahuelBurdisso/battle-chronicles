@@ -332,7 +332,7 @@ bc_shieldbrother_forged = {
 # ZERO fires across a whole session.
 #
 # MOMENTUM STACKING. Each grant below sits behind an explicit
-# `NOT = { bc_has_momentum_trigger = yes }` (or the faltering equivalent)
+# `NOT = { bc_momentum_settled_trigger = yes }` (or the faltering equivalent)
 # evaluated INSIDE the side_commander scope. It cannot go in `is_valid`: that
 # block is rooted on the KNIGHT, and bc_has_momentum_trigger reads
 # has_character_modifier on its own root, so there it would test the wrong
@@ -394,7 +394,7 @@ bc_knight_unhorses_a_lord = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_major_effect = yes
 			}
 
@@ -461,7 +461,7 @@ bc_knight_takes_a_captive = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -529,7 +529,7 @@ bc_knight_is_ridden_down = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -614,7 +614,7 @@ bc_knight_stands_in_the_snow = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -680,7 +680,7 @@ bc_knight_the_old_sword = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -841,7 +841,7 @@ bc_knight_in_the_press = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -911,7 +911,7 @@ bc_knight_the_long_war = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -1078,7 +1078,7 @@ bc_knight_the_glory_hound = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -1226,7 +1226,7 @@ bc_knight_strips_the_dead = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -1459,7 +1459,7 @@ bc_knight_in_the_green = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -1577,7 +1577,7 @@ bc_knight_the_old_wound = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -1745,7 +1745,7 @@ bc_knight_the_face_they_run_from = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -2026,7 +2026,7 @@ bc_knight_for_a_friend = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -2107,7 +2107,7 @@ bc_knight_owes_him_nothing = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -2797,7 +2797,7 @@ bc_knight_something_is_always_there = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -2890,7 +2890,7 @@ bc_knight_the_name_across_the_field = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -2986,7 +2986,7 @@ bc_knight_the_horses_went_past = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -3081,7 +3081,7 @@ bc_knight_he_has_lost_count = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -3126,7 +3126,7 @@ bc_knight_he_has_lost_count = {
 # and the template would never fire once.
 #
 # `wild`/`down`, AND NO RUNG GRANT AT ALL. The gate IS bc_faltering_decisive,
-# so the usual `NOT = { bc_is_faltering_trigger = yes }` guard could never
+# so the usual `NOT = { bc_faltering_settled_trigger = yes }` guard could never
 # pass here - writing the `if` would be dead code that reads like a live
 # effect, which is worse than writing nothing. The host is already at the
 # bottom of the ladder and there is no lower rung to hand it. bc_spent_horse
@@ -3256,7 +3256,7 @@ bc_knight_the_banner_answerable = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -3335,7 +3335,7 @@ bc_knight_the_leash_holds = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -3419,7 +3419,7 @@ bc_knight_the_white_cloak = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -3520,7 +3520,7 @@ bc_knight_the_squires_best_day = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -3597,7 +3597,7 @@ bc_knight_what_he_agreed_to = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -3683,7 +3683,7 @@ bc_knight_nobody_pays_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -3778,7 +3778,7 @@ bc_knight_twice_as_good = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -3879,7 +3879,7 @@ bc_knight_built_for_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -3963,7 +3963,7 @@ bc_knight_it_weighs_the_same = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -4253,7 +4253,7 @@ bc_knight_word_came_down_the_line = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -4346,7 +4346,7 @@ bc_knight_nothing_to_say_over_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -4388,7 +4388,7 @@ bc_knight_nothing_to_say_over_him = {
 # the other in either direction.
 #
 # NO RUNG, AND THE GUARD IS WHY. The faltering grant everywhere in this mod is
-# wrapped in `NOT = { bc_is_faltering_trigger = yes }` and this template gates
+# wrapped in `NOT = { bc_faltering_settled_trigger = yes }` and this template gates
 # on the commander already carrying it, so the grant would be dead code. The
 # stress on the knight is the whole cost.
 #
@@ -4561,7 +4561,7 @@ bc_knight_it_will_be_his_name = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -4652,7 +4652,7 @@ bc_knight_exactly_what_was_asked = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -4752,7 +4752,7 @@ bc_knight_nobody_here_is_sworn = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -4837,7 +4837,7 @@ bc_knight_the_water_is_over_his_boots = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -4933,7 +4933,7 @@ bc_knight_he_leaves_the_horse_in_the_shallows = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -5032,7 +5032,7 @@ bc_knight_where_the_wages_are = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5127,7 +5127,7 @@ bc_knight_the_men_a_king_can_afford = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -5221,7 +5221,7 @@ bc_knight_nothing_has_changed_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -5319,7 +5319,7 @@ bc_knight_the_ground_here_was_worth_something = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -5414,7 +5414,7 @@ bc_knight_the_orders_have_stopped_arriving = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5508,7 +5508,7 @@ bc_knight_the_reach_is_wrong = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5602,7 +5602,7 @@ bc_knight_the_light_is_going = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -5703,7 +5703,7 @@ bc_knight_these_are_the_ones_who_stayed = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5797,7 +5797,7 @@ bc_knight_a_hall_is_waiting_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5892,7 +5892,7 @@ bc_knight_nobody_has_looked_at_him_since_dawn = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -5987,7 +5987,7 @@ bc_knight_it_was_never_a_bargain = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -6086,7 +6086,7 @@ bc_knight_there_is_no_seam_in_a_shieldwall = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6183,7 +6183,7 @@ bc_knight_there_is_no_second_host = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -6280,7 +6280,7 @@ bc_knight_the_wedge_behind_one_man = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6373,7 +6373,7 @@ bc_knight_a_shoulder_to_line_up_on = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6467,7 +6467,7 @@ bc_knight_the_man_who_is_the_name = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -6563,7 +6563,7 @@ bc_knight_the_sums_were_finished_years_ago = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6659,7 +6659,7 @@ bc_knight_what_a_run_of_afternoons_gets_called = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6752,7 +6752,7 @@ bc_knight_a_half_step_more_careful = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6849,7 +6849,7 @@ bc_knight_the_chain_that_put_him_here = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -6943,7 +6943,7 @@ bc_knight_a_man_who_runs_here_runs_into_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7053,7 +7053,7 @@ bc_knight_he_did_not_start_at_seven = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7165,7 +7165,7 @@ bc_knight_the_place_is_an_arrangement = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7269,7 +7269,7 @@ bc_knight_he_has_seen_a_household_stop = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7374,7 +7374,7 @@ bc_knight_he_has_read_these_terms_before = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7480,7 +7480,7 @@ bc_knight_he_understands_the_far_rank = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -7590,7 +7590,7 @@ bc_knight_the_lesson_holds_the_line = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7703,7 +7703,7 @@ bc_knight_he_cannot_be_the_one_who_left = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -7813,7 +7813,7 @@ bc_knight_he_would_rather_not_be_remembered = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -7924,7 +7924,7 @@ bc_knight_nothing_here_is_owed = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8034,7 +8034,7 @@ bc_knight_one_distance_instead_of_a_battle = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8111,7 +8111,7 @@ bc_knight_he_cannot_be_seen_to_want_this = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8188,7 +8188,7 @@ bc_knight_there_is_no_ransom_in_it_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8264,7 +8264,7 @@ bc_knight_everything_he_has_was_handed_to_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -8340,7 +8340,7 @@ bc_knight_he_was_not_asked_about_any_of_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8417,7 +8417,7 @@ bc_knight_there_is_nothing_he_can_do_that_is_new = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8494,7 +8494,7 @@ bc_knight_the_best_afternoon_he_will_never_have = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -8570,7 +8570,7 @@ bc_knight_he_will_not_be_the_one_who_gives_first = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8646,7 +8646,7 @@ bc_knight_a_horse_is_a_very_slow_way_to_arrive = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -8721,7 +8721,7 @@ bc_knight_he_was_a_clause_in_something_before_he_was_a_man = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8796,7 +8796,7 @@ bc_knight_the_name_is_promised_and_the_day_is_not = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -8871,7 +8871,7 @@ bc_knight_the_end_of_a_name_is_a_short_afternoon = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -8946,7 +8946,7 @@ bc_knight_this_is_not_the_war_he_is_actually_fighting = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9020,7 +9020,7 @@ bc_knight_none_of_his_arrangements_reach_this_far = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -9093,7 +9093,7 @@ bc_knight_nothing_about_today_will_be_settled_afterwards = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9166,7 +9166,7 @@ bc_knight_the_lesson_he_bought_only_works_one_way = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -9239,7 +9239,7 @@ bc_knight_there_is_no_version_of_this_where_they_leave = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -9329,7 +9329,7 @@ bc_knight_their_quarrel_is_with_somebody_else = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -9420,7 +9420,7 @@ bc_knight_three_lines_of_a_letter_eventually = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9506,7 +9506,7 @@ bc_knight_a_feast_planned_around_a_man_we_are_trying_to_kill = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9591,7 +9591,7 @@ bc_knight_the_worst_thing_in_his_life_is_elsewhere = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -9678,7 +9678,7 @@ bc_knight_they_were_beaten_before_he_got_here = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9767,7 +9767,7 @@ bc_knight_winning_this_one_finishes_nothing = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9854,7 +9854,7 @@ bc_knight_beating_a_man_who_owns_none_of_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -9942,7 +9942,7 @@ bc_knight_he_has_been_in_a_room_with_that_man = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10029,7 +10029,7 @@ bc_knight_the_fifteen_percent_nobody_can_see = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10117,7 +10117,7 @@ bc_knight_everything_he_wins_today_he_has_to_carry = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10206,7 +10206,7 @@ bc_knight_nothing_over_there_is_anybodys_trade = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10277,7 +10277,7 @@ bc_knight_the_hands_do_not_know_the_difference = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10349,7 +10349,7 @@ bc_knight_a_second_cell_in_the_same_family = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -10422,7 +10422,7 @@ bc_knight_no_hurry_for_the_war_to_end = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10495,7 +10495,7 @@ bc_knight_the_next_order_will_be_a_coin = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -10568,7 +10568,7 @@ bc_knight_he_is_not_the_man_whose_face_this_is = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10635,7 +10635,7 @@ bc_knight_his_kit_is_on_a_cart_somewhere = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -10702,7 +10702,7 @@ bc_knight_the_line_holds_anyway = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10769,7 +10769,7 @@ bc_knight_he_has_stopped_before = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -10836,7 +10836,7 @@ bc_knight_the_banners_opposite_do_not_match = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10903,7 +10903,7 @@ bc_knight_nobody_has_ever_come_for_what_he_is_owed = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -10970,7 +10970,7 @@ bc_knight_he_will_not_be_moved_off_this_ground = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11037,7 +11037,7 @@ bc_knight_the_other_household_is_already_shut_up = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -11104,7 +11104,7 @@ bc_knight_the_order_came_from_a_man_who_can_afford_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -11171,7 +11171,7 @@ bc_knight_he_holds_his_land_of_the_man_giving_the_orders = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11238,7 +11238,7 @@ bc_knight_the_man_shouting_the_orders_is_the_man_who_pays_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_is_faltering_trigger = yes } }
+				limit = { NOT = { bc_faltering_settled_trigger = yes } }
 				bc_faltering_minor_effect = yes
 			}
 
@@ -11305,7 +11305,7 @@ bc_knight_he_has_a_seat_of_his_own_and_it_is_a_small_one = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11372,7 +11372,7 @@ bc_knight_the_name_is_doing_some_of_the_standing_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11439,7 +11439,7 @@ bc_knight_the_ground_he_owns_is_in_his_own_two_hands = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11507,7 +11507,7 @@ bc_knight_the_country_here_has_already_taken_a_side = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11575,7 +11575,7 @@ bc_knight_nothing_written_down_required_him_to_come = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11642,7 +11642,7 @@ bc_knight_there_is_nothing_here_to_get_behind = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11709,7 +11709,7 @@ bc_knight_he_is_the_larger_power_and_he_is_taking_the_orders = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11776,7 +11776,7 @@ bc_knight_the_men_opposite_are_not_foreign_at_all = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11843,7 +11843,7 @@ bc_knight_the_ground_under_him_belongs_to_the_faith = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11910,7 +11910,7 @@ bc_knight_the_men_opposite_are_dying_by_the_rules = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -11977,7 +11977,7 @@ bc_knight_he_is_fighting_across_somebody_elses_unfinished_plan = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12044,7 +12044,7 @@ bc_knight_he_has_not_been_home_in_two_years = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12111,7 +12111,7 @@ bc_knight_the_man_running_them_could_not_live_with_him_for_a_minute = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12178,7 +12178,7 @@ bc_knight_he_is_the_biggest_man_on_this_field_and_he_is_in_the_line = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12245,7 +12245,7 @@ bc_knight_he_has_not_stopped_moving_since_the_horns = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12312,7 +12312,7 @@ bc_knight_he_has_been_holding_his_own_ground_since_before_most_of_them_were_born
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12379,7 +12379,7 @@ bc_knight_somebody_has_been_looking_after_this_country_for_years = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12446,7 +12446,7 @@ bc_knight_this_is_the_precise_thing_he_came_all_this_way_for = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12513,7 +12513,7 @@ bc_knight_he_was_raised_to_believe_this_is_what_the_year_is_for = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12580,7 +12580,7 @@ bc_knight_the_whole_line_can_find_him_without_being_told_where_to_look = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12647,7 +12647,7 @@ bc_knight_he_has_done_this_before_without_a_cause_attached = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12714,7 +12714,7 @@ bc_knight_the_thing_that_happened_to_him_once_is_happening_again = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12781,7 +12781,7 @@ bc_knight_he_took_a_second_set_of_vows_and_kept_those = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12848,7 +12848,7 @@ bc_knight_nothing_here_is_the_thing_he_is_afraid_of = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12915,7 +12915,7 @@ bc_knight_he_finds_the_seam_the_way_he_once_found_a_door = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -12982,7 +12982,7 @@ bc_knight_he_has_already_been_dead_once_this_life = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13049,7 +13049,7 @@ bc_knight_three_men_would_come_if_he_went_down = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13116,7 +13116,7 @@ bc_knight_he_can_hear_what_they_are_telling_each_other = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13183,7 +13183,7 @@ bc_knight_this_is_the_part_he_has_done_a_hundred_times = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13250,7 +13250,7 @@ bc_knight_moving_him_is_not_a_realistic_plan = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13317,7 +13317,7 @@ bc_knight_the_one_hour_that_asks_for_his_best = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13384,7 +13384,7 @@ bc_knight_the_blood_they_whisper_about = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13451,7 +13451,7 @@ bc_knight_there_is_one_word_for_him_and_today_it_pays = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13518,7 +13518,7 @@ bc_knight_the_eighth_war_of_his_life = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13585,7 +13585,7 @@ bc_knight_nothing_about_that_man_is_his = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13652,7 +13652,7 @@ bc_knight_the_law_never_gave_him_anything = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13719,7 +13719,7 @@ bc_knight_his_hall_is_finer_than_his_station = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13786,7 +13786,7 @@ bc_knight_nobody_is_waiting_on_word_of_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13853,7 +13853,7 @@ bc_knight_he_rode_out_for_the_lord_next_door = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13920,7 +13920,7 @@ bc_knight_his_mother_is_the_last_one_left = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -13987,7 +13987,7 @@ bc_knight_there_is_no_second_thought_in_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14054,7 +14054,7 @@ bc_knight_the_line_runs_through_her = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14121,7 +14121,7 @@ bc_knight_none_of_it_ever_reached_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14188,7 +14188,7 @@ bc_knight_it_never_woke_in_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14255,7 +14255,7 @@ bc_knight_nobody_much_is_praying_this_year = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14323,7 +14323,7 @@ bc_knight_the_house_guard_is_standing_here = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14391,7 +14391,7 @@ bc_knight_what_he_is_owed_is_out_of_reach = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14459,7 +14459,7 @@ bc_knight_this_host_came_here_to_plunder = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14527,7 +14527,7 @@ bc_knight_the_far_lord_has_a_rising_behind_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14595,7 +14595,7 @@ bc_knight_he_is_working_against_the_man_he_follows = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14662,7 +14662,7 @@ bc_knight_the_far_lord_rode_out_short_handed = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14729,7 +14729,7 @@ bc_knight_he_has_learned_something_the_man_leading_him_has_not = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14796,7 +14796,7 @@ bc_knight_he_has_a_name_men_say_kindly = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14863,7 +14863,7 @@ bc_knight_the_same_word_speaks_well_of_them_both = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14930,7 +14930,7 @@ bc_knight_he_follows_a_man_with_five_names_on_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -14997,7 +14997,7 @@ bc_knight_he_has_one_boy_of_his_own = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15064,7 +15064,7 @@ bc_knight_he_could_lawfully_fight_his_own_side = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15131,7 +15131,7 @@ bc_knight_the_boy_he_used_to_beat_commands_the_far_side = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15198,7 +15198,7 @@ bc_knight_he_swore_blood_with_the_man_giving_the_orders = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15266,7 +15266,7 @@ bc_knight_the_far_lord_has_carried_this_whole_war = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15334,7 +15334,7 @@ bc_knight_this_war_has_only_two_names_in_it = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15402,7 +15402,7 @@ bc_knight_this_ground_is_being_stripped_while_they_fight = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15470,7 +15470,7 @@ bc_knight_there_is_nothing_built_on_this_ground = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15538,7 +15538,7 @@ bc_knight_this_side_is_the_one_at_the_wall = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15606,7 +15606,7 @@ bc_knight_the_far_people_make_war_nothing_like_his = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15674,7 +15674,7 @@ bc_knight_this_column_is_all_bow_and_no_horse = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15742,7 +15742,7 @@ bc_knight_the_seat_across_the_field_is_on_the_table = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15810,7 +15810,7 @@ bc_knight_one_house_against_the_whole_gathering = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15878,7 +15878,7 @@ bc_knight_there_is_one_way_out_of_here = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -15946,7 +15946,7 @@ bc_knight_this_war_is_about_who_owns_whom = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16014,7 +16014,7 @@ bc_knight_the_foe_is_fighting_with_a_ruin = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16082,7 +16082,7 @@ bc_knight_the_name_they_gave_him_never_grew = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16150,7 +16150,7 @@ bc_knight_the_man_opposite_holds_three_that_way = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16218,7 +16218,7 @@ bc_knight_five_great_men_stand_under_the_man_he_follows = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16286,7 +16286,7 @@ bc_knight_everything_he_holds_is_one_roof = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16354,7 +16354,7 @@ bc_knight_almost_nothing_arrives_for_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16422,7 +16422,7 @@ bc_knight_only_one_man_stands_sideways_of_him = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
@@ -16490,7 +16490,7 @@ bc_knight_he_has_three_living_sisters = {
 			bc_battle_open_effect = yes
 
 			if = {
-				limit = { NOT = { bc_has_momentum_trigger = yes } }
+				limit = { NOT = { bc_momentum_settled_trigger = yes } }
 				bc_momentum_minor_effect = yes
 			}
 
