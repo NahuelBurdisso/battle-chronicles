@@ -581,9 +581,40 @@ bc_can_interrupt_player_trigger = {
 # the mod's own measurement says a toast body DOES run for an AI subject, so
 # that would be a real behaviour change and not a no-op. Keep state out of
 # toasts; this trigger is now a second reason why.
+#
+# THE SECOND ARM IS A PRIORITY LANE, NOT A SECOND CHANCE. A moment whose
+# EFFECTIVE rank is major or decisive may speak over a cooldown a minor moment
+# set, and pays for it out of bc_toast_cooldown_high instead. The rank is on this
+# scope already - see bc_record_effective_tier_effect - so this needs no parameter
+# and no call site changes.
+#
+# `exists` SIBLING PLUS trigger_if, AND BOTH ARE LOAD-BEARING. CK3 does not
+# short-circuit and guarantees no evaluation order among siblings, so a plain
+# `exists = var:X` beside `var:X >= 2` still evaluates the comparison when the
+# variable is absent and logs a read of a missing variable - the trap
+# bc_record_moment_effect's own header documents, and bc_depth_rung_one_trigger is
+# the shipped example of the correct shape. The `exists` sibling is needed a
+# SECOND time because a trigger_if whose limit is FALSE evaluates to TRUE: without
+# it the AND would pass vacuously whenever the variable is absent, and a rank-less
+# toast would preempt.
+#
+# `is_ai = no` BEING FIRST DOES NOT MAKE THE REST CONDITIONAL. Every sibling is
+# evaluated regardless of order, so the guard above is required for AI recipients
+# too. Any argument of the form "row 1 already excluded that case" is invalid in
+# this codebase.
 bc_can_toast_trigger = {
 	is_ai = no
-	NOT = { has_character_flag = bc_toast_cooldown }
+	OR = {
+		NOT = { has_character_flag = bc_toast_cooldown }
+		AND = {
+			NOT = { has_character_flag = bc_toast_cooldown_high }
+			exists = var:bc_last_moment_rank
+			trigger_if = {
+				limit = { exists = var:bc_last_moment_rank }
+				var:bc_last_moment_rank >= 2
+			}
+		}
+	}
 }
 
 # --- the eve's posture variant ----------------------------------------------
