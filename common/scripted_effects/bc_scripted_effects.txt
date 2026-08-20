@@ -58,12 +58,12 @@ bc_add_momentum_effect = {
 	if = {
 		limit = { exists = var:bc_battle_moments }
 		if = {
-			limit = { var:bc_battle_moments >= 16 }
+			limit = { var:bc_battle_moments >= 13 }
 			debug_log = "BC: momentum depth two"
 			bc_momentum_step2_effect = { MODIFIER = $MODIFIER$ }
 		}
 		else_if = {
-			limit = { var:bc_battle_moments >= 11 }
+			limit = { var:bc_battle_moments >= 9 }
 			debug_log = "BC: momentum depth one"
 			bc_momentum_step1_effect = { MODIFIER = $MODIFIER$ }
 		}

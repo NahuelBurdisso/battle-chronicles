@@ -333,11 +333,11 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:decisive
 				AND = {
 					flag:$TIER$ = flag:major
-					var:bc_battle_moments >= 11
+					var:bc_battle_moments >= 9
 				}
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 16
+					var:bc_battle_moments >= 13
 				}
 			}
 		}
@@ -361,7 +361,7 @@ bc_record_effective_tier_effect = {
 				flag:$TIER$ = flag:major
 				AND = {
 					flag:$TIER$ = flag:minor
-					var:bc_battle_moments >= 11
+					var:bc_battle_moments >= 9
 				}
 			}
 		}

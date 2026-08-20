@@ -10897,14 +10897,14 @@ bc_he_has_three_living_sisters_trigger = {
 #
 # `exists` AS A SIBLING PLUS A REPEATED `trigger_if`, because CK3 does not
 # short-circuit and guarantees no evaluation order among siblings - a bare
-# `var:bc_battle_moments >= 11` next to an `exists` still evaluates when the
+# `var:bc_battle_moments >= 9` next to an `exists` still evaluates when the
 # variable is absent. Absent is the ordinary case here: the gate is tested on the
 # commander before bc_battle_open_effect has run in that battle.
 bc_depth_rung_one_trigger = {
 	exists = var:bc_battle_moments
 	trigger_if = {
 		limit = { exists = var:bc_battle_moments }
-		var:bc_battle_moments >= 11
+		var:bc_battle_moments >= 9
 	}
 }
 
@@ -10912,7 +10912,7 @@ bc_depth_rung_two_trigger = {
 	exists = var:bc_battle_moments
 	trigger_if = {
 		limit = { exists = var:bc_battle_moments }
-		var:bc_battle_moments >= 16
+		var:bc_battle_moments >= 13
 	}
 }
 
