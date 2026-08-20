@@ -24,7 +24,7 @@
 # Scratch and ledger must be variables — bc_cleanup_effect strips every modifier
 # at combat end, so anything modifier-shaped cannot persist by construction.
 #
-# CLEARING MEANS remove_variable, NEVER set_variable value = 0. Six of the nine
+# CLEARING MEANS remove_variable, NEVER set_variable value = 0. Six of the ten
 # scratch variables cannot hold zero (enumerated at bc_clear_scratch_effect
 # below), and absence-versus-zero is load-bearing: it is how
 # the seam detects the first moment of a battle and which arm of the pacing floor
@@ -344,6 +344,18 @@ bc_record_effective_tier_effect = {
 		bc_write_style_effect = { RANK = 3 KIND = $KIND$ }
 		debug_log = "BC: moment decisive"
 
+		# THE TOAST GATE'S ONLY INPUT. bc_can_toast_trigger reads this to decide
+		# whether a moment may speak over a cooldown a minor moment set. It is
+		# written here rather than passed as a parameter because this effect
+		# already runs in the recipient's scope at every one of the 444 call
+		# sites - proved mechanically by tools/_bcorder.py, not assumed.
+		#
+		# ABOVE bc_wound_effect, NOT APPENDED TO THE ARM. The wound call is last
+		# on purpose so "BC: wound" can only ever follow the "BC: moment
+		# decisive" that caused it; appending here would silently break that
+		# ordering and the ratio the two counts are read as.
+		set_variable = { name = bc_last_moment_rank value = 3 }
+
 		# Family 3 hangs here and ONLY here. This arm IS the effective tier: it is
 		# the point at which the ceiling has already been applied and the answer is
 		# `decisive`. bc_wound_effect's header explains at length why the obvious
@@ -368,6 +380,10 @@ bc_record_effective_tier_effect = {
 		bc_write_style_effect = { RANK = 2 KIND = $KIND$ }
 		debug_log = "BC: moment major"
 
+		# See the decisive arm above for why this is here and why it is above the
+		# wound call.
+		set_variable = { name = bc_last_moment_rank value = 2 }
+
 		# THE MAJOR ARM WOUNDS TOO, AND IT IS THE ARM THAT DOES THE WORK.
 		# Under the old ceiling this arm was the wound's only realistic route:
 		# `decisive` was requested ten times a run, all ten from
@@ -385,6 +401,12 @@ bc_record_effective_tier_effect = {
 	else = {
 		bc_write_style_effect = { RANK = 1 KIND = $KIND$ }
 		debug_log = "BC: moment minor"
+
+		# THE ELSE ARM MUST WRITE TOO, AND WRITING 1 IS NOT THE SAME AS WRITING
+		# NOTHING. Leaving it unwritten would let the previous moment's rank
+		# survive into this one, and every minor moment after a decisive one
+		# would inherit the right to preempt.
+		set_variable = { name = bc_last_moment_rank value = 1 }
 	}
 }
 
@@ -539,7 +561,7 @@ bc_wound_effect = {
 
 # --- scratch clearing -------------------------------------------------------
 #
-# remove_variable, NEVER set_variable value = 0. Six of the nine cannot hold
+# remove_variable, NEVER set_variable value = 0. Six of the ten cannot hold
 # zero — bc_battle_style is a flag, bc_battle_foe is a character,
 # bc_battle_wounded is a presence test, bc_battle_ground is a flag,
 # bc_battle_bond is a flag, bc_battle_creed is a flag — and absence-versus-zero
@@ -567,6 +589,16 @@ bc_clear_scratch_effect = {
 	remove_variable = bc_battle_ground
 	remove_variable = bc_battle_bond
 	remove_variable = bc_battle_creed
+
+	# NOT here to stop a stale rank preempting - tools/_bcorder.py proves the
+	# record always precedes the read, so the gate always sees the current
+	# moment's rank. It is here because bc_record_effective_tier_effect runs for
+	# EVERY AI COMMANDER IN THE WORLD (is_ai = no gates the toast, not the
+	# ledger), and without this the variable accumulates permanently on every
+	# character who has ever commanded. This effect runs under side_commander ?=
+	# and OUTSIDE the aftermath gate, i.e. on both sides of every combat in the
+	# world, so it does reap that accumulation.
+	remove_variable = bc_last_moment_rank
 }
 
 # --- family 2: the character of the fight -----------------------------------
