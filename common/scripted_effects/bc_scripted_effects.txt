@@ -351,9 +351,53 @@ bc_start_popup_cooldown_effect = {
 # SET BEFORE THE TOAST, INSIDE THE SAME `if`. Not inside the toast body: the
 # mod's rule is that a toast is purely presentational, and this is state.
 bc_start_toast_cooldown_effect = {
+	# READ BEFORE WRITE, so the OLD flag state is still visible. Every one of the
+	# 444 call sites is the first statement inside a bc_can_toast_trigger gate, so
+	# "base held at entry" is equivalent to "passed through the high arm while base
+	# was held" - i.e. this branch IS the preemption, exactly. It is also the only
+	# obtainable counter, because a trigger cannot log.
+	#
+	# THE HIGH FLAG IS SET ONLY BY A PREEMPTION, NEVER BY AN ORDINARY RANK-2+
+	# TOAST, AND THE FEATURE DIES IF THAT IS GOT WRONG. Setting it whenever the
+	# rank is 2+ is self-defeating in exactly the case this exists to serve: past
+	# rung two every moment is rank 3, so every toast would refresh the high flag
+	# while the 10-day base expires under it, the high arm could never pass again,
+	# and preemption would become structurally impossible for the rest of the
+	# battle. It would also make the verification undecidable - "preempt 0" would
+	# be produced both by a feature that is unnecessary and by a correctly wired
+	# one that over-refreshed itself. The high budget pays for INTERRUPTIONS, so
+	# only an interruption spends it.
+	if = {
+		limit = { has_character_flag = bc_toast_cooldown }
+		debug_log = "BC: toast preempt"
+		add_character_flag = {
+			flag = bc_toast_cooldown_high
+			days = 20
+		}
+	}
+
+	# UNCONDITIONAL, AND THE SUB-ADDITIVITY IS DELIBERATE. A preemption also resets
+	# the ordinary clock, so an interruption costs the player a later routine
+	# toast. Moving this into an `else` would "restore independence" and raise the
+	# volume ceiling to the full additive bound - a real volume change dressed up
+	# as a tidy-up.
 	add_character_flag = {
 		flag = bc_toast_cooldown
 		days = 10
+	}
+
+	# THE DENOMINATOR, not a budget. How often a rank-2+ moment spoke at all, by
+	# either arm. Without it, "preempt 0" cannot be told apart from "no rank-2+
+	# moment ever reached the gate".
+	#
+	# NESTED, NOT TWO ROWS IN ONE `limit`, for the reason bc_can_toast_trigger
+	# records: CK3 does not short-circuit.
+	if = {
+		limit = { exists = var:bc_last_moment_rank }
+		if = {
+			limit = { var:bc_last_moment_rank >= 2 }
+			debug_log = "BC: toast rank2"
+		}
 	}
 }
 
