@@ -221,10 +221,10 @@ bc_battle_open_effect = {
 # bc_van_breaks_through are both KIND `bloodied`, and one falters while the other
 # gains. The wound gate in plan 6 is written against SWING = down.
 #
-# NO COMBAT SCOPE IS TOUCHED HERE. Eight of the eighteen call sites are pop-up
-# options, and bc_events.txt records as an invariant that those character events
-# hold no combat scope at all. Everything combat-scoped lives in
-# bc_battle_open_effect instead.
+# NO COMBAT SCOPE IS TOUCHED HERE. Twenty-one of the four hundred and sixty-five
+# call sites are pop-up options, and bc_events.txt records as an invariant that
+# those character events hold no combat scope at all. Everything combat-scoped
+# lives in bc_battle_open_effect instead.
 #
 # EVERY PARAMETER A CALL SITE PASSES MUST BE READ SOMEWHERE IN THE BODY, or the
 # whole effect fails to compile and every call site is silently dead. The first
@@ -268,8 +268,12 @@ bc_record_moment_effect = {
 	# still evaluate the comparison when the variable is absent and log a read of
 	# a missing variable.
 	#
-	# THE ABSENT CASE IS REAL, NOT DEFENSIVE PADDING. Eight of the eighteen call
-	# sites are pop-up options, and a pop-up answered AFTER combat ended has had
+	# THE ABSENT CASE IS REAL, NOT DEFENSIVE PADDING. Twenty-one of the four
+	# hundred and sixty-five call sites are pop-up options - 238 commander phase
+	# events, 206 knight, 21 in bc_events.txt, and all 21 of the bc_events.txt
+	# sites sit inside `option` blocks while no phase-event site does. The old
+	# "eight of the eighteen" predated the 434-template batch. A pop-up answered
+	# AFTER combat ended has had
 	# bc_battle_size removed by bc_clear_scratch_effect. Without this guard that
 	# option would log an error - and if the comparison somehow passed, it would
 	# apply a 20-day modifier that bc_cleanup_effect has already run past and will
